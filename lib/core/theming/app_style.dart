@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'font_weight_helper.dart';
 
 abstract class AppStyle {
-  static TextStyle styleRegular16 = TextStyle(
-    fontSize: 16.sp,
-    fontWeight: FontWeight.w400,
+  //! Roboto Font
+  static TextStyle robotoExtraBold32 = GoogleFonts.roboto(
+    fontSize: 32.sp,
+    fontWeight: FontWeightHelper.extraBold,
+  );
+  //! Roboto Condensed Font
+  static TextStyle robotoCondensedSemiBold36 = GoogleFonts.robotoCondensed(
+    fontSize: 36.sp,
+    fontWeight: FontWeightHelper.semiBold,
+  );
+  static TextStyle robotoCondensedRegular8 = GoogleFonts.robotoCondensed(
+    fontSize: 8.sp,
+    fontWeight: FontWeightHelper.regular,
+  );
+  //! Poppins Font
+  static TextStyle poppinsMedium14 = GoogleFonts.poppins(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.medium,
   );
 }
