@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../helpers/spacing.dart';
+import '../../theming/app_style.dart';
 
 class CustomFailureWidget extends StatelessWidget {
   const CustomFailureWidget({super.key, required this.text, this.textColor});
@@ -11,7 +11,7 @@ class CustomFailureWidget extends StatelessWidget {
     return Center(
       child: Text(
         text,
-        style: AppStyle.styleRegular14.copyWith(color: textColor),
+        style: AppStyle.poppinsMedium14.copyWith(color: textColor),
         textAlign: TextAlign.center,
       ),
     );

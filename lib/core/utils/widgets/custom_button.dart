@@ -24,7 +24,7 @@ class CustomButton extends StatelessWidget {
       style: _buttonStyle(),
       child: FittedBox(
         fit: BoxFit.scaleDown,
-        child: Text(text, style: AppStyle.styleBold15),
+        child: Text(text, style: AppStyle.poppinsMedium14),
       ),
     );
   }

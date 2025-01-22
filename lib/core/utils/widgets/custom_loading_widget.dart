@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-class CustomFailureWidget extends StatelessWidget {
-  const CustomFailureWidget({super.key, required this.text, this.textColor});
-  final String text;
-  final Color? textColor;
+class CustomLoadingWidget extends StatelessWidget {
+  const CustomLoadingWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
