@@ -15,8 +15,16 @@ abstract class AppStyle {
     fontSize: 36.sp,
     fontWeight: FontWeightHelper.semiBold,
   );
+  static TextStyle robotoCondensedBold50 = GoogleFonts.robotoCondensed(
+    fontSize: 50.sp,
+    fontWeight: FontWeightHelper.bold,
+  );
   static TextStyle robotoCondensedRegular8 = GoogleFonts.robotoCondensed(
     fontSize: 8.sp,
+    fontWeight: FontWeightHelper.regular,
+  );
+  static TextStyle robotoCondensedRegular15 = GoogleFonts.robotoCondensed(
+    fontSize: 15.sp,
     fontWeight: FontWeightHelper.regular,
   );
   //! Poppins Font

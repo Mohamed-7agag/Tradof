@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/di/di.dart';
-import 'package:tradof/core/my_app.dart';
+import 'package:tradof/my_app.dart';
 
 import 'core/cache/cache_helper.dart';
 import 'core/helpers/cubit_observer.dart';

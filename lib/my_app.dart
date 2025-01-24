@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/routing/app_router.dart';
-import 'package:tradof/core/routing/routes.dart';
+import 'package:tradof/core/theming/app_colors.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,8 +12,10 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       builder: (context, child) {
-        return MaterialApp(
-          theme: ThemeData.light(),
+        return MaterialApp.router(
+          routerConfig: AppRouter.router,
+          theme: ThemeData.light()
+              .copyWith(scaffoldBackgroundColor: AppColors.background),
           builder: (context, child) {
             return MediaQuery(
               data: MediaQuery.of(context)
@@ -21,8 +23,6 @@ class MyApp extends StatelessWidget {
               child: child!,
             );
           },
-          onGenerateRoute: AppRouter.generateRoute,
-          initialRoute: Routes.loginViewRoute,
           debugShowCheckedModeBanner: false,
         );
       },
