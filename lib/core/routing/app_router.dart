@@ -7,10 +7,12 @@ import 'package:tradof/features/auth/presentation/views/registeer_page_view.dart
 
 
 import '../../welcome_view.dart';
+import '../helpers/navigation_handler.dart';
 
 class AppRouter {
   static final router = GoRouter(
-    initialLocation: '/registerPageView',
+    navigatorKey: NavigationHandler.navigatorKey,
+    initialLocation: '/welcomeView',
     routes: [
       GoRoute(
         name: Routes.welcomeViewRoute,
