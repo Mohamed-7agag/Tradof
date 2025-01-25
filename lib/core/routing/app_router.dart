@@ -4,9 +4,11 @@ import 'package:tradof/features/auth/presentation/views/forget_password_page_vie
 import 'package:tradof/features/auth/presentation/views/login_view.dart';
 
 import '../../welcome_view.dart';
+import '../helpers/navigation_handler.dart';
 
 class AppRouter {
   static final router = GoRouter(
+    navigatorKey: NavigationHandler.navigatorKey,
     initialLocation: '/welcomeView',
     routes: [
       GoRoute(

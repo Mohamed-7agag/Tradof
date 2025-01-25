@@ -13,8 +13,14 @@ class ForgetPasswordPageView extends StatefulWidget {
 }
 
 class _ForgetPasswordPageViewState extends State<ForgetPasswordPageView> {
-  final PageController _pageController = PageController();
+  late PageController _pageController;
   int _currentPage = 0;
+
+  @override
+  void initState() {
+    _pageController = PageController();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -30,6 +36,7 @@ class _ForgetPasswordPageViewState extends State<ForgetPasswordPageView> {
           Expanded(
             child: PageView(
               controller: _pageController,
+              physics: NeverScrollableScrollPhysics(),
               onPageChanged: (int page) {
                 setState(() => _currentPage = page);
               },

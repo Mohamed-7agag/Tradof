@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 extension NavigationExtension on BuildContext {
-  // Push a new route onto the stack
+  /// Push a new route onto the stack
   void pushNamed(String routeName, {Object? extra}) {
     GoRouter.of(this).push(routeName, extra: extra);
   }
 
-  // Replace the current route with a new route
+  /// Replace the current route with a new route
   void pushReplacementNamed(String routeName, {Object? extra}) {
     GoRouter.of(this).pushReplacement(routeName, extra: extra);
   }
@@ -22,21 +22,23 @@ extension NavigationExtension on BuildContext {
   //   }
   // }
 
-  // Pop the current route
+  /// Pop the current route
   void pop() {
     GoRouter.of(this).pop();
   }
 
-  // Go to a new route (replaces the entire stack)
+  /// Go to a new route (replaces the entire stack)
   void goNamed(String routeName, {Object? extra}) {
     GoRouter.of(this).go(routeName, extra: extra);
   }
 }
 
+/// Extension on String to check if it is null or empty
 extension StringExtension on String? {
   bool isNullOrEmpty() => this == null || this == "";
 }
 
+/// Extension on List to check if it is null or empty
 extension ListExtension<T> on List<T>? {
   bool isNullOrEmpty() => this == null || this!.isEmpty;
 }
