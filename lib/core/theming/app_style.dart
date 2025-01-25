@@ -48,4 +48,18 @@ abstract class AppStyle {
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.medium,
   );
+  static TextStyle poppinsSemiBold14 = GoogleFonts.poppins(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.semiBold,
+  );
+  static TextStyle poppinsMedium22 = GoogleFonts.poppins(
+    fontSize: 22.sp,
+    fontWeight: FontWeightHelper.bold,
+  );
+
+  //! Epilogue Font
+  static TextStyle epilogueRegular14 = GoogleFonts.epilogue(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.regular,
+  );
 }

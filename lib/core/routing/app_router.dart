@@ -2,12 +2,15 @@ import 'package:go_router/go_router.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/features/auth/presentation/views/forget_password_page_view.dart';
 import 'package:tradof/features/auth/presentation/views/login_view.dart';
+import 'package:tradof/features/auth/presentation/views/registeer_page_view.dart';
+
+
 
 import '../../welcome_view.dart';
 
 class AppRouter {
   static final router = GoRouter(
-    initialLocation: '/welcomeView',
+    initialLocation: '/registerPageView',
     routes: [
       GoRoute(
         name: Routes.welcomeViewRoute,
@@ -23,6 +26,11 @@ class AppRouter {
         name: Routes.forgetPasswordPageViewRoute,
         path: '/forgetPasswordPageView',
         builder: (context, state) => ForgetPasswordPageView(),
+      ),
+      GoRoute(
+        name: Routes.registerPageViewRoute,
+        path: '/registerPageView',
+        builder: (context, state) => RegisterPageView(),
       ),
     ],
   );
