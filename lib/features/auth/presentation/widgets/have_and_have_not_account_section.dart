@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tradof/core/helpers/extensions.dart';
+import 'package:tradof/core/routing/routes.dart';
 
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
@@ -14,7 +16,9 @@ class HaveNotAccountSection extends StatelessWidget {
       children: [
         Text("haven't an Account?", style: AppStyle.robotoRegular12),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            context.pushNamed(Routes.createAccountPageViewRoute);
+          },
           child: Text(
             'Create Account',
             style: AppStyle.robotoRegular12.copyWith(
@@ -36,13 +40,13 @@ class HaveAccountSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Have an Account?', style: AppStyle.robotoRegular12),
+        Text('Have an Account?', style: AppStyle.robotoRegular12.copyWith(color: AppColors.white)),
         TextButton(
           onPressed: () {},
           child: Text(
             'Login',
             style: AppStyle.robotoRegular12.copyWith(
-              color: AppColors.primary,
+              color: AppColors.lightOrange,
               fontWeight: FontWeightHelper.bold,
             ),
           ),

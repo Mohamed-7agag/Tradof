@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/auth/presentation/views/select_type_account_page_view.dart';
+import 'package:tradof/features/auth/presentation/views/register_view.dart';
+import 'package:tradof/features/auth/presentation/views/select_account_type_view.dart';
 
-class RegisterPageView extends StatefulWidget {
-  const RegisterPageView({super.key});
+class CreateAccountPageView extends StatefulWidget {
+  const CreateAccountPageView({super.key});
 
   @override
-  State<RegisterPageView> createState() => _RegisterPageViewState();
+  State<CreateAccountPageView> createState() => _CreateAccountPageViewState();
 }
 
-class _RegisterPageViewState extends State<RegisterPageView> {
-  final PageController _pageController = PageController();
+class _CreateAccountPageViewState extends State<CreateAccountPageView> {
+  late PageController _pageController;
   int _currentPage = 0;
+
+  @override
+  void initState() {
+    _pageController = PageController();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -33,9 +40,9 @@ class _RegisterPageViewState extends State<RegisterPageView> {
                 setState(() => _currentPage = page);
               },
               children: [
-                SelectTypeAccountPageView(),
-                SelectTypeAccountPageView(),
-                SelectTypeAccountPageView(),
+                SelectAccountTypeView(pageController: _pageController),
+                RegisterView(pageController: _pageController),
+                SelectAccountTypeView(pageController: _pageController),
               ],
             ),
           ),
@@ -56,7 +63,7 @@ class _RegisterPageViewState extends State<RegisterPageView> {
           height: 4,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: _currentPage == index ? AppColors.white : AppColors.grey,
+            color: _currentPage == index ? AppColors.white : Colors.grey,
           ),
         );
       }),

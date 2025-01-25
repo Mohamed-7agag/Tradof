@@ -12,12 +12,14 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType,
     required this.controller,
     this.obscureText = false,
+    this.labelColor,
   });
 
   final String labelText;
   final TextInputType? keyboardType;
   final bool obscureText;
   final TextEditingController controller;
+  final Color? labelColor;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -57,9 +59,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         border: _buildBorder(),
         enabledBorder: _buildBorder(),
         focusedErrorBorder: _buildBorder(),
-        focusedBorder: _buildBorder(color: AppColors.primary),
+        focusedBorder: _buildBorder(color: widget.labelColor ?? AppColors.primary),
         errorBorder: _buildBorder(color: Colors.red),
-        label: Text(widget.labelText, style: AppStyle.robotoRegular14),
+        label: Text(
+          widget.labelText,
+          style: AppStyle.robotoRegular14.copyWith(color: widget.labelColor),
+        ),
         floatingLabelStyle: TextStyle(color: AppColors.primary),
       ),
     );

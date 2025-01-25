@@ -1,10 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/routing/routes.dart';
+import 'package:tradof/features/auth/presentation/views/create_account_page_view.dart';
 import 'package:tradof/features/auth/presentation/views/forget_password_page_view.dart';
 import 'package:tradof/features/auth/presentation/views/login_view.dart';
-import 'package:tradof/features/auth/presentation/views/registeer_page_view.dart';
-
-
 
 import '../../welcome_view.dart';
 import '../helpers/navigation_handler.dart';
@@ -30,9 +28,9 @@ class AppRouter {
         builder: (context, state) => ForgetPasswordPageView(),
       ),
       GoRoute(
-        name: Routes.registerPageViewRoute,
-        path: '/registerPageView',
-        builder: (context, state) => RegisterPageView(),
+        name: Routes.createAccountPageViewRoute,
+        path: '/createAccountPageView',
+        builder: (context, state) => CreateAccountPageView(),
       ),
     ],
   );
