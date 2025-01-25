@@ -1,3 +1,4 @@
+import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -31,23 +32,29 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primary,
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (int page) {
-                setState(() => _currentPage = page);
-              },
+      body: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
               children: [
-                SelectAccountTypeView(pageController: _pageController),
-                RegisterView(pageController: _pageController),
-                SelectAccountTypeView(pageController: _pageController),
+                ExpandablePageView(
+                  controller: _pageController,
+                  onPageChanged: (int page) {
+                    setState(() => _currentPage = page);
+                  },
+                  children: [
+                    SelectAccountTypeView(pageController: _pageController),
+                    RegisterView(pageController: _pageController),
+                    SelectAccountTypeView(pageController: _pageController),
+                  ],
+                ),
+                verticalSpace(20),
+                _buildDotIndicator(),
+                verticalSpace(20),
               ],
             ),
-          ),
-          _buildDotIndicator(),
-          verticalSpace(20),
+          )
         ],
       ),
     );

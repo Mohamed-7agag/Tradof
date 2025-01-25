@@ -4,15 +4,14 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
 class CreateAccountContainerCurve extends StatelessWidget {
-  const CreateAccountContainerCurve({super.key, this.height});
-  final double? height;
+  const CreateAccountContainerCurve({super.key});
   @override
   Widget build(BuildContext context) {
     return ClipPath(
       clipper: CurveClipper(),
       child: Container(
         alignment: Alignment.center,
-        height: height ?? 340.h,
+        height: 340.h,
         width: 1.sw,
         decoration: BoxDecoration(
           color: AppColors.background,

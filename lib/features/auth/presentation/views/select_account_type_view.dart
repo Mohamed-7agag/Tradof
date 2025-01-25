@@ -12,39 +12,42 @@ class SelectAccountTypeView extends StatelessWidget {
   final PageController pageController;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.topCenter,
-      children: [
-        CreateAccountContainerCurve(),
-        Positioned(
-          top: 210.h,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SelectAccountTypeSection(),
-              SizedBox(
-                width: 1.sw,
-                child: PrivacyPolicyCheckBox(),
-              ),
-            ],
+    return SizedBox(
+      height: 1.sh,
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          CreateAccountContainerCurve(),
+          Positioned(
+            top: 210.h,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SelectAccountTypeSection(),
+                SizedBox(
+                  width: 1.sw,
+                  child: PrivacyPolicyCheckBox(),
+                ),
+              ],
+            ),
           ),
-        ),
-        Positioned(
-          bottom: 80.h,
-          left: 16.w,
-          right: 16.w,
-          child: CustomButton(
-            text: 'Continue',
-            onPressed: () {
-              pageController.nextPage(
-                duration: const Duration(milliseconds: 350),
-                curve: Curves.easeInOut,
-              );
-            },
-            color: AppColors.lightOrange,
+          Positioned(
+            bottom: 80.h,
+            left: 16.w,
+            right: 16.w,
+            child: CustomButton(
+              text: 'Continue',
+              onPressed: () {
+                pageController.nextPage(
+                  duration: const Duration(milliseconds: 350),
+                  curve: Curves.easeInOut,
+                );
+              },
+              color: AppColors.lightOrange,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

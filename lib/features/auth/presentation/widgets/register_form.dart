@@ -7,8 +7,8 @@ import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
 
 class RegisterForm extends StatelessWidget {
-  const RegisterForm({super.key});
-
+  const RegisterForm({super.key, required this.pageController});
+  final PageController pageController;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -64,7 +64,12 @@ class RegisterForm extends StatelessWidget {
           CustomButton(
             text: 'Continue',
             color: AppColors.lightOrange,
-            onPressed: () {},
+            onPressed: () {
+              pageController.nextPage(
+                duration: const Duration(milliseconds: 350),
+                curve: Curves.easeInOut,
+              );
+            },
           ),
           verticalSpace(20),
         ],
