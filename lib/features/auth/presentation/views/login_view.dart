@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tradof/core/helpers/spacing.dart';
+import 'package:tradof/core/theming/app_style.dart';
+import 'package:tradof/features/auth/presentation/widgets/auth_shape.dart';
+import 'package:tradof/features/auth/presentation/widgets/have_and_have_not_account_section.dart';
+
+import '../widgets/login_form.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -6,8 +12,23 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Login View'),
+      body: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              children: [
+                AuthShape(),
+                Text('Login', style: AppStyle.robotoExtraBold32),
+                verticalSpace(25),
+                LoginForm(),
+                Spacer(),
+                HaveNotAccountSection(),
+                verticalSpace(16),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

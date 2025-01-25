@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../theming/app_colors.dart';
 import '../../theming/app_style.dart';
@@ -24,7 +25,7 @@ class CustomButton extends StatelessWidget {
       style: _buttonStyle(),
       child: FittedBox(
         fit: BoxFit.scaleDown,
-        child: Text(text, style: AppStyle.poppinsMedium14),
+        child: Text(text, style: AppStyle.poppinsMedium14.copyWith(fontSize: 15.sp)),
       ),
     );
   }
@@ -33,9 +34,9 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton.styleFrom(
       backgroundColor: color ?? AppColors.primary,
       foregroundColor: Colors.white,
-      minimumSize: Size(width ?? double.infinity, height ?? 54),
+      minimumSize: Size(width ?? double.infinity, height ?? 52),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderRadius: BorderRadius.all(Radius.circular(50)),
       ),
     );
   }

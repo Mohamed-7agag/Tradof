@@ -14,8 +14,10 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp.router(
           routerConfig: AppRouter.router,
-          theme: ThemeData.light()
-              .copyWith(scaffoldBackgroundColor: AppColors.background),
+          theme: ThemeData.light().copyWith(
+            scaffoldBackgroundColor: AppColors.background,
+            primaryColor: AppColors.primary,
+          ),
           builder: (context, child) {
             return MediaQuery(
               data: MediaQuery.of(context)

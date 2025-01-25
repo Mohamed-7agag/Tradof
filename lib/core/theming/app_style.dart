@@ -10,9 +10,25 @@ abstract class AppStyle {
     fontSize: 32.sp,
     fontWeight: FontWeightHelper.extraBold,
   );
+  static TextStyle robotoBold20 = GoogleFonts.roboto(
+    fontSize: 20.sp,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static TextStyle robotoRegular14 = GoogleFonts.roboto(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.regular,
+  );
+  static TextStyle robotoRegular12 = GoogleFonts.roboto(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.regular,
+  );
   //! Roboto Condensed Font
   static TextStyle robotoCondensedSemiBold36 = GoogleFonts.robotoCondensed(
     fontSize: 36.sp,
+    fontWeight: FontWeightHelper.semiBold,
+  );
+  static TextStyle robotoCondensedSemiBold32 = GoogleFonts.robotoCondensed(
+    fontSize: 32.sp,
     fontWeight: FontWeightHelper.semiBold,
   );
   static TextStyle robotoCondensedBold50 = GoogleFonts.robotoCondensed(
