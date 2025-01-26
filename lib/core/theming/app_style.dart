@@ -56,7 +56,7 @@ abstract class AppStyle {
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.semiBold,
   );
-  static TextStyle poppinsMedium22 = GoogleFonts.poppins(
+  static TextStyle poppinsBold22 = GoogleFonts.poppins(
     fontSize: 22.sp,
     fontWeight: FontWeightHelper.bold,
   );
