@@ -8,7 +8,8 @@ class AccountTypeCustom extends StatelessWidget {
     super.key,
     required this.image,
     required this.title,
-    required this.description, required this.onTap,
+    required this.description,
+    required this.onTap,
   });
   final String image;
   final String title;
@@ -26,13 +27,11 @@ class AccountTypeCustom extends StatelessWidget {
         title,
         style: AppStyle.poppinsSemiBold14,
       ),
-      subtitle: Expanded(
-        child: Text(
-          description,
-          maxLines: 6,
-          overflow: TextOverflow.fade,
-          style: AppStyle.epilogueRegular14.copyWith(color: AppColors.darkGrey),
-        ),
+      subtitle: Text(
+        description,
+        maxLines: 6,
+        overflow: TextOverflow.fade,
+        style: AppStyle.epilogueRegular14.copyWith(color: AppColors.darkGrey),
       ),
     );
   }

@@ -26,7 +26,8 @@ class SelectAccountTypeView extends StatelessWidget {
               children: [
                 SlideInLeft(
                   from: 400,
-                  child: SelectAccountTypeSection()),
+                  child: SelectAccountTypeSection(),
+                ),
                 SizedBox(
                   width: 1.sw,
                   child: PrivacyPolicyCheckBox(),
