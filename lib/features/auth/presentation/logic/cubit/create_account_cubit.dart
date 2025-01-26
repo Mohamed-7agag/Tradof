@@ -18,7 +18,6 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
   void removeSpecialization(String specialization) {
     specializations.remove(specialization);
-    
   }
 
   void addLanguagePair(String languagePair) {
