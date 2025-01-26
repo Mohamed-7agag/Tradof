@@ -16,7 +16,7 @@ class _PrivacyPolicyCheckBoxState extends State<PrivacyPolicyCheckBox> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: CheckboxListTile(
         value: checked,
         onChanged: (val) {

@@ -13,7 +13,7 @@ class SelectAccountTypeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 1.sh,
+      height: 0.95.sh,
       child: Stack(
         alignment: Alignment.topCenter,
         children: [

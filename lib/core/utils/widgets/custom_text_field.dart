@@ -41,6 +41,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: _isObscure,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
+      style: AppStyle.robotoRegular14.copyWith(color: widget.labelColor),
       validator: (value) {
         if (value!.trim().isNullOrEmpty()) {
           return 'required';
@@ -51,6 +52,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         suffixIcon: widget.obscureText
             ? ObscureIcon(
                 isObscure: _isObscure,
+                labelColor: widget.labelColor,
                 onPressed: () {
                   setState(() => _isObscure = !_isObscure);
                 },
@@ -59,7 +61,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
         border: _buildBorder(),
         enabledBorder: _buildBorder(),
         focusedErrorBorder: _buildBorder(),
-        focusedBorder: _buildBorder(color: widget.labelColor ?? AppColors.primary),
+        focusedBorder:
+            _buildBorder(color: widget.labelColor ?? AppColors.primary),
         errorBorder: _buildBorder(color: Colors.red),
         label: Text(
           widget.labelText,

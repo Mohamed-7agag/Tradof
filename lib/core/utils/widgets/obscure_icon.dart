@@ -5,10 +5,11 @@ class ObscureIcon extends StatelessWidget {
   const ObscureIcon({
     super.key,
     required this.isObscure,
-    required this.onPressed,
+    required this.onPressed, this.labelColor,
   });
 
   final bool isObscure;
+  final Color? labelColor;
   final VoidCallback onPressed;
 
   @override
@@ -16,7 +17,7 @@ class ObscureIcon extends StatelessWidget {
     return IconButton(
       icon: Icon(
         isObscure ? Icons.visibility : Icons.visibility_off,
-        color: AppColors.primary,
+        color: labelColor ?? AppColors.primary,
       ),
       onPressed: onPressed,
     );

@@ -28,7 +28,6 @@ class RegisterForm extends StatelessWidget {
             labelColor: AppColors.white,
             controller: TextEditingController(),
             keyboardType: TextInputType.text,
-            obscureText: true,
           ),
           verticalSpace(12),
           CustomTextField(
@@ -43,7 +42,6 @@ class RegisterForm extends StatelessWidget {
             labelColor: AppColors.white,
             controller: TextEditingController(),
             keyboardType: TextInputType.number,
-            obscureText: true,
           ),
           verticalSpace(12),
           CustomTextField(
@@ -51,6 +49,7 @@ class RegisterForm extends StatelessWidget {
             labelColor: AppColors.white,
             controller: TextEditingController(),
             keyboardType: TextInputType.text,
+            obscureText: true,
           ),
           verticalSpace(12),
           CustomTextField(

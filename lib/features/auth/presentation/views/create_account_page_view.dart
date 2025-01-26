@@ -5,6 +5,8 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/auth/presentation/views/register_view.dart';
 import 'package:tradof/features/auth/presentation/views/select_account_type_view.dart';
 
+import 'freelancer_register_view.dart';
+
 class CreateAccountPageView extends StatefulWidget {
   const CreateAccountPageView({super.key});
 
@@ -38,16 +40,19 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
             hasScrollBody: false,
             child: Column(
               children: [
-                ExpandablePageView(
-                  controller: _pageController,
-                  onPageChanged: (int page) {
-                    setState(() => _currentPage = page);
-                  },
-                  children: [
-                    SelectAccountTypeView(pageController: _pageController),
-                    RegisterView(pageController: _pageController),
-                    SelectAccountTypeView(pageController: _pageController),
-                  ],
+                Expanded(
+                  child: ExpandablePageView(
+                    controller: _pageController,
+                    onPageChanged: (int page) {
+                      setState(() => _currentPage = page);
+                    },
+                    children: [
+                      SelectAccountTypeView(pageController: _pageController),
+                      RegisterView(pageController: _pageController),
+                      FreelancerRegisterView(),
+                      //CompanyRegisterView(),
+                    ],
+                  ),
                 ),
                 verticalSpace(20),
                 _buildDotIndicator(),

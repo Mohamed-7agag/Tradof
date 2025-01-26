@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
+import 'package:tradof/features/auth/presentation/widgets/account_image_widget.dart';
 
-class CreateAccountContainerCurve extends StatelessWidget {
-  const CreateAccountContainerCurve({super.key});
+class CreateAccountCurveWithImage extends StatelessWidget {
+  const CreateAccountCurveWithImage({super.key});
   @override
   Widget build(BuildContext context) {
     return ClipPath(
@@ -19,14 +21,16 @@ class CreateAccountContainerCurve extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(flex: 3),
+            Spacer(flex: 4),
             Text(
               'Create Account',
               style: AppStyle.poppinsMedium22.copyWith(
                 color: AppColors.primary,
               ),
             ),
-            Spacer(flex: 4),
+            verticalSpace(20),
+            AccountImageWidget(),
+            Spacer(flex: 5),
           ],
         ),
       ),
