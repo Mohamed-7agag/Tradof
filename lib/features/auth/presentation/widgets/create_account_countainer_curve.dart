@@ -22,7 +22,7 @@ class CreateAccountContainerCurve extends StatelessWidget {
             Spacer(flex: 3),
             Text(
               'Create Account',
-              style: AppStyle.poppinsMedium22.copyWith(
+              style: AppStyle.poppinsBold22.copyWith(
                 color: AppColors.primary,
               ),
             ),
