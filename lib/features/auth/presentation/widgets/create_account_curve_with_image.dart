@@ -24,7 +24,7 @@ class CreateAccountCurveWithImage extends StatelessWidget {
             Spacer(flex: 4),
             Text(
               'Create Account',
-              style: AppStyle.poppinsMedium22.copyWith(
+              style: AppStyle.poppinsBold22.copyWith(
                 color: AppColors.primary,
               ),
             ),
