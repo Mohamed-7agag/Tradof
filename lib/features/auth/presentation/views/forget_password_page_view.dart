@@ -47,6 +47,7 @@ class _ForgetPasswordPageViewState extends State<ForgetPasswordPageView> {
               ],
             ),
           ),
+          verticalSpace(20),
           _buildDotIndicator(),
           verticalSpace(20),
         ],

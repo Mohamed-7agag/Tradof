@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/utils/widgets/custom_button.dart';
@@ -21,8 +22,11 @@ class ForgetPasswordView extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               children: [
-                Text('Forget Password',
-                    style: AppStyle.robotoCondensedSemiBold32),
+                SlideInLeft(
+                  from: 400,
+                  child: Text('Forget Password',
+                      style: AppStyle.robotoCondensedSemiBold32),
+                ),
                 verticalSpace(20),
                 Text(
                   'To reset your password, enter your email below and submit. An email will be sent to you with instructions about how to complete the process.',
@@ -36,15 +40,19 @@ class ForgetPasswordView extends StatelessWidget {
                   controller: TextEditingController(),
                   keyboardType: TextInputType.emailAddress,
                 ),
-                verticalSpace(36),
-                CustomButton(
-                  text: 'Continue',
-                  onPressed: () {
-                    pageController.nextPage(
-                      duration: Duration(milliseconds: 350),
-                      curve: Curves.easeInOut,
-                    );
-                  },
+                verticalSpace(45),
+                SlideInUp(
+                  from: 400,
+                  child: CustomButton(
+                    text: 'Continue',
+                    onPressed: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      pageController.nextPage(
+                        duration: Duration(milliseconds: 350),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                  ),
                 ),
                 verticalSpace(25),
               ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/helpers/spacing.dart';
+import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_drop_down_widget.dart';
@@ -45,7 +47,10 @@ class CompanyRegisterView extends StatelessWidget {
               CustomButton(
                 text: 'Submit',
                 color: AppColors.lightOrange,
-                onPressed: () {},
+                onPressed: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  context.pushNamed(Routes.verificationViewRoute);
+                },
               ),
               verticalSpace(20),
             ],

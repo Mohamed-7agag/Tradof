@@ -6,7 +6,7 @@ import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
-
+import 'package:animate_do/animate_do.dart';
 class WelcomeView extends StatelessWidget {
   const WelcomeView({super.key});
 
@@ -18,7 +18,9 @@ class WelcomeView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Spacer(flex: 3),
-          SvgPicture.asset('assets/images/icon.svg', width: 100.w),
+          BounceInDown(
+            from: 400,
+            child: SvgPicture.asset('assets/images/icon.svg', width: 100.w)),
           verticalSpace(20),
           Text(
             'TRADOF',
@@ -32,19 +34,22 @@ class WelcomeView extends StatelessWidget {
                 .copyWith(color: AppColors.white),
           ),
           verticalSpace(50),
-          IconButton(
-            onPressed: () {
-              context.pushReplacementNamed(Routes.loginViewRoute);
-            },
-            icon: Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: AppColors.primary,
-              size: 30.sp,
-            ),
-            style: IconButton.styleFrom(
-              backgroundColor: AppColors.white,
-              padding: EdgeInsets.all(15),
-              shape: CircleBorder(),
+          SlideInLeft(
+            from: 400,
+            child: IconButton(
+              onPressed: () {
+                context.pushReplacementNamed(Routes.loginViewRoute);
+              },
+              icon: Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: AppColors.primary,
+                size: 30.sp,
+              ),
+              style: IconButton.styleFrom(
+                backgroundColor: AppColors.white,
+                padding: EdgeInsets.all(15),
+                shape: CircleBorder(),
+              ),
             ),
           ),
           Spacer(),

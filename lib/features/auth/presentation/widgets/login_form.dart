@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/extensions.dart';
@@ -39,7 +40,15 @@ class LoginForm extends StatelessWidget {
                   child: Text('Forgot Password?',
                       style: AppStyle.robotoRegular12))),
           verticalSpace(50),
-          CustomButton(text: 'Login', onPressed: () {})
+          SlideInUp(
+            from: 400,
+            child: CustomButton(
+              text: 'Login',
+              onPressed: () {
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
+            ),
+          )
         ],
       ),
     ));

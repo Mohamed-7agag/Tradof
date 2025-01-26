@@ -35,6 +35,7 @@ class OtpView extends StatelessWidget {
                 CustomButton(
                   text: 'Reset Password',
                   onPressed: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     pageController.nextPage(
                       duration: Duration(milliseconds: 350),
                       curve: Curves.easeInOut,

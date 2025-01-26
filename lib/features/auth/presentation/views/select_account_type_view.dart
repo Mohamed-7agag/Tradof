@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -23,7 +24,9 @@ class SelectAccountTypeView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SelectAccountTypeSection(),
+                SlideInLeft(
+                  from: 400,
+                  child: SelectAccountTypeSection()),
                 SizedBox(
                   width: 1.sw,
                   child: PrivacyPolicyCheckBox(),
@@ -35,15 +38,18 @@ class SelectAccountTypeView extends StatelessWidget {
             bottom: 80.h,
             left: 16.w,
             right: 16.w,
-            child: CustomButton(
-              text: 'Continue',
-              onPressed: () {
-                pageController.nextPage(
-                  duration: const Duration(milliseconds: 350),
-                  curve: Curves.easeInOut,
-                );
-              },
-              color: AppColors.lightOrange,
+            child: SlideInUp(
+              from: 400,
+              child: CustomButton(
+                text: 'Continue',
+                onPressed: () {
+                  pageController.nextPage(
+                    duration: const Duration(milliseconds: 350),
+                    curve: Curves.easeInOut,
+                  );
+                },
+                color: AppColors.lightOrange,
+              ),
             ),
           ),
         ],

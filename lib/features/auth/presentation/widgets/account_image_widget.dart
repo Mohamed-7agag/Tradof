@@ -65,7 +65,7 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
               _image!,
               width: 85,
               height: 85,
-              fit: BoxFit.fill,
+              fit: BoxFit.contain,
             ),
           )
         : SvgPicture.asset('assets/images/person.svg');

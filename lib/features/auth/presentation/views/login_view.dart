@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_style.dart';
@@ -18,8 +19,11 @@ class LoginView extends StatelessWidget {
             hasScrollBody: false,
             child: Column(
               children: [
-                AuthShape(),
-                Text('Login', style: AppStyle.robotoExtraBold32),
+                SlideInDown(
+                  from: 200,
+                  child: AuthShape()),
+                SlideInDown(
+                  child: Text('Login', style: AppStyle.robotoExtraBold32)),
                 verticalSpace(25),
                 LoginForm(),
                 Spacer(),

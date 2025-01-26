@@ -64,6 +64,7 @@ class RegisterForm extends StatelessWidget {
             text: 'Continue',
             color: AppColors.lightOrange,
             onPressed: () {
+              FocusManager.instance.primaryFocus?.unfocus();
               pageController.nextPage(
                 duration: const Duration(milliseconds: 350),
                 curve: Curves.easeInOut,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
@@ -29,7 +30,13 @@ class ResetPasswordForm extends StatelessWidget {
               obscureText: true,
             ),
             verticalSpace(50),
-            CustomButton(text: 'Submit', onPressed: () {}),
+            CustomButton(
+              text: 'Submit',
+              onPressed: () {
+                FocusManager.instance.primaryFocus?.unfocus();
+                context.pop();
+              },
+            ),
             verticalSpace(25),
           ],
         ),
