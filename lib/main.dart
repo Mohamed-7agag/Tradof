@@ -1,4 +1,4 @@
-import 'package:device_preview/device_preview.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,12 +19,14 @@ void main() async {
     _systemChromeConfig(),
   ]);
 
-  runApp(
-    DevicePreview(
-      enabled: false,
-      builder: (context) => const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
+ 
+  // runApp(
+  //   DevicePreview(
+  //     enabled: false,
+  //     builder: (context) => const MyApp(),
+  //   ),
+  // );
 }
 
 // to make sure that the device orientation is set to portrait

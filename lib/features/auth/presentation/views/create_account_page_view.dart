@@ -1,7 +1,9 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
+import 'package:tradof/features/auth/presentation/logic/cubit/create_account_cubit.dart';
 import 'package:tradof/features/auth/presentation/views/register_view.dart';
 import 'package:tradof/features/auth/presentation/views/select_account_type_view.dart';
 
