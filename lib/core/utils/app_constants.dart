@@ -17,3 +17,9 @@ final List<LanguageModel> availableLanguage = [
   LanguageModel(languageName: 'English-French', tag: 'En-Fr'),
   LanguageModel(languageName: 'English-French', tag: 'En-Fr'),
 ];
+final List<LanguageModel> availablePreferedLanguage = [
+  LanguageModel(languageName: 'English', tag: 'En'),
+  LanguageModel(languageName: 'Splanish', tag: 'Es'),
+  LanguageModel(languageName: 'French', tag: 'Fr'),
+  LanguageModel(languageName: 'Germany', tag: 'Gr'),
+];

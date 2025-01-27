@@ -18,40 +18,37 @@ class FreelancerRegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CreateAccountCurveWithImage(),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(
-            children: [
-              CustomDropDownWidget(
-                hint: 'Country',
-                items: ['USA', 'UK', 'Canada'],
-              ),
-              verticalSpace(32),
-              BlocProvider(
-                create: (context) => TablesCubit(),
-                child: LanguagePairTable(),
-              ),
-              verticalSpace(32),
-              BlocProvider(
-                create: (context) => TablesCubit(),
-                child: SpecializationTable(),
-              ),
-              verticalSpace(40),
-              CustomButton(
-                text: 'Submit',
-                color: AppColors.lightOrange,
-                onPressed: () {
-                  context.pushNamed(Routes.verificationViewRoute);
-                },
-              ),
-              verticalSpace(20),
-            ],
+    return BlocProvider(
+      create: (context) => TablesCubit(),
+      child: Column(
+        children: [
+          CreateAccountCurveWithImage(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              children: [
+                CustomDropDownWidget(
+                  hint: 'Country',
+                  items: ['USA', 'UK', 'Canada'],
+                ),
+                verticalSpace(32),
+                LanguagePairTable(),
+                verticalSpace(32),
+                SpecializationTable(),
+                verticalSpace(40),
+                CustomButton(
+                  text: 'Submit',
+                  color: AppColors.lightOrange,
+                  onPressed: () {
+                    context.pushNamed(Routes.verificationViewRoute);
+                  },
+                ),
+                verticalSpace(20),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

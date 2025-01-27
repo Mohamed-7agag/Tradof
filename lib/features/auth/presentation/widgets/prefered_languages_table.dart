@@ -121,9 +121,9 @@ class PreferedLanguagesTable extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
             ),
             content: SizedBox(
-              width: 9.sw,
+              width: 0.9.sw,
               child: ListView.separated(
-                itemCount: availableLanguage.length,
+                itemCount: availablePreferedLanguage.length,
                 shrinkWrap: true,
                 separatorBuilder: (BuildContext context, int index) =>
                     Divider(color: AppColors.background,height: 0),
@@ -133,11 +133,11 @@ class PreferedLanguagesTable extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    title: Text(availableLanguage[index].languageName),
-                    subtitle: Text(availableLanguage[index].tag),
+                    title: Text(availablePreferedLanguage[index].languageName),
+                    subtitle: Text(availablePreferedLanguage[index].tag),
                     onTap: () {
                       context.read<TablesCubit>().addPreferedLanguage(
-                            availableLanguage[index],
+                            availablePreferedLanguage[index],
                           );
                       Navigator.pop(context);
                     },

@@ -40,17 +40,19 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
             hasScrollBody: false,
             child: Column(
               children: [
-                ExpandablePageView(
-                  controller: _pageController,
-                  onPageChanged: (int page) {
-                    setState(() => _currentPage = page);
-                  },
-                  children: [
-                    SelectAccountTypeView(pageController: _pageController),
-                    RegisterView(pageController: _pageController),
-                    FreelancerRegisterView(),
-                    //CompanyRegisterView(),
-                  ],
+                Expanded(
+                  child: ExpandablePageView(
+                    controller: _pageController,
+                    onPageChanged: (int page) {
+                      setState(() => _currentPage = page);
+                    },
+                    children: [
+                      SelectAccountTypeView(pageController: _pageController),
+                      RegisterView(pageController: _pageController),
+                      FreelancerRegisterView(),
+                      //CompanyRegisterView(),
+                    ],
+                  ),
                 ),
                 verticalSpace(20),
                 _buildDotIndicator(),

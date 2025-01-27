@@ -5,36 +5,33 @@ part 'tables_state.dart';
 
 class TablesCubit extends Cubit<TablesState> {
   TablesCubit() : super(TablesState());
-
-  // Add specialization
+  //! Specialization
   void addSpecialization(String specialization) {
     final updatedList = List<String>.from(state.selectedSpecializations)
       ..add(specialization);
     emit(state.copyWith(selectedSpecializations: updatedList));
   }
 
-  // Remove specialization
   void removeSpecialization(String specialization) {
     final updatedList = List<String>.from(state.selectedSpecializations)
       ..remove(specialization);
     emit(state.copyWith(selectedSpecializations: updatedList));
   }
 
-  // Add industry served
+  //! Industries Served
   void addIndustryServed(String industry) {
     final updatedList = List<String>.from(state.selectedIndustriesServed)
       ..add(industry);
     emit(state.copyWith(selectedIndustriesServed: updatedList));
   }
 
-  // Remove industry served
   void removeIndustryServed(String industry) {
     final updatedList = List<String>.from(state.selectedIndustriesServed)
       ..remove(industry);
     emit(state.copyWith(selectedIndustriesServed: updatedList));
   }
 
-  // add prefered languages
+  //! Prefered Languages
   void addPreferedLanguage(LanguageModel language) {
     final updatedList =
         List<LanguageModel>.from(state.selectedPreferedLanguages)
@@ -42,7 +39,6 @@ class TablesCubit extends Cubit<TablesState> {
     emit(state.copyWith(selectedPreferedLanguages: updatedList));
   }
 
-  // remove prefered languages
   void removePreferedLanguage(LanguageModel language) {
     final updatedList =
         List<LanguageModel>.from(state.selectedPreferedLanguages)
@@ -50,14 +46,13 @@ class TablesCubit extends Cubit<TablesState> {
     emit(state.copyWith(selectedPreferedLanguages: updatedList));
   }
 
-  // add language pair
+  //! Language Pair
   void addLanguagePair(LanguageModel language) {
     final updatedList = List<LanguageModel>.from(state.selectedLanguagePair)
       ..add(language);
     emit(state.copyWith(selectedLanguagePair: updatedList));
   }
 
-  // remove language pair
   void removeLanguagePair(LanguageModel language) {
     final updatedList = List<LanguageModel>.from(state.selectedLanguagePair)
       ..remove(language);

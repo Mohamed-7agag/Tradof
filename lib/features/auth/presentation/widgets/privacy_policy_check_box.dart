@@ -28,6 +28,7 @@ class _PrivacyPolicyCheckBoxState extends State<PrivacyPolicyCheckBox> {
         ),
         checkboxShape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         side: BorderSide(color: AppColors.white),
         selectedTileColor: AppColors.primary,
         controlAffinity: ListTileControlAffinity.leading,

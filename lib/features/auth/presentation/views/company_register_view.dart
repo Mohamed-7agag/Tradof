@@ -18,53 +18,50 @@ class CompanyRegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CreateAccountCurveWithImage(),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(
-            children: [
-              CustomTextField(
-                labelText: 'Job Title',
-                labelColor: AppColors.white,
-                controller: TextEditingController(),
-                keyboardType: TextInputType.text,
-              ),
-              verticalSpace(16),
-              CustomDropDownWidget(
-                hint: 'Country',
-                items: ['USA', 'UK', 'Canada'],
-              ),
-              verticalSpace(16),
-              CustomDropDownWidget(
-                hint: 'Location Company',
-                items: ['USA', 'UK', 'Canada'],
-              ),
-              verticalSpace(32),
-              BlocProvider(
-                create: (context) => TablesCubit(),
-                child: PreferedLanguagesTable(),
-              ),
-              verticalSpace(32),
-              BlocProvider(
-                create: (context) => TablesCubit(),
-                child: IndustriesServedTable(),
-              ),
-              verticalSpace(40),
-              CustomButton(
-                text: 'Submit',
-                color: AppColors.lightOrange,
-                onPressed: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  context.pushNamed(Routes.verificationViewRoute);
-                },
-              ),
-              verticalSpace(20),
-            ],
+    return BlocProvider(
+      create: (context) => TablesCubit(),
+      child: Column(
+        children: [
+          CreateAccountCurveWithImage(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              children: [
+                CustomTextField(
+                  labelText: 'Job Title',
+                  labelColor: AppColors.white,
+                  controller: TextEditingController(),
+                  keyboardType: TextInputType.text,
+                ),
+                verticalSpace(16),
+                CustomDropDownWidget(
+                  hint: 'Country',
+                  items: ['USA', 'UK', 'Canada'],
+                ),
+                verticalSpace(16),
+                CustomDropDownWidget(
+                  hint: 'Location Company',
+                  items: ['USA', 'UK', 'Canada'],
+                ),
+                verticalSpace(32),
+                PreferedLanguagesTable(),
+                verticalSpace(32),
+                IndustriesServedTable(),
+                verticalSpace(40),
+                CustomButton(
+                  text: 'Submit',
+                  color: AppColors.lightOrange,
+                  onPressed: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    context.pushNamed(Routes.verificationViewRoute);
+                  },
+                ),
+                verticalSpace(20),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

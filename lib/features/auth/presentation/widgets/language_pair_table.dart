@@ -20,7 +20,7 @@ class LanguagePairTable extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Prefered Languages',
+              'Language Pair',
               style:
                   AppStyle.poppinsSemiBold14.copyWith(color: AppColors.white),
             ),
@@ -44,7 +44,7 @@ class LanguagePairTable extends StatelessWidget {
                 columns: [
                   DataColumn(
                     label: Text(
-                      'Prefered Languages',
+                      'Language Pair',
                       style: AppStyle.poppinsSemiBold14.copyWith(
                         color: AppColors.white,
                       ),
