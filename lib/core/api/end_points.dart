@@ -1,6 +1,9 @@
 abstract class EndPoint {
-  static const String baseUrl = 'https://vcare.integration25.com/api/';
+  static const String baseUrl = 'http://tradof.runasp.net/api/';
   static const String login = 'auth/login';
-  static const String register = 'auth/register';
-  static const String logout = 'auth/logout';
+  static const String registerFreelancer = 'auth/register-freelancer';
+  static const String registerCompany = 'auth/register-company';
+  static const String forgetPassword = 'auth/forget-password';
+  static const String verifyOtp = 'auth/verify-otp';
+  static const String resetPassword = '';
 }

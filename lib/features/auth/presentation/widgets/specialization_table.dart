@@ -6,7 +6,7 @@ import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/core/utils/app_constants.dart';
-import 'package:tradof/features/auth/presentation/logic/cubit/tables_cubit.dart';
+import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 
 class SpecializationTable extends StatelessWidget {
   const SpecializationTable({super.key});

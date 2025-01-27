@@ -69,4 +69,20 @@ class ApiServices implements ApiRequests {
     );
     return response.data;
   }
+
+//! Put Request
+  @override
+  Future put(
+    String path, {
+    data,
+    Map<String, dynamic>? queryParameters,
+    bool isFormData = false,
+  }) async {
+    final response = await _dio.put(
+      path,
+      data: isFormData ? FormData.fromMap(data) : data,
+      queryParameters: queryParameters,
+    );
+    return response.data;
+  }
 }

@@ -1,6 +1,8 @@
-import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
 
+import '../../features/auth/data/repo/auth_repo.dart';
+import '../../features/auth/data/repo/auth_repo_impl.dart';
 import '../api/api_service.dart';
 import '../api/dio_factory.dart';
 
@@ -10,4 +12,7 @@ void setupGetIt() {
   // Dio & ApiServices
   Dio dio = DioFactory.getDio();
   getIt.registerLazySingleton<ApiServices>(() => ApiServices(dio: dio));
+
+  // AuthRepo
+  getIt.registerFactory<AuthRepo>(() => AuthRepoImpl(apiServices: getIt()));
 }

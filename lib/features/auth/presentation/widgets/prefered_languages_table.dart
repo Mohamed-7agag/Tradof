@@ -7,7 +7,7 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/core/utils/app_constants.dart';
 
-import '../logic/cubit/tables_cubit.dart';
+import '../logic/tables_cubit/tables_cubit.dart';
 
 class PreferedLanguagesTable extends StatelessWidget {
   const PreferedLanguagesTable({super.key});

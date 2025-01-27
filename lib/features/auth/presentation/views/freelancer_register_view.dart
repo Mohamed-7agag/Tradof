@@ -6,7 +6,7 @@ import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_drop_down_widget.dart';
-import 'package:tradof/features/auth/presentation/logic/cubit/tables_cubit.dart';
+import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import 'package:tradof/features/auth/presentation/widgets/create_account_curve_with_image.dart';
 import 'package:tradof/features/auth/presentation/widgets/language_pair_table.dart';
 import 'package:tradof/features/auth/presentation/widgets/specialization_table.dart';
