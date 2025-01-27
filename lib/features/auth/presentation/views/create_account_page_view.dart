@@ -5,7 +5,7 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/auth/presentation/views/register_view.dart';
 import 'package:tradof/features/auth/presentation/views/select_account_type_view.dart';
 
-import 'freelancer_register_view.dart';
+import 'company_register_view.dart';
 
 class CreateAccountPageView extends StatefulWidget {
   const CreateAccountPageView({super.key});
@@ -49,8 +49,8 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
                     children: [
                       SelectAccountTypeView(pageController: _pageController),
                       RegisterView(pageController: _pageController),
-                      FreelancerRegisterView(),
-                      //CompanyRegisterView(),
+                      //FreelancerRegisterView(),
+                      CompanyRegisterView(),
                     ],
                   ),
                 ),

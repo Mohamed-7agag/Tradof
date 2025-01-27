@@ -121,7 +121,7 @@ class LanguagePairTable extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
             ),
             content: SizedBox(
-              width: 9.sw,
+              width: 0.9.sw,
               child: ListView.separated(
                 itemCount: availableLanguage.length,
                 shrinkWrap: true,

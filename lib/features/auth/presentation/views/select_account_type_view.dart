@@ -8,9 +8,16 @@ import 'package:tradof/features/auth/presentation/widgets/select_account_type_se
 
 import '../widgets/privacy_policy_check_box.dart';
 
-class SelectAccountTypeView extends StatelessWidget {
+class SelectAccountTypeView extends StatefulWidget {
   const SelectAccountTypeView({super.key, required this.pageController});
   final PageController pageController;
+
+  @override
+  State<SelectAccountTypeView> createState() => _SelectAccountTypeViewState();
+}
+
+class _SelectAccountTypeViewState extends State<SelectAccountTypeView> {
+  bool isAgreed = false;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -30,7 +37,9 @@ class SelectAccountTypeView extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 1.sw,
-                  child: PrivacyPolicyCheckBox(),
+                  child: PrivacyPolicyCheckBox(
+                    onChanged: (isChecked) => isAgreed = isChecked,
+                  ),
                 ),
               ],
             ),
@@ -44,10 +53,13 @@ class SelectAccountTypeView extends StatelessWidget {
               child: CustomButton(
                 text: 'Continue',
                 onPressed: () {
-                  pageController.nextPage(
-                    duration: const Duration(milliseconds: 350),
-                    curve: Curves.easeInOut,
-                  );
+                  print(isAgreed);
+                  if (isAgreed) {
+                    widget.pageController.nextPage(
+                      duration: const Duration(milliseconds: 350),
+                      curve: Curves.easeInOut,
+                    );
+                  }
                 },
                 color: AppColors.lightOrange,
               ),

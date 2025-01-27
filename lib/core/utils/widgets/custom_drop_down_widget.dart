@@ -37,8 +37,9 @@ class CustomDropDownWidget extends StatelessWidget {
     );
   }
 
-  UnderlineInputBorder _buildBorder({Color? color}) {
-    return UnderlineInputBorder(
+  OutlineInputBorder _buildBorder({Color? color}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
       borderSide: BorderSide(color: color ?? AppColors.grey),
     );
   }

@@ -103,7 +103,7 @@ class SpecializationTable extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
             ),
             content: SizedBox(
-              width: 9.sw,
+             width: 0.9.sw,
               child: ListView.builder(
                 itemCount: availableSpecializationsAndServed.length,
                 shrinkWrap: true,

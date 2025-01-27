@@ -17,20 +17,6 @@ class RegisterForm extends StatelessWidget {
       child: Column(
         children: [
           CustomTextField(
-            labelText: 'First Name',
-            labelColor: AppColors.white,
-            controller: TextEditingController(),
-            keyboardType: TextInputType.text,
-          ),
-          verticalSpace(12),
-          CustomTextField(
-            labelText: 'Last Name',
-            labelColor: AppColors.white,
-            controller: TextEditingController(),
-            keyboardType: TextInputType.text,
-          ),
-          verticalSpace(12),
-          CustomTextField(
             labelText: 'Email',
             labelColor: AppColors.white,
             controller: TextEditingController(),

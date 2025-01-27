@@ -66,12 +66,12 @@ class PreferedLanguagesTable extends StatelessWidget {
                         Row(
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                context
-                                    .read<TablesCubit>()
-                                    .removePreferedLanguage(language);
-                              },
-                              child: Icon(Icons.cancel, color: Colors.red)),
+                                onTap: () {
+                                  context
+                                      .read<TablesCubit>()
+                                      .removePreferedLanguage(language);
+                                },
+                                child: Icon(Icons.cancel, color: Colors.red)),
                             horizontalSpace(6),
                             Text(
                               language.languageName,
@@ -126,7 +126,7 @@ class PreferedLanguagesTable extends StatelessWidget {
                 itemCount: availablePreferedLanguage.length,
                 shrinkWrap: true,
                 separatorBuilder: (BuildContext context, int index) =>
-                    Divider(color: AppColors.background,height: 0),
+                    Divider(color: AppColors.background, height: 0),
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
