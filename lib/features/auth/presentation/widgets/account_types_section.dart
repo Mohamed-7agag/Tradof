@@ -29,7 +29,7 @@ class _AccountTypesSectionState extends State<AccountTypesSection> {
           description:
               'if you are doing all jobs alone and do not subcontract freelancers. ',
         ),
-        verticalSpace(18),
+        verticalSpace(16),
         AccountTypeCustom(
           onTap: () {
             setState(() {

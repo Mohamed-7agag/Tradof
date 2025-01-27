@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
+import 'package:tradof/core/utils/app_constants.dart';
+
+import '../logic/cubit/tables_cubit.dart';
 
 class LanguagePairTable extends StatelessWidget {
   const LanguagePairTable({super.key});
@@ -16,98 +20,134 @@ class LanguagePairTable extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Language Pair',
+              'Prefered Languages',
               style:
                   AppStyle.poppinsSemiBold14.copyWith(color: AppColors.white),
             ),
-            SvgPicture.asset('assets/images/add.svg', width: 25),
+            GestureDetector(
+              onTap: () {
+                _showLanguagePairDialog(context);
+              },
+              child: SvgPicture.asset('assets/images/add.svg', width: 28),
+            ),
           ],
         ),
         verticalSpace(12),
         SizedBox(
           width: 1.sw,
-          child: DataTable(
-            columns: [
-              DataColumn(
-                label: Text(
-                  'Language Pair',
-                  style: AppStyle.poppinsSemiBold14.copyWith(
-                    color: AppColors.white,
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'IEFT tag',
-                  style: AppStyle.poppinsSemiBold14.copyWith(
-                    color: AppColors.white,
-                  ),
-                ),
-              )
-            ],
-            rows: [
-              DataRow(
-                cells: [
-                  DataCell(
-                    Row(
-                      children: [
-                        Icon(Icons.cancel, color: Colors.red),
-                        horizontalSpace(6),
-                        Text(
-                          'English - French',
-                          style: AppStyle.robotoRegular12.copyWith(
-                            color: AppColors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  DataCell(
-                    Text(
-                      'en-fr',
-                      style: AppStyle.robotoRegular12.copyWith(
+          child: BlocBuilder<TablesCubit, TablesState>(
+            buildWhen: (previous, current) =>
+                current.selectedLanguagePair !=
+                previous.selectedLanguagePair,
+            builder: (context, state) {
+              return DataTable(
+                columns: [
+                  DataColumn(
+                    label: Text(
+                      'Prefered Languages',
+                      style: AppStyle.poppinsSemiBold14.copyWith(
                         color: AppColors.white,
                       ),
                     ),
                   ),
+                  DataColumn(
+                    label: Text(
+                      'IEFT tag',
+                      style: AppStyle.poppinsSemiBold14.copyWith(
+                        color: AppColors.white,
+                      ),
+                    ),
+                  )
                 ],
-              ),
-              DataRow(
-                cells: [
-                  DataCell(
-                    Row(
-                      children: [
-                        Icon(Icons.cancel, color: Colors.red),
-                        horizontalSpace(6),
+                rows: state.selectedLanguagePair.map((language) {
+                  return DataRow(
+                    cells: [
+                      DataCell(
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<TablesCubit>()
+                                    .removeLanguagePair(language);
+                              },
+                              child: Icon(Icons.cancel, color: Colors.red)),
+                            horizontalSpace(6),
+                            Text(
+                              language.languageName,
+                              style: AppStyle.robotoRegular12.copyWith(
+                                color: AppColors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      DataCell(
                         Text(
-                          'English - French',
+                          language.tag,
                           style: AppStyle.robotoRegular12.copyWith(
                             color: AppColors.white,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  DataCell(
-                    Text(
-                      'en-fr',
-                      style: AppStyle.robotoRegular12.copyWith(
-                        color: AppColors.white,
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-            horizontalMargin: 15,
-            columnSpacing: 28,
-            border: TableBorder.all(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
+                    ],
+                  );
+                }).toList(),
+                horizontalMargin: 15,
+                columnSpacing: 28,
+                border: TableBorder.all(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              );
+            },
           ),
         ),
       ],
+    );
+  }
+
+  _showLanguagePairDialog(BuildContext context) {
+    final cubit = context.read<TablesCubit>();
+    showDialog(
+      context: context,
+      builder: (context) {
+        return BlocProvider.value(
+          value: cubit,
+          child: AlertDialog(
+            title: Text('Select Language'),
+            backgroundColor: AppColors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
+            content: SizedBox(
+              width: 9.sw,
+              child: ListView.separated(
+                itemCount: availableLanguage.length,
+                shrinkWrap: true,
+                separatorBuilder: (BuildContext context, int index) =>
+                    Divider(color: AppColors.background,height: 0),
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    title: Text(availableLanguage[index].languageName),
+                    subtitle: Text(availableLanguage[index].tag),
+                    onTap: () {
+                      context.read<TablesCubit>().addLanguagePair(
+                            availableLanguage[index],
+                          );
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

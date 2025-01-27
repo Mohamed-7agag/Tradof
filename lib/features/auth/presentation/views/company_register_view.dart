@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/helpers/spacing.dart';
@@ -7,6 +8,7 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_drop_down_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_text_field.dart';
+import 'package:tradof/features/auth/presentation/logic/cubit/tables_cubit.dart';
 import 'package:tradof/features/auth/presentation/widgets/create_account_curve_with_image.dart';
 import 'package:tradof/features/auth/presentation/widgets/industries_served_table.dart';
 import 'package:tradof/features/auth/presentation/widgets/prefered_languages_table.dart';
@@ -39,10 +41,16 @@ class CompanyRegisterView extends StatelessWidget {
                 hint: 'Location Company',
                 items: ['USA', 'UK', 'Canada'],
               ),
-              verticalSpace(35),
-              PreferedLanguagesTable(),
-              verticalSpace(35),
-              IndustriesServedTable(),
+              verticalSpace(32),
+              BlocProvider(
+                create: (context) => TablesCubit(),
+                child: PreferedLanguagesTable(),
+              ),
+              verticalSpace(32),
+              BlocProvider(
+                create: (context) => TablesCubit(),
+                child: IndustriesServedTable(),
+              ),
               verticalSpace(40),
               CustomButton(
                 text: 'Submit',
