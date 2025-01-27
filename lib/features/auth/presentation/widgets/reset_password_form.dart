@@ -6,8 +6,29 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
 
-class ResetPasswordForm extends StatelessWidget {
+class ResetPasswordForm extends StatefulWidget {
   const ResetPasswordForm({super.key});
+
+  @override
+  State<ResetPasswordForm> createState() => _ResetPasswordFormState();
+}
+
+class _ResetPasswordFormState extends State<ResetPasswordForm> {
+  late final TextEditingController passwordController;
+  late final TextEditingController confirmPasswordController;
+  @override
+  void initState() {
+    passwordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +39,14 @@ class ResetPasswordForm extends StatelessWidget {
           children: [
             CustomTextField(
               labelText: 'New Password',
-              controller: TextEditingController(),
+              controller: passwordController,
               keyboardType: TextInputType.text,
               obscureText: true,
             ),
             verticalSpace(12),
             CustomTextField(
               labelText: 'Confirm Password',
-              controller: TextEditingController(),
+              controller: confirmPasswordController,
               keyboardType: TextInputType.text,
               obscureText: true,
             ),

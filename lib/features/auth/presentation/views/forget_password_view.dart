@@ -9,9 +9,28 @@ import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../widgets/auth_shape.dart';
 
-class ForgetPasswordView extends StatelessWidget {
+class ForgetPasswordView extends StatefulWidget {
   const ForgetPasswordView({super.key, required this.pageController});
   final PageController pageController;
+
+  @override
+  State<ForgetPasswordView> createState() => _ForgetPasswordViewState();
+}
+
+class _ForgetPasswordViewState extends State<ForgetPasswordView> {
+  late final TextEditingController emailController;
+  @override
+  void initState() {
+    emailController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -37,7 +56,7 @@ class ForgetPasswordView extends StatelessWidget {
                 verticalSpace(30),
                 CustomTextField(
                   labelText: 'Email',
-                  controller: TextEditingController(),
+                  controller: emailController,
                   keyboardType: TextInputType.emailAddress,
                 ),
                 verticalSpace(45),
@@ -47,7 +66,7 @@ class ForgetPasswordView extends StatelessWidget {
                     text: 'Continue',
                     onPressed: () {
                       FocusManager.instance.primaryFocus?.unfocus();
-                      pageController.nextPage(
+                      widget.pageController.nextPage(
                         duration: Duration(milliseconds: 350),
                         curve: Curves.easeInOut,
                       );

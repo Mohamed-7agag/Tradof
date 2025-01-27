@@ -6,9 +6,38 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
 
-class RegisterForm extends StatelessWidget {
+class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key, required this.pageController});
   final PageController pageController;
+
+  @override
+  State<RegisterForm> createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<RegisterForm> {
+  late final TextEditingController emailController;
+  late final TextEditingController phoneNumberController;
+  late final TextEditingController passwordController;
+  late final TextEditingController confirmPasswordController;
+
+  @override
+  void initState() {
+    emailController = TextEditingController();
+    phoneNumberController = TextEditingController();
+    passwordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    phoneNumberController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -19,21 +48,21 @@ class RegisterForm extends StatelessWidget {
           CustomTextField(
             labelText: 'Email',
             labelColor: AppColors.white,
-            controller: TextEditingController(),
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
           ),
           verticalSpace(12),
           CustomTextField(
             labelText: 'Phone Number',
             labelColor: AppColors.white,
-            controller: TextEditingController(),
+            controller: phoneNumberController,
             keyboardType: TextInputType.number,
           ),
           verticalSpace(12),
           CustomTextField(
             labelText: 'Password',
             labelColor: AppColors.white,
-            controller: TextEditingController(),
+            controller: passwordController,
             keyboardType: TextInputType.text,
             obscureText: true,
           ),
@@ -41,7 +70,7 @@ class RegisterForm extends StatelessWidget {
           CustomTextField(
             labelText: 'Confirm Password',
             labelColor: AppColors.white,
-            controller: TextEditingController(),
+            controller: confirmPasswordController,
             keyboardType: TextInputType.text,
             obscureText: true,
           ),
@@ -51,7 +80,7 @@ class RegisterForm extends StatelessWidget {
             color: AppColors.lightOrange,
             onPressed: () {
               FocusManager.instance.primaryFocus?.unfocus();
-              pageController.nextPage(
+              widget.pageController.nextPage(
                 duration: const Duration(milliseconds: 350),
                 curve: Curves.easeInOut,
               );
