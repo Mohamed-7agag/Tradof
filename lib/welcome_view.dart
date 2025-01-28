@@ -38,7 +38,7 @@ class WelcomeView extends StatelessWidget {
             from: 400,
             child: IconButton(
               onPressed: () {
-                context.pushReplacementNamed(Routes.loginViewRoute);
+                context.goNamed(Routes.loginViewRoute);
               },
               icon: Icon(
                 Icons.arrow_forward_ios_rounded,

@@ -19,7 +19,7 @@ extension AuthStepX on AuthStatus {
   bool get isLoading => this == AuthStatus.loading;
 }
 
-class AuthState {
+class AuthState extends Equatable {
   final AuthStatus status;
   final String email;
   final String password;
@@ -28,7 +28,7 @@ class AuthState {
   final String errorMessage;
 
   const AuthState({
-    required this.status,
+    this.status = AuthStatus.initial,
     this.email = '',
     this.password = '',
     this.otp = '',
@@ -53,4 +53,14 @@ class AuthState {
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        status,
+        email,
+        password,
+        otp,
+        newPassword,
+        errorMessage,
+      ];
 }

@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/routing/routes.dart';
-import 'package:tradof/features/auth/presentation/views/create_account_page_view.dart';
-import 'package:tradof/features/auth/presentation/views/forget_password_page_view.dart';
-import 'package:tradof/features/auth/presentation/views/login_view.dart';
-import 'package:tradof/features/auth/presentation/views/verification_view.dart';
 
+import '../../features/auth/presentation/views/create_account_page_view.dart';
+import '../../features/auth/presentation/views/forget_password_page_view.dart';
+import '../../features/auth/presentation/views/login_view.dart';
+import '../../features/auth/presentation/views/verification_view.dart';
 import '../../welcome_view.dart';
 import '../helpers/navigation_handler.dart';
 

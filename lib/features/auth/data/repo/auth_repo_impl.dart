@@ -7,13 +7,13 @@ import 'package:tradof/features/auth/data/repo/auth_repo.dart';
 import '../../../../core/api/end_points.dart';
 
 class AuthRepoImpl implements AuthRepo {
-  final ApiServices apiServices;
+  final ApiServices _apiServices;
 
-  AuthRepoImpl({required this.apiServices});
+  AuthRepoImpl({required ApiServices apiServices}) : _apiServices = apiServices;
   @override
   Future<Either<Failure, String>> login(String email, String password) {
     return handleRequest(() async {
-      final response = await apiServices.post(
+      final response = await _apiServices.post(
         EndPoint.login,
         // data: loginRequestModel.toJson(),
       );
@@ -25,7 +25,7 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<Either<Failure, String>> forgetPassword(String email) {
     return handleRequest(() async {
-      final response = await apiServices.post(
+      final response = await _apiServices.post(
         EndPoint.forgetPassword,
         data: {'email': email},
       );
@@ -36,7 +36,7 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<Either<Failure, String>> resetPassword(String newPassword) {
     return handleRequest(() async {
-      final response = await apiServices.post(
+      final response = await _apiServices.post(
         EndPoint.resetPassword,
         data: {'newPassword': newPassword},
       );
@@ -47,7 +47,7 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<Either<Failure, String>> verifyOtp(String email, String otp) {
     return handleRequest(() async {
-      final response = await apiServices.post(
+      final response = await _apiServices.post(
         EndPoint.verifyOtp,
         data: {'email': email, 'otp': otp},
       );
