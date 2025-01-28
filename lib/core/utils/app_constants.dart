@@ -11,18 +11,35 @@ const List<String> availableSpecializationsAndServed = [
   "Technical Translation",
   "Financial Translation",
 ];
-const List<LanguageModel> availableLanguage = [
-  LanguageModel(languageName: 'English-French', tag: 'En-Fr'),
-  LanguageModel(languageName: 'French-English', tag: 'Fr-En'),
-  LanguageModel(languageName: 'English-Spanish', tag: 'En-Es'),
-  LanguageModel(languageName: 'Spanish-English', tag: 'Es-En'),
-  LanguageModel(languageName: 'Spanish-French', tag: 'Es-Fr'),
-  LanguageModel(languageName: 'French-Spanish', tag: 'Fr-Es'),
-  LanguageModel(languageName: 'English-German', tag: 'En-Gr'),
-  LanguageModel(languageName: 'German-English', tag: 'Gr-En'),
-  LanguageModel(languageName: 'English-Arabic', tag: 'En-Ar'),
-  LanguageModel(languageName: 'Arabic-English', tag: 'Ar-En'),
+const List<String> availableLanguages = [
+  'English',
+  'French',
+  'Spanish',
+  'German',
+  'Arabic',
+  'Italian',
+  'Portuguese',
+  'Russian',
+  'Chinese',
+  'Japanese',
+  'Korean',
+  'Hindi',
 ];
+
+const Map<String, String> availableTags = {
+  'English': 'En',
+  'French': 'Fr',
+  'Spanish': 'Es',
+  'German': 'Gr',
+  'Arabic': 'Ar',
+  'Italian': 'It',
+  'Portuguese': 'Pt',
+  'Russian': 'Ru',
+  'Chinese': 'Ch',
+  'Japanese': 'Ja',
+  'Korean': 'Kr',
+  'Hindi': 'Hi',
+};
 const List<LanguageModel> availablePreferedLanguage = [
   LanguageModel(languageName: 'English', tag: 'En'),
   LanguageModel(languageName: 'Splanish', tag: 'Es'),

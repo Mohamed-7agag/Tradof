@@ -30,6 +30,7 @@ class FreelancerRegisterView extends StatelessWidget {
                 CustomDropDownWidget(
                   hint: 'Country',
                   items: ['USA', 'UK', 'Canada'],
+                  onChanged: (value) {},
                 ),
                 verticalSpace(32),
                 LanguagePairTable(),

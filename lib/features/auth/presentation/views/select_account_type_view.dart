@@ -53,7 +53,6 @@ class _SelectAccountTypeViewState extends State<SelectAccountTypeView> {
               child: CustomButton(
                 text: 'Continue',
                 onPressed: () {
-                  print(isAgreed);
                   if (isAgreed) {
                     widget.pageController.nextPage(
                       duration: const Duration(milliseconds: 350),

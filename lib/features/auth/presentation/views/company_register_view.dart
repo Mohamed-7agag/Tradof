@@ -37,11 +37,13 @@ class CompanyRegisterView extends StatelessWidget {
                 CustomDropDownWidget(
                   hint: 'Country',
                   items: ['USA', 'UK', 'Canada'],
+                  onChanged: (value) {},
                 ),
                 verticalSpace(16),
                 CustomDropDownWidget(
                   hint: 'Location Company',
                   items: ['USA', 'UK', 'Canada'],
+                  onChanged: (value) {},
                 ),
                 verticalSpace(32),
                 PreferedLanguagesTable(),

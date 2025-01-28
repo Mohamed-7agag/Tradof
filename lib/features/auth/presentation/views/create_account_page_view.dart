@@ -6,6 +6,7 @@ import 'package:tradof/features/auth/presentation/views/register_view.dart';
 import 'package:tradof/features/auth/presentation/views/select_account_type_view.dart';
 
 import 'company_register_view.dart';
+import 'freelancer_register_view.dart';
 
 class CreateAccountPageView extends StatefulWidget {
   const CreateAccountPageView({super.key});
@@ -49,7 +50,7 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
                     children: [
                       SelectAccountTypeView(pageController: _pageController),
                       RegisterView(pageController: _pageController),
-                      //FreelancerRegisterView(),
+                      FreelancerRegisterView(),
                       CompanyRegisterView(),
                     ],
                   ),
@@ -68,7 +69,7 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
   Widget _buildDotIndicator() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(3, (index) {
+      children: List.generate(4, (index) {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 4),
           width: 30,

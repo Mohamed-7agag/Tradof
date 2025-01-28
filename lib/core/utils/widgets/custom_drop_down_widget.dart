@@ -4,11 +4,17 @@ import '../../theming/app_colors.dart';
 import '../../theming/app_style.dart';
 
 class CustomDropDownWidget extends StatelessWidget {
-  const CustomDropDownWidget(
-      {super.key, required this.hint, required this.items, this.value});
+  const CustomDropDownWidget({
+    super.key,
+    required this.hint,
+    required this.items,
+    this.value,
+    this.onChanged,
+  });
   final String hint;
   final List<String> items;
   final String? value;
+  final void Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +36,12 @@ class CustomDropDownWidget extends StatelessWidget {
       items: items
           .map(
             (e) => DropdownMenuItem(
-                value: e, child: Text(e, style: AppStyle.poppinsMedium14)),
+              value: e,
+              child: Text(e, style: AppStyle.poppinsMedium14),
+            ),
           )
           .toList(),
-      onChanged: (value) {},
+      onChanged: onChanged,
     );
   }
 
