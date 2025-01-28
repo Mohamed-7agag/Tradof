@@ -1,7 +1,9 @@
 import 'package:tradof/features/auth/data/model/language_model.dart';
 
 abstract class AppConstants {
-  static const String userToken = "userToken";
+  static const String token = "userToken";
+  static const String role = "role";
+  static const String userId = "userId";
 }
 
 const List<String> availableSpecializationsAndServed = [

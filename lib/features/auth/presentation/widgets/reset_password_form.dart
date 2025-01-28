@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/extensions.dart';
+import 'package:tradof/features/auth/presentation/widgets/reset_password_button.dart';
 
 import '../../../../core/helpers/spacing.dart';
-import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
 
 class ResetPasswordForm extends StatefulWidget {
@@ -14,10 +13,13 @@ class ResetPasswordForm extends StatefulWidget {
 }
 
 class _ResetPasswordFormState extends State<ResetPasswordForm> {
+  late final GlobalKey<FormState> formKey;
+
   late final TextEditingController passwordController;
   late final TextEditingController confirmPasswordController;
   @override
   void initState() {
+    formKey = GlobalKey<FormState>();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
     super.initState();
@@ -33,6 +35,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
@@ -51,12 +54,10 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
               obscureText: true,
             ),
             verticalSpace(50),
-            CustomButton(
-              text: 'Submit',
-              onPressed: () {
-                FocusManager.instance.primaryFocus?.unfocus();
-                context.pop();
-              },
+            ResetPasswordButton(
+              formKey: formKey,
+              passwordController: passwordController,
+              confirmPasswordController: confirmPasswordController,
             ),
             verticalSpace(25),
           ],

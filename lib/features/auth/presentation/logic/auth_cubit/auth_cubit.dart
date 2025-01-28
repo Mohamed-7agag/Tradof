@@ -1,6 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/core/cache/cache_helper.dart';
+import 'package:tradof/features/auth/data/model/login_response_model.dart';
 import 'package:tradof/features/auth/data/repo/auth_repo.dart';
+
+import '../../../../../core/utils/app_constants.dart';
 
 part 'auth_state.dart';
 
@@ -13,17 +17,19 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> login(String email, String password) async {
     emit(state.copyWith(status: AuthStatus.loading));
     final result = await _authRepo.login(email, password);
-    result.fold(
-      (failure) => emit(state.copyWith(
+    result.fold((failure) {
+      emit(state.copyWith(
         status: AuthStatus.error,
         errorMessage: failure.errMessage,
-      )),
-      (success) => emit(state.copyWith(
+      ));
+    }, (response) {
+      emit(state.copyWith(
         status: AuthStatus.login,
         email: email,
         password: password,
-      )),
-    );
+      ));
+      _cacheUserData(response);
+    });
   }
 
   //forget password
@@ -35,8 +41,9 @@ class AuthCubit extends Cubit<AuthState> {
         status: AuthStatus.error,
         errorMessage: failure.errMessage,
       )),
-      (success) => emit(state.copyWith(
+      (successMessage) => emit(state.copyWith(
         status: AuthStatus.forgotPassword,
+        message: successMessage,
         email: email,
       )),
     );
@@ -54,6 +61,7 @@ class AuthCubit extends Cubit<AuthState> {
       (success) => emit(state.copyWith(
         status: AuthStatus.otpVerification,
         otp: otp,
+        resetToken: success['resetToken'],
       )),
     );
   }
@@ -61,16 +69,28 @@ class AuthCubit extends Cubit<AuthState> {
   //reset password
   Future<void> resetPassword(String newPassword) async {
     emit(state.copyWith(status: AuthStatus.loading));
-    final result = await _authRepo.resetPassword(newPassword);
+    final result = await _authRepo.resetPassword(
+      newPassword,
+      state.resetToken,
+      state.email,
+    );
     result.fold(
       (failure) => emit(state.copyWith(
         status: AuthStatus.error,
         errorMessage: failure.errMessage,
       )),
-      (success) => emit(state.copyWith(
+      (successMessage) => emit(state.copyWith(
         status: AuthStatus.resetPassword,
         newPassword: newPassword,
+        message: successMessage,
       )),
     );
+  }
+
+//! Helpers
+  void _cacheUserData(LoginResponseModel response) {
+    CacheHelper.setSecuredString(AppConstants.userId, response.userId);
+    CacheHelper.setSecuredString(AppConstants.token, response.token);
+    CacheHelper.setData(key: AppConstants.role, value: response.role);
   }
 }

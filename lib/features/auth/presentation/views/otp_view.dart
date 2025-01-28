@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/auth/presentation/widgets/otp_widget.dart';
+import 'package:tradof/features/auth/presentation/widgets/otp_widget_and_button.dart';
 
 import '../../../../core/theming/app_style.dart';
-import '../../../../core/utils/widgets/custom_button.dart';
 import '../widgets/auth_shape.dart';
 
 class OtpView extends StatelessWidget {
   const OtpView({super.key, required this.pageController});
   final PageController pageController;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -30,18 +30,7 @@ class OtpView extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 verticalSpace(32),
-                OtpWidget(),
-                verticalSpace(38),
-                CustomButton(
-                  text: 'Reset Password',
-                  onPressed: () {
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    pageController.nextPage(
-                      duration: Duration(milliseconds: 350),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                ),
+                OtpWidgetAndButton(pageController: pageController),
                 verticalSpace(16),
                 Row(
                   children: [
@@ -49,8 +38,10 @@ class OtpView extends StatelessWidget {
                         style: AppStyle.robotoRegular12),
                     Text(
                       'Resend OTP',
-                      style: AppStyle.robotoRegular12
-                          .copyWith(color: AppColors.primary),
+                      style: AppStyle.robotoRegular12.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ],
                 ),

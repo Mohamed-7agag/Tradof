@@ -6,8 +6,8 @@ import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 
 class OtpWidget extends StatelessWidget {
-  const OtpWidget({super.key});
-
+  const OtpWidget({super.key, required this.onSubmit});
+  final void Function(String pin)? onSubmit;
   @override
   Widget build(BuildContext context) {
     return OtpTextField(
@@ -21,8 +21,7 @@ class OtpWidget extends StatelessWidget {
       contentPadding: EdgeInsets.symmetric(vertical: 18.h),
       textStyle: AppStyle.robotoBold20,
       focusedBorderColor: AppColors.primary,
-
-      onSubmit: (String pin) {}, // end onSubmit
+      onSubmit: onSubmit, // end onSubmit
     );
   }
 }

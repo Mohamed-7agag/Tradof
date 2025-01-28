@@ -26,7 +26,7 @@ class CustomDropDownWidget extends StatelessWidget {
       ),
       value: value,
       iconEnabledColor: AppColors.white,
-      style: AppStyle.poppinsMedium14.copyWith(color: AppColors.white),
+      style: AppStyle.robotoRegular14.copyWith(color: AppColors.white),
       dropdownColor: AppColors.darkGrey,
       elevation: 4,
       hint: Text(
@@ -35,9 +35,9 @@ class CustomDropDownWidget extends StatelessWidget {
       ),
       items: items
           .map(
-            (e) => DropdownMenuItem(
-              value: e,
-              child: Text(e, style: AppStyle.poppinsMedium14),
+            (item) => DropdownMenuItem(
+              value: item,
+              child: Text(item, style: AppStyle.robotoRegular14),
             ),
           )
           .toList(),
@@ -47,7 +47,7 @@ class CustomDropDownWidget extends StatelessWidget {
 
   OutlineInputBorder _buildBorder({Color? color}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(12),
       borderSide: BorderSide(color: color ?? AppColors.grey),
     );
   }

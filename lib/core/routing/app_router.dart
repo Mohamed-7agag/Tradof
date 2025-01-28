@@ -1,6 +1,10 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
 
+import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
+import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
 import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
@@ -21,17 +25,26 @@ class AppRouter {
       GoRoute(
         name: Routes.loginViewRoute,
         path: '/loginView',
-        builder: (context, state) => LoginView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => AuthCubit(getIt()),
+          child: LoginView(),
+        ),
       ),
       GoRoute(
         name: Routes.forgetPasswordPageViewRoute,
         path: '/forgetPasswordPageView',
-        builder: (context, state) => ForgetPasswordPageView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => AuthCubit(getIt()),
+          child: ForgetPasswordPageView(),
+        ),
       ),
       GoRoute(
         name: Routes.createAccountPageViewRoute,
         path: '/createAccountPageView',
-        builder: (context, state) => CreateAccountPageView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => RegisterationCubit(getIt()),
+          child: CreateAccountPageView(),
+        ),
       ),
       GoRoute(
         name: Routes.verificationViewRoute,

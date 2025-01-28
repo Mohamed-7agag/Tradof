@@ -26,6 +26,8 @@ class AuthState extends Equatable {
   final String otp;
   final String newPassword;
   final String errorMessage;
+  final String message;
+  final String resetToken;
 
   const AuthState({
     this.status = AuthStatus.initial,
@@ -34,6 +36,8 @@ class AuthState extends Equatable {
     this.otp = '',
     this.newPassword = '',
     this.errorMessage = '',
+    this.message = '',
+    this.resetToken = '',
   });
 
   AuthState copyWith({
@@ -43,6 +47,8 @@ class AuthState extends Equatable {
     String? otp,
     String? newPassword,
     String? errorMessage,
+    String? message,
+    String? resetToken,
   }) {
     return AuthState(
       status: status ?? this.status,
@@ -51,6 +57,8 @@ class AuthState extends Equatable {
       otp: otp ?? this.otp,
       newPassword: newPassword ?? this.newPassword,
       errorMessage: errorMessage ?? this.errorMessage,
+      message: message ?? this.message,
+      resetToken: resetToken ?? this.resetToken,
     );
   }
 
@@ -62,5 +70,7 @@ class AuthState extends Equatable {
         otp,
         newPassword,
         errorMessage,
+        message,
+        resetToken,
       ];
 }

@@ -32,6 +32,7 @@ class CompanyRegisterView extends StatelessWidget {
                   labelColor: AppColors.white,
                   controller: TextEditingController(),
                   keyboardType: TextInputType.text,
+                  outlineBorder: true,
                 ),
                 verticalSpace(16),
                 CustomDropDownWidget(
