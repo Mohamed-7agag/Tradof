@@ -26,7 +26,6 @@ class CustomDropDownWidget extends StatelessWidget {
       ),
       value: value,
       iconEnabledColor: AppColors.white,
-      style: AppStyle.robotoRegular14.copyWith(color: AppColors.white),
       dropdownColor: AppColors.darkGrey,
       elevation: 4,
       hint: Text(
@@ -37,7 +36,12 @@ class CustomDropDownWidget extends StatelessWidget {
           .map(
             (item) => DropdownMenuItem(
               value: item,
-              child: Text(item, style: AppStyle.robotoRegular14),
+              child: Text(
+                item,
+                style: AppStyle.robotoRegular15.copyWith(
+                  color: AppColors.white,
+                ),
+              ),
             ),
           )
           .toList(),

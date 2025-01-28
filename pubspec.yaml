@@ -48,6 +48,7 @@ dependencies:
   go_router: ^14.7.1
   google_fonts: ^6.2.1
   image_picker: ^1.1.2
+  intl_phone_field: ^3.2.0
   pretty_dio_logger: ^1.4.0
   shared_preferences: ^2.3.4
   toastification: ^2.3.0

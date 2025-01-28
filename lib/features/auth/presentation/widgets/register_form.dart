@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/theming/app_colors.dart';
+import 'package:tradof/features/auth/presentation/widgets/phone_number_text_field.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
@@ -56,13 +57,11 @@ class _RegisterFormState extends State<RegisterForm> {
                 keyboardType: TextInputType.emailAddress,
               ),
               verticalSpace(12),
-              CustomTextField(
+              PhoneNumberTextField(
                 labelText: 'Phone Number',
-                labelColor: AppColors.white,
                 controller: phoneNumberController,
-                keyboardType: TextInputType.number,
               ),
-              verticalSpace(12),
+              verticalSpace(6),
               CustomTextField(
                 labelText: 'Password',
                 labelColor: AppColors.white,
