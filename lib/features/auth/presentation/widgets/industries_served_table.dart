@@ -98,8 +98,11 @@ class IndustriesServedTable extends StatelessWidget {
         return BlocProvider.value(
           value: cubit,
           child: AlertDialog(
-            title: Text('Industries Served'),
-            backgroundColor: AppColors.white,
+            title: Text(
+              'Industries Served',
+              style: AppStyle.poppinsBold22.copyWith(color: Colors.white),
+            ),
+            backgroundColor: AppColors.darkGrey,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),
@@ -112,9 +115,13 @@ class IndustriesServedTable extends StatelessWidget {
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    title: Text(availableSpecializationsAndServed[index]),
+                    title: Text(
+                      '${index + 1}. ${availableSpecializationsAndServed[index]}',
+                      style: AppStyle.robotoRegular15
+                          .copyWith(color: Colors.white),
+                    ),
                     onTap: () {
                       context.read<TablesCubit>().addIndustryServed(
                             availableSpecializationsAndServed[index],

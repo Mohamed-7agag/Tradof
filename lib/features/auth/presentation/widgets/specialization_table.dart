@@ -97,13 +97,16 @@ class SpecializationTable extends StatelessWidget {
         return BlocProvider.value(
           value: cubit,
           child: AlertDialog(
-            title: Text('Select Specialization'),
-            backgroundColor: AppColors.white,
+            title: Text(
+              'Select Specialization',
+              style: AppStyle.poppinsBold22.copyWith(color: Colors.white),
+            ),
+            backgroundColor: AppColors.darkGrey,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),
             content: SizedBox(
-             width: 0.9.sw,
+              width: 0.9.sw,
               child: ListView.builder(
                 itemCount: availableSpecializationsAndServed.length,
                 shrinkWrap: true,
@@ -111,9 +114,13 @@ class SpecializationTable extends StatelessWidget {
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    title: Text(availableSpecializationsAndServed[index]),
+                    title: Text(
+                      '${index + 1}. ${availableSpecializationsAndServed[index]}',
+                      style: AppStyle.robotoRegular15
+                          .copyWith(color: Colors.white),
+                    ),
                     onTap: () {
                       context.read<TablesCubit>().addSpecialization(
                             availableSpecializationsAndServed[index],

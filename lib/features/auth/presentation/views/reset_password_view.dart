@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/spacing.dart';
@@ -14,7 +15,10 @@ class ResetPasswordView extends StatelessWidget {
       child: Column(
         children: [
           AuthShape(),
-          Text('Reset Password', style: AppStyle.robotoExtraBold32),
+          SlideInLeft(
+            from: 400,
+            child: Text('Reset Password', style: AppStyle.robotoExtraBold32),
+          ),
           verticalSpace(30),
           ResetPasswordForm(),
         ],

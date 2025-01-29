@@ -61,7 +61,7 @@ class _ForgetPasswordPageViewState extends State<ForgetPasswordPageView> {
       children: List.generate(3, (index) {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 4),
-          width: 30,
+          width: 32,
           height: 4,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),

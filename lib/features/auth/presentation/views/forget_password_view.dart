@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_text_field.dart';
+import 'package:tradof/features/auth/presentation/widgets/forget_password_button.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
@@ -43,8 +43,10 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
               children: [
                 SlideInLeft(
                   from: 400,
-                  child: Text('Forget Password',
-                      style: AppStyle.robotoCondensedSemiBold32),
+                  child: Text(
+                    'Forget Password',
+                    style: AppStyle.robotoCondensedSemiBold32,
+                  ),
                 ),
                 verticalSpace(20),
                 Text(
@@ -54,23 +56,22 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                   textAlign: TextAlign.center,
                 ),
                 verticalSpace(30),
-                CustomTextField(
-                  labelText: 'Email',
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
+                SlideInRight(
+                  from: 400,
+                  delay: Duration(milliseconds: 100),
+                  child: CustomTextField(
+                    labelText: 'Email',
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
                 ),
                 verticalSpace(45),
                 SlideInUp(
                   from: 400,
-                  child: CustomButton(
-                    text: 'Continue',
-                    onPressed: () {
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      widget.pageController.nextPage(
-                        duration: Duration(milliseconds: 350),
-                        curve: Curves.easeInOut,
-                      );
-                    },
+                  delay: Duration(milliseconds: 200),
+                  child: ForgetPasswordButton(
+                    emailController: emailController,
+                    pageController: widget.pageController,
                   ),
                 ),
                 verticalSpace(25),

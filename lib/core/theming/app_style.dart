@@ -18,6 +18,10 @@ abstract class AppStyle {
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.regular,
   );
+  static TextStyle robotoRegular15 = GoogleFonts.roboto(
+    fontSize: 15.sp,
+    fontWeight: FontWeightHelper.regular,
+  );
   static TextStyle robotoRegular12 = GoogleFonts.roboto(
     fontSize: 12.sp,
     fontWeight: FontWeightHelper.regular,

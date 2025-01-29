@@ -19,21 +19,25 @@ extension AuthStepX on AuthStatus {
   bool get isLoading => this == AuthStatus.loading;
 }
 
-class AuthState {
+class AuthState extends Equatable {
   final AuthStatus status;
   final String email;
   final String password;
   final String otp;
   final String newPassword;
   final String errorMessage;
+  final String message;
+  final String resetToken;
 
   const AuthState({
-    required this.status,
+    this.status = AuthStatus.initial,
     this.email = '',
     this.password = '',
     this.otp = '',
     this.newPassword = '',
     this.errorMessage = '',
+    this.message = '',
+    this.resetToken = '',
   });
 
   AuthState copyWith({
@@ -43,6 +47,8 @@ class AuthState {
     String? otp,
     String? newPassword,
     String? errorMessage,
+    String? message,
+    String? resetToken,
   }) {
     return AuthState(
       status: status ?? this.status,
@@ -51,6 +57,20 @@ class AuthState {
       otp: otp ?? this.otp,
       newPassword: newPassword ?? this.newPassword,
       errorMessage: errorMessage ?? this.errorMessage,
+      message: message ?? this.message,
+      resetToken: resetToken ?? this.resetToken,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        status,
+        email,
+        password,
+        otp,
+        newPassword,
+        errorMessage,
+        message,
+        resetToken,
+      ];
 }

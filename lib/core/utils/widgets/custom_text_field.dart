@@ -13,6 +13,7 @@ class CustomTextField extends StatefulWidget {
     required this.controller,
     this.obscureText = false,
     this.labelColor,
+    this.outlineBorder = false,
   });
 
   final String labelText;
@@ -20,6 +21,7 @@ class CustomTextField extends StatefulWidget {
   final bool obscureText;
   final TextEditingController controller;
   final Color? labelColor;
+  final bool outlineBorder;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -37,11 +39,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      cursorColor: AppColors.primary,
+      cursorColor: widget.labelColor ?? AppColors.primary,
+      cursorRadius: Radius.circular(10),
       obscureText: _isObscure,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
-      style: AppStyle.robotoRegular14.copyWith(color: widget.labelColor),
+      style: AppStyle.robotoRegular15.copyWith(color: widget.labelColor),
       validator: (value) {
         if (value!.trim().isNullOrEmpty()) {
           return 'required';
@@ -73,8 +76,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 
-  UnderlineInputBorder _buildBorder({Color? color}) {
-    return UnderlineInputBorder(
+  _buildBorder({Color? color}) {
+    return widget.outlineBorder ? OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(color: color ?? AppColors.grey),
+    ) : UnderlineInputBorder(
       borderSide: BorderSide(color: color ?? AppColors.grey),
     );
   }

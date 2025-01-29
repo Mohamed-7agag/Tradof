@@ -5,5 +5,5 @@ abstract class EndPoint {
   static const String registerCompany = 'auth/register-company';
   static const String forgetPassword = 'auth/forget-password';
   static const String verifyOtp = 'auth/verify-otp';
-  static const String resetPassword = '';
+  static const String resetPassword = 'auth/change-password';
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import 'account_type_custom.dart';
@@ -20,6 +22,7 @@ class _AccountTypesSectionState extends State<AccountTypesSection> {
           onTap: () {
             setState(() {
               _selectedAccountType = 0;
+              context.read<RegisterationCubit>().setUserRole(UserRole.freelancer);
             });
           },
           image: _selectedAccountType == 0
@@ -34,6 +37,7 @@ class _AccountTypesSectionState extends State<AccountTypesSection> {
           onTap: () {
             setState(() {
               _selectedAccountType = 1;
+              context.read<RegisterationCubit>().setUserRole(UserRole.company);
             });
           },
           image: _selectedAccountType == 1

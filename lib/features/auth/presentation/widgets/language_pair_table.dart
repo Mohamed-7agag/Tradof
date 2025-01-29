@@ -5,9 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/core/utils/app_constants.dart';
 
 import '../logic/tables_cubit/tables_cubit.dart';
+import 'show_language_pair_dialog.dart';
 
 class LanguagePairTable extends StatelessWidget {
   const LanguagePairTable({super.key});
@@ -26,7 +26,7 @@ class LanguagePairTable extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                _showLanguagePairDialog(context);
+                showLanguagePairDialog(context);
               },
               child: SvgPicture.asset('assets/images/add.svg', width: 28),
             ),
@@ -37,8 +37,7 @@ class LanguagePairTable extends StatelessWidget {
           width: 1.sw,
           child: BlocBuilder<TablesCubit, TablesState>(
             buildWhen: (previous, current) =>
-                current.selectedLanguagePair !=
-                previous.selectedLanguagePair,
+                current.selectedLanguagePair != previous.selectedLanguagePair,
             builder: (context, state) {
               return DataTable(
                 columns: [
@@ -66,12 +65,12 @@ class LanguagePairTable extends StatelessWidget {
                         Row(
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                context
-                                    .read<TablesCubit>()
-                                    .removeLanguagePair(language);
-                              },
-                              child: Icon(Icons.cancel, color: Colors.red)),
+                                onTap: () {
+                                  context
+                                      .read<TablesCubit>()
+                                      .removeLanguagePair(language);
+                                },
+                                child: Icon(Icons.cancel, color: Colors.red)),
                             horizontalSpace(6),
                             Text(
                               language.languageName,
@@ -104,50 +103,6 @@ class LanguagePairTable extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  _showLanguagePairDialog(BuildContext context) {
-    final cubit = context.read<TablesCubit>();
-    showDialog(
-      context: context,
-      builder: (context) {
-        return BlocProvider.value(
-          value: cubit,
-          child: AlertDialog(
-            title: Text('Select Language'),
-            backgroundColor: AppColors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
-            content: SizedBox(
-              width: 0.9.sw,
-              child: ListView.separated(
-                itemCount: availableLanguage.length,
-                shrinkWrap: true,
-                separatorBuilder: (BuildContext context, int index) =>
-                    Divider(color: AppColors.background,height: 0),
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    title: Text(availableLanguage[index].languageName),
-                    subtitle: Text(availableLanguage[index].tag),
-                    onTap: () {
-                      context.read<TablesCubit>().addLanguagePair(
-                            availableLanguage[index],
-                          );
-                      Navigator.pop(context);
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }

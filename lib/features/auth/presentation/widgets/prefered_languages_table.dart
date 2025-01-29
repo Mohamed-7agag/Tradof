@@ -6,6 +6,7 @@ import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/core/utils/app_constants.dart';
+import 'package:tradof/features/auth/data/model/language_model.dart';
 
 import '../logic/tables_cubit/tables_cubit.dart';
 
@@ -115,29 +116,38 @@ class PreferedLanguagesTable extends StatelessWidget {
         return BlocProvider.value(
           value: cubit,
           child: AlertDialog(
-            title: Text('Select Language'),
-            backgroundColor: AppColors.white,
+            title: Text(
+              'Select Language',
+              style: AppStyle.poppinsBold22.copyWith(color: Colors.white),
+            ),
+            backgroundColor: AppColors.darkGrey,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),
             content: SizedBox(
               width: 0.9.sw,
               child: ListView.separated(
-                itemCount: availablePreferedLanguage.length,
+                itemCount: availableLanguages.length,
                 shrinkWrap: true,
                 separatorBuilder: (BuildContext context, int index) =>
-                    Divider(color: AppColors.background, height: 0),
+                    Divider(color: Colors.white10, height: 0),
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    title: Text(availablePreferedLanguage[index].languageName),
-                    subtitle: Text(availablePreferedLanguage[index].tag),
+                    title: Text(
+                      '${availableLanguages[index]} (${availableTags[availableLanguages[index]]})',
+                      style: AppStyle.robotoRegular15
+                          .copyWith(color: Colors.white),
+                    ),
                     onTap: () {
                       context.read<TablesCubit>().addPreferedLanguage(
-                            availablePreferedLanguage[index],
+                            LanguageModel(
+                              languageName: availableLanguages[index],
+                              tag: availableTags[availableLanguages[index]]!,
+                            ),
                           );
                       Navigator.pop(context);
                     },

@@ -29,16 +29,15 @@ class DioFactory {
   }
 
   static void addDioHeaders() async {
-    final userToken =
-        await CacheHelper.getSecuredString(AppConstants.userToken);
+    final userToken = await CacheHelper.getSecuredString(AppConstants.token);
     dio?.options.headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer $userToken',
     };
   }
 
-  static void setTokenIntoHeaderAfterLogin(String token) async{
-    await CacheHelper.setSecuredString(AppConstants.userToken, token);
+  static void setTokenIntoHeaderAfterLogin(String token) async {
+    await CacheHelper.setSecuredString(AppConstants.token, token);
     dio?.options.headers = {
       'Authorization': 'Bearer $token',
     };
