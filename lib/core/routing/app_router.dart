@@ -4,6 +4,7 @@ import 'package:tradof/features/auth/presentation/views/create_account_page_view
 import 'package:tradof/features/auth/presentation/views/forget_password_page_view.dart';
 import 'package:tradof/features/auth/presentation/views/login_view.dart';
 import 'package:tradof/features/auth/presentation/views/verification_view.dart';
+import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_view.dart';
 
 import '../../welcome_view.dart';
 import '../helpers/navigation_handler.dart';
@@ -11,7 +12,7 @@ import '../helpers/navigation_handler.dart';
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationHandler.navigatorKey,
-    initialLocation: '/welcomeView',
+    initialLocation: '/bottomNavBarView',
     routes: [
       GoRoute(
         name: Routes.welcomeViewRoute,
@@ -37,7 +38,12 @@ class AppRouter {
         name: Routes.verificationViewRoute,
         path: '/verificationView',
         builder: (context, state) => VerificationView(),
-      )
+      ),
+      GoRoute(
+        name: Routes.bottomNavBarViewRoute,
+        path: '/bottomNavBarView',
+        builder: (context, state) => BottomNavBarView(),
+      ),
     ],
   );
 }
