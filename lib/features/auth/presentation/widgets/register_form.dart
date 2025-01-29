@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -50,44 +51,63 @@ class _RegisterFormState extends State<RegisterForm> {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             children: [
-              CustomTextField(
-                labelText: 'Email',
-                labelColor: AppColors.white,
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
+              SlideInRight(
+                from: 400,
+                child: CustomTextField(
+                  labelText: 'Email',
+                  labelColor: AppColors.white,
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                ),
               ),
               verticalSpace(12),
-              PhoneNumberTextField(
-                labelText: 'Phone Number',
-                controller: phoneNumberController,
+              SlideInRight(
+                from: 400,
+                delay: Duration(milliseconds: 125),
+                child: PhoneNumberTextField(
+                  labelText: 'Phone Number',
+                  controller: phoneNumberController,
+                ),
               ),
               verticalSpace(6),
-              CustomTextField(
-                labelText: 'Password',
-                labelColor: AppColors.white,
-                controller: passwordController,
-                keyboardType: TextInputType.text,
-                obscureText: true,
+              SlideInRight(
+                from: 400,
+                delay: Duration(milliseconds: 250),
+                child: CustomTextField(
+                  labelText: 'Password',
+                  labelColor: AppColors.white,
+                  controller: passwordController,
+                  keyboardType: TextInputType.text,
+                  obscureText: true,
+                ),
               ),
               verticalSpace(12),
-              CustomTextField(
-                labelText: 'Confirm Password',
-                labelColor: AppColors.white,
-                controller: confirmPasswordController,
-                keyboardType: TextInputType.text,
-                obscureText: true,
+              SlideInRight(
+                from: 400,
+                delay: Duration(milliseconds: 375),
+                child: CustomTextField(
+                  labelText: 'Confirm Password',
+                  labelColor: AppColors.white,
+                  controller: confirmPasswordController,
+                  keyboardType: TextInputType.text,
+                  obscureText: true,
+                ),
               ),
               verticalSpace(50),
-              CustomButton(
-                text: 'Continue',
-                color: AppColors.lightOrange,
-                onPressed: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  widget.pageController.nextPage(
-                    duration: const Duration(milliseconds: 350),
-                    curve: Curves.easeInOut,
-                  );
-                },
+              SlideInUp(
+                from: 400,
+                delay: Duration(milliseconds: 500),
+                child: CustomButton(
+                  text: 'Continue',
+                  color: AppColors.lightOrange,
+                  onPressed: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    widget.pageController.nextPage(
+                      duration: const Duration(milliseconds: 350),
+                      curve: Curves.easeInOut,
+                    );
+                  },
+                ),
               ),
               verticalSpace(20),
             ],

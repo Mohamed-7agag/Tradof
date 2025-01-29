@@ -8,11 +8,11 @@ class RegisterationCubit extends Cubit<RegisterationState> {
   RegisterationCubit(this._registerationRepo)
       : super(const RegisterationState());
   final RegisterationRepo _registerationRepo;
-  void userRole(String role) {
+  void setUserRole(UserRole role) {
     emit(state.copyWith(userRole: role));
   }
 
-  void commonRegisterationData(
+  void setCommonRegisterationData(
     String email,
     String phoneNumber,
     String password,

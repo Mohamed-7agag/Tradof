@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/cache/cache_helper.dart';
 import 'package:tradof/features/auth/data/model/login_response_model.dart';
+import 'package:tradof/features/auth/data/model/reset_password_request_model.dart';
 import 'package:tradof/features/auth/data/repo/auth_repo.dart';
 
 import '../../../../../core/utils/app_constants.dart';
@@ -69,11 +70,15 @@ class AuthCubit extends Cubit<AuthState> {
   //reset password
   Future<void> resetPassword(String newPassword) async {
     emit(state.copyWith(status: AuthStatus.loading));
-    final result = await _authRepo.resetPassword(
-      newPassword,
-      state.resetToken,
-      state.email,
+
+    final ResetPasswordRequestModel request = ResetPasswordRequestModel(
+      email: state.email,
+      resetToken: state.resetToken,
+      newPassword: newPassword,
+      confirmPassword: newPassword,
     );
+
+    final result = await _authRepo.resetPassword(request);
     result.fold(
       (failure) => emit(state.copyWith(
         status: AuthStatus.error,

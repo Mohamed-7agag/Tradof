@@ -7,6 +7,8 @@ enum RegisterationStatus {
   error,
 }
 
+enum UserRole { freelancer, company }
+
 extension RegisterationStepX on RegisterationStatus {
   bool get isLoading => this == RegisterationStatus.loading;
   bool get isRegistered => this == RegisterationStatus.success;
@@ -15,7 +17,7 @@ extension RegisterationStepX on RegisterationStatus {
 
 class RegisterationState extends Equatable {
   final RegisterationStatus status;
-  final String userRole;
+  final UserRole userRole;
   final String email;
   final String phoneNumber;
   final String password;
@@ -27,7 +29,7 @@ class RegisterationState extends Equatable {
   final String errorMessage;
   const RegisterationState({
     this.status = RegisterationStatus.initial,
-    this.userRole = 'freelancer',
+    this.userRole = UserRole.freelancer,
     this.errorMessage = '',
     this.email = '',
     this.phoneNumber = '',
@@ -37,7 +39,7 @@ class RegisterationState extends Equatable {
 
   RegisterationState copyWith({
     RegisterationStatus? status,
-    String? userRole,
+    UserRole? userRole,
     String? errorMessage,
     String? email,
     String? phoneNumber,
@@ -58,6 +60,7 @@ class RegisterationState extends Equatable {
   @override
   List<Object> get props => [
         status,
+        userRole,
         errorMessage,
         email,
         phoneNumber,

@@ -1,7 +1,9 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
+import 'package:tradof/features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
 import 'package:tradof/features/auth/presentation/views/register_view.dart';
 import 'package:tradof/features/auth/presentation/views/select_account_type_view.dart';
 
@@ -44,14 +46,17 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
                 Expanded(
                   child: ExpandablePageView(
                     controller: _pageController,
+                    physics: NeverScrollableScrollPhysics(),
                     onPageChanged: (int page) {
                       setState(() => _currentPage = page);
                     },
                     children: [
                       SelectAccountTypeView(pageController: _pageController),
                       RegisterView(pageController: _pageController),
-                      FreelancerRegisterView(),
-                      CompanyRegisterView(),
+                      context.read<RegisterationCubit>().state.userRole ==
+                              UserRole.freelancer
+                          ? FreelancerRegisterView()
+                          : CompanyRegisterView(),
                     ],
                   ),
                 ),
@@ -69,10 +74,10 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
   Widget _buildDotIndicator() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(4, (index) {
+      children: List.generate(3, (index) {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 4),
-          width: 30,
+          width: 32,
           height: 4,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),

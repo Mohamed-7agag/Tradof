@@ -56,14 +56,19 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                   textAlign: TextAlign.center,
                 ),
                 verticalSpace(30),
-                CustomTextField(
-                  labelText: 'Email',
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
+                SlideInRight(
+                  from: 400,
+                  delay: Duration(milliseconds: 100),
+                  child: CustomTextField(
+                    labelText: 'Email',
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
                 ),
                 verticalSpace(45),
                 SlideInUp(
                   from: 400,
+                  delay: Duration(milliseconds: 200),
                   child: ForgetPasswordButton(
                     emailController: emailController,
                     pageController: widget.pageController,

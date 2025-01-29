@@ -43,17 +43,25 @@ class _LoginFormState extends State<LoginForm> {
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
           children: [
-            CustomTextField(
-              labelText: 'Email',
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
+            SlideInRight(
+              from: 400,
+              delay: Duration(milliseconds: 100),
+              child: CustomTextField(
+                labelText: 'Email',
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
+              ),
             ),
             verticalSpace(12),
-            CustomTextField(
-              labelText: 'Password',
-              controller: passwordController,
-              keyboardType: TextInputType.text,
-              obscureText: true,
+            SlideInRight(
+              from: 400,
+              delay: Duration(milliseconds: 200),
+              child: CustomTextField(
+                labelText: 'Password',
+                controller: passwordController,
+                keyboardType: TextInputType.text,
+                obscureText: true,
+              ),
             ),
             verticalSpace(10),
             Align(
@@ -69,6 +77,7 @@ class _LoginFormState extends State<LoginForm> {
             verticalSpace(50),
             SlideInUp(
               from: 400,
+              delay: Duration(milliseconds: 300),
               child: LoginButtonAndValidation(
                 formKey: formKey,
                 emailController: emailController,

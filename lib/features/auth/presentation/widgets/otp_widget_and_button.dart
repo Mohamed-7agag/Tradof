@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,19 +45,22 @@ class _OtpWidgetAndButtonState extends State<OtpWidgetAndButton> {
           builder: (context, state) {
             return state.status.isLoading
                 ? const CustomLoadingWidget()
-                : CustomButton(
-                    text: 'Continue',
-                    onPressed: () {
-                      log('OTP: $otp');
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      if (otp.length == 6) {
-                        context.read<AuthCubit>().otpVerification(otp);
-                      } else {
-                        errorToast(
-                            context, 'Invalid OTP', 'Please enter a valid OTP');
-                      }
-                    },
-                  );
+                : SlideInUp(
+                  from: 400,
+                  child: CustomButton(
+                      text: 'Continue',
+                      onPressed: () {
+                        log('OTP: $otp');
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        if (otp.length == 6) {
+                          context.read<AuthCubit>().otpVerification(otp);
+                        } else {
+                          errorToast(
+                              context, 'Invalid OTP', 'Please enter a valid OTP');
+                        }
+                      },
+                    ),
+                );
           },
         ),
       ],

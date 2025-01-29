@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -34,15 +35,19 @@ class ResetPasswordButton extends StatelessWidget {
       builder: (context, state) {
         return state.status.isLoading
             ? const CustomLoadingWidget()
-            : CustomButton(
-                text: 'Submit',
-                onPressed: () {
-                  log('password: ${passwordController.text.trim()}');
-                  log('confirmPassword: ${confirmPasswordController.text.trim()}');
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  _validateAndConfirmNewPassword(context);
-                },
-              );
+            : SlideInUp(
+              from: 400,
+              delay: Duration(milliseconds: 300),
+              child: CustomButton(
+                  text: 'Submit',
+                  onPressed: () {
+                    log('password: ${passwordController.text.trim()}');
+                    log('confirmPassword: ${confirmPasswordController.text.trim()}');
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    _validateAndConfirmNewPassword(context);
+                  },
+                ),
+            );
       },
     );
   }

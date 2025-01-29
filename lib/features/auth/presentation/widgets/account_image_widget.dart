@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -40,16 +41,21 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
         Positioned(
           bottom: -10,
           right: -10,
-          child: IconButton(
-            onPressed: () {
-              _pickImageFromGallery();
-            },
-            icon: Icon(
-              Icons.camera_alt,
-              color: AppColors.lightOrange,
-            ),
-            style: IconButton.styleFrom(
-              backgroundColor: AppColors.white,
+          child: SlideInRight(
+            from: 400,
+            child: IconButton(
+              onPressed: () {
+                _pickImageFromGallery();
+              },
+              icon: Icon(
+                Icons.camera_alt,
+                color: AppColors.lightOrange,
+              ),
+              style: IconButton.styleFrom(
+                backgroundColor: AppColors.white,
+                shadowColor: AppColors.darkGrey,
+                elevation: 0.3,
+              ),
             ),
           ),
         )
@@ -63,11 +69,13 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
             borderRadius: BorderRadius.circular(50),
             child: Image.file(
               _image!,
-              width: 85,
-              height: 85,
+              width: 90,
+              height: 90,
               fit: BoxFit.contain,
             ),
           )
-        : SvgPicture.asset('assets/images/person.svg');
+        : SlideInLeft(
+            from: 400,
+            child: SvgPicture.asset('assets/images/person.svg', width: 90));
   }
 }

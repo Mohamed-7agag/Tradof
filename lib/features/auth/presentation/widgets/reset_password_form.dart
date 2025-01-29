@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/features/auth/presentation/widgets/reset_password_button.dart';
@@ -40,18 +41,26 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
           children: [
-            CustomTextField(
-              labelText: 'New Password',
-              controller: passwordController,
-              keyboardType: TextInputType.text,
-              obscureText: true,
+            SlideInRight(
+              from: 400,
+              delay: Duration(milliseconds: 100),
+              child: CustomTextField(
+                labelText: 'New Password',
+                controller: passwordController,
+                keyboardType: TextInputType.text,
+                obscureText: true,
+              ),
             ),
             verticalSpace(12),
-            CustomTextField(
-              labelText: 'Confirm Password',
-              controller: confirmPasswordController,
-              keyboardType: TextInputType.text,
-              obscureText: true,
+            SlideInRight(
+              from: 400,
+              delay: Duration(milliseconds: 200),
+              child: CustomTextField(
+                labelText: 'Confirm Password',
+                controller: confirmPasswordController,
+                keyboardType: TextInputType.text,
+                obscureText: true,
+              ),
             ),
             verticalSpace(50),
             ResetPasswordButton(
