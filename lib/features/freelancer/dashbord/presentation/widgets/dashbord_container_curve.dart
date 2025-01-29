@@ -80,43 +80,44 @@ class DashbordContainerCurve extends StatelessWidget {
           ),
         ),
         Positioned(
-            top: 127.h,
-            left: 25.w,
-            right: 25.w,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                height: 65.h,
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      children: [
-                        verticalSpace(15),
-                        SvgPicture.asset('assets/images/category_color.svg'),
-                        Text(
-                          'Current project',
-                          style: AppStyle.robotoSemiBold10,
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        verticalSpace(15),
-                        SvgPicture.asset('assets/images/save.svg'),
-                        Text(
-                          'All project',
-                          style: AppStyle.robotoSemiBold10,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+          top: 127.h,
+          left: 25.w,
+          right: 25.w,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              height: 65.h,
+              decoration: BoxDecoration(
+                color: AppColors.white,
               ),
-            ))
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      verticalSpace(15),
+                      SvgPicture.asset('assets/images/category_color.svg'),
+                      Text(
+                        'Current project',
+                        style: AppStyle.robotoSemiBold10,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      verticalSpace(15),
+                      SvgPicture.asset('assets/images/save.svg'),
+                      Text(
+                        'All project',
+                        style: AppStyle.robotoSemiBold10,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
