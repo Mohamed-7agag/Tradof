@@ -9,8 +9,8 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../core/theming/app_colors.dart';
 
 class AccountImageWidget extends StatefulWidget {
-  const AccountImageWidget({super.key});
-
+  const AccountImageWidget({super.key, required this.onImagePicked});
+final void Function(XFile? image) onImagePicked;
   @override
   State<AccountImageWidget> createState() => _AccountImageWidgetState();
 }
@@ -24,6 +24,7 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
       if (image != null) {
         setState(() {
           _image = File(image.path);
+          widget.onImagePicked(image);
         });
       }
     } catch (e) {
@@ -53,8 +54,8 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
               ),
               style: IconButton.styleFrom(
                 backgroundColor: AppColors.white,
-                shadowColor: AppColors.darkGrey,
-                elevation: 0.3,
+                shadowColor: AppColors.grey,
+                elevation: 0.01,
               ),
             ),
           ),

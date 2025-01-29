@@ -5,8 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/core/utils/app_constants.dart';
 
+import '../../data/model/specialization_model.dart';
+import '../logic/registeration_cubit/registeration_cubit.dart';
 import '../logic/tables_cubit/tables_cubit.dart';
 
 class IndustriesServedTable extends StatelessWidget {
@@ -67,7 +68,7 @@ class IndustriesServedTable extends StatelessWidget {
                             ),
                             SizedBox(width: 6),
                             Text(
-                              industriesServed,
+                              industriesServed.name,
                               style: TextStyle(color: Colors.white),
                             ),
                           ],
@@ -92,6 +93,8 @@ class IndustriesServedTable extends StatelessWidget {
 
   _showIndusteriesServedDialog(BuildContext context) {
     final cubit = context.read<TablesCubit>();
+    final List<SpecializationModel> industriesServed =
+        context.read<RegisterationCubit>().state.specializations;
     showDialog(
       context: context,
       builder: (context) {
@@ -108,9 +111,11 @@ class IndustriesServedTable extends StatelessWidget {
             ),
             content: SizedBox(
               width: 0.9.sw,
-              child: ListView.builder(
-                itemCount: availableSpecializationsAndServed.length,
+              child: ListView.separated(
+                itemCount: industriesServed.length,
                 shrinkWrap: true,
+                separatorBuilder: (BuildContext context, int index) =>
+                    Divider(color: Colors.white10, height: 0),
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
@@ -118,13 +123,13 @@ class IndustriesServedTable extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     title: Text(
-                      '${index + 1}. ${availableSpecializationsAndServed[index]}',
+                      '${index + 1}. ${industriesServed[index].name}',
                       style: AppStyle.robotoRegular15
                           .copyWith(color: Colors.white),
                     ),
                     onTap: () {
                       context.read<TablesCubit>().addIndustryServed(
-                            availableSpecializationsAndServed[index],
+                            industriesServed[index],
                           );
                       Navigator.pop(context);
                     },

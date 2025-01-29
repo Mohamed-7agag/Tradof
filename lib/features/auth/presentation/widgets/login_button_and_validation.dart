@@ -53,6 +53,9 @@ class LoginButtonAndValidation extends StatelessWidget {
       } else if (!AppRegex.hasLowerCase(password)) {
         errorToast(context, 'Invalid Password',
             'Password must contain at least one lowercase letter');
+      } else if (!AppRegex.hasUpperCase(password)) {
+        errorToast(context, 'Invalid Password',
+            'Password must contain at least one upper letter');
       } else if (!AppRegex.hasNumber(password)) {
         errorToast(context, 'Invalid Password',
             'Password must contain at least one number digit');

@@ -46,7 +46,7 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
                 Expanded(
                   child: ExpandablePageView(
                     controller: _pageController,
-                    physics: NeverScrollableScrollPhysics(),
+                    //physics: NeverScrollableScrollPhysics(),
                     onPageChanged: (int page) {
                       setState(() => _currentPage = page);
                     },

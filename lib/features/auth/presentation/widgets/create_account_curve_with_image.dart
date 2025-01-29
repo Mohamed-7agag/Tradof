@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/features/auth/presentation/widgets/account_image_widget.dart';
 
 class CreateAccountCurveWithImage extends StatelessWidget {
-  const CreateAccountCurveWithImage({super.key});
+  const CreateAccountCurveWithImage({super.key, required this.onImagePicked});
+  final void Function(XFile? image) onImagePicked;
   @override
   Widget build(BuildContext context) {
     return ClipPath(
@@ -29,7 +31,7 @@ class CreateAccountCurveWithImage extends StatelessWidget {
               ),
             ),
             verticalSpace(20),
-            AccountImageWidget(),
+            AccountImageWidget(onImagePicked: onImagePicked),
             Spacer(flex: 5),
           ],
         ),

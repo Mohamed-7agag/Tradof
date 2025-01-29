@@ -5,8 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/core/utils/app_constants.dart';
+import 'package:tradof/features/auth/data/model/specialization_model.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
+
+import '../logic/registeration_cubit/registeration_cubit.dart';
 
 class SpecializationTable extends StatelessWidget {
   const SpecializationTable({super.key});
@@ -66,7 +68,7 @@ class SpecializationTable extends StatelessWidget {
                             ),
                             SizedBox(width: 6),
                             Text(
-                              specialization,
+                              specialization.name,
                               style: TextStyle(color: Colors.white),
                             ),
                           ],
@@ -91,6 +93,8 @@ class SpecializationTable extends StatelessWidget {
 
   _showSpecializationDialog(BuildContext context) {
     final cubit = context.read<TablesCubit>();
+    final List<SpecializationModel> specializations =
+        context.read<RegisterationCubit>().state.specializations;
     showDialog(
       context: context,
       builder: (context) {
@@ -107,9 +111,11 @@ class SpecializationTable extends StatelessWidget {
             ),
             content: SizedBox(
               width: 0.9.sw,
-              child: ListView.builder(
-                itemCount: availableSpecializationsAndServed.length,
+              child: ListView.separated(
+                itemCount: specializations.length,
                 shrinkWrap: true,
+                separatorBuilder: (BuildContext context, int index) =>
+                    Divider(color: Colors.white10, height: 0),
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
@@ -117,13 +123,13 @@ class SpecializationTable extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     title: Text(
-                      '${index + 1}. ${availableSpecializationsAndServed[index]}',
+                      '${index + 1}. ${specializations[index].name}',
                       style: AppStyle.robotoRegular15
                           .copyWith(color: Colors.white),
                     ),
                     onTap: () {
                       context.read<TablesCubit>().addSpecialization(
-                            availableSpecializationsAndServed[index],
+                            specializations[index],
                           );
                       Navigator.pop(context);
                     },

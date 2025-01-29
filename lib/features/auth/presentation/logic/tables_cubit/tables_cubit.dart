@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';
+import 'package:tradof/features/auth/data/model/language_pair_model.dart';
+import 'package:tradof/features/auth/data/model/specialization_model.dart';
 
 part 'tables_state.dart';
 
@@ -7,31 +9,31 @@ class TablesCubit extends Cubit<TablesState> {
   TablesCubit() : super(TablesState());
 
   //! Specialization
-  void addSpecialization(String specialization) {
+  void addSpecialization(SpecializationModel specialization) {
     if (!state.selectedSpecializations.contains(specialization)) {
-      final updatedList = List<String>.from(state.selectedSpecializations)
+      final updatedList = List<SpecializationModel>.from(state.selectedSpecializations)
         ..add(specialization);
       emit(state.copyWith(selectedSpecializations: updatedList));
     }
   }
 
-  void removeSpecialization(String specialization) {
-    final updatedList = List<String>.from(state.selectedSpecializations)
+  void removeSpecialization(SpecializationModel specialization) {
+    final updatedList = List<SpecializationModel>.from(state.selectedSpecializations)
       ..remove(specialization);
     emit(state.copyWith(selectedSpecializations: updatedList));
   }
 
   //! Industries Served
-  void addIndustryServed(String industry) {
+  void addIndustryServed(SpecializationModel industry) {
     if (!state.selectedIndustriesServed.contains(industry)) {
-      final updatedList = List<String>.from(state.selectedIndustriesServed)
+      final updatedList = List<SpecializationModel>.from(state.selectedIndustriesServed)
         ..add(industry);
       emit(state.copyWith(selectedIndustriesServed: updatedList));
     }
   }
 
-  void removeIndustryServed(String industry) {
-    final updatedList = List<String>.from(state.selectedIndustriesServed)
+  void removeIndustryServed(SpecializationModel industry) {
+    final updatedList = List<SpecializationModel>.from(state.selectedIndustriesServed)
       ..remove(industry);
     emit(state.copyWith(selectedIndustriesServed: updatedList));
   }
@@ -54,17 +56,18 @@ class TablesCubit extends Cubit<TablesState> {
   }
 
   //! Language Pair
-  void addLanguagePair(LanguageModel language) {
-    if (!state.selectedLanguagePair.contains(language)) {
-      final updatedList = List<LanguageModel>.from(state.selectedLanguagePair)
-        ..add(language);
+  void addLanguagePair(LanguagePairModel languagePair) {
+    if (!state.selectedLanguagePair.contains(languagePair)) {
+      final updatedList =
+          List<LanguagePairModel>.from(state.selectedLanguagePair)
+            ..add(languagePair);
       emit(state.copyWith(selectedLanguagePair: updatedList));
     }
   }
 
-  void removeLanguagePair(LanguageModel language) {
-    final updatedList = List<LanguageModel>.from(state.selectedLanguagePair)
-      ..remove(language);
+  void removeLanguagePair(LanguagePairModel languagePair) {
+    final updatedList = List<LanguagePairModel>.from(state.selectedLanguagePair)
+      ..remove(languagePair);
     emit(state.copyWith(selectedLanguagePair: updatedList));
   }
 }
