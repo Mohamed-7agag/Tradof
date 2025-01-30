@@ -69,6 +69,10 @@ abstract class AppStyle {
     fontSize: 15.sp,
     fontWeight: FontWeightHelper.regular,
   );
+  static TextStyle robotoCondensedMedium15 = GoogleFonts.robotoCondensed(
+    fontSize: 15.sp,
+    fontWeight: FontWeightHelper.medium,
+  );
   //! Poppins Font
   static TextStyle poppinsMedium14 = GoogleFonts.poppins(
     fontSize: 14.sp,
