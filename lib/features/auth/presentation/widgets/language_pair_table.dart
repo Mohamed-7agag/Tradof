@@ -56,7 +56,7 @@ class LanguagePairTable extends StatelessWidget {
                         color: AppColors.white,
                       ),
                     ),
-                  )
+                  ),
                 ],
                 rows: state.selectedLanguagePair.map((language) {
                   return DataRow(
@@ -65,15 +65,16 @@ class LanguagePairTable extends StatelessWidget {
                         Row(
                           children: [
                             GestureDetector(
-                                onTap: () {
-                                  context
-                                      .read<TablesCubit>()
-                                      .removeLanguagePair(language);
-                                },
-                                child: Icon(Icons.cancel, color: Colors.red)),
+                              onTap: () {
+                                context
+                                    .read<TablesCubit>()
+                                    .removeLanguagePair(language);
+                              },
+                              child: Icon(Icons.cancel, color: Colors.red),
+                            ),
                             horizontalSpace(6),
                             Text(
-                              language.languageName,
+                              '${language.fromLanguage.name} - ${language.toLanguage.name}',
                               style: AppStyle.robotoRegular12.copyWith(
                                 color: AppColors.white,
                               ),
@@ -83,7 +84,7 @@ class LanguagePairTable extends StatelessWidget {
                       ),
                       DataCell(
                         Text(
-                          language.tag,
+                          '${language.fromLanguage.code} - ${language.toLanguage.code}',
                           style: AppStyle.robotoRegular12.copyWith(
                             color: AppColors.white,
                           ),

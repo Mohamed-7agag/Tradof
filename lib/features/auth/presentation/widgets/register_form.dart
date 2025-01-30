@@ -1,7 +1,12 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tradof/core/helpers/app_regex.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/theming/app_colors.dart';
+import 'package:tradof/core/utils/widgets/custom_toastification.dart';
+import 'package:tradof/features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
 import 'package:tradof/features/auth/presentation/widgets/phone_number_text_field.dart';
 
 import '../../../../core/helpers/spacing.dart';
@@ -20,6 +25,8 @@ class _RegisterFormState extends State<RegisterForm> {
   late final GlobalKey<FormState> formKey;
 
   late final TextEditingController emailController;
+  late final TextEditingController firstNameController;
+  late final TextEditingController lastNameController;
   late final TextEditingController phoneNumberController;
   late final TextEditingController passwordController;
   late final TextEditingController confirmPasswordController;
@@ -28,6 +35,8 @@ class _RegisterFormState extends State<RegisterForm> {
   void initState() {
     formKey = GlobalKey<FormState>();
     emailController = TextEditingController();
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
     phoneNumberController = TextEditingController();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
@@ -36,6 +45,8 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
     emailController.dispose();
     phoneNumberController.dispose();
     passwordController.dispose();
@@ -54,6 +65,28 @@ class _RegisterFormState extends State<RegisterForm> {
               SlideInRight(
                 from: 400,
                 child: CustomTextField(
+                  labelText: 'First Name',
+                  labelColor: AppColors.white,
+                  controller: firstNameController,
+                  keyboardType: TextInputType.text,
+                ),
+              ),
+              verticalSpace(12),
+              SlideInRight(
+                from: 400,
+                delay: Duration(milliseconds: 100),
+                child: CustomTextField(
+                  labelText: 'Last Name',
+                  labelColor: AppColors.white,
+                  controller: lastNameController,
+                  keyboardType: TextInputType.text,
+                ),
+              ),
+              verticalSpace(12),
+              SlideInRight(
+                from: 400,
+                delay: Duration(milliseconds: 200),
+                child: CustomTextField(
                   labelText: 'Email',
                   labelColor: AppColors.white,
                   controller: emailController,
@@ -63,7 +96,7 @@ class _RegisterFormState extends State<RegisterForm> {
               verticalSpace(12),
               SlideInRight(
                 from: 400,
-                delay: Duration(milliseconds: 125),
+                delay: Duration(milliseconds: 300),
                 child: PhoneNumberTextField(
                   labelText: 'Phone Number',
                   controller: phoneNumberController,
@@ -72,7 +105,7 @@ class _RegisterFormState extends State<RegisterForm> {
               verticalSpace(6),
               SlideInRight(
                 from: 400,
-                delay: Duration(milliseconds: 250),
+                delay: Duration(milliseconds: 400),
                 child: CustomTextField(
                   labelText: 'Password',
                   labelColor: AppColors.white,
@@ -84,7 +117,7 @@ class _RegisterFormState extends State<RegisterForm> {
               verticalSpace(12),
               SlideInRight(
                 from: 400,
-                delay: Duration(milliseconds: 375),
+                delay: Duration(milliseconds: 500),
                 child: CustomTextField(
                   labelText: 'Confirm Password',
                   labelColor: AppColors.white,
@@ -93,19 +126,16 @@ class _RegisterFormState extends State<RegisterForm> {
                   obscureText: true,
                 ),
               ),
-              verticalSpace(50),
+              verticalSpace(45),
               SlideInUp(
                 from: 400,
-                delay: Duration(milliseconds: 500),
+                delay: Duration(milliseconds: 600),
                 child: CustomButton(
                   text: 'Continue',
                   color: AppColors.lightOrange,
                   onPressed: () {
                     FocusManager.instance.primaryFocus?.unfocus();
-                    widget.pageController.nextPage(
-                      duration: const Duration(milliseconds: 350),
-                      curve: Curves.easeInOut,
-                    );
+                    _registerFormValidation();
                   },
                 ),
               ),
@@ -113,5 +143,49 @@ class _RegisterFormState extends State<RegisterForm> {
             ],
           ),
         ));
+  }
+
+  _registerFormValidation() {
+    final String email = emailController.text.trim();
+    final String phoneNumber = phoneNumberController.text.trim();
+    final String password = passwordController.text.trim();
+    final String confirmPassword = confirmPasswordController.text.trim();
+    if (formKey.currentState!.validate()) {
+      if (!AppRegex.isEmailValid(email)) {
+        errorToast(context, 'Invalid Email', 'Please enter a valid email');
+      } else if (phoneNumber.isNullOrEmpty()) {
+        errorToast(context, 'Invalid Phone number',
+            'Please enter a valid Phone number');
+      } else if (password != confirmPassword) {
+        errorToast(context, 'Invalid Password', 'Passwords do not match');
+      } else if (!AppRegex.hasMinLength(password)) {
+        errorToast(context, 'Invalid Password',
+            'Password must be at least 8 characters long');
+      } else if (!AppRegex.hasLowerCase(password)) {
+        errorToast(context, 'Invalid Password',
+            'Password must contain at least one lowercase letter');
+      } else if (!AppRegex.hasUpperCase(password)) {
+        errorToast(context, 'Invalid Password',
+            'Password must contain at least one upper letter');
+      } else if (!AppRegex.hasNumber(password)) {
+        errorToast(context, 'Invalid Password',
+            'Password must contain at least one number digit');
+      } else if (!AppRegex.hasSpecialCharacter(password)) {
+        errorToast(context, 'Invalid Password',
+            'Password must contain at least one special character');
+      } else {
+        widget.pageController.nextPage(
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.easeInOut,
+        );
+        context.read<RegisterationCubit>().setCommonRegisterationData(
+              firstNameController.text.trim(),
+              lastNameController.text.trim(),
+              email,
+              phoneNumber,
+              password,
+            );
+      }
+    }
   }
 }

@@ -6,4 +6,7 @@ abstract class EndPoint {
   static const String forgetPassword = 'auth/forget-password';
   static const String verifyOtp = 'auth/verify-otp';
   static const String resetPassword = 'auth/change-password';
+  static const String getCountries = 'country';
+  static const String getLanguages = 'language';
+  static const String getSpecializations = 'specialization';
 }

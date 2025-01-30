@@ -2,23 +2,23 @@ part of 'tables_cubit.dart';
 
 class TablesState {
   // specializations & industries served
-  final List<String> selectedSpecializations;
-  final List<String> selectedIndustriesServed;
+  final List<SpecializationModel> selectedSpecializations;
+  final List<SpecializationModel> selectedIndustriesServed;
   // prefered language & language pair
   final List<LanguageModel> selectedPreferedLanguages;
-  final List<LanguageModel> selectedLanguagePair;
+  final List<LanguagePairModel> selectedLanguagePair;
 
   TablesState({
-    this.selectedSpecializations = const [],
-    this.selectedIndustriesServed = const [],
-    this.selectedLanguagePair = const <LanguageModel>[],
+    this.selectedSpecializations = const <SpecializationModel>[],
+    this.selectedIndustriesServed = const <SpecializationModel>[],
+    this.selectedLanguagePair = const <LanguagePairModel>[],
     this.selectedPreferedLanguages = const <LanguageModel>[],
   });
 
   TablesState copyWith({
-    List<String>? selectedSpecializations,
-    List<String>? selectedIndustriesServed,
-    List<LanguageModel>? selectedLanguagePair,
+    List<SpecializationModel>? selectedSpecializations,
+    List<SpecializationModel>? selectedIndustriesServed,
+    List<LanguagePairModel>? selectedLanguagePair,
     List<LanguageModel>? selectedPreferedLanguages,
   }) {
     return TablesState(

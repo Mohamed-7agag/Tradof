@@ -5,9 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/core/utils/app_constants.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';
 
+import '../logic/registeration_cubit/registeration_cubit.dart';
 import '../logic/tables_cubit/tables_cubit.dart';
 
 class PreferedLanguagesTable extends StatelessWidget {
@@ -75,7 +75,7 @@ class PreferedLanguagesTable extends StatelessWidget {
                                 child: Icon(Icons.cancel, color: Colors.red)),
                             horizontalSpace(6),
                             Text(
-                              language.languageName,
+                              language.name,
                               style: AppStyle.robotoRegular12.copyWith(
                                 color: AppColors.white,
                               ),
@@ -85,7 +85,7 @@ class PreferedLanguagesTable extends StatelessWidget {
                       ),
                       DataCell(
                         Text(
-                          language.tag,
+                          language.code,
                           style: AppStyle.robotoRegular12.copyWith(
                             color: AppColors.white,
                           ),
@@ -110,6 +110,8 @@ class PreferedLanguagesTable extends StatelessWidget {
 
   _showPreferedLanguageDialog(BuildContext context) {
     final cubit = context.read<TablesCubit>();
+    final List<LanguageModel> preferedLanguages =
+        context.read<RegisterationCubit>().state.languages;
     showDialog(
       context: context,
       builder: (context) {
@@ -127,7 +129,7 @@ class PreferedLanguagesTable extends StatelessWidget {
             content: SizedBox(
               width: 0.9.sw,
               child: ListView.separated(
-                itemCount: availableLanguages.length,
+                itemCount: preferedLanguages.length,
                 shrinkWrap: true,
                 separatorBuilder: (BuildContext context, int index) =>
                     Divider(color: Colors.white10, height: 0),
@@ -138,16 +140,13 @@ class PreferedLanguagesTable extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     title: Text(
-                      '${availableLanguages[index]} (${availableTags[availableLanguages[index]]})',
+                      '${preferedLanguages[index].name} (${preferedLanguages[index].code})',
                       style: AppStyle.robotoRegular15
                           .copyWith(color: Colors.white),
                     ),
                     onTap: () {
                       context.read<TablesCubit>().addPreferedLanguage(
-                            LanguageModel(
-                              languageName: availableLanguages[index],
-                              tag: availableTags[availableLanguages[index]]!,
-                            ),
+                            preferedLanguages[index],
                           );
                       Navigator.pop(context);
                     },

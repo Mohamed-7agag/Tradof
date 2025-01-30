@@ -44,7 +44,7 @@ class AppRouter {
         name: Routes.createAccountPageViewRoute,
         path: '/createAccountPageView',
         builder: (context, state) => BlocProvider(
-          create: (context) => RegisterationCubit(getIt()),
+          create: (context) => RegisterationCubit(getIt())..fetchAllData(),
           child: CreateAccountPageView(),
         ),
       ),

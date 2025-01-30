@@ -36,9 +36,9 @@ class ResetPasswordButton extends StatelessWidget {
         return state.status.isLoading
             ? const CustomLoadingWidget()
             : SlideInUp(
-              from: 400,
-              delay: Duration(milliseconds: 300),
-              child: CustomButton(
+                from: 400,
+                delay: Duration(milliseconds: 300),
+                child: CustomButton(
                   text: 'Submit',
                   onPressed: () {
                     log('password: ${passwordController.text.trim()}');
@@ -47,7 +47,7 @@ class ResetPasswordButton extends StatelessWidget {
                     _validateAndConfirmNewPassword(context);
                   },
                 ),
-            );
+              );
       },
     );
   }
@@ -64,6 +64,9 @@ class ResetPasswordButton extends StatelessWidget {
       } else if (!AppRegex.hasLowerCase(password)) {
         errorToast(context, 'Invalid Password',
             'Password must contain at least one lowercase letter');
+      } else if (!AppRegex.hasUpperCase(password)) {
+        errorToast(context, 'Invalid Password',
+            'Password must contain at least one upper letter');
       } else if (!AppRegex.hasNumber(password)) {
         errorToast(context, 'Invalid Password',
             'Password must contain at least one number digit');

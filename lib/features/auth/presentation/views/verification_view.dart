@@ -44,7 +44,7 @@ class VerificationView extends StatelessWidget {
                   context.goNamed(Routes.loginViewRoute);
                 },
               ),
-            )
+            ),
           ],
         ),
       ),

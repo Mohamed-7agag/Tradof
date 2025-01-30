@@ -43,9 +43,9 @@ const Map<String, String> availableTags = {
   'Hindi': 'Hi',
 };
 const List<LanguageModel> availablePreferedLanguage = [
-  LanguageModel(languageName: 'English', tag: 'En'),
-  LanguageModel(languageName: 'Splanish', tag: 'Es'),
-  LanguageModel(languageName: 'French', tag: 'Fr'),
-  LanguageModel(languageName: 'Germany', tag: 'Gr'),
-  LanguageModel(languageName: 'Arabic', tag: 'Ar'),
+  LanguageModel(name: 'English', code: 'En',id: 1),
+  LanguageModel(name: 'Splanish', code: 'Es',id: 2),
+  LanguageModel(name: 'French', code: 'Fr',id: 3),
+  LanguageModel(name: 'Germany', code: 'Gr',id: 4),
+  LanguageModel(name: 'Arabic', code: 'Ar',id: 5),
 ];
