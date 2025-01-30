@@ -4,14 +4,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
 
-class BottomNavBarView extends StatefulWidget {
-  const BottomNavBarView({super.key});
+class BottomNavBarFreelancerView extends StatefulWidget {
+  const BottomNavBarFreelancerView({super.key});
 
   @override
-  State<BottomNavBarView> createState() => _BottomNavBarViewState();
+  State<BottomNavBarFreelancerView> createState() => _BottomNavBarFreelancerViewState();
 }
 
-class _BottomNavBarViewState extends State<BottomNavBarView> {
+class _BottomNavBarFreelancerViewState extends State<BottomNavBarFreelancerView> {
   int _selectedIndex = 0;
 
   final List<Widget> views = [

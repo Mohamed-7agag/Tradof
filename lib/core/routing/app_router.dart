@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
+import 'package:tradof/features/company/bottom_nav_bar/presentation/views/bottom_nav_bar_company_view.dart';
+import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
 import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
@@ -15,7 +17,7 @@ import '../helpers/navigation_handler.dart';
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationHandler.navigatorKey,
-    initialLocation: '/welcomeView',
+    initialLocation: '/bottomNavBarCompanyView',
     routes: [
       GoRoute(
         name: Routes.welcomeViewRoute,
@@ -54,8 +56,13 @@ class AppRouter {
       GoRoute(
         name: Routes.bottomNavBarViewRoute,
         path: '/bottomNavBarView',
-        builder: (context, state) => BottomNavBarView(),
+        builder: (context, state) => BottomNavBarFreelancerView(),
       ),
+      GoRoute(
+        name: Routes.bottomNavBarCompanyViewRoute,
+        path: '/bottomNavBarCompanyView',
+        builder: (context, state) => BottomNavBarCompanyView(),
+      )
     ],
   );
 }
