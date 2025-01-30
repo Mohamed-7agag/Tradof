@@ -24,4 +24,7 @@ class FontWeightHelper {
 
   /// 800
   static const FontWeight extraBold = FontWeight.w800;
+
+  /// 900
+  static const FontWeight black = FontWeight.w900;
 }
