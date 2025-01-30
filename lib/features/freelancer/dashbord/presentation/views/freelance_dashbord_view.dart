@@ -13,7 +13,7 @@ class FreelanceDashbordView extends StatelessWidget {
       body: Column(
         children: [
           DashbordContainerCurve(),
-          verticalSpace(11),
+          verticalSpace(12),
           SizedBox(
             height: 123.h,
             child: ListView.builder(

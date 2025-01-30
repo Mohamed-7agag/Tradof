@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
@@ -19,6 +21,7 @@ class FreelancerRegisterationButton extends StatelessWidget {
     return BlocConsumer<RegisterationCubit, RegisterationState>(
       listener: (context, state) {
         if (state.status.isRegistered) {
+          context.go(Routes.loginViewRoute);
           successToast(context, 'Success', state.registerSuccessMessage);
         } else if (state.status.isError) {
           errorToast(context, 'Error', state.errorMessage);

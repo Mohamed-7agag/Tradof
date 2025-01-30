@@ -6,9 +6,7 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
 class DashbordContainerCurve extends StatelessWidget {
-  const DashbordContainerCurve({
-    super.key,
-  });
+  const DashbordContainerCurve({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,53 +14,46 @@ class DashbordContainerCurve extends StatelessWidget {
       alignment: Alignment.topCenter,
       children: [
         Container(
-          height: 207,
+          height: 210,
           decoration: BoxDecoration(
             color: AppColors.primary,
           ),
-          child: Column(
-            children: [
-              verticalSpace(60),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: ListTile(
-                  leading: SizedBox(
-                    width: 50.w,
-                    height: 50.h,
-                    child: CircleAvatar(
-                      radius: 50.r,
-                      backgroundImage: AssetImage(
-                        'assets/images/photo3.jpg',
-                      ),
+          child: SafeArea(
+            child: Column(
+              children: [
+                verticalSpace(10),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: CircleAvatar(
+                      radius: 24,
+                      backgroundColor: AppColors.white,
+                      backgroundImage: AssetImage('assets/images/photo3.jpg'),
+                    ),
+                    title: Text(
+                      'Youssef Ghareb',
+                      style: AppStyle.poppinsMedium14
+                          .copyWith(color: AppColors.white),
+                    ),
+                    subtitle: Text(
+                      'J0esph',
+                      style: AppStyle.robotoRegular10
+                          .copyWith(color: AppColors.white),
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset('assets/images/bell2.png',width: 22),
+                        horizontalSpace(18),
+                        Image.asset('assets/images/calendar.png',width: 22),
+                        horizontalSpace(4),
+                      ],
                     ),
                   ),
-                  title: Text(
-                    'Youssef Ghareb',
-                    style: AppStyle.robotoSemiBold12
-                        .copyWith(color: AppColors.white),
-                  ),
-                  subtitle: Text(
-                    'J0esph',
-                    style: AppStyle.robotoRegular10
-                        .copyWith(color: AppColors.white),
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.notifications,
-                        color: AppColors.white,
-                      ),
-                      horizontalSpace(10),
-                      Icon(
-                        Icons.calendar_month,
-                        color: AppColors.white,
-                      ),
-                    ],
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         Positioned(

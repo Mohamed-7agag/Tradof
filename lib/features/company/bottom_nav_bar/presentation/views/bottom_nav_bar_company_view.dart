@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/company_setting_view.dart';
 import 'package:tradof/features/company/profile_company/presentation/views/profile_company_view.dart';
@@ -26,51 +27,60 @@ class _BottomNavBarCompanyViewState extends State<BottomNavBarCompanyView> {
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(() => _selectedIndex = index);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
-      body: views[_selectedIndex],
+      body: LazyLoadIndexedStack(index: _selectedIndex, children: views),
       bottomNavigationBar: Stack(
         clipBehavior: Clip.none,
+        alignment: Alignment.topCenter,
         children: [
           ClipPath(
             clipper: CustomNavBarClipper(),
             child: Container(
-              height: 100.h,
+              height: 85,
               color: AppColors.white,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildNavItem('assets/images/home.svg', 0),
-                  _buildNavItem('assets/images/layer.svg', 1),
-                  SizedBox(width: 50.w),
-                  _buildNavItem('assets/images/wallet.svg', 3),
-                  _buildNavItem('assets/images/setting.svg', 4),
+                  _buildNavItem(
+                    'assets/images/home_off.png',
+                    'assets/images/home_on.png',
+                    0,
+                  ),
+                  _buildNavItem(
+                    'assets/images/add_project_off.png',
+                    'assets/images/add_project_on.png',
+                    1,
+                  ),
+                  SizedBox(width: 40.w),
+                  _buildNavItem(
+                    'assets/images/wallet_off.png',
+                    'assets/images/wallet_on.png',
+                    3,
+                  ),
+                  _buildNavItem(
+                    'assets/images/setting_off.png',
+                    'assets/images/setting_on.png',
+                    4,
+                  ),
                 ],
               ),
             ),
           ),
           Positioned(
             top: -20,
-            left: MediaQuery.of(context).size.width / 2 - 30,
             child: GestureDetector(
               onTap: () => _onItemTapped(2),
               child: Container(
-                width: 60.w,
-                height: 60.h,
+                width: 60,
+                height: 60,
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xffCE5BEB), Color(0xff5B61EB)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  color: AppColors.primary,
                   shape: BoxShape.circle,
                 ),
                 child: SvgPicture.asset(
@@ -84,40 +94,12 @@ class _BottomNavBarCompanyViewState extends State<BottomNavBarCompanyView> {
     );
   }
 
-  Widget _buildNavItem(String icon, int index) {
-    return GestureDetector(
+  Widget _buildNavItem(String iconOff, String iconOn, int index) {
+    return InkWell(
       onTap: () => _onItemTapped(index),
       child: _selectedIndex == index
-          ? ShaderMask(
-              shaderCallback: (Rect bounds) {
-                return LinearGradient(
-                  colors: [Color(0xffCE5BEB), Color(0xff5B61EB)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ).createShader(bounds);
-              },
-              child: SvgPicture.asset(
-                icon,
-                width: 24.w,
-                height: 24.h,
-                colorFilter: const ColorFilter.mode(
-                  Colors.white,
-                  BlendMode.srcIn,
-                ),
-              ),
-            )
-          : Opacity(
-              opacity: 0.5,
-              child: SvgPicture.asset(
-                icon,
-                width: 24.w,
-                height: 24.h,
-                colorFilter: const ColorFilter.mode(
-                  Colors.grey,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
+          ? Image.asset(iconOn, width: 24.w)
+          : Image.asset(iconOff, width: index == 4 ? 25.w : 22.w),
     );
   }
 }
