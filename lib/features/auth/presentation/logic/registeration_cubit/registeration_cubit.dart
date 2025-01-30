@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tradof/core/helpers/upload_image_to_api.dart';
 import 'package:tradof/features/auth/data/model/company_register_request_model.dart';
 import 'package:tradof/features/auth/data/model/freelancer_register_request_model.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';
@@ -181,7 +180,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       lastName: state.lastName,
       phoneNumber: state.phoneNumber,
       password: state.password,
-      profileImageUrl: uploadImageToApi(state.profileImage ?? XFile('')), //
+    //  profileImageUrl: uploadImageToApi(state.profileImage ?? XFile('')), //
       countryId: state.country,
       languagePairs: languagePairIds,
       specializationIds: specializationIds,
@@ -205,7 +204,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       lastName: state.lastName,
       phoneNumber: state.phoneNumber,
       password: state.password,
-      profileImageUrl: uploadImageToApi(state.profileImage ?? XFile('')), //
+   //   profileImageUrl: uploadImageToApi(state.profileImage ?? XFile('')), //
       countryId: state.country,
       jobTitle: state.jobTitle,
       companyAddress: state.locationCompany,

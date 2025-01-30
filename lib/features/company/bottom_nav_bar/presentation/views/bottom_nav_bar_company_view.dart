@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tradof/core/theming/app_colors.dart';
+import 'package:tradof/features/company/company_setting/presentation/views/company_setting_view.dart';
 import 'package:tradof/features/company/profile_company/presentation/views/profile_company_view.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
 
@@ -21,7 +22,7 @@ class _BottomNavBarCompanyViewState extends State<BottomNavBarCompanyView> {
     FreelanceDashbordView(),
     ProfileCompanyView(),
     FreelanceDashbordView(),
-    FreelanceDashbordView(),
+    CompanySettingView(),
   ];
 
   void _onItemTapped(int index) {
@@ -99,7 +100,10 @@ class _BottomNavBarCompanyViewState extends State<BottomNavBarCompanyView> {
                 icon,
                 width: 24.w,
                 height: 24.h,
-                color: Colors.white,
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
               ),
             )
           : Opacity(
@@ -108,7 +112,10 @@ class _BottomNavBarCompanyViewState extends State<BottomNavBarCompanyView> {
                 icon,
                 width: 24.w,
                 height: 24.h,
-                color: Colors.grey,
+                colorFilter: const ColorFilter.mode(
+                  Colors.grey,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
     );

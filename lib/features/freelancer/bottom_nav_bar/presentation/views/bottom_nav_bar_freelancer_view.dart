@@ -8,10 +8,12 @@ class BottomNavBarFreelancerView extends StatefulWidget {
   const BottomNavBarFreelancerView({super.key});
 
   @override
-  State<BottomNavBarFreelancerView> createState() => _BottomNavBarFreelancerViewState();
+  State<BottomNavBarFreelancerView> createState() =>
+      _BottomNavBarFreelancerViewState();
 }
 
-class _BottomNavBarFreelancerViewState extends State<BottomNavBarFreelancerView> {
+class _BottomNavBarFreelancerViewState
+    extends State<BottomNavBarFreelancerView> {
   int _selectedIndex = 0;
 
   final List<Widget> views = [
@@ -97,7 +99,10 @@ class _BottomNavBarFreelancerViewState extends State<BottomNavBarFreelancerView>
                 icon,
                 width: 24.w,
                 height: 24.h,
-                color: Colors.white,
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
               ),
             )
           : Opacity(
@@ -106,7 +111,10 @@ class _BottomNavBarFreelancerViewState extends State<BottomNavBarFreelancerView>
                 icon,
                 width: 24.w,
                 height: 24.h,
-                color: Colors.grey,
+                colorFilter: const ColorFilter.mode(
+                  Colors.grey,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
     );
