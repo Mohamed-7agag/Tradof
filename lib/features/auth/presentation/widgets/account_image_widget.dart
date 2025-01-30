@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,13 +11,15 @@ import '../../../../core/theming/app_colors.dart';
 
 class AccountImageWidget extends StatefulWidget {
   const AccountImageWidget({super.key, required this.onImagePicked});
-final void Function(XFile? image) onImagePicked;
+  final void Function(String? imageUrl) onImagePicked;
   @override
   State<AccountImageWidget> createState() => _AccountImageWidgetState();
 }
 
 class _AccountImageWidgetState extends State<AccountImageWidget> {
   File? _image;
+  String? imageUrl;
+  
   Future<void> _pickImageFromGallery() async {
     try {
       final ImagePicker picker = ImagePicker();
@@ -24,11 +27,39 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
       if (image != null) {
         setState(() {
           _image = File(image.path);
-          widget.onImagePicked(image);
         });
       }
     } catch (e) {
       log('Error picking image: $e');
+    }
+  }
+
+  Future<void> _uploadImage() async {
+    if (_image == null) return;
+
+    const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dbzgz8bis/upload';
+    const uploadPreset = 'tradof-images';
+
+    try {
+      FormData formData = FormData.fromMap({
+        'upload_preset': uploadPreset,
+        'file': await MultipartFile.fromFile(_image!.path),
+      });
+
+      Dio dio = Dio();
+      Response response = await dio.post(cloudinaryUrl, data: formData);
+
+      if (response.statusCode == 200) {
+        final jsonMap = response.data;
+        setState(() {
+          imageUrl = jsonMap['url'];
+          widget.onImagePicked(imageUrl);
+        });
+      } else {
+        log('Error: ${response.statusCode} - ${response.statusMessage}');
+      }
+    } catch (e) {
+      log('Upload failed: $e');
     }
   }
 
@@ -45,8 +76,9 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
           child: SlideInRight(
             from: 400,
             child: IconButton(
-              onPressed: () {
-                _pickImageFromGallery();
+              onPressed: () async {
+                await _pickImageFromGallery();
+                _uploadImage();
               },
               icon: Icon(
                 Icons.camera_alt,

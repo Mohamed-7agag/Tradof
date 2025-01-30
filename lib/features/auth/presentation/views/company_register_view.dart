@@ -97,7 +97,7 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
                       delay: Duration(milliseconds: 625),
                       child: CompanyRegisterationButton(
                         countryId: state.countryId,
-                        imageFile: state.imagePicked,
+                        imageUrl: state.imagePicked,
                         jobTitleController: jobTitleController,
                         locationCompanyController: locationCompanyController,
                       ),

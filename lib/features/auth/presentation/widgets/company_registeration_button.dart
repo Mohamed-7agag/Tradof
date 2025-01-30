@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
@@ -14,12 +13,12 @@ class CompanyRegisterationButton extends StatelessWidget {
   const CompanyRegisterationButton({
     super.key,
     required this.countryId,
-    this.imageFile,
+    this.imageUrl,
     required this.jobTitleController,
     required this.locationCompanyController,
   });
   final int? countryId;
-  final XFile? imageFile;
+  final String? imageUrl;
   final TextEditingController jobTitleController;
   final TextEditingController locationCompanyController;
   @override
@@ -63,7 +62,7 @@ class CompanyRegisterationButton extends StatelessWidget {
                         'Please select at least one industry served');
                   } else {
                     context.read<RegisterationCubit>().companyData(
-                          imageFile ?? XFile(''),
+                          imageUrl ?? '',
                           jobTitleController.text.trim(),
                           countryId!,
                           locationCompanyController.text.trim(),

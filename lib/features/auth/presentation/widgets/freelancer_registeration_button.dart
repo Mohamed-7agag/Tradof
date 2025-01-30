@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
@@ -12,9 +11,9 @@ import '../logic/registeration_cubit/registeration_cubit.dart';
 
 class FreelancerRegisterationButton extends StatelessWidget {
   const FreelancerRegisterationButton(
-      {super.key, required this.countryId, this.imageFile});
+      {super.key, required this.countryId, this.imageUrl});
   final int? countryId;
-  final XFile? imageFile;
+  final String? imageUrl;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterationCubit, RegisterationState>(
@@ -51,7 +50,7 @@ class FreelancerRegisterationButton extends StatelessWidget {
                         'Please select at least one specialization');
                   } else {
                     context.read<RegisterationCubit>().freelancerData(
-                          imageFile ?? XFile(''),
+                          imageUrl ?? '',
                           countryId!,
                           context
                               .read<TablesCubit>()

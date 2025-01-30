@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:tradof/features/auth/data/model/company_register_request_model.dart';
 import 'package:tradof/features/auth/data/model/freelancer_register_request_model.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';
@@ -40,7 +37,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
   }
 
   void freelancerData(
-    XFile profileImage,
+    String profileImage,
     int countryId,
     List<SpecializationModel> specializations,
     List<LanguagePairModel> languagePairs,
@@ -51,13 +48,11 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       selectedLanguagePair: languagePairs,
       selectedSpecializations: specializations,
     ));
-    //await registerFreelancer();
-    final data = await _collectFreelancerRegisterationData();
-    log('\ndata: ${data.toJson()}\n');
+    await registerFreelancer();
   }
 
   void companyData(
-    XFile profileImage,
+    String profileImage,
     String jobTitle,
     int countryId,
     String locationCompany,
@@ -72,9 +67,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       selectedPreferedLanguages: preferedLanguages,
       selectedIndustriesServed: industriesServed,
     ));
-    //await registerCompany();
-    final data = await _collectCompanyRegisterationData();
-    log('\ndata: ${data.toJson()}\n');
+    await registerCompany();
   }
 
 //! register for freelancer
@@ -188,14 +181,11 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       lastName: state.lastName,
       phoneNumber: state.phoneNumber,
       password: state.password,
-      profileImageUrl: '${state.profileImage?.path}', //
-      // profileImageUrl:
-      //     await uploadImageToApi(state.profileImage ?? XFile('')), //
+      profileImageUrl: state.profileImage,
       countryId: state.country,
       languagePairs: languagePairIds,
       specializationIds: specializationIds,
     );
-
     return freelancerRegisterRequestModel;
   }
 
@@ -214,16 +204,13 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       lastName: state.lastName,
       phoneNumber: state.phoneNumber,
       password: state.password,
-      profileImageUrl: '${state.profileImage?.path}', //
-      // profileImageUrl:
-      //     await uploadImageToApi(state.profileImage ?? XFile('')), //
+      profileImageUrl: state.profileImage,
       countryId: state.country,
       jobTitle: state.jobTitle,
       companyAddress: state.locationCompany,
       specializationIds: specializationIds,
       preferredLanguageIds: preferredLanguageIds,
     );
-
     return companyRegisterRequestModel;
   }
 }

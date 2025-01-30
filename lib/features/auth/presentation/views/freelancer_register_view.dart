@@ -51,7 +51,7 @@ class FreelancerRegisterView extends StatelessWidget {
                       delay: Duration(milliseconds: 375),
                       child: FreelancerRegisterationButton(
                         countryId: state.countryId,
-                        imageFile: state.imagePicked,
+                        imageUrl: state.imagePicked,
                       ),
                     );
                   },

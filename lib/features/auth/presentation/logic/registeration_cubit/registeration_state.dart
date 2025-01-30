@@ -34,7 +34,7 @@ class RegisterationState extends Equatable {
   final String locationCompany;
   final String jobTitle;
 
-  final XFile? profileImage;
+  final String profileImage;
   final List<LanguageModel> languages;
   final List<CountryModel> countries;
   final List<SpecializationModel> specializations;
@@ -59,7 +59,7 @@ class RegisterationState extends Equatable {
     this.lastName = '',
     this.jobTitle = '',
     this.locationCompany = '',
-    this.profileImage,
+    this.profileImage = '',
     this.selectedLanguagePair = const [],
     this.selectedSpecializations = const [],
     this.selectedIndustriesServed = const [],
@@ -82,7 +82,7 @@ class RegisterationState extends Equatable {
     String? jobTitle,
     String? firstName,
     String? lastName,
-    XFile? profileImage,
+    String? profileImage,
     List<LanguageModel>? languages,
     List<CountryModel>? countries,
     List<SpecializationModel>? specializations,
@@ -95,7 +95,8 @@ class RegisterationState extends Equatable {
       status: status ?? this.status,
       userRole: userRole ?? this.userRole,
       errorMessage: errorMessage ?? this.errorMessage,
-      registerSuccessMessage: registerSuccessMessage ?? this.registerSuccessMessage,
+      registerSuccessMessage:
+          registerSuccessMessage ?? this.registerSuccessMessage,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       password: password ?? this.password,
@@ -130,7 +131,7 @@ class RegisterationState extends Equatable {
         country,
         firstName,
         lastName,
-        profileImage ?? '',
+        profileImage,
         jobTitle,
         locationCompany,
         languages,
