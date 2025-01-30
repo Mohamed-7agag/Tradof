@@ -1,7 +1,8 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tradof/core/helpers/upload_image_to_api.dart';
 import 'package:tradof/features/auth/data/model/company_register_request_model.dart';
 import 'package:tradof/features/auth/data/model/freelancer_register_request_model.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';
@@ -50,7 +51,9 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       selectedLanguagePair: languagePairs,
       selectedSpecializations: specializations,
     ));
-    await registerFreelancer();
+    //await registerFreelancer();
+    final data = await _collectFreelancerRegisterationData();
+    log('\ndata: ${data.toJson()}\n');
   }
 
   void companyData(
@@ -60,7 +63,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     String locationCompany,
     List<LanguageModel> preferedLanguages,
     List<SpecializationModel> industriesServed,
-  ) async{
+  ) async {
     emit(state.copyWith(
       profileImage: profileImage,
       jobTitle: jobTitle,
@@ -69,22 +72,25 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       selectedPreferedLanguages: preferedLanguages,
       selectedIndustriesServed: industriesServed,
     ));
-    await registerCompany();
+    //await registerCompany();
+    final data = await _collectCompanyRegisterationData();
+    log('\ndata: ${data.toJson()}\n');
   }
 
 //! register for freelancer
   Future<void> registerFreelancer() async {
     emit(state.copyWith(status: RegisterationStatus.loading));
     final result = await _registerationRepo.freelancerRegister(
-      _collectFreelancerRegisterationData(),
+      await _collectFreelancerRegisterationData(),
     );
     result.fold(
       (failure) => emit(state.copyWith(
         status: RegisterationStatus.error,
         errorMessage: failure.errMessage,
       )),
-      (user) => emit(state.copyWith(
+      (successMessage) => emit(state.copyWith(
         status: RegisterationStatus.success,
+        registerSuccessMessage: successMessage,
       )),
     );
   }
@@ -93,7 +99,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
   Future<void> registerCompany() async {
     emit(state.copyWith(status: RegisterationStatus.loading));
     final result = await _registerationRepo
-        .companyRegister(_collectCompanyRegisterationData());
+        .companyRegister(await _collectCompanyRegisterationData());
     result.fold(
       (failure) => emit(state.copyWith(
         status: RegisterationStatus.error,
@@ -162,7 +168,8 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     );
   }
 
-  FreelancerRegisterRequestModel _collectFreelancerRegisterationData() {
+  Future<FreelancerRegisterRequestModel>
+      _collectFreelancerRegisterationData() async {
     List<int> specializationIds = state.selectedSpecializations
         .map((specialization) => specialization.id)
         .toList();
@@ -181,7 +188,9 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       lastName: state.lastName,
       phoneNumber: state.phoneNumber,
       password: state.password,
-      profileImageUrl: uploadImageToApi(state.profileImage ?? XFile('')), //
+      profileImageUrl: '${state.profileImage?.path}', //
+      // profileImageUrl:
+      //     await uploadImageToApi(state.profileImage ?? XFile('')), //
       countryId: state.country,
       languagePairs: languagePairIds,
       specializationIds: specializationIds,
@@ -190,7 +199,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     return freelancerRegisterRequestModel;
   }
 
-  CompanyRegisterRequestModel _collectCompanyRegisterationData() {
+  Future<CompanyRegisterRequestModel> _collectCompanyRegisterationData() async {
     List<int> specializationIds = state.selectedIndustriesServed
         .map((specialization) => specialization.id)
         .toList();
@@ -205,7 +214,9 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       lastName: state.lastName,
       phoneNumber: state.phoneNumber,
       password: state.password,
-      profileImageUrl: uploadImageToApi(state.profileImage ?? XFile('')), //
+      profileImageUrl: '${state.profileImage?.path}', //
+      // profileImageUrl:
+      //     await uploadImageToApi(state.profileImage ?? XFile('')), //
       countryId: state.country,
       jobTitle: state.jobTitle,
       companyAddress: state.locationCompany,

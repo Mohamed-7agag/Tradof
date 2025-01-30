@@ -20,6 +20,7 @@ class FreelancerRegisterationButton extends StatelessWidget {
     return BlocConsumer<RegisterationCubit, RegisterationState>(
       listener: (context, state) {
         if (state.status.isRegistered) {
+          successToast(context, 'Success', state.registerSuccessMessage);
         } else if (state.status.isError) {
           errorToast(context, 'Error', state.errorMessage);
         }

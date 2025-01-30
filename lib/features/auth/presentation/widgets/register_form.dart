@@ -102,7 +102,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   controller: phoneNumberController,
                 ),
               ),
-              verticalSpace(6),
+              verticalSpace(2),
               SlideInRight(
                 from: 400,
                 delay: Duration(milliseconds: 400),
@@ -150,6 +150,7 @@ class _RegisterFormState extends State<RegisterForm> {
     final String phoneNumber = phoneNumberController.text.trim();
     final String password = passwordController.text.trim();
     final String confirmPassword = confirmPasswordController.text.trim();
+
     if (formKey.currentState!.validate()) {
       if (!AppRegex.isEmailValid(email)) {
         errorToast(context, 'Invalid Email', 'Please enter a valid email');

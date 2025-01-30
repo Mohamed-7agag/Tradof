@@ -16,6 +16,7 @@ class RegisterationRepoImpl implements RegisterationRepo {
 
   RegisterationRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
+
   @override
   Future<Either<Failure, String>> freelancerRegister(
       FreelancerRegisterRequestModel freelancerRegisterRequestModel) {
@@ -24,7 +25,7 @@ class RegisterationRepoImpl implements RegisterationRepo {
         EndPoint.registerFreelancer,
         data: freelancerRegisterRequestModel.toJson(),
       );
-      return response; // or parse the response
+      return response;
     });
   }
 

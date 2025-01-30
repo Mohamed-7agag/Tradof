@@ -25,7 +25,6 @@ class CompanyRegisterRequestModel {
     this.profileImageUrl = '',
   });
 
-  // Convert the model to a JSON map
   Map<String, dynamic> toJson() {
     return {
       'email': email,
@@ -40,22 +39,5 @@ class CompanyRegisterRequestModel {
       'preferredLanguageIds': preferredLanguageIds,
       'profileImageUrl': profileImageUrl,
     };
-  }
-
-  // Create an instance from a JSON map
-  factory CompanyRegisterRequestModel.fromJson(Map<String, dynamic> json) {
-    return CompanyRegisterRequestModel(
-      email: json['email'],
-      password: json['password'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      phoneNumber: json['phoneNumber'],
-      countryId: json['countryId'],
-      jobTitle: json['jobTitle'],
-      companyAddress: json['companyAddress'],
-      specializationIds: List<int>.from(json['specializationIds']),
-      preferredLanguageIds: List<int>.from(json['preferredLanguageIds']),
-      profileImageUrl: json['profileImageUrl'],
-    );
   }
 }

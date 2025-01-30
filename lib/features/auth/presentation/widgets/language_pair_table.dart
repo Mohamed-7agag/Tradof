@@ -50,10 +50,12 @@ class LanguagePairTable extends StatelessWidget {
                     ),
                   ),
                   DataColumn(
-                    label: Text(
-                      'IEFT tag',
-                      style: AppStyle.poppinsSemiBold14.copyWith(
-                        color: AppColors.white,
+                    label: Expanded(
+                      child: Text(
+                        'IEFT tag',
+                        style: AppStyle.poppinsSemiBold14.copyWith(
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -73,10 +75,12 @@ class LanguagePairTable extends StatelessWidget {
                               child: Icon(Icons.cancel, color: Colors.red),
                             ),
                             horizontalSpace(6),
-                            Text(
-                              '${language.fromLanguage.name} - ${language.toLanguage.name}',
-                              style: AppStyle.robotoRegular12.copyWith(
-                                color: AppColors.white,
+                            Expanded(
+                              child: Text(
+                                '${language.fromLanguage.name} - ${language.toLanguage.name}',
+                                style: AppStyle.robotoRegular12.copyWith(
+                                  color: AppColors.white,
+                                ),
                               ),
                             ),
                           ],
@@ -93,8 +97,8 @@ class LanguagePairTable extends StatelessWidget {
                     ],
                   );
                 }).toList(),
-                horizontalMargin: 15,
-                columnSpacing: 28,
+                horizontalMargin: 12,
+                columnSpacing: 22,
                 border: TableBorder.all(
                   color: AppColors.white,
                   borderRadius: BorderRadius.circular(10),

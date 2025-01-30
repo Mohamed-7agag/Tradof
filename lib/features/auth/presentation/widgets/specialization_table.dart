@@ -77,8 +77,8 @@ class SpecializationTable extends StatelessWidget {
                     ],
                   );
                 }).toList(),
-                horizontalMargin: 15,
-                columnSpacing: 28,
+                horizontalMargin: 12,
+                columnSpacing: 22,
                 border: TableBorder.all(
                   color: AppColors.white,
                   borderRadius: BorderRadius.circular(10),

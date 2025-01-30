@@ -21,7 +21,6 @@ class FreelancerRegisterRequestModel {
     this.profileImageUrl = '',
   });
 
-  // Convert the model to a JSON map
   Map<String, dynamic> toJson() {
     return {
       'email': email,
@@ -36,22 +35,6 @@ class FreelancerRegisterRequestModel {
     };
   }
 
-  // Create an instance from a JSON map
-  factory FreelancerRegisterRequestModel.fromJson(Map<String, dynamic> json) {
-    return FreelancerRegisterRequestModel(
-      email: json['email'],
-      password: json['password'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      countryId: json['countryId'],
-      phoneNumber: json['phoneNumber'],
-      specializationIds: List<int>.from(json['specializationIds']),
-      languagePairs: (json['languagePairs'] as List)
-          .map((pair) => LanguagePair.fromJson(pair))
-          .toList(),
-      profileImageUrl: json['profileImageUrl'],
-    );
-  }
 }
 
 class LanguagePair {
@@ -63,19 +46,10 @@ class LanguagePair {
     required this.languageToId,
   });
 
-  // Convert the model to a JSON map
   Map<String, dynamic> toJson() {
     return {
       'languageFromId': languageFromId,
       'languageToId': languageToId,
     };
-  }
-
-  // Create an instance from a JSON map
-  factory LanguagePair.fromJson(Map<String, dynamic> json) {
-    return LanguagePair(
-      languageFromId: json['languageFromId'],
-      languageToId: json['languageToId'],
-    );
   }
 }

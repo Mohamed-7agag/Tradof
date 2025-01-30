@@ -45,10 +45,12 @@ class RegisterationState extends Equatable {
   final List<LanguageModel> selectedPreferedLanguages;
 
   final String errorMessage;
+  final String registerSuccessMessage;
   const RegisterationState({
     this.status = RegisterationStatus.initial,
     this.userRole = UserRole.freelancer,
     this.errorMessage = '',
+    this.registerSuccessMessage = '',
     this.email = '',
     this.phoneNumber = '',
     this.password = '',
@@ -58,19 +60,20 @@ class RegisterationState extends Equatable {
     this.jobTitle = '',
     this.locationCompany = '',
     this.profileImage,
-    this.languages = const [],
-    this.countries = const [],
-    this.specializations = const [],
     this.selectedLanguagePair = const [],
     this.selectedSpecializations = const [],
     this.selectedIndustriesServed = const [],
     this.selectedPreferedLanguages = const [],
+    this.languages = const [],
+    this.countries = const [],
+    this.specializations = const [],
   });
 
   RegisterationState copyWith({
     RegisterationStatus? status,
     UserRole? userRole,
     String? errorMessage,
+    String? registerSuccessMessage,
     String? email,
     String? phoneNumber,
     String? password,
@@ -92,6 +95,7 @@ class RegisterationState extends Equatable {
       status: status ?? this.status,
       userRole: userRole ?? this.userRole,
       errorMessage: errorMessage ?? this.errorMessage,
+      registerSuccessMessage: registerSuccessMessage ?? this.registerSuccessMessage,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       password: password ?? this.password,
@@ -119,6 +123,7 @@ class RegisterationState extends Equatable {
         status,
         userRole,
         errorMessage,
+        registerSuccessMessage,
         email,
         phoneNumber,
         password,

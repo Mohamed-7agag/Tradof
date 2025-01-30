@@ -11,30 +11,34 @@ class TablesCubit extends Cubit<TablesState> {
   //! Specialization
   void addSpecialization(SpecializationModel specialization) {
     if (!state.selectedSpecializations.contains(specialization)) {
-      final updatedList = List<SpecializationModel>.from(state.selectedSpecializations)
-        ..add(specialization);
+      final updatedList =
+          List<SpecializationModel>.from(state.selectedSpecializations)
+            ..add(specialization);
       emit(state.copyWith(selectedSpecializations: updatedList));
     }
   }
 
   void removeSpecialization(SpecializationModel specialization) {
-    final updatedList = List<SpecializationModel>.from(state.selectedSpecializations)
-      ..remove(specialization);
+    final updatedList =
+        List<SpecializationModel>.from(state.selectedSpecializations)
+          ..remove(specialization);
     emit(state.copyWith(selectedSpecializations: updatedList));
   }
 
   //! Industries Served
   void addIndustryServed(SpecializationModel industry) {
     if (!state.selectedIndustriesServed.contains(industry)) {
-      final updatedList = List<SpecializationModel>.from(state.selectedIndustriesServed)
-        ..add(industry);
+      final updatedList =
+          List<SpecializationModel>.from(state.selectedIndustriesServed)
+            ..add(industry);
       emit(state.copyWith(selectedIndustriesServed: updatedList));
     }
   }
 
   void removeIndustryServed(SpecializationModel industry) {
-    final updatedList = List<SpecializationModel>.from(state.selectedIndustriesServed)
-      ..remove(industry);
+    final updatedList =
+        List<SpecializationModel>.from(state.selectedIndustriesServed)
+          ..remove(industry);
     emit(state.copyWith(selectedIndustriesServed: updatedList));
   }
 

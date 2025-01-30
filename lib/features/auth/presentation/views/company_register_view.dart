@@ -2,18 +2,17 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
-import 'package:tradof/features/auth/presentation/widgets/create_account_curve_with_image.dart';
+import 'package:tradof/features/auth/presentation/widgets/country_drop_down_section.dart';
 import 'package:tradof/features/auth/presentation/widgets/industries_served_table.dart';
 import 'package:tradof/features/auth/presentation/widgets/prefered_languages_table.dart';
+import 'package:tradof/features/auth/presentation/widgets/profile_image_section.dart';
 
-import '../logic/registeration_cubit/registeration_cubit.dart';
+import '../logic/freelancer_registeration_cubit.dart';
 import '../widgets/company_registeration_button.dart';
-import '../widgets/country_drop_down.dart';
 
 class CompanyRegisterView extends StatefulWidget {
   const CompanyRegisterView({super.key});
@@ -39,17 +38,16 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
     super.dispose();
   }
 
-  int? countryId;
-  XFile? profileImage;
-
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TablesCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => TablesCubit()),
+        BlocProvider(create: (context) => ProfileImageAndCountryCubit()),
+      ],
       child: Column(
         children: [
-          CreateAccountCurveWithImage(
-              onImagePicked: (image) => profileImage = image),
+          ProfileImageSection(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
@@ -65,17 +63,7 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
                   ),
                 ),
                 verticalSpace(12),
-                SlideInRight(
-                  from: 400,
-                  delay: Duration(milliseconds: 125),
-                  child: CountryDropDown(
-                    hint: 'Country',
-                    items: context.read<RegisterationCubit>().state.countries,
-                    onChanged: (value) {
-                      countryId = value?.id;
-                    },
-                  ),
-                ),
+                CountryDropDownSection(),
                 verticalSpace(12),
                 SlideInRight(
                   from: 400,
@@ -101,15 +89,20 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
                   child: IndustriesServedTable(),
                 ),
                 verticalSpace(40),
-                SlideInUp(
-                  from: 400,
-                  delay: Duration(milliseconds: 625),
-                  child: CompanyRegisterationButton(
-                    countryId: countryId,
-                    imageFile: profileImage,
-                    jobTitleController: jobTitleController,
-                    locationCompanyController: locationCompanyController,
-                  ),
+                BlocBuilder<ProfileImageAndCountryCubit,
+                    ProfileImageAndCountryState>(
+                  builder: (context, state) {
+                    return SlideInUp(
+                      from: 400,
+                      delay: Duration(milliseconds: 625),
+                      child: CompanyRegisterationButton(
+                        countryId: state.countryId,
+                        imageFile: state.imagePicked,
+                        jobTitleController: jobTitleController,
+                        locationCompanyController: locationCompanyController,
+                      ),
+                    );
+                  },
                 ),
                 verticalSpace(20),
               ],
