@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:tradof/features/company/profile_company/data/repos/profile_company_repo.dart';
+import 'package:tradof/features/company/profile_company/data/repos/profile_company_repo_impl.dart';
 
 import '../../features/auth/data/repo/auth_repo.dart';
 import '../../features/auth/data/repo/auth_repo_impl.dart';
@@ -27,5 +29,10 @@ void setupGetIt() {
   // project repo
   getIt.registerFactory<ProjectRepo>(
     () => ProjectRepoImpl(apiServices: getIt()),
+  );
+
+  // profile company repo
+  getIt.registerFactory<ProfileCompanyRepo>(
+    () => ProfileCompanyRepoImpl(apiServices: getIt()),
   );
 }

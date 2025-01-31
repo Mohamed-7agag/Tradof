@@ -12,7 +12,7 @@ abstract class EndPoint {
   static const String getSpecializations = 'specialization';
   // project
   static const String createProject = 'project';
-
+  
   static  String getCompanybyId(String id) {
       return 'Company/$id';
   }
