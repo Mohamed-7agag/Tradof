@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/my_app.dart';
 
@@ -11,6 +12,7 @@ import 'core/helpers/cubit_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  initializeDateFormatting('en_US', null);
   setupGetIt();
   Bloc.observer = MyBlocObserver();
   await Future.wait([

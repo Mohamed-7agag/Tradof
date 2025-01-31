@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/core/utils/widgets/upload_image_to_cloudinary.dart';
 import 'package:tradof/features/auth/data/model/company_register_request_model.dart';
 import 'package:tradof/features/auth/data/model/freelancer_register_request_model.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';
@@ -37,13 +40,13 @@ class RegisterationCubit extends Cubit<RegisterationState> {
   }
 
   void freelancerData(
-    String profileImage,
+    File image,
     int countryId,
     List<SpecializationModel> specializations,
     List<LanguagePairModel> languagePairs,
   ) async {
     emit(state.copyWith(
-      profileImage: profileImage,
+      profileImage: image,
       country: countryId,
       selectedLanguagePair: languagePairs,
       selectedSpecializations: specializations,
@@ -52,7 +55,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
   }
 
   void companyData(
-    String profileImage,
+    File image,
     String jobTitle,
     int countryId,
     String locationCompany,
@@ -60,7 +63,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     List<SpecializationModel> industriesServed,
   ) async {
     emit(state.copyWith(
-      profileImage: profileImage,
+      profileImage: image,
       jobTitle: jobTitle,
       country: countryId,
       locationCompany: locationCompany,
@@ -181,7 +184,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       lastName: state.lastName,
       phoneNumber: state.phoneNumber,
       password: state.password,
-      profileImageUrl: state.profileImage,
+      profileImageUrl: await uploadImageToCloudinary(state.profileImage),
       countryId: state.country,
       languagePairs: languagePairIds,
       specializationIds: specializationIds,
@@ -204,7 +207,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       lastName: state.lastName,
       phoneNumber: state.phoneNumber,
       password: state.password,
-      profileImageUrl: state.profileImage,
+      profileImageUrl: await uploadImageToCloudinary(state.profileImage),
       countryId: state.country,
       jobTitle: state.jobTitle,
       companyAddress: state.locationCompany,

@@ -13,6 +13,7 @@ import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
 import '../../welcome_view.dart';
 import '../helpers/navigation_handler.dart';
+import '../utils/app_constants.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -54,8 +55,8 @@ class AppRouter {
         builder: (context, state) => VerificationView(),
       ),
       GoRoute(
-        name: Routes.bottomNavBarFreelancerViewRoute,
-        path: '/bottomNavBarFreelancerView',
+        name: Routes.bottomNavBarViewRoute,
+        path: '/bottomNavBarView',
         builder: (context, state) => BottomNavBarFreelancerView(),
       ),
       GoRoute(
