@@ -27,7 +27,7 @@ class AttachmentFilesSection extends StatelessWidget {
           builder: (context, files) {
             return Container(
               width: 1.sw,
-              height: files.isEmpty ? 100 : null,
+              height: files.isEmpty ? 80 : null,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: AppColors.grey),
@@ -35,6 +35,7 @@ class AttachmentFilesSection extends StatelessWidget {
               child: ListView.builder(
                 itemCount: files.length,
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return ListTile(
                     contentPadding: EdgeInsets.only(
@@ -59,7 +60,7 @@ class AttachmentFilesSection extends StatelessWidget {
           right: 15,
           child: IconButton(
             onPressed: () => _pickFiles(context),
-            icon: Icon(Icons.add),
+            icon: Icon(Icons.add, size: 28),
             style: IconButton.styleFrom(
                 backgroundColor: AppColors.lightOrange,
                 foregroundColor: AppColors.white,

@@ -38,6 +38,7 @@ class _FreelancerRegisterViewState extends State<FreelancerRegisterView> {
         BlocProvider(create: (context) => ProfileImageAndCountryCubit()),
       ],
       child: BlocListener<MetaDataCubit, MetaDataState>(
+        listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
           if (state.status.isError) {
             context.pop();
