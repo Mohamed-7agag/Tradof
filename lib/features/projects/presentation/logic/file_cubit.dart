@@ -13,4 +13,6 @@ class FileCubit extends Cubit<List<PlatformFile>> {
     updatedFiles.removeAt(index);
     emit(updatedFiles);
   }
+
+  List<PlatformFile> getFiles() => state;
 }

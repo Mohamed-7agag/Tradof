@@ -17,13 +17,19 @@ class CountryDropDownSection extends StatelessWidget {
       builder: (context, state) {
         return SlideInRight(
           from: 400,
-          child: CountryDropDown(
-            hint: 'Country',
-            items: context.read<MetaDataCubit>().state.countries,
-            onChanged: (value) {
-              context
-                  .read<ProfileImageAndCountryCubit>()
-                  .onCountrySelected(value?.id);
+          child: BlocBuilder<MetaDataCubit, MetaDataState>(
+            buildWhen: (previous, current) =>
+                previous.countries != current.countries,
+            builder: (context, state) {
+              return CountryDropDown(
+                hint: 'Country',
+                items: state.countries,
+                onChanged: (value) {
+                  context
+                      .read<ProfileImageAndCountryCubit>()
+                      .onCountrySelected(value?.id);
+                },
+              );
             },
           ),
         );
