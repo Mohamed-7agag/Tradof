@@ -107,63 +107,6 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     );
   }
 
-//! call them in the same time
-  Future<void> fetchAllData() async {
-    await Future.wait([
-      getCountries(),
-      getLanguages(),
-      getSpecializations(),
-    ]);
-  }
-
-  //! get Languages
-  Future<void> getLanguages() async {
-    emit(state.copyWith(status: RegisterationStatus.loading));
-    final result = await _registerationRepo.getLanguages();
-    result.fold(
-      (failure) => emit(state.copyWith(
-        status: RegisterationStatus.error,
-        errorMessage: failure.errMessage,
-      )),
-      (languages) => emit(state.copyWith(
-        status: RegisterationStatus.getLanguages,
-        languages: languages,
-      )),
-    );
-  }
-
-  //! get Countries
-  Future<void> getCountries() async {
-    emit(state.copyWith(status: RegisterationStatus.loading));
-    final result = await _registerationRepo.getCountries();
-    result.fold(
-      (failure) => emit(state.copyWith(
-        status: RegisterationStatus.error,
-        errorMessage: failure.errMessage,
-      )),
-      (countries) => emit(state.copyWith(
-        status: RegisterationStatus.getCountries,
-        countries: countries,
-      )),
-    );
-  }
-
-  //! get Specializations
-  Future<void> getSpecializations() async {
-    emit(state.copyWith(status: RegisterationStatus.loading));
-    final result = await _registerationRepo.getSpecaialization();
-    result.fold(
-      (failure) => emit(state.copyWith(
-        status: RegisterationStatus.error,
-        errorMessage: failure.errMessage,
-      )),
-      (specializations) => emit(state.copyWith(
-        status: RegisterationStatus.getSpecializations,
-        specializations: specializations,
-      )),
-    );
-  }
-
   Future<FreelancerRegisterRequestModel>
       _collectFreelancerRegisterationData() async {
     List<int> specializationIds = state.selectedSpecializations

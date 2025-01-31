@@ -4,9 +4,6 @@ enum RegisterationStatus {
   initial,
   loading,
   success,
-  getCountries,
-  getLanguages,
-  getSpecializations,
   error,
 }
 
@@ -16,10 +13,6 @@ extension RegisterationStepX on RegisterationStatus {
   bool get isLoading => this == RegisterationStatus.loading;
   bool get isRegistered => this == RegisterationStatus.success;
   bool get isError => this == RegisterationStatus.error;
-  bool get isGetCountries => this == RegisterationStatus.getCountries;
-  bool get isGetLanguages => this == RegisterationStatus.getLanguages;
-  bool get isGetSpecializations =>
-      this == RegisterationStatus.getSpecializations;
 }
 
 class RegisterationState extends Equatable {
@@ -35,9 +28,6 @@ class RegisterationState extends Equatable {
   final String jobTitle;
 
   final File? profileImage;
-  final List<LanguageModel> languages;
-  final List<CountryModel> countries;
-  final List<SpecializationModel> specializations;
 
   final List<LanguagePairModel> selectedLanguagePair;
   final List<SpecializationModel> selectedSpecializations;
@@ -64,9 +54,6 @@ class RegisterationState extends Equatable {
     this.selectedSpecializations = const [],
     this.selectedIndustriesServed = const [],
     this.selectedPreferedLanguages = const [],
-    this.languages = const [],
-    this.countries = const [],
-    this.specializations = const [],
   });
 
   RegisterationState copyWith({
@@ -106,9 +93,6 @@ class RegisterationState extends Equatable {
       jobTitle: jobTitle ?? this.jobTitle,
       locationCompany: locationCompany ?? this.locationCompany,
       profileImage: profileImage ?? this.profileImage,
-      languages: languages ?? this.languages,
-      countries: countries ?? this.countries,
-      specializations: specializations ?? this.specializations,
       selectedLanguagePair: selectedLanguagePair ?? this.selectedLanguagePair,
       selectedSpecializations:
           selectedSpecializations ?? this.selectedSpecializations,
@@ -134,9 +118,6 @@ class RegisterationState extends Equatable {
         profileImage ?? '',
         jobTitle,
         locationCompany,
-        languages,
-        countries,
-        specializations,
         selectedLanguagePair,
         selectedSpecializations,
         selectedIndustriesServed,

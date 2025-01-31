@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_text_field.dart';
@@ -11,6 +12,9 @@ import 'package:tradof/features/auth/presentation/widgets/industries_served_tabl
 import 'package:tradof/features/auth/presentation/widgets/prefered_languages_table.dart';
 import 'package:tradof/features/auth/presentation/widgets/profile_image_section.dart';
 
+import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
+import '../../../../core/utils/widgets/custom_loading_dialog.dart';
+import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../logic/freelancer_registeration_cubit.dart';
 import '../widgets/company_registeration_button.dart';
 
@@ -26,6 +30,7 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
   late final TextEditingController locationCompanyController;
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => loadingDialog(context));
     jobTitleController = TextEditingController();
     locationCompanyController = TextEditingController();
     super.initState();
@@ -45,70 +50,83 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
         BlocProvider(create: (context) => TablesCubit()),
         BlocProvider(create: (context) => ProfileImageAndCountryCubit()),
       ],
-      child: Column(
-        children: [
-          ProfileImageSection(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              children: [
-                SlideInRight(
-                  from: 400,
-                  child: CustomTextField(
-                    labelText: 'Job Title',
-                    labelColor: AppColors.white,
-                    controller: jobTitleController,
-                    keyboardType: TextInputType.text,
-                    outlineBorder: true,
+      child: BlocListener<MetaDataCubit, MetaDataState>(
+        listener: (context, state) {
+          if (state.status.isError) {
+            context.pop();
+            context.pop();
+            errorToast(context, 'Error', state.errorMessage);
+          } else if (state.languages.isNotEmpty &&
+              state.countries.isNotEmpty &&
+              state.specializations.isNotEmpty) {
+            context.pop();
+          }
+        },
+        child: Column(
+          children: [
+            ProfileImageSection(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                children: [
+                  SlideInRight(
+                    from: 400,
+                    child: CustomTextField(
+                      labelText: 'Job Title',
+                      labelColor: AppColors.white,
+                      controller: jobTitleController,
+                      keyboardType: TextInputType.text,
+                      outlineBorder: true,
+                    ),
                   ),
-                ),
-                verticalSpace(12),
-                CountryDropDownSection(),
-                verticalSpace(12),
-                SlideInRight(
-                  from: 400,
-                  delay: Duration(milliseconds: 250),
-                  child: CustomTextField(
-                    labelText: 'Location Company',
-                    labelColor: AppColors.white,
-                    controller: locationCompanyController,
-                    keyboardType: TextInputType.text,
-                    outlineBorder: true,
+                  verticalSpace(12),
+                  CountryDropDownSection(),
+                  verticalSpace(12),
+                  SlideInRight(
+                    from: 400,
+                    delay: Duration(milliseconds: 250),
+                    child: CustomTextField(
+                      labelText: 'Location Company',
+                      labelColor: AppColors.white,
+                      controller: locationCompanyController,
+                      keyboardType: TextInputType.text,
+                      outlineBorder: true,
+                    ),
                   ),
-                ),
-                verticalSpace(28),
-                SlideInLeft(
-                  from: 400,
-                  delay: Duration(milliseconds: 375),
-                  child: PreferedLanguagesTable(),
-                ),
-                verticalSpace(28),
-                SlideInLeft(
-                  from: 400,
-                  delay: Duration(milliseconds: 500),
-                  child: IndustriesServedTable(),
-                ),
-                verticalSpace(40),
-                BlocBuilder<ProfileImageAndCountryCubit,
-                    ProfileImageAndCountryState>(
-                  builder: (context, state) {
-                    return SlideInUp(
-                      from: 400,
-                      delay: Duration(milliseconds: 625),
-                      child: CompanyRegisterationButton(
-                        countryId: state.countryId,
-                        imageUrl: state.imagePicked,
-                        jobTitleController: jobTitleController,
-                        locationCompanyController: locationCompanyController,
-                      ),
-                    );
-                  },
-                ),
-                verticalSpace(20),
-              ],
+                  verticalSpace(28),
+                  SlideInLeft(
+                    from: 400,
+                    delay: Duration(milliseconds: 375),
+                    child: PreferedLanguagesTable(),
+                  ),
+                  verticalSpace(28),
+                  SlideInLeft(
+                    from: 400,
+                    delay: Duration(milliseconds: 500),
+                    child: IndustriesServedTable(),
+                  ),
+                  verticalSpace(40),
+                  BlocBuilder<ProfileImageAndCountryCubit,
+                      ProfileImageAndCountryState>(
+                    builder: (context, state) {
+                      return SlideInUp(
+                        from: 400,
+                        delay: Duration(milliseconds: 625),
+                        child: CompanyRegisterationButton(
+                          countryId: state.countryId,
+                          imageUrl: state.imagePicked,
+                          jobTitleController: jobTitleController,
+                          locationCompanyController: locationCompanyController,
+                        ),
+                      );
+                    },
+                  ),
+                  verticalSpace(20),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

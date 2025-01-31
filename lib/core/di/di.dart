@@ -11,6 +11,8 @@ import '../../features/projects/data/repo/project_repo.dart';
 import '../../features/projects/data/repo/project_repo_impl.dart';
 import '../api/api_service.dart';
 import '../api/dio_factory.dart';
+import '../utils/repo/meta_data_repo.dart';
+import '../utils/repo/meta_data_repo_impl.dart';
 
 final getIt = GetIt.instance;
 
@@ -20,7 +22,9 @@ void setupGetIt() {
   getIt.registerLazySingleton<ApiServices>(() => ApiServices(dio: dio));
 
   // AuthRepo
-  getIt.registerFactory<AuthRepo>(() => AuthRepoImpl(apiServices: getIt()));
+  getIt.registerFactory<AuthRepo>(
+    () => AuthRepoImpl(apiServices: getIt()),
+  );
 
   // Registeration Repo
   getIt.registerFactory<RegisterationRepo>(
@@ -29,6 +33,10 @@ void setupGetIt() {
   // project repo
   getIt.registerFactory<ProjectRepo>(
     () => ProjectRepoImpl(apiServices: getIt()),
+  );
+  // MetaData Repo
+  getIt.registerFactory<MetaDataRepo>(
+    () => MetaDataRepoImpl(apiServices: getIt()),
   );
 
   // profile company repo

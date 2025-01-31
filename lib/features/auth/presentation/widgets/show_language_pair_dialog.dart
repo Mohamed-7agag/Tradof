@@ -7,17 +7,16 @@ import 'package:tradof/features/auth/data/model/language_model.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
+import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
-import 'language_pair_drop_down.dart';
 import '../../data/model/language_pair_model.dart';
-import '../logic/registeration_cubit/registeration_cubit.dart';
 import '../logic/tables_cubit/tables_cubit.dart';
+import 'language_pair_drop_down.dart';
 
 showLanguagePairDialog(BuildContext context) {
   final cubit = context.read<TablesCubit>();
   LanguageModel? fromLanguage, toLanguage;
-  List<LanguageModel> languages =
-      context.read<RegisterationCubit>().state.languages;
+  List<LanguageModel> languages = context.read<MetaDataCubit>().state.languages;
   languages.isNullOrEmpty()
       ? AwesomeDialog(
           context: context,
