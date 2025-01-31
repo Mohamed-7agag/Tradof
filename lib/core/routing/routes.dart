@@ -4,6 +4,6 @@ abstract class Routes {
   static const String forgetPasswordPageViewRoute = "/forgetPasswordPageView";
   static const String createAccountPageViewRoute = "/createAccountPageView";
   static const String verificationViewRoute = "/verificationView";
-  static const String bottomNavBarViewRoute = "/bottomNavBarFreelancerView";
+  static const String bottomNavBarFreelancerViewRoute = "/bottomNavBarFreelancerView";
   static const String bottomNavBarCompanyViewRoute = "/bottomNavBarCompanyView";
 }

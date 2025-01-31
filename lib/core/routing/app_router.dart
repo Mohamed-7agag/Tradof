@@ -17,7 +17,7 @@ import '../helpers/navigation_handler.dart';
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationHandler.navigatorKey,
-    initialLocation: '/bottomNavBarCompanyView',
+    initialLocation: '/welcomeView',
     routes: [
       GoRoute(
         name: Routes.welcomeViewRoute,
@@ -54,8 +54,8 @@ class AppRouter {
         builder: (context, state) => VerificationView(),
       ),
       GoRoute(
-        name: Routes.bottomNavBarViewRoute,
-        path: '/bottomNavBarView',
+        name: Routes.bottomNavBarFreelancerViewRoute,
+        path: '/bottomNavBarFreelancerView',
         builder: (context, state) => BottomNavBarFreelancerView(),
       ),
       GoRoute(

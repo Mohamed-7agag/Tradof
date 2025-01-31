@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/cache/cache_helper.dart';
@@ -23,12 +25,15 @@ class AuthCubit extends Cubit<AuthState> {
         status: AuthStatus.error,
         errorMessage: failure.errMessage,
       ));
+      log(failure.errMessage);
     }, (response) {
-      emit(state.copyWith(
-        status: AuthStatus.login,
-        email: email,
-        password: password,
-      ));
+      emit(
+        state.copyWith(
+          status: AuthStatus.login,
+          email: email,
+          password: password,
+        ),
+      );
       _cacheUserData(response);
     });
   }

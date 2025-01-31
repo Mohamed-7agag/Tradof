@@ -9,4 +9,8 @@ abstract class EndPoint {
   static const String getCountries = 'country';
   static const String getLanguages = 'language';
   static const String getSpecializations = 'specialization';
+
+  static  String getCompanybyId(String id) {
+      return 'Company/$id';
+  }
 }

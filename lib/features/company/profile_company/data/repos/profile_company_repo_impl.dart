@@ -38,4 +38,42 @@ class ProfileCompanyRepoImpl implements ProfileCompanyRepo {
       return specializations;
     });
   }
+
+  @override
+  Future<Either<Failure, SpecializationModel>> addIndustriesService(
+      {required SpecializationModel specializationModel}) {
+    // TODO: implement addIndustriesService
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, LanguageModel>> addPreferedLanguages(
+      {required LanguageModel languageModel}) {
+    // TODO: implement addPreferedLanguages
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, String>> deleteIndustriesService(
+      {required SpecializationModel specializationModel}) {
+    // TODO: implement deleteIndustriesService
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, String>> deletePreferedLanguages(
+      {required LanguageModel languageModel}) {
+    // TODO: implement deletePreferedLanguages
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, String>> getCompanyProfrile({required String id}) async {
+    return handleRequest(() async {
+      final response = await _apiServices.get(
+        EndPoint.getCompanybyId(id),
+      );
+      return response;
+    });
+  }
 }

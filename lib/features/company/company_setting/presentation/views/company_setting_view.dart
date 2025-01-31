@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/features/company/company_setting/presentation/widgets/company_setting_app_bar.dart';
 import 'package:tradof/features/company/company_setting/presentation/widgets/setting_section1.dart';
 import 'package:tradof/features/company/company_setting/presentation/widgets/setting_section2.dart';
@@ -32,7 +28,6 @@ class CompanySettingView extends StatelessWidget {
                   verticalSpace(26),
                   SubscriptionPlanAndTimer(),
                   verticalSpace(20),
-                  
                   verticalSpace(20),
                 ],
               ),
