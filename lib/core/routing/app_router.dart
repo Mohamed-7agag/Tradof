@@ -12,26 +12,28 @@ import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
 import '../../welcome_view.dart';
+import '../cache/cache_helper.dart';
 import '../helpers/navigation_handler.dart';
+import '../utils/app_constants.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationHandler.navigatorKey,
     initialLocation: '/loginView',
-    // redirect: (context, state) {
-    //   if (CacheHelper.getBool(AppConstants.firstTime) == true) {
-    //     if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
-    //       //return Routes.freelancerBottomNavBarViewRoute;
-    //       return Routes.companyBottomNavBarViewRoute;
-    //     } else if (CacheHelper.getString(AppConstants.role) == 'Company') {
-    //       return Routes.companyBottomNavBarViewRoute;
-    //     } else {
-    //       return Routes.loginViewRoute;
-    //     }
-    //   }
-    //   return Routes.welcomeViewRoute;
-    // },
+    redirect: (context, state) {
+      if (CacheHelper.getBool(AppConstants.firstTime) == true) {
+        if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
+          //return Routes.freelancerBottomNavBarViewRoute;
+          return Routes.companyBottomNavBarViewRoute;
+        } else if (CacheHelper.getString(AppConstants.role) == 'Company') {
+          return Routes.companyBottomNavBarViewRoute;
+        } else {
+          return Routes.loginViewRoute;
+        }
+      }
+      return Routes.welcomeViewRoute;
+    },
     routes: [
       GoRoute(
         name: Routes.welcomeViewRoute,
