@@ -33,7 +33,6 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
   void initState() {
    BlocProvider.of<ProfileCompanyCubit>(context).getCompanyProfile();
     super.initState();
-   
   }
 
   void _onItemTapped(int index) {

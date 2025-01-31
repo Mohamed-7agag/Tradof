@@ -74,7 +74,7 @@ class AppRouter {
           providers: [
             BlocProvider(
               create: (context) =>
-                  ProfileCompanyCubit(getIt())..getCompanyProfile(),
+                  ProfileCompanyCubit(getIt()),
             ),
             BlocProvider(
               create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
