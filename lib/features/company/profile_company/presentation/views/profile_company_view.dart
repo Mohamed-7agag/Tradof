@@ -17,18 +17,28 @@ class ProfileCompanyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TablesCubit(),
-      child: Column(
-        children: [
-          ProfileAppbar(),
-          verticalSpace(15),
-          RatingAndReviews(),
-          verticalSpace(20),
-          SocialLinks(),
-          verticalSpace(20),
-          PreferredLanguage(),
-          verticalSpace(23),
-          IndustriesServed(),
-        ],
+      child: Expanded(
+        child: Column(
+          children: [
+            ProfileAppbar(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    verticalSpace(15),
+                    RatingAndReviews(),
+                    verticalSpace(20),
+                    SocialLinks(),
+                    verticalSpace(20),
+                    //  PreferredLanguage(),
+                    verticalSpace(23),
+                    IndustriesServed(),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

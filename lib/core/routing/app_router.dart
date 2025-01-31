@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tradof/core/cache/cache_helper.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/utils/app_constants.dart';
@@ -14,15 +15,13 @@ import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
 import '../../welcome_view.dart';
-import '../cache/cache_helper.dart';
 import '../helpers/navigation_handler.dart';
-import '../utils/app_constants.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationHandler.navigatorKey,
-    initialLocation: '/welcomeView',
+    initialLocation: _initialLocation(),
     routes: [
       GoRoute(
         name: Routes.welcomeViewRoute,
@@ -71,11 +70,26 @@ class AppRouter {
       GoRoute(
         name: Routes.bottomNavBarCompanyViewRoute,
         path: '/bottomNavBarCompanyView',
-        builder: (context, state) => BlocProvider(
-          create: (context) => ProfileCompanyCubit(getIt())..getCompanyProfile(id: CacheHelper.getString( AppConstants.userId)),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  ProfileCompanyCubit(getIt())..getCompanyProfile(),
+            ),
+            BlocProvider(
+              create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
+            ),
+          ],
           child: CompanyBottomNavBarView(),
         ),
       )
     ],
   );
+  
+  static String _initialLocation() {
+    if(CacheHelper.getSecuredString(AppConstants.userId) != null){
+      return '/bottomNavBarCompanyView';
+    }
+    return '/welcomeView';
+  }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/company_setting_view.dart';
+import 'package:tradof/features/company/profile_company/presentation/logic/cubit/profile_company_cubit.dart';
 import 'package:tradof/features/company/profile_company/presentation/views/profile_company_view.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
 import 'package:tradof/features/projects/presentation/views/create_project_view.dart';
@@ -26,6 +28,13 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
     FreelanceDashbordView(),
     CompanySettingView(),
   ];
+
+  @override
+  void initState() {
+   BlocProvider.of<ProfileCompanyCubit>(context).getCompanyProfile();
+    super.initState();
+   
+  }
 
   void _onItemTapped(int index) {
     setState(() => _selectedIndex = index);

@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:tradof/core/api/api_service.dart';
 import 'package:tradof/core/api/end_points.dart';
+import 'package:tradof/core/cache/cache_helper.dart';
 import 'package:tradof/core/errors/failure.dart';
 import 'package:tradof/core/helpers/handle_request_method.dart';
+import 'package:tradof/core/utils/app_constants.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';
 import 'package:tradof/features/auth/data/model/specialization_model.dart';
 import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
@@ -13,7 +15,6 @@ class ProfileCompanyRepoImpl implements ProfileCompanyRepo {
 
   ProfileCompanyRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
- 
 
   @override
   Future<Either<Failure, SpecializationModel>> addIndustriesService(
@@ -24,9 +25,16 @@ class ProfileCompanyRepoImpl implements ProfileCompanyRepo {
 
   @override
   Future<Either<Failure, LanguageModel>> addPreferedLanguages(
-      {required LanguageModel languageModel}) {
-    // TODO: implement addPreferedLanguages
-    throw UnimplementedError();
+      {required LanguageModel languageModel}) async {
+    return handleRequest(() async {
+      final response = await _apiServices.post(
+        EndPoint.addPreferredLanguage(CacheHelper.getString(AppConstants.userId), languageModel.id.toString()),
+        data: {
+          'languageId': languageModel.id,
+        },
+      );
+      return LanguageModel.fromJson(response);
+    });
   }
 
   @override
@@ -38,13 +46,18 @@ class ProfileCompanyRepoImpl implements ProfileCompanyRepo {
 
   @override
   Future<Either<Failure, String>> deletePreferedLanguages(
-      {required LanguageModel languageModel}) {
-    // TODO: implement deletePreferedLanguages
-    throw UnimplementedError();
+      {required LanguageModel languageModel}) async {
+    return handleRequest(() async {
+      final response = await _apiServices.delete(
+        EndPoint.deletePreferredLanguage(CacheHelper.getString(AppConstants.userId), languageModel.id.toString()),
+      );
+      return response['message'] ?? 'Language deleted successfully';
+    });
   }
 
   @override
-  Future<Either<Failure, CompanyModel>> getCompanyProfrile({required String id}) async {
+  Future<Either<Failure, CompanyModel>> getCompanyProfrile(
+      {required String id}) async {
     return handleRequest(() async {
       final response = await _apiServices.get(
         EndPoint.getCompanybyId(id),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeDateFormatting('en_US', null);
   setupGetIt();
-  Bloc.observer = MyBlocObserver();
+//  Bloc.observer = MyBlocObserver();
   await Future.wait([
     CacheHelper.init(),
     ScreenUtil.ensureScreenSize(),
@@ -22,7 +21,7 @@ void main() async {
   ]);
 
   runApp(const MyApp());
- 
+
   // runApp(
   //   DevicePreview(
   //     enabled: false,
