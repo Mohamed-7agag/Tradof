@@ -32,10 +32,12 @@ dependencies:
   awesome_dialog: ^3.2.1
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
+  date_picker_plus: ^4.1.0
   device_preview: ^1.2.0
   dio: ^5.7.0
   equatable: ^2.0.7
   expandable_page_view: ^1.0.17
+  file_picker: ^8.3.1
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
@@ -50,6 +52,7 @@ dependencies:
   google_fonts: ^6.2.1
   image_picker: ^1.1.2
   internet_connection_checker: ^3.0.1
+  intl: ^0.19.0
   intl_phone_field: ^3.2.0
   lazy_load_indexed_stack: ^1.2.1
   percent_indicator: ^4.2.4

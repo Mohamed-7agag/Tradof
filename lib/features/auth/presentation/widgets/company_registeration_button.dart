@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +22,7 @@ class CompanyRegisterationButton extends StatelessWidget {
     required this.locationCompanyController,
   });
   final int? countryId;
-  final String? imageUrl;
+  final File? imageUrl;
   final TextEditingController jobTitleController;
   final TextEditingController locationCompanyController;
   @override
@@ -65,7 +67,7 @@ class CompanyRegisterationButton extends StatelessWidget {
                         'Please select at least one industry served');
                   } else {
                     context.read<RegisterationCubit>().companyData(
-                          imageUrl ?? '',
+                          imageUrl ?? File(''),
                           jobTitleController.text.trim(),
                           countryId!,
                           locationCompanyController.text.trim(),

@@ -6,21 +6,22 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/company_setting_view.dart';
 import 'package:tradof/features/company/profile_company/presentation/views/profile_company_view.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
+import 'package:tradof/features/projects/presentation/views/create_project_view.dart';
 
-class BottomNavBarCompanyView extends StatefulWidget {
-  const BottomNavBarCompanyView({super.key});
+class CompanyBottomNavBarView extends StatefulWidget {
+  const CompanyBottomNavBarView({super.key});
 
   @override
-  State<BottomNavBarCompanyView> createState() =>
-      _BottomNavBarCompanyViewState();
+  State<CompanyBottomNavBarView> createState() =>
+      _CompanyBottomNavBarViewState();
 }
 
-class _BottomNavBarCompanyViewState extends State<BottomNavBarCompanyView> {
+class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
   int _selectedIndex = 0;
 
   final List<Widget> views = [
     FreelanceDashbordView(),
-    FreelanceDashbordView(),
+    CreateProjectView(),
     ProfileCompanyView(),
     FreelanceDashbordView(),
     CompanySettingView(),

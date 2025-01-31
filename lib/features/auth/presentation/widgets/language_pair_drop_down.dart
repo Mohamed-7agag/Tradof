@@ -11,10 +11,14 @@ class LanguagePairDropDown extends StatefulWidget {
     required this.hint,
     required this.items,
     this.onChanged,
+    this.borderColor,
+    this.hintColor,
   });
   final String hint;
   final List<LanguageModel> items;
   final void Function(LanguageModel?)? onChanged;
+  final Color? borderColor;
+  final Color? hintColor;
 
   @override
   State<LanguagePairDropDown> createState() => _LanguagePairDropDownState();
@@ -28,11 +32,11 @@ class _LanguagePairDropDownState extends State<LanguagePairDropDown> {
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.white),
+        border: Border.all(color: widget.borderColor ?? AppColors.white),
       ),
       child: DropdownButton<LanguageModel>(
-        iconEnabledColor: AppColors.white,
-        dropdownColor: AppColors.darkGrey,
+        iconEnabledColor: widget.borderColor ?? AppColors.white,
+        dropdownColor: widget.borderColor != null ? AppColors.white : AppColors.darkGrey,
         isExpanded: true,
         menuWidth: 1.sw - 70,
         underline: SizedBox.shrink(),
@@ -40,7 +44,8 @@ class _LanguagePairDropDownState extends State<LanguagePairDropDown> {
         value: selectedLanguage,
         hint: Text(
           widget.hint,
-          style: AppStyle.robotoRegular14.copyWith(color: AppColors.white),
+          style: AppStyle.robotoRegular14
+              .copyWith(color: widget.hintColor ?? AppColors.white),
         ),
         items: widget.items
             .map(
@@ -49,7 +54,7 @@ class _LanguagePairDropDownState extends State<LanguagePairDropDown> {
                 child: Text(
                   '${item.name} (${item.code})',
                   style: AppStyle.robotoRegular15.copyWith(
-                    color: AppColors.white,
+                    color: widget.hintColor ?? AppColors.white,
                   ),
                 ),
               ),

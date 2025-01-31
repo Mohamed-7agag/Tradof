@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tradof/core/cache/cache_helper.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 import 'package:animate_do/animate_do.dart';
+
+import 'core/utils/app_constants.dart';
+
 class WelcomeView extends StatelessWidget {
   const WelcomeView({super.key});
 
@@ -19,8 +23,8 @@ class WelcomeView extends StatelessWidget {
         children: [
           Spacer(flex: 3),
           BounceInDown(
-            from: 400,
-            child: SvgPicture.asset('assets/images/icon.svg', width: 100.w)),
+              from: 400,
+              child: SvgPicture.asset('assets/images/icon.svg', width: 100.w)),
           verticalSpace(20),
           Text(
             'TRADOF',
@@ -38,6 +42,7 @@ class WelcomeView extends StatelessWidget {
             from: 400,
             child: IconButton(
               onPressed: () {
+                CacheHelper.setData(key: AppConstants.firstTime, value: true);
                 context.goNamed(Routes.loginViewRoute);
               },
               icon: Icon(

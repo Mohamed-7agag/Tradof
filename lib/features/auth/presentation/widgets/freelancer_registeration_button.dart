@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +17,7 @@ class FreelancerRegisterationButton extends StatelessWidget {
   const FreelancerRegisterationButton(
       {super.key, required this.countryId, this.imageUrl});
   final int? countryId;
-  final String? imageUrl;
+  final File? imageUrl;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterationCubit, RegisterationState>(
@@ -53,7 +55,7 @@ class FreelancerRegisterationButton extends StatelessWidget {
                         'Please select at least one specialization');
                   } else {
                     context.read<RegisterationCubit>().freelancerData(
-                          imageUrl ?? '',
+                          imageUrl ?? File(''),
                           countryId!,
                           context
                               .read<TablesCubit>()

@@ -1,15 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileImageAndCountryState {
   final int? countryId;
-  final String? imagePicked;
+  final File? imagePicked;
   ProfileImageAndCountryState({
     this.countryId,
     this.imagePicked,
   });
   ProfileImageAndCountryState copyWith({
     int? countryId,
-    String? imagePicked,
+    File? imagePicked,
   }) {
     return ProfileImageAndCountryState(
       countryId: countryId ?? this.countryId,
@@ -26,7 +28,7 @@ class ProfileImageAndCountryCubit extends Cubit<ProfileImageAndCountryState> {
     emit(state.copyWith(countryId: countryId));
   }
 
-  void onImagePicked(String? image) {
+  void onImagePicked(File? image) {
     emit(state.copyWith(imagePicked: image));
   }
 }
