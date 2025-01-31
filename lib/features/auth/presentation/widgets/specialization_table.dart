@@ -8,7 +8,7 @@ import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/features/auth/data/model/specialization_model.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 
-import '../logic/registeration_cubit/registeration_cubit.dart';
+import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
 class SpecializationTable extends StatelessWidget {
   const SpecializationTable({super.key});
@@ -94,7 +94,7 @@ class SpecializationTable extends StatelessWidget {
   _showSpecializationDialog(BuildContext context) {
     final cubit = context.read<TablesCubit>();
     final List<SpecializationModel> specializations =
-        context.read<RegisterationCubit>().state.specializations;
+        context.read<MetaDataCubit>().state.specializations;
     showDialog(
       context: context,
       builder: (context) {

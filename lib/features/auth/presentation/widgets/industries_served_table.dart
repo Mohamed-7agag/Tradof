@@ -5,9 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
+import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
 import '../../data/model/specialization_model.dart';
-import '../logic/registeration_cubit/registeration_cubit.dart';
 import '../logic/tables_cubit/tables_cubit.dart';
 
 class IndustriesServedTable extends StatelessWidget {
@@ -94,7 +94,7 @@ class IndustriesServedTable extends StatelessWidget {
   _showIndusteriesServedDialog(BuildContext context) {
     final cubit = context.read<TablesCubit>();
     final List<SpecializationModel> industriesServed =
-        context.read<RegisterationCubit>().state.specializations;
+        context.read<MetaDataCubit>().state.specializations;
     showDialog(
       context: context,
       builder: (context) {

@@ -7,7 +7,7 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';
 
-import '../logic/registeration_cubit/registeration_cubit.dart';
+import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../logic/tables_cubit/tables_cubit.dart';
 
 class PreferedLanguagesTable extends StatelessWidget {
@@ -111,7 +111,7 @@ class PreferedLanguagesTable extends StatelessWidget {
   _showPreferedLanguageDialog(BuildContext context) {
     final cubit = context.read<TablesCubit>();
     final List<LanguageModel> preferedLanguages =
-        context.read<RegisterationCubit>().state.languages;
+        context.read<MetaDataCubit>().state.languages;
     showDialog(
       context: context,
       builder: (context) {

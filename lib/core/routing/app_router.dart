@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tradof/core/cache/cache_helper.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/views/bottom_nav_bar_company_view.dart';
@@ -14,25 +13,25 @@ import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
 import '../../welcome_view.dart';
 import '../helpers/navigation_handler.dart';
-import '../utils/app_constants.dart';
+import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationHandler.navigatorKey,
     initialLocation: '/loginView',
-    redirect: (context, state) {
-      if (CacheHelper.getBool(AppConstants.firstTime) == true) {
-        if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
-          //return Routes.freelancerBottomNavBarViewRoute;
-          return Routes.companyBottomNavBarViewRoute;
-        } else if (CacheHelper.getString(AppConstants.role) == 'Company') {
-          return Routes.companyBottomNavBarViewRoute;
-        } else {
-          return Routes.loginViewRoute;
-        }
-      }
-      return Routes.welcomeViewRoute;
-    },
+    // redirect: (context, state) {
+    //   if (CacheHelper.getBool(AppConstants.firstTime) == true) {
+    //     if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
+    //       //return Routes.freelancerBottomNavBarViewRoute;
+    //       return Routes.companyBottomNavBarViewRoute;
+    //     } else if (CacheHelper.getString(AppConstants.role) == 'Company') {
+    //       return Routes.companyBottomNavBarViewRoute;
+    //     } else {
+    //       return Routes.loginViewRoute;
+    //     }
+    //   }
+    //   return Routes.welcomeViewRoute;
+    // },
     routes: [
       GoRoute(
         name: Routes.welcomeViewRoute,
@@ -58,8 +57,13 @@ class AppRouter {
       GoRoute(
         name: Routes.createAccountPageViewRoute,
         path: '/createAccountPageView',
-        builder: (context, state) => BlocProvider(
-          create: (context) => RegisterationCubit(getIt())..fetchAllData(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => RegisterationCubit(getIt())),
+            BlocProvider(
+              create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
+            ),
+          ],
           child: CreateAccountPageView(),
         ),
       ),
