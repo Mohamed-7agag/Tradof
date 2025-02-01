@@ -12,4 +12,26 @@ abstract class EndPoint {
   static const String getSpecializations = 'specialization';
   // project
   static const String createProject = 'project';
+
+  //company
+
+  static String getCompanybyId(String id) {
+    return 'Company/$id';
+  }
+
+  static String addPreferredLanguage(String companyId, String languageId) {
+    return 'Company/AddLanguage/$companyId?languageId=$languageId';
+  }
+
+  static String deletePreferredLanguage(String companyId, String languageId) {
+    return 'Company/RemoveLanguage/$companyId?languageId=$languageId';
+  }
+
+  static String addIndustries(String companyId, String industryId) {
+    return 'Company/AddIndustry/$companyId?specializationId=$industryId';
+  }
+
+  static String deleteIndustries(String companyId, String industryId) {
+    return 'Company/RemoveIndustry/$companyId?specializationId=$industryId';
+  }
 }

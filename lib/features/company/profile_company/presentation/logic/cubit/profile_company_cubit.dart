@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/cache/cache_helper.dart';
 import 'package:tradof/core/utils/app_constants.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';

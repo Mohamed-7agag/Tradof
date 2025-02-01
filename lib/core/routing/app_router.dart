@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/company_bottom_nav_bar_cubit.dart';
+import 'package:tradof/features/company/profile_company/presentation/logic/cubit/profile_company_cubit.dart';
 import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
@@ -85,8 +86,18 @@ class AppRouter {
         path: '/companyBottomNavBarView',
         builder: (context, state) {
           final index = state.extra as int?;
-          return BlocProvider(
-            create: (context) => CompanyBottomNavBarCubit(),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => CompanyBottomNavBarCubit(),
+              ),
+              BlocProvider(
+                create: (context) => MetaDataCubit(getIt()),
+              ),
+              BlocProvider(
+                create: (context) => ProfileCompanyCubit(getIt())..getCompanyProfile(),
+              ),
+            ],
             child: CompanyBottomNavBarView(initialIndex: index ?? 0),
           );
         },
