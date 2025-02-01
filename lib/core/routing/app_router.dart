@@ -98,7 +98,7 @@ class AppRouter {
                 create: (context) => ProfileCompanyCubit(getIt())..getCompanyProfile(),
               ),
             ],
-            child: CompanyBottomNavBarView(initialIndex: index ?? 0),
+            child: CompanyBottomNavBarView(initialIndex: index ?? 2),
           );
         },
       )

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 
-import 'package:tradof/features/company/profile_company/presentation/widgets/industries_served.dart';
-import 'package:tradof/features/company/profile_company/presentation/widgets/preferred_language.dart';
-
-import 'package:tradof/features/company/profile_company/presentation/widgets/profile_appbar.dart';
-import 'package:tradof/features/company/profile_company/presentation/widgets/rating_and_reviews.dart';
-import 'package:tradof/features/company/profile_company/presentation/widgets/social_links.dart';
+import '../../../../auth/presentation/logic/tables_cubit/tables_cubit.dart';
+import '../widgets/industries_served.dart';
+import '../widgets/preferred_language.dart';
+import '../widgets/profile_appbar.dart';
+import '../widgets/rating_and_reviews.dart';
+import '../widgets/social_links.dart';
 
 class ProfileCompanyView extends StatelessWidget {
   const ProfileCompanyView({super.key});
