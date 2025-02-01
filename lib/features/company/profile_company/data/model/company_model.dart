@@ -13,14 +13,11 @@ class CompanyModel extends Equatable {
   final String jobTitle;
   final int ratingSum;
   final int reviewCount;
-  final String profileImageUrl;
   final int countryId;
+  final String profileImageUrl;
   final List<SpecializationModel> specializations;
   final List<LanguageModel> preferredLanguages;
-  final List<dynamic> socialMedia;
-  final double netPrice;
-  final DateTime subscriptionStartDate;
-  final DateTime subscriptionEndDate;
+  final List<dynamic> socialMedia; // dynamic must be changes
 
   const CompanyModel({
     required this.id,
@@ -37,34 +34,29 @@ class CompanyModel extends Equatable {
     required this.countryId,
     required this.specializations,
     required this.preferredLanguages,
-    this.socialMedia = const [],
-    this.netPrice = 0,
-    required this.subscriptionStartDate,
-    required this.subscriptionEndDate,
+    required this.socialMedia,
   });
 
   factory CompanyModel.fromJson(Map<String, dynamic> json) => CompanyModel(
-        id: json['id'] as String,
-        companyAddress: json['companyAddress'] as String,
-        companyName: json['companyName'] as String,
-        firstName: json['firstName'] as String,
-        lastName: json['lastName'] as String,
-        email: json['email'] as String,
-        phone: json['phone'] as String,
-        jobTitle: json['jobTitle'] as String,
-        ratingSum: json['ratingSum'] as int,
-        reviewCount: json['reviewCount'] as int,
-        profileImageUrl: json['profileImageUrl'] as String,
-        countryId: json['countryId'] as int,
-        specializations: List<SpecializationModel>.from(json['specializations']
-            .map((x) => SpecializationModel.fromJson(x))),
+        id: json['id'],
+        companyAddress: json['companyAddress'],
+        companyName: json['companyName'],
+        firstName: json['firstName'],
+        lastName: json['lastName'],
+        email: json['email'],
+        phone: json['phone'],
+        jobTitle: json['jobTitle'],
+        ratingSum: json['ratingSum'],
+        reviewCount: json['reviewCount'],
+        profileImageUrl: json['profileImageUrl'],
+        countryId: json['countryId'],
+        specializations: List<SpecializationModel>.from(
+          json['specializations'].map((x) => SpecializationModel.fromJson(x)),
+        ),
         preferredLanguages: List<LanguageModel>.from(
-            json['preferredLanguages'].map((x) => LanguageModel.fromJson(x))),
-        socialMedia: json['socialMedia'] ?? [],
-        netPrice: 0, // Default value as it's not in the response
-        subscriptionStartDate: DateTime.now(), // Default to current date
-        subscriptionEndDate: DateTime.now()
-            .add(Duration(days: 365)), // Default to 1 year from now
+          json['preferredLanguages'].map((x) => LanguageModel.fromJson(x)),
+        ),
+        socialMedia: json['socialMedia'],
       );
 
   @override
@@ -84,8 +76,5 @@ class CompanyModel extends Equatable {
         specializations,
         preferredLanguages,
         socialMedia,
-        netPrice,
-        subscriptionStartDate,
-        subscriptionEndDate,
       ];
 }

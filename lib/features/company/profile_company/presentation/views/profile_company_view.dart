@@ -1,14 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
+import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
-import 'package:tradof/features/company/profile_company/presentation/logic/cubit/profile_company_cubit.dart';
+import 'package:tradof/features/company/profile_company/presentation/logic/company_profile_cubit/profile_company_cubit.dart';
+import 'package:tradof/features/company/profile_company/presentation/widgets/company_profile_tables.dart';
 
-import '../../../../auth/presentation/logic/tables_cubit/tables_cubit.dart';
-import '../widgets/industries_served.dart';
-import '../widgets/preferred_language.dart';
 import '../widgets/profile_appbar.dart';
 import '../widgets/rating_and_reviews.dart';
 import '../widgets/social_links.dart';
@@ -19,41 +18,43 @@ class ProfileCompanyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TablesCubit(),
-      child: BlocBuilder<ProfileCompanyCubit, ProfileCompanyState>(
+      child: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
         builder: (context, state) {
-          if (state.status == ProfileCompanyStatus.error) {
-            return Text(state.errorMessage.toString());
-          } else if (state.status == ProfileCompanyStatus.companyDataFetched) {
+          if (state.status == CompanyProfileStatus.companyDataFetched) {
             return Column(
               children: [
                 ProfileAppbar(companyModel: state.companyModel!),
                 Expanded(
                   child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        verticalSpace(15),
-                        RatingAndReviews(
-                          companyModel: state.companyModel!,
-                        ),
-                        verticalSpace(20),
-                        SocialLinks(),
-                        verticalSpace(20),
-                        PreferredLanguage(
-                          languages: state.companyModel!.preferredLanguages,
-                        ),
-                        verticalSpace(23),
-                        IndustriesServed(
-                          fileds: state.companyModel!.specializations,
-                        ),
-                      ],
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Column(
+                        children: [
+                          verticalSpace(15),
+                          RatingAndReviews(
+                            companyModel: state.companyModel!,
+                          ),
+                          verticalSpace(20),
+                          if (state.companyModel!.socialMedia.isEmpty) ...[
+                            SocialLinks(
+                              socialLinks: state.companyModel!.socialMedia,
+                            ),
+                            verticalSpace(20),
+                          ],
+                          CompanyProfileTables(
+                            companyModel: state.companyModel!,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ],
             );
-          } else {
-            return CustomLoadingWidget();
+          } else if (state.status == CompanyProfileStatus.error) {
+            return CustomFailureWidget(text: state.errorMessage);
           }
+          return CustomLoadingWidget();
         },
       ),
     );

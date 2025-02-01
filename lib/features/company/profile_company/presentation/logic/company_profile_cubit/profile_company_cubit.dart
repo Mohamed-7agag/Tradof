@@ -1,0 +1,71 @@
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/features/auth/data/model/language_model.dart';
+
+import '../../../../../../core/utils/app_constants.dart';
+import '../../../data/model/company_model.dart';
+import '../../../data/repos/company_profile_repo.dart';
+
+part 'profile_company_state.dart';
+
+class CompanyProfileCubit extends Cubit<CompanyProfileState> {
+  CompanyProfileCubit(this._profileCompanyRepo)
+      : super(const CompanyProfileState());
+
+  final CompanyProfileRepo _profileCompanyRepo;
+
+  Future<void> getCompanyProfile() async {
+    emit(state.copyWith(status: CompanyProfileStatus.loading));
+    final result = await _profileCompanyRepo.getCompanyProfrile(
+      companyId: AppConstants.kUserId,
+      //companyId: 'f0b77c6a-b4de-4175-bb0d-28a5e54abc81',
+    );
+    result.fold(
+        (failure) => emit(state.copyWith(
+              status: CompanyProfileStatus.error,
+              errorMessage: failure.errMessage,
+            )),
+        (companyModel) => emit(
+              state.copyWith(
+                status: CompanyProfileStatus.companyDataFetched,
+                companyModel: companyModel,
+              ),
+            ));
+  }
+
+  Future<void> addPreferedLanguages(
+      {required LanguageModel languageModel}) async {
+    final result = await _profileCompanyRepo.addPreferedLanguages(
+      languageModel: languageModel,
+    );
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          status: CompanyProfileStatus.error,
+          errorMessage: failure.errMessage,
+        ),
+      ),
+      (message) => emit(state.copyWith(
+        status: CompanyProfileStatus.addPreferredLanguage,
+        message: message,
+      )),
+    );
+  }
+
+  Future<void> deletePreferedLanguages(LanguageModel languageModel) async {
+    final result = await _profileCompanyRepo.deletePreferedLanguages(
+        languageModel: languageModel);
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          status: CompanyProfileStatus.error,
+          errorMessage: failure.errMessage,
+        ),
+      ),
+      (message) => emit(state.copyWith(
+        status: CompanyProfileStatus.deletePreferredLanguage,
+        message: message,
+      )),
+    );
+  }
+}

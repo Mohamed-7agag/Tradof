@@ -5,9 +5,7 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
 class Rating extends StatelessWidget {
-  const Rating({
-    super.key, required this.rating,
-  });
+  const Rating({super.key, required this.rating});
 
   final int rating;
 

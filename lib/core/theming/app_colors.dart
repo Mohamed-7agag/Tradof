@@ -9,4 +9,5 @@ abstract class AppColors {
   static const Color background = Color.fromRGBO(245, 245, 255, 1);
   static const Color lightOrange = Color.fromRGBO(255, 111, 97, 1);
   static const Color cardColor = Color.fromRGBO(229, 229, 255, 1);
+  static const Color cardDarkColor = Color.fromRGBO(215, 215, 255, 1);
 }

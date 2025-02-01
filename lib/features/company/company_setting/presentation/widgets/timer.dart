@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
@@ -13,35 +12,30 @@ class TimerOFdays extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 81.h,
-      width: 123.w,
+      padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 16.w),
       decoration: BoxDecoration(
         color: AppColors.cardColor,
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '250',
-                  style:
-                      AppStyle.robotoCondensedSemiBold32.copyWith(fontSize: 20),
-                ),
-                Text(
-                  'days',
-                  style: AppStyle.robotoCondensedRegular15,
-                )
-              ],
-            ),
-            SvgPicture.asset('assets/images/timer.svg'),
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '250',
+                style: AppStyle.robotoCondensedSemiBold20,
+              ),
+              SvgPicture.asset('assets/images/timer.svg'),
+            ],
+          ),
+          Text(
+            'days',
+            style: AppStyle.robotoCondensedRegular15,
+          ),
+        ],
       ),
     );
   }

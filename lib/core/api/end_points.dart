@@ -15,23 +15,21 @@ abstract class EndPoint {
 
   //company
 
-  static String getCompanybyId(String id) {
-    return 'Company/$id';
-  }
+  static String getCompanybyId(String id) => 'Company/$id';
 
-  static String addPreferredLanguage(String companyId, String languageId) {
+  static String addPreferredLanguage(String companyId, int languageId) {
     return 'Company/AddLanguage/$companyId?languageId=$languageId';
   }
 
-  static String deletePreferredLanguage(String companyId, String languageId) {
+  static String deletePreferredLanguage(String companyId, int languageId) {
     return 'Company/RemoveLanguage/$companyId?languageId=$languageId';
   }
 
-  static String addIndustries(String companyId, String industryId) {
+  static String addIndustries(String companyId, int industryId) {
     return 'Company/AddIndustry/$companyId?specializationId=$industryId';
   }
 
-  static String deleteIndustries(String companyId, String industryId) {
+  static String deleteIndustries(String companyId, int industryId) {
     return 'Company/RemoveIndustry/$companyId?specializationId=$industryId';
   }
 }

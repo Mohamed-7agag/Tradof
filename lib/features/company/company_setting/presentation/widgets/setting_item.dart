@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
@@ -17,8 +16,9 @@ class SettingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsets.only(right: 6),
       leading: CircleAvatar(
-        radius: 20.r,
+        radius: 21.r,
         backgroundColor: AppColors.white,
         child: SvgPicture.asset(icon),
       ),
@@ -26,7 +26,11 @@ class SettingItem extends StatelessWidget {
         title,
         style: AppStyle.robotoCondensedRegular15,
       ),
-      trailing: Icon(Icons.arrow_forward_ios),
+      trailing: Icon(
+        Icons.arrow_forward_ios_rounded,
+        size: 20,
+        color: AppColors.primary,
+      ),
     );
   }
 }

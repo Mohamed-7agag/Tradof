@@ -4,24 +4,18 @@ import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
-class CompanySettingAppbar extends StatelessWidget {
-  const CompanySettingAppbar({super.key});
+class CreateProjectAppbar extends StatelessWidget {
+  const CreateProjectAppbar({super.key});
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: AppColors.primary,
       title: Text(
-        'Setting',
+        'Create Project',
         style: AppStyle.robotoBold20.copyWith(color: AppColors.white),
       ),
       actions: [
-        SvgPicture.asset(
-          'assets/images/setting.svg',
-          colorFilter: const ColorFilter.mode(
-            AppColors.white,
-            BlendMode.srcIn,
-          ),
-        ),
+        SvgPicture.asset('assets/images/create_project.svg'),
         horizontalSpace(16),
       ],
       toolbarHeight: 65,

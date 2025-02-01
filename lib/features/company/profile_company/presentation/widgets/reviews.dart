@@ -5,10 +5,7 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
 class Reviews extends StatelessWidget {
-  const Reviews({
-    super.key,
-    required this.reviews,
-  });
+  const Reviews({super.key, required this.reviews});
 
   final int reviews;
 
@@ -37,8 +34,10 @@ class Reviews extends StatelessWidget {
           ),
           Text(
             '$reviews',
-            style: AppStyle.robotoSemiBold12
-                .copyWith(color: AppColors.white, fontSize: 18.sp),
+            style: AppStyle.robotoSemiBold12.copyWith(
+              color: AppColors.white,
+              fontSize: 18.sp,
+            ),
           ),
         ],
       ),

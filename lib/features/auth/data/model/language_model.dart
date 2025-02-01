@@ -10,10 +10,17 @@ class LanguageModel extends Equatable {
 
   factory LanguageModel.fromJson(Map<String, dynamic> json) {
     return LanguageModel(
-        id: json['id'], name: json['name'], code: json['code']);
+      id: json['id'],
+      name: json['name'],
+      code: json['code'],
+    );
   }
 
-  Map<String, dynamic> toJson() => {'id': id, 'name': name, 'code': code};
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'code': code,
+      };
 
   @override
   List<Object?> get props => [id, name, code];

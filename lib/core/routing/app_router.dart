@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/company_bottom_nav_bar_cubit.dart';
-import 'package:tradof/features/company/profile_company/presentation/logic/cubit/profile_company_cubit.dart';
+import 'package:tradof/features/company/profile_company/presentation/logic/company_profile_cubit/profile_company_cubit.dart';
 import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
@@ -95,10 +95,11 @@ class AppRouter {
                 create: (context) => MetaDataCubit(getIt()),
               ),
               BlocProvider(
-                create: (context) => ProfileCompanyCubit(getIt())..getCompanyProfile(),
+                create: (context) =>
+                    CompanyProfileCubit(getIt())..getCompanyProfile(),
               ),
             ],
-            child: CompanyBottomNavBarView(initialIndex: index ?? 2),
+            child: CompanyBottomNavBarView(initialIndex: index ?? 4),
           );
         },
       )
