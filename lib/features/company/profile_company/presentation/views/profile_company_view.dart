@@ -22,7 +22,7 @@ class ProfileCompanyView extends StatelessWidget {
           RatingAndReviews(),
           verticalSpace(20),
           SocialLinks(),
-          verticalSpace(20),
+          verticalSpace(30),
           PreferredLanguage(),
           verticalSpace(23),
           IndustriesServed(),
