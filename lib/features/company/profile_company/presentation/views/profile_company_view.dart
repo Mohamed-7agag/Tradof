@@ -24,7 +24,7 @@ class ProfileCompanyView extends StatelessWidget {
         builder: (context, state) {
           if (state.status == ProfileCompanyStatus.error) {
             return Text(state.errorMessage.toString());
-          } else if (state.status == ProfileCompanyStatus.success) {
+          } else if (state.status == ProfileCompanyStatus.companyDataFetched) {
             return Column(
               children: [
                 ProfileAppbar(companyModel: state.companyModel!),

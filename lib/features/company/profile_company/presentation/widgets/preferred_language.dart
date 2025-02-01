@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,19 +12,28 @@ import 'package:tradof/features/auth/data/model/language_model.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import 'package:tradof/features/company/profile_company/presentation/logic/cubit/profile_company_cubit.dart';
 
-class PreferredLanguage extends StatelessWidget {
+class PreferredLanguage extends StatefulWidget {
   const PreferredLanguage({super.key, required this.languages});
 
   final List<LanguageModel> languages;
+
+  @override
+  State<PreferredLanguage> createState() => _PreferredLanguageState();
+}
+
+class _PreferredLanguageState extends State<PreferredLanguage> {
+  @override
+  void initState() {
+    context.read<MetaDataCubit>().getLanguages();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
         BlocListener<ProfileCompanyCubit, ProfileCompanyState>(
-          listener: (context, state) {
-           
-          },
+          listener: (context, state) async {},
         ),
       ],
       child: Padding(
@@ -71,7 +82,7 @@ class PreferredLanguage extends StatelessWidget {
                         ),
                       ),
                       Column(
-                        children: languages.map((language) {
+                        children: widget.languages.map((language) {
                           return Column(
                             children: [
                               Padding(
@@ -84,9 +95,7 @@ class PreferredLanguage extends StatelessWidget {
                                     Row(
                                       children: [
                                         GestureDetector(
-                                          onTap: () {
-                                           
-                                          },
+                                          onTap: () {},
                                           child: SvgPicture.asset(
                                             'assets/images/close.svg',
                                             height: 20.h,
@@ -105,7 +114,7 @@ class PreferredLanguage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              if (language != languages.last)
+                              if (language != widget.languages.last)
                                 Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 17.w),
@@ -163,7 +172,7 @@ class PreferredLanguage extends StatelessWidget {
                     style:
                         AppStyle.robotoRegular15.copyWith(color: Colors.white),
                   ),
-                  onTap: () {
+                  onTap: ()  {
                     Navigator.pop(context);
                   },
                 );

@@ -3,15 +3,27 @@ part of 'profile_company_cubit.dart';
 enum ProfileCompanyStatus {
   initial,
   loading,
-  success,
+  companyDataFetched,
   error,
+  addPreferredLanguage,
+  deletePreferredLanguage,
+  addIndustrie,
+  deleteIndustrie,
 }
 
 extension ProfileCompanyStatusX on ProfileCompanyStatus {
   bool get isLoading => this == ProfileCompanyStatus.loading;
-  bool get success => this == ProfileCompanyStatus.success;
+  bool get success => this == ProfileCompanyStatus.companyDataFetched;
   bool get isError => this == ProfileCompanyStatus.error;
   bool get isInitial => this == ProfileCompanyStatus.initial;
+  bool get isAddPreferredLanguage =>
+      this == ProfileCompanyStatus.addPreferredLanguage;
+  bool get isDeletePreferredLanguage =>
+      this == ProfileCompanyStatus.deletePreferredLanguage;
+  bool get isAddIndustrie =>
+      this == ProfileCompanyStatus.addIndustrie;
+  bool get isDeleteIndustrie =>
+      this == ProfileCompanyStatus.deleteIndustrie;
 }
 
 class ProfileCompanyState extends Equatable {

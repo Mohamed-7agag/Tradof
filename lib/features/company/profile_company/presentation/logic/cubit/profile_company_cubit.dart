@@ -27,7 +27,7 @@ class ProfileCompanyCubit extends Cubit<ProfileCompanyState> {
             ), (companyModel) {
       emit(
         state.copyWith(
-          status: ProfileCompanyStatus.success,
+          status: ProfileCompanyStatus.companyDataFetched,
           companyModel: companyModel,
         ),
       );
@@ -45,7 +45,7 @@ class ProfileCompanyCubit extends Cubit<ProfileCompanyState> {
         ),
       ),
       (message) => emit(state.copyWith(
-        status: ProfileCompanyStatus.success,
+        status: ProfileCompanyStatus.deletePreferredLanguage,
       )),
     );
   }
@@ -63,7 +63,7 @@ class ProfileCompanyCubit extends Cubit<ProfileCompanyState> {
         ),
       ),
       (message) => emit(state.copyWith(
-        status: ProfileCompanyStatus.success,
+        status: ProfileCompanyStatus.addPreferredLanguage,
       )),
     );
   }

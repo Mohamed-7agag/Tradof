@@ -77,7 +77,7 @@ class AppRouter {
                   ProfileCompanyCubit(getIt())..getCompanyProfile(),
             ),
             BlocProvider(
-              create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
+              create: (context) => MetaDataCubit(getIt())
             ),
           ],
           child: CompanyBottomNavBarView(),

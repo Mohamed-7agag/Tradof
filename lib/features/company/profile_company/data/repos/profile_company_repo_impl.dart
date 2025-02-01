@@ -24,18 +24,15 @@ class ProfileCompanyRepoImpl implements ProfileCompanyRepo {
   }
 
   @override
-  Future<Either<Failure, LanguageModel>> addPreferedLanguages(
+  Future<Either<Failure, String>> addPreferedLanguages(
       {required LanguageModel languageModel}) async {
     return handleRequest(() async {
       final response = await _apiServices.post(
         EndPoint.addPreferredLanguage(
-            CacheHelper.getSecuredString(AppConstants.userId),
+           await CacheHelper.getSecuredString(AppConstants.userId),
             languageModel.id.toString()),
-        data: {
-          'languageId': languageModel.id,
-        },
       );
-      return LanguageModel.fromJson(response);
+      return response['message'] ?? 'Language added successfully';
     });
   }
 
@@ -52,7 +49,7 @@ class ProfileCompanyRepoImpl implements ProfileCompanyRepo {
     return handleRequest(() async {
       final response = await _apiServices.delete(
         EndPoint.deletePreferredLanguage(
-            CacheHelper.getSecuredString(AppConstants.userId),
+          await  CacheHelper.getSecuredString(AppConstants.userId),
             languageModel.id.toString()),
       );
       return response['message'] ?? 'Language deleted successfully';
