@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/di/di.dart';
+import 'package:tradof/core/helpers/extensions.dart';
+import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import 'package:tradof/features/projects/presentation/logic/project_cubit/project_cubit.dart';
 
@@ -20,6 +22,7 @@ class CreateProjectLanguagePair extends StatelessWidget {
       child: BlocConsumer<MetaDataCubit, MetaDataState>(
         listener: (context, state) {
           if (state.status.isError) {
+            context.goNamed(Routes.companyBottomNavBarViewRoute, extra: 0);
             errorToast(context, 'Error', state.errorMessage);
           }
         },

@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
-import 'package:tradof/features/company/bottom_nav_bar/presentation/views/bottom_nav_bar_company_view.dart';
+import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/company_bottom_nav_bar_cubit.dart';
 import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
@@ -11,6 +11,7 @@ import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
+import '../../features/company/bottom_nav_bar/presentation/views/company_bottom_nav_bar_view.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../helpers/navigation_handler.dart';
@@ -82,7 +83,13 @@ class AppRouter {
       GoRoute(
         name: Routes.companyBottomNavBarViewRoute,
         path: '/companyBottomNavBarView',
-        builder: (context, state) => CompanyBottomNavBarView(),
+        builder: (context, state) {
+          final index = state.extra as int?;
+          return BlocProvider(
+            create: (context) => CompanyBottomNavBarCubit(),
+            child: CompanyBottomNavBarView(initialIndex: index ?? 0),
+          );
+        },
       )
     ],
   );
