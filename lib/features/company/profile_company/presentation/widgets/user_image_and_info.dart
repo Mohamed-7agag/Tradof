@@ -59,5 +59,6 @@ class UserImageAndInfo extends StatelessWidget {
         )
       ],
     );
+   
   }
 }

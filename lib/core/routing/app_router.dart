@@ -84,22 +84,24 @@ class AppRouter {
       GoRoute(
         name: Routes.companyBottomNavBarViewRoute,
         path: '/companyBottomNavBarView',
-        builder: (context, state) => MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => CompanyBottomNavBarCubit(),
-            ),
-            BlocProvider(
-              create: (context) =>
-                  ProfileCompanyCubit(getIt())..getCompanyProfile(),
-            ),
-            BlocProvider(
-              create: (context) => MetaDataCubit(getIt())
-            ),
-          ],
-          child: CompanyBottomNavBarView(),
-        ),
-      ),
+        builder: (context, state) {
+          final index = state.extra as int?;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => CompanyBottomNavBarCubit(),
+              ),
+              BlocProvider(
+                create: (context) => MetaDataCubit(getIt()),
+              ),
+              BlocProvider(
+                create: (context) => ProfileCompanyCubit(getIt())..getCompanyProfile(),
+              ),
+            ],
+            child: CompanyBottomNavBarView(initialIndex: index ?? 2),
+          );
+        },
+      )
     ],
   );
 }

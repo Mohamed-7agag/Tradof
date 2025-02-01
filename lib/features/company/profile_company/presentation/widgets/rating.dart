@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
+
 class Rating extends StatelessWidget {
   const Rating({
     super.key, required this.rating,
@@ -13,14 +14,13 @@ class Rating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 135.w,
-      height: 43.h,
+      padding: EdgeInsets.symmetric(vertical: 11, horizontal: 12),
       decoration: BoxDecoration(
         color: AppColors.primary,
-        borderRadius: BorderRadius.circular(15.r),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -34,6 +34,7 @@ class Rating extends StatelessWidget {
               verticalSpace(10),
             ],
           ),
+          horizontalSpace(6),
           Row(
             children: [
               Text(
@@ -41,9 +42,14 @@ class Rating extends StatelessWidget {
                 style: AppStyle.robotoSemiBold12
                     .copyWith(color: AppColors.white, fontSize: 18.sp),
               ),
-              Icon(
-                Icons.star,
-                color: Colors.yellow,
+              horizontalSpace(5),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Icon(
+                  size: 22,
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
               )
             ],
           ),
