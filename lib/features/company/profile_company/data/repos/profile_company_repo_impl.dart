@@ -28,7 +28,9 @@ class ProfileCompanyRepoImpl implements ProfileCompanyRepo {
       {required LanguageModel languageModel}) async {
     return handleRequest(() async {
       final response = await _apiServices.post(
-        EndPoint.addPreferredLanguage(CacheHelper.getString(AppConstants.userId), languageModel.id.toString()),
+        EndPoint.addPreferredLanguage(
+            CacheHelper.getSecuredString(AppConstants.userId),
+            languageModel.id.toString()),
         data: {
           'languageId': languageModel.id,
         },
@@ -49,7 +51,9 @@ class ProfileCompanyRepoImpl implements ProfileCompanyRepo {
       {required LanguageModel languageModel}) async {
     return handleRequest(() async {
       final response = await _apiServices.delete(
-        EndPoint.deletePreferredLanguage(CacheHelper.getString(AppConstants.userId), languageModel.id.toString()),
+        EndPoint.deletePreferredLanguage(
+            CacheHelper.getSecuredString(AppConstants.userId),
+            languageModel.id.toString()),
       );
       return response['message'] ?? 'Language deleted successfully';
     });
@@ -62,7 +66,7 @@ class ProfileCompanyRepoImpl implements ProfileCompanyRepo {
       final response = await _apiServices.get(
         EndPoint.getCompanybyId(id),
       );
-      return response;
+      return CompanyModel.fromJson(response);
     });
   }
 }

@@ -34,12 +34,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
     CompanySettingView(),
   ];
 
-  @override
-  void initState() {
-   BlocProvider.of<ProfileCompanyCubit>(context).getCompanyProfile();
-    super.initState();
-  }
-
+  
   void _onItemTapped(int index) {
     setState(() => _selectedIndex = index);
   }
@@ -47,7 +42,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LazyLoadIndexedStack(index: _selectedIndex, children: views),
+     body: views[_selectedIndex],
       bottomNavigationBar: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.topCenter,

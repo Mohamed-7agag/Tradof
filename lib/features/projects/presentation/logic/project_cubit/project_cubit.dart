@@ -27,6 +27,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       fromLanguageId: state.fromLanguage!.id,
       toLanguageId: state.toLanguage!.id,
       files: await uploadFileToApi(files[0]), //
+      
     );
 
     final result = await _projectRepo.createProject(model);

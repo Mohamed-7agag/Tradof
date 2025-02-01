@@ -18,11 +18,19 @@ abstract class EndPoint {
   }
 
   static String addPreferredLanguage(String companyId, String languageId) {
-    return 'AddLanguage/1?companyId=$companyId&languageId=$languageId';
+    return 'AddLanguage/$companyId?&languageId=$languageId';
   }
 
   static String deletePreferredLanguage(String companyId, String languageId) {
-    return 'AddLanguage/1?companyId=$companyId&languageId=$languageId';
+    return 'AddLanguage/$companyId?&languageId=$languageId';
+  }
+
+  static String addIndustries(String companyId, String industryId) {
+    return 'AddIndustry/$companyId?&specializationId=$industryId';
+  }
+
+  static String deleteIndustries(String companyId, String industryId) {
+    return 'AddIndustry/$companyId?&specializationId=$industryId';
   }
   
 }

@@ -11,7 +11,9 @@ import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubi
 import 'package:tradof/features/company/profile_company/presentation/logic/cubit/profile_company_cubit.dart';
 
 class PreferredLanguage extends StatelessWidget {
-  const PreferredLanguage({super.key});
+  const PreferredLanguage({super.key, required this.languages});
+
+  final List<LanguageModel> languages;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +21,7 @@ class PreferredLanguage extends StatelessWidget {
       listeners: [
         BlocListener<ProfileCompanyCubit, ProfileCompanyState>(
           listener: (context, state) {
-            if (state.status == ProfileCompanyStatus.companyModel) {
-              // Optionally handle successful language operations
-            }
+           
           },
         ),
       ],
@@ -71,8 +71,7 @@ class PreferredLanguage extends StatelessWidget {
                         ),
                       ),
                       Column(
-                        children:
-                            state.selectedPreferedLanguages.map((language) {
+                        children: languages.map((language) {
                           return Column(
                             children: [
                               Padding(
@@ -86,17 +85,7 @@ class PreferredLanguage extends StatelessWidget {
                                       children: [
                                         GestureDetector(
                                           onTap: () {
-                                            // Remove language from TablesCubit
-                                            context
-                                                .read<TablesCubit>()
-                                                .removePreferedLanguage(
-                                                    language);
-
-                                            // Remove language from ProfileCompanyCubit
-                                            context
-                                                .read<ProfileCompanyCubit>()
-                                                .deletePreferedLanguages(
-                                                    language);
+                                           
                                           },
                                           child: SvgPicture.asset(
                                             'assets/images/close.svg',
@@ -116,8 +105,7 @@ class PreferredLanguage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              if (language !=
-                                  state.selectedPreferedLanguages.last)
+                              if (language != languages.last)
                                 Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 17.w),
@@ -128,7 +116,6 @@ class PreferredLanguage extends StatelessWidget {
                         }).toList(),
                       ),
                       verticalSpace(10),
-                      
                     ],
                   ),
                 );
@@ -177,13 +164,6 @@ class PreferredLanguage extends StatelessWidget {
                         AppStyle.robotoRegular15.copyWith(color: Colors.white),
                   ),
                   onTap: () {
-                    // Add language to TablesCubit
-                    tablesCubit.addPreferedLanguage(preferedLanguages[index]);
-
-                    // Add language via ProfileCompanyCubit
-                    profileCompanyCubit.addPreferedLanguages(
-                        languageModel: preferedLanguages[index]);
-
                     Navigator.pop(context);
                   },
                 );

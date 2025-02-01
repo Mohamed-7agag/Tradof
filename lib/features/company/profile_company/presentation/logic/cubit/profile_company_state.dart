@@ -3,14 +3,12 @@ part of 'profile_company_cubit.dart';
 enum ProfileCompanyStatus {
   initial,
   loading,
-  companyModel,
   success,
   error,
 }
 
 extension ProfileCompanyStatusX on ProfileCompanyStatus {
   bool get isLoading => this == ProfileCompanyStatus.loading;
-  bool get companyModel => this == ProfileCompanyStatus.companyModel;
   bool get success => this == ProfileCompanyStatus.success;
   bool get isError => this == ProfileCompanyStatus.error;
   bool get isInitial => this == ProfileCompanyStatus.initial;

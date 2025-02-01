@@ -27,7 +27,7 @@ class ProfileCompanyCubit extends Cubit<ProfileCompanyState> {
             ), (companyModel) {
       emit(
         state.copyWith(
-          status: ProfileCompanyStatus.companyModel,
+          status: ProfileCompanyStatus.success,
           companyModel: companyModel,
         ),
       );

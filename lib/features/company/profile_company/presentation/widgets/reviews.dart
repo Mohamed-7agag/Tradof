@@ -8,7 +8,10 @@ import 'package:tradof/core/theming/app_style.dart';
 class Reviews extends StatelessWidget {
   const Reviews({
     super.key,
+    required this.reviews,
   });
+
+  final int reviews;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class Reviews extends StatelessWidget {
             ],
           ),
           Text(
-            '7500',
+            '$reviews',
             style: AppStyle.robotoSemiBold12
                 .copyWith(color: AppColors.white, fontSize: 18.sp),
           ),

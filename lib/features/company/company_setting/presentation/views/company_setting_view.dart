@@ -11,30 +11,28 @@ class CompanySettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          CompanySettingAppbar(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  verticalSpace(15),
-                  UserInfoInSetting(),
-                  verticalSpace(20),
-                  SettingsSection1(),
-                  verticalSpace(20),
-                  SettingSection2(),
-                  verticalSpace(26),
-                  SubscriptionPlanAndTimer(),
-                  verticalSpace(20),
-                  verticalSpace(20),
-                ],
-              ),
+    return Column(
+      children: [
+        CompanySettingAppbar(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                verticalSpace(15),
+                UserInfoInSetting(),
+                verticalSpace(20),
+                SettingsSection1(),
+                verticalSpace(20),
+                SettingSection2(),
+                verticalSpace(26),
+                SubscriptionPlanAndTimer(),
+                verticalSpace(20),
+                verticalSpace(20),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
