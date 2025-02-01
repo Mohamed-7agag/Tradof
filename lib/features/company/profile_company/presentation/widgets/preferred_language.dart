@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/helpers/spacing.dart';
+import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/features/auth/data/model/language_model.dart';
+import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
 
 class PreferredLanguage extends StatelessWidget {
-  const PreferredLanguage({super.key, required this.preferedLanguages});
+  const PreferredLanguage({super.key, required this.companyModel});
 
-  final List<LanguageModel> preferedLanguages;
+  final CompanyModel companyModel;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,12 @@ class PreferredLanguage extends StatelessWidget {
           children: [
             Text('Preferred Language', style: AppStyle.poppinsMedium15),
             GestureDetector(
-              onTap: () => {},
+              onTap: () {
+                context.pushNamed(
+                  Routes.updateCompanyProfileTablesViewRoute,
+                  extra: companyModel,
+                );
+              },
               child: Image.asset('assets/images/edit.png', width: 25),
             )
           ],
@@ -42,7 +49,7 @@ class PreferredLanguage extends StatelessWidget {
                 ),
               )
             ],
-            rows: preferedLanguages.map((language) {
+            rows: companyModel.preferredLanguages.map((language) {
               return DataRow(
                 cells: [
                   DataCell(

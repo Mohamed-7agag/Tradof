@@ -1,4 +1,4 @@
-part of 'profile_company_cubit.dart';
+part of 'company_profile_cubit.dart';
 
 enum CompanyProfileStatus {
   initial,

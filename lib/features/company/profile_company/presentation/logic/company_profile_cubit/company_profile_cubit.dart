@@ -6,7 +6,7 @@ import '../../../../../../core/utils/app_constants.dart';
 import '../../../data/model/company_model.dart';
 import '../../../data/repos/company_profile_repo.dart';
 
-part 'profile_company_state.dart';
+part 'company_profile_state.dart';
 
 class CompanyProfileCubit extends Cubit<CompanyProfileState> {
   CompanyProfileCubit(this._profileCompanyRepo)

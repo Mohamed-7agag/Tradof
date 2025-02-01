@@ -13,11 +13,11 @@ class CompanyProfileTables extends StatelessWidget {
     return Column(
       children: [
         PreferredLanguage(
-          preferedLanguages: companyModel.preferredLanguages,
+          companyModel: companyModel,
         ),
         verticalSpace(23),
         IndustriesServed(
-          industriesServed: companyModel.specializations,
+          companyModel: companyModel,
         ),
         verticalSpace(30),
       ],

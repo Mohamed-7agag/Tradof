@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
-import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
-import 'package:tradof/features/company/profile_company/presentation/logic/company_profile_cubit/profile_company_cubit.dart';
+import 'package:tradof/features/company/profile_company/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import 'package:tradof/features/company/profile_company/presentation/widgets/company_profile_tables.dart';
 
+import '../../../../../core/di/di.dart';
 import '../widgets/profile_appbar.dart';
 import '../widgets/rating_and_reviews.dart';
 import '../widgets/social_links.dart';
@@ -17,7 +17,7 @@ class ProfileCompanyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TablesCubit(),
+      create: (context) => CompanyProfileCubit(getIt())..getCompanyProfile(),
       child: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
         builder: (context, state) {
           if (state.status == CompanyProfileStatus.companyDataFetched) {
@@ -34,13 +34,13 @@ class ProfileCompanyView extends StatelessWidget {
                           RatingAndReviews(
                             companyModel: state.companyModel!,
                           ),
-                          verticalSpace(20),
                           if (state.companyModel!.socialMedia.isEmpty) ...[
+                            verticalSpace(20),
                             SocialLinks(
                               socialLinks: state.companyModel!.socialMedia,
                             ),
-                            verticalSpace(20),
                           ],
+                          verticalSpace(26),
                           CompanyProfileTables(
                             companyModel: state.companyModel!,
                           ),

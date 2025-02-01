@@ -40,7 +40,7 @@ class UserImageAndInfo extends StatelessWidget {
           ),
         ],
       ),
-      trailing: SvgPicture.asset('assets/images/edit.svg',width: 26,),
+      trailing: SvgPicture.asset('assets/images/edit.svg', width: 26),
     );
   }
 }

@@ -2,8 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
+import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/company_bottom_nav_bar_cubit.dart';
-import 'package:tradof/features/company/profile_company/presentation/logic/company_profile_cubit/profile_company_cubit.dart';
+import 'package:tradof/features/company/profile_company/presentation/views/update_company_profile_tables_view.dart';
 import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
@@ -13,6 +14,7 @@ import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
 import '../../features/company/bottom_nav_bar/presentation/views/company_bottom_nav_bar_view.dart';
+import '../../features/company/profile_company/data/model/company_model.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../helpers/navigation_handler.dart';
@@ -86,23 +88,31 @@ class AppRouter {
         path: '/companyBottomNavBarView',
         builder: (context, state) {
           final index = state.extra as int?;
+          return BlocProvider(
+            create: (context) => CompanyBottomNavBarCubit(),
+            child: CompanyBottomNavBarView(initialIndex: index ?? 0),
+          );
+        },
+      ),
+      GoRoute(
+        name: Routes.updateCompanyProfileTablesViewRoute,
+        path: '/updateCompanyProfileTablesView',
+        builder: (context, state) {
+          final companyModel = state.extra as CompanyModel;
           return MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => CompanyBottomNavBarCubit(),
-              ),
-              BlocProvider(
-                create: (context) => MetaDataCubit(getIt()),
-              ),
-              BlocProvider(
                 create: (context) =>
-                    CompanyProfileCubit(getIt())..getCompanyProfile(),
+                    MetaDataCubit(getIt())..fetchLanguagesAndSpecializations(),
+              ),
+              BlocProvider(
+                create: (context) => TablesCubit(),
               ),
             ],
-            child: CompanyBottomNavBarView(initialIndex: index ?? 4),
+            child: UpdateCompanyProfileTablesView(companyModel: companyModel),
           );
         },
-      )
+      ),
     ],
   );
 }

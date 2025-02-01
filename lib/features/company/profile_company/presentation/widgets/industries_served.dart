@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/features/auth/data/model/specialization_model.dart';
+import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
+
+import '../../../../../core/routing/routes.dart';
 
 class IndustriesServed extends StatelessWidget {
-  const IndustriesServed({super.key, required this.industriesServed});
+  const IndustriesServed({super.key, required this.companyModel});
 
-  final List<SpecializationModel> industriesServed;
+  final CompanyModel companyModel;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,12 @@ class IndustriesServed extends StatelessWidget {
           children: [
             Text('Industries Served', style: AppStyle.poppinsMedium15),
             GestureDetector(
-              onTap: () => {},
+              onTap: () {
+                context.pushNamed(
+                  Routes.updateCompanyProfileTablesViewRoute,
+                  extra: companyModel,
+                );
+              },
               child: Image.asset('assets/images/edit.png', width: 25),
             )
           ],
@@ -36,7 +44,7 @@ class IndustriesServed extends StatelessWidget {
                 ),
               ),
             ],
-            rows: industriesServed.map((language) {
+            rows: companyModel.specializations.map((language) {
               return DataRow(
                 cells: [
                   DataCell(

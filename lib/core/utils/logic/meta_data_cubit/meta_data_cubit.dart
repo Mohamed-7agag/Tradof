@@ -21,6 +21,14 @@ class MetaDataCubit extends Cubit<MetaDataState> {
     ]);
   }
 
+  Future<void> fetchLanguagesAndSpecializations() async {
+    await Future.wait([getLanguages(), getSpecializations()]);
+  }
+
+  Future<void> fetchLanguagesAndCountries() async {
+    await Future.wait([getLanguages(), getCountries()]);
+  }
+
   //! get Languages
   Future<void> getLanguages() async {
     emit(state.copyWith(status: MetaDataStatus.loading));

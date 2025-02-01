@@ -7,4 +7,5 @@ abstract class Routes {
   static const String freelancerBottomNavBarViewRoute =
       "/freelancerBottomNavBarView";
   static const String companyBottomNavBarViewRoute = "/companyBottomNavBarView";
+  static const String updateCompanyProfileTablesViewRoute = "/updateCompanyProfileTablesView";
 }
