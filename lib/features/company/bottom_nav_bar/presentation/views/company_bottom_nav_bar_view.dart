@@ -36,6 +36,7 @@ class CompanyBottomNavBarView extends StatelessWidget {
       body: BlocBuilder<CompanyBottomNavBarCubit, int>(
         builder: (context, selectedIndex) {
           return LazyLoadIndexedStack(index: selectedIndex, children: views);
+     //   return views[selectedIndex];
         },
       ),
       bottomNavigationBar: BlocBuilder<CompanyBottomNavBarCubit, int>(

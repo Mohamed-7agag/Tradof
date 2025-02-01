@@ -5,11 +5,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
+import 'package:tradof/features/auth/data/model/specialization_model.dart';
 
 class IndustriesServed extends StatelessWidget {
-  IndustriesServed({super.key});
+ const IndustriesServed({super.key, required this.fileds});
 
-  final List<String> fileds = ['Medical', 'Engineering'];
+  final List<SpecializationModel> fileds;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,7 @@ class IndustriesServed extends StatelessWidget {
                                     width: 20.w,
                                   ),
                                   SizedBox(width: 6),
-                                  Text(filed, style: AppStyle.robotoRegular12),
+                                  Text(filed.name, style: AppStyle.robotoRegular12),
                                 ],
                               ),
                             ],

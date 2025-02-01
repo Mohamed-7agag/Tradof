@@ -5,8 +5,10 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 class Rating extends StatelessWidget {
   const Rating({
-    super.key,
+    super.key, required this.rating,
   });
+
+  final int rating;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class Rating extends StatelessWidget {
           Row(
             children: [
               Text(
-                '1500',
+                '$rating',
                 style: AppStyle.robotoSemiBold12
                     .copyWith(color: AppColors.white, fontSize: 18.sp),
               ),

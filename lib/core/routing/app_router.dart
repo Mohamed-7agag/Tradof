@@ -28,7 +28,7 @@ class AppRouter {
         if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
           //return Routes.freelancerBottomNavBarViewRoute;
           return Routes.companyBottomNavBarViewRoute;
-        } else if (CacheHelper.getString(AppConstants.role) == 'Company') {
+        } else if (CacheHelper.getString(AppConstants.role) == 'CompanyAdmin') {
           return Routes.companyBottomNavBarViewRoute;
         } else {
           return Routes.loginViewRoute;
@@ -84,24 +84,22 @@ class AppRouter {
       GoRoute(
         name: Routes.companyBottomNavBarViewRoute,
         path: '/companyBottomNavBarView',
-        builder: (context, state) {
-          final index = state.extra as int?;
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => CompanyBottomNavBarCubit(),
-              ),
-              BlocProvider(
-                create: (context) => MetaDataCubit(getIt()),
-              ),
-              BlocProvider(
-                create: (context) => ProfileCompanyCubit(getIt())..getCompanyProfile(),
-              ),
-            ],
-            child: CompanyBottomNavBarView(initialIndex: index ?? 0),
-          );
-        },
-      )
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => CompanyBottomNavBarCubit(),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  ProfileCompanyCubit(getIt())..getCompanyProfile(),
+            ),
+            BlocProvider(
+              create: (context) => MetaDataCubit(getIt())
+            ),
+          ],
+          child: CompanyBottomNavBarView(),
+        ),
+      ),
     ],
   );
 }

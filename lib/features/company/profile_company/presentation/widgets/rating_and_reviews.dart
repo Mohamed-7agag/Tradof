@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:tradof/core/theming/app_colors.dart';
+import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
 import 'package:tradof/features/company/profile_company/presentation/widgets/rating.dart';
 import 'package:tradof/features/company/profile_company/presentation/widgets/reviews.dart';
 
 class RatingAndReviews extends StatelessWidget {
-  const RatingAndReviews({super.key});
+  const RatingAndReviews({super.key, required this.companyModel});
+  final CompanyModel companyModel;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +18,8 @@ class RatingAndReviews extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Rating(),
-          Reviews(),
+          Rating(rating: companyModel.ratingSum,),
+          Reviews(reviews: companyModel.reviewCount,),
           Container(
             width: 40.w,
             height: 43.h,
