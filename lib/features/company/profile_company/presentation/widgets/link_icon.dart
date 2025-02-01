@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 
 class LinkIcon extends StatelessWidget {
@@ -16,8 +15,7 @@ class LinkIcon extends StatelessWidget {
       ),
       child: Image.asset(
         image,
-        width: 29.w,
-        height: 29.h,
+        height: 32,
       ),
     );
   }
