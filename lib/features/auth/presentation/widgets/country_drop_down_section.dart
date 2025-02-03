@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
 import '../logic/freelancer_registeration_cubit.dart';

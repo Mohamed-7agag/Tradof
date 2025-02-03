@@ -8,7 +8,7 @@ class SettingSection2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 14.h,horizontal: 14.w),
+      padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
       decoration: BoxDecoration(
         color: AppColors.cardColor,
         borderRadius: BorderRadius.circular(15),
@@ -18,16 +18,19 @@ class SettingSection2 extends StatelessWidget {
           SettingItem(
             title: 'Change password',
             icon: 'assets/images/password.svg',
+            onTap: () {},
           ),
           Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Technical Support',
             icon: 'assets/images/support.svg',
+            onTap: () {},
           ),
           Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Give us feedback',
             icon: 'assets/images/feedback.svg',
+            onTap: () {},
           ),
         ],
       ),

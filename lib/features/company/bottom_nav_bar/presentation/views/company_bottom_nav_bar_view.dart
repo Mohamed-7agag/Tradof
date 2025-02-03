@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -13,8 +14,10 @@ import 'package:tradof/features/projects/presentation/logic/project_cubit/projec
 import 'package:tradof/features/projects/presentation/views/create_project_view.dart';
 
 class CompanyBottomNavBarView extends StatelessWidget {
-  const CompanyBottomNavBarView({super.key, this.initialIndex = 0});
+  const CompanyBottomNavBarView(
+      {super.key, required this.navigationShell, this.initialIndex = 0});
 
+  final StatefulNavigationShell navigationShell;
   final int initialIndex;
 
   static final List<Widget> views = [
@@ -33,12 +36,7 @@ class CompanyBottomNavBarView extends StatelessWidget {
     // Initialize the cubit with the initial index
     context.read<CompanyBottomNavBarCubit>().updateIndex(initialIndex);
     return Scaffold(
-      body: BlocBuilder<CompanyBottomNavBarCubit, int>(
-        builder: (context, selectedIndex) {
-          return LazyLoadIndexedStack(index: selectedIndex, children: views);
-     //   return views[selectedIndex];
-        },
-      ),
+      body: navigationShell,
       bottomNavigationBar: BlocBuilder<CompanyBottomNavBarCubit, int>(
         builder: (context, selectedIndex) {
           return Stack(
@@ -85,8 +83,10 @@ class CompanyBottomNavBarView extends StatelessWidget {
               Positioned(
                 top: -20,
                 child: GestureDetector(
-                  onTap: () =>
-                      context.read<CompanyBottomNavBarCubit>().updateIndex(2),
+                  onTap: () {
+                    context.read<CompanyBottomNavBarCubit>().updateIndex(2);
+                    navigationShell.goBranch(2);
+                  },
                   child: Container(
                     width: 60,
                     height: 60,
@@ -109,13 +109,21 @@ class CompanyBottomNavBarView extends StatelessWidget {
   }
 
   Widget _buildNavItem(
-      BuildContext context, String iconOff, String iconOn, int index) {
-    final selectedIndex = context.watch<CompanyBottomNavBarCubit>().state;
-    return InkWell(
-      onTap: () => context.read<CompanyBottomNavBarCubit>().updateIndex(index),
-      child: selectedIndex == index
-          ? Image.asset(iconOn, width: 24.w)
-          : Image.asset(iconOff, width: index == 4 ? 25.w : 22.w),
+      BuildContext context, String inactiveIcon, String activeIcon, int index) {
+    final isSelected = navigationShell.currentIndex == index;
+    return GestureDetector(
+      onTap: () {
+        context.read<CompanyBottomNavBarCubit>().updateIndex(index);
+        navigationShell.goBranch(index);
+      },
+      child: Opacity(
+        opacity: isSelected ? 1.0 : 0.5,
+        child: Image.asset(
+          isSelected ? activeIcon : inactiveIcon,
+          width: 24.w,
+          height: 24.h,
+        ),
+      ),
     );
   }
 }
@@ -123,9 +131,14 @@ class CompanyBottomNavBarView extends StatelessWidget {
 class CustomNavBarClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    final path = Path();
+    Path path = Path();
     path.moveTo(0, 20);
-    path.quadraticBezierTo(size.width / 2, -20, size.width, 20);
+    path.quadraticBezierTo(0, 0, 20, 0);
+    path.lineTo(size.width / 2 - 40, 0);
+    path.quadraticBezierTo(size.width / 2 - 20, 0, size.width / 2, 20);
+    path.quadraticBezierTo(size.width / 2 + 20, 40, size.width / 2 + 40, 20);
+    path.lineTo(size.width - 20, 0);
+    path.quadraticBezierTo(size.width, 0, size.width, 20);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
     path.close();

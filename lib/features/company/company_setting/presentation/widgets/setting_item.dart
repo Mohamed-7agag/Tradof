@@ -8,14 +8,17 @@ class SettingItem extends StatelessWidget {
   const SettingItem({
     super.key,
     required this.title,
-    required this.icon,
+    required this.icon, 
+   required this.onTap,
   });
   final String title;
   final String icon;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       contentPadding: EdgeInsets.only(right: 6),
       leading: CircleAvatar(
         radius: 21.r,

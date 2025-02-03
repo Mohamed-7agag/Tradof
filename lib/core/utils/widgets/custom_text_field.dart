@@ -14,6 +14,7 @@ class CustomTextField extends StatefulWidget {
     this.obscureText = false,
     this.labelColor,
     this.outlineBorder = false,
+    this.labelBehavior=false,
   });
 
   final String labelText;
@@ -22,6 +23,7 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final Color? labelColor;
   final bool outlineBorder;
+  final bool? labelBehavior;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -72,16 +74,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
           style: AppStyle.robotoRegular14.copyWith(color: widget.labelColor),
         ),
         floatingLabelStyle: TextStyle(color: AppColors.primary),
+        floatingLabelBehavior: widget.labelBehavior==true?FloatingLabelBehavior.never:FloatingLabelBehavior.auto,
       ),
     );
   }
 
   _buildBorder({Color? color}) {
-    return widget.outlineBorder ? OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide(color: color ?? AppColors.grey),
-    ) : UnderlineInputBorder(
-      borderSide: BorderSide(color: color ?? AppColors.grey),
-    );
+    return widget.outlineBorder
+        ? OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: color ?? AppColors.grey),
+          )
+        : UnderlineInputBorder(
+            borderSide: BorderSide(color: color ?? AppColors.grey),
+          );
   }
 }

@@ -11,25 +11,31 @@ class PhoneNumberTextField extends StatelessWidget {
     super.key,
     required this.labelText,
     required this.controller,
+    this.borderColor,
+    this.labelBehavior = false,
   });
 
   final String labelText;
   final TextEditingController controller;
+  final Color? borderColor;
+  final bool? labelBehavior;
 
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
-      cursorColor: AppColors.white,
+      cursorColor: borderColor ?? AppColors.white,
       cursorRadius: Radius.circular(10),
       controller: controller,
       initialCountryCode: 'EG',
-      dropdownTextStyle: TextStyle(color: AppColors.white),
-      dropdownIcon: Icon(Icons.arrow_drop_down, color: AppColors.white),
+      dropdownTextStyle: TextStyle(color: borderColor ?? AppColors.white),
+      dropdownIcon:
+          Icon(Icons.arrow_drop_down, color: borderColor ?? AppColors.white),
       pickerDialogStyle: PickerDialogStyle(
         searchFieldCursorColor: AppColors.primary,
         listTileDivider: Divider(height: 0),
       ),
-      style: AppStyle.robotoRegular15.copyWith(color: AppColors.white),
+      style: AppStyle.robotoRegular15
+          .copyWith(color: borderColor ?? AppColors.white),
       validator: (value) {
         if (value == null || value.completeNumber.isNullOrEmpty()) {
           return 'required';
@@ -37,24 +43,27 @@ class PhoneNumberTextField extends StatelessWidget {
         return null;
       },
       decoration: InputDecoration(
-        counterStyle: TextStyle(color: AppColors.white),
-        border: _buildBorder(),
-        enabledBorder: _buildBorder(),
-        focusedErrorBorder: _buildBorder(),
-        focusedBorder: _buildBorder(),
-        errorBorder: _buildBorder(color: Colors.red),
-        label: Text(
-          labelText,
-          style: AppStyle.robotoRegular14.copyWith(color: AppColors.white),
-        ),
-        floatingLabelStyle: TextStyle(color: AppColors.primary),
-      ),
+          counterStyle: TextStyle(color: borderColor ?? AppColors.white),
+          border: _buildBorder(),
+          enabledBorder: _buildBorder(),
+          focusedErrorBorder: _buildBorder(),
+          focusedBorder: _buildBorder(),
+          errorBorder: _buildBorder(color: Colors.red),
+          label: Text(
+            labelText,
+            style: AppStyle.robotoRegular14
+                .copyWith(color: borderColor ?? AppColors.white),
+          ),
+          floatingLabelStyle: TextStyle(color: AppColors.primary),
+          floatingLabelBehavior: labelBehavior == true
+              ? FloatingLabelBehavior.never
+              : FloatingLabelBehavior.auto),
     );
   }
 
   _buildBorder({Color? color}) {
     return UnderlineInputBorder(
-      borderSide: BorderSide(color: color ?? AppColors.white),
+      borderSide: BorderSide(color: color ?? borderColor ?? AppColors.white),
     );
   }
 }
