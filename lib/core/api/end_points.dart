@@ -10,6 +10,7 @@ abstract class EndPoint {
   static const String getCountries = 'country';
   static const String getLanguages = 'language';
   static const String getSpecializations = 'specialization';
+  static const String updateCompanyProfile = 'Company/UpdateCompany';
   // project
   static const String createProject = 'project';
 

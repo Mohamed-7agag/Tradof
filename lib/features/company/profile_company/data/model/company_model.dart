@@ -58,6 +58,7 @@ class CompanyModel extends Equatable {
         ),
         socialMedia: json['socialMedia'],
       );
+      
 
   @override
   List<Object?> get props => [

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';
+import 'package:tradof/features/company/profile_company/data/model/company_update_request_model.dart';
 
 import '../../../../../../core/utils/app_constants.dart';
 import '../../../data/model/company_model.dart';
@@ -61,9 +62,34 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
           errorMessage: failure.errMessage,
         ),
       ),
+      (message) => emit(
+        state.copyWith(
+          status: CompanyProfileStatus.deletePreferredLanguage,
+          message: message,
+        ),
+      ),
+    );
+  }
+
+  Future<void> updateCompanyProfile(
+      CompanyUpdateRequestModel companyUpdateRequestModel) async {
+    emit(state.copyWith(
+      status: CompanyProfileStatus.loading,
+    ));
+    final result = await _profileCompanyRepo.updateCompanyProfile(
+      companyUpdateRequestModel: companyUpdateRequestModel,
+    );
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          status: CompanyProfileStatus.error,
+          errorMessage: failure.errMessage,
+        ),
+      ),
       (message) => emit(state.copyWith(
-        status: CompanyProfileStatus.deletePreferredLanguage,
+        status: CompanyProfileStatus.updateCompanyProfile,
         message: message,
+        errorMessage: null,
       )),
     );
   }

@@ -21,6 +21,7 @@ import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
+
 import '../../features/company/profile_company/data/model/company_model.dart';
 import '../../welcome_view.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
@@ -197,10 +198,7 @@ class AppRouter {
         name: Routes.editProfileCompanyViewRoute,
         path: '/editProfileCompanyView',
         builder: (context, state) {
-          final companyModel = state.extra as CompanyModel;
-          return EditProfileCompanyView(
-            companyModel: companyModel,
-          );
+          return EditProfileCompanyView();
         },
       ),
     ],
