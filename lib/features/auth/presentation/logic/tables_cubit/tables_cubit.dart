@@ -8,6 +8,20 @@ part 'tables_state.dart';
 class TablesCubit extends Cubit<TablesState> {
   TablesCubit() : super(TablesState());
 
+  void addInitialData({
+    List<SpecializationModel>? specializations,
+    List<LanguagePairModel>? languagePairs,
+    List<LanguageModel>? preferedLanguages,
+    List<SpecializationModel>? industriesServed,
+  }) {
+    emit(state.copyWith(
+      selectedSpecializations: specializations,
+      selectedLanguagePair: languagePairs,
+      selectedPreferedLanguages: preferedLanguages,
+      selectedIndustriesServed: industriesServed,
+    ));
+  }
+
   //! Specialization
   void addSpecialization(SpecializationModel specialization) {
     if (!state.selectedSpecializations.contains(specialization)) {

@@ -11,7 +11,7 @@ abstract class CompanyProfileRepo {
   });
 
   Future<Either<Failure, String>> addPreferedLanguages({
-    required LanguageModel languageModel,
+    required int id,
   });
   Future<Either<Failure, String>> deletePreferedLanguages({
     required LanguageModel languageModel,

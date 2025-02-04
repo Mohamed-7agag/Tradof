@@ -68,7 +68,7 @@ class _EditProfileCompanyViewState extends State<EditProfileCompanyView> {
               ProfileImageEdit(),
               verticalSpace(40),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
                   children: [
                     CustomTextField(

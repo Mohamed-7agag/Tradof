@@ -5,12 +5,12 @@ import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/company_bottom_nav_bar_cubit.dart';
-import 'package:tradof/features/company/profile_company/presentation/views/edit_profile_company_view.dart';
-import 'package:tradof/features/company/profile_company/presentation/views/update_company_profile_tables_view.dart';
-import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/views/company_bottom_nav_bar_view.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/company_setting_view.dart';
+import 'package:tradof/features/company/profile_company/presentation/views/edit_profile_company_view.dart';
 import 'package:tradof/features/company/profile_company/presentation/views/profile_company_view.dart';
+import 'package:tradof/features/company/profile_company/presentation/views/update_company_profile_tables_view.dart';
+import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
 import 'package:tradof/features/projects/presentation/logic/project_cubit/project_cubit.dart';
 import 'package:tradof/features/projects/presentation/views/create_project_view.dart';
@@ -21,12 +21,8 @@ import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
-import '../../features/company/bottom_nav_bar/presentation/views/company_bottom_nav_bar_view.dart';
 import '../../features/company/profile_company/data/model/company_model.dart';
 import '../../welcome_view.dart';
-import '../cache/cache_helper.dart';
-import '../helpers/navigation_handler.dart';
-import '../utils/app_constants.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
 class AppRouter {
@@ -36,7 +32,6 @@ class AppRouter {
       GlobalKey<NavigatorState>();
 
   static final router = GoRouter(
-   // debugLogDiagnostics: true,
     navigatorKey: _rootNavigatorKey,
     initialLocation: '/companyBottomNavBarView',
     // redirect: (context, state) {
@@ -178,10 +173,14 @@ class AppRouter {
             providers: [
               BlocProvider(
                 create: (context) =>
-                    MetaDataCubit(getIt())..fetchLanguagesAndSpecializations(),
+                    MetaDataCubit(getIt()),
               ),
               BlocProvider(
-                create: (context) => TablesCubit(),
+                create: (context) => TablesCubit()
+                  ..addInitialData(
+                    industriesServed: companyModel.specializations,
+                    preferedLanguages: companyModel.preferredLanguages,
+                  ),
               ),
             ],
             child: UpdateCompanyProfileTablesView(companyModel: companyModel),
@@ -193,7 +192,9 @@ class AppRouter {
         path: '/editProfileCompanyView',
         builder: (context, state) {
           final companyModel = state.extra as CompanyModel;
-          return EditProfileCompanyView(companyModel: companyModel,);
+          return EditProfileCompanyView(
+            companyModel: companyModel,
+          );
         },
       ),
     ],

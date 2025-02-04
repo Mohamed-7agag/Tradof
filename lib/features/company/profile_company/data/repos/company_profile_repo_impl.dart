@@ -28,14 +28,10 @@ class CompanyProfileRepoImpl implements CompanyProfileRepo {
   }
 
   @override
-  Future<Either<Failure, String>> addPreferedLanguages(
-      {required LanguageModel languageModel}) {
+  Future<Either<Failure, String>> addPreferedLanguages({required int id}) {
     return handleRequest(() async {
       final response = await _apiServices.post(
-        EndPoint.addPreferredLanguage(
-          AppConstants.kUserId,
-          languageModel.id,
-        ),
+        EndPoint.addPreferredLanguage(AppConstants.kUserId, id),
       );
       return response['message'] ?? 'Language added successfully';
     });

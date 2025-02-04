@@ -21,16 +21,9 @@ class MetaDataCubit extends Cubit<MetaDataState> {
     ]);
   }
 
-  Future<void> fetchLanguagesAndSpecializations() async {
-    await Future.wait([getLanguages(), getSpecializations()]);
-  }
-
-  Future<void> fetchLanguagesAndCountries() async {
-    await Future.wait([getLanguages(), getCountries()]);
-  }
-
   //! get Languages
   Future<void> getLanguages() async {
+    if (state.languages.isNotEmpty) return;
     emit(state.copyWith(status: MetaDataStatus.loading));
     final result = await _metaDataRepo.getLanguages();
     result.fold(
@@ -47,6 +40,7 @@ class MetaDataCubit extends Cubit<MetaDataState> {
 
   //! get Countries
   Future<void> getCountries() async {
+    if (state.countries.isNotEmpty) return;
     emit(state.copyWith(status: MetaDataStatus.loading));
     final result = await _metaDataRepo.getCountries();
     result.fold(
@@ -63,6 +57,7 @@ class MetaDataCubit extends Cubit<MetaDataState> {
 
   //! get Specializations
   Future<void> getSpecializations() async {
+    if (state.specializations.isNotEmpty) return;
     emit(state.copyWith(status: MetaDataStatus.loading));
     final result = await _metaDataRepo.getSpecaialization();
     result.fold(
