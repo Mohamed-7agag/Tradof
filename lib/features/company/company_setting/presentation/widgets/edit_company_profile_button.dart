@@ -18,6 +18,7 @@ class EditCompanyProfileButton extends StatelessWidget {
     required this.phoneNumberController,
     required this.locationCompanyController,
     required this.companyModel,
+    required this.companyNameController,
   });
 
   final TextEditingController firstNameController;
@@ -25,6 +26,7 @@ class EditCompanyProfileButton extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController phoneNumberController;
   final TextEditingController locationCompanyController;
+  final TextEditingController companyNameController;
   final CompanyModel companyModel;
 
   @override
@@ -66,8 +68,7 @@ class EditCompanyProfileButton extends StatelessWidget {
                                   .state
                                   .countryId ??
                               companyModel.countryId,
-                          companyName: state.companyModel?.companyName ??
-                              companyModel.companyName,
+                          companyName: companyNameController.text,
                         ),
                       );
                 },

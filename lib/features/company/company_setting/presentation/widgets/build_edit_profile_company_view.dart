@@ -29,6 +29,7 @@ class _BuildEditProfileCompanyViewState
   late final TextEditingController lastNameController;
   late final TextEditingController phoneNumberController;
   late final TextEditingController locationCompanyController;
+  late final TextEditingController companyNameController;
 
   @override
   void initState() {
@@ -39,12 +40,15 @@ class _BuildEditProfileCompanyViewState
     lastNameController =
         TextEditingController(text: widget.companyModel.lastName);
 
-    phoneNumberController = TextEditingController(
-        text: widget.companyModel.phone.length == 11
-            ? widget.companyModel.phone.substring(1)
-            : widget.companyModel.phone);
+    // phoneNumberController = TextEditingController(
+    //     text: widget.companyModel.phone.length == 11
+    //         ? widget.companyModel.phone.substring(1)
+    //         : widget.companyModel.phone);
+    phoneNumberController = TextEditingController(text: widget.companyModel.phone);
     locationCompanyController =
         TextEditingController(text: widget.companyModel.companyAddress);
+    companyNameController =
+        TextEditingController(text: widget.companyModel.companyName);
     context
         .read<ProfileImageAndCountryCubit>()
         .onCountrySelected(widget.companyModel.countryId);
@@ -101,6 +105,14 @@ class _BuildEditProfileCompanyViewState
                   ),
                   verticalSpace(20),
                   CustomTextField(
+                    labelText: 'Company Name',
+                    labelColor: AppColors.darkGrey,
+                    controller: companyNameController,
+                    keyboardType: TextInputType.text,
+                    labelBehavior: true,
+                    outlineBorder: false,
+                  ),
+                  CustomTextField(
                     labelText: 'Email',
                     labelColor: AppColors.darkGrey,
                     controller: emailController,
@@ -129,6 +141,7 @@ class _BuildEditProfileCompanyViewState
                   ),
                   verticalSpace(40),
                   EditCompanyProfileButton(
+                    companyNameController: companyNameController,
                     firstNameController: firstNameController,
                     lastNameController: lastNameController,
                     emailController: emailController,
