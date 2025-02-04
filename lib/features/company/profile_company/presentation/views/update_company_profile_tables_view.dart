@@ -46,7 +46,7 @@ class UpdateCompanyProfileTablesView extends StatelessWidget {
         style: AppStyle.robotoBold20.copyWith(color: AppColors.white),
       ),
       actions: [
-        SvgPicture.asset('assets/images/edit.svg', width: 25),
+        SvgPicture.asset('assets/images/edit.svg', width: 24),
         horizontalSpace(16),
       ],
       toolbarHeight: 65,

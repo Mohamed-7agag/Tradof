@@ -7,9 +7,9 @@ import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 import 'package:tradof/features/auth/presentation/logic/freelancer_registeration_cubit.dart';
 import 'package:tradof/features/auth/presentation/widgets/phone_number_text_field.dart';
 import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
-import 'package:tradof/features/company/profile_company/presentation/widgets/country_drop_down_edit.dart';
-import 'package:tradof/features/company/profile_company/presentation/widgets/edit_company_profile_button.dart';
-import 'package:tradof/features/company/profile_company/presentation/widgets/profile_image_edit.dart';
+import 'package:tradof/features/company/company_setting/presentation/widgets/country_drop_down_edit.dart';
+import 'package:tradof/features/company/company_setting/presentation/widgets/edit_company_profile_button.dart';
+import 'package:tradof/features/company/company_setting/presentation/widgets/profile_image_edit.dart';
 
 class BuildEditProfileCompanyView extends StatefulWidget {
   const BuildEditProfileCompanyView({super.key, required this.companyModel});

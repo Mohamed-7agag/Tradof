@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
@@ -40,7 +39,6 @@ class UserImageAndInfo extends StatelessWidget {
           ),
         ],
       ),
-      trailing: SvgPicture.asset('assets/images/edit.svg', width: 26),
     );
   }
 }

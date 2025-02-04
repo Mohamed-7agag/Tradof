@@ -7,11 +7,11 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
-import 'package:tradof/features/auth/presentation/logic/freelancer_registeration_cubit.dart';
-import 'package:tradof/features/company/profile_company/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
-import 'package:tradof/features/company/profile_company/presentation/widgets/build_edit_profile_company_view.dart';
 
 import '../../../../../core/utils/widgets/custom_toastification.dart';
+import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
+import '../../../profile_company/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
+import '../widgets/build_edit_profile_company_view.dart';
 
 class EditProfileCompanyView extends StatefulWidget {
   const EditProfileCompanyView({super.key});
@@ -68,7 +68,7 @@ class _EditProfileCompanyViewState extends State<EditProfileCompanyView> {
         style: AppStyle.robotoBold20,
       ),
       actions: [
-        SvgPicture.asset('assets/images/edit.svg'),
+        SvgPicture.asset('assets/images/edit.svg',width: 24),
         horizontalSpace(16),
       ],
       toolbarHeight: 65,

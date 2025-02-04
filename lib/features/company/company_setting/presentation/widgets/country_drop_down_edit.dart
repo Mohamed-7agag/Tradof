@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import 'package:tradof/features/auth/data/model/country_model.dart';
 import 'package:tradof/features/auth/presentation/logic/freelancer_registeration_cubit.dart';
-import 'package:tradof/features/company/profile_company/presentation/widgets/country_drop_down_with_edit.dart';
+import 'package:tradof/features/company/company_setting/presentation/widgets/country_drop_down_with_edit.dart';
 
 class CountryDropDownEdit extends StatefulWidget {
   const CountryDropDownEdit({

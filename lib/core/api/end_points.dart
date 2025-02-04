@@ -15,7 +15,7 @@ abstract class EndPoint {
   static const String createProject = 'project';
 
   //company
-
+  static String changeCompanyPassword = 'Company/ChangePassword';
   static String getCompanybyId(String id) => 'Company/$id';
 
   static String addPreferredLanguage(String companyId, int languageId) {

@@ -118,13 +118,9 @@ class CompanyBottomNavBarView extends StatelessWidget {
         context.read<CompanyBottomNavBarCubit>().updateIndex(index);
         navigationShell.goBranch(index);
       },
-      child: Opacity(
-        opacity: isSelected ? 1.0 : 0.5,
-        child: Image.asset(
-          isSelected ? activeIcon : inactiveIcon,
-          width: 24.w,
-          height: 24.h,
-        ),
+      child: Image.asset(
+        isSelected ? activeIcon : inactiveIcon,
+        width: 24.w,
       ),
     );
   }

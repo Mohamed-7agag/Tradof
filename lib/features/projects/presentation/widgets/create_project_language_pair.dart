@@ -20,7 +20,7 @@ class CreateProjectLanguagePair extends StatelessWidget {
           return const CustomLoadingWidget();
         } else if (state.status.isError) {
           return CustomFailureWidget(
-            text: '${state.errorMessage} ,Try to refresh',
+            text: state.errorMessage,
           );
         }
         return Column(

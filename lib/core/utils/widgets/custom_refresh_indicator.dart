@@ -7,15 +7,17 @@ class CustomRefreshIndicator extends StatelessWidget {
     super.key,
     required this.child,
     required this.onRefresh,
+    this.reversColors = false,
   });
   final Widget child;
+  final bool reversColors;
   final Future<void> Function() onRefresh;
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: onRefresh,
-      color: AppColors.white,
-      backgroundColor: AppColors.primary,
+      color: reversColors ? AppColors.primary : AppColors.white,
+      backgroundColor: reversColors ? AppColors.white : AppColors.primary,
       child: child,
     );
   }

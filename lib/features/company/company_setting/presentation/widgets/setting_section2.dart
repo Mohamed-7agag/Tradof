@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tradof/core/helpers/extensions.dart';
+import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/company/company_setting/presentation/widgets/setting_item.dart';
 
@@ -11,14 +13,16 @@ class SettingSection2 extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
       decoration: BoxDecoration(
         color: AppColors.cardColor,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         children: [
           SettingItem(
             title: 'Change password',
             icon: 'assets/images/password.svg',
-            onTap: () {},
+            onTap: () {
+              context.pushNamed(Routes.changeCompanyPasswordViewRoute);
+            },
           ),
           Divider(color: AppColors.cardDarkColor),
           SettingItem(
