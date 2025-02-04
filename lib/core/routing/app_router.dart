@@ -22,7 +22,6 @@ import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
-import '../../features/company/profile_company/data/model/company_model.dart';
 import '../../welcome_view.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
@@ -177,7 +176,7 @@ class AppRouter {
         name: Routes.updateCompanyProfileTablesViewRoute,
         path: '/updateCompanyProfileTablesView',
         builder: (context, state) {
-          final companyModel = state.extra as CompanyModel;
+          final data = state.extra as Map<String, dynamic>;
           return MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -186,12 +185,15 @@ class AppRouter {
               BlocProvider(
                 create: (context) => TablesCubit()
                   ..addInitialData(
-                    industriesServed: companyModel.specializations,
-                    preferedLanguages: companyModel.preferredLanguages,
+                    industriesServed: data['data'].specializations,
+                    preferedLanguages: data['data'].preferredLanguages,
                   ),
               ),
             ],
-            child: UpdateCompanyProfileTablesView(companyModel: companyModel),
+            child: UpdateCompanyProfileTablesView(
+              companyModel: data['data'],
+              isPreferedLanguages: data['isPreferedLanguages'],
+            ),
           );
         },
       ),

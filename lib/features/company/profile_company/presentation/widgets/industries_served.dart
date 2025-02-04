@@ -23,9 +23,13 @@ class IndustriesServed extends StatelessWidget {
             Text('Industries Served', style: AppStyle.poppinsMedium15),
             GestureDetector(
               onTap: () {
+                Map<String, dynamic> data = {
+                  'isPreferedLanguages': false,
+                  'data': companyModel
+                };
                 context.pushNamed(
                   Routes.updateCompanyProfileTablesViewRoute,
-                  extra: companyModel,
+                  extra: data,
                 );
               },
               child: Image.asset('assets/images/edit.png', width: 25),

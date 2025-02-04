@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tradof/core/di/di.dart';
 import 'package:tradof/features/auth/presentation/widgets/industries_served_table.dart';
 import 'package:tradof/features/auth/presentation/widgets/prefered_languages_table.dart';
 import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
@@ -9,10 +11,16 @@ import 'package:tradof/features/company/profile_company/presentation/widgets/upd
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
+import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class UpdateCompanyProfileTablesView extends StatelessWidget {
-  const UpdateCompanyProfileTablesView({super.key, required this.companyModel});
+  const UpdateCompanyProfileTablesView({
+    super.key,
+    required this.companyModel,
+    required this.isPreferedLanguages,
+  });
   final CompanyModel companyModel;
+  final bool isPreferedLanguages;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,11 +31,16 @@ class UpdateCompanyProfileTablesView extends StatelessWidget {
           child: Column(
             children: [
               verticalSpace(16),
-              PreferedLanguagesTable(darkColors: true),
-              verticalSpace(24),
-              IndustriesServedTable(darkColors: true),
+              isPreferedLanguages
+                  ? PreferedLanguagesTable(darkColors: true)
+                  : IndustriesServedTable(darkColors: true),
               verticalSpace(40),
-              UpdateCompanyProfileTablesButton(companyModel: companyModel),
+              BlocProvider(
+                create: (context) => CompanyProfileCubit(getIt()),
+                child: UpdateCompanyProfileTablesButton(
+                  companyModel: companyModel,
+                ),
+              ),
               verticalSpace(40),
             ],
           ),

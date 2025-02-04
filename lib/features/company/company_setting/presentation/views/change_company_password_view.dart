@@ -15,13 +15,13 @@ class ChangeCompanyPasswordView extends StatefulWidget {
 }
 
 class _ChangeCompanyPasswordViewState extends State<ChangeCompanyPasswordView> {
-  late final TextEditingController oldPasswordController;
+  late final TextEditingController currentPasswordController;
   late final TextEditingController newPasswordController;
   late final TextEditingController confirmPasswordController;
 
   @override
   void initState() {
-    oldPasswordController = TextEditingController();
+    currentPasswordController = TextEditingController();
     newPasswordController = TextEditingController();
     confirmPasswordController = TextEditingController();
     super.initState();
@@ -29,7 +29,7 @@ class _ChangeCompanyPasswordViewState extends State<ChangeCompanyPasswordView> {
 
   @override
   void dispose() {
-    oldPasswordController.dispose();
+    currentPasswordController.dispose();
     newPasswordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
@@ -49,25 +49,28 @@ class _ChangeCompanyPasswordViewState extends State<ChangeCompanyPasswordView> {
                   children: [
                     verticalSpace(30),
                     CustomTextField(
-                      labelText: 'Old Password',
-                      controller: oldPasswordController,
+                      labelText: 'Current Password',
+                      controller: currentPasswordController,
                       outlineBorder: true,
+                      obscureText: true,
                     ),
                     verticalSpace(16),
                     CustomTextField(
                       labelText: 'New Password',
                       controller: newPasswordController,
                       outlineBorder: true,
+                      obscureText: true,
                     ),
                     verticalSpace(16),
                     CustomTextField(
                       labelText: 'Confirm Password',
                       controller: confirmPasswordController,
                       outlineBorder: true,
+                      obscureText: true,
                     ),
                     verticalSpace(60),
                     ChangeCompanyPasswordButton(
-                      oldPasswordController: oldPasswordController,
+                      currentPasswordController: currentPasswordController,
                       newPasswordController: newPasswordController,
                       confirmPasswordController: confirmPasswordController,
                     ),

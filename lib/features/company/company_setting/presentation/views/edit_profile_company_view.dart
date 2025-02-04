@@ -6,9 +6,9 @@ import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
+import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 
-import '../../../../../core/utils/widgets/custom_toastification.dart';
 import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
 import '../../../profile_company/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import '../widgets/build_edit_profile_company_view.dart';
@@ -40,14 +40,14 @@ class _EditProfileCompanyViewState extends State<EditProfileCompanyView> {
         ],
         child: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
           buildWhen: (previous, current) =>
-              current.status.companyDataFetched ||
-              current.status.isError ||
-              current.status.isLoading,
+              current.status.isGetCompanySuccess ||
+              current.status.isGetCompanyFailure ||
+              current.status.isGetCompanyloading,
           builder: (context, state) {
-            if (state.status.isLoading) {
+            if (state.status.isGetCompanyloading) {
               return const CustomLoadingWidget();
-            } else if (state.status.isError) {
-              errorToast(context, 'Error', state.errorMessage);
+            } else if (state.status.isGetCompanyFailure) {
+              return CustomFailureWidget(text: state.errorMessage);
             }
             return BuildEditProfileCompanyView(
               companyModel: state.companyModel!,
@@ -68,7 +68,7 @@ class _EditProfileCompanyViewState extends State<EditProfileCompanyView> {
         style: AppStyle.robotoBold20,
       ),
       actions: [
-        SvgPicture.asset('assets/images/edit.svg',width: 24),
+        SvgPicture.asset('assets/images/edit.svg', width: 24),
         horizontalSpace(16),
       ],
       toolbarHeight: 65,

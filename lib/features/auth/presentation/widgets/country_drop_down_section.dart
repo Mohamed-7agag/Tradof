@@ -17,6 +17,7 @@ class CountryDropDownSection extends StatelessWidget {
       builder: (context, state) {
         return SlideInRight(
           from: 400,
+          delay: Duration(milliseconds: 250),
           child: BlocBuilder<MetaDataCubit, MetaDataState>(
             buildWhen: (previous, current) =>
                 previous.countries != current.countries,

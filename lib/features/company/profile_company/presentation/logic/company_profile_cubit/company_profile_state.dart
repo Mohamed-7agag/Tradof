@@ -2,38 +2,46 @@ part of 'company_profile_cubit.dart';
 
 enum CompanyProfileStatus {
   initial,
-  loading,
-  companyDataFetched,
-  error,
-  addPreferredLanguage,
-  deletePreferredLanguage,
-  addIndustriesServed,
-  deleteIndustriesServed,
+  getCompanyloading,
+  getCompanySuccess,
+  getCompanyFailure,
   updateCompanyProfileLoading,
   updateCompanyProfileFailure,
   updateCompanyProfileSuccess,
+  preferedLanguagesLoading,
+  preferedLanguagesFailure,
+  preferedLanguagesSuccess,
+  industriesServedLoading,
+  industriesServedFailure,
+  industriesServedSuccess
 }
 
 extension CompanyProfileStatusX on CompanyProfileStatus {
-  bool get isLoading => this == CompanyProfileStatus.loading;
-  bool get companyDataFetched =>
-      this == CompanyProfileStatus.companyDataFetched;
-  bool get isError => this == CompanyProfileStatus.error;
+  bool get isGetCompanyloading =>
+      this == CompanyProfileStatus.getCompanyloading;
+  bool get isGetCompanySuccess =>
+      this == CompanyProfileStatus.getCompanySuccess;
+  bool get isGetCompanyFailure =>
+      this == CompanyProfileStatus.getCompanyFailure;
   bool get isInitial => this == CompanyProfileStatus.initial;
-  bool get isAddPreferredLanguage =>
-      this == CompanyProfileStatus.addPreferredLanguage;
-  bool get isDeletePreferredLanguage =>
-      this == CompanyProfileStatus.deletePreferredLanguage;
-  bool get isAddIndustriesServed =>
-      this == CompanyProfileStatus.addIndustriesServed;
-  bool get isDeleteIndustriesServed =>
-      this == CompanyProfileStatus.deleteIndustriesServed;
   bool get isUpdateCompanyProfileSuccess =>
       this == CompanyProfileStatus.updateCompanyProfileSuccess;
   bool get isUpdateCompanyProfileLoading =>
       this == CompanyProfileStatus.updateCompanyProfileLoading;
   bool get isUpdateCompanyProfileFailure =>
       this == CompanyProfileStatus.updateCompanyProfileFailure;
+  bool get isUpdateCompanyTablesSuccess =>
+      this == CompanyProfileStatus.preferedLanguagesSuccess;
+  bool get isUpdateCompanyTablesLoading =>
+      this == CompanyProfileStatus.preferedLanguagesLoading;
+  bool get isUpdateCompanyTablesFailure =>
+      this == CompanyProfileStatus.preferedLanguagesFailure;
+  bool get isIndustriesServedSuccess =>
+      this == CompanyProfileStatus.industriesServedSuccess;
+  bool get isIndustriesServedLoading =>
+      this == CompanyProfileStatus.industriesServedLoading;
+  bool get isIndustriesServedFailure =>
+      this == CompanyProfileStatus.industriesServedFailure;
 }
 
 class CompanyProfileState extends Equatable {

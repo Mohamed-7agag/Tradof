@@ -22,9 +22,13 @@ class PreferredLanguage extends StatelessWidget {
             Text('Preferred Language', style: AppStyle.poppinsMedium15),
             GestureDetector(
               onTap: () {
+                Map<String, dynamic> data = {
+                  'isPreferedLanguages': true,
+                  'data': companyModel
+                };
                 context.pushNamed(
                   Routes.updateCompanyProfileTablesViewRoute,
-                  extra: companyModel,
+                  extra: data,
                 );
               },
               child: Image.asset('assets/images/edit.png', width: 25),

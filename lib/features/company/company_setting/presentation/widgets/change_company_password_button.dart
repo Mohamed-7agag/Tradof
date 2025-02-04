@@ -12,11 +12,11 @@ import '../logic/cubit/company_setting_cubit.dart';
 class ChangeCompanyPasswordButton extends StatelessWidget {
   const ChangeCompanyPasswordButton({
     super.key,
-    required this.oldPasswordController,
+    required this.currentPasswordController,
     required this.newPasswordController,
     required this.confirmPasswordController,
   });
-  final TextEditingController oldPasswordController;
+  final TextEditingController currentPasswordController;
   final TextEditingController newPasswordController;
   final TextEditingController confirmPasswordController;
   @override
@@ -49,7 +49,7 @@ class ChangeCompanyPasswordButton extends StatelessWidget {
   _validateAndConfirmNewPassword(BuildContext context) {
     final password = newPasswordController.text.trim();
     final confirmPassword = confirmPasswordController.text.trim();
-    if (oldPasswordController.text.trim().isNullOrEmpty() ||
+    if (currentPasswordController.text.trim().isNullOrEmpty() ||
         password.isNullOrEmpty() ||
         confirmPassword.isNullOrEmpty()) {
       errorToast(context, 'Invalid Password', 'Please fill all fields');
@@ -71,10 +71,10 @@ class ChangeCompanyPasswordButton extends StatelessWidget {
       errorToast(context, 'Invalid Password',
           'Password must contain at least one special character');
     } else {
-      // context.read<CompanySettingCubit>().changeCompanyPassword(
-      //       oldPassword: oldPasswordController.text.trim(),
-      //       newPassword: password,
-      //     );
+      context.read<CompanySettingCubit>().changeCompanyPassword(
+            currentPassword: currentPasswordController.text.trim(),
+            newPassword: password,
+          );
     }
   }
 }
