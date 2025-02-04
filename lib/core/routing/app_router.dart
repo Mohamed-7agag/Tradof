@@ -123,8 +123,15 @@ class AppRouter {
               GoRoute(
                 path: '/create-project',
                 pageBuilder: (context, state) => NoTransitionPage(
-                  child: BlocProvider(
-                    create: (context) => ProjectCubit(getIt()),
+                  child: MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) => ProjectCubit(getIt()),
+                      ),
+                      BlocProvider(
+                        create: (context) => MetaDataCubit(getIt())..getLanguages(),
+                      ),
+                    ],
                     child: CreateProjectView(),
                   ),
                 ),
@@ -172,8 +179,7 @@ class AppRouter {
           return MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) =>
-                    MetaDataCubit(getIt()),
+                create: (context) => MetaDataCubit(getIt()),
               ),
               BlocProvider(
                 create: (context) => TablesCubit()

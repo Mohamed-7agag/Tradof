@@ -60,7 +60,7 @@ class AttachmentFilesSection extends StatelessWidget {
           right: 15,
           child: IconButton(
             onPressed: () => _pickFiles(context),
-            icon: Icon(Icons.add, size: 28),
+            icon: Icon(Icons.add, size: 30),
             style: IconButton.styleFrom(
                 backgroundColor: AppColors.lightOrange,
                 foregroundColor: AppColors.white,

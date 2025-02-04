@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
+import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
+import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
 import 'package:tradof/features/projects/presentation/logic/file_cubit.dart';
 import 'package:tradof/features/projects/presentation/widgets/attachment_files_section.dart';
 import 'package:tradof/features/projects/presentation/widgets/create_project_button.dart';
@@ -45,14 +47,16 @@ class _CreateProjectViewState extends State<CreateProjectView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FileCubit(),
-      child: Column(
-        children: [
-          CreateProjectAppbar(),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+    return Column(
+      children: [
+        CreateProjectAppbar(),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: CustomRefreshIndicator(
+              onRefresh: () async {
+                context.read<MetaDataCubit>().getLanguages();
+              },
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +103,10 @@ class _CreateProjectViewState extends State<CreateProjectView> {
                     verticalSpace(20),
                     Text('Attachments Files', style: AppStyle.poppinsMedium14),
                     verticalSpace(12),
-                    AttachmentFilesSection(),
+                    BlocProvider(
+                      create: (context) => FileCubit(),
+                      child: AttachmentFilesSection(),
+                    ),
                     verticalSpace(60),
                     CreateProjectButton(
                       projectNameController: projectNameController,
@@ -114,8 +121,8 @@ class _CreateProjectViewState extends State<CreateProjectView> {
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
