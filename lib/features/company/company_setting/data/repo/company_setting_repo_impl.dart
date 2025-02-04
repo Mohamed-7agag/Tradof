@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:tradof/core/api/api_service.dart';
 import 'package:tradof/core/errors/failure.dart';
+import 'package:tradof/features/company/profile_company/data/model/company_update_request_model.dart';
 
 import '../../../../../core/api/end_points.dart';
 import '../../../../../core/helpers/handle_request_method.dart';
@@ -23,6 +24,17 @@ class CompanySettingRepoImpl implements CompanySettingRepo {
           'newPassword': newPassword,
           'confirmPassword': newPassword,
         },
+      );
+      return response;
+    });
+  }
+  @override
+  Future<Either<Failure, String>> updateCompanyProfile(
+      {required CompanyUpdateRequestModel companyUpdateRequestModel}) {
+    return handleRequest(() async {
+      final response = await _apiServices.put(
+        EndPoint.updateCompanyProfile,
+        data: companyUpdateRequestModel.toJson(),
       );
       return response;
     });

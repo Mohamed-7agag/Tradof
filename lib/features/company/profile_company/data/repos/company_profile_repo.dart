@@ -22,8 +22,4 @@ abstract class CompanyProfileRepo {
   Future<Either<Failure, String>> deleteIndustriesServed({
     required List<int> industriesIds,
   });
-
-  Future<Either<Failure, String>> updateCompanyProfile({
-    required CompanyUpdateRequestModel companyUpdateRequestModel,
-  });
 }

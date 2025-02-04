@@ -32,27 +32,7 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
             ));
   }
 
-  Future<void> updateCompanyProfile(
-      CompanyUpdateRequestModel companyUpdateRequestModel) async {
-    emit(state.copyWith(
-        status: CompanyProfileStatus.updateCompanyProfileLoading));
-    final result = await _profileCompanyRepo.updateCompanyProfile(
-      companyUpdateRequestModel: companyUpdateRequestModel,
-    );
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: CompanyProfileStatus.updateCompanyProfileFailure,
-          errorMessage: failure.errMessage,
-        ),
-      ),
-      (message) => emit(state.copyWith(
-        status: CompanyProfileStatus.updateCompanyProfileSuccess,
-        message: message,
-        errorMessage: null,
-      )),
-    );
-  }
+ 
 
   Future<void> addPreferedLanguages({required List<int> languagesIds}) async {
     emit(state.copyWith(status: CompanyProfileStatus.preferedLanguagesLoading));

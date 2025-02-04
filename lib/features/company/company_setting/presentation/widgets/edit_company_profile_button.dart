@@ -5,9 +5,9 @@ import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 import 'package:tradof/features/auth/presentation/logic/freelancer_registeration_cubit.dart';
+import 'package:tradof/features/company/company_setting/presentation/logic/cubit/company_setting_cubit.dart';
 import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
 import 'package:tradof/features/company/profile_company/data/model/company_update_request_model.dart';
-import 'package:tradof/features/company/profile_company/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 
 class EditCompanyProfileButton extends StatelessWidget {
   const EditCompanyProfileButton({
@@ -31,7 +31,7 @@ class EditCompanyProfileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CompanyProfileCubit, CompanyProfileState>(
+    return BlocConsumer<CompanySettingCubit, CompanySettingState>(
       listenWhen: (previous, current) =>
           current.status.isUpdateCompanyProfileLoading ||
           current.status.isUpdateCompanyProfileFailure ||
@@ -45,7 +45,7 @@ class EditCompanyProfileButton extends StatelessWidget {
           successToast(context, 'Success', state.message);
           Navigator.pop(context);
         } else if (state.status.isUpdateCompanyProfileFailure) {
-          errorToast(context, 'Error', state.errorMessage);
+          errorToast(context, 'Error', state.errMessage);
         }
       },
       builder: (context, state) {
@@ -55,7 +55,7 @@ class EditCompanyProfileButton extends StatelessWidget {
                 text: 'Update',
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  context.read<CompanyProfileCubit>().updateCompanyProfile(
+                  context.read<CompanySettingCubit>().updateCompanyProfile(
                         CompanyUpdateRequestModel(
                           id: AppConstants.kUserId,
                           firstName: firstNameController.text,

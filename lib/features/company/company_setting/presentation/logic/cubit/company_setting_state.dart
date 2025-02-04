@@ -5,6 +5,9 @@ enum CompanySettingStatus {
   changePasswordLoading,
   changePasswordSuccess,
   changePasswordFailure,
+  updateCompanyProfileLoading,
+  updateCompanyProfileFailure,
+  updateCompanyProfileSuccess,
 }
 
 extension CompanySettingStatusX on CompanySettingStatus {
@@ -14,6 +17,12 @@ extension CompanySettingStatusX on CompanySettingStatus {
       this == CompanySettingStatus.changePasswordSuccess;
   bool get isChangePasswordFailure =>
       this == CompanySettingStatus.changePasswordFailure;
+  bool get isUpdateCompanyProfileLoading =>
+      this == CompanySettingStatus.updateCompanyProfileLoading;
+  bool get isUpdateCompanyProfileSuccess =>
+      this == CompanySettingStatus.updateCompanyProfileSuccess;
+  bool get isUpdateCompanyProfileFailure =>
+      this == CompanySettingStatus.updateCompanyProfileFailure;
 }
 
 class CompanySettingState extends Equatable {

@@ -74,15 +74,5 @@ class CompanyProfileRepoImpl implements CompanyProfileRepo {
     });
   }
 
-  @override
-  Future<Either<Failure, String>> updateCompanyProfile(
-      {required CompanyUpdateRequestModel companyUpdateRequestModel}) {
-    return handleRequest(() async {
-      final response = await _apiServices.put(
-        EndPoint.updateCompanyProfile,
-        data: companyUpdateRequestModel.toJson(),
-      );
-      return response;
-    });
-  }
+  
 }
