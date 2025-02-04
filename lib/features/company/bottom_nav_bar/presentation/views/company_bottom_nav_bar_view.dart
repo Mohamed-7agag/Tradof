@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/company_bottom_nav_bar_cubit.dart';
@@ -14,8 +13,11 @@ import 'package:tradof/features/projects/presentation/logic/project_cubit/projec
 import 'package:tradof/features/projects/presentation/views/create_project_view.dart';
 
 class CompanyBottomNavBarView extends StatelessWidget {
-  const CompanyBottomNavBarView(
-      {super.key, required this.navigationShell, this.initialIndex = 0});
+  const CompanyBottomNavBarView({
+    super.key,
+    required this.navigationShell,
+    this.initialIndex = 0,
+  });
 
   final StatefulNavigationShell navigationShell;
   final int initialIndex;

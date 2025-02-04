@@ -5,12 +5,12 @@ import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/company_bottom_nav_bar_cubit.dart';
-import 'package:tradof/features/company/profile_company/presentation/views/edit_profile_company_view.dart';
-import 'package:tradof/features/company/profile_company/presentation/views/update_company_profile_tables_view.dart';
-import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/views/company_bottom_nav_bar_view.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/company_setting_view.dart';
+import 'package:tradof/features/company/profile_company/presentation/views/edit_profile_company_view.dart';
 import 'package:tradof/features/company/profile_company/presentation/views/profile_company_view.dart';
+import 'package:tradof/features/company/profile_company/presentation/views/update_company_profile_tables_view.dart';
+import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
 import 'package:tradof/features/projects/presentation/logic/project_cubit/project_cubit.dart';
 import 'package:tradof/features/projects/presentation/views/create_project_view.dart';
@@ -33,7 +33,6 @@ class AppRouter {
       GlobalKey<NavigatorState>();
 
   static final router = GoRouter(
-    // debugLogDiagnostics: true,
     navigatorKey: _rootNavigatorKey,
     initialLocation: '/companyBottomNavBarView',
     // redirect: (context, state) {
@@ -125,8 +124,15 @@ class AppRouter {
               GoRoute(
                 path: '/create-project',
                 pageBuilder: (context, state) => NoTransitionPage(
-                  child: BlocProvider(
-                    create: (context) => ProjectCubit(getIt()),
+                  child: MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) => ProjectCubit(getIt()),
+                      ),
+                      BlocProvider(
+                        create: (context) => MetaDataCubit(getIt())..getLanguages(),
+                      ),
+                    ],
                     child: CreateProjectView(),
                   ),
                 ),
@@ -174,11 +180,14 @@ class AppRouter {
           return MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) =>
-                    MetaDataCubit(getIt())..fetchLanguagesAndSpecializations(),
+                create: (context) => MetaDataCubit(getIt()),
               ),
               BlocProvider(
-                create: (context) => TablesCubit(),
+                create: (context) => TablesCubit()
+                  ..addInitialData(
+                    industriesServed: companyModel.specializations,
+                    preferedLanguages: companyModel.preferredLanguages,
+                  ),
               ),
             ],
             child: UpdateCompanyProfileTablesView(companyModel: companyModel),

@@ -7,12 +7,13 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
-import '../../data/model/specialization_model.dart';
+import '../../../../core/utils/widgets/custom_failure_widget.dart';
+import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../logic/tables_cubit/tables_cubit.dart';
 
 class IndustriesServedTable extends StatelessWidget {
-  const IndustriesServedTable({super.key});
-
+  const IndustriesServedTable({super.key, this.darkColors = false});
+  final bool darkColors;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,8 +23,8 @@ class IndustriesServedTable extends StatelessWidget {
           children: [
             Text(
               'Industries Served',
-              style:
-                  AppStyle.poppinsSemiBold14.copyWith(color: AppColors.white),
+              style: AppStyle.poppinsSemiBold14.copyWith(
+                  color: darkColors ? AppColors.black : AppColors.white),
             ),
             GestureDetector(
               onTap: () {
@@ -47,7 +48,7 @@ class IndustriesServedTable extends StatelessWidget {
                     label: Text(
                       'Industries Served',
                       style: AppStyle.poppinsSemiBold14.copyWith(
-                        color: AppColors.white,
+                        color: darkColors ? AppColors.black : AppColors.white,
                       ),
                     ),
                   ),
@@ -69,7 +70,10 @@ class IndustriesServedTable extends StatelessWidget {
                             SizedBox(width: 6),
                             Text(
                               industriesServed.name,
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(
+                                  color: darkColors
+                                      ? AppColors.black
+                                      : Colors.white),
                             ),
                           ],
                         ),
@@ -79,10 +83,17 @@ class IndustriesServedTable extends StatelessWidget {
                 }).toList(),
                 horizontalMargin: 12,
                 columnSpacing: 22,
+                dividerThickness: 0,
                 border: TableBorder.all(
-                  color: AppColors.white,
+                  color: darkColors ? AppColors.cardDarkColor : AppColors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
+                decoration: darkColors
+                    ? BoxDecoration(
+                        color: AppColors.cardColor,
+                        borderRadius: BorderRadius.circular(10),
+                      )
+                    : null,
               );
             },
           ),
@@ -93,13 +104,16 @@ class IndustriesServedTable extends StatelessWidget {
 
   _showIndusteriesServedDialog(BuildContext context) {
     final cubit = context.read<TablesCubit>();
-    final List<SpecializationModel> industriesServed =
-        context.read<MetaDataCubit>().state.specializations;
+    final metaDataCubit = context.read<MetaDataCubit>();
+
     showDialog(
       context: context,
       builder: (context) {
-        return BlocProvider.value(
-          value: cubit,
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: cubit),
+            BlocProvider.value(value: metaDataCubit..getSpecializations()),
+          ],
           child: AlertDialog(
             title: Text(
               'Industries Served',
@@ -111,27 +125,41 @@ class IndustriesServedTable extends StatelessWidget {
             ),
             content: SizedBox(
               width: 0.9.sw,
-              child: ListView.separated(
-                itemCount: industriesServed.length,
-                shrinkWrap: true,
-                separatorBuilder: (BuildContext context, int index) =>
-                    Divider(color: Colors.white10, height: 0),
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    title: Text(
-                      '${index + 1}. ${industriesServed[index].name}',
-                      style: AppStyle.robotoRegular15
-                          .copyWith(color: Colors.white),
-                    ),
-                    onTap: () {
-                      context.read<TablesCubit>().addIndustryServed(
-                            industriesServed[index],
-                          );
-                      Navigator.pop(context);
+              height: 0.7.sh,
+              child: BlocBuilder<MetaDataCubit, MetaDataState>(
+                buildWhen: (previous, current) =>
+                    previous.specializations != current.specializations,
+                builder: (context, state) {
+                  if (state.status.isLoading) {
+                    return const CustomLoadingWidget(color: AppColors.white);
+                  } else if (state.status.isError) {
+                    return CustomFailureWidget(
+                      text: state.errorMessage,
+                      textColor: AppColors.white,
+                    );
+                  }
+                  return ListView.separated(
+                    itemCount: state.specializations.length,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        Divider(color: Colors.white10, height: 0),
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        title: Text(
+                          '${index + 1}. ${state.specializations[index].name}',
+                          style: AppStyle.robotoRegular15
+                              .copyWith(color: Colors.white),
+                        ),
+                        onTap: () {
+                          context.read<TablesCubit>().addIndustryServed(
+                                state.specializations[index],
+                              );
+                          Navigator.pop(context);
+                        },
+                      );
                     },
                   );
                 },

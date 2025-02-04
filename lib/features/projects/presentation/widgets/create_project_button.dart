@@ -52,6 +52,9 @@ class CreateProjectButton extends StatelessWidget {
     } else if (context.read<ProjectCubit>().state.fromLanguage == null ||
         context.read<ProjectCubit>().state.toLanguage == null) {
       errorToast(context, 'Error', 'Please select a language pair');
+    } else if (context.read<ProjectCubit>().state.fromLanguage ==
+        context.read<ProjectCubit>().state.toLanguage) {
+      errorToast(context, 'Error', 'Please select different languages');
     } else if (context.read<ProjectCubit>().state.projectDeliveryDate == null) {
       errorToast(context, 'Error', 'Please select a delivery date');
     } else if (files.isEmpty) {

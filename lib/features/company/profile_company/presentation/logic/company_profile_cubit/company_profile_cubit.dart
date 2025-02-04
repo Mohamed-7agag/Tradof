@@ -19,7 +19,6 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
     emit(state.copyWith(status: CompanyProfileStatus.loading));
     final result = await _profileCompanyRepo.getCompanyProfrile(
       companyId: AppConstants.kUserId,
-      //companyId: 'f0b77c6a-b4de-4175-bb0d-28a5e54abc81',
     );
     result.fold(
         (failure) => emit(state.copyWith(
@@ -37,7 +36,7 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
   Future<void> addPreferedLanguages(
       {required LanguageModel languageModel}) async {
     final result = await _profileCompanyRepo.addPreferedLanguages(
-      languageModel: languageModel,
+      id: languageModel.id,
     );
     result.fold(
       (failure) => emit(

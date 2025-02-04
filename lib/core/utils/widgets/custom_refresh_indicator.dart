@@ -15,7 +15,7 @@ class CustomRefreshIndicator extends StatelessWidget {
     return RefreshIndicator(
       onRefresh: onRefresh,
       color: AppColors.white,
-      backgroundColor: Colors.grey[900],
+      backgroundColor: AppColors.primary,
       child: child,
     );
   }
