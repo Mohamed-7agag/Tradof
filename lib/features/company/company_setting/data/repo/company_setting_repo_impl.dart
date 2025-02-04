@@ -4,6 +4,7 @@ import 'package:tradof/core/errors/failure.dart';
 
 import '../../../../../core/api/end_points.dart';
 import '../../../../../core/helpers/handle_request_method.dart';
+import '../../../../../core/utils/app_constants.dart';
 import 'company_setting_repo.dart';
 
 class CompanySettingRepoImpl implements CompanySettingRepo {
@@ -13,12 +14,12 @@ class CompanySettingRepoImpl implements CompanySettingRepo {
       : _apiServices = apiServices;
   @override
   Future<Either<Failure, String>> changeCompanyPassword(
-      {required String oldPassword, required String newPassword}) {
+      {required String currentPassword, required String newPassword}) {
     return handleRequest(() async {
       final response = await _apiServices.post(
-        EndPoint.changeCompanyPassword,
+        EndPoint.changeCompanyPassword(AppConstants.kUserId),
         data: {
-          'oldPassword': oldPassword,
+          'currentPassword': currentPassword,
           'newPassword': newPassword,
           'confirmPassword': newPassword,
         },

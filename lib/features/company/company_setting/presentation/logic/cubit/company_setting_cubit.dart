@@ -5,17 +5,18 @@ import 'package:tradof/features/company/company_setting/data/repo/company_settin
 part 'company_setting_state.dart';
 
 class CompanySettingCubit extends Cubit<CompanySettingState> {
-  CompanySettingCubit(this._companySettingRepo) : super(const CompanySettingState());
+  CompanySettingCubit(this._companySettingRepo)
+      : super(const CompanySettingState());
 
   final CompanySettingRepo _companySettingRepo;
 
   Future<void> changeCompanyPassword({
-    required String oldPassword,
+    required String currentPassword,
     required String newPassword,
   }) async {
     emit(state.copyWith(status: CompanySettingStatus.changePasswordLoading));
     final result = await _companySettingRepo.changeCompanyPassword(
-      oldPassword: oldPassword,
+      currentPassword: currentPassword,
       newPassword: newPassword,
     );
     result.fold((failure) {

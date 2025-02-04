@@ -28,9 +28,9 @@ class ProfileCompanyView extends StatelessWidget {
               if (state.companyModel != null) return;
               context.read<CompanyProfileCubit>().getCompanyProfile();
             },
-            child: state.status.isLoading
+            child: state.status.isGetCompanyloading
                 ? const CustomLoadingWidget()
-                : state.status.isError
+                : state.status.isGetCompanyFailure
                     ? ListView(
                         itemExtent: 1.sh,
                         children: [

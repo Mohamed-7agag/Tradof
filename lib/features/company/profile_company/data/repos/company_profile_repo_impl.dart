@@ -4,10 +4,8 @@ import 'package:tradof/core/api/end_points.dart';
 import 'package:tradof/core/errors/failure.dart';
 import 'package:tradof/core/helpers/handle_request_method.dart';
 import 'package:tradof/core/utils/app_constants.dart';
-import 'package:tradof/features/auth/data/model/language_model.dart';
 import 'package:tradof/features/company/profile_company/data/model/company_update_request_model.dart';
 
-import '../../../../auth/data/model/specialization_model.dart';
 import '../model/company_model.dart';
 import 'company_profile_repo.dart';
 
@@ -29,41 +27,51 @@ class CompanyProfileRepoImpl implements CompanyProfileRepo {
   }
 
   @override
-  Future<Either<Failure, String>> addPreferedLanguages({required int id}) {
+  Future<Either<Failure, String>> addPreferedLanguages(
+      {required List<int> languagesIds}) {
     return handleRequest(() async {
       final response = await _apiServices.post(
-        EndPoint.addPreferredLanguage(AppConstants.kUserId, id),
+        EndPoint.addPreferredLanguage(AppConstants.kUserId),
+        data: languagesIds,
       );
-      return response['message'] ?? 'Language added successfully';
+      return response;
     });
   }
 
   @override
   Future<Either<Failure, String>> deletePreferedLanguages(
-      {required LanguageModel languageModel}) {
+      {required List<int> languagesIds}) {
     return handleRequest(() async {
       final response = await _apiServices.delete(
-        EndPoint.deletePreferredLanguage(
-          AppConstants.kUserId,
-          languageModel.id,
-        ),
+        EndPoint.deletePreferredLanguage(AppConstants.kUserId),
+        data: languagesIds,
       );
-      return response['message'] ?? 'Language deleted successfully';
+      return response;
     });
   }
 
   @override
-  Future<Either<Failure, SpecializationModel>> addIndustriesServed(
-      {required SpecializationModel specializationModel}) {
-    // TODO: implement addIndustriesService
-    throw UnimplementedError();
+  Future<Either<Failure, String>> addIndustriesServed(
+      {required List<int> industriesIds}) {
+    return handleRequest(() async {
+      final response = await _apiServices.post(
+        EndPoint.addIndustries(AppConstants.kUserId),
+        data: industriesIds,
+      );
+      return response;
+    });
   }
 
   @override
   Future<Either<Failure, String>> deleteIndustriesServed(
-      {required SpecializationModel specializationModel}) {
-    // TODO: implement deleteIndustriesService
-    throw UnimplementedError();
+      {required List<int> industriesIds}) {
+    return handleRequest(() async {
+      final response = await _apiServices.delete(
+        EndPoint.deleteIndustries(AppConstants.kUserId),
+        data: industriesIds,
+      );
+      return response;
+    });
   }
 
   @override
@@ -77,5 +85,4 @@ class CompanyProfileRepoImpl implements CompanyProfileRepo {
       return response;
     });
   }
-
 }

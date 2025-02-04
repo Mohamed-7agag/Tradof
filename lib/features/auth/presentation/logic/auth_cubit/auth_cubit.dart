@@ -24,12 +24,12 @@ class AuthCubit extends Cubit<AuthState> {
         errorMessage: failure.errMessage,
       ));
     }, (response) {
+      _cacheUserData(response);
       emit(state.copyWith(
         status: AuthStatus.login,
         email: email,
         password: password,
       ));
-      _cacheUserData(response);
     });
   }
 

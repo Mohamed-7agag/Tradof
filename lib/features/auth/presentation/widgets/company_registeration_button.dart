@@ -20,11 +20,13 @@ class CompanyRegisterationButton extends StatelessWidget {
     this.imageUrl,
     required this.jobTitleController,
     required this.locationCompanyController,
+    required this.companyNameController,
   });
   final int? countryId;
   final File? imageUrl;
   final TextEditingController jobTitleController;
   final TextEditingController locationCompanyController;
+  final TextEditingController companyNameController;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterationCubit, RegisterationState>(
@@ -44,46 +46,47 @@ class CompanyRegisterationButton extends StatelessWidget {
                 color: AppColors.lightOrange,
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  if (jobTitleController.text.isNullOrEmpty()) {
-                    errorToast(context, 'Error', 'Please enter job title');
-                  } else if (countryId == null) {
-                    errorToast(context, 'Error', 'Please select a country');
-                  } else if (locationCompanyController.text.isNullOrEmpty()) {
-                    errorToast(
-                        context, 'Error', 'Please enter location of company');
-                  } else if (context
-                      .read<TablesCubit>()
-                      .state
-                      .selectedPreferedLanguages
-                      .isNullOrEmpty()) {
-                    errorToast(context, 'Error',
-                        'Please select at least one prefered language');
-                  } else if (context
-                      .read<TablesCubit>()
-                      .state
-                      .selectedIndustriesServed
-                      .isNullOrEmpty()) {
-                    errorToast(context, 'Error',
-                        'Please select at least one industry served');
-                  } else {
-                    context.read<RegisterationCubit>().companyData(
-                          imageUrl ?? File(''),
-                          jobTitleController.text.trim(),
-                          countryId!,
-                          locationCompanyController.text.trim(),
-                          context
-                              .read<TablesCubit>()
-                              .state
-                              .selectedPreferedLanguages,
-                          context
-                              .read<TablesCubit>()
-                              .state
-                              .selectedIndustriesServed,
-                        );
-                  }
+                  _validateCompanyRegisterData(context);
                 },
               );
       },
     );
+  }
+
+  void _validateCompanyRegisterData(BuildContext context) {
+    if (jobTitleController.text.trim().isNullOrEmpty()) {
+      errorToast(context, 'Error', 'Please enter job title');
+    } else if (companyNameController.text.trim().isNullOrEmpty()) {
+      errorToast(context, 'Error', 'Please enter company name');
+    } else if (countryId == null) {
+      errorToast(context, 'Error', 'Please select a country');
+    } else if (locationCompanyController.text.trim().isNullOrEmpty()) {
+      errorToast(context, 'Error', 'Please enter location of company');
+    } else if (context
+        .read<TablesCubit>()
+        .state
+        .selectedPreferedLanguages
+        .isNullOrEmpty()) {
+      errorToast(
+          context, 'Error', 'Please select at least one prefered language');
+    } else if (context
+        .read<TablesCubit>()
+        .state
+        .selectedIndustriesServed
+        .isNullOrEmpty()) {
+      errorToast(
+          context, 'Error', 'Please select at least one industry served');
+    } else {
+      context.read<RegisterationCubit>().companyData(
+            imageUrl ?? File(''),
+            jobTitleController.text.trim(),
+            companyNameController.text.trim(),
+            countryId!,
+            locationCompanyController.text.trim(),
+            context.read<TablesCubit>().state.selectedPreferedLanguages,
+            context.read<TablesCubit>().state.selectedIndustriesServed,
+
+          );
+    }
   }
 }

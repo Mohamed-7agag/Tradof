@@ -21,6 +21,7 @@ class RegisterationState extends Equatable {
   final String firstName;
   final String lastName;
   final String email;
+  final String companyName;
   final String phoneNumber;
   final String password;
   final int country;
@@ -43,6 +44,7 @@ class RegisterationState extends Equatable {
     this.registerSuccessMessage = '',
     this.email = '',
     this.phoneNumber = '',
+    this.companyName = '',
     this.password = '',
     this.country = 0,
     this.firstName = '',
@@ -61,6 +63,7 @@ class RegisterationState extends Equatable {
     UserRole? userRole,
     String? errorMessage,
     String? registerSuccessMessage,
+    String? companyName,
     String? email,
     String? phoneNumber,
     String? password,
@@ -86,6 +89,7 @@ class RegisterationState extends Equatable {
           registerSuccessMessage ?? this.registerSuccessMessage,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
+      companyName: companyName ?? this.companyName,
       password: password ?? this.password,
       country: country ?? this.country,
       firstName: firstName ?? this.firstName,
@@ -113,6 +117,7 @@ class RegisterationState extends Equatable {
         phoneNumber,
         password,
         country,
+        companyName,
         firstName,
         lastName,
         profileImage ?? '',

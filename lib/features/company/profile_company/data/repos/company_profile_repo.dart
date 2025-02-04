@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:tradof/core/errors/failure.dart';
-import 'package:tradof/features/auth/data/model/language_model.dart';
-import 'package:tradof/features/auth/data/model/specialization_model.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_update_request_model.dart';
 
 import '../model/company_model.dart';
+import '../model/company_update_request_model.dart';
 
 abstract class CompanyProfileRepo {
   Future<Either<Failure, CompanyModel>> getCompanyProfrile({
@@ -12,17 +10,17 @@ abstract class CompanyProfileRepo {
   });
 
   Future<Either<Failure, String>> addPreferedLanguages({
-    required int id,
+    required List<int> languagesIds,
   });
   Future<Either<Failure, String>> deletePreferedLanguages({
-    required LanguageModel languageModel,
+    required List<int> languagesIds,
   });
 
-  Future<Either<Failure, SpecializationModel>> addIndustriesServed({
-    required SpecializationModel specializationModel,
+  Future<Either<Failure, String>> addIndustriesServed({
+    required List<int> industriesIds,
   });
   Future<Either<Failure, String>> deleteIndustriesServed({
-    required SpecializationModel specializationModel,
+    required List<int> industriesIds,
   });
 
   Future<Either<Failure, String>> updateCompanyProfile({

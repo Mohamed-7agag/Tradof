@@ -1,5 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/core/cache/cache_helper.dart';
+import 'package:tradof/core/helpers/extensions.dart';
+import 'package:tradof/core/routing/routes.dart';
+import 'package:tradof/core/utils/app_constants.dart';
 
 import '../../../../core/helpers/app_regex.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
@@ -22,7 +26,11 @@ class LoginButtonAndValidation extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state.status.isLogin) {
-          // go to home page
+          if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
+            context.goNamed(Routes.freelancerBottomNavBarViewRoute);
+          } else {
+            context.goNamed(Routes.companyBottomNavBarViewRoute);
+          }
         } else if (state.status.isError) {
           errorToast(context, 'Error', state.errorMessage);
         }

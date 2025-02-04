@@ -28,11 +28,13 @@ class CompanyRegisterView extends StatefulWidget {
 class _CompanyRegisterViewState extends State<CompanyRegisterView> {
   late final TextEditingController jobTitleController;
   late final TextEditingController locationCompanyController;
+  late final TextEditingController companyNameController;
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) => loadingDialog(context));
     jobTitleController = TextEditingController();
     locationCompanyController = TextEditingController();
+    companyNameController = TextEditingController();
     super.initState();
   }
 
@@ -40,6 +42,7 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
   void dispose() {
     jobTitleController.dispose();
     locationCompanyController.dispose();
+    companyNameController.dispose();
     super.dispose();
   }
 
@@ -80,11 +83,23 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
                     ),
                   ),
                   verticalSpace(12),
+                  SlideInRight(
+                    from: 400,
+                    delay: Duration(milliseconds: 125),
+                    child: CustomTextField(
+                      labelText: 'Company Name',
+                      labelColor: AppColors.white,
+                      controller: companyNameController,
+                      keyboardType: TextInputType.text,
+                      outlineBorder: true,
+                    ),
+                  ),
+                  verticalSpace(12),
                   CountryDropDownSection(),
                   verticalSpace(12),
                   SlideInRight(
                     from: 400,
-                    delay: Duration(milliseconds: 250),
+                    delay: Duration(milliseconds: 375),
                     child: CustomTextField(
                       labelText: 'Location Company',
                       labelColor: AppColors.white,
@@ -96,13 +111,13 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
                   verticalSpace(28),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 375),
+                    delay: Duration(milliseconds: 500),
                     child: PreferedLanguagesTable(),
                   ),
                   verticalSpace(28),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 500),
+                    delay: Duration(milliseconds: 625),
                     child: IndustriesServedTable(),
                   ),
                   verticalSpace(40),
@@ -111,12 +126,13 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
                     builder: (context, state) {
                       return SlideInUp(
                         from: 400,
-                        delay: Duration(milliseconds: 625),
+                        delay: Duration(milliseconds: 750),
                         child: CompanyRegisterationButton(
                           countryId: state.countryId,
                           imageUrl: state.imagePicked,
                           jobTitleController: jobTitleController,
                           locationCompanyController: locationCompanyController,
+                          companyNameController: companyNameController,
                         ),
                       );
                     },

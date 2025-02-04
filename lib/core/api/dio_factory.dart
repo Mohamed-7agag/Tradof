@@ -32,6 +32,7 @@ class DioFactory {
     final userToken = await CacheHelper.getSecuredString(AppConstants.token);
     dio?.options.headers = {
       'Accept': 'application/json',
+      'Content-Type': 'application/json',
       'Authorization': 'Bearer $userToken',
     };
   }

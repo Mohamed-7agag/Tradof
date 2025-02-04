@@ -57,6 +57,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
   void companyData(
     File image,
     String jobTitle,
+    String companyName,
     int countryId,
     String locationCompany,
     List<LanguageModel> preferedLanguages,
@@ -65,6 +66,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     emit(state.copyWith(
       profileImage: image,
       jobTitle: jobTitle,
+      companyName: companyName,
       country: countryId,
       locationCompany: locationCompany,
       selectedPreferedLanguages: preferedLanguages,
@@ -120,6 +122,8 @@ class RegisterationCubit extends Cubit<RegisterationState> {
             ))
         .toList();
 
+    final imageUrl = await uploadImageToCloudinary(state.profileImage);
+
     final FreelancerRegisterRequestModel freelancerRegisterRequestModel =
         FreelancerRegisterRequestModel(
       email: state.email,
@@ -127,7 +131,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       lastName: state.lastName,
       phoneNumber: state.phoneNumber,
       password: state.password,
-      profileImageUrl: await uploadImageToCloudinary(state.profileImage),
+      profileImageUrl: imageUrl,
       countryId: state.country,
       languagePairs: languagePairIds,
       specializationIds: specializationIds,
@@ -143,6 +147,8 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     List<int> preferredLanguageIds =
         state.selectedPreferedLanguages.map((language) => language.id).toList();
 
+    final imageUrl = await uploadImageToCloudinary(state.profileImage);
+
     final CompanyRegisterRequestModel companyRegisterRequestModel =
         CompanyRegisterRequestModel(
       email: state.email,
@@ -150,7 +156,8 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       lastName: state.lastName,
       phoneNumber: state.phoneNumber,
       password: state.password,
-      profileImageUrl: await uploadImageToCloudinary(state.profileImage),
+      companyName: state.companyName,
+      profileImageUrl: imageUrl,
       countryId: state.country,
       jobTitle: state.jobTitle,
       companyAddress: state.locationCompany,

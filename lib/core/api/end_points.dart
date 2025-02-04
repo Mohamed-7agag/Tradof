@@ -15,22 +15,25 @@ abstract class EndPoint {
   static const String createProject = 'project';
 
   //company
-  static String changeCompanyPassword = 'Company/ChangePassword';
+  static String changeCompanyPassword(String id) {
+    return 'Company/ChangePassword?companyId=$id';
+  }
+
   static String getCompanybyId(String id) => 'Company/$id';
 
-  static String addPreferredLanguage(String companyId, int languageId) {
-    return 'Company/AddLanguage/$companyId?languageId=$languageId';
+  static String addPreferredLanguage(String companyId) {
+    return 'Company/AddLanguage/$companyId';
   }
 
-  static String deletePreferredLanguage(String companyId, int languageId) {
-    return 'Company/RemoveLanguage/$companyId?languageId=$languageId';
+  static String deletePreferredLanguage(String companyId) {
+    return 'Company/RemoveLanguage/$companyId';
   }
 
-  static String addIndustries(String companyId, int industryId) {
-    return 'Company/AddIndustry/$companyId?specializationId=$industryId';
+  static String addIndustries(String companyId) {
+    return 'Company/AddIndustry/$companyId';
   }
 
-  static String deleteIndustries(String companyId, int industryId) {
-    return 'Company/RemoveIndustry/$companyId?specializationId=$industryId';
+  static String deleteIndustries(String companyId) {
+    return 'Company/RemoveIndustry/$companyId';
   }
 }

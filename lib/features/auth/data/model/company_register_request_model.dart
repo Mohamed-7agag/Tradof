@@ -6,6 +6,7 @@ class CompanyRegisterRequestModel {
   final String phoneNumber;
   final int countryId;
   final String companyAddress;
+  final String companyName;
   final String jobTitle;
   final List<int> specializationIds;
   final List<int> preferredLanguageIds;
@@ -19,6 +20,7 @@ class CompanyRegisterRequestModel {
     required this.phoneNumber,
     required this.countryId,
     required this.jobTitle,
+    required this.companyName,
     required this.companyAddress,
     required this.specializationIds,
     required this.preferredLanguageIds,
@@ -33,6 +35,7 @@ class CompanyRegisterRequestModel {
       'lastName': lastName,
       'countryId': countryId,
       'phoneNumber': phoneNumber,
+      'companyName': companyName,
       'jobTitle': jobTitle,
       'companyAddress': companyAddress,
       'specializationIds': specializationIds,
