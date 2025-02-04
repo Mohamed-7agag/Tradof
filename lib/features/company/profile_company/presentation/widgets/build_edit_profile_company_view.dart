@@ -46,7 +46,7 @@ class _BuildEditProfileCompanyViewState
         TextEditingController(text: widget.companyModel.lastName);
 
     phoneNumberController = TextEditingController(
-        text: widget.companyModel.phone.length==1
+        text: widget.companyModel.phone.length == 11
             ? widget.companyModel.phone.substring(1)
             : widget.companyModel.phone);
     locationCompanyController =
@@ -77,99 +77,102 @@ class _BuildEditProfileCompanyViewState
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        child: Column(
-      children: [
-        verticalSpace(35),
-        ProfileImageEdit(),
-        verticalSpace(40),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 32.w),
+        child: Form(
+          key: formKey,
           child: Column(
-            children: [
-              CustomTextField(
-                labelText: 'First Name',
-                labelColor: AppColors.darkGrey,
-                controller: firstNameController,
-                keyboardType: TextInputType.text,
-                labelBehavior: true,
-                outlineBorder: false,
-              ),
-              verticalSpace(20),
-              CustomTextField(
-                labelText: 'Last Name',
-                labelColor: AppColors.darkGrey,
-                controller: lastNameController,
-                keyboardType: TextInputType.text,
-                labelBehavior: true,
-                outlineBorder: false,
-              ),
-              verticalSpace(20),
-              CustomTextField(
-                labelText: 'Email',
-                labelColor: AppColors.darkGrey,
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                labelBehavior: true,
-                outlineBorder: false,
-              ),
-              verticalSpace(20),
-              PhoneNumberTextField(
-                labelText: 'Phone Number',
-                controller: phoneNumberController,
-                borderColor: AppColors.darkGrey,
-                labelBehavior: true,
-              ),
-              verticalSpace(20),
-              CountryDropDownEdit(
-                initialCountryId: widget.companyModel.countryId,
-              ),
-              verticalSpace(20),
-              CustomTextField(
-                labelText: 'Location',
-                labelColor: AppColors.darkGrey,
-                controller: locationCompanyController,
-                labelBehavior: true,
-                outlineBorder: false,
-              ),
-              verticalSpace(40),
-              BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
-                builder: (context, state) {
-                  if (state.status.isError) {
-                    return CustomFailureWidget(text: state.errorMessage);
-                  } else if (state.status.isLoading) {
-                    return CustomLoadingWidget();
-                  } else {
-                    return CustomButton(
-                      text: 'Save',
-                      onPressed: () {
-                        context
-                            .read<CompanyProfileCubit>()
-                            .updateCompanyProfile(
-                              CompanyUpdateRequestModel(
-                                id: AppConstants.kUserId,
-                                firstName: firstNameController.text,
-                                lastName: lastNameController.text,
-                                email: emailController.text,
-                                phoneNumber: phoneNumberController.text,
-                                companyAddress: locationCompanyController.text,
-                                countryId: context
-                                        .read<ProfileImageAndCountryCubit>()
-                                        .state
-                                        .countryId ??
-                                    10,
-                                companyName:
-                                    state.companyModel?.companyName ?? '',
-                              ),
-                            );
-                      },
-                    );
-                  }
-                },
-              ),
-            ],
+                children: [
+          verticalSpace(35),
+          ProfileImageEdit(),
+          verticalSpace(40),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32.w),
+            child: Column(
+              children: [
+                CustomTextField(
+                  labelText: 'First Name',
+                  labelColor: AppColors.darkGrey,
+                  controller: firstNameController,
+                  keyboardType: TextInputType.text,
+                  labelBehavior: true,
+                  outlineBorder: false,
+                ),
+                verticalSpace(20),
+                CustomTextField(
+                  labelText: 'Last Name',
+                  labelColor: AppColors.darkGrey,
+                  controller: lastNameController,
+                  keyboardType: TextInputType.text,
+                  labelBehavior: true,
+                  outlineBorder: false,
+                ),
+                verticalSpace(20),
+                CustomTextField(
+                  labelText: 'Email',
+                  labelColor: AppColors.darkGrey,
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  labelBehavior: true,
+                  outlineBorder: false,
+                ),
+                verticalSpace(20),
+                PhoneNumberTextField(
+                  labelText: 'Phone Number',
+                  controller: phoneNumberController,
+                  borderColor: AppColors.darkGrey,
+                  labelBehavior: true,
+                ),
+                verticalSpace(20),
+                CountryDropDownEdit(
+                  initialCountryId: widget.companyModel.countryId,
+                ),
+                verticalSpace(20),
+                CustomTextField(
+                  labelText: 'Location',
+                  labelColor: AppColors.darkGrey,
+                  controller: locationCompanyController,
+                  labelBehavior: true,
+                  outlineBorder: false,
+                ),
+                verticalSpace(40),
+                BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
+                  builder: (context, state) {
+                    if (state.status.isError) {
+                      return CustomFailureWidget(text: state.errorMessage);
+                    } else if (state.status.isLoading) {
+                      return CustomLoadingWidget();
+                    } else {
+                      return CustomButton(
+                        text: 'Save',
+                        onPressed: () {
+                          context
+                              .read<CompanyProfileCubit>()
+                              .updateCompanyProfile(
+                                CompanyUpdateRequestModel(
+                                  id: AppConstants.kUserId,
+                                  firstName: firstNameController.text,
+                                  lastName: lastNameController.text,
+                                  email: emailController.text,
+                                  phoneNumber: phoneNumberController.text,
+                                  companyAddress: locationCompanyController.text,
+                                  countryId: context
+                                          .read<ProfileImageAndCountryCubit>()
+                                          .state
+                                          .countryId ??
+                                      10,
+                                  companyName:
+                                      state.companyModel?.companyName ?? '',
+                                ),
+                              );
+                        },
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
-    ));
+                ],
+              ),
+        ));
   }
 }
