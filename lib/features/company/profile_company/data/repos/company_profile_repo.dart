@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:tradof/core/errors/failure.dart';
 
 import '../model/company_model.dart';
-import '../model/company_update_request_model.dart';
+
 
 abstract class CompanyProfileRepo {
   Future<Either<Failure, CompanyModel>> getCompanyProfrile({

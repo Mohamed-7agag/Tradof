@@ -77,7 +77,7 @@ class LanguagePairTable extends StatelessWidget {
                             horizontalSpace(6),
                             Expanded(
                               child: Text(
-                                '${language.fromLanguage.name} - ${language.toLanguage.name}',
+                                '${language.fromLanguage.languageName} - ${language.toLanguage.languageName}',
                                 style: AppStyle.robotoRegular12.copyWith(
                                   color: AppColors.white,
                                 ),
@@ -88,7 +88,7 @@ class LanguagePairTable extends StatelessWidget {
                       ),
                       DataCell(
                         Text(
-                          '${language.fromLanguage.code} - ${language.toLanguage.code}',
+                          '${language.fromLanguage.languageCode} - ${language.toLanguage.languageCode}',
                           style: AppStyle.robotoRegular12.copyWith(
                             color: AppColors.white,
                           ),

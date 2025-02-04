@@ -79,7 +79,7 @@ class PreferedLanguagesTable extends StatelessWidget {
                                 child: Icon(Icons.cancel, color: Colors.red)),
                             horizontalSpace(6),
                             Text(
-                              language.name,
+                              language.languageName,
                               style: AppStyle.robotoRegular12.copyWith(
                                 color: darkColors
                                     ? AppColors.black
@@ -91,7 +91,7 @@ class PreferedLanguagesTable extends StatelessWidget {
                       ),
                       DataCell(
                         Text(
-                          language.code,
+                          language.languageCode,
                           style: AppStyle.robotoRegular12.copyWith(
                             color:
                                 darkColors ? AppColors.black : AppColors.white,
@@ -168,7 +168,7 @@ class PreferedLanguagesTable extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         title: Text(
-                          '${state.languages[index].name} (${state.languages[index].code})',
+                          '${state.languages[index].languageName} (${state.languages[index].languageCode})',
                           style: AppStyle.robotoRegular15
                               .copyWith(color: Colors.white),
                         ),

@@ -58,13 +58,13 @@ class PreferredLanguage extends StatelessWidget {
                 cells: [
                   DataCell(
                     Text(
-                      language.name,
+                      language.languageName,
                       style: AppStyle.robotoRegular12,
                     ),
                   ),
                   DataCell(
                     Text(
-                      language.code,
+                      language.languageCode,
                       style: AppStyle.robotoRegular12,
                     ),
                   ),

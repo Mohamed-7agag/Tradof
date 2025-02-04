@@ -58,8 +58,6 @@ class _CountryDropDownEditState extends State<CountryDropDownEdit> {
           _isInitialized = true;
         });
       } catch (e) {
-        print('No country found for ID: ${widget.initialCountryId}');
-        // Fallback to first country if initial country not found
         if (metaState.countries.isNotEmpty) {
           _initialCountry = metaState.countries.first;
           context

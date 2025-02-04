@@ -4,8 +4,6 @@ import 'package:tradof/core/api/end_points.dart';
 import 'package:tradof/core/errors/failure.dart';
 import 'package:tradof/core/helpers/handle_request_method.dart';
 import 'package:tradof/core/utils/app_constants.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_update_request_model.dart';
-
 import '../model/company_model.dart';
 import 'company_profile_repo.dart';
 
