@@ -8,7 +8,7 @@ import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/compan
 import 'package:tradof/features/company/bottom_nav_bar/presentation/views/company_bottom_nav_bar_view.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/company_setting_view.dart';
 import 'package:tradof/features/company/profile_company/presentation/views/edit_profile_company_view.dart';
-import 'package:tradof/features/company/profile_company/presentation/views/profile_company_view.dart';
+import 'package:tradof/features/company/profile_company/presentation/views/company_profile_view.dart';
 import 'package:tradof/features/company/profile_company/presentation/views/update_company_profile_tables_view.dart';
 import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';

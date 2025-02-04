@@ -1,10 +1,8 @@
 part of 'tables_cubit.dart';
 
 class TablesState {
-  // specializations & industries served
   final List<SpecializationModel> selectedSpecializations;
   final List<SpecializationModel> selectedIndustriesServed;
-  // prefered language & language pair
   final List<LanguageModel> selectedPreferedLanguages;
   final List<LanguagePairModel> selectedLanguagePair;
 

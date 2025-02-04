@@ -7,7 +7,7 @@ import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/company_bottom_nav_bar_cubit.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/company_setting_view.dart';
-import 'package:tradof/features/company/profile_company/presentation/views/profile_company_view.dart';
+import 'package:tradof/features/company/profile_company/presentation/views/company_profile_view.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
 import 'package:tradof/features/projects/presentation/logic/project_cubit/project_cubit.dart';
 import 'package:tradof/features/projects/presentation/views/create_project_view.dart';
