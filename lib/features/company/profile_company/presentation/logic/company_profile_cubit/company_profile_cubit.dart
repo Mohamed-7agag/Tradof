@@ -74,20 +74,19 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
   Future<void> updateCompanyProfile(
       CompanyUpdateRequestModel companyUpdateRequestModel) async {
     emit(state.copyWith(
-      status: CompanyProfileStatus.loading,
-    ));
+        status: CompanyProfileStatus.updateCompanyProfileLoading));
     final result = await _profileCompanyRepo.updateCompanyProfile(
       companyUpdateRequestModel: companyUpdateRequestModel,
     );
     result.fold(
       (failure) => emit(
         state.copyWith(
-          status: CompanyProfileStatus.error,
+          status: CompanyProfileStatus.updateCompanyProfileFailure,
           errorMessage: failure.errMessage,
         ),
       ),
       (message) => emit(state.copyWith(
-        status: CompanyProfileStatus.updateCompanyProfile,
+        status: CompanyProfileStatus.updateCompanyProfileSuccess,
         message: message,
         errorMessage: null,
       )),

@@ -9,12 +9,15 @@ enum CompanyProfileStatus {
   deletePreferredLanguage,
   addIndustriesServed,
   deleteIndustriesServed,
-  updateCompanyProfile,
+  updateCompanyProfileLoading,
+  updateCompanyProfileFailure,
+  updateCompanyProfileSuccess,
 }
 
 extension CompanyProfileStatusX on CompanyProfileStatus {
   bool get isLoading => this == CompanyProfileStatus.loading;
-  bool get success => this == CompanyProfileStatus.companyDataFetched;
+  bool get companyDataFetched =>
+      this == CompanyProfileStatus.companyDataFetched;
   bool get isError => this == CompanyProfileStatus.error;
   bool get isInitial => this == CompanyProfileStatus.initial;
   bool get isAddPreferredLanguage =>
@@ -25,8 +28,12 @@ extension CompanyProfileStatusX on CompanyProfileStatus {
       this == CompanyProfileStatus.addIndustriesServed;
   bool get isDeleteIndustriesServed =>
       this == CompanyProfileStatus.deleteIndustriesServed;
-  bool get isUpdateCompanyProfile =>
-      this == CompanyProfileStatus.updateCompanyProfile;
+  bool get isUpdateCompanyProfileSuccess =>
+      this == CompanyProfileStatus.updateCompanyProfileSuccess;
+  bool get isUpdateCompanyProfileLoading =>
+      this == CompanyProfileStatus.updateCompanyProfileLoading;
+  bool get isUpdateCompanyProfileFailure =>
+      this == CompanyProfileStatus.updateCompanyProfileFailure;
 }
 
 class CompanyProfileState extends Equatable {

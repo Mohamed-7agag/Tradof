@@ -4,11 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/company/company_setting/presentation/widgets/setting_item.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
 
 class SettingsSection1 extends StatelessWidget {
-  const SettingsSection1({super.key, required this.companyModel});
-  final CompanyModel companyModel;
+  const SettingsSection1({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,8 +21,9 @@ class SettingsSection1 extends StatelessWidget {
             title: 'Personal info',
             icon: 'assets/images/profile.svg',
             onTap: () {
-              context.push(Routes.editProfileCompanyViewRoute,
-                  extra: companyModel);
+              context.push(
+                Routes.editProfileCompanyViewRoute,
+              );
             },
           ),
           Divider(color: AppColors.cardDarkColor),

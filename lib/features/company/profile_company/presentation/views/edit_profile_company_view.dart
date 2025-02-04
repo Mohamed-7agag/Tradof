@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,10 +11,10 @@ import 'package:tradof/features/auth/presentation/logic/freelancer_registeration
 import 'package:tradof/features/company/profile_company/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import 'package:tradof/features/company/profile_company/presentation/widgets/build_edit_profile_company_view.dart';
 
+import '../../../../../core/utils/widgets/custom_toastification.dart';
+
 class EditProfileCompanyView extends StatefulWidget {
-  const EditProfileCompanyView({
-    super.key,
-  });
+  const EditProfileCompanyView({super.key});
 
   @override
   State<EditProfileCompanyView> createState() => _EditProfileCompanyViewState();
@@ -40,9 +39,15 @@ class _EditProfileCompanyViewState extends State<EditProfileCompanyView> {
           ),
         ],
         child: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
+          buildWhen: (previous, current) =>
+              current.status.companyDataFetched ||
+              current.status.isError ||
+              current.status.isLoading,
           builder: (context, state) {
-            if (state.status == CompanyProfileStatus.loading) {
+            if (state.status.isLoading) {
               return const CustomLoadingWidget();
+            } else if (state.status.isError) {
+              errorToast(context, 'Error', state.errorMessage);
             }
             return BuildEditProfileCompanyView(
               companyModel: state.companyModel!,
@@ -55,32 +60,18 @@ class _EditProfileCompanyViewState extends State<EditProfileCompanyView> {
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.background,
-      centerTitle: true,
+      backgroundColor: AppColors.primary,
+      foregroundColor: AppColors.white,
+      leadingWidth: 40,
       title: Text(
         'Personal Info',
-        style: AppStyle.robotoBold20.copyWith(color: AppColors.primary),
+        style: AppStyle.robotoBold20,
       ),
       actions: [
-        SvgPicture.asset(
-          'assets/images/edit.svg',
-          colorFilter: const ColorFilter.mode(
-            AppColors.primary,
-            BlendMode.srcIn,
-          ),
-        ),
+        SvgPicture.asset('assets/images/edit.svg'),
         horizontalSpace(16),
       ],
       toolbarHeight: 65,
-      leading: GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: Icon(
-          Icons.arrow_back_ios,
-          color: AppColors.primary,
-        ),
-      ),
     );
   }
 }

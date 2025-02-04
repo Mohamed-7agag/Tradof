@@ -72,18 +72,9 @@ class CompanyProfileRepoImpl implements CompanyProfileRepo {
     return handleRequest(() async {
       final response = await _apiServices.put(
         EndPoint.updateCompanyProfile,
-        data: {
-          'id': companyUpdateRequestModel.id,
-          'CompanyName': companyUpdateRequestModel.companyName,
-          'countryId': companyUpdateRequestModel.countryId,
-          'firstName': companyUpdateRequestModel.firstName,
-          'lastName': companyUpdateRequestModel.lastName,
-          'phoneNumber': companyUpdateRequestModel.phoneNumber,
-          'email': companyUpdateRequestModel.email,
-          'companyAddress': companyUpdateRequestModel.companyAddress,
-        },
+        data: companyUpdateRequestModel.toJson(),
       );
-      return response['message'] ?? 'Company updated successfully';
+      return response;
     });
   }
 
