@@ -131,14 +131,9 @@ class CompanyBottomNavBarView extends StatelessWidget {
 class CustomNavBarClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    Path path = Path();
+    final path = Path();
     path.moveTo(0, 20);
-    path.quadraticBezierTo(0, 0, 20, 0);
-    path.lineTo(size.width / 2 - 40, 0);
-    path.quadraticBezierTo(size.width / 2 - 20, 0, size.width / 2, 20);
-    path.quadraticBezierTo(size.width / 2 + 20, 40, size.width / 2 + 40, 20);
-    path.lineTo(size.width - 20, 0);
-    path.quadraticBezierTo(size.width, 0, size.width, 20);
+    path.quadraticBezierTo(size.width / 2, -20, size.width, 20);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
     path.close();

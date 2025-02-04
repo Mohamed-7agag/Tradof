@@ -9,6 +9,7 @@ enum CompanyProfileStatus {
   deletePreferredLanguage,
   addIndustriesServed,
   deleteIndustriesServed,
+  updateCompanyProfile,
 }
 
 extension CompanyProfileStatusX on CompanyProfileStatus {
@@ -24,6 +25,8 @@ extension CompanyProfileStatusX on CompanyProfileStatus {
       this == CompanyProfileStatus.addIndustriesServed;
   bool get isDeleteIndustriesServed =>
       this == CompanyProfileStatus.deleteIndustriesServed;
+  bool get isUpdateCompanyProfile =>
+      this == CompanyProfileStatus.updateCompanyProfile;
 }
 
 class CompanyProfileState extends Equatable {

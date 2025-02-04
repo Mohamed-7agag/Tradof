@@ -21,12 +21,9 @@ import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
-import '../../features/company/bottom_nav_bar/presentation/views/company_bottom_nav_bar_view.dart';
+
 import '../../features/company/profile_company/data/model/company_model.dart';
 import '../../welcome_view.dart';
-import '../cache/cache_helper.dart';
-import '../helpers/navigation_handler.dart';
-import '../utils/app_constants.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
 class AppRouter {
@@ -36,7 +33,7 @@ class AppRouter {
       GlobalKey<NavigatorState>();
 
   static final router = GoRouter(
-   // debugLogDiagnostics: true,
+    // debugLogDiagnostics: true,
     navigatorKey: _rootNavigatorKey,
     initialLocation: '/companyBottomNavBarView',
     // redirect: (context, state) {
@@ -192,8 +189,7 @@ class AppRouter {
         name: Routes.editProfileCompanyViewRoute,
         path: '/editProfileCompanyView',
         builder: (context, state) {
-          final companyModel = state.extra as CompanyModel;
-          return EditProfileCompanyView(companyModel: companyModel,);
+          return EditProfileCompanyView();
         },
       ),
     ],

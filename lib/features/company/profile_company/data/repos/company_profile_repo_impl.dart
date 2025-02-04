@@ -5,6 +5,7 @@ import 'package:tradof/core/errors/failure.dart';
 import 'package:tradof/core/helpers/handle_request_method.dart';
 import 'package:tradof/core/utils/app_constants.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';
+import 'package:tradof/features/company/profile_company/data/model/company_update_request_model.dart';
 
 import '../../../../auth/data/model/specialization_model.dart';
 import '../model/company_model.dart';
@@ -68,4 +69,26 @@ class CompanyProfileRepoImpl implements CompanyProfileRepo {
     // TODO: implement deleteIndustriesService
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<Failure, String>> updateCompanyProfile(
+      {required CompanyUpdateRequestModel companyUpdateRequestModel}) {
+    return handleRequest(() async {
+      final response = await _apiServices.put(
+        EndPoint.updateCompanyProfile,
+        data: {
+          'id': companyUpdateRequestModel.id,
+          'CompanyName': companyUpdateRequestModel.companyName,
+          'countryId': companyUpdateRequestModel.countryId,
+          'firstName': companyUpdateRequestModel.firstName,
+          'lastName': companyUpdateRequestModel.lastName,
+          'phoneNumber': companyUpdateRequestModel.phoneNumber,
+          'email': companyUpdateRequestModel.email,
+          'companyAddress': companyUpdateRequestModel.companyAddress,
+        },
+      );
+      return response['message'] ?? 'Company updated successfully';
+    });
+  }
+
 }
