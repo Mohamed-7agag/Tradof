@@ -8,6 +8,6 @@ abstract class CompanySettingRepo {
     required String newPassword,
   });
   Future<Either<Failure, String>> updateCompanyProfile({
-    required CompanyUpdateRequestModel companyUpdateRequestModel,
+    required UpdateCompanyRequestModel updateCompanyRequestModel,
   });
 }

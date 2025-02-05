@@ -14,7 +14,7 @@ class CustomTextField extends StatefulWidget {
     this.obscureText = false,
     this.labelColor,
     this.outlineBorder = false,
-    this.labelBehavior=false,
+    this.labelBehavior = false,
   });
 
   final String labelText;
@@ -74,7 +74,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
           style: AppStyle.robotoRegular14.copyWith(color: widget.labelColor),
         ),
         floatingLabelStyle: TextStyle(color: AppColors.primary),
-        floatingLabelBehavior: widget.labelBehavior==true?FloatingLabelBehavior.never:FloatingLabelBehavior.auto,
+        floatingLabelBehavior: widget.labelBehavior == true
+            ? FloatingLabelBehavior.never
+            : FloatingLabelBehavior.auto,
       ),
     );
   }

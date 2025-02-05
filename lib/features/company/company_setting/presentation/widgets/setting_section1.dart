@@ -22,7 +22,7 @@ class SettingsSection1 extends StatelessWidget {
             icon: 'assets/images/profile.svg',
             onTap: () {
               context.push(
-                Routes.editProfileCompanyViewRoute,
+                Routes.updateCompanyProfileViewRoute,
               );
             },
           ),

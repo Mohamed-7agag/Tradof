@@ -34,11 +34,11 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
   }
 
   Future<void> updateCompanyProfile(
-      CompanyUpdateRequestModel companyUpdateRequestModel) async {
+      UpdateCompanyRequestModel updateCompanyRequestModel) async {
     emit(state.copyWith(
         status: CompanySettingStatus.updateCompanyProfileLoading));
     final result = await _companySettingRepo.updateCompanyProfile(
-      companyUpdateRequestModel: companyUpdateRequestModel,
+      updateCompanyRequestModel: updateCompanyRequestModel,
     );
     result.fold(
       (failure) => emit(

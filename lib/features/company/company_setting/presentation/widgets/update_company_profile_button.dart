@@ -4,13 +4,14 @@ import 'package:tradof/core/utils/app_constants.dart';
 import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
-import 'package:tradof/features/auth/presentation/logic/freelancer_registeration_cubit.dart';
-import 'package:tradof/features/company/company_setting/presentation/logic/cubit/company_setting_cubit.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_update_request_model.dart';
 
-class EditCompanyProfileButton extends StatelessWidget {
-  const EditCompanyProfileButton({
+import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
+import '../../../profile_company/data/model/company_model.dart';
+import '../../../profile_company/data/model/company_update_request_model.dart';
+import '../logic/cubit/company_setting_cubit.dart';
+
+class UpdateCompanyProfileButton extends StatelessWidget {
+  const UpdateCompanyProfileButton({
     super.key,
     required this.firstNameController,
     required this.lastNameController,
@@ -56,7 +57,7 @@ class EditCompanyProfileButton extends StatelessWidget {
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
                   context.read<CompanySettingCubit>().updateCompanyProfile(
-                        CompanyUpdateRequestModel(
+                        UpdateCompanyRequestModel(
                           id: AppConstants.kUserId,
                           firstName: firstNameController.text,
                           lastName: lastNameController.text,

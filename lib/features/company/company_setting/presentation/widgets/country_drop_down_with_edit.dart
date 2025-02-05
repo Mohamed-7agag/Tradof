@@ -36,20 +36,17 @@ class _CountryDropDownWithEditState extends State<CountryDropDownWithEdit> {
   void didUpdateWidget(covariant CountryDropDownWithEdit oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.value != oldWidget.value) {
-      setState(() {
-        selectedCountry = widget.value;
-      });
+      setState(() => selectedCountry = widget.value);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 3.h),
+      padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 10.w),
       decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: AppColors.darkGrey),
-        ),
+        border: Border.all(color: AppColors.darkGrey),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: DropdownButton<CountryModel>(
         iconEnabledColor: AppColors.darkGrey,

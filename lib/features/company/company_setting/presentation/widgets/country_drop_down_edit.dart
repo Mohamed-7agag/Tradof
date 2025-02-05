@@ -6,10 +6,7 @@ import 'package:tradof/features/auth/presentation/logic/freelancer_registeration
 import 'package:tradof/features/company/company_setting/presentation/widgets/country_drop_down_with_edit.dart';
 
 class CountryDropDownEdit extends StatefulWidget {
-  const CountryDropDownEdit({
-    super.key,
-    this.initialCountryId,
-  });
+  const CountryDropDownEdit({super.key, this.initialCountryId});
 
   final int? initialCountryId;
 
@@ -25,7 +22,6 @@ class _CountryDropDownEditState extends State<CountryDropDownEdit> {
   void initState() {
     super.initState();
 
-    // Delay initialization to ensure MetaDataState is loaded
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _initializeCountry();
     });

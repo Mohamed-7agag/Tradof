@@ -4,8 +4,8 @@ class LanguageModel extends Equatable {
   final int id;
   final String languageName;
   final String languageCode;
-  final String countryName;
-  final String countryCode;
+  final String? countryName;
+  final String? countryCode;
 
   const LanguageModel({
     required this.id,
@@ -34,6 +34,11 @@ class LanguageModel extends Equatable {
       };
 
   @override
-  List<Object?> get props =>
-      [id, languageName, languageCode, countryName, countryCode];
+  List<Object?> get props => [
+        id,
+        languageName,
+        languageCode,
+        countryName,
+        countryCode,
+      ];
 }

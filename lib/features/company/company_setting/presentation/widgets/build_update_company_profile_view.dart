@@ -4,24 +4,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_text_field.dart';
-import 'package:tradof/features/auth/presentation/logic/freelancer_registeration_cubit.dart';
-import 'package:tradof/features/auth/presentation/widgets/phone_number_text_field.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
-import 'package:tradof/features/company/company_setting/presentation/widgets/country_drop_down_edit.dart';
-import 'package:tradof/features/company/company_setting/presentation/widgets/edit_company_profile_button.dart';
-import 'package:tradof/features/company/company_setting/presentation/widgets/profile_image_edit.dart';
 
-class BuildEditProfileCompanyView extends StatefulWidget {
-  const BuildEditProfileCompanyView({super.key, required this.companyModel});
+import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
+import '../../../../auth/presentation/widgets/phone_number_text_field.dart';
+import '../../../profile_company/data/model/company_model.dart';
+import 'country_drop_down_edit.dart';
+import 'profile_image_edit.dart';
+import 'update_company_profile_button.dart';
+
+class BuildUpdateCompanyProfileView extends StatefulWidget {
+  const BuildUpdateCompanyProfileView({
+    super.key,
+    required this.companyModel,
+  });
   final CompanyModel companyModel;
 
   @override
-  State<BuildEditProfileCompanyView> createState() =>
-      _BuildEditProfileCompanyViewState();
+  State<BuildUpdateCompanyProfileView> createState() =>
+      _BuildUpdateCompanyProfileViewState();
 }
 
-class _BuildEditProfileCompanyViewState
-    extends State<BuildEditProfileCompanyView> {
+class _BuildUpdateCompanyProfileViewState
+    extends State<BuildUpdateCompanyProfileView> {
   late final GlobalKey<FormState> formKey;
 
   late final TextEditingController emailController;
@@ -40,7 +44,8 @@ class _BuildEditProfileCompanyViewState
     lastNameController =
         TextEditingController(text: widget.companyModel.lastName);
 
-    phoneNumberController = TextEditingController(text: widget.companyModel.phone);
+    phoneNumberController =
+        TextEditingController(text: widget.companyModel.phone);
     locationCompanyController =
         TextEditingController(text: widget.companyModel.companyAddress);
     companyNameController =
@@ -75,9 +80,9 @@ class _BuildEditProfileCompanyViewState
       child: SingleChildScrollView(
         child: Column(
           children: [
-            verticalSpace(35),
+            verticalSpace(30),
             ProfileImageEdit(),
-            verticalSpace(40),
+            verticalSpace(50),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
@@ -87,8 +92,8 @@ class _BuildEditProfileCompanyViewState
                     labelColor: AppColors.darkGrey,
                     controller: firstNameController,
                     keyboardType: TextInputType.text,
-                    labelBehavior: true,
-                    outlineBorder: false,
+                    labelBehavior: false,
+                    outlineBorder: true,
                   ),
                   verticalSpace(20),
                   CustomTextField(
@@ -96,8 +101,8 @@ class _BuildEditProfileCompanyViewState
                     labelColor: AppColors.darkGrey,
                     controller: lastNameController,
                     keyboardType: TextInputType.text,
-                    labelBehavior: true,
-                    outlineBorder: false,
+                    labelBehavior: false,
+                    outlineBorder: true,
                   ),
                   verticalSpace(20),
                   CustomTextField(
@@ -105,38 +110,40 @@ class _BuildEditProfileCompanyViewState
                     labelColor: AppColors.darkGrey,
                     controller: companyNameController,
                     keyboardType: TextInputType.text,
-                    labelBehavior: true,
-                    outlineBorder: false,
+                    labelBehavior: false,
+                    outlineBorder: true,
                   ),
+                  verticalSpace(20),
                   CustomTextField(
                     labelText: 'Email',
                     labelColor: AppColors.darkGrey,
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
-                    labelBehavior: true,
-                    outlineBorder: false,
-                  ),
-                  verticalSpace(20),
-                  PhoneNumberTextField(
-                    labelText: 'Phone Number',
-                    controller: phoneNumberController,
-                    borderColor: AppColors.darkGrey,
-                    labelBehavior: true,
-                  ),
-                  verticalSpace(20),
-                  CountryDropDownEdit(
-                    initialCountryId: widget.companyModel.countryId,
+                    labelBehavior: false,
+                    outlineBorder: true,
                   ),
                   verticalSpace(20),
                   CustomTextField(
                     labelText: 'Location',
                     labelColor: AppColors.darkGrey,
                     controller: locationCompanyController,
-                    labelBehavior: true,
-                    outlineBorder: false,
+                    labelBehavior: false,
+                    outlineBorder: true,
                   ),
-                  verticalSpace(40),
-                  EditCompanyProfileButton(
+                  verticalSpace(20),
+                  PhoneNumberTextField(
+                    labelText: 'Phone Number',
+                    controller: phoneNumberController,
+                    borderColor: AppColors.darkGrey,
+                    labelBehavior: false,
+                    outlineBorder: true,
+                  ),
+                  verticalSpace(18),
+                  CountryDropDownEdit(
+                    initialCountryId: widget.companyModel.countryId,
+                  ),
+                  verticalSpace(60),
+                  UpdateCompanyProfileButton(
                     companyNameController: companyNameController,
                     firstNameController: firstNameController,
                     lastNameController: lastNameController,
@@ -145,6 +152,7 @@ class _BuildEditProfileCompanyViewState
                     locationCompanyController: locationCompanyController,
                     companyModel: widget.companyModel,
                   ),
+                  verticalSpace(40),
                 ],
               ),
             ),

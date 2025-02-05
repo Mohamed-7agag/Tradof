@@ -8,20 +8,21 @@ import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
-import 'package:tradof/features/company/company_setting/presentation/logic/cubit/company_setting_cubit.dart';
 
 import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
 import '../../../profile_company/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
-import '../widgets/build_edit_profile_company_view.dart';
+import '../logic/cubit/company_setting_cubit.dart';
+import '../widgets/build_update_company_profile_view.dart';
 
-class EditProfileCompanyView extends StatefulWidget {
-  const EditProfileCompanyView({super.key});
+class UpdateCompanyProfileView extends StatefulWidget {
+  const UpdateCompanyProfileView({super.key});
 
   @override
-  State<EditProfileCompanyView> createState() => _EditProfileCompanyViewState();
+  State<UpdateCompanyProfileView> createState() =>
+      _UpdateCompanyProfileViewState();
 }
 
-class _EditProfileCompanyViewState extends State<EditProfileCompanyView> {
+class _UpdateCompanyProfileViewState extends State<UpdateCompanyProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +54,7 @@ class _EditProfileCompanyViewState extends State<EditProfileCompanyView> {
             } else if (state.status.isGetCompanyFailure) {
               return CustomFailureWidget(text: state.errorMessage);
             }
-            return BuildEditProfileCompanyView(
+            return BuildUpdateCompanyProfileView(
               companyModel: state.companyModel!,
             );
           },

@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:tradof/core/api/api_service.dart';
 import 'package:tradof/core/errors/failure.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_update_request_model.dart';
 
 import '../../../../../core/api/end_points.dart';
 import '../../../../../core/helpers/handle_request_method.dart';
 import '../../../../../core/utils/app_constants.dart';
+import '../../../profile_company/data/model/company_update_request_model.dart';
 import 'company_setting_repo.dart';
 
 class CompanySettingRepoImpl implements CompanySettingRepo {
@@ -17,7 +17,7 @@ class CompanySettingRepoImpl implements CompanySettingRepo {
   Future<Either<Failure, String>> changeCompanyPassword(
       {required String currentPassword, required String newPassword}) {
     return handleRequest(() async {
-      final response = await _apiServices.post(
+      final response = await _apiServices.put(
         EndPoint.changeCompanyPassword(AppConstants.kUserId),
         data: {
           'currentPassword': currentPassword,
@@ -28,13 +28,14 @@ class CompanySettingRepoImpl implements CompanySettingRepo {
       return response;
     });
   }
+
   @override
   Future<Either<Failure, String>> updateCompanyProfile(
-      {required CompanyUpdateRequestModel companyUpdateRequestModel}) {
+      {required UpdateCompanyRequestModel updateCompanyRequestModel}) {
     return handleRequest(() async {
       final response = await _apiServices.put(
         EndPoint.updateCompanyProfile,
-        data: companyUpdateRequestModel.toJson(),
+        data: updateCompanyRequestModel.toJson(),
       );
       return response;
     });
