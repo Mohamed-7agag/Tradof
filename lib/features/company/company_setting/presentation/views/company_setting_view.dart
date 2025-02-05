@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
@@ -23,9 +24,16 @@ class CompanySettingView extends StatelessWidget {
               child: Column(
                 children: [
                   verticalSpace(15),
-                  SettingsSection1(),
+                  SlideInLeft(
+                    from: 400,
+                    child: SettingsSection1(),
+                  ),
                   verticalSpace(20),
-                  SettingSection2(),
+                  SlideInLeft(
+                    from: 400,
+                    delay: Duration(milliseconds: 250),
+                    child: SettingSection2(),
+                  ),
                   verticalSpace(26),
                   SubscriptionPlanAndTimer(),
                   verticalSpace(20),

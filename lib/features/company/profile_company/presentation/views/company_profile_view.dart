@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -67,14 +68,15 @@ class BuildCompanyProfileSuccess extends StatelessWidget {
                 children: [
                   verticalSpace(16),
                   RatingAndReviews(companyModel: companyModel),
-                  if (companyModel.socialMedia.isEmpty) ...[
-                    verticalSpace(20),
-                    SocialLinks(
-                      socialLinks: companyModel.socialMedia,
-                    ),
-                  ],
+                  verticalSpace(20),
+                  SocialLinks(
+                    socialLinks: companyModel.socialMedia,
+                  ),
                   verticalSpace(26),
-                  CompanyProfileTables(companyModel: companyModel),
+                  SlideInUp(
+                    from: 150,
+                    child: CompanyProfileTables(companyModel: companyModel),
+                  ),
                 ],
               ),
             ),

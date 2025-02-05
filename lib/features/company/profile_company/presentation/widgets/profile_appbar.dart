@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -21,15 +22,18 @@ class ProfileAppbar extends StatelessWidget {
         child: Column(
           children: [
             verticalSpace(16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Profile',
-                  style: AppStyle.robotoBold20.copyWith(color: AppColors.white),
-                ),
-                SvgPicture.asset('assets/images/user.svg')
-              ],
+            SlideInDown(
+              from: 400,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Profile',
+                    style: AppStyle.robotoBold20.copyWith(color: AppColors.white),
+                  ),
+                  SvgPicture.asset('assets/images/user.svg')
+                ],
+              ),
             ),
             verticalSpace(10),
             UserImageAndInfo(companyModel: companyModel),

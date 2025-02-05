@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,49 +16,57 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
       children: [
         Expanded(
           flex: 5,
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w)
-                .copyWith(right: 20.w),
-            decoration: BoxDecoration(
-              color: AppColors.cardColor,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Delete Account',
-                  style: AppStyle.robotoCondensedMedium15.copyWith(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
+          child: SlideInLeft(
+            from: 400,
+            delay: Duration(milliseconds: 550),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w)
+                  .copyWith(right: 20.w),
+              decoration: BoxDecoration(
+                color: AppColors.cardColor,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Delete Account',
+                    style: AppStyle.robotoCondensedMedium15.copyWith(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                SvgPicture.asset('assets/images/delete_account.svg'),
-              ],
+                  SvgPicture.asset('assets/images/delete_account.svg'),
+                ],
+              ),
             ),
           ),
         ),
         horizontalSpace(8),
         Expanded(
           flex: 4,
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w)
-                .copyWith(right: 20.w),
-            decoration: BoxDecoration(
-              color: AppColors.cardColor,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Logout',
-                  style: AppStyle.robotoCondensedMedium15.copyWith(
-                    fontWeight: FontWeight.bold,
+          child: SlideInRight(
+            from: 400,
+            delay: Duration(milliseconds: 550),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w)
+                  .copyWith(right: 20.w),
+              decoration: BoxDecoration(
+                color: AppColors.cardColor,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Logout',
+                    style: AppStyle.robotoCondensedMedium15.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                SvgPicture.asset('assets/images/logout.svg'),
-              ],
+                  SvgPicture.asset('assets/images/logout.svg'),
+                ],
+              ),
             ),
           ),
         ),

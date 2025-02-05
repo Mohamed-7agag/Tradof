@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,11 +15,14 @@ class UserImageAndInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: CircleAvatar(
-        radius: 26.r,
-        backgroundColor: AppColors.white,
-        backgroundImage: CachedNetworkImageProvider(
-          companyModel.profileImageUrl,
+      leading: SlideInLeft(
+        from: 400,
+        child: CircleAvatar(
+          radius: 26.r,
+          backgroundColor: AppColors.white,
+          backgroundImage: CachedNetworkImageProvider(
+            companyModel.profileImageUrl,
+          ),
         ),
       ),
       title: Text(
