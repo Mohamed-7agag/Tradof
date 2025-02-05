@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/features/auth/data/model/specialization_model.dart';
@@ -21,13 +22,13 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<CompanyProfileCubit, CompanyProfileState>(
       listener: (context, state) {
-        if (state.status.isUpdateCompanyTablesFailure ||
-            state.status.isIndustriesServedLoading) {
+        if (state.status.isPreferedLanguagesFailure ||
+            state.status.isIndustriesServedFailure) {
           errorToast(context, 'Error', state.errorMessage);
-        } else if (state.status.isUpdateCompanyTablesSuccess ||
+        } else if (state.status.isPreferedLanguagesSuccess ||
             state.status.isIndustriesServedSuccess) {
           successToast(context, 'Success', state.message);
-          context.pop();
+          GoRouter.of(context).pop(true);
         }
       },
       builder: (context, state) {
@@ -38,7 +39,7 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
               current.selectedIndustriesServed !=
                   previous.selectedIndustriesServed,
           builder: (context, tablesState) {
-            return (state.status.isUpdateCompanyTablesLoading ||
+            return (state.status.isPreferedLanguagesLoading ||
                     state.status.isIndustriesServedLoading)
                 ? CustomLoadingWidget()
                 : CustomButton(
@@ -73,18 +74,13 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
     if (!newList.isNullOrEmpty()) {
       final addedItems = newList.where((item) => !oldList.contains(item));
       final removedItems = oldList.where((item) => !newList.contains(item));
-      if (addedItems.isNotEmpty) {
-        final languagesIds = addedItems.map((item) => item.id).toList();
-        context
-            .read<CompanyProfileCubit>()
-            .addPreferedLanguages(languagesIds: languagesIds);
-      }
-      if (removedItems.isNotEmpty) {
-        final languagesIds = removedItems.map((item) => item.id).toList();
-        context
-            .read<CompanyProfileCubit>()
-            .deletePreferedLanguages(languagesIds: languagesIds);
-      }
+
+      final addedLanguagesIds = addedItems.map((item) => item.id).toList();
+      final deletedLanguagesIds = removedItems.map((item) => item.id).toList();
+      context.read<CompanyProfileCubit>().updatePreferredLanguages(
+            addedLanguagesIds: addedLanguagesIds,
+            deletedLanguagesIds: deletedLanguagesIds,
+          );
     } else {
       errorToast(
           context, 'Error', 'Please select at least one prefered language');
@@ -96,18 +92,14 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
     if (!newList.isNullOrEmpty()) {
       final addedItems = newList.where((item) => !oldList.contains(item));
       final removedItems = oldList.where((item) => !newList.contains(item));
-      if (addedItems.isNotEmpty) {
-        final industriesIds = addedItems.map((item) => item.id).toList();
-        context
-            .read<CompanyProfileCubit>()
-            .addIndustriesServed(industriesIds: industriesIds);
-      }
-      if (removedItems.isNotEmpty) {
-        final industriesIds = removedItems.map((item) => item.id).toList();
-        context
-            .read<CompanyProfileCubit>()
-            .deleteIndustriesServed(industriesIds: industriesIds);
-      }
+
+      final addedIndustriesIds = addedItems.map((item) => item.id).toList();
+      final deletedIndustriesIds = removedItems.map((item) => item.id).toList();
+
+      context.read<CompanyProfileCubit>().updateIndustriesServed(
+            addedIndustriesIds: addedIndustriesIds,
+            deletedIndustriesIds: deletedIndustriesIds,
+          );
     } else {
       errorToast(
           context, 'Error', 'Please select at least one industry served');

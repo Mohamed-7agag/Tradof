@@ -22,11 +22,14 @@ class ProfileCompanyView extends StatelessWidget {
     return BlocProvider(
       create: (context) => CompanyProfileCubit(getIt())..getCompanyProfile(),
       child: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
+        buildWhen: (previous, current) =>
+            current.status.isGetCompanyloading ||
+            current.status.isGetCompanySuccess ||
+            current.status.isGetCompanyFailure,
         builder: (context, state) {
           return CustomRefreshIndicator(
             reversColors: true,
             onRefresh: () async {
-              if (state.companyModel != null) return;
               context.read<CompanyProfileCubit>().getCompanyProfile();
             },
             child: state.status.isGetCompanyloading
@@ -61,27 +64,33 @@ class BuildCompanyProfileSuccess extends StatelessWidget {
       children: [
         ProfileAppbar(companyModel: companyModel),
         Expanded(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                children: [
-                  verticalSpace(16),
-                  RatingAndReviews(companyModel: companyModel),
-                  verticalSpace(20),
-                  SocialLinks(
-                    socialLinks: companyModel.socialMedia,
+            child: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Column(
+                    children: [
+                      verticalSpace(16),
+                      RatingAndReviews(companyModel: companyModel),
+                      verticalSpace(20),
+                      SocialLinks(
+                        socialLinks: companyModel.socialMedia,
+                      ),
+                      verticalSpace(26),
+                      SlideInUp(
+                        from: 150,
+                        child: CompanyProfileTables(companyModel: companyModel),
+                      ),
+                    ],
                   ),
-                  verticalSpace(26),
-                  SlideInUp(
-                    from: 150,
-                    child: CompanyProfileTables(companyModel: companyModel),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
+            )
+          ],
+        )),
       ],
     );
   }

@@ -30,10 +30,10 @@ abstract class EndPoint {
   }
 
   static String addIndustries(String companyId) {
-    return 'Company/AddIndustry/$companyId';
+    return 'Company/AddSpecialization/$companyId';
   }
 
   static String deleteIndustries(String companyId) {
-    return 'Company/RemoveIndustry/$companyId';
+    return 'Company/RemoveSpecialization/$companyId';
   }
 }

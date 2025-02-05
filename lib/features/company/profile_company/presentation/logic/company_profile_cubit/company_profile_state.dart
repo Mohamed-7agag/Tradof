@@ -22,11 +22,11 @@ extension CompanyProfileStatusX on CompanyProfileStatus {
       this == CompanyProfileStatus.getCompanyFailure;
   bool get isInitial => this == CompanyProfileStatus.initial;
 
-  bool get isUpdateCompanyTablesSuccess =>
+  bool get isPreferedLanguagesSuccess =>
       this == CompanyProfileStatus.preferedLanguagesSuccess;
-  bool get isUpdateCompanyTablesLoading =>
+  bool get isPreferedLanguagesLoading =>
       this == CompanyProfileStatus.preferedLanguagesLoading;
-  bool get isUpdateCompanyTablesFailure =>
+  bool get isPreferedLanguagesFailure =>
       this == CompanyProfileStatus.preferedLanguagesFailure;
   bool get isIndustriesServedSuccess =>
       this == CompanyProfileStatus.industriesServedSuccess;

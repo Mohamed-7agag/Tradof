@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/extensions.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
+
+import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class PreferredLanguage extends StatelessWidget {
   const PreferredLanguage({super.key, required this.companyModel});
@@ -21,15 +24,19 @@ class PreferredLanguage extends StatelessWidget {
           children: [
             Text('Preferred Language', style: AppStyle.poppinsMedium15),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 Map<String, dynamic> data = {
                   'isPreferedLanguages': true,
                   'data': companyModel
                 };
-                context.pushNamed(
+                final result = await context.push(
                   Routes.updateCompanyProfileTablesViewRoute,
                   extra: data,
                 );
+
+                if (result == true && context.mounted) {
+                  context.read<CompanyProfileCubit>().getCompanyProfile();
+                }
               },
               child: Image.asset('assets/images/edit.png', width: 25),
             )

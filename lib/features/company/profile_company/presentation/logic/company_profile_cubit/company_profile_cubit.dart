@@ -31,87 +31,99 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
             ));
   }
 
- 
-
-  Future<void> addPreferedLanguages({required List<int> languagesIds}) async {
+  Future<void> updatePreferredLanguages({
+    required List<int> addedLanguagesIds,
+    required List<int> deletedLanguagesIds,
+  }) async {
     emit(state.copyWith(status: CompanyProfileStatus.preferedLanguagesLoading));
-    final result = await _profileCompanyRepo.addPreferedLanguages(
-      languagesIds: languagesIds,
-    );
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: CompanyProfileStatus.preferedLanguagesFailure,
-          errorMessage: failure.errMessage,
-        ),
-      ),
-      (message) => emit(state.copyWith(
+
+    try {
+      if (addedLanguagesIds.isNotEmpty) {
+        final addResult = await _profileCompanyRepo.addPreferedLanguages(
+            languagesIds: addedLanguagesIds);
+        addResult.fold(
+          (failure) => emit(
+            state.copyWith(
+              status: CompanyProfileStatus.preferedLanguagesFailure,
+              errorMessage: failure.errMessage,
+            ),
+          ),
+          (_) => {},
+        );
+      }
+
+      if (deletedLanguagesIds.isNotEmpty) {
+        final deleteResult = await _profileCompanyRepo.deletePreferedLanguages(
+            languagesIds: deletedLanguagesIds);
+        deleteResult.fold(
+          (failure) => emit(
+            state.copyWith(
+              status: CompanyProfileStatus.preferedLanguagesFailure,
+              errorMessage: failure.errMessage,
+            ),
+          ),
+          (_) => {},
+        );
+      }
+
+      emit(state.copyWith(
         status: CompanyProfileStatus.preferedLanguagesSuccess,
-        message: message,
-      )),
-    );
+        message: 'Preferred languages updated successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: CompanyProfileStatus.preferedLanguagesFailure,
+        errorMessage: e.toString(),
+      ));
+    }
   }
 
-  Future<void> deletePreferedLanguages(
-      {required List<int> languagesIds}) async {
-    emit(state.copyWith(status: CompanyProfileStatus.preferedLanguagesLoading));
-    final result = await _profileCompanyRepo.deletePreferedLanguages(
-      languagesIds: languagesIds,
-    );
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: CompanyProfileStatus.preferedLanguagesFailure,
-          errorMessage: failure.errMessage,
-        ),
-      ),
-      (message) => emit(
-        state.copyWith(
-          status: CompanyProfileStatus.preferedLanguagesSuccess,
-          message: message,
-        ),
-      ),
-    );
-  }
-
-  Future<void> addIndustriesServed({required List<int> industriesIds}) async {
+  Future<void> updateIndustriesServed({
+    required List<int> addedIndustriesIds,
+    required List<int> deletedIndustriesIds,
+  }) async {
     emit(state.copyWith(status: CompanyProfileStatus.industriesServedLoading));
-    final result = await _profileCompanyRepo.addIndustriesServed(
-      industriesIds: industriesIds,
-    );
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: CompanyProfileStatus.industriesServedFailure,
-          errorMessage: failure.errMessage,
-        ),
-      ),
-      (message) => emit(state.copyWith(
+
+    try {
+      if (addedIndustriesIds.isNotEmpty) {
+        final addResult = await _profileCompanyRepo.addIndustriesServed(
+          industriesIds: addedIndustriesIds,
+        );
+        addResult.fold(
+          (failure) => emit(
+            state.copyWith(
+              status: CompanyProfileStatus.industriesServedFailure,
+              errorMessage: failure.errMessage,
+            ),
+          ),
+          (_) => {},
+        );
+      }
+
+      if (deletedIndustriesIds.isNotEmpty) {
+        final deleteResult = await _profileCompanyRepo.deleteIndustriesServed(
+          industriesIds: deletedIndustriesIds,
+        );
+        deleteResult.fold(
+          (failure) => emit(
+            state.copyWith(
+              status: CompanyProfileStatus.industriesServedFailure,
+              errorMessage: failure.errMessage,
+            ),
+          ),
+          (_) => {},
+        );
+      }
+
+      emit(state.copyWith(
         status: CompanyProfileStatus.industriesServedSuccess,
-        message: message,
-      )),
-    );
-  }
-
-  Future<void> deleteIndustriesServed(
-      {required List<int> industriesIds}) async {
-    emit(state.copyWith(status: CompanyProfileStatus.industriesServedLoading));
-    final result = await _profileCompanyRepo.deleteIndustriesServed(
-      industriesIds: industriesIds,
-    );
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: CompanyProfileStatus.industriesServedFailure,
-          errorMessage: failure.errMessage,
-        ),
-      ),
-      (message) => emit(
-        state.copyWith(
-          status: CompanyProfileStatus.industriesServedSuccess,
-          message: message,
-        ),
-      ),
-    );
+        message: 'Industries served updated successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: CompanyProfileStatus.industriesServedFailure,
+        errorMessage: e.toString(),
+      ));
+    }
   }
 }
