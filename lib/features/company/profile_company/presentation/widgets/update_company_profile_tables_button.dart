@@ -74,7 +74,10 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
     if (!newList.isNullOrEmpty()) {
       final addedItems = newList.where((item) => !oldList.contains(item));
       final removedItems = oldList.where((item) => !newList.contains(item));
-
+      if (addedItems.isEmpty && removedItems.isEmpty) {
+        infoToast(context, 'Info', 'No changes detected');
+        return;
+      }
       final addedLanguagesIds = addedItems.map((item) => item.id).toList();
       final deletedLanguagesIds = removedItems.map((item) => item.id).toList();
       context.read<CompanyProfileCubit>().updatePreferredLanguages(
@@ -92,7 +95,10 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
     if (!newList.isNullOrEmpty()) {
       final addedItems = newList.where((item) => !oldList.contains(item));
       final removedItems = oldList.where((item) => !newList.contains(item));
-
+      if (addedItems.isEmpty && removedItems.isEmpty) {
+        infoToast(context, 'Info', 'No changes detected');
+        return;
+      }
       final addedIndustriesIds = addedItems.map((item) => item.id).toList();
       final deletedIndustriesIds = removedItems.map((item) => item.id).toList();
 
