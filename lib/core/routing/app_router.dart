@@ -20,11 +20,13 @@ import 'package:tradof/features/projects/presentation/views/create_project_view.
 import 'package:tradof/features/company/company_setting/presentation/views/add_update_social_media_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
+import '../../features/auth/presentation/logic/freelancer_registeration_cubit.dart';
 import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
 import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
+import '../../features/company/company_profile/presentation/views/company_add_employee_view.dart';
 import '../../welcome_view.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
@@ -221,16 +223,20 @@ class AppRouter {
           return MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => CompanySettingCubit(getIt()),
+                create: (context) => CompanyProfileCubit(getIt()),
               ),
               BlocProvider(
-                create: (context) => CompanyProfileCubit(getIt())..getCompanyProfile(),
+                create: (context) => MetaDataCubit(getIt())..getCountries(),
+              ),
+              BlocProvider(
+                create: (context) => ProfileImageAndCountryCubit(),
               ),
             ],
             child: AddUpdateSocialMediaView(),
           );
         },
       ),
+     
     ],
   );
 }

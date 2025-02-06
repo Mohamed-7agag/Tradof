@@ -10,7 +10,7 @@ import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 
 import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
-import '../../../profile_company/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
+import '../../../company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import '../logic/cubit/company_setting_cubit.dart';
 import '../widgets/build_update_company_profile_view.dart';
 

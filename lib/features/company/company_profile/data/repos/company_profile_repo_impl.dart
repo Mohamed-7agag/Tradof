@@ -5,6 +5,8 @@ import 'package:tradof/core/errors/failure.dart';
 import 'package:tradof/core/helpers/handle_request_method.dart';
 import 'package:tradof/core/utils/app_constants.dart';
 
+import '../model/company_employee_model.dart';
+import '../model/company_employee_request_model.dart';
 import '../model/company_model.dart';
 import 'company_profile_repo.dart';
 
@@ -22,6 +24,33 @@ class CompanyProfileRepoImpl implements CompanyProfileRepo {
         EndPoint.getCompanybyId(companyId),
       );
       return CompanyModel.fromJson(response);
+    });
+  }
+
+  @override
+  Future<Either<Failure, List<CompanyEmployeeModel>>> getCompanyEmployees(
+      {required String companyId}) {
+    return handleRequest(() async {
+      final response = await _apiServices.get(
+        EndPoint.getCompanyEmployees(companyId),
+      );
+      return List<CompanyEmployeeModel>.from(
+        response.map<CompanyEmployeeModel>(
+          (employee) => CompanyEmployeeModel.fromJson(employee),
+        ),
+      );
+    });
+  }
+
+  @override
+  Future<Either<Failure, String>> addCompanyEmployee(
+      {required CompanyEmployeeRequestModel employeeModel}) {
+    return handleRequest(() async {
+      final response = await _apiServices.post(
+        EndPoint.addCompanyEmployee,
+        data: employeeModel.toJson(),
+      );
+      return response;
     });
   }
 

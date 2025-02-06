@@ -7,7 +7,7 @@ import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 
 import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
 import '../../../../auth/presentation/widgets/phone_number_text_field.dart';
-import '../../../profile_company/data/model/company_model.dart';
+import '../../../company_profile/data/model/company_model.dart';
 import 'country_drop_down_edit.dart';
 import 'profile_image_edit.dart';
 import 'update_company_profile_button.dart';

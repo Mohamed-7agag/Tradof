@@ -5,3 +5,15 @@ abstract class AppConstants {
   static const String firstTime = "firstTime";
   static String kUserId = '';
 }
+
+const List<String> employeesGroups = [
+  "Adminstrator",
+  "SeniorProject",
+  "SeniorProjectManager",
+  "FinanceManager",
+  "ClientFinanceManager",
+  "ProjectManager",
+  "ClientManager",
+  "VendorManager",
+  "VendorFinanceManager"
+];

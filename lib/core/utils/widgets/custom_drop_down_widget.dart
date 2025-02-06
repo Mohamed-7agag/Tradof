@@ -56,3 +56,57 @@ class CustomDropDownWidget extends StatelessWidget {
     );
   }
 }
+
+class CustomDropDownDarBorderkWidget extends StatelessWidget {
+  const CustomDropDownDarBorderkWidget({
+    super.key,
+    required this.hint,
+    required this.items,
+    this.value,
+    this.onChanged,
+  });
+  final String hint;
+  final List<String> items;
+  final String? value;
+  final void Function(String?)? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<String>(
+      decoration: InputDecoration(
+        border: _buildBorder(),
+        enabledBorder: _buildBorder(),
+        focusedBorder: _buildBorder(color: AppColors.grey),
+      ),
+      value: value,
+      iconEnabledColor: AppColors.darkGrey,
+      dropdownColor: AppColors.white,
+      elevation: 4,
+      hint: Text(
+        hint,
+        style: AppStyle.robotoRegular14.copyWith(color: AppColors.darkGrey),
+      ),
+      items: items
+          .map(
+            (item) => DropdownMenuItem(
+              value: item,
+              child: Text(
+                item,
+                style: AppStyle.robotoRegular15.copyWith(
+                  color: AppColors.darkGrey,
+                ),
+              ),
+            ),
+          )
+          .toList(),
+      onChanged: onChanged,
+    );
+  }
+
+  OutlineInputBorder _buildBorder({Color? color}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(color: color ?? AppColors.grey),
+    );
+  }
+}

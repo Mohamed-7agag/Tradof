@@ -6,7 +6,7 @@ import 'package:tradof/features/company/company_setting/data/model/social_media_
 import '../../../../../core/api/end_points.dart';
 import '../../../../../core/helpers/handle_request_method.dart';
 import '../../../../../core/utils/app_constants.dart';
-import '../../../profile_company/data/model/company_update_request_model.dart';
+import '../../../company_profile/data/model/company_update_request_model.dart';
 import 'company_setting_repo.dart';
 
 class CompanySettingRepoImpl implements CompanySettingRepo {

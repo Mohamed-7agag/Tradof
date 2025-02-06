@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
+import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import 'industries_served.dart';

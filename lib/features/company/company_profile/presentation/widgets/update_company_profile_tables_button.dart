@@ -5,7 +5,7 @@ import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/features/auth/data/model/specialization_model.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
+import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
 import '../../../../../core/utils/widgets/custom_button.dart';
 import '../../../../../core/utils/widgets/custom_toastification.dart';

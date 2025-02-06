@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/features/company/profile_company/presentation/widgets/link_icon.dart';
+import 'package:tradof/features/company/company_profile/presentation/widgets/link_icon.dart';
 
 class SocialLinks extends StatelessWidget {
   const SocialLinks({super.key, required this.socialLinks});
