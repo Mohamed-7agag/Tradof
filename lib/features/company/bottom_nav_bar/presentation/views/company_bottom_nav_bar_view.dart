@@ -38,7 +38,7 @@ class CompanyBottomNavBarView extends StatelessWidget {
                     children: [
                       SlideInLeft(
                         from: 400,
-                        delay: Duration(milliseconds: 500),
+                        delay: Duration(milliseconds: 350),
                         child: _buildNavItem(
                           context,
                           'assets/images/home_off.png',
@@ -67,7 +67,7 @@ class CompanyBottomNavBarView extends StatelessWidget {
                       ),
                       SlideInRight(
                         from: 400,
-                        delay: Duration(milliseconds: 500),
+                        delay: Duration(milliseconds: 350),
                         child: _buildNavItem(
                           context,
                           'assets/images/setting_off.png',

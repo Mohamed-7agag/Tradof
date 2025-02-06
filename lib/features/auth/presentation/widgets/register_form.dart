@@ -2,8 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/app_regex.dart';
-import 'package:tradof/core/helpers/extensions.dart';
+import 'package:tradof/core/helpers/app_validation.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 
@@ -152,28 +151,11 @@ class _RegisterFormState extends State<RegisterForm> {
     final String confirmPassword = confirmPasswordController.text.trim();
 
     if (formKey.currentState!.validate()) {
-      if (!AppRegex.isEmailValid(email)) {
-        errorToast(context, 'Invalid Email', 'Please enter a valid email');
-      } else if (phoneNumber.isNullOrEmpty()) {
-        errorToast(context, 'Invalid Phone number',
-            'Please enter a valid Phone number');
+      if (!AppValidation.emailValidation(context, email) ||
+          !AppValidation.phoneNumberValidation(context, phoneNumber)) {
       } else if (password != confirmPassword) {
         errorToast(context, 'Invalid Password', 'Passwords do not match');
-      } else if (!AppRegex.hasMinLength(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must be at least 8 characters long');
-      } else if (!AppRegex.hasLowerCase(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one lowercase letter');
-      } else if (!AppRegex.hasUpperCase(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one upper letter');
-      } else if (!AppRegex.hasNumber(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one number digit');
-      } else if (!AppRegex.hasSpecialCharacter(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one special character');
+      } else if (!AppValidation.passwordValidation(context, password)) {
       } else {
         widget.pageController.nextPage(
           duration: const Duration(milliseconds: 350),

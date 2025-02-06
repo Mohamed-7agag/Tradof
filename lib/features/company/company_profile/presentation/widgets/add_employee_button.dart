@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tradof/core/helpers/app_regex.dart';
+import 'package:tradof/core/helpers/app_validation.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/app_constants.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
@@ -60,26 +60,11 @@ class AddEmployeeButton extends StatelessWidget {
   void _addEmployeeValidation(BuildContext context) {
     final password = passwordController.text.trim();
     if (formKey.currentState!.validate()) {
-      if (!AppRegex.isEmailValid(emailController.text.trim())) {
-        errorToast(context, 'Error', 'Please enter valid email');
-      } else if (!AppRegex.hasMinLength(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must be at least 8 characters long');
-      } else if (!AppRegex.hasLowerCase(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one lowercase letter');
-      } else if (!AppRegex.hasUpperCase(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one upper letter');
-      } else if (!AppRegex.hasNumber(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one number digit');
-      } else if (!AppRegex.hasSpecialCharacter(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one special character');
-      } else if (phoneNumberController.text.trim().isNullOrEmpty()) {
-        errorToast(
-            context, 'Invalid Phone Number', 'Please enter valid Phone Number');
+      if (!AppValidation.emailValidation(
+          context, emailController.text.trim())) {
+      } else if (!AppValidation.passwordValidation(context, password) ||
+          !AppValidation.phoneNumberValidation(
+              context, phoneNumberController.text.trim())) {
       } else if (groupName.isNullOrEmpty()) {
         errorToast(context, 'Error', 'Please Select Group Name');
       } else if (context.read<ProfileImageAndCountryCubit>().state.countryId ==
