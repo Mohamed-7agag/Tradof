@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/utils/app_constants.dart';
+import '../../../data/model/company_employee_model.dart';
+import '../../../data/model/company_employee_request_model.dart';
 import '../../../data/model/company_model.dart';
 import '../../../data/repos/company_profile_repo.dart';
 
@@ -29,6 +31,47 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
                 companyModel: companyModel,
               ),
             ));
+  }
+
+  Future<void> getCompanyEmployees() async {
+    emit(state.copyWith(
+        status: CompanyProfileStatus.getCompanyEmployeesLoading));
+    final result = await _profileCompanyRepo.getCompanyEmployees(
+      companyId: AppConstants.kUserId,
+    );
+    result.fold(
+      (failure) => emit(state.copyWith(
+        status: CompanyProfileStatus.getCompanyEmployeesFailure,
+        errorMessage: failure.errMessage,
+      )),
+      (companyEmployees) => emit(
+        state.copyWith(
+          status: CompanyProfileStatus.getCompanyEmployeesSuccess,
+          companyEmployees: companyEmployees,
+        ),
+      ),
+    );
+  }
+
+  Future<void> addCompanyEmployee(
+      {required CompanyEmployeeRequestModel employeeModel}) async {
+    emit(state.copyWith(
+        status: CompanyProfileStatus.addCompanyEmployeesLoading));
+    final result = await _profileCompanyRepo.addCompanyEmployee(
+      employeeModel: employeeModel,
+    );
+    result.fold(
+      (failure) => emit(state.copyWith(
+        status: CompanyProfileStatus.addCompanyEmployeesFailure,
+        errorMessage: failure.errMessage,
+      )),
+      (success) => emit(
+        state.copyWith(
+          status: CompanyProfileStatus.addCompanyEmployeesSuccess,
+          message: success,
+        ),
+      ),
+    );
   }
 
   Future<void> updatePreferredLanguages({
@@ -71,10 +114,12 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
         message: 'Preferred languages updated successfully',
       ));
     } catch (e) {
-      emit(state.copyWith(
-        status: CompanyProfileStatus.preferedLanguagesFailure,
-        errorMessage: e.toString(),
-      ));
+      emit(
+        state.copyWith(
+          status: CompanyProfileStatus.preferedLanguagesFailure,
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 
@@ -120,10 +165,12 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
         message: 'Industries served updated successfully',
       ));
     } catch (e) {
-      emit(state.copyWith(
-        status: CompanyProfileStatus.industriesServedFailure,
-        errorMessage: e.toString(),
-      ));
+      emit(
+        state.copyWith(
+          status: CompanyProfileStatus.industriesServedFailure,
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 }

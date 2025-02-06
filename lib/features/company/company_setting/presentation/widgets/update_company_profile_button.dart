@@ -6,8 +6,8 @@ import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 
 import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
-import '../../../profile_company/data/model/company_model.dart';
-import '../../../profile_company/data/model/company_update_request_model.dart';
+import '../../../company_profile/data/model/company_model.dart';
+import '../../../company_profile/data/model/company_update_request_model.dart';
 import '../logic/cubit/company_setting_cubit.dart';
 
 class UpdateCompanyProfileButton extends StatelessWidget {

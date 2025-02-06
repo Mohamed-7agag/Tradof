@@ -6,12 +6,12 @@ import 'package:tradof/core/helpers/app_regex.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
-import 'package:tradof/features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
-import 'package:tradof/features/auth/presentation/widgets/phone_number_text_field.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
+import '../logic/registeration_cubit/registeration_cubit.dart';
+import 'phone_number_text_field.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key, required this.pageController});

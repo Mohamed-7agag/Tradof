@@ -1,12 +1,20 @@
 import 'package:dartz/dartz.dart';
 import 'package:tradof/core/errors/failure.dart';
 
+import '../model/company_employee_model.dart';
+import '../model/company_employee_request_model.dart';
 import '../model/company_model.dart';
-
 
 abstract class CompanyProfileRepo {
   Future<Either<Failure, CompanyModel>> getCompanyProfrile({
     required String companyId,
+  });
+  Future<Either<Failure, List<CompanyEmployeeModel>>> getCompanyEmployees({
+    required String companyId,
+  });
+
+  Future<Either<Failure, String>> addCompanyEmployee({
+    required CompanyEmployeeRequestModel employeeModel,
   });
 
   Future<Either<Failure, String>> addPreferedLanguages({

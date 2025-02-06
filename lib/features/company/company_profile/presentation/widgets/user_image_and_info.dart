@@ -2,9 +2,12 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
+import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
 class UserImageAndInfo extends StatelessWidget {
   const UserImageAndInfo({super.key, required this.companyModel});
@@ -42,6 +45,16 @@ class UserImageAndInfo extends StatelessWidget {
             style: AppStyle.robotoRegular12.copyWith(color: AppColors.white),
           ),
         ],
+      ),
+      trailing: GestureDetector(
+        onTap: () {
+          context.pushNamed(Routes.companyEmployeesViewRoute);
+        },
+        child: SvgPicture.asset(
+          'assets/images/support.svg',
+          width: 28,
+          colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+        ),
       ),
     );
   }

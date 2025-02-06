@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/features/company/company_setting/data/repo/company_setting_repo.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_update_request_model.dart';
+import 'package:tradof/features/company/company_profile/data/model/company_update_request_model.dart';
 
 part 'company_setting_state.dart';
 

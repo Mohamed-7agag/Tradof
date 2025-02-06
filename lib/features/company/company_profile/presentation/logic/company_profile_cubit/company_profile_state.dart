@@ -10,7 +10,13 @@ enum CompanyProfileStatus {
   preferedLanguagesSuccess,
   industriesServedLoading,
   industriesServedFailure,
-  industriesServedSuccess
+  industriesServedSuccess,
+  getCompanyEmployeesLoading,
+  getCompanyEmployeesSuccess,
+  getCompanyEmployeesFailure,
+  addCompanyEmployeesLoading,
+  addCompanyEmployeesSuccess,
+  addCompanyEmployeesFailure,
 }
 
 extension CompanyProfileStatusX on CompanyProfileStatus {
@@ -34,16 +40,31 @@ extension CompanyProfileStatusX on CompanyProfileStatus {
       this == CompanyProfileStatus.industriesServedLoading;
   bool get isIndustriesServedFailure =>
       this == CompanyProfileStatus.industriesServedFailure;
+
+  bool get isGetCompanyEmployeesLoading =>
+      this == CompanyProfileStatus.getCompanyEmployeesLoading;
+  bool get isGetCompanyEmployeesSuccess =>
+      this == CompanyProfileStatus.getCompanyEmployeesSuccess;
+  bool get isGetCompanyEmployeesFailure =>
+      this == CompanyProfileStatus.getCompanyEmployeesFailure;
+  bool get isAddCompanyEmployeesLoading =>
+      this == CompanyProfileStatus.addCompanyEmployeesLoading;
+  bool get isAddCompanyEmployeesSuccess =>
+      this == CompanyProfileStatus.addCompanyEmployeesSuccess;
+  bool get isAddCompanyEmployeesFailure =>
+      this == CompanyProfileStatus.addCompanyEmployeesFailure;
 }
 
 class CompanyProfileState extends Equatable {
   final CompanyProfileStatus status;
   final CompanyModel? companyModel;
+  final List<CompanyEmployeeModel> companyEmployees;
   final String errorMessage;
   final String message;
 
   const CompanyProfileState({
     this.status = CompanyProfileStatus.initial,
+    this.companyEmployees = const [],
     this.errorMessage = '',
     this.companyModel,
     this.message = '',
@@ -51,12 +72,14 @@ class CompanyProfileState extends Equatable {
 
   CompanyProfileState copyWith({
     CompanyProfileStatus? status,
+    List<CompanyEmployeeModel>? companyEmployees,
     String? errorMessage,
     CompanyModel? companyModel,
     String? message,
   }) {
     return CompanyProfileState(
       status: status ?? this.status,
+      companyEmployees: companyEmployees ?? this.companyEmployees,
       errorMessage: errorMessage ?? this.errorMessage,
       companyModel: companyModel ?? this.companyModel,
       message: message ?? this.message,
@@ -66,6 +89,7 @@ class CompanyProfileState extends Equatable {
   @override
   List<Object> get props => [
         status,
+        companyEmployees,
         errorMessage,
         companyModel ?? '',
         message,

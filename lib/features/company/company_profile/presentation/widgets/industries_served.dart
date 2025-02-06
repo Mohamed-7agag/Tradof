@@ -3,15 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/features/company/profile_company/data/model/company_model.dart';
+import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
+import '../../../../../core/routing/routes.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
-class PreferredLanguage extends StatelessWidget {
-  const PreferredLanguage({super.key, required this.companyModel});
+class IndustriesServed extends StatelessWidget {
+  const IndustriesServed({super.key, required this.companyModel});
 
   final CompanyModel companyModel;
 
@@ -22,11 +22,11 @@ class PreferredLanguage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Preferred Language', style: AppStyle.poppinsMedium15),
+            Text('Industries Served', style: AppStyle.poppinsMedium15),
             GestureDetector(
               onTap: () async {
                 Map<String, dynamic> data = {
-                  'isPreferedLanguages': true,
+                  'isPreferedLanguages': false,
                   'data': companyModel
                 };
                 final result = await context.push(
@@ -49,29 +49,17 @@ class PreferredLanguage extends StatelessWidget {
             columns: [
               DataColumn(
                 label: Text(
-                  'Prefered Languages',
+                  'Industries Served',
                   style: AppStyle.poppinsSemiBold14,
                 ),
               ),
-              DataColumn(
-                label: Text(
-                  'IEFT tag',
-                  style: AppStyle.poppinsSemiBold14,
-                ),
-              )
             ],
-            rows: companyModel.preferredLanguages.map((language) {
+            rows: companyModel.specializations.map((language) {
               return DataRow(
                 cells: [
                   DataCell(
                     Text(
-                      language.languageName,
-                      style: AppStyle.robotoRegular12,
-                    ),
-                  ),
-                  DataCell(
-                    Text(
-                      language.languageCode,
+                      language.name,
                       style: AppStyle.robotoRegular12,
                     ),
                   ),

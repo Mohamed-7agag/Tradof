@@ -19,6 +19,12 @@ abstract class EndPoint {
     return 'Company/ChangePassword?companyId=$id';
   }
 
+  static String getCompanyEmployees(String id) {
+    return 'company/$id/employees';
+  }
+
+  static String addCompanyEmployee = 'Company/AddEmployee';
+
   static String getCompanybyId(String id) => 'Company/$id';
 
   static String addPreferredLanguage(String companyId) {
