@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/utils/widgets/custom_text_field.dart';
-import 'package:tradof/features/company/company_setting/data/model/social_media_model.dart';
+
 import 'package:tradof/features/company/company_setting/presentation/widgets/add_update_social_media_button.dart';
 
 class BuildAddUpdateSocialMedia extends StatefulWidget {
   const BuildAddUpdateSocialMedia({
     super.key,
-  //  required this.socialMediaModel,
+    //  required this.socialMediaModel,
   });
   //final List<SocialMediaModel> socialMediaModel;
 
@@ -21,11 +21,13 @@ class _BuildAddUpdateSocialMediaState extends State<BuildAddUpdateSocialMedia> {
   late TextEditingController facebookController;
   late TextEditingController linkedinController;
   late TextEditingController gamilController;
+  late TextEditingController githubController;
   @override
   void initState() {
     facebookController = TextEditingController();
     linkedinController = TextEditingController();
     gamilController = TextEditingController();
+    githubController = TextEditingController();
     super.initState();
   }
 
@@ -53,6 +55,12 @@ class _BuildAddUpdateSocialMediaState extends State<BuildAddUpdateSocialMedia> {
               CustomTextField(
                 labelText: 'link',
                 controller: gamilController,
+                outlineBorder: true,
+              ),
+              verticalSpace(16),
+              CustomTextField(
+                labelText: 'link',
+                controller: githubController,
                 outlineBorder: true,
               ),
               verticalSpace(60),
