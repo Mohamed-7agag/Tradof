@@ -143,6 +143,7 @@ class _BuildUpdateCompanyProfileViewState
                     initialCountryId: widget.companyModel.countryId,
                   ),
                   verticalSpace(60),
+
                   UpdateCompanyProfileButton(
                     companyNameController: companyNameController,
                     firstNameController: firstNameController,
@@ -151,6 +152,7 @@ class _BuildUpdateCompanyProfileViewState
                     phoneNumberController: phoneNumberController,
                     locationCompanyController: locationCompanyController,
                     companyModel: widget.companyModel,
+                    
                   ),
                   verticalSpace(40),
                 ],

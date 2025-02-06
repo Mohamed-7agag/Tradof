@@ -13,4 +13,6 @@ abstract class Routes {
       "/updateCompanyProfileView";
   static const String changeCompanyPasswordViewRoute =
       "/changeCompanyPasswordView";
+  static const String addUpdateSocialMediaViewRoute =
+      "/addUpdateSocialMediaView";    
 }

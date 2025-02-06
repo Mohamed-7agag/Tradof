@@ -4,13 +4,14 @@ import 'package:tradof/core/utils/app_constants.dart';
 import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
+import 'package:tradof/core/utils/widgets/upload_image_to_cloudinary.dart';
 
 import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
 import '../../../profile_company/data/model/company_model.dart';
 import '../../../profile_company/data/model/company_update_request_model.dart';
 import '../logic/cubit/company_setting_cubit.dart';
 
-class UpdateCompanyProfileButton extends StatelessWidget {
+class UpdateCompanyProfileButton extends StatefulWidget {
   const UpdateCompanyProfileButton({
     super.key,
     required this.firstNameController,
@@ -29,6 +30,23 @@ class UpdateCompanyProfileButton extends StatelessWidget {
   final TextEditingController locationCompanyController;
   final TextEditingController companyNameController;
   final CompanyModel companyModel;
+
+  @override
+  State<UpdateCompanyProfileButton> createState() =>
+      _UpdateCompanyProfileButtonState();
+}
+
+class _UpdateCompanyProfileButtonState
+    extends State<UpdateCompanyProfileButton> {
+  String? image = '';
+
+  Future<void> imageProfile() async {
+    image = widget.companyModel.profileImageUrl;
+    if (context.read<ProfileImageAndCountryCubit>().state.imagePicked != null) {
+      image = await uploadImageToCloudinary(
+          context.read<ProfileImageAndCountryCubit>().state.imagePicked);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,22 +72,24 @@ class UpdateCompanyProfileButton extends StatelessWidget {
             ? const CustomLoadingWidget()
             : CustomButton(
                 text: 'Update',
-                onPressed: () {
+                onPressed: () async {
                   FocusManager.instance.primaryFocus?.unfocus();
+                  await imageProfile();
                   context.read<CompanySettingCubit>().updateCompanyProfile(
                         UpdateCompanyRequestModel(
                           id: AppConstants.kUserId,
-                          firstName: firstNameController.text,
-                          lastName: lastNameController.text,
-                          email: emailController.text,
-                          phoneNumber: phoneNumberController.text,
-                          companyAddress: locationCompanyController.text,
+                          firstName: widget.firstNameController.text,
+                          lastName: widget.lastNameController.text,
+                          email: widget.emailController.text,
+                          phoneNumber: widget.phoneNumberController.text,
+                          companyAddress: widget.locationCompanyController.text,
                           countryId: context
                                   .read<ProfileImageAndCountryCubit>()
                                   .state
                                   .countryId ??
-                              companyModel.countryId,
-                          companyName: companyNameController.text,
+                              widget.companyModel.countryId,
+                          companyName: widget.companyNameController.text,
+                          profileImageUrl: image!,
                         ),
                       );
                 },

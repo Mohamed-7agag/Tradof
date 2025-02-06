@@ -36,4 +36,8 @@ abstract class EndPoint {
   static String deleteIndustries(String companyId) {
     return 'Company/RemoveSpecialization/$companyId';
   }
+
+  static String addUpateSocialMedia(String companyId) {
+    return 'Company/$companyId/social-medias/add-or-update';
+  }
 }

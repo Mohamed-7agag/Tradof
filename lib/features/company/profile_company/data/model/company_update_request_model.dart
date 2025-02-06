@@ -9,6 +9,7 @@ class UpdateCompanyRequestModel extends Equatable {
   final String lastName;
   final String phoneNumber;
   final String email;
+  final String profileImageUrl;
 
   const UpdateCompanyRequestModel({
     required this.id,
@@ -19,6 +20,7 @@ class UpdateCompanyRequestModel extends Equatable {
     required this.lastName,
     required this.phoneNumber,
     required this.email,
+    required this.profileImageUrl,
   });
 
   Map<String, dynamic> toJson() {
@@ -31,6 +33,7 @@ class UpdateCompanyRequestModel extends Equatable {
       'lastName': lastName,
       'phoneNumber': phoneNumber,
       'email': email,
+      'profileImageUrl': profileImageUrl
     };
   }
 
@@ -44,5 +47,6 @@ class UpdateCompanyRequestModel extends Equatable {
         lastName,
         phoneNumber,
         email,
+        profileImageUrl
       ];
 }

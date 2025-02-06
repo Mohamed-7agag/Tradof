@@ -42,7 +42,11 @@ class SettingsSection1 extends StatelessWidget {
           SettingItem(
             title: 'Social Media',
             icon: 'assets/images/media.svg',
-            onTap: () {},
+            onTap: () {
+              context.push(
+                Routes.addUpdateSocialMediaViewRoute,
+              );
+            },
           ),
         ],
       ),

@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:tradof/features/auth/data/model/language_model.dart';
 import 'package:tradof/features/auth/data/model/specialization_model.dart';
+import 'package:tradof/features/company/company_setting/data/model/social_media_model.dart';
+
 
 class CompanyModel extends Equatable {
   final String id;
@@ -17,7 +19,7 @@ class CompanyModel extends Equatable {
   final String profileImageUrl;
   final List<SpecializationModel> specializations;
   final List<LanguageModel> preferredLanguages;
-  final List<dynamic> socialMedia; // dynamic must be changes
+  final List<SocialMediaModel> socialMedia;
 
   const CompanyModel({
     required this.id,
@@ -56,10 +58,11 @@ class CompanyModel extends Equatable {
         preferredLanguages: List<LanguageModel>.from(
           json['preferredLanguages'].map((x) => LanguageModel.fromJson(x)),
         ),
-        socialMedia: json['socialMedia'],
+        socialMedia: List<SocialMediaModel>.from(
+          json['socialMedia'].map((x) => SocialMediaModel.fromJson(x)),
+        ),
       );
-      
-
+  
   @override
   List<Object?> get props => [
         id,

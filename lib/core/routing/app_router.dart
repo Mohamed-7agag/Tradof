@@ -6,15 +6,18 @@ import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/company_bottom_nav_bar_cubit.dart';
 import 'package:tradof/features/company/bottom_nav_bar/presentation/views/company_bottom_nav_bar_view.dart';
+import 'package:tradof/features/company/company_setting/presentation/logic/cubit/company_setting_cubit.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/change_company_password_view.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/company_setting_view.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/update_company_profile_view.dart';
+import 'package:tradof/features/company/profile_company/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import 'package:tradof/features/company/profile_company/presentation/views/company_profile_view.dart';
 import 'package:tradof/features/company/profile_company/presentation/views/update_company_profile_tables_view.dart';
 import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
 import 'package:tradof/features/projects/presentation/logic/project_cubit/project_cubit.dart';
 import 'package:tradof/features/projects/presentation/views/create_project_view.dart';
+import 'package:tradof/features/company/company_setting/presentation/views/add_update_social_media_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
 import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
@@ -209,6 +212,23 @@ class AppRouter {
         path: '/changeCompanyPasswordView',
         builder: (context, state) {
           return ChangeCompanyPasswordView();
+        },
+      ),
+      GoRoute(
+        name: Routes.addUpdateSocialMediaViewRoute,
+        path: '/addUpdateSocialMediaView',
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => CompanySettingCubit(getIt()),
+              ),
+              BlocProvider(
+                create: (context) => CompanyProfileCubit(getIt())..getCompanyProfile(),
+              ),
+            ],
+            child: AddUpdateSocialMediaView(),
+          );
         },
       ),
     ],

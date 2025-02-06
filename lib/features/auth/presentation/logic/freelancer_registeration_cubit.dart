@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,7 @@ class ProfileImageAndCountryCubit extends Cubit<ProfileImageAndCountryState> {
   }
 
   void onImagePicked(File? image) {
+    log('picked image: $image');
     emit(state.copyWith(imagePicked: image));
   }
 }
