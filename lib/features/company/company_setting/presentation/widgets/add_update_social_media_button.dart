@@ -5,7 +5,7 @@ import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 import 'package:tradof/features/company/company_setting/data/model/social_media_model.dart';
 import 'package:tradof/features/company/company_setting/presentation/logic/cubit/company_setting_cubit.dart';
-import 'package:tradof/features/company/profile_company/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
+
 
 class AddUpdateSocialMediaButton extends StatelessWidget {
   const AddUpdateSocialMediaButton(
@@ -21,7 +21,7 @@ class AddUpdateSocialMediaButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CompanyProfileCubit(getIt()),
+      create: (context) => CompanySettingCubit(getIt()),
       child: BlocConsumer<CompanySettingCubit, CompanySettingState>(
         listener: (context, state) {
           if (state.status.isAddUpdateSocialMediaSuccess) {

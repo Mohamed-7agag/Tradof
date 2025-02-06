@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
+import 'package:tradof/features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import 'package:tradof/features/company/company_setting/presentation/widgets/add_update_social_media_appbar.dart';
 import 'package:tradof/features/company/company_setting/presentation/widgets/build_add_update_social_media.dart';
-import 'package:tradof/features/company/profile_company/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 
 class AddUpdateSocialMediaView extends StatelessWidget {
   const AddUpdateSocialMediaView({super.key});
@@ -27,7 +27,7 @@ class AddUpdateSocialMediaView extends StatelessWidget {
                 return CustomFailureWidget(text: state.errorMessage);
               }
               return BuildAddUpdateSocialMedia(
-                socialMediaModel: state.companyModel!.socialMedia,
+                //socialMediaModel: state.companyModel!.socialMedia ?? [],
               );
             },
           ),
@@ -36,4 +36,3 @@ class AddUpdateSocialMediaView extends StatelessWidget {
     );
   }
 }
-

@@ -8,9 +8,9 @@ import 'package:tradof/features/company/company_setting/presentation/widgets/add
 class BuildAddUpdateSocialMedia extends StatefulWidget {
   const BuildAddUpdateSocialMedia({
     super.key,
-    required this.socialMediaModel,
+  //  required this.socialMediaModel,
   });
-  final List<SocialMediaModel> socialMediaModel;
+  //final List<SocialMediaModel> socialMediaModel;
 
   @override
   State<BuildAddUpdateSocialMedia> createState() =>

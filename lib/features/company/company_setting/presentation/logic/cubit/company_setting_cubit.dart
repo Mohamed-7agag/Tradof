@@ -52,7 +52,7 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
         status: CompanySettingStatus.updateCompanyProfileSuccess,
         message: message,
         errMessage: null,
-      )),
+      ))
     );
   }
 
