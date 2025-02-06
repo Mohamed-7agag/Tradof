@@ -9,7 +9,6 @@ import 'package:tradof/features/company/bottom_nav_bar/presentation/views/compan
 import 'package:tradof/features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import 'package:tradof/features/company/company_profile/presentation/views/company_profile_view.dart';
 import 'package:tradof/features/company/company_profile/presentation/views/update_company_profile_tables_view.dart';
-import 'package:tradof/features/company/company_setting/presentation/logic/cubit/company_setting_cubit.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/change_company_password_view.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/company_setting_view.dart';
 import 'package:tradof/features/company/company_setting/presentation/views/update_company_profile_view.dart';
@@ -17,16 +16,15 @@ import 'package:tradof/features/freelancer/bottom_nav_bar/presentation/views/bot
 import 'package:tradof/features/freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
 import 'package:tradof/features/projects/presentation/logic/project_cubit/project_cubit.dart';
 import 'package:tradof/features/projects/presentation/views/create_project_view.dart';
-import 'package:tradof/features/company/company_setting/presentation/views/add_update_social_media_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
-import '../../features/auth/presentation/logic/freelancer_registeration_cubit.dart';
 import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
 import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
-import '../../features/company/company_profile/presentation/views/company_add_employee_view.dart';
+import '../../features/company/company_setting/data/model/social_media_model.dart';
+import '../../features/company/company_setting/presentation/views/add_update_social_media_view.dart';
 import '../../welcome_view.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
@@ -220,23 +218,13 @@ class AppRouter {
         name: Routes.addUpdateSocialMediaViewRoute,
         path: '/addUpdateSocialMediaView',
         builder: (context, state) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => CompanyProfileCubit(getIt()),
-              ),
-              BlocProvider(
-                create: (context) => MetaDataCubit(getIt())..getCountries(),
-              ),
-              BlocProvider(
-                create: (context) => ProfileImageAndCountryCubit(),
-              ),
-            ],
-            child: AddUpdateSocialMediaView(),
+          final socialMedia = state.extra as List<SocialMediaModel>;
+          return BlocProvider(
+            create: (context) => CompanyProfileCubit(getIt()),
+            child: AddUpdateSocialMediaView(socialMedia: socialMedia),
           );
         },
       ),
-     
     ],
   );
 }

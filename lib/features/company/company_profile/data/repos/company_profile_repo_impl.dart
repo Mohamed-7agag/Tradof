@@ -5,6 +5,7 @@ import 'package:tradof/core/errors/failure.dart';
 import 'package:tradof/core/helpers/handle_request_method.dart';
 import 'package:tradof/core/utils/app_constants.dart';
 
+import '../../../company_setting/data/model/social_media_model.dart';
 import '../model/company_employee_model.dart';
 import '../model/company_employee_request_model.dart';
 import '../model/company_model.dart';
@@ -49,6 +50,18 @@ class CompanyProfileRepoImpl implements CompanyProfileRepo {
       final response = await _apiServices.post(
         EndPoint.addCompanyEmployee,
         data: employeeModel.toJson(),
+      );
+      return response;
+    });
+  }
+
+  @override
+  Future<Either<Failure, String>> addUpdateSocialMedia(
+      {required List<SocialMediaModel> socialMediaModel}) {
+    return handleRequest(() async {
+      final response = await _apiServices.post(
+        EndPoint.addUpateSocialMedia(AppConstants.kUserId),
+        data: socialMediaModel.map((e) => e.toJson()).toList(),
       );
       return response;
     });

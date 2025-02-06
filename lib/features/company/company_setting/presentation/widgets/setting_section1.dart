@@ -38,16 +38,6 @@ class SettingsSection1 extends StatelessWidget {
             icon: 'assets/images/calendar.svg',
             onTap: () {},
           ),
-          Divider(color: AppColors.cardDarkColor),
-          SettingItem(
-            title: 'Social Media',
-            icon: 'assets/images/media.svg',
-            onTap: () {
-              context.push(
-                Routes.addUpdateSocialMediaViewRoute,
-              );
-            },
-          ),
         ],
       ),
     );

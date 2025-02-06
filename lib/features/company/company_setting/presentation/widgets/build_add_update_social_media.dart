@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 
-import 'package:tradof/features/company/company_setting/presentation/widgets/add_update_social_media_button.dart';
+import '../../data/model/social_media_model.dart';
+import 'add_update_social_media_button.dart';
+import 'social_media_item.dart';
 
 class BuildAddUpdateSocialMedia extends StatefulWidget {
   const BuildAddUpdateSocialMedia({
     super.key,
-    //  required this.socialMediaModel,
+    required this.socialMedia,
   });
-  //final List<SocialMediaModel> socialMediaModel;
+  final List<SocialMediaModel> socialMedia;
 
   @override
   State<BuildAddUpdateSocialMedia> createState() =>
@@ -20,59 +21,80 @@ class BuildAddUpdateSocialMedia extends StatefulWidget {
 class _BuildAddUpdateSocialMediaState extends State<BuildAddUpdateSocialMedia> {
   late TextEditingController facebookController;
   late TextEditingController linkedinController;
-  late TextEditingController gamilController;
+  late TextEditingController gmailController;
   late TextEditingController githubController;
   @override
   void initState() {
     facebookController = TextEditingController();
     linkedinController = TextEditingController();
-    gamilController = TextEditingController();
+    gmailController = TextEditingController();
     githubController = TextEditingController();
+    for (var element in widget.socialMedia) {
+      if (element.platformType == 'Facebook') {
+        facebookController.text = element.link;
+      } else if (element.platformType == 'LinkedIn') {
+        linkedinController.text = element.link;
+      } else if (element.platformType == 'Gmail') {
+        gmailController.text = element.link;
+      } else if (element.platformType == 'GitHub') {
+        githubController.text = element.link;
+      }
+    }
+
     super.initState();
   }
 
   @override
+  void dispose() {
+    facebookController.dispose();
+    linkedinController.dispose();
+    gmailController.dispose();
+    githubController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              verticalSpace(30),
-              CustomTextField(
-                labelText: 'link',
-                controller: facebookController,
-                outlineBorder: true,
-              ),
-              verticalSpace(16),
-              CustomTextField(
-                labelText: 'link',
-                controller: linkedinController,
-                outlineBorder: true,
-              ),
-              verticalSpace(16),
-              CustomTextField(
-                labelText: 'link',
-                controller: gamilController,
-                outlineBorder: true,
-              ),
-              verticalSpace(16),
-              CustomTextField(
-                labelText: 'link',
-                controller: githubController,
-                outlineBorder: true,
-              ),
-              verticalSpace(60),
-              AddUpdateSocialMediaButton(
-                facebookController: facebookController,
-                linkedinController: linkedinController,
-                gamilController: gamilController,
-              ),
-              verticalSpace(40),
-            ],
-          ),
-        ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              children: [
+                verticalSpace(28),
+                SocialMediaItem(
+                  image: 'assets/images/facebook.png',
+                  controller: facebookController,
+                ),
+                verticalSpace(28),
+                SocialMediaItem(
+                  image: 'assets/images/linkedin.png',
+                  controller: linkedinController,
+                ),
+                verticalSpace(28),
+                SocialMediaItem(
+                  image: 'assets/images/github.png',
+                  controller: githubController,
+                ),
+                verticalSpace(28),
+                SocialMediaItem(
+                  image: 'assets/images/gmail.png',
+                  controller: gmailController,
+                ),
+                Expanded(child: verticalSpace(40)),
+                AddUpdateSocialMediaButton(
+                  facebookController: facebookController,
+                  linkedinController: linkedinController,
+                  gmailController: gmailController,
+                  githubController: githubController,
+                ),
+                verticalSpace(20),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

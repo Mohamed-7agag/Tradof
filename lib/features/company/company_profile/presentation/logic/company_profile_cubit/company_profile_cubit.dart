@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/utils/app_constants.dart';
+import '../../../../company_setting/data/model/social_media_model.dart';
 import '../../../data/model/company_employee_model.dart';
 import '../../../data/model/company_employee_request_model.dart';
 import '../../../data/model/company_model.dart';
@@ -71,6 +72,29 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
           message: success,
         ),
       ),
+    );
+  }
+
+  Future<void> addUpdateSocialMedia({
+    required List<SocialMediaModel> socialMedia,
+  }) async {
+    emit(state.copyWith(
+        status: CompanyProfileStatus.addUpdateSocialMediaLoading));
+    final result = await _profileCompanyRepo.addUpdateSocialMedia(
+      socialMediaModel: socialMedia,
+    );
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          status: CompanyProfileStatus.addUpdateSocialMediaFailure,
+          errorMessage: failure.errMessage,
+        ),
+      ),
+      (message) => emit(state.copyWith(
+        status: CompanyProfileStatus.addUpdateSocialMediaSuccess,
+        message: message,
+        errorMessage: null,
+      )),
     );
   }
 

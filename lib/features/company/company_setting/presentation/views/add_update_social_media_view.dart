@@ -1,37 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
-import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
-import 'package:tradof/features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
-import 'package:tradof/features/company/company_setting/presentation/widgets/add_update_social_media_appbar.dart';
-import 'package:tradof/features/company/company_setting/presentation/widgets/build_add_update_social_media.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:tradof/core/helpers/spacing.dart';
+import 'package:tradof/core/theming/app_colors.dart';
+
+import '../../../../../core/theming/app_style.dart';
+import '../../data/model/social_media_model.dart';
+import '../widgets/build_add_update_social_media.dart';
 
 class AddUpdateSocialMediaView extends StatelessWidget {
-  const AddUpdateSocialMediaView({super.key});
-
+  const AddUpdateSocialMediaView({super.key, required this.socialMedia});
+  final List<SocialMediaModel> socialMedia;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          AddUpdateSocialMediaAppbar(),
-          BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
-            buildWhen: (previous, current) =>
-                current.status.isGetCompanySuccess ||
-                current.status.isGetCompanyFailure ||
-                current.status.isGetCompanyloading,
-            builder: (context, state) {
-              if (state.status.isGetCompanyloading) {
-                return const CustomLoadingWidget();
-              } else if (state.status.isGetCompanyFailure) {
-                return CustomFailureWidget(text: state.errorMessage);
-              }
-              return BuildAddUpdateSocialMedia(
-                //socialMediaModel: state.companyModel!.socialMedia ?? [],
-              );
-            },
-          ),
+      appBar: AppBar(
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
+        leadingWidth: 40,
+        title: Text('Social Media', style: AppStyle.robotoBold20),
+        actions: [
+          SvgPicture.asset('assets/images/edit.svg', width: 24),
+          horizontalSpace(16),
         ],
+      ),
+      body: BuildAddUpdateSocialMedia(
+        socialMedia: socialMedia,
       ),
     );
   }

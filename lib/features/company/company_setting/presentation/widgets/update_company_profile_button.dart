@@ -75,23 +75,26 @@ class _UpdateCompanyProfileButtonState
                 onPressed: () async {
                   FocusManager.instance.primaryFocus?.unfocus();
                   await imageProfile();
-                  context.read<CompanySettingCubit>().updateCompanyProfile(
-                        UpdateCompanyRequestModel(
-                          id: AppConstants.kUserId,
-                          firstName: widget.firstNameController.text,
-                          lastName: widget.lastNameController.text,
-                          email: widget.emailController.text,
-                          phoneNumber: widget.phoneNumberController.text,
-                          companyAddress: widget.locationCompanyController.text,
-                          countryId: context
-                                  .read<ProfileImageAndCountryCubit>()
-                                  .state
-                                  .countryId ??
-                              widget.companyModel.countryId,
-                          companyName: widget.companyNameController.text,
-                          profileImageUrl: image!,
-                        ),
-                      );
+                  if (context.mounted) {
+                    context.read<CompanySettingCubit>().updateCompanyProfile(
+                          UpdateCompanyRequestModel(
+                            id: AppConstants.kUserId,
+                            firstName: widget.firstNameController.text,
+                            lastName: widget.lastNameController.text,
+                            email: widget.emailController.text,
+                            phoneNumber: widget.phoneNumberController.text,
+                            companyAddress:
+                                widget.locationCompanyController.text,
+                            countryId: context
+                                    .read<ProfileImageAndCountryCubit>()
+                                    .state
+                                    .countryId ??
+                                widget.companyModel.countryId,
+                            companyName: widget.companyNameController.text,
+                            profileImageUrl: image!,
+                          ),
+                        );
+                  }
                 },
               );
       },

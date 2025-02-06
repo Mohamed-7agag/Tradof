@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:tradof/core/errors/failure.dart';
-import 'package:tradof/features/company/company_setting/data/model/social_media_model.dart';
 
 import '../../../company_profile/data/model/company_update_request_model.dart';
 
@@ -11,9 +10,5 @@ abstract class CompanySettingRepo {
   });
   Future<Either<Failure, String>> updateCompanyProfile({
     required UpdateCompanyRequestModel updateCompanyRequestModel,
-  });
-
-  Future<Either<Failure, String>> addUpdateSocialMedia({
-    required List<SocialMediaModel> socialMediaModel,
   });
 }

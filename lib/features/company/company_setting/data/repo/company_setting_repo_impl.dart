@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:tradof/core/api/api_service.dart';
 import 'package:tradof/core/errors/failure.dart';
-import 'package:tradof/features/company/company_setting/data/model/social_media_model.dart';
 
 import '../../../../../core/api/end_points.dart';
 import '../../../../../core/helpers/handle_request_method.dart';
@@ -37,17 +36,6 @@ class CompanySettingRepoImpl implements CompanySettingRepo {
       final response = await _apiServices.put(
         EndPoint.updateCompanyProfile,
         data: updateCompanyRequestModel.toJson(),
-      );
-      return response;
-    });
-  }
-
-  @override
-  Future<Either<Failure, String>> addUpdateSocialMedia({required List<SocialMediaModel> socialMediaModel}) {
-    return handleRequest(() async {
-      final response = await _apiServices.post(
-        EndPoint.addUpateSocialMedia(AppConstants.kUserId),
-        data: socialMediaModel.map((e) => e.toJson()).toList(),
       );
       return response;
     });

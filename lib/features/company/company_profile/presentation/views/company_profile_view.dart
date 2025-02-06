@@ -77,7 +77,7 @@ class BuildCompanyProfileSuccess extends StatelessWidget {
                       RatingAndReviews(companyModel: companyModel),
                       verticalSpace(20),
                       SocialLinks(
-                        socialLinks: companyModel.socialMedia,
+                        socialMedia: companyModel.socialMedia,
                       ),
                       verticalSpace(26),
                       SlideInUp(

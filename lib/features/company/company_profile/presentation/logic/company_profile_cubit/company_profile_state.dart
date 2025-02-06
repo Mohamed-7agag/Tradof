@@ -17,6 +17,10 @@ enum CompanyProfileStatus {
   addCompanyEmployeesLoading,
   addCompanyEmployeesSuccess,
   addCompanyEmployeesFailure,
+
+  addUpdateSocialMediaLoading,
+  addUpdateSocialMediaFailure,
+  addUpdateSocialMediaSuccess,
 }
 
 extension CompanyProfileStatusX on CompanyProfileStatus {
@@ -53,6 +57,12 @@ extension CompanyProfileStatusX on CompanyProfileStatus {
       this == CompanyProfileStatus.addCompanyEmployeesSuccess;
   bool get isAddCompanyEmployeesFailure =>
       this == CompanyProfileStatus.addCompanyEmployeesFailure;
+  bool get isAddUpdateSocialMediaLoading =>
+      this == CompanyProfileStatus.addUpdateSocialMediaLoading;
+  bool get isAddUpdateSocialMediaSuccess =>
+      this == CompanyProfileStatus.addUpdateSocialMediaSuccess;
+  bool get isAddUpdateSocialMediaFailure =>
+      this == CompanyProfileStatus.addUpdateSocialMediaFailure;
 }
 
 class CompanyProfileState extends Equatable {

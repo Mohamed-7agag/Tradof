@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:tradof/core/errors/failure.dart';
 
+import '../../../company_setting/data/model/social_media_model.dart';
 import '../model/company_employee_model.dart';
 import '../model/company_employee_request_model.dart';
 import '../model/company_model.dart';
@@ -29,5 +30,9 @@ abstract class CompanyProfileRepo {
   });
   Future<Either<Failure, String>> deleteIndustriesServed({
     required List<int> industriesIds,
+  });
+
+  Future<Either<Failure, String>> addUpdateSocialMedia({
+    required List<SocialMediaModel> socialMediaModel,
   });
 }
