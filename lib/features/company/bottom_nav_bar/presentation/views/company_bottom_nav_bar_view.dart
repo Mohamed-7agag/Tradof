@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/company_bottom_nav_bar_cubit.dart';
+
+import '../logic/company_bottom_nav_bar_cubit.dart';
 
 class CompanyBottomNavBarView extends StatelessWidget {
   const CompanyBottomNavBarView({
