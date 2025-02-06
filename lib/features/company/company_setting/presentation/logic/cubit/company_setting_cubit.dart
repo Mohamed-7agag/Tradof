@@ -29,7 +29,7 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
     }, (message) {
       emit(state.copyWith(
         status: CompanySettingStatus.changePasswordSuccess,
-        message: message,
+        message: 'Password Changed Successfully',
       ));
     });
   }

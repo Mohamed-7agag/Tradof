@@ -4,8 +4,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tradof/core/helpers/app_validation.dart';
 
-import '../../../../core/helpers/app_regex.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
@@ -58,22 +58,7 @@ class ResetPasswordButton extends StatelessWidget {
     if (formKey.currentState!.validate()) {
       if (password != confirmPassword) {
         errorToast(context, 'Invalid Password', 'Passwords do not match');
-      } else if (!AppRegex.hasMinLength(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must be at least 8 characters long');
-      } else if (!AppRegex.hasLowerCase(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one lowercase letter');
-      } else if (!AppRegex.hasUpperCase(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one upper letter');
-      } else if (!AppRegex.hasNumber(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one number digit');
-      } else if (!AppRegex.hasSpecialCharacter(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one special character');
-      } else {
+      } else if (AppValidation.passwordValidation(context, password)) {
         context.read<AuthCubit>().resetPassword(password);
       }
     }

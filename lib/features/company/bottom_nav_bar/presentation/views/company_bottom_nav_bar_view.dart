@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/company/bottom_nav_bar/presentation/logic/company_bottom_nav_bar_cubit.dart';
+
+import '../logic/company_bottom_nav_bar_cubit.dart';
 
 class CompanyBottomNavBarView extends StatelessWidget {
   const CompanyBottomNavBarView({
@@ -38,7 +39,7 @@ class CompanyBottomNavBarView extends StatelessWidget {
                     children: [
                       SlideInLeft(
                         from: 400,
-                        delay: Duration(milliseconds: 500),
+                        delay: Duration(milliseconds: 350),
                         child: _buildNavItem(
                           context,
                           'assets/images/home_off.png',
@@ -67,7 +68,7 @@ class CompanyBottomNavBarView extends StatelessWidget {
                       ),
                       SlideInRight(
                         from: 400,
-                        delay: Duration(milliseconds: 500),
+                        delay: Duration(milliseconds: 350),
                         child: _buildNavItem(
                           context,
                           'assets/images/setting_off.png',

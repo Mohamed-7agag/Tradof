@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/cache/cache_helper.dart';
+import 'package:tradof/core/helpers/app_validation.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/utils/app_constants.dart';
 
-import '../../../../core/helpers/app_regex.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
@@ -53,24 +53,8 @@ class LoginButtonAndValidation extends StatelessWidget {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
     if (formKey.currentState!.validate()) {
-      if (!AppRegex.isEmailValid(email)) {
-        errorToast(context, 'Invalid Email', 'Please enter a valid email');
-      } else if (!AppRegex.hasMinLength(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must be at least 8 characters long');
-      } else if (!AppRegex.hasLowerCase(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one lowercase letter');
-      } else if (!AppRegex.hasUpperCase(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one upper letter');
-      } else if (!AppRegex.hasNumber(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one number digit');
-      } else if (!AppRegex.hasSpecialCharacter(password)) {
-        errorToast(context, 'Invalid Password',
-            'Password must contain at least one special character');
-      } else {
+      if (AppValidation.emailValidation(context, email) &&
+          AppValidation.passwordValidation(context, password)) {
         context.read<AuthCubit>().login(email, password);
       }
     }
