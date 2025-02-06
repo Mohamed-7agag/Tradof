@@ -18,11 +18,14 @@ import 'package:tradof/features/projects/presentation/logic/project_cubit/projec
 import 'package:tradof/features/projects/presentation/views/create_project_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
+import '../../features/auth/presentation/logic/freelancer_registeration_cubit.dart';
 import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
 import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
+import '../../features/company/company_profile/presentation/views/company_add_employee_view.dart';
+import '../../features/company/company_profile/presentation/views/company_employees_view.dart';
 import '../../features/company/company_setting/data/model/social_media_model.dart';
 import '../../features/company/company_setting/presentation/views/add_update_social_media_view.dart';
 import '../../welcome_view.dart';
@@ -222,6 +225,37 @@ class AppRouter {
           return BlocProvider(
             create: (context) => CompanyProfileCubit(getIt()),
             child: AddUpdateSocialMediaView(socialMedia: socialMedia),
+          );
+        },
+      ),
+      GoRoute(
+        name: Routes.companyEmployeesViewRoute,
+        path: '/companyEmployeesView',
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) =>
+                CompanyProfileCubit(getIt())..getCompanyEmployees(),
+            child: CompanyEmployeesView(),
+          );
+        },
+      ),
+      GoRoute(
+        name: Routes.companyAddEmployeeViewRoute,
+        path: '/companyAddEmployeeView',
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => CompanyProfileCubit(getIt()),
+              ),
+              BlocProvider(
+                create: (context) => MetaDataCubit(getIt())..getCountries(),
+              ),
+              BlocProvider(
+                create: (context) => ProfileImageAndCountryCubit(),
+              ),
+            ],
+            child: CompanyAddEmployeeView(),
           );
         },
       ),
