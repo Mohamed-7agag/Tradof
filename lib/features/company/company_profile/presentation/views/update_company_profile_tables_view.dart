@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,13 +33,22 @@ class UpdateCompanyProfileTablesView extends StatelessWidget {
             children: [
               verticalSpace(16),
               isPreferedLanguages
-                  ? PreferedLanguagesTable(darkColors: true)
-                  : IndustriesServedTable(darkColors: true),
-              verticalSpace(40),
+                  ? SlideInRight(
+                      from: 400,
+                      child: PreferedLanguagesTable(darkColors: true),
+                    )
+                  : SlideInRight(
+                      from: 400,
+                      child: IndustriesServedTable(darkColors: true),
+                    ),
+              verticalSpace(50),
               BlocProvider(
                 create: (context) => CompanyProfileCubit(getIt()),
-                child: UpdateCompanyProfileTablesButton(
-                  companyModel: companyModel,
+                child: SlideInLeft(
+                  from: 400,
+                  child: UpdateCompanyProfileTablesButton(
+                    companyModel: companyModel,
+                  ),
                 ),
               ),
               verticalSpace(40),

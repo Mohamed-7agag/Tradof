@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
@@ -64,31 +65,50 @@ class _BuildAddUpdateSocialMediaState extends State<BuildAddUpdateSocialMedia> {
             child: Column(
               children: [
                 verticalSpace(28),
-                SocialMediaItem(
-                  image: 'assets/images/facebook.png',
-                  controller: facebookController,
+                SlideInRight(
+                  from: 400,
+                  child: SocialMediaItem(
+                    image: 'assets/images/facebook.png',
+                    controller: facebookController,
+                  ),
                 ),
                 verticalSpace(28),
-                SocialMediaItem(
-                  image: 'assets/images/linkedin.png',
-                  controller: linkedinController,
+                SlideInRight(
+                  from: 400,
+                  delay: Duration(milliseconds: 100),
+                  child: SocialMediaItem(
+                    image: 'assets/images/linkedin.png',
+                    controller: linkedinController,
+                  ),
                 ),
                 verticalSpace(28),
-                SocialMediaItem(
-                  image: 'assets/images/github.png',
-                  controller: githubController,
+                SlideInRight(
+                  from: 400,
+                  delay: Duration(milliseconds: 200),
+                  child: SocialMediaItem(
+                    image: 'assets/images/github.png',
+                    controller: githubController,
+                  ),
                 ),
                 verticalSpace(28),
-                SocialMediaItem(
-                  image: 'assets/images/gmail.png',
-                  controller: gmailController,
+                SlideInRight(
+                  from: 400,
+                  delay: Duration(milliseconds: 300),
+                  child: SocialMediaItem(
+                    image: 'assets/images/gmail.png',
+                    controller: gmailController,
+                  ),
                 ),
                 Expanded(child: verticalSpace(40)),
-                AddUpdateSocialMediaButton(
-                  facebookController: facebookController,
-                  linkedinController: linkedinController,
-                  gmailController: gmailController,
-                  githubController: githubController,
+                SlideInUp(
+                  from: 400,
+                  delay: Duration(milliseconds: 400),
+                  child: AddUpdateSocialMediaButton(
+                    facebookController: facebookController,
+                    linkedinController: linkedinController,
+                    gmailController: gmailController,
+                    githubController: githubController,
+                  ),
                 ),
                 verticalSpace(20),
               ],

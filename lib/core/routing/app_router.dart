@@ -18,7 +18,6 @@ import 'package:tradof/features/projects/presentation/logic/project_cubit/projec
 import 'package:tradof/features/projects/presentation/views/create_project_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
-import '../../features/auth/presentation/logic/freelancer_registeration_cubit.dart';
 import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
 import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
@@ -262,9 +261,6 @@ class AppRouter {
               ),
               BlocProvider(
                 create: (context) => MetaDataCubit(getIt())..getCountries(),
-              ),
-              BlocProvider(
-                create: (context) => ProfileImageAndCountryCubit(),
               ),
             ],
             child: CompanyAddEmployeeView(),
