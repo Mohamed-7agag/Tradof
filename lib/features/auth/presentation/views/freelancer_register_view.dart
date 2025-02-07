@@ -12,7 +12,6 @@ import 'package:tradof/features/auth/presentation/widgets/language_pair_table.da
 import 'package:tradof/features/auth/presentation/widgets/specialization_table.dart';
 
 import '../../../../core/utils/widgets/custom_toastification.dart';
-import '../logic/freelancer_registeration_cubit.dart';
 import '../widgets/freelancer_registeration_button.dart';
 import '../widgets/profile_image_section.dart';
 
@@ -32,13 +31,9 @@ class _FreelancerRegisterViewState extends State<FreelancerRegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => TablesCubit()),
-        BlocProvider(create: (context) => ProfileImageAndCountryCubit()),
-      ],
+    return BlocProvider(
+      create: (context) => TablesCubit(),
       child: BlocListener<MetaDataCubit, MetaDataState>(
-        listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
           if (state.status.isError) {
             context.pop();
@@ -71,18 +66,10 @@ class _FreelancerRegisterViewState extends State<FreelancerRegisterView> {
                     child: SpecializationTable(),
                   ),
                   verticalSpace(42),
-                  BlocBuilder<ProfileImageAndCountryCubit,
-                      ProfileImageAndCountryState>(
-                    builder: (context, state) {
-                      return SlideInUp(
-                        from: 400,
-                        delay: Duration(milliseconds: 375),
-                        child: FreelancerRegisterationButton(
-                          countryId: state.countryId,
-                          imageUrl: state.imagePicked,
-                        ),
-                      );
-                    },
+                  SlideInUp(
+                    from: 400,
+                    delay: Duration(milliseconds: 375),
+                    child: FreelancerRegisterationButton(),
                   ),
                   verticalSpace(20),
                 ],

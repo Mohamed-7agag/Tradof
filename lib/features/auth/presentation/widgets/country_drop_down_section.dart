@@ -1,9 +1,8 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
-import '../logic/freelancer_registeration_cubit.dart';
+import '../logic/registeration_cubit/registeration_cubit.dart';
 import 'country_drop_down.dart';
 
 class CountryDropDownSection extends StatelessWidget {
@@ -11,28 +10,17 @@ class CountryDropDownSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileImageAndCountryCubit,
-        ProfileImageAndCountryState>(
-      buildWhen: (previous, current) => previous.countryId != current.countryId,
+    return BlocBuilder<MetaDataCubit, MetaDataState>(
+      buildWhen: (previous, current) => previous.countries != current.countries,
       builder: (context, state) {
-        return SlideInRight(
-          from: 400,
-          delay: Duration(milliseconds: 250),
-          child: BlocBuilder<MetaDataCubit, MetaDataState>(
-            buildWhen: (previous, current) =>
-                previous.countries != current.countries,
-            builder: (context, state) {
-              return CountryDropDown(
-                hint: 'Country',
-                items: state.countries,
-                onChanged: (value) {
-                  context
-                      .read<ProfileImageAndCountryCubit>()
-                      .onCountrySelected(value?.id);
-                },
-              );
-            },
-          ),
+        return CountryDropDown(
+          hint: 'Country',
+          items: state.countries,
+          onChanged: (value) {
+            context
+                .read<RegisterationCubit>()
+                .setCountryAndImageProfile(countryId: value?.id);
+          },
         );
       },
     );

@@ -10,7 +10,6 @@ import 'package:tradof/features/company/company_profile/data/model/company_emplo
 import 'package:tradof/features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 
 import '../../../../../core/utils/widgets/custom_button.dart';
-import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
 
 class AddEmployeeButton extends StatelessWidget {
   const AddEmployeeButton({
@@ -22,7 +21,6 @@ class AddEmployeeButton extends StatelessWidget {
     required this.jobTitleController,
     required this.phoneNumberController,
     required this.formKey,
-    required this.groupName,
   });
   final GlobalKey<FormState> formKey;
   final TextEditingController firstNameController;
@@ -31,7 +29,6 @@ class AddEmployeeButton extends StatelessWidget {
   final TextEditingController passwordController;
   final TextEditingController jobTitleController;
   final TextEditingController phoneNumberController;
-  final String groupName;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanyProfileCubit, CompanyProfileState>(
@@ -50,14 +47,14 @@ class AddEmployeeButton extends StatelessWidget {
                 text: 'Add',
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  _addEmployeeValidation(context);
+                  _addEmployeeValidation(state, context);
                 },
               );
       },
     );
   }
 
-  void _addEmployeeValidation(BuildContext context) {
+  void _addEmployeeValidation(CompanyProfileState state, BuildContext context) {
     final password = passwordController.text.trim();
     if (formKey.currentState!.validate()) {
       if (!AppValidation.emailValidation(
@@ -65,22 +62,20 @@ class AddEmployeeButton extends StatelessWidget {
       } else if (!AppValidation.passwordValidation(context, password) ||
           !AppValidation.phoneNumberValidation(
               context, phoneNumberController.text.trim())) {
-      } else if (groupName.isNullOrEmpty()) {
+      } else if (state.groupName.isNullOrEmpty()) {
         errorToast(context, 'Error', 'Please Select Group Name');
-      } else if (context.read<ProfileImageAndCountryCubit>().state.countryId ==
-          null) {
+      } else if (state.countryId == null) {
         errorToast(context, 'Error', 'Please Select Country');
       } else {
         final companyEmployeeModel = CompanyEmployeeRequestModel(
           jobTitle: jobTitleController.text.trim(),
-          countryId:
-              context.read<ProfileImageAndCountryCubit>().state.countryId!,
+          countryId: state.countryId!,
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
           phoneNumber: phoneNumberController.text.trim(),
           email: emailController.text.trim(),
           password: password,
-          groupName: groupName,
+          groupName: state.groupName!,
           companyId: AppConstants.kUserId,
         );
         context

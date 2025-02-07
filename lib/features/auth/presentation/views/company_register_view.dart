@@ -15,7 +15,6 @@ import 'package:tradof/features/auth/presentation/widgets/profile_image_section.
 import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../core/utils/widgets/custom_loading_dialog.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
-import '../logic/freelancer_registeration_cubit.dart';
 import '../widgets/company_registeration_button.dart';
 
 class CompanyRegisterView extends StatefulWidget {
@@ -48,11 +47,8 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => TablesCubit()),
-        BlocProvider(create: (context) => ProfileImageAndCountryCubit()),
-      ],
+    return BlocProvider(
+      create: (context) => TablesCubit(),
       child: BlocListener<MetaDataCubit, MetaDataState>(
         listener: (context, state) {
           if (state.status.isError) {
@@ -121,21 +117,14 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
                     child: IndustriesServedTable(),
                   ),
                   verticalSpace(40),
-                  BlocBuilder<ProfileImageAndCountryCubit,
-                      ProfileImageAndCountryState>(
-                    builder: (context, state) {
-                      return SlideInUp(
-                        from: 400,
-                        delay: Duration(milliseconds: 750),
-                        child: CompanyRegisterationButton(
-                          countryId: state.countryId,
-                          imageUrl: state.imagePicked,
-                          jobTitleController: jobTitleController,
-                          locationCompanyController: locationCompanyController,
-                          companyNameController: companyNameController,
-                        ),
-                      );
-                    },
+                  SlideInUp(
+                    from: 400,
+                    delay: Duration(milliseconds: 750),
+                    child: CompanyRegisterationButton(
+                      jobTitleController: jobTitleController,
+                      locationCompanyController: locationCompanyController,
+                      companyNameController: companyNameController,
+                    ),
                   ),
                   verticalSpace(20),
                 ],

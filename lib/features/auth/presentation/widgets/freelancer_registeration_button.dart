@@ -1,23 +1,18 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
-import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../logic/registeration_cubit/registeration_cubit.dart';
+import '../logic/tables_cubit/tables_cubit.dart';
 
 class FreelancerRegisterationButton extends StatelessWidget {
-  const FreelancerRegisterationButton(
-      {super.key, required this.countryId, this.imageUrl});
-  final int? countryId;
-  final File? imageUrl;
+  const FreelancerRegisterationButton({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterationCubit, RegisterationState>(
@@ -37,39 +32,28 @@ class FreelancerRegisterationButton extends StatelessWidget {
                 color: AppColors.lightOrange,
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  if (countryId == null) {
-                    errorToast(context, 'Error', 'Please select a country');
-                  } else if (context
-                      .read<TablesCubit>()
-                      .state
-                      .selectedLanguagePair
-                      .isNullOrEmpty()) {
-                    errorToast(context, 'Error',
-                        'Please select at least one language pair');
-                  } else if (context
-                      .read<TablesCubit>()
-                      .state
-                      .selectedSpecializations
-                      .isNullOrEmpty()) {
-                    errorToast(context, 'Error',
-                        'Please select at least one specialization');
-                  } else {
-                    context.read<RegisterationCubit>().freelancerData(
-                          imageUrl ?? File(''),
-                          countryId!,
-                          context
-                              .read<TablesCubit>()
-                              .state
-                              .selectedSpecializations,
-                          context
-                              .read<TablesCubit>()
-                              .state
-                              .selectedLanguagePair,
-                        );
-                  }
+                  _freelancerValidation(state, context);
                 },
               );
       },
     );
+  }
+
+  void _freelancerValidation(RegisterationState state, BuildContext context) {
+    final languagePairs =
+        context.read<TablesCubit>().state.selectedLanguagePair;
+    final specializations =
+        context.read<TablesCubit>().state.selectedSpecializations;
+    if (state.countryId == null) {
+      errorToast(context, 'Error', 'Please select a country');
+    } else if (languagePairs.isNullOrEmpty()) {
+      errorToast(context, 'Error', 'Please select at least one language pair');
+    } else if (specializations.isNullOrEmpty()) {
+      errorToast(context, 'Error', 'Please select at least one specialization');
+    } else {
+      context
+          .read<RegisterationCubit>()
+          .registerFreelancer(specializations, languagePairs);
+    }
   }
 }

@@ -38,6 +38,7 @@ extension CompanyProfileStatusX on CompanyProfileStatus {
       this == CompanyProfileStatus.preferedLanguagesLoading;
   bool get isPreferedLanguagesFailure =>
       this == CompanyProfileStatus.preferedLanguagesFailure;
+
   bool get isIndustriesServedSuccess =>
       this == CompanyProfileStatus.industriesServedSuccess;
   bool get isIndustriesServedLoading =>
@@ -51,12 +52,14 @@ extension CompanyProfileStatusX on CompanyProfileStatus {
       this == CompanyProfileStatus.getCompanyEmployeesSuccess;
   bool get isGetCompanyEmployeesFailure =>
       this == CompanyProfileStatus.getCompanyEmployeesFailure;
+
   bool get isAddCompanyEmployeesLoading =>
       this == CompanyProfileStatus.addCompanyEmployeesLoading;
   bool get isAddCompanyEmployeesSuccess =>
       this == CompanyProfileStatus.addCompanyEmployeesSuccess;
   bool get isAddCompanyEmployeesFailure =>
       this == CompanyProfileStatus.addCompanyEmployeesFailure;
+
   bool get isAddUpdateSocialMediaLoading =>
       this == CompanyProfileStatus.addUpdateSocialMediaLoading;
   bool get isAddUpdateSocialMediaSuccess =>
@@ -70,6 +73,8 @@ class CompanyProfileState extends Equatable {
   final CompanyModel? companyModel;
   final List<CompanyEmployeeModel> companyEmployees;
   final String errorMessage;
+  final String? groupName;
+  final int? countryId;
   final String message;
 
   const CompanyProfileState({
@@ -78,6 +83,8 @@ class CompanyProfileState extends Equatable {
     this.errorMessage = '',
     this.companyModel,
     this.message = '',
+    this.groupName,
+    this.countryId,
   });
 
   CompanyProfileState copyWith({
@@ -86,6 +93,8 @@ class CompanyProfileState extends Equatable {
     String? errorMessage,
     CompanyModel? companyModel,
     String? message,
+    String? groupName,
+    int? countryId,
   }) {
     return CompanyProfileState(
       status: status ?? this.status,
@@ -93,6 +102,8 @@ class CompanyProfileState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
       companyModel: companyModel ?? this.companyModel,
       message: message ?? this.message,
+      groupName: groupName ?? this.groupName,
+      countryId: countryId ?? this.countryId,
     );
   }
 
@@ -103,5 +114,7 @@ class CompanyProfileState extends Equatable {
         errorMessage,
         companyModel ?? '',
         message,
+        groupName ?? '',
+        countryId ?? 0
       ];
 }

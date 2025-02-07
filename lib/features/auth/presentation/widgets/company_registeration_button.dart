@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -16,14 +14,10 @@ import '../logic/registeration_cubit/registeration_cubit.dart';
 class CompanyRegisterationButton extends StatelessWidget {
   const CompanyRegisterationButton({
     super.key,
-    required this.countryId,
-    this.imageUrl,
     required this.jobTitleController,
     required this.locationCompanyController,
     required this.companyNameController,
   });
-  final int? countryId;
-  final File? imageUrl;
   final TextEditingController jobTitleController;
   final TextEditingController locationCompanyController;
   final TextEditingController companyNameController;
@@ -46,46 +40,41 @@ class CompanyRegisterationButton extends StatelessWidget {
                 color: AppColors.lightOrange,
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  _validateCompanyRegisterData(context);
+                  _validateCompanyRegisterData(state, context);
                 },
               );
       },
     );
   }
 
-  void _validateCompanyRegisterData(BuildContext context) {
+  void _validateCompanyRegisterData(
+      RegisterationState state, BuildContext context) {
+    final preferedLanguages =
+        context.read<TablesCubit>().state.selectedPreferedLanguages;
+    final industriesServed =
+        context.read<TablesCubit>().state.selectedIndustriesServed;
+
     if (jobTitleController.text.trim().isNullOrEmpty()) {
       errorToast(context, 'Error', 'Please enter job title');
     } else if (companyNameController.text.trim().isNullOrEmpty()) {
       errorToast(context, 'Error', 'Please enter company name');
-    } else if (countryId == null) {
+    } else if (state.countryId == null) {
       errorToast(context, 'Error', 'Please select a country');
     } else if (locationCompanyController.text.trim().isNullOrEmpty()) {
       errorToast(context, 'Error', 'Please enter location of company');
-    } else if (context
-        .read<TablesCubit>()
-        .state
-        .selectedPreferedLanguages
-        .isNullOrEmpty()) {
+    } else if (preferedLanguages.isNullOrEmpty()) {
       errorToast(
           context, 'Error', 'Please select at least one prefered language');
-    } else if (context
-        .read<TablesCubit>()
-        .state
-        .selectedIndustriesServed
-        .isNullOrEmpty()) {
+    } else if (industriesServed.isNullOrEmpty()) {
       errorToast(
           context, 'Error', 'Please select at least one industry served');
     } else {
-      context.read<RegisterationCubit>().companyData(
-            imageUrl ?? File(''),
+      context.read<RegisterationCubit>().registerCompany(
             jobTitleController.text.trim(),
             companyNameController.text.trim(),
-            countryId!,
             locationCompanyController.text.trim(),
-            context.read<TablesCubit>().state.selectedPreferedLanguages,
-            context.read<TablesCubit>().state.selectedIndustriesServed,
-
+            preferedLanguages,
+            industriesServed,
           );
     }
   }

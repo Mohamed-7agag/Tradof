@@ -7,15 +7,15 @@ import 'package:tradof/core/utils/widgets/custom_drop_down_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/features/auth/presentation/widgets/country_drop_down.dart';
-import 'package:tradof/features/company/company_profile/presentation/widgets/add_employee_button.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/widgets/custom_text_field.dart';
-import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
 import '../../../../auth/presentation/widgets/phone_number_text_field.dart';
+import '../logic/company_profile_cubit/company_profile_cubit.dart';
+import '../widgets/add_employee_button.dart';
 
 class CompanyAddEmployeeView extends StatefulWidget {
   const CompanyAddEmployeeView({super.key});
@@ -56,8 +56,6 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
     jobTitleController.dispose();
     super.dispose();
   }
-
-  String? groupName;
 
   @override
   Widget build(BuildContext context) {
@@ -145,13 +143,18 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                 SlideInRight(
                   from: 400,
                   delay: Duration(milliseconds: 540),
-                  child: CustomDropDownDarBorderkWidget(
+                  child: CustomDropDownWidget(
                     hint: 'Group Name',
                     items: employeesGroups,
+                    borderColor: AppColors.grey,
+                    focusedBorderColor: AppColors.grey,
+                    textColor: AppColors.darkGrey,
+                    dropdownColor: AppColors.white,
+                    iconColor: AppColors.darkGrey,
                     onChanged: (group) {
-                      setState(() {
-                        groupName = group; // will be refactor
-                      });
+                      context
+                          .read<CompanyProfileCubit>()
+                          .setGroupNameAndCountry(groupName: group);
                     },
                   ),
                 ),
@@ -159,30 +162,26 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                 SlideInRight(
                   from: 400,
                   delay: Duration(milliseconds: 630),
-                  child: BlocBuilder<ProfileImageAndCountryCubit,
-                      ProfileImageAndCountryState>(
-                    buildWhen: (previous, current) =>
-                        previous.countryId != current.countryId,
+                  child: BlocBuilder<MetaDataCubit, MetaDataState>(
                     builder: (context, state) {
-                      return BlocBuilder<MetaDataCubit, MetaDataState>(
-                        builder: (context, metaDataState) {
-                          if (metaDataState.status.isGetCountries) {
-                            return CountryDarkBorderDropDown(
-                              hint: 'Country',
-                              items: metaDataState.countries,
-                              onChanged: (country) {
-                                context
-                                    .read<ProfileImageAndCountryCubit>()
-                                    .onCountrySelected(country?.id);
-                              },
-                            );
-                          } else if (metaDataState.status.isError) {
-                            return CustomFailureWidget(
-                                text: metaDataState.errorMessage);
-                          }
-                          return CustomLoadingWidget();
-                        },
-                      );
+                      if (state.status.isGetCountries) {
+                        return CountryDropDown(
+                          hint: 'Country',
+                          items: state.countries,
+                          borderColor: AppColors.grey,
+                          textColor: AppColors.darkGrey,
+                          dropdownColor: AppColors.white,
+                          iconColor: AppColors.darkGrey,
+                          onChanged: (country) {
+                            context
+                                .read<CompanyProfileCubit>()
+                                .setGroupNameAndCountry(countryId: country?.id);
+                          },
+                        );
+                      } else if (state.status.isError) {
+                        return CustomFailureWidget(text: state.errorMessage);
+                      }
+                      return CustomLoadingWidget();
                     },
                   ),
                 ),
@@ -198,7 +197,6 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                     jobTitleController: jobTitleController,
                     phoneNumberController: phoneNumberController,
                     formKey: formKey,
-                    groupName: groupName ?? '',
                   ),
                 ),
                 verticalSpace(40),

@@ -75,6 +75,10 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
     );
   }
 
+  void setGroupNameAndCountry({String? groupName, int? countryId}) {
+    emit(state.copyWith(groupName: groupName, countryId: countryId));
+  }
+
   Future<void> addUpdateSocialMedia({
     required List<SocialMediaModel> socialMedia,
   }) async {

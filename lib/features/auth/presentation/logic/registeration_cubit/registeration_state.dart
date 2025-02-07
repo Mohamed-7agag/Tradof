@@ -21,22 +21,13 @@ class RegisterationState extends Equatable {
   final String firstName;
   final String lastName;
   final String email;
-  final String companyName;
   final String phoneNumber;
   final String password;
-  final int country;
-  final String locationCompany;
-  final String jobTitle;
-
-  final File? profileImage;
-
-  final List<LanguagePairModel> selectedLanguagePair;
-  final List<SpecializationModel> selectedSpecializations;
-  final List<SpecializationModel> selectedIndustriesServed;
-  final List<LanguageModel> selectedPreferedLanguages;
-
   final String errorMessage;
   final String registerSuccessMessage;
+  final File? imageProfile;
+  final int? countryId;
+
   const RegisterationState({
     this.status = RegisterationStatus.initial,
     this.userRole = UserRole.freelancer,
@@ -44,18 +35,11 @@ class RegisterationState extends Equatable {
     this.registerSuccessMessage = '',
     this.email = '',
     this.phoneNumber = '',
-    this.companyName = '',
     this.password = '',
-    this.country = 0,
     this.firstName = '',
     this.lastName = '',
-    this.jobTitle = '',
-    this.locationCompany = '',
-    this.profileImage,
-    this.selectedLanguagePair = const [],
-    this.selectedSpecializations = const [],
-    this.selectedIndustriesServed = const [],
-    this.selectedPreferedLanguages = const [],
+    this.imageProfile,
+    this.countryId,
   });
 
   RegisterationState copyWith({
@@ -63,23 +47,13 @@ class RegisterationState extends Equatable {
     UserRole? userRole,
     String? errorMessage,
     String? registerSuccessMessage,
-    String? companyName,
     String? email,
     String? phoneNumber,
     String? password,
-    int? country,
-    String? locationCompany,
-    String? jobTitle,
     String? firstName,
     String? lastName,
-    File? profileImage,
-    List<LanguageModel>? languages,
-    List<CountryModel>? countries,
-    List<SpecializationModel>? specializations,
-    List<LanguagePairModel>? selectedLanguagePair,
-    List<SpecializationModel>? selectedSpecializations,
-    List<SpecializationModel>? selectedIndustriesServed,
-    List<LanguageModel>? selectedPreferedLanguages,
+    File? imageProfile,
+    int? countryId,
   }) {
     return RegisterationState(
       status: status ?? this.status,
@@ -89,21 +63,11 @@ class RegisterationState extends Equatable {
           registerSuccessMessage ?? this.registerSuccessMessage,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
-      companyName: companyName ?? this.companyName,
       password: password ?? this.password,
-      country: country ?? this.country,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
-      jobTitle: jobTitle ?? this.jobTitle,
-      locationCompany: locationCompany ?? this.locationCompany,
-      profileImage: profileImage ?? this.profileImage,
-      selectedLanguagePair: selectedLanguagePair ?? this.selectedLanguagePair,
-      selectedSpecializations:
-          selectedSpecializations ?? this.selectedSpecializations,
-      selectedIndustriesServed:
-          selectedIndustriesServed ?? this.selectedIndustriesServed,
-      selectedPreferedLanguages:
-          selectedPreferedLanguages ?? this.selectedPreferedLanguages,
+      imageProfile: imageProfile ?? this.imageProfile,
+      countryId: countryId ?? this.countryId,
     );
   }
 
@@ -116,16 +80,9 @@ class RegisterationState extends Equatable {
         email,
         phoneNumber,
         password,
-        country,
-        companyName,
         firstName,
         lastName,
-        profileImage ?? '',
-        jobTitle,
-        locationCompany,
-        selectedLanguagePair,
-        selectedSpecializations,
-        selectedIndustriesServed,
-        selectedPreferedLanguages
+        imageProfile ?? '',
+        countryId ?? 0,
       ];
 }
