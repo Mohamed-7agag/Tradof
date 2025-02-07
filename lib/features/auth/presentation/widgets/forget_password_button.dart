@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/helpers/app_regex.dart';
+import 'package:tradof/core/helpers/app_validation.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
 
@@ -37,15 +35,12 @@ class ForgetPasswordButton extends StatelessWidget {
             : CustomButton(
                 text: 'Continue',
                 onPressed: () {
-                  log(emailController.text.trim());
                   FocusManager.instance.primaryFocus?.unfocus();
-                  if (AppRegex.isEmailValid(emailController.text.trim())) {
-                    context
-                        .read<AuthCubit>()
-                        .forgetPassword(emailController.text.trim());
-                  } else {
-                    errorToast(
-                        context, 'Invalid Email', 'Please enter a valid email');
+                  if (AppValidation.emailValidation(
+                      context, emailController.text.trim())) {
+                    context.read<AuthCubit>().forgetPassword(
+                          emailController.text.trim(),
+                        );
                   }
                 },
               );

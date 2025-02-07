@@ -36,7 +36,8 @@ class _LanguagePairDropDownState extends State<LanguagePairDropDown> {
       ),
       child: DropdownButton<LanguageModel>(
         iconEnabledColor: widget.borderColor ?? AppColors.white,
-        dropdownColor: widget.borderColor != null ? AppColors.white : AppColors.darkGrey,
+        dropdownColor:
+            widget.borderColor != null ? AppColors.white : AppColors.darkGrey,
         isExpanded: true,
         menuWidth: 1.sw - 70,
         underline: SizedBox.shrink(),

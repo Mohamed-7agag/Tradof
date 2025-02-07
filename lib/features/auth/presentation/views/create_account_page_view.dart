@@ -7,6 +7,7 @@ import 'package:tradof/features/auth/presentation/logic/registeration_cubit/regi
 import 'package:tradof/features/auth/presentation/views/register_view.dart';
 import 'package:tradof/features/auth/presentation/views/select_account_type_view.dart';
 
+import '../widgets/dot_indicator.dart';
 import 'company_register_view.dart';
 import 'freelancer_register_view.dart';
 
@@ -61,30 +62,17 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
                   ),
                 ),
                 verticalSpace(20),
-                _buildDotIndicator(),
+                DotIndicator(
+                  currentPage: _currentPage,
+                  activeColor: AppColors.white,
+                  inActiveColor: AppColors.grey,
+                ),
                 verticalSpace(20),
               ],
             ),
           )
         ],
       ),
-    );
-  }
-
-  Widget _buildDotIndicator() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(3, (index) {
-        return Container(
-          margin: EdgeInsets.symmetric(horizontal: 4),
-          width: 32,
-          height: 4,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: _currentPage == index ? AppColors.white : Colors.grey,
-          ),
-        );
-      }),
     );
   }
 }

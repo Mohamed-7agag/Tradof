@@ -9,7 +9,6 @@ import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart'
 import '../../../../auth/presentation/widgets/phone_number_text_field.dart';
 import '../../../company_profile/data/model/company_model.dart';
 import 'country_drop_down_edit.dart';
-import 'profile_image_edit.dart';
 import 'update_company_profile_button.dart';
 
 class BuildUpdateCompanyProfileView extends StatefulWidget {
@@ -81,7 +80,7 @@ class _BuildUpdateCompanyProfileViewState
         child: Column(
           children: [
             verticalSpace(30),
-            ProfileImageEdit(),
+            //ProfileImageEdit(),
             verticalSpace(50),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),

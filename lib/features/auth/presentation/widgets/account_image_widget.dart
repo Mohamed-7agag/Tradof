@@ -3,14 +3,15 @@ import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/theming/app_colors.dart';
+import '../logic/registeration_cubit/registeration_cubit.dart';
 
 class AccountImageWidget extends StatefulWidget {
-  const AccountImageWidget({super.key, required this.onImagePicked});
-  final void Function(File? image) onImagePicked;
+  const AccountImageWidget({super.key});
   @override
   State<AccountImageWidget> createState() => _AccountImageWidgetState();
 }
@@ -25,7 +26,9 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
       if (image != null) {
         setState(() {
           _image = File(image.path);
-          widget.onImagePicked(_image);
+          context
+              .read<RegisterationCubit>()
+              .setCountryAndImageProfile(imageProfile: _image);
         });
       }
     } catch (e) {
@@ -78,6 +81,7 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
           )
         : SlideInLeft(
             from: 400,
-            child: SvgPicture.asset('assets/images/person.svg', width: 90));
+            child: SvgPicture.asset('assets/images/person.svg', width: 90),
+          );
   }
 }

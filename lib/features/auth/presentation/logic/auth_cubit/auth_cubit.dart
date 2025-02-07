@@ -25,11 +25,7 @@ class AuthCubit extends Cubit<AuthState> {
       ));
     }, (response) {
       _cacheUserData(response);
-      emit(state.copyWith(
-        status: AuthStatus.login,
-        email: email,
-        password: password,
-      ));
+      emit(state.copyWith(status: AuthStatus.login));
     });
   }
 
@@ -50,10 +46,14 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
+  void setOtp(String otp) {
+    emit(state.copyWith(otp: otp));
+  }
+
   // otp
-  Future<void> otpVerification(String otp) async {
+  Future<void> otpVerification() async {
     emit(state.copyWith(status: AuthStatus.loading));
-    final result = await _authRepo.verifyOtp(state.email, otp);
+    final result = await _authRepo.verifyOtp(state.email, state.otp);
     result.fold(
       (failure) => emit(state.copyWith(
         status: AuthStatus.error,
@@ -61,7 +61,6 @@ class AuthCubit extends Cubit<AuthState> {
       )),
       (success) => emit(state.copyWith(
         status: AuthStatus.otpVerification,
-        otp: otp,
         resetToken: success['resetToken'],
       )),
     );
@@ -86,7 +85,6 @@ class AuthCubit extends Cubit<AuthState> {
       )),
       (successMessage) => emit(state.copyWith(
         status: AuthStatus.resetPassword,
-        newPassword: newPassword,
         message: successMessage,
       )),
     );

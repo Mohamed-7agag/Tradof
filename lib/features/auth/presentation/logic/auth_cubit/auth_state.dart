@@ -22,9 +22,7 @@ extension AuthStepX on AuthStatus {
 class AuthState extends Equatable {
   final AuthStatus status;
   final String email;
-  final String password;
   final String otp;
-  final String newPassword;
   final String errorMessage;
   final String message;
   final String resetToken;
@@ -32,9 +30,7 @@ class AuthState extends Equatable {
   const AuthState({
     this.status = AuthStatus.initial,
     this.email = '',
-    this.password = '',
     this.otp = '',
-    this.newPassword = '',
     this.errorMessage = '',
     this.message = '',
     this.resetToken = '',
@@ -43,9 +39,7 @@ class AuthState extends Equatable {
   AuthState copyWith({
     AuthStatus? status,
     String? email,
-    String? password,
     String? otp,
-    String? newPassword,
     String? errorMessage,
     String? message,
     String? resetToken,
@@ -53,9 +47,7 @@ class AuthState extends Equatable {
     return AuthState(
       status: status ?? this.status,
       email: email ?? this.email,
-      password: password ?? this.password,
       otp: otp ?? this.otp,
-      newPassword: newPassword ?? this.newPassword,
       errorMessage: errorMessage ?? this.errorMessage,
       message: message ?? this.message,
       resetToken: resetToken ?? this.resetToken,
@@ -66,9 +58,7 @@ class AuthState extends Equatable {
   List<Object?> get props => [
         status,
         email,
-        password,
         otp,
-        newPassword,
         errorMessage,
         message,
         resetToken,

@@ -24,7 +24,9 @@ class OtpView extends StatelessWidget {
               children: [
                 SlideInLeft(
                   from: 400,
-                  child: Text('Enter OTP', style: AppStyle.robotoCondensedSemiBold32)),
+                  child: Text('Enter OTP',
+                      style: AppStyle.robotoCondensedSemiBold32),
+                ),
                 verticalSpace(20),
                 Text(
                   "Enter the OTP code we just sent you on your\nregistered Email/Phone number",

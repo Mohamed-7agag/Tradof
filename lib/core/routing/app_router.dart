@@ -39,7 +39,7 @@ class AppRouter {
 
   static final router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/companyBottomNavBarView',
+    initialLocation: '/loginView',
     // redirect: (context, state) {
     //   if (CacheHelper.getBool(AppConstants.firstTime) == true) {
     //     if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {

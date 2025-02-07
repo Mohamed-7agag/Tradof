@@ -5,6 +5,8 @@ import 'package:tradof/features/auth/presentation/views/forget_password_view.dar
 import 'package:tradof/features/auth/presentation/views/otp_view.dart';
 import 'package:tradof/features/auth/presentation/views/reset_password_view.dart';
 
+import '../widgets/dot_indicator.dart';
+
 class ForgetPasswordPageView extends StatefulWidget {
   const ForgetPasswordPageView({super.key});
 
@@ -48,27 +50,14 @@ class _ForgetPasswordPageViewState extends State<ForgetPasswordPageView> {
             ),
           ),
           verticalSpace(20),
-          _buildDotIndicator(),
+          DotIndicator(
+            currentPage: _currentPage,
+            activeColor: AppColors.primary,
+            inActiveColor: AppColors.grey,
+          ),
           verticalSpace(20),
         ],
       ),
-    );
-  }
-
-  Widget _buildDotIndicator() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(3, (index) {
-        return Container(
-          margin: EdgeInsets.symmetric(horizontal: 4),
-          width: 32,
-          height: 4,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: _currentPage == index ? AppColors.primary : AppColors.grey,
-          ),
-        );
-      }),
     );
   }
 }

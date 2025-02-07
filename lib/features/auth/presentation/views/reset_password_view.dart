@@ -17,7 +17,10 @@ class ResetPasswordView extends StatelessWidget {
           AuthShape(),
           SlideInLeft(
             from: 400,
-            child: Text('Reset Password', style: AppStyle.robotoExtraBold32),
+            child: Text(
+              'Reset Password',
+              style: AppStyle.robotoExtraBold32,
+            ),
           ),
           verticalSpace(30),
           ResetPasswordForm(),

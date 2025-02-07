@@ -10,12 +10,12 @@ import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubi
 import 'package:tradof/features/auth/presentation/widgets/country_drop_down_section.dart';
 import 'package:tradof/features/auth/presentation/widgets/industries_served_table.dart';
 import 'package:tradof/features/auth/presentation/widgets/prefered_languages_table.dart';
-import 'package:tradof/features/auth/presentation/widgets/profile_image_section.dart';
 
 import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../core/utils/widgets/custom_loading_dialog.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../widgets/company_registeration_button.dart';
+import '../widgets/create_account_curve_with_image.dart';
 
 class CompanyRegisterView extends StatefulWidget {
   const CompanyRegisterView({super.key});
@@ -63,7 +63,7 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
         },
         child: Column(
           children: [
-            ProfileImageSection(),
+            CreateAccountCurveWithImage(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(

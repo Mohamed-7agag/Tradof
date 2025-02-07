@@ -12,8 +12,8 @@ import 'package:tradof/features/auth/presentation/widgets/language_pair_table.da
 import 'package:tradof/features/auth/presentation/widgets/specialization_table.dart';
 
 import '../../../../core/utils/widgets/custom_toastification.dart';
+import '../widgets/create_account_curve_with_image.dart';
 import '../widgets/freelancer_registeration_button.dart';
-import '../widgets/profile_image_section.dart';
 
 class FreelancerRegisterView extends StatefulWidget {
   const FreelancerRegisterView({super.key});
@@ -47,7 +47,7 @@ class _FreelancerRegisterViewState extends State<FreelancerRegisterView> {
         },
         child: Column(
           children: [
-            ProfileImageSection(),
+            CreateAccountCurveWithImage(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
