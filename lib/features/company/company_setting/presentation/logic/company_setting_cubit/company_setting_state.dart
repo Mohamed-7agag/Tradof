@@ -29,25 +29,39 @@ class CompanySettingState extends Equatable {
   final CompanySettingStatus status;
   final String errMessage;
   final String message;
+  final int? countryId;
+  final File? imagePicked;
 
   const CompanySettingState({
     this.status = CompanySettingStatus.initial,
     this.errMessage = '',
     this.message = '',
+    this.countryId,
+    this.imagePicked,
   });
 
   CompanySettingState copyWith({
     CompanySettingStatus? status,
     String? errMessage,
     String? message,
+    int? countryId,
+    File? imagePicked,
   }) {
     return CompanySettingState(
       status: status ?? this.status,
       errMessage: errMessage ?? this.errMessage,
       message: message ?? this.message,
+      countryId: countryId ?? this.countryId,
+      imagePicked: imagePicked ?? this.imagePicked,
     );
   }
 
   @override
-  List<Object?> get props => [status, errMessage, message];
+  List<Object?> get props => [
+        status,
+        errMessage,
+        message,
+        countryId,
+        imagePicked,
+      ];
 }

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:tradof/core/errors/failure.dart';
 
-import '../../../company_setting/data/model/social_media_model.dart';
+import '../model/social_media_model.dart';
 import '../model/company_employee_model.dart';
 import '../model/company_employee_request_model.dart';
 import '../model/company_model.dart';

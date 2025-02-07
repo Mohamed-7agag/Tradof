@@ -5,7 +5,7 @@ import 'package:tradof/core/errors/failure.dart';
 import '../../../../../core/api/end_points.dart';
 import '../../../../../core/helpers/handle_request_method.dart';
 import '../../../../../core/utils/app_constants.dart';
-import '../../../company_profile/data/model/company_update_request_model.dart';
+import '../model/update_company_request_model.dart';
 import 'company_setting_repo.dart';
 
 class CompanySettingRepoImpl implements CompanySettingRepo {

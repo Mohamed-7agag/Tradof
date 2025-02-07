@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
-import 'package:tradof/features/company/company_setting/data/model/social_media_model.dart';
+import 'package:tradof/features/company/company_profile/data/model/social_media_model.dart';
 
 import '../../../../../core/helpers/custom_url_launcher.dart';
 

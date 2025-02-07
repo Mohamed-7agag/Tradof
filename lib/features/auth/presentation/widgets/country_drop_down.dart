@@ -15,11 +15,13 @@ class CountryDropDown extends StatefulWidget {
     this.textColor = AppColors.white,
     this.dropdownColor = AppColors.darkGrey,
     this.iconColor = AppColors.white,
+    this.value,
   });
 
   final String hint;
   final List<CountryModel> items;
   final void Function(CountryModel?)? onChanged;
+  final CountryModel? value;
   final Color borderColor;
   final Color textColor;
   final Color dropdownColor;
@@ -31,6 +33,13 @@ class CountryDropDown extends StatefulWidget {
 
 class _CountryDropDownState extends State<CountryDropDown> {
   CountryModel? selectedCountry;
+  @override
+  void initState() {
+    super.initState();
+    if (widget.value != null) {
+      selectedCountry = widget.value;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

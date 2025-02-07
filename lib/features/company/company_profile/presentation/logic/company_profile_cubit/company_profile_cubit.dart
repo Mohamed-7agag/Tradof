@@ -2,10 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/utils/app_constants.dart';
-import '../../../../company_setting/data/model/social_media_model.dart';
 import '../../../data/model/company_employee_model.dart';
 import '../../../data/model/company_employee_request_model.dart';
 import '../../../data/model/company_model.dart';
+import '../../../data/model/social_media_model.dart';
 import '../../../data/repos/company_profile_repo.dart';
 
 part 'company_profile_state.dart';
@@ -22,16 +22,17 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
       companyId: AppConstants.kUserId,
     );
     result.fold(
-        (failure) => emit(state.copyWith(
-              status: CompanyProfileStatus.getCompanyFailure,
-              errorMessage: failure.errMessage,
-            )),
-        (companyModel) => emit(
-              state.copyWith(
-                status: CompanyProfileStatus.getCompanySuccess,
-                companyModel: companyModel,
-              ),
-            ));
+      (failure) => emit(state.copyWith(
+        status: CompanyProfileStatus.getCompanyFailure,
+        errorMessage: failure.errMessage,
+      )),
+      (companyModel) => emit(
+        state.copyWith(
+          status: CompanyProfileStatus.getCompanySuccess,
+          companyModel: companyModel,
+        ),
+      ),
+    );
   }
 
   Future<void> getCompanyEmployees() async {

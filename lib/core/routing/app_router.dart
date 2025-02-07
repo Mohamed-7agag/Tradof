@@ -24,10 +24,11 @@ import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
+import '../../features/company/company_profile/data/model/social_media_model.dart';
+import '../../features/company/company_profile/presentation/views/add_update_social_media_view.dart';
 import '../../features/company/company_profile/presentation/views/company_add_employee_view.dart';
 import '../../features/company/company_profile/presentation/views/company_employees_view.dart';
-import '../../features/company/company_setting/data/model/social_media_model.dart';
-import '../../features/company/company_setting/presentation/views/add_update_social_media_view.dart';
+import '../../features/company/company_setting/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
 import '../../welcome_view.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
@@ -39,7 +40,7 @@ class AppRouter {
 
   static final router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/loginView',
+    initialLocation: '/companyBottomNavBarView',
     // redirect: (context, state) {
     //   if (CacheHelper.getBool(AppConstants.firstTime) == true) {
     //     if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
@@ -207,7 +208,18 @@ class AppRouter {
         name: Routes.updateCompanyProfileViewRoute,
         path: '/updateCompanyProfileView',
         builder: (context, state) {
-          return UpdateCompanyProfileView();
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    CompanyProfileCubit(getIt())..getCompanyProfile(),
+              ),
+              BlocProvider(
+                create: (context) => CompanySettingCubit(getIt()),
+              ),
+            ],
+            child: UpdateCompanyProfileView(),
+          );
         },
       ),
       GoRoute(

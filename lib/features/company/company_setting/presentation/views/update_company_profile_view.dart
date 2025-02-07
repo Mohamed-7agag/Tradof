@@ -9,9 +9,7 @@ import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 
-import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
 import '../../../company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
-import '../logic/cubit/company_setting_cubit.dart';
 import '../widgets/build_update_company_profile_view.dart';
 
 class UpdateCompanyProfileView extends StatefulWidget {
@@ -27,22 +25,8 @@ class _UpdateCompanyProfileViewState extends State<UpdateCompanyProfileView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => ProfileImageAndCountryCubit(),
-          ),
-          BlocProvider(
-            create: (context) => MetaDataCubit(getIt())..getCountries(),
-          ),
-          BlocProvider(
-            create: (context) =>
-                CompanyProfileCubit(getIt())..getCompanyProfile(),
-          ),
-          BlocProvider(
-            create: (context) => CompanySettingCubit(getIt()),
-          ),
-        ],
+      body: BlocProvider(
+        create: (context) => MetaDataCubit(getIt())..getCountries(),
         child: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
           buildWhen: (previous, current) =>
               current.status.isGetCompanySuccess ||

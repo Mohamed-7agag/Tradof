@@ -7,7 +7,7 @@ import 'package:tradof/core/helpers/extensions.dart';
 import '../../../../../core/utils/widgets/custom_button.dart';
 import '../../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../../core/utils/widgets/custom_toastification.dart';
-import '../logic/cubit/company_setting_cubit.dart';
+import '../logic/company_setting_cubit/company_setting_cubit.dart';
 
 class ChangeCompanyPasswordButton extends StatelessWidget {
   const ChangeCompanyPasswordButton({
@@ -56,8 +56,7 @@ class ChangeCompanyPasswordButton extends StatelessWidget {
       errorToast(context, 'Invalid Password', 'Please fill all fields');
     } else if (password != confirmPassword) {
       errorToast(context, 'Invalid Password', 'Passwords do not match');
-    } else if (!AppValidation.passwordValidation(context, password)) {
-    } else {
+    } else if (AppValidation.passwordValidation(context, password)) {
       context.read<CompanySettingCubit>().changeCompanyPassword(
             currentPassword: currentPasswordController.text.trim(),
             newPassword: password,

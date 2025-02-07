@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:tradof/core/errors/failure.dart';
 
-import '../../../company_profile/data/model/company_update_request_model.dart';
+import '../model/update_company_request_model.dart';
 
 abstract class CompanySettingRepo {
   Future<Either<Failure, String>> changeCompanyPassword({

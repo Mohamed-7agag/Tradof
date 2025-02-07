@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 
-import '../../../company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
+import '../logic/company_profile_cubit/company_profile_cubit.dart';
 import '../../data/model/social_media_model.dart';
 
 class AddUpdateSocialMediaButton extends StatelessWidget {

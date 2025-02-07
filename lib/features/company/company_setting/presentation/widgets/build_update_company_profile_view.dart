@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 
-import '../../../../auth/presentation/logic/freelancer_registeration_cubit.dart';
 import '../../../../auth/presentation/widgets/phone_number_text_field.dart';
 import '../../../company_profile/data/model/company_model.dart';
 import 'country_drop_down_edit.dart';
 import 'update_company_profile_button.dart';
+import 'update_company_profile_image.dart';
 
 class BuildUpdateCompanyProfileView extends StatefulWidget {
   const BuildUpdateCompanyProfileView({
@@ -36,40 +35,30 @@ class _BuildUpdateCompanyProfileViewState
 
   @override
   void initState() {
+    super.initState();
     formKey = GlobalKey<FormState>();
     emailController = TextEditingController(text: widget.companyModel.email);
     firstNameController =
         TextEditingController(text: widget.companyModel.firstName);
     lastNameController =
         TextEditingController(text: widget.companyModel.lastName);
-
     phoneNumberController =
         TextEditingController(text: widget.companyModel.phone);
     locationCompanyController =
         TextEditingController(text: widget.companyModel.companyAddress);
     companyNameController =
         TextEditingController(text: widget.companyModel.companyName);
-    context
-        .read<ProfileImageAndCountryCubit>()
-        .onCountrySelected(widget.companyModel.countryId);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<ProfileImageAndCountryCubit>()
-          .onCountrySelected(widget.companyModel.countryId);
-    });
-
-    super.initState();
   }
 
   @override
   void dispose() {
+    super.dispose();
     emailController.dispose();
     firstNameController.dispose();
     lastNameController.dispose();
     phoneNumberController.dispose();
     locationCompanyController.dispose();
-    super.dispose();
+    companyNameController.dispose();
   }
 
   @override
@@ -80,7 +69,9 @@ class _BuildUpdateCompanyProfileViewState
         child: Column(
           children: [
             verticalSpace(30),
-            //ProfileImageEdit(),
+            UpdateCompanyProfileImage(
+              imageUrl: widget.companyModel.profileImageUrl,
+            ),
             verticalSpace(50),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -142,7 +133,6 @@ class _BuildUpdateCompanyProfileViewState
                     initialCountryId: widget.companyModel.countryId,
                   ),
                   verticalSpace(60),
-
                   UpdateCompanyProfileButton(
                     companyNameController: companyNameController,
                     firstNameController: firstNameController,
@@ -151,7 +141,6 @@ class _BuildUpdateCompanyProfileViewState
                     phoneNumberController: phoneNumberController,
                     locationCompanyController: locationCompanyController,
                     companyModel: widget.companyModel,
-                    
                   ),
                   verticalSpace(40),
                 ],

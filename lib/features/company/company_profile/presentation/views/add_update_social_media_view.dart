@@ -23,9 +23,7 @@ class AddUpdateSocialMediaView extends StatelessWidget {
           horizontalSpace(16),
         ],
       ),
-      body: BuildAddUpdateSocialMedia(
-        socialMedia: socialMedia,
-      ),
+      body: BuildAddUpdateSocialMedia(socialMedia: socialMedia),
     );
   }
 }
