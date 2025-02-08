@@ -1,8 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
+import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/widgets/charts_completed.dart';
-import 'package:tradof/features/freelancer/dashbord/presentation/widgets/dashbord_container_curve.dart';
+import 'package:tradof/features/freelancer/dashbord/presentation/widgets/profile_section.dart';
+import 'package:tradof/features/freelancer/dashbord/presentation/widgets/switcher_widget.dart';
+
+// class FreelanceDashbordView extends StatelessWidget {
+//   const FreelanceDashbordView({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Column(
+//         children: [
+//           DashbordContainerCurve(),
+//           verticalSpace(12),
+//           SizedBox(
+//             height: 123.h,
+//             child: ListView.builder(
+//               itemCount: 3,
+//               physics: AlwaysScrollableScrollPhysics(),
+//               scrollDirection: Axis.horizontal,
+//               itemBuilder: (context, index) {
+//                 return Padding(
+//                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+//                   child: CompleteProjectsCard(),
+//                 );
+//               },
+//             ),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class FreelanceDashbordView extends StatelessWidget {
   const FreelanceDashbordView({super.key});
@@ -10,25 +41,61 @@ class FreelanceDashbordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          DashbordContainerCurve(),
-          verticalSpace(12),
-          SizedBox(
-            height: 123.h,
-            child: ListView.builder(
-              itemCount: 3,
-              physics: AlwaysScrollableScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CompleteProjectsCard(),
-                );
-              },
-            ),
-          )
-        ],
+      backgroundColor: AppColors.primary,
+      body: SafeArea(
+        child: Column(
+          children: [
+            verticalSpace(12),
+            ProfileSection(),
+            verticalSpace(50),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: AppColors.background,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(32),
+                    topRight: Radius.circular(32),
+                  ),
+                ),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  alignment: Alignment.topCenter,
+                  children: [
+                    Positioned(
+                      top: -32.5,
+                      child: SwitcherWidget(),
+                    ),
+                    Column(
+                      children: [
+                        verticalSpace(50),
+                        Expanded(
+                          flex: 2,
+                          child: ListView.builder(
+                            itemCount: 3,
+                            physics: AlwaysScrollableScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            padding: EdgeInsets.only(left: 10, right: 2),
+                            itemBuilder: (context, index) {
+                              return CompleteProjectsCard();
+                            },
+                          ),
+                        ),
+                        verticalSpace(10),
+                        Expanded(
+                          flex: 7,
+                          child: Container(
+                            width: double.infinity,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

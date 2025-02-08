@@ -10,13 +10,12 @@ class CompleteProjectsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 325.w,
-      height: 123.h,
+      width: 0.80.sw,
+      margin: EdgeInsets.only(right: 8.w),
       decoration: BoxDecoration(
         color: AppColors.primary,
-        borderRadius: BorderRadius.circular(30.r),
+        borderRadius: BorderRadius.circular(25.r),
       ),
-      padding: EdgeInsets.all(16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
