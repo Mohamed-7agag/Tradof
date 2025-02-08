@@ -33,7 +33,7 @@ class _SelectDateSectionState extends State<SelectDateSection> {
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 17.h),
-        width: double.infinity,
+        width: 1.sw,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: AppColors.grey),

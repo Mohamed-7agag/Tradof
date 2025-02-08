@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -43,7 +44,7 @@ class IndustriesServed extends StatelessWidget {
         ),
         verticalSpace(10),
         SizedBox(
-          width: double.infinity,
+          width: 1.sw,
           child: DataTable(
             columns: [
               DataColumn(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/widgets/charts_completed.dart';
@@ -54,7 +55,7 @@ class FreelanceDashbordView extends StatelessWidget {
                         verticalSpace(10),
                         Expanded(
                           flex: 7,
-                          child: Container(width: double.infinity),
+                          child: Container(width: 1.sw),
                         ),
                       ],
                     )

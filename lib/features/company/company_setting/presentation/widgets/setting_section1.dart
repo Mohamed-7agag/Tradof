@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
+import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 import 'package:tradof/features/company/company_setting/presentation/widgets/setting_item.dart';
 
 class SettingsSection1 extends StatelessWidget {
-  const SettingsSection1({super.key});
+  const SettingsSection1({super.key, required this.companyModel});
+  final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,6 +25,7 @@ class SettingsSection1 extends StatelessWidget {
             onTap: () {
               context.push(
                 Routes.updateCompanyProfileViewRoute,
+                extra: companyModel,
               );
             },
           ),

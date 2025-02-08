@@ -35,7 +35,7 @@ class SpecializationTable extends StatelessWidget {
         ),
         verticalSpace(12),
         SizedBox(
-          width: double.infinity,
+          width:1.sw,
           child: BlocBuilder<TablesCubit, TablesState>(
             buildWhen: (previous, current) =>
                 current.selectedSpecializations !=

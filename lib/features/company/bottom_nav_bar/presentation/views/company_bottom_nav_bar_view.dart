@@ -5,9 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 import 'package:tradof/core/theming/app_colors.dart';
+import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
+import 'package:tradof/features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 
 import '../../../../../core/di/di.dart';
 import '../../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
+import '../../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../../../projects/presentation/views/create_project_view.dart';
@@ -23,30 +26,45 @@ class CompanyBottomNavBarView extends StatefulWidget {
 }
 
 class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
-  static final List<Widget> views = [
-    const FreelanceDashbordView(),
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => ProjectCubit(getIt()),
-        ),
-        BlocProvider(
-          create: (context) => MetaDataCubit(getIt())..getLanguages(),
-        ),
-      ],
-      child: CreateProjectView(),
-    ),
-    const ProfileCompanyView(),
-    const FreelanceDashbordView(),
-    const CompanySettingView(),
-  ];
-
   int currentIndex = 0;
+
+  List<Widget> _buildIndexedStackChildren(CompanyProfileState state) {
+    return [
+      const FreelanceDashbordView(),
+      MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => ProjectCubit(getIt())),
+          BlocProvider(
+            create: (context) => MetaDataCubit(getIt())..getLanguages(),
+          ),
+        ],
+        child: const CreateProjectView(),
+      ),
+      ProfileCompanyView(companyModel: state.companyModel!),
+      const FreelanceDashbordView(),
+      CompanySettingView(companyModel: state.companyModel!),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LazyLoadIndexedStack(index: currentIndex, children: views),
+      body: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
+        builder: (context, state) {
+          if (state.status.isGetCompanySuccess) {
+            return LazyLoadIndexedStack(
+              index: currentIndex,
+              children: _buildIndexedStackChildren(state),
+            );
+          } else if (state.status.isGetCompanyFailure) {
+            return CustomFailureWidget(
+              text: state.errorMessage,
+            );
+          }
+
+          return const CustomLoadingWidget();
+        },
+      ),
       bottomNavigationBar: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.topCenter,

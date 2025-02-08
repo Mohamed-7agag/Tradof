@@ -14,7 +14,7 @@ class AuthShape extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        SvgPicture.asset('assets/images/auth_shape.svg', width: double.infinity),
+        SvgPicture.asset('assets/images/auth_shape.svg', width: 1.sw),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

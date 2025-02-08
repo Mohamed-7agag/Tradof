@@ -26,7 +26,7 @@ class AttachmentFilesSection extends StatelessWidget {
         BlocBuilder<FileCubit, List<PlatformFile>>(
           builder: (context, files) {
             return Container(
-              width: double.infinity,
+              width: 1.sw,
               height: files.isEmpty ? 80 : null,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),

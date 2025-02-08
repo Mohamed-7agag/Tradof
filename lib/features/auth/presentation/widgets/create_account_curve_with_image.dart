@@ -14,7 +14,7 @@ class CreateAccountCurveWithImage extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         height: 325.h,
-        width: double.infinity,
+        width: 1.sw,
         decoration: BoxDecoration(
           color: AppColors.background,
         ),

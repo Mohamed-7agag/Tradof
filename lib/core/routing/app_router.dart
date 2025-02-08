@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
 
@@ -13,6 +12,7 @@ import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
 import '../../features/company/bottom_nav_bar/presentation/views/company_bottom_nav_bar_view.dart';
+import '../../features/company/company_profile/data/model/company_model.dart';
 import '../../features/company/company_profile/data/model/social_media_model.dart';
 import '../../features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import '../../features/company/company_profile/presentation/views/add_update_social_media_view.dart';
@@ -83,7 +83,11 @@ class AppRouter {
       GoRoute(
         name: Routes.companyBottomNavBarViewRoute,
         path: '/companyBottomNavBarView',
-        builder: (context, state) => CompanyBottomNavBarView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              CompanyProfileCubit(getIt())..getCompanyProfile(),
+          child: CompanyBottomNavBarView(),
+        ),
       ),
       GoRoute(
         name: Routes.updateCompanyProfileTablesViewRoute,
@@ -114,17 +118,14 @@ class AppRouter {
         name: Routes.updateCompanyProfileViewRoute,
         path: '/updateCompanyProfileView',
         builder: (context, state) {
+          final comanyModel = state.extra as CompanyModel;
           return MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (context) =>
-                    CompanyProfileCubit(getIt())..getCompanyProfile(),
-              ),
               BlocProvider(
                 create: (context) => CompanySettingCubit(getIt()),
               ),
             ],
-            child: UpdateCompanyProfileView(),
+            child: UpdateCompanyProfileView(companyModel: comanyModel),
           );
         },
       ),

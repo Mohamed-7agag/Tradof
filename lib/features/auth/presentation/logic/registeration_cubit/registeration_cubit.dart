@@ -93,8 +93,9 @@ class RegisterationCubit extends Cubit<RegisterationState> {
         status: RegisterationStatus.error,
         errorMessage: failure.errMessage,
       )),
-      (user) => emit(state.copyWith(
+      (message) => emit(state.copyWith(
         status: RegisterationStatus.success,
+        registerSuccessMessage: message,
       )),
     );
   }
