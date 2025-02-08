@@ -11,9 +11,9 @@ import 'package:tradof/features/company/company_profile/presentation/logic/compa
 import '../../../../../core/di/di.dart';
 import '../../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../../core/utils/widgets/custom_loading_widget.dart';
-import '../../../../freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../../../projects/presentation/views/create_project_view.dart';
+import '../../../company_dashboard/presentation/views/company_dashboard_view.dart';
 import '../../../company_profile/presentation/views/company_profile_view.dart';
 import '../../../company_setting/presentation/views/company_setting_view.dart';
 
@@ -30,7 +30,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
 
   List<Widget> _buildIndexedStackChildren(CompanyProfileState state) {
     return [
-      const FreelanceDashbordView(),
+      CompanyDashboardView(companyModel: state.companyModel!),
       MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => ProjectCubit(getIt())),
@@ -38,10 +38,10 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
             create: (context) => MetaDataCubit(getIt())..getLanguages(),
           ),
         ],
-        child: const CreateProjectView(),
+        child: CreateProjectView(companyModel: state.companyModel!),
       ),
       ProfileCompanyView(companyModel: state.companyModel!),
-      const FreelanceDashbordView(),
+      CompanyDashboardView(companyModel: state.companyModel!),
       CompanySettingView(companyModel: state.companyModel!),
     ];
   }

@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/company/company_dashboard/presentation/widgets/switcher_widget.dart';
-import 'package:tradof/features/freelancer/dashbord/presentation/widgets/charts_completed.dart';
+import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
-class FreelanceDashbordView extends StatelessWidget {
-  const FreelanceDashbordView({super.key});
+import '../../../../freelancer/dashbord/presentation/widgets/charts_completed.dart';
+import '../widgets/profile_section.dart';
+import '../widgets/switcher_widget.dart';
 
+class CompanyDashboardView extends StatelessWidget {
+  const CompanyDashboardView({super.key, required this.companyModel});
+  final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +19,7 @@ class FreelanceDashbordView extends StatelessWidget {
         child: Column(
           children: [
             verticalSpace(12),
-            //ProfileSection(),
+            ProfileSection(companyModel: companyModel),
             verticalSpace(50),
             Expanded(
               child: Container(

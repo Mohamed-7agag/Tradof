@@ -14,50 +14,32 @@ class ProfileCompanyView extends StatelessWidget {
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {
-    return BuildCompanyProfileSuccess(companyModel: companyModel);
-  }
-}
-
-class BuildCompanyProfileSuccess extends StatelessWidget {
-  const BuildCompanyProfileSuccess({
-    super.key,
-    required this.companyModel,
-  });
-
-  final CompanyModel companyModel;
-  @override
-  Widget build(BuildContext context) {
     return Column(
       children: [
         ProfileAppbar(companyModel: companyModel),
         Expanded(
-            child: CustomScrollView(
-          slivers: [
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Column(
-                    children: [
-                      verticalSpace(16),
-                      RatingAndReviews(companyModel: companyModel),
-                      verticalSpace(20),
-                      SocialLinks(
-                        socialMedia: companyModel.socialMedia,
-                      ),
-                      verticalSpace(26),
-                      SlideInUp(
-                        from: 150,
-                        child: CompanyProfileTables(companyModel: companyModel),
-                      ),
-                    ],
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                children: [
+                  verticalSpace(16),
+                  RatingAndReviews(companyModel: companyModel),
+                  verticalSpace(20),
+                  SocialLinks(
+                    socialMedia: companyModel.socialMedia,
                   ),
-                ),
+                  verticalSpace(26),
+                  SlideInUp(
+                    from: 150,
+                    child: CompanyProfileTables(companyModel: companyModel),
+                  ),
+                  verticalSpace(100),
+                ],
               ),
-            )
-          ],
-        )),
+            ),
+          ),
+        ),
       ],
     );
   }

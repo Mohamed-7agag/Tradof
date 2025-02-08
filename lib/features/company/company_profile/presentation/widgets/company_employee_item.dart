@@ -22,6 +22,7 @@ class CompanyEmployeeItem extends StatelessWidget {
         children: [
           ListTile(
             contentPadding: EdgeInsets.zero,
+            horizontalTitleGap: 10,
             leading: Icon(
               Icons.account_circle,
               size: 50,

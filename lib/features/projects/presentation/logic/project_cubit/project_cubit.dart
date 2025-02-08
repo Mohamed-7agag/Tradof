@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,19 +17,33 @@ class ProjectCubit extends Cubit<ProjectState> {
   final ProjectRepo _projectRepo;
 
   // create project
-  Future<void> createProject(String projectName, String projectDescription,
-      int minBudget, int maxBudget, List<PlatformFile> files) async {
+  Future<void> createProject(
+    String projectName,
+    String projectDescription,
+    int minBudget,
+    int maxBudget,
+    List<PlatformFile> files,
+  ) async {
     emit(state.copyWith(status: ProjectStatus.loading));
+
+    Future<List<MultipartFile>> prepareFiles() {
+      final convertedFiles =
+          files.map((file) async => await uploadFileToApi(file)).toList();
+      return Future.wait(convertedFiles);
+    }
+
+    log(prepareFiles().toString());
 
     final model = CreateProjectRequestModel(
       projectName: projectName,
       description: projectDescription,
       minPrice: minBudget,
       maxPrice: maxBudget,
-      deliveryDate: state.projectDeliveryDate!,
+      days: state.days!,
       fromLanguageId: state.fromLanguage!.id,
       toLanguageId: state.toLanguage!.id,
-      files: await uploadFileToApi(files[0]), //
+      specializationId: state.industryId!,
+      files: await prepareFiles(), //!
     );
 
     final result = await _projectRepo.createProject(model);
@@ -42,12 +59,17 @@ class ProjectCubit extends Cubit<ProjectState> {
     );
   }
 
-  void setLanguagePair(
-      {LanguageModel? fromLanguage, LanguageModel? toLanguage}) {
-    emit(state.copyWith(fromLanguage: fromLanguage, toLanguage: toLanguage));
-  }
-
-  void setProjectDeliveryDate(String date) {
-    emit(state.copyWith(projectDeliveryDate: date));
+  void setCreateProjectData({
+    LanguageModel? fromLanguage,
+    LanguageModel? toLanguage,
+    int? days,
+    int? industryId,
+  }) {
+    emit(state.copyWith(
+      fromLanguage: fromLanguage,
+      toLanguage: toLanguage,
+      days: days,
+      industryId: industryId,
+    ));
   }
 }

@@ -33,6 +33,7 @@ class AttachmentFilesSection extends StatelessWidget {
                 border: Border.all(color: AppColors.grey),
               ),
               child: ListView.builder(
+                padding: EdgeInsets.zero,
                 itemCount: files.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),

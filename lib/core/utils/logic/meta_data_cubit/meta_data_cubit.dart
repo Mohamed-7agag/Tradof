@@ -27,14 +27,20 @@ class MetaDataCubit extends Cubit<MetaDataState> {
     emit(state.copyWith(status: MetaDataStatus.loading));
     final result = await _metaDataRepo.getLanguages();
     result.fold(
-      (failure) => emit(state.copyWith(
-        status: MetaDataStatus.error,
-        errorMessage: failure.errMessage,
-      )),
-      (languages) => emit(state.copyWith(
-        status: MetaDataStatus.getLanguages,
-        languages: languages,
-      )),
+      (failure) {
+        if (isClosed) return;
+        emit(state.copyWith(
+          status: MetaDataStatus.error,
+          errorMessage: failure.errMessage,
+        ));
+      },
+      (languages) {
+        if (isClosed) return;
+        emit(state.copyWith(
+          status: MetaDataStatus.getLanguages,
+          languages: languages,
+        ));
+      },
     );
   }
 
@@ -43,16 +49,19 @@ class MetaDataCubit extends Cubit<MetaDataState> {
     if (state.countries.isNotEmpty) return;
     emit(state.copyWith(status: MetaDataStatus.loading));
     final result = await _metaDataRepo.getCountries();
-    result.fold(
-      (failure) => emit(state.copyWith(
+    result.fold((failure) {
+      if (isClosed) return;
+      emit(state.copyWith(
         status: MetaDataStatus.error,
         errorMessage: failure.errMessage,
-      )),
-      (countries) => emit(state.copyWith(
+      ));
+    }, (countries) {
+      if (isClosed) return;
+      emit(state.copyWith(
         status: MetaDataStatus.getCountries,
         countries: countries,
-      )),
-    );
+      ));
+    });
   }
 
   //! get Specializations
@@ -60,15 +69,18 @@ class MetaDataCubit extends Cubit<MetaDataState> {
     if (state.specializations.isNotEmpty) return;
     emit(state.copyWith(status: MetaDataStatus.loading));
     final result = await _metaDataRepo.getSpecaialization();
-    result.fold(
-      (failure) => emit(state.copyWith(
+    result.fold((failure) {
+      if (isClosed) return;
+      emit(state.copyWith(
         status: MetaDataStatus.error,
         errorMessage: failure.errMessage,
-      )),
-      (specializations) => emit(state.copyWith(
+      ));
+    }, (specializations) {
+      if (isClosed) return;
+      emit(state.copyWith(
         status: MetaDataStatus.getSpecializations,
         specializations: specializations,
-      )),
-    );
+      ));
+    });
   }
 }

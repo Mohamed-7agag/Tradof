@@ -6,6 +6,7 @@ import 'package:tradof/features/company/company_profile/data/model/company_model
 
 import '../widgets/company_setting_app_bar.dart';
 import '../widgets/delete_account_and_logout_section.dart';
+import '../widgets/setting_profile_info_section.dart';
 import '../widgets/setting_section1.dart';
 import '../widgets/setting_section2.dart';
 import '../widgets/subscription_plan_and_timer.dart';
@@ -28,6 +29,13 @@ class CompanySettingView extends StatelessWidget {
                   verticalSpace(15),
                   SlideInLeft(
                     from: 400,
+                    child:
+                        SettingProfileInfoSection(companyModel: companyModel),
+                  ),
+                  verticalSpace(20),
+                  SlideInLeft(
+                    from: 400,
+                    delay: Duration(milliseconds: 200),
                     child: SettingsSection1(
                       companyModel: companyModel,
                     ),
@@ -35,14 +43,14 @@ class CompanySettingView extends StatelessWidget {
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 250),
+                    delay: Duration(milliseconds: 400),
                     child: SettingSection2(),
                   ),
                   verticalSpace(26),
                   SubscriptionPlanAndTimer(),
                   verticalSpace(20),
                   DeleteAccountAndLogoutSection(),
-                  verticalSpace(40),
+                  verticalSpace(100),
                 ],
               ),
             ),

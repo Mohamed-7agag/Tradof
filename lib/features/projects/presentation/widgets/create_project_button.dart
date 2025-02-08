@@ -55,18 +55,20 @@ class CreateProjectButton extends StatelessWidget {
     } else if (context.read<ProjectCubit>().state.fromLanguage ==
         context.read<ProjectCubit>().state.toLanguage) {
       errorToast(context, 'Error', 'Please select different languages');
-    } else if (context.read<ProjectCubit>().state.projectDeliveryDate == null) {
+    } else if (context.read<ProjectCubit>().state.industryId == null) {
+      errorToast(context, 'Error', 'Please select an industry Served');
+    } else if (context.read<ProjectCubit>().state.days == null) {
       errorToast(context, 'Error', 'Please select a delivery date');
     } else if (files.isEmpty) {
       errorToast(context, 'Error', 'Please select at least one file');
     } else {
-      // context.read<ProjectCubit>().createProject(
-      //       projectName,
-      //       projectDescription,
-      //       minBudget,
-      //       maxBudget,
-      //       files,
-      //     );
+      context.read<ProjectCubit>().createProject(
+            projectName,
+            projectDescription,
+            minBudget,
+            maxBudget,
+            files,
+          );
     }
   }
 }

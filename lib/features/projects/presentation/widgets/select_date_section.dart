@@ -27,7 +27,8 @@ class _SelectDateSectionState extends State<SelectDateSection> {
         if (date != null) {
           setState(() {
             selectedDate = DateFormat('dd / MM / yyyy').format(date);
-            context.read<ProjectCubit>().setProjectDeliveryDate(selectedDate!);
+            int days = date.difference(DateTime.now()).inDays;
+            context.read<ProjectCubit>().setCreateProjectData(days: days);
           });
         }
       },

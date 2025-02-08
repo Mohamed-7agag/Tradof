@@ -19,7 +19,8 @@ class ProjectState extends Equatable {
   final String? errorMessage;
   final LanguageModel? fromLanguage;
   final LanguageModel? toLanguage;
-  final String? projectDeliveryDate;
+  final int? days;
+  final int? industryId;
 
   const ProjectState({
     this.status = ProjectStatus.initial,
@@ -27,7 +28,8 @@ class ProjectState extends Equatable {
     this.errorMessage,
     this.fromLanguage,
     this.toLanguage,
-    this.projectDeliveryDate,
+    this.days,
+    this.industryId,
   });
 
   ProjectState copyWith({
@@ -36,7 +38,8 @@ class ProjectState extends Equatable {
     String? errorMessage,
     LanguageModel? fromLanguage,
     LanguageModel? toLanguage,
-    String? projectDeliveryDate,
+    int? days,
+    int? industryId,
   }) {
     return ProjectState(
       status: status ?? this.status,
@@ -44,7 +47,8 @@ class ProjectState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
       fromLanguage: fromLanguage ?? this.fromLanguage,
       toLanguage: toLanguage ?? this.toLanguage,
-      projectDeliveryDate: projectDeliveryDate ?? this.projectDeliveryDate,
+      days: days ?? this.days,
+      industryId: industryId ?? this.industryId,
     );
   }
 
@@ -55,6 +59,7 @@ class ProjectState extends Equatable {
         errorMessage,
         fromLanguage,
         toLanguage,
-        projectDeliveryDate,
+        days,
+        industryId,
       ];
 }

@@ -53,7 +53,7 @@ class _LanguagePairDropDownState extends State<LanguagePairDropDown> {
               (item) => DropdownMenuItem(
                 value: item,
                 child: Text(
-                  '${item.languageName} (${item.languageCode})',
+                  '${item.languageName} (${item.countryName})',
                   style: AppStyle.robotoRegular15.copyWith(
                     color: widget.hintColor ?? AppColors.white,
                   ),

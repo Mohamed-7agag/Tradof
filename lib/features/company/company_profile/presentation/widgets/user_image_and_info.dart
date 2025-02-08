@@ -41,7 +41,7 @@ class UserImageAndInfo extends StatelessWidget {
             style: AppStyle.robotoRegular12.copyWith(color: AppColors.white),
           ),
           Text(
-            companyModel.jobTitle,
+            companyModel.companyName,
             style: AppStyle.robotoRegular12.copyWith(color: AppColors.white),
           ),
         ],

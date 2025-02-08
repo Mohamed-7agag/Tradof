@@ -33,7 +33,7 @@ class CreateProjectLanguagePair extends StatelessWidget {
               onChanged: (value) {
                 context
                     .read<ProjectCubit>()
-                    .setLanguagePair(fromLanguage: value);
+                    .setCreateProjectData(fromLanguage: value);
               },
             ),
             verticalSpace(12),
@@ -43,7 +43,9 @@ class CreateProjectLanguagePair extends StatelessWidget {
               hintColor: AppColors.darkGrey,
               items: state.languages,
               onChanged: (value) {
-                context.read<ProjectCubit>().setLanguagePair(toLanguage: value);
+                context
+                    .read<ProjectCubit>()
+                    .setCreateProjectData(toLanguage: value);
               },
             ),
           ],

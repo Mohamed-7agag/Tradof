@@ -19,7 +19,6 @@ class CompanyProfileTables extends StatelessWidget {
         IndustriesServed(
           companyModel: companyModel,
         ),
-        verticalSpace(30),
       ],
     );
   }

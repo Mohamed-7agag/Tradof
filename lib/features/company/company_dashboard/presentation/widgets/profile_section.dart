@@ -1,13 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 
 class ProfileSection extends StatelessWidget {
-  const ProfileSection({super.key});
-
+  const ProfileSection({super.key, required this.companyModel});
+  final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -15,14 +17,14 @@ class ProfileSection extends StatelessWidget {
       leading: CircleAvatar(
         radius: 24,
         backgroundColor: AppColors.white,
-        backgroundImage: AssetImage('assets/images/photo3.jpg'),
+        backgroundImage: CachedNetworkImageProvider(companyModel.profileImageUrl),
       ),
       title: Text(
-        'Youssef Ghareb',
+        '${companyModel.firstName} ${companyModel.lastName}',
         style: AppStyle.poppinsMedium14.copyWith(color: AppColors.white),
       ),
       subtitle: Text(
-        'J0esph',
+        companyModel.jobTitle,
         style: AppStyle.robotoRegular10.copyWith(color: AppColors.white),
       ),
       trailing: Row(

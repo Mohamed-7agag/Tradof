@@ -103,7 +103,7 @@ class IndustriesServedTable extends StatelessWidget {
   }
 
   _showIndusteriesServedDialog(BuildContext context) {
-    final cubit = context.read<TablesCubit>();
+    final tablesCubit = context.read<TablesCubit>();
     final metaDataCubit = context.read<MetaDataCubit>();
 
     showDialog(
@@ -111,7 +111,7 @@ class IndustriesServedTable extends StatelessWidget {
       builder: (context) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider.value(value: cubit),
+            BlocProvider.value(value: tablesCubit),
             BlocProvider.value(value: metaDataCubit..getSpecializations()),
           ],
           child: AlertDialog(
@@ -154,9 +154,9 @@ class IndustriesServedTable extends StatelessWidget {
                               .copyWith(color: Colors.white),
                         ),
                         onTap: () {
-                          context.read<TablesCubit>().addIndustryServed(
-                                state.specializations[index],
-                              );
+                          tablesCubit.addIndustryServed(
+                            state.specializations[index],
+                          );
                           Navigator.pop(context);
                         },
                       );
