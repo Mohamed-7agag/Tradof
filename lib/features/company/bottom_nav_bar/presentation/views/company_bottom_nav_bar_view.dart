@@ -3,120 +3,135 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
+import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 
-import '../logic/company_bottom_nav_bar_cubit.dart';
+import '../../../../../core/di/di.dart';
+import '../../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
+import '../../../../freelancer/dashbord/presentation/views/freelance_dashbord_view.dart';
+import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart';
+import '../../../../projects/presentation/views/create_project_view.dart';
+import '../../../company_profile/presentation/views/company_profile_view.dart';
+import '../../../company_setting/presentation/views/company_setting_view.dart';
 
-class CompanyBottomNavBarView extends StatelessWidget {
-  const CompanyBottomNavBarView({
-    super.key,
-    required this.navigationShell,
-    this.initialIndex = 0,
-  });
+class CompanyBottomNavBarView extends StatefulWidget {
+  const CompanyBottomNavBarView({super.key});
 
-  final StatefulNavigationShell navigationShell;
-  final int initialIndex;
+  @override
+  State<CompanyBottomNavBarView> createState() =>
+      _CompanyBottomNavBarViewState();
+}
+
+class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
+  static final List<Widget> views = [
+    const FreelanceDashbordView(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ProjectCubit(getIt()),
+        ),
+        BlocProvider(
+          create: (context) => MetaDataCubit(getIt())..getLanguages(),
+        ),
+      ],
+      child: CreateProjectView(),
+    ),
+    const ProfileCompanyView(),
+    const FreelanceDashbordView(),
+    const CompanySettingView(),
+  ];
+
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    context.read<CompanyBottomNavBarCubit>().updateIndex(initialIndex);
     return Scaffold(
-      body: navigationShell,
-      bottomNavigationBar: BlocBuilder<CompanyBottomNavBarCubit, int>(
-        builder: (context, selectedIndex) {
-          return Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.topCenter,
-            children: [
-              ClipPath(
-                clipper: CustomNavBarClipper(),
-                child: Container(
-                  height: 85,
-                  color: AppColors.white,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SlideInLeft(
-                        from: 400,
-                        delay: Duration(milliseconds: 350),
-                        child: _buildNavItem(
-                          context,
-                          'assets/images/home_off.png',
-                          'assets/images/home_on.png',
-                          0,
-                        ),
-                      ),
-                      SlideInLeft(
-                        from: 400,
-                        child: _buildNavItem(
-                          context,
-                          'assets/images/add_project_off.png',
-                          'assets/images/add_project_on.png',
-                          1,
-                        ),
-                      ),
-                      SizedBox(width: 40.w),
-                      SlideInRight(
-                        from: 400,
-                        child: _buildNavItem(
-                          context,
-                          'assets/images/wallet_off.png',
-                          'assets/images/wallet_on.png',
-                          3,
-                        ),
-                      ),
-                      SlideInRight(
-                        from: 400,
-                        delay: Duration(milliseconds: 350),
-                        child: _buildNavItem(
-                          context,
-                          'assets/images/setting_off.png',
-                          'assets/images/setting_on.png',
-                          4,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                top: -20,
-                child: BounceInUp(
-                  child: GestureDetector(
-                    onTap: () {
-                      context.read<CompanyBottomNavBarCubit>().updateIndex(2);
-                      navigationShell.goBranch(2);
-                    },
-                    child: Container(
-                      width: 60,
-                      height: 60,
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        shape: BoxShape.circle,
-                      ),
-                      child: SvgPicture.asset(
-                        'assets/images/user.svg',
-                      ),
+      body: LazyLoadIndexedStack(index: currentIndex, children: views),
+      bottomNavigationBar: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.topCenter,
+        children: [
+          ClipPath(
+            clipper: CustomNavBarClipper(),
+            child: Container(
+              height: 85,
+              color: AppColors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SlideInLeft(
+                    from: 400,
+                    delay: Duration(milliseconds: 350),
+                    child: _buildNavItem(
+                      'assets/images/home_off.png',
+                      'assets/images/home_on.png',
+                      0,
                     ),
                   ),
+                  SlideInLeft(
+                    from: 400,
+                    child: _buildNavItem(
+                      'assets/images/add_project_off.png',
+                      'assets/images/add_project_on.png',
+                      1,
+                    ),
+                  ),
+                  SizedBox(width: 40.w),
+                  SlideInRight(
+                    from: 400,
+                    child: _buildNavItem(
+                      'assets/images/wallet_off.png',
+                      'assets/images/wallet_on.png',
+                      3,
+                    ),
+                  ),
+                  SlideInRight(
+                    from: 400,
+                    delay: Duration(milliseconds: 350),
+                    child: _buildNavItem(
+                      'assets/images/setting_off.png',
+                      'assets/images/setting_on.png',
+                      4,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: -20,
+            child: BounceInUp(
+              child: GestureDetector(
+                onTap: () {
+                  if (currentIndex != 2) {
+                    setState(() => currentIndex = 2);
+                  }
+                },
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: SvgPicture.asset('assets/images/user.svg'),
                 ),
               ),
-            ],
-          );
-        },
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildNavItem(
-      BuildContext context, String inactiveIcon, String activeIcon, int index) {
-    final isSelected = navigationShell.currentIndex == index;
+  Widget _buildNavItem(String inactiveIcon, String activeIcon, int index) {
+    final isSelected = currentIndex == index;
     return GestureDetector(
       onTap: () {
-        context.read<CompanyBottomNavBarCubit>().updateIndex(index);
-        navigationShell.goBranch(index);
+        if (currentIndex != index) {
+          setState(() => currentIndex = index);
+        }
       },
       child: Image.asset(
         isSelected ? activeIcon : inactiveIcon,
