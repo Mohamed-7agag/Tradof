@@ -53,7 +53,7 @@ class _CountryDropDownState extends State<CountryDropDown> {
         iconEnabledColor: widget.iconColor,
         dropdownColor: widget.dropdownColor,
         isExpanded: true,
-        menuWidth: 1.sw - 70,
+        menuWidth: double.infinity - 70,
         underline: const SizedBox.shrink(),
         borderRadius: BorderRadius.circular(10),
         elevation: 4,

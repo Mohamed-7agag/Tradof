@@ -10,7 +10,7 @@ class CompleteProjectsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 0.80.sw,
+      width: 0.84.sw,
       margin: EdgeInsets.only(right: 8.w),
       decoration: BoxDecoration(
         color: AppColors.primary,

@@ -36,7 +36,7 @@ class _SelectAccountTypeViewState extends State<SelectAccountTypeView> {
                   child: SelectAccountTypeSection(),
                 ),
                 SizedBox(
-                  width: 1.sw,
+                  width: double.infinity,
                   child: PrivacyPolicyCheckBox(
                     onChanged: (isChecked) => isAgreed = isChecked,
                   ),

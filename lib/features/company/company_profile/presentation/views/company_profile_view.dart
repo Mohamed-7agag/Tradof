@@ -36,7 +36,7 @@ class ProfileCompanyView extends StatelessWidget {
                 ? const CustomLoadingWidget()
                 : state.status.isGetCompanyFailure
                     ? ListView(
-                        itemExtent: 1.sh,
+                        itemExtent: double.infinity,
                         children: [
                           CustomFailureWidget(text: state.errorMessage)
                         ],

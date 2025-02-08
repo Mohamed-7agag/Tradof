@@ -39,7 +39,7 @@ class PreferedLanguagesTable extends StatelessWidget {
         ),
         verticalSpace(12),
         SizedBox(
-          width: 1.sw,
+          width: double.infinity,
           child: BlocBuilder<TablesCubit, TablesState>(
             buildWhen: (previous, current) =>
                 current.selectedPreferedLanguages !=

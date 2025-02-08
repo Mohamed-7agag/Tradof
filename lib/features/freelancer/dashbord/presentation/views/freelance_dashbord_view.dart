@@ -5,36 +5,6 @@ import 'package:tradof/features/freelancer/dashbord/presentation/widgets/charts_
 import 'package:tradof/features/freelancer/dashbord/presentation/widgets/profile_section.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/widgets/switcher_widget.dart';
 
-// class FreelanceDashbordView extends StatelessWidget {
-//   const FreelanceDashbordView({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Column(
-//         children: [
-//           DashbordContainerCurve(),
-//           verticalSpace(12),
-//           SizedBox(
-//             height: 123.h,
-//             child: ListView.builder(
-//               itemCount: 3,
-//               physics: AlwaysScrollableScrollPhysics(),
-//               scrollDirection: Axis.horizontal,
-//               itemBuilder: (context, index) {
-//                 return Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-//                   child: CompleteProjectsCard(),
-//                 );
-//               },
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 class FreelanceDashbordView extends StatelessWidget {
   const FreelanceDashbordView({super.key});
 
@@ -84,9 +54,7 @@ class FreelanceDashbordView extends StatelessWidget {
                         verticalSpace(10),
                         Expanded(
                           flex: 7,
-                          child: Container(
-                            width: double.infinity,
-                          ),
+                          child: Container(width: double.infinity),
                         ),
                       ],
                     )

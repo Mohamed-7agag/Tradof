@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -34,7 +33,7 @@ class LanguagePairTable extends StatelessWidget {
         ),
         verticalSpace(12),
         SizedBox(
-          width: 1.sw,
+          width: double.infinity,
           child: BlocBuilder<TablesCubit, TablesState>(
             buildWhen: (previous, current) =>
                 current.selectedLanguagePair != previous.selectedLanguagePair,
