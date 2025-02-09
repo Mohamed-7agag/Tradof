@@ -9,8 +9,8 @@ import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../auth/presentation/widgets/language_pair_drop_down.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
-class CreateProjectLanguagePair extends StatelessWidget {
-  const CreateProjectLanguagePair({super.key});
+class UpdateProjectLanguagePair extends StatelessWidget {
+  const UpdateProjectLanguagePair({super.key});
 
   @override
   Widget build(BuildContext context) {

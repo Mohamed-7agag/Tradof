@@ -9,14 +9,20 @@ import '../logic/project_cubit/project_cubit.dart';
 import 'custom_date_picker.dart';
 
 class SelectDateSection extends StatefulWidget {
-  const SelectDateSection({super.key});
-
+  const SelectDateSection({super.key, this.value});
+  final String? value;
   @override
   State<SelectDateSection> createState() => _SelectDateSectionState();
 }
 
 class _SelectDateSectionState extends State<SelectDateSection> {
   String? selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDate = widget.value;
+  }
 
   @override
   Widget build(BuildContext context) {

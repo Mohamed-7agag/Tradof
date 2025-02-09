@@ -25,7 +25,7 @@ showLanguagePairDialog(BuildContext context) {
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Column(
         children: [
-          LanguagePairDropDown(
+          LanguageDropDown(
             hint: 'From',
             items: languages,
             onChanged: (value) {
@@ -33,7 +33,7 @@ showLanguagePairDialog(BuildContext context) {
             },
           ),
           verticalSpace(12),
-          LanguagePairDropDown(
+          LanguageDropDown(
             hint: 'To',
             items: languages,
             onChanged: (value) {

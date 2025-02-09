@@ -36,9 +36,7 @@ class _CountryDropDownState extends State<CountryDropDown> {
   @override
   void initState() {
     super.initState();
-    if (widget.value != null) {
-      selectedCountry = widget.value;
-    }
+    selectedCountry = widget.value;
   }
 
   @override

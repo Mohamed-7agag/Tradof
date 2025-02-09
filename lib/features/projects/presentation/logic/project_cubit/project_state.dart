@@ -2,21 +2,21 @@ part of 'project_cubit.dart';
 
 enum ProjectStatus {
   initial,
-  loading,
-  success,
-  error,
+  createProjectLoading,
+  createProjectSuccess,
+  createProjectFailure,
 }
 
 extension ProjectStatusX on ProjectStatus {
-  bool get isLoading => this == ProjectStatus.loading;
-  bool get isSuccess => this == ProjectStatus.success;
-  bool get isError => this == ProjectStatus.error;
+  bool get isCreateProjectLoading => this == ProjectStatus.createProjectLoading;
+  bool get isCreateProjectSuccess => this == ProjectStatus.createProjectSuccess;
+  bool get isCreateProjectFailure => this == ProjectStatus.createProjectFailure;
 }
 
 class ProjectState extends Equatable {
   final ProjectStatus status;
-  final String? message;
-  final String? errorMessage;
+  final String message;
+  final String errorMessage;
   final LanguageModel? fromLanguage;
   final LanguageModel? toLanguage;
   final int? days;
@@ -24,8 +24,8 @@ class ProjectState extends Equatable {
 
   const ProjectState({
     this.status = ProjectStatus.initial,
-    this.message,
-    this.errorMessage,
+    this.message = '',
+    this.errorMessage = '',
     this.fromLanguage,
     this.toLanguage,
     this.days,

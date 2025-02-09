@@ -12,8 +12,10 @@ class CreateProjectIndustriesSection extends StatefulWidget {
   const CreateProjectIndustriesSection({
     super.key,
     required this.companyModel,
+    this.value,
   });
   final CompanyModel companyModel;
+  final SpecializationModel? value;
 
   @override
   State<CreateProjectIndustriesSection> createState() =>
@@ -23,6 +25,13 @@ class CreateProjectIndustriesSection extends StatefulWidget {
 class _CreateProjectIndustriesSectionState
     extends State<CreateProjectIndustriesSection> {
   SpecializationModel? selectedIndustries;
+
+  @override
+  void initState() {
+    selectedIndustries = widget.value;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

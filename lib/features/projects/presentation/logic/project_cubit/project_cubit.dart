@@ -24,7 +24,7 @@ class ProjectCubit extends Cubit<ProjectState> {
     int maxBudget,
     List<PlatformFile> files,
   ) async {
-    emit(state.copyWith(status: ProjectStatus.loading));
+    emit(state.copyWith(status: ProjectStatus.createProjectLoading));
 
     Future<List<MultipartFile>> prepareFiles() {
       final convertedFiles =
@@ -49,11 +49,11 @@ class ProjectCubit extends Cubit<ProjectState> {
     final result = await _projectRepo.createProject(model);
     result.fold(
       (failure) => emit(state.copyWith(
-        status: ProjectStatus.error,
+        status: ProjectStatus.createProjectFailure,
         errorMessage: failure.errMessage,
       )),
       (message) => emit(state.copyWith(
-        status: ProjectStatus.success,
+        status: ProjectStatus.createProjectSuccess,
         message: message,
       )),
     );

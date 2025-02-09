@@ -12,6 +12,7 @@ class ProjectTextField extends StatelessWidget {
     required this.controller,
     this.labelColor,
     this.maxLines = 1,
+    this.readOnly = false,
   });
 
   final String labelText;
@@ -19,6 +20,7 @@ class ProjectTextField extends StatelessWidget {
   final TextEditingController controller;
   final Color? labelColor;
   final int maxLines;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class ProjectTextField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
+      readOnly: readOnly,
       style: AppStyle.robotoRegular15.copyWith(color: labelColor),
       validator: (value) {
         if (value!.trim().isNullOrEmpty()) {
@@ -36,16 +39,14 @@ class ProjectTextField extends StatelessWidget {
         return null;
       },
       decoration: InputDecoration(
-        border: _buildBorder(),
-        enabledBorder: _buildBorder(),
-        focusedErrorBorder: _buildBorder(),
-        focusedBorder:
-            _buildBorder(color: labelColor ?? AppColors.darkGrey),
-        errorBorder: _buildBorder(color: Colors.red),
-        labelText: labelText,
-        floatingLabelStyle: TextStyle(color: AppColors.darkGrey),
-        floatingLabelBehavior: FloatingLabelBehavior.always
-      ),
+          border: _buildBorder(),
+          enabledBorder: _buildBorder(),
+          focusedErrorBorder: _buildBorder(),
+          focusedBorder: _buildBorder(color: labelColor ?? AppColors.darkGrey),
+          errorBorder: _buildBorder(color: Colors.red),
+          labelText: labelText,
+          floatingLabelStyle: TextStyle(color: AppColors.darkGrey),
+          floatingLabelBehavior: FloatingLabelBehavior.always),
     );
   }
 

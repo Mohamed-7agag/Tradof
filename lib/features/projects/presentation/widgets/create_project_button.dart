@@ -4,6 +4,7 @@ import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 import 'package:tradof/features/projects/presentation/logic/file_cubit.dart';
 
 import '../../../../core/utils/widgets/custom_button.dart';
+import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
 class CreateProjectButton extends StatelessWidget {
@@ -21,13 +22,35 @@ class CreateProjectButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomButton(
-      text: 'Create Project',
-      onPressed: () {
-        FocusManager.instance.primaryFocus?.unfocus();
-        _validateAndCreateProject(context);
+    return BlocConsumer<ProjectCubit, ProjectState>(
+      listener: (context, state) {
+        if (state.status == ProjectStatus.createProjectSuccess) {
+          successToast(context, 'Success', state.message);
+          _resetData(context);
+        } else if (state.status == ProjectStatus.createProjectFailure) {
+          errorToast(context, 'Error', state.errorMessage);
+        }
+      },
+      builder: (context, state) {
+        return state.status == ProjectStatus.createProjectLoading
+            ? const CustomLoadingWidget()
+            : CustomButton(
+                text: 'Create Project',
+                onPressed: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  _validateAndCreateProject(context);
+                },
+              );
       },
     );
+  }
+
+  void _resetData(BuildContext context) {
+    projectNameController.clear();
+    projectDescriptionController.clear();
+    minBudgetController.clear();
+    maxBudgetController.clear();
+    context.read<FileCubit>().resetFiles();
   }
 
   void _validateAndCreateProject(BuildContext context) {

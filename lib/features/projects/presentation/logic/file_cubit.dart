@@ -1,5 +1,5 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FileCubit extends Cubit<List<PlatformFile>> {
   FileCubit() : super([]);
@@ -7,6 +7,8 @@ class FileCubit extends Cubit<List<PlatformFile>> {
   void addFiles(List<PlatformFile> files) {
     emit([...state, ...files]);
   }
+
+  void resetFiles() => emit([]);
 
   void removeFile(int index) {
     final updatedFiles = List<PlatformFile>.from(state);

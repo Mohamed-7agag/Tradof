@@ -5,27 +5,36 @@ import 'package:tradof/features/auth/data/model/language_model.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 
-class LanguagePairDropDown extends StatefulWidget {
-  const LanguagePairDropDown({
+class LanguageDropDown extends StatefulWidget {
+  const LanguageDropDown({
     super.key,
     required this.hint,
     required this.items,
     this.onChanged,
     this.borderColor,
     this.hintColor,
+    this.value,
   });
   final String hint;
   final List<LanguageModel> items;
   final void Function(LanguageModel?)? onChanged;
   final Color? borderColor;
   final Color? hintColor;
+  final LanguageModel? value;
 
   @override
-  State<LanguagePairDropDown> createState() => _LanguagePairDropDownState();
+  State<LanguageDropDown> createState() => _LanguageDropDownState();
 }
 
-class _LanguagePairDropDownState extends State<LanguagePairDropDown> {
+class _LanguageDropDownState extends State<LanguageDropDown> {
   LanguageModel? selectedLanguage;
+  
+  @override
+  void initState() {
+    super.initState();
+    selectedLanguage = widget.value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
