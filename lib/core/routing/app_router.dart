@@ -11,7 +11,7 @@ import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/verification_view.dart';
-import '../../features/company/bottom_nav_bar/presentation/views/company_bottom_nav_bar_view.dart';
+import '../../features/company/company_bottom_nav_bar_view.dart';
 import '../../features/company/company_profile/data/model/company_model.dart';
 import '../../features/company/company_profile/data/model/social_media_model.dart';
 import '../../features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';

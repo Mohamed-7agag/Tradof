@@ -2,8 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
+import '../../../company_profile/data/model/company_model.dart';
 import '../widgets/company_setting_app_bar.dart';
 import '../widgets/delete_account_and_logout_section.dart';
 import '../widgets/setting_profile_info_section.dart';

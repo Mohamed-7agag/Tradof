@@ -6,7 +6,6 @@ import '../utils/app_constants.dart';
 import 'end_points.dart';
 
 class DioFactory {
-  /// private constructor as I don't want to allow creating an instance of this class
   DioFactory._();
 
   static Dio? dio;
@@ -32,16 +31,12 @@ class DioFactory {
     final userToken = await CacheHelper.getSecuredString(AppConstants.token);
     dio?.options.headers = {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
       'Authorization': 'Bearer $userToken',
     };
   }
 
-  static void setTokenIntoHeaderAfterLogin(String token) async {
-    await CacheHelper.setSecuredString(AppConstants.token, token);
-    dio?.options.headers = {
-      'Authorization': 'Bearer $token',
-    };
+  static void setTokenIntoHeaderAfterLogin(String token) {
+    dio?.options.headers = {'Authorization': 'Bearer $token'};
   }
 
   static void addDioInterceptor() {

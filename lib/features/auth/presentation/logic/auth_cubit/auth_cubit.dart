@@ -5,6 +5,7 @@ import 'package:tradof/features/auth/data/model/login_response_model.dart';
 import 'package:tradof/features/auth/data/model/reset_password_request_model.dart';
 import 'package:tradof/features/auth/data/repo/auth_repo.dart';
 
+import '../../../../../core/api/dio_factory.dart';
 import '../../../../../core/utils/app_constants.dart';
 
 part 'auth_state.dart';
@@ -23,8 +24,8 @@ class AuthCubit extends Cubit<AuthState> {
         status: AuthStatus.error,
         errorMessage: failure.errMessage,
       ));
-    }, (response) {
-      _cacheUserData(response);
+    }, (response) async {
+      await _cacheUserData(response);
       emit(state.copyWith(status: AuthStatus.login));
     });
   }
@@ -91,9 +92,10 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
 //! Helpers
-  void _cacheUserData(LoginResponseModel response) {
-    CacheHelper.setSecuredString(AppConstants.userId, response.userId);
-    CacheHelper.setSecuredString(AppConstants.token, response.token);
+  Future<void> _cacheUserData(LoginResponseModel response) async {
+    await CacheHelper.setSecuredString(AppConstants.userId, response.userId);
+    await CacheHelper.setSecuredString(AppConstants.token, response.token);
     CacheHelper.setData(key: AppConstants.role, value: response.role);
+    DioFactory.setTokenIntoHeaderAfterLogin(response.token);
   }
 }

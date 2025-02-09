@@ -2,6 +2,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tradof/core/cache/cache_helper.dart';
+import 'package:tradof/core/helpers/extensions.dart';
+import 'package:tradof/core/routing/routes.dart';
+import 'package:tradof/core/utils/app_constants.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
@@ -48,24 +52,31 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
           child: SlideInRight(
             from: 400,
             delay: Duration(milliseconds: 550),
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w)
-                  .copyWith(right: 20.w),
-              decoration: BoxDecoration(
-                color: AppColors.cardColor,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Logout',
-                    style: AppStyle.robotoCondensedMedium15.copyWith(
-                      fontWeight: FontWeight.bold,
+            child: InkWell(
+              onTap: () {
+                CacheHelper.clearAllSecuredData();
+                CacheHelper.removeData(key: AppConstants.role);
+                context.goNamed(Routes.loginViewRoute);
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w)
+                    .copyWith(right: 20.w),
+                decoration: BoxDecoration(
+                  color: AppColors.cardColor,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Logout',
+                      style: AppStyle.robotoCondensedMedium15.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  SvgPicture.asset('assets/images/logout.svg'),
-                ],
+                    SvgPicture.asset('assets/images/logout.svg'),
+                  ],
+                ),
               ),
             ),
           ),
