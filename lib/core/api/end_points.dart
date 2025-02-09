@@ -8,6 +8,7 @@ abstract class EndPoint {
   static const String verifyOtp = 'auth/verify-otp';
   static const String resetPassword = 'auth/change-password';
   static const String getCountries = 'country';
+  static const String refreshToken = 'auth/refresh-token';
   static const String getLanguages = 'language';
   static const String getSpecializations = 'specialization';
   static const String updateCompanyProfile = 'Company/UpdateCompany';

@@ -95,6 +95,8 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> _cacheUserData(LoginResponseModel response) async {
     await CacheHelper.setSecuredString(AppConstants.userId, response.userId);
     await CacheHelper.setSecuredString(AppConstants.token, response.token);
+    await CacheHelper.setSecuredString(
+        AppConstants.refreshToken, response.refreshToken);
     CacheHelper.setData(key: AppConstants.role, value: response.role);
     DioFactory.setTokenIntoHeaderAfterLogin(response.token);
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 
 class NavigationHandler {
   NavigationHandler._privateConstructor();
@@ -12,4 +13,6 @@ class NavigationHandler {
       GlobalKey<NavigatorState>();
 
   BuildContext? get context => navigatorKey.currentContext;
+
+  void goToLoginView() => navigatorKey.currentContext!.goNamed('/login');
 }
