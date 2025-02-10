@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 
-class AllProjectsSection extends StatelessWidget {
-  const AllProjectsSection({super.key});
+class UpcomingProjectsSection extends StatelessWidget {
+  const UpcomingProjectsSection({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -53,7 +53,7 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
         child: Column(
           children: [
             CustomTextField(
-              labelText: 'Search...',
+              labelText: 'Search',
               controller: _searchController,
               outlineBorder: true,
               labelColor: AppColors.white,

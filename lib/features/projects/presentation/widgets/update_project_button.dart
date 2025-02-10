@@ -9,16 +9,18 @@ class UpdateProjectButton extends StatelessWidget {
     required this.projectDescriptionController,
     required this.minBudgetController,
     required this.maxBudgetController,
+    required this.daysController,
   });
   final TextEditingController projectNameController;
   final TextEditingController projectDescriptionController;
   final TextEditingController minBudgetController;
   final TextEditingController maxBudgetController;
+  final TextEditingController daysController;
 
   @override
   Widget build(BuildContext context) {
     return CustomButton(
-      text: 'Update',
+      text: 'Update Project',
       onPressed: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },

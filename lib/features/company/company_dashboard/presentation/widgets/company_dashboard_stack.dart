@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 
-import 'all_projects_section.dart';
-import 'current_projects_section.dart';
+import 'started_projects_section.dart';
 import 'switcher_widget.dart';
+import 'upcoming_projects_section.dart';
 
 class CompanyDashboardStack extends StatefulWidget {
   const CompanyDashboardStack({super.key});
@@ -25,8 +25,8 @@ class _CompanyDashboardStackState extends State<CompanyDashboardStack> {
           margin: EdgeInsets.only(top: 32.5),
           decoration: _decoration(),
           child: currentIndex == 0
-              ? CurrentProjectsSection()
-              : AllProjectsSection(),
+              ? StartedProjectsSection()
+              : UpcomingProjectsSection(),
         ),
         Positioned(
           top: 0,

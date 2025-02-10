@@ -40,23 +40,29 @@ class _CreateProjectIndustriesSectionState
       },
       borderRadius: BorderRadius.circular(12),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 17.h),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         width: 1.sw,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: AppColors.grey),
         ),
-        child: Text(
-          selectedIndustries != null
-              ? selectedIndustries!.name
-              : 'Choose Industries Served',
-          style: selectedIndustries == null
-              ? AppStyle.robotoRegular12.copyWith(
-                  color: AppColors.darkGrey,
-                )
-              : AppStyle.robotoRegular14.copyWith(
-                  color: AppColors.darkGrey,
-                ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              selectedIndustries != null
+                  ? selectedIndustries!.name
+                  : 'Choose Industries Served',
+              style: selectedIndustries == null
+                  ? AppStyle.robotoRegular12.copyWith(
+                      color: AppColors.darkGrey,
+                    )
+                  : AppStyle.robotoRegular14.copyWith(
+                      color: AppColors.darkGrey,
+                    ),
+            ),
+            Icon(Icons.arrow_drop_down,color: AppColors.grey),
+          ],
         ),
       ),
     );

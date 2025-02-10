@@ -12,7 +12,6 @@ import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
 
 import '../../core/di/di.dart';
-import '../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../core/utils/widgets/custom_loading_widget.dart';
 import '../projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../projects/presentation/views/create_project_view.dart';
@@ -35,13 +34,8 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
   List<Widget> _buildIndexedStackChildren(CompanyProfileState state) {
     return [
       CompanyDashboardView(companyModel: state.companyModel!),
-      MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => ProjectCubit(getIt())),
-          BlocProvider(
-            create: (context) => MetaDataCubit(getIt())..getLanguages(),
-          ),
-        ],
+      BlocProvider(
+        create: (context) => ProjectCubit(getIt()),
         child: CreateProjectView(companyModel: state.companyModel!),
       ),
       ProfileCompanyView(companyModel: state.companyModel!),
