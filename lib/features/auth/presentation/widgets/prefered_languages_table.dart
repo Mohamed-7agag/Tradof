@@ -5,10 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
-import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 
 import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
+import '../../../../core/utils/widgets/language_selection_dialog.dart';
 import '../logic/tables_cubit/tables_cubit.dart';
 
 class PreferedLanguagesTable extends StatelessWidget {
@@ -56,10 +55,12 @@ class PreferedLanguagesTable extends StatelessWidget {
                     ),
                   ),
                   DataColumn(
-                    label: Text(
-                      'IEFT tag',
-                      style: AppStyle.poppinsSemiBold14.copyWith(
-                        color: darkColors ? AppColors.black : AppColors.white,
+                    label: Expanded(
+                      child: Text(
+                        'IEFT tag',
+                        style: AppStyle.poppinsSemiBold14.copyWith(
+                          color: darkColors ? AppColors.black : AppColors.white,
+                        ),
                       ),
                     ),
                   )
@@ -78,12 +79,14 @@ class PreferedLanguagesTable extends StatelessWidget {
                                 },
                                 child: Icon(Icons.cancel, color: Colors.red)),
                             horizontalSpace(6),
-                            Text(
-                              language.languageName,
-                              style: AppStyle.robotoRegular12.copyWith(
-                                color: darkColors
-                                    ? AppColors.black
-                                    : AppColors.white,
+                            Expanded(
+                              child: Text(
+                                '${language.languageName} (${language.countryName})',
+                                style: AppStyle.robotoRegular12.copyWith(
+                                  color: darkColors
+                                      ? AppColors.black
+                                      : AppColors.white,
+                                ),
                               ),
                             ),
                           ],
@@ -91,7 +94,7 @@ class PreferedLanguagesTable extends StatelessWidget {
                       ),
                       DataCell(
                         Text(
-                          language.languageCode,
+                          '${language.languageCode} (${language.countryCode})',
                           style: AppStyle.robotoRegular12.copyWith(
                             color:
                                 darkColors ? AppColors.black : AppColors.white,
@@ -125,6 +128,7 @@ class PreferedLanguagesTable extends StatelessWidget {
   _showPreferedLanguageDialog(BuildContext context) {
     final cubit = context.read<TablesCubit>();
     final metaDataCubit = context.read<MetaDataCubit>();
+
     showDialog(
       context: context,
       builder: (context) {
@@ -133,58 +137,7 @@ class PreferedLanguagesTable extends StatelessWidget {
             BlocProvider.value(value: cubit),
             BlocProvider.value(value: metaDataCubit..getLanguages()),
           ],
-          child: AlertDialog(
-            title: Text(
-              'Select Language',
-              style: AppStyle.poppinsBold22.copyWith(color: Colors.white),
-            ),
-            backgroundColor: AppColors.darkGrey,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
-            content: SizedBox(
-              width: 0.9.sw,
-              height: 0.7.sh,
-              child: BlocBuilder<MetaDataCubit, MetaDataState>(
-                buildWhen: (previous, current) =>
-                    previous.languages != current.languages,
-                builder: (context, state) {
-                  if (state.status.isLoading) {
-                    return const CustomLoadingWidget(color: AppColors.white);
-                  } else if (state.status.isError) {
-                    return CustomFailureWidget(
-                      text: state.errorMessage,
-                      textColor: AppColors.white,
-                    );
-                  }
-                  return ListView.separated(
-                    itemCount: state.languages.length,
-                    separatorBuilder: (BuildContext context, int index) =>
-                        Divider(color: Colors.white10, height: 0),
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        title: Text(
-                          '${state.languages[index].languageName} (${state.languages[index].languageCode})',
-                          style: AppStyle.robotoRegular15
-                              .copyWith(color: Colors.white),
-                        ),
-                        onTap: () {
-                          context.read<TablesCubit>().addPreferedLanguage(
-                                state.languages[index],
-                              );
-                          Navigator.pop(context);
-                        },
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
+          child: LanguageSelectionDialog(),
         );
       },
     );

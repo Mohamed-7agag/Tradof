@@ -9,7 +9,7 @@ import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../../data/model/language_pair_model.dart';
 import '../logic/tables_cubit/tables_cubit.dart';
-import 'language_pair_drop_down.dart';
+import 'language_drop_down.dart';
 
 showLanguagePairDialog(BuildContext context) {
   final cubit = context.read<TablesCubit>();

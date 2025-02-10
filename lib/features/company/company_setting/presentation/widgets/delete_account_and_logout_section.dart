@@ -1,15 +1,16 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tradof/core/cache/cache_helper.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/routing/routes.dart';
-import 'package:tradof/core/utils/app_constants.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../../core/cache/cache_helper.dart';
 import '../../../../../core/helpers/spacing.dart';
+import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
+import '../../../../../core/utils/app_constants.dart';
 
 class DeleteAccountAndLogoutSection extends StatelessWidget {
   const DeleteAccountAndLogoutSection({super.key});
@@ -54,10 +55,9 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
             delay: Duration(milliseconds: 550),
             child: InkWell(
               onTap: () {
-                CacheHelper.clearAllSecuredData();
-                CacheHelper.removeData(key: AppConstants.role);
-                context.goNamed(Routes.loginViewRoute);
+                _showLogoutDialog(context);
               },
+              borderRadius: BorderRadius.circular(15),
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w)
                     .copyWith(right: 20.w),
@@ -83,5 +83,25 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _showLogoutDialog(BuildContext context) async {
+    AwesomeDialog(
+      context: context,
+      animType: AnimType.rightSlide,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      dialogType: DialogType.question,
+      body: Text(
+        'Are you sure you want to logout ?',
+        textAlign: TextAlign.center,
+        style: AppStyle.robotoRegular14.copyWith(height: 1.8),
+      ),
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {
+        CacheHelper.clearAllSecuredData();
+        CacheHelper.removeData(key: AppConstants.role);
+        context.goNamed(Routes.loginViewRoute);
+      },
+    ).show();
   }
 }

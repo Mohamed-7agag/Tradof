@@ -6,14 +6,20 @@ import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 
-class SwitcherWidget extends StatelessWidget {
-  const SwitcherWidget({super.key});
+class SwitcherWidget extends StatefulWidget {
+  const SwitcherWidget({super.key, required this.onSwitch});
+  final void Function(int index) onSwitch;
+  @override
+  State<SwitcherWidget> createState() => _SwitcherWidgetState();
+}
 
+class _SwitcherWidgetState extends State<SwitcherWidget> {
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 13),
-      width: 0.86.sw,
+      width: 0.85.sw,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
@@ -27,27 +33,49 @@ class SwitcherWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Column(
-            children: [
-              SvgPicture.asset(
-                'assets/images/category_color.svg',
-              ),
-              verticalSpace(3),
-              Text(
-                'Current project',
-                style: AppStyle.robotoSemiBold10,
-              ),
-            ],
+          GestureDetector(
+            onTap: () {
+              if (index != 0) {
+                setState(() => index = 0);
+                widget.onSwitch(index);
+              }
+            },
+            child: Column(
+              children: [
+                SvgPicture.asset(
+                  index == 0
+                      ? 'assets/images/category_color.svg'
+                      : 'assets/images/category.svg',
+                ),
+                verticalSpace(3),
+                Text(
+                  'Started project',
+                  style: AppStyle.robotoSemiBold10,
+                ),
+              ],
+            ),
           ),
-          Column(
-            children: [
-              SvgPicture.asset('assets/images/save.svg'),
-              verticalSpace(3),
-              Text(
-                'All project',
-                style: AppStyle.robotoSemiBold10,
-              ),
-            ],
+          InkWell(
+            onTap: () {
+              if (index != 1) {
+                setState(() => index = 1);
+                widget.onSwitch(index);
+              }
+            },
+            child: Column(
+              children: [
+                SvgPicture.asset(
+                  index == 1
+                      ? 'assets/images/save_color.svg'
+                      : 'assets/images/save.svg',
+                ),
+                verticalSpace(3),
+                Text(
+                  'Upcoming project',
+                  style: AppStyle.robotoSemiBold10,
+                ),
+              ],
+            ),
           ),
         ],
       ),

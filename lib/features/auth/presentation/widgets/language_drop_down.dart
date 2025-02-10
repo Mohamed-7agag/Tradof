@@ -28,7 +28,7 @@ class LanguageDropDown extends StatefulWidget {
 
 class _LanguageDropDownState extends State<LanguageDropDown> {
   LanguageModel? selectedLanguage;
-  
+
   @override
   void initState() {
     super.initState();
@@ -48,10 +48,12 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
         dropdownColor:
             widget.borderColor != null ? AppColors.white : AppColors.darkGrey,
         isExpanded: true,
-        menuWidth: 1.sw - 70,
+        menuWidth: 1.sw - 60,
+        menuMaxHeight: 0.8.sh,
         underline: SizedBox.shrink(),
         elevation: 4,
         value: selectedLanguage,
+        borderRadius: BorderRadius.circular(12),
         hint: Text(
           widget.hint,
           style: AppStyle.robotoRegular14

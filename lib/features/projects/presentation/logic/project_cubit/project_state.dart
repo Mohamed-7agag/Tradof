@@ -19,7 +19,6 @@ class ProjectState extends Equatable {
   final String errorMessage;
   final LanguageModel? fromLanguage;
   final LanguageModel? toLanguage;
-  final int? days;
   final int? industryId;
 
   const ProjectState({
@@ -28,7 +27,6 @@ class ProjectState extends Equatable {
     this.errorMessage = '',
     this.fromLanguage,
     this.toLanguage,
-    this.days,
     this.industryId,
   });
 
@@ -38,7 +36,6 @@ class ProjectState extends Equatable {
     String? errorMessage,
     LanguageModel? fromLanguage,
     LanguageModel? toLanguage,
-    int? days,
     int? industryId,
   }) {
     return ProjectState(
@@ -47,7 +44,6 @@ class ProjectState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
       fromLanguage: fromLanguage ?? this.fromLanguage,
       toLanguage: toLanguage ?? this.toLanguage,
-      days: days ?? this.days,
       industryId: industryId ?? this.industryId,
     );
   }
@@ -59,7 +55,6 @@ class ProjectState extends Equatable {
         errorMessage,
         fromLanguage,
         toLanguage,
-        days,
         industryId,
       ];
 }

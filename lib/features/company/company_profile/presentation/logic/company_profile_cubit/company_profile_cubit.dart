@@ -137,11 +137,12 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
           (_) => {},
         );
       }
-
-      emit(state.copyWith(
-        status: CompanyProfileStatus.preferedLanguagesSuccess,
-        message: 'Preferred languages updated successfully',
-      ));
+      if (!state.status.isPreferedLanguagesFailure) {
+        emit(state.copyWith(
+          status: CompanyProfileStatus.preferedLanguagesSuccess,
+          message: 'Preferred languages updated successfully',
+        ));
+      }
     } catch (e) {
       emit(
         state.copyWith(
@@ -189,10 +190,12 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
         );
       }
 
-      emit(state.copyWith(
-        status: CompanyProfileStatus.industriesServedSuccess,
-        message: 'Industries served updated successfully',
-      ));
+      if (!state.status.isIndustriesServedFailure) {
+        emit(state.copyWith(
+          status: CompanyProfileStatus.industriesServedSuccess,
+          message: 'Industries served updated successfully',
+        ));
+      }
     } catch (e) {
       emit(
         state.copyWith(

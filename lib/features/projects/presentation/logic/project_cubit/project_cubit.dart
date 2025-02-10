@@ -22,6 +22,7 @@ class ProjectCubit extends Cubit<ProjectState> {
     String projectDescription,
     int minBudget,
     int maxBudget,
+    int days,
     List<PlatformFile> files,
   ) async {
     emit(state.copyWith(status: ProjectStatus.createProjectLoading));
@@ -39,7 +40,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       description: projectDescription,
       minPrice: minBudget,
       maxPrice: maxBudget,
-      days: state.days!,
+      days: days,
       fromLanguageId: state.fromLanguage!.id,
       toLanguageId: state.toLanguage!.id,
       specializationId: state.industryId!,
@@ -68,7 +69,6 @@ class ProjectCubit extends Cubit<ProjectState> {
     emit(state.copyWith(
       fromLanguage: fromLanguage,
       toLanguage: toLanguage,
-      days: days,
       industryId: industryId,
     ));
   }

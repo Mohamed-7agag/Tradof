@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/company/company_dashboard/presentation/widgets/switcher_widget.dart';
 import 'package:tradof/features/freelancer/dashbord/presentation/widgets/charts_completed.dart';
 
 class FreelanceDashbordView extends StatelessWidget {
@@ -32,10 +31,10 @@ class FreelanceDashbordView extends StatelessWidget {
                   clipBehavior: Clip.none,
                   alignment: Alignment.topCenter,
                   children: [
-                    Positioned(
-                      top: -32.5,
-                      child: SwitcherWidget(),
-                    ),
+                    // Positioned(
+                    //   top: -32.5,
+                    //   child: SwitcherWidget(),
+                    // ),
                     Column(
                       children: [
                         verticalSpace(50),

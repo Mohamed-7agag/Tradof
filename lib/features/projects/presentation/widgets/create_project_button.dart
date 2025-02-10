@@ -14,11 +14,13 @@ class CreateProjectButton extends StatelessWidget {
     required this.projectDescriptionController,
     required this.minBudgetController,
     required this.maxBudgetController,
+    required this.daysController,
   });
   final TextEditingController projectNameController;
   final TextEditingController projectDescriptionController;
   final TextEditingController minBudgetController;
   final TextEditingController maxBudgetController;
+  final TextEditingController daysController;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +59,9 @@ class CreateProjectButton extends StatelessWidget {
     final files = context.read<FileCubit>().getFiles();
     final projectName = projectNameController.text.trim();
     final projectDescription = projectDescriptionController.text.trim();
+    final days = daysController.text.trim() == ''
+        ? 0
+        : int.parse(daysController.text.trim());
     final minBudget = minBudgetController.text.trim() == ''
         ? 0
         : int.parse(minBudgetController.text.trim());
@@ -67,7 +72,8 @@ class CreateProjectButton extends StatelessWidget {
     if (projectName.isEmpty ||
         projectDescription.isEmpty ||
         minBudgetController.text.isEmpty ||
-        maxBudgetController.text.isEmpty) {
+        maxBudgetController.text.isEmpty ||
+        daysController.text.isEmpty) {
       errorToast(context, 'Error', 'Please fill in all fields');
     } else if (minBudget > maxBudget) {
       errorToast(
@@ -80,8 +86,6 @@ class CreateProjectButton extends StatelessWidget {
       errorToast(context, 'Error', 'Please select different languages');
     } else if (context.read<ProjectCubit>().state.industryId == null) {
       errorToast(context, 'Error', 'Please select an industry Served');
-    } else if (context.read<ProjectCubit>().state.days == null) {
-      errorToast(context, 'Error', 'Please select a delivery date');
     } else if (files.isEmpty) {
       errorToast(context, 'Error', 'Please select at least one file');
     } else {
@@ -90,6 +94,7 @@ class CreateProjectButton extends StatelessWidget {
             projectDescription,
             minBudget,
             maxBudget,
+            days,
             files,
           );
     }

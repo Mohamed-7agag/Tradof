@@ -6,7 +6,7 @@ import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
-import '../../../auth/presentation/widgets/language_pair_drop_down.dart';
+import '../../../auth/presentation/widgets/language_drop_down.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
 class UpdateProjectLanguagePair extends StatelessWidget {

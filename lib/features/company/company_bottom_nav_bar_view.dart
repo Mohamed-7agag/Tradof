@@ -1,9 +1,12 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
+import 'package:tradof/core/helpers/exit_dialog.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
@@ -49,98 +52,101 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
-        builder: (context, state) {
-          if (state.status.isGetCompanySuccess) {
-            return LazyLoadIndexedStack(
-              index: currentIndex,
-              children: _buildIndexedStackChildren(state),
-            );
-          } else if (state.status.isGetCompanyFailure) {
-            return _buildFailureWidget(
-              context,
-              currentIndex,
-              state.errorMessage,
-            );
-          }
-          return const CustomLoadingWidget();
-        },
-      ),
-      bottomNavigationBar: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.topCenter,
-        children: [
-          ClipPath(
-            clipper: CustomNavBarClipper(),
-            child: Container(
-              height: 85,
-              color: AppColors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SlideInLeft(
-                    from: 400,
-                    delay: Duration(milliseconds: 350),
-                    child: _buildNavItem(
-                      'assets/images/home_off.png',
-                      'assets/images/home_on.png',
-                      0,
+    return WillPopScope(
+      onWillPop: () => exitDialog(context),
+      child: Scaffold(
+        body: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
+          builder: (context, state) {
+            if (state.status.isGetCompanySuccess) {
+              return LazyLoadIndexedStack(
+                index: currentIndex,
+                children: _buildIndexedStackChildren(state),
+              );
+            } else if (state.status.isGetCompanyFailure) {
+              return _buildFailureWidget(
+                context,
+                currentIndex,
+                state.errorMessage,
+              );
+            }
+            return const CustomLoadingWidget();
+          },
+        ),
+        bottomNavigationBar: Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.topCenter,
+          children: [
+            ClipPath(
+              clipper: CustomNavBarClipper(),
+              child: Container(
+                height: 85,
+                color: AppColors.white,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SlideInLeft(
+                      from: 400,
+                      delay: Duration(milliseconds: 350),
+                      child: _buildNavItem(
+                        'assets/images/home2_off.png',
+                        'assets/images/home2_on.png',
+                        0,
+                      ),
                     ),
-                  ),
-                  SlideInLeft(
-                    from: 400,
-                    child: _buildNavItem(
-                      'assets/images/add_project_off.png',
-                      'assets/images/add_project_on.png',
-                      1,
+                    SlideInLeft(
+                      from: 400,
+                      child: _buildNavItem(
+                        'assets/images/add_project_off.png',
+                        'assets/images/add_project_on.png',
+                        1,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 40.w),
-                  SlideInRight(
-                    from: 400,
-                    child: _buildNavItem(
-                      'assets/images/wallet_off.png',
-                      'assets/images/wallet_on.png',
-                      3,
+                    SizedBox(width: 40.w),
+                    SlideInRight(
+                      from: 400,
+                      child: _buildNavItem(
+                        'assets/images/wallet_off.png',
+                        'assets/images/wallet_on.png',
+                        3,
+                      ),
                     ),
-                  ),
-                  SlideInRight(
-                    from: 400,
-                    delay: Duration(milliseconds: 350),
-                    child: _buildNavItem(
-                      'assets/images/setting_off.png',
-                      'assets/images/setting_on.png',
-                      4,
+                    SlideInRight(
+                      from: 400,
+                      delay: Duration(milliseconds: 350),
+                      child: _buildNavItem(
+                        'assets/images/setting_off.png',
+                        'assets/images/setting_on.png',
+                        4,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: -20,
-            child: BounceInUp(
-              child: GestureDetector(
-                onTap: () {
-                  if (currentIndex != 2) {
-                    setState(() => currentIndex = 2);
-                  }
-                },
-                child: Container(
-                  width: 60,
-                  height: 60,
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: SvgPicture.asset('assets/images/user.svg'),
+                  ],
                 ),
               ),
             ),
-          ),
-        ],
+            Positioned(
+              top: -20,
+              child: BounceInUp(
+                child: GestureDetector(
+                  onTap: () {
+                    if (currentIndex != 2) {
+                      setState(() => currentIndex = 2);
+                    }
+                  },
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      shape: BoxShape.circle,
+                    ),
+                    child: SvgPicture.asset('assets/images/user.svg'),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -14,7 +14,6 @@ import '../widgets/create_project_button.dart';
 import '../widgets/create_project_industries_section.dart';
 import '../widgets/create_project_language_pair.dart';
 import '../widgets/project_text_field.dart';
-import '../widgets/select_date_section.dart';
 
 class CreateProjectView extends StatefulWidget {
   const CreateProjectView({super.key, required this.companyModel});
@@ -28,6 +27,7 @@ class _CreateProjectViewState extends State<CreateProjectView> {
   late final TextEditingController projectDescriptionController;
   late final TextEditingController minBudgetController;
   late final TextEditingController maxBudgetController;
+  late final TextEditingController daysController;
 
   @override
   void initState() {
@@ -35,6 +35,7 @@ class _CreateProjectViewState extends State<CreateProjectView> {
     projectDescriptionController = TextEditingController();
     minBudgetController = TextEditingController();
     maxBudgetController = TextEditingController();
+    daysController = TextEditingController();
     super.initState();
   }
 
@@ -44,6 +45,7 @@ class _CreateProjectViewState extends State<CreateProjectView> {
     projectDescriptionController.dispose();
     minBudgetController.dispose();
     maxBudgetController.dispose();
+    daysController.dispose();
     super.dispose();
   }
 
@@ -70,17 +72,19 @@ class _CreateProjectViewState extends State<CreateProjectView> {
                         labelText: 'Project Name',
                         controller: projectNameController,
                       ),
-                      verticalSpace(22),
+                      verticalSpace(25),
                       ProjectTextField(
                         labelText: 'Project Description',
                         controller: projectDescriptionController,
                         maxLines: 4,
                       ),
-                      verticalSpace(22),
+                      verticalSpace(20),
                       Text('Language Pair', style: AppStyle.poppinsMedium14),
                       verticalSpace(12),
-                      CreateProjectLanguagePair(),
-                      verticalSpace(30),
+                      CreateProjectLanguagePair(
+                        companyModel: widget.companyModel,
+                      ),
+                      verticalSpace(25),
                       CreateProjectIndustriesSection(
                         companyModel: widget.companyModel,
                       ),
@@ -104,11 +108,13 @@ class _CreateProjectViewState extends State<CreateProjectView> {
                           ),
                         ],
                       ),
-                      verticalSpace(20),
-                      Text('Delivery Date', style: AppStyle.poppinsMedium14),
-                      verticalSpace(12),
-                      SelectDateSection(),
-                      verticalSpace(20),
+                      verticalSpace(25),
+                      ProjectTextField(
+                        labelText: 'Delivery Time (Days)',
+                        controller: daysController,
+                        keyboardType: TextInputType.number,
+                      ),
+                      verticalSpace(25),
                       Text(
                         'Attachments Files',
                         style: AppStyle.poppinsMedium14,
@@ -122,6 +128,7 @@ class _CreateProjectViewState extends State<CreateProjectView> {
                             projectDescriptionController,
                         minBudgetController: minBudgetController,
                         maxBudgetController: maxBudgetController,
+                        daysController: daysController,
                       ),
                       verticalSpace(100),
                     ],

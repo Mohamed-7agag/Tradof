@@ -15,6 +15,7 @@ class CustomTextField extends StatefulWidget {
     this.labelColor,
     this.outlineBorder = false,
     this.labelBehavior = false,
+    this.onChange,
   });
 
   final String labelText;
@@ -24,6 +25,7 @@ class CustomTextField extends StatefulWidget {
   final Color? labelColor;
   final bool outlineBorder;
   final bool? labelBehavior;
+  final void Function(String)? onChange;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -53,6 +55,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         }
         return null;
       },
+      onChanged: widget.onChange,
       decoration: InputDecoration(
         suffixIcon: widget.obscureText
             ? ObscureIcon(
