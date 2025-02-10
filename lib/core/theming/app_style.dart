@@ -85,6 +85,10 @@ abstract class AppStyle {
     fontSize: 12.sp,
     fontWeight: FontWeightHelper.medium,
   );
+  static TextStyle robotoCondensedBold14 = GoogleFonts.robotoCondensed(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.bold,
+  );
   static TextStyle robotoCondensedSemiBold20 = GoogleFonts.robotoCondensed(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.semiBold,

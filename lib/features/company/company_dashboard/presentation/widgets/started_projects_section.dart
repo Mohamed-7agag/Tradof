@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tradof/core/theming/app_colors.dart';
+import 'package:tradof/features/projects/presentation/widgets/project_item.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 
@@ -15,7 +16,7 @@ class StartedProjectsSection extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            verticalSpace(50),
+            verticalSpace(40),
             Container(
               padding: EdgeInsets.only(top: 8.w),
               decoration: BoxDecoration(
@@ -43,21 +44,11 @@ class StartedProjectsSection extends StatelessWidget {
               ),
             ),
             verticalSpace(25),
-            Container(
-              height: 130,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                color: AppColors.cardColor,
-              ),
-            ),
+            ProjectItem(),
             verticalSpace(12),
-            Container(
-              height: 130,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                color: AppColors.cardColor,
-              ),
-            ),
+            ProjectItem(),
+            verticalSpace(12),
+            ProjectItem(),
             verticalSpace(100),
           ],
         ),

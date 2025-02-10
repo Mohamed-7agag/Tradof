@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
+
+import '../../../../projects/presentation/widgets/project_item.dart';
 
 class UpcomingProjectsSection extends StatelessWidget {
   const UpcomingProjectsSection({super.key});
@@ -7,12 +10,21 @@ class UpcomingProjectsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          verticalSpace(50),
-          CircleAvatar(radius: 30),
-          CircleAvatar(radius: 30),
-        ],
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Column(
+          children: [
+            verticalSpace(40),
+            ProjectItem(),
+            verticalSpace(12),
+            ProjectItem(),
+            verticalSpace(12),
+            ProjectItem(),
+            verticalSpace(12),
+            ProjectItem(),
+            verticalSpace(100),
+          ],
+        ),
       ),
     );
   }

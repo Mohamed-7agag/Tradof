@@ -23,6 +23,7 @@ class _CompanyDashboardStackState extends State<CompanyDashboardStack> {
         Container(
           width: double.infinity,
           margin: EdgeInsets.only(top: 32.5),
+          padding: EdgeInsets.only(top: 10),
           decoration: _decoration(),
           child: currentIndex == 0
               ? StartedProjectsSection()
