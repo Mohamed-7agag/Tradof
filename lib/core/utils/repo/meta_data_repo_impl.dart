@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../features/auth/data/model/country_model.dart';
-import '../../../features/auth/data/model/language_model.dart';
+import '../models/country_model.dart';
+import '../models/language_model.dart';
 import '../../../features/auth/data/model/specialization_model.dart';
 import '../../api/api_service.dart';
 import '../../api/end_points.dart';

@@ -10,7 +10,9 @@ import 'package:tradof/core/helpers/exit_dialog.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
+import 'package:tradof/features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_cubit.dart';
 
+import '../../core/utils/widgets/custom_loading_widget.dart';
 import '../company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import 'freelancer_dashboard/presentation/views/freelance_dashbord_view.dart';
 
@@ -26,13 +28,13 @@ class _FreelancerBottomNavBarViewState
     extends State<FreelancerBottomNavBarView> {
   int currentIndex = 0;
 
-  List<Widget> _buildIndexedStackChildren() {
+  List<Widget> _buildIndexedStackChildren(FreelancerProfileState state) {
     return [
-      FreelancerDashboardView(),
-      FreelancerDashboardView(),
-      FreelancerDashboardView(),
-      FreelancerDashboardView(),
-      FreelancerDashboardView(),
+      FreelancerDashboardView(freelancerModel: state.freelancerModel!),
+      FreelancerDashboardView(freelancerModel: state.freelancerModel!),
+      FreelancerDashboardView(freelancerModel: state.freelancerModel!),
+      FreelancerDashboardView(freelancerModel: state.freelancerModel!),
+      FreelancerDashboardView(freelancerModel: state.freelancerModel!),
     ];
   }
 
@@ -41,9 +43,26 @@ class _FreelancerBottomNavBarViewState
     return WillPopScope(
       onWillPop: () => exitDialog(context),
       child: Scaffold(
-        body: LazyLoadIndexedStack(
-          index: currentIndex,
-          children: _buildIndexedStackChildren(),
+        body: BlocBuilder<FreelancerProfileCubit, FreelancerProfileState>(
+          buildWhen: (previous, current) =>
+              current.status.isGetFreelancerFailure ||
+              current.status.isGetFreelancerSuccess ||
+              current.status.isGetFreelancerLoading,
+          builder: (context, state) {
+            if (state.status.isGetFreelancerSuccess) {
+              return LazyLoadIndexedStack(
+                index: currentIndex,
+                children: _buildIndexedStackChildren(state),
+              );
+            } else if (state.status.isGetFreelancerFailure) {
+              return _buildFailureWidget(
+                context,
+                currentIndex,
+                state.errMessage,
+              );
+            }
+            return const CustomLoadingWidget();
+          },
         ),
         bottomNavigationBar: Stack(
           clipBehavior: Clip.none,

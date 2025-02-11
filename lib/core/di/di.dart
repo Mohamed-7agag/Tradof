@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:tradof/features/company/company_profile/data/repos/company_profile_repo.dart';
-import 'package:tradof/features/company/company_profile/data/repos/company_profile_repo_impl.dart';
 import 'package:tradof/features/offers/data/repos/offer_repo.dart';
 import 'package:tradof/features/offers/data/repos/offer_repo_impl.dart';
 
@@ -9,8 +7,12 @@ import '../../features/auth/data/repo/auth_repo.dart';
 import '../../features/auth/data/repo/auth_repo_impl.dart';
 import '../../features/auth/data/repo/registeration_repo.dart';
 import '../../features/auth/data/repo/registeration_repo_impl.dart';
+import '../../features/company/company_profile/data/repos/company_profile_repo.dart';
+import '../../features/company/company_profile/data/repos/company_profile_repo_impl.dart';
 import '../../features/company/company_setting/data/repo/company_setting_repo.dart';
 import '../../features/company/company_setting/data/repo/company_setting_repo_impl.dart';
+import '../../features/freelancer/freelancer_profile/data/repo/freelancer_repo.dart';
+import '../../features/freelancer/freelancer_profile/data/repo/freelancer_repo_impl.dart';
 import '../../features/projects/data/repo/project_repo.dart';
 import '../../features/projects/data/repo/project_repo_impl.dart';
 import '../api/api_service.dart';
@@ -56,5 +58,10 @@ void setupGetIt() {
   // offer repo
   getIt.registerFactory<OfferRepo>(
     () => OfferRepoImpl(apiServices: getIt()),
+  );
+
+  // freelancer repo
+  getIt.registerFactory<FreelancerRepo>(
+    () => FreelancerRepoImpl(apiServices: getIt()),
   );
 }

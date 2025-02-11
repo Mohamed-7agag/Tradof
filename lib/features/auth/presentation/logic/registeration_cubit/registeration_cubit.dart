@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/utils/widgets/upload_image_to_cloudinary.dart';
 import 'package:tradof/features/auth/data/model/company_register_request_model.dart';
 import 'package:tradof/features/auth/data/model/freelancer_register_request_model.dart';
-import 'package:tradof/features/auth/data/model/language_model.dart';
-import 'package:tradof/features/auth/data/model/language_pair_model.dart';
+import 'package:tradof/core/utils/models/language_model.dart';
+import 'package:tradof/core/utils/models/language_pair_model.dart';
 import 'package:tradof/features/auth/data/repo/registeration_repo.dart';
 
 import '../../../data/model/specialization_model.dart';

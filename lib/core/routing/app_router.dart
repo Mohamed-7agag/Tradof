@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
+import 'package:tradof/features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_cubit.dart';
 import 'package:tradof/features/offers/presentation/logic/cubit/offer_cubit.dart';
 import 'package:tradof/features/offers/presentation/views/create_offer_view.dart';
 
@@ -36,8 +37,7 @@ class AppRouter {
 
   static final router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    // initialLocation: _initLocation(),
-    initialLocation: '/createOfferView',
+    initialLocation: _initLocation(),
     routes: [
       GoRoute(
         name: Routes.welcomeViewRoute,
@@ -81,7 +81,11 @@ class AppRouter {
       GoRoute(
         name: Routes.freelancerBottomNavBarViewRoute,
         path: '/freelancerBottomNavBarView',
-        builder: (context, state) => FreelancerBottomNavBarView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              FreelancerProfileCubit(getIt())..getFreelancerProfile(),
+          child: FreelancerBottomNavBarView(),
+        ),
       ),
       GoRoute(
         name: Routes.companyBottomNavBarViewRoute,

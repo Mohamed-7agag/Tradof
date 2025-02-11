@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/features/auth/data/model/language_model.dart';
-import 'package:tradof/features/auth/data/model/language_pair_model.dart';
+import 'package:tradof/core/utils/models/language_model.dart';
+import 'package:tradof/core/utils/models/language_pair_model.dart';
 import 'package:tradof/features/auth/data/model/specialization_model.dart';
 
 part 'tables_state.dart';

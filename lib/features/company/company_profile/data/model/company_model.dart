@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tradof/features/auth/data/model/language_model.dart';
+import 'package:tradof/core/utils/models/language_model.dart';
 import 'package:tradof/features/auth/data/model/specialization_model.dart';
 import 'package:tradof/features/company/company_profile/data/model/social_media_model.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/utils/widgets/custom_text_field.dart';
-import 'package:tradof/features/auth/data/model/language_model.dart';
+import 'package:tradof/core/utils/models/language_model.dart';
 
 import '../../../features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import '../../theming/app_colors.dart';

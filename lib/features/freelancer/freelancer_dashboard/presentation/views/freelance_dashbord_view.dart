@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 
+import '../../../freelancer_profile/data/model/freelancer_model.dart';
 import '../widgets/freelancer_dashboard_stack.dart';
 import '../widgets/freelancer_profile_section.dart';
 
 class FreelancerDashboardView extends StatelessWidget {
-  const FreelancerDashboardView({super.key});
-
+  const FreelancerDashboardView({
+    super.key,
+    required this.freelancerModel,
+  });
+  final FreelancerModel freelancerModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +20,7 @@ class FreelancerDashboardView extends StatelessWidget {
         children: [
           verticalSpace(10),
           SafeArea(
-            child: FreelancerProfileSection(),
+            child: FreelancerProfileSection(freelancerModel: freelancerModel),
           ),
           verticalSpace(15),
           Expanded(

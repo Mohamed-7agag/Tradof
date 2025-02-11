@@ -9,7 +9,7 @@ import 'package:tradof/features/company/company_profile/data/model/company_model
 
 import '../../../../../core/utils/widgets/custom_button.dart';
 import '../../../../../core/utils/widgets/custom_toastification.dart';
-import '../../../../auth/data/model/language_model.dart';
+import '../../../../../core/utils/models/language_model.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class UpdateCompanyProfileTablesButton extends StatelessWidget {

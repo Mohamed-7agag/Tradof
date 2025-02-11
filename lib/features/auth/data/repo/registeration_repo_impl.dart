@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:tradof/core/api/end_points.dart';
 import 'package:tradof/core/errors/failure.dart';
-import 'package:tradof/features/auth/data/model/language_model.dart';
+import 'package:tradof/core/utils/models/language_model.dart';
 import 'package:tradof/features/auth/data/model/specialization_model.dart';
 
 import '../../../../core/api/api_service.dart';
 import '../../../../core/helpers/handle_request_method.dart';
 import '../model/company_register_request_model.dart';
-import '../model/country_model.dart';
+import '../../../../core/utils/models/country_model.dart';
 import '../model/freelancer_register_request_model.dart';
 import 'registeration_repo.dart';
 
