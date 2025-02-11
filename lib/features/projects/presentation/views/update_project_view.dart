@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tradof/features/projects/data/models/project_model.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_style.dart';
@@ -9,7 +10,6 @@ import '../logic/file_cubit.dart';
 import '../widgets/attachment_files_section.dart';
 import '../widgets/create_project_industries_section.dart';
 import '../widgets/project_text_field.dart';
-import '../widgets/select_date_section.dart';
 import '../widgets/update_project_app_bar.dart';
 import '../widgets/update_project_button.dart';
 import '../widgets/update_project_language_pair.dart';
@@ -18,8 +18,10 @@ class UpdateProjectView extends StatefulWidget {
   const UpdateProjectView({
     super.key,
     required this.companyModel,
+    required this.projectModel,
   });
   final CompanyModel companyModel;
+  final ProjectModel projectModel;
   @override
   State<UpdateProjectView> createState() => _UpdateProjectViewState();
 }
@@ -29,13 +31,20 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
   late final TextEditingController projectDescriptionController;
   late final TextEditingController minBudgetController;
   late final TextEditingController maxBudgetController;
+  late final TextEditingController daysController;
 
   @override
   void initState() {
-    projectNameController = TextEditingController();
-    projectDescriptionController = TextEditingController();
-    minBudgetController = TextEditingController();
-    maxBudgetController = TextEditingController();
+    projectNameController =
+        TextEditingController(text: widget.projectModel.projectName);
+    projectDescriptionController =
+        TextEditingController(text: widget.projectModel.description);
+    minBudgetController =
+        TextEditingController(text: widget.projectModel.minPrice.toString());
+    maxBudgetController =
+        TextEditingController(text: widget.projectModel.maxPrice.toString());
+    daysController =
+        TextEditingController(text: widget.projectModel.days.toString());
     super.initState();
   }
 
@@ -45,6 +54,7 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
     projectDescriptionController.dispose();
     minBudgetController.dispose();
     maxBudgetController.dispose();
+    daysController.dispose();
     super.dispose();
   }
 
@@ -67,13 +77,13 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
                       labelText: 'Project Name',
                       controller: projectNameController,
                     ),
-                    verticalSpace(22),
+                    verticalSpace(25),
                     ProjectTextField(
                       labelText: 'Project Description',
                       controller: projectDescriptionController,
                       maxLines: 4,
                     ),
-                    verticalSpace(22),
+                    verticalSpace(25),
                     Text('Language Pair', style: AppStyle.poppinsMedium14),
                     verticalSpace(12),
                     UpdateProjectLanguagePair(),
@@ -81,7 +91,7 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
                     CreateProjectIndustriesSection(
                       companyModel: widget.companyModel,
                     ),
-                    verticalSpace(30),
+                    verticalSpace(25),
                     Row(
                       children: [
                         Expanded(
@@ -101,11 +111,13 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
                         ),
                       ],
                     ),
-                    verticalSpace(20),
-                    Text('Delivery Date', style: AppStyle.poppinsMedium14),
-                    verticalSpace(12),
-                    SelectDateSection(),
-                    verticalSpace(20),
+                    verticalSpace(25),
+                    ProjectTextField(
+                      labelText: 'Delivery Time (Days)',
+                      controller: daysController,
+                      keyboardType: TextInputType.number,
+                    ),
+                    verticalSpace(25),
                     Text(
                       'Attachments Files',
                       style: AppStyle.poppinsMedium14,
@@ -119,6 +131,7 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
                           projectDescriptionController,
                       minBudgetController: minBudgetController,
                       maxBudgetController: maxBudgetController,
+                      daysController: daysController,
                     ),
                     verticalSpace(40),
                   ],

@@ -12,7 +12,6 @@ import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
 
 import '../../core/di/di.dart';
-import '../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../core/utils/widgets/custom_loading_widget.dart';
 import '../projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../projects/presentation/views/create_project_view.dart';
@@ -35,13 +34,8 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
   List<Widget> _buildIndexedStackChildren(CompanyProfileState state) {
     return [
       CompanyDashboardView(companyModel: state.companyModel!),
-      MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => ProjectCubit(getIt())),
-          BlocProvider(
-            create: (context) => MetaDataCubit(getIt())..getLanguages(),
-          ),
-        ],
+      BlocProvider(
+        create: (context) => ProjectCubit(getIt()),
         child: CreateProjectView(companyModel: state.companyModel!),
       ),
       ProfileCompanyView(companyModel: state.companyModel!),
@@ -126,7 +120,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
             Positioned(
               top: -20,
               child: BounceInUp(
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     if (currentIndex != 2) {
                       setState(() => currentIndex = 2);
@@ -153,15 +147,18 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
 
   Widget _buildNavItem(String inactiveIcon, String activeIcon, int index) {
     final isSelected = currentIndex == index;
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         if (currentIndex != index) {
           setState(() => currentIndex = index);
         }
       },
-      child: Image.asset(
-        isSelected ? activeIcon : inactiveIcon,
-        width: 24.w,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        child: Image.asset(
+          isSelected ? activeIcon : inactiveIcon,
+          width: 24.w,
+        ),
       ),
     );
   }
