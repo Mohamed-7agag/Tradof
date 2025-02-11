@@ -20,4 +20,6 @@ abstract class Routes {
   static const String updateFreelancerSocialMediaViewRoute =
       "/updateFreelancerSocialMediaView";
   static const String createOfferViewRoute = "/createOfferView";
+  static const String changeFreelancerPasswordViewRoute =
+      "/changeFreelancerPasswordView";
 }

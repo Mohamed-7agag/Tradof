@@ -6,8 +6,8 @@ import 'package:tradof/features/company/company_profile/data/model/company_model
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 
-class SettingProfileInfoSection extends StatelessWidget {
-  const SettingProfileInfoSection({
+class CompanySettingProfileInfo extends StatelessWidget {
+  const CompanySettingProfileInfo({
     super.key,
     required this.companyModel,
   });

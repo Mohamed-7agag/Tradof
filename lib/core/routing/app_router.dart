@@ -5,6 +5,7 @@ import 'package:tradof/core/helpers/navigation_handler.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import 'package:tradof/features/freelancer/freelancer_profile/presentation/views/update_freelancer_social_media_view.dart';
+import 'package:tradof/features/freelancer/freelancer_setting/presentation/views/change_freelancer_password_view.dart';
 import 'package:tradof/features/offers/presentation/logic/cubit/offer_cubit.dart';
 import 'package:tradof/features/offers/presentation/views/create_offer_view.dart';
 
@@ -199,6 +200,13 @@ class AppRouter {
             create: (context) => FreelancerProfileCubit(getIt()),
             child: UpdateFreelancerSocialMediaView(socialList: socialMedia),
           );
+        },
+      ),
+      GoRoute(
+        name: Routes.changeFreelancerPasswordViewRoute,
+        path: '/changeFreelancerPasswordView',
+        builder: (context, state) {
+          return ChangeFreelancerPasswordView();
         },
       ),
     ],

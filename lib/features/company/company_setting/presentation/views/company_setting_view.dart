@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 
 import '../../../company_profile/data/model/company_model.dart';
-import '../widgets/setting_app_bar.dart';
+import '../widgets/company_setting_profile_info.dart';
+import '../widgets/company_setting_section1.dart';
+import '../widgets/company_setting_section2.dart';
 import '../widgets/delete_account_and_logout_section.dart';
-import '../widgets/setting_profile_info_section.dart';
-import '../widgets/setting_section1.dart';
-import '../widgets/setting_section2.dart';
+import '../widgets/setting_app_bar.dart';
 import '../widgets/subscription_plan_and_timer.dart';
 
 class CompanySettingView extends StatelessWidget {
@@ -29,14 +29,15 @@ class CompanySettingView extends StatelessWidget {
                   verticalSpace(15),
                   SlideInLeft(
                     from: 400,
-                    child:
-                        SettingProfileInfoSection(companyModel: companyModel),
+                    child: CompanySettingProfileInfo(
+                      companyModel: companyModel,
+                    ),
                   ),
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
                     delay: Duration(milliseconds: 200),
-                    child: SettingsSection1(
+                    child: CompanySettingsSection1(
                       companyModel: companyModel,
                     ),
                   ),
@@ -44,7 +45,7 @@ class CompanySettingView extends StatelessWidget {
                   SlideInLeft(
                     from: 400,
                     delay: Duration(milliseconds: 400),
-                    child: SettingSection2(),
+                    child: CompanySettingSection2(),
                   ),
                   verticalSpace(26),
                   SubscriptionPlanAndTimer(),

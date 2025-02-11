@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:tradof/features/freelancer/freelancer_setting/data/repo/freelancer_setting_repo_impl.dart';
 import 'package:tradof/features/offers/data/repos/offer_repo.dart';
 import 'package:tradof/features/offers/data/repos/offer_repo_impl.dart';
 
@@ -13,6 +14,7 @@ import '../../features/company/company_setting/data/repo/company_setting_repo.da
 import '../../features/company/company_setting/data/repo/company_setting_repo_impl.dart';
 import '../../features/freelancer/freelancer_profile/data/repo/freelancer_profile_repo.dart';
 import '../../features/freelancer/freelancer_profile/data/repo/freelancer_profile_repo_impl.dart';
+import '../../features/freelancer/freelancer_setting/data/repo/freelancer_setting_repo.dart';
 import '../../features/projects/data/repo/project_repo.dart';
 import '../../features/projects/data/repo/project_repo_impl.dart';
 import '../api/api_service.dart';
@@ -63,5 +65,10 @@ void setupGetIt() {
   // freelancer repo
   getIt.registerFactory<FreelancerProfileRepo>(
     () => FreelancerProfileRepoImpl(apiServices: getIt()),
+  );
+
+  // freelancer setting repo
+  getIt.registerFactory<FreelancerSettingRepo>(
+    () => FreelancerSettingRepoImpl(apiServices: getIt()),
   );
 }

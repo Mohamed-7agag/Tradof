@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
-import 'package:tradof/features/company/company_setting/presentation/widgets/setting_item.dart';
 
-class SettingsSection1 extends StatelessWidget {
-  const SettingsSection1({super.key, required this.companyModel});
-  final CompanyModel companyModel;
+import 'setting_item.dart';
+
+class CompanySettingSection2 extends StatelessWidget {
+  const CompanySettingSection2({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,25 +19,22 @@ class SettingsSection1 extends StatelessWidget {
       child: Column(
         children: [
           SettingItem(
-            title: 'Personal info',
-            icon: 'assets/images/profile.svg',
+            title: 'Change password',
+            icon: 'assets/images/password.svg',
             onTap: () {
-              context.push(
-                Routes.updateCompanyProfileViewRoute,
-                extra: companyModel,
-              );
+              context.pushNamed(Routes.changeCompanyPasswordViewRoute);
             },
           ),
           Divider(color: AppColors.cardDarkColor),
           SettingItem(
-            title: 'Notification',
-            icon: 'assets/images/notification.svg',
+            title: 'Technical Support',
+            icon: 'assets/images/support.svg',
             onTap: () {},
           ),
           Divider(color: AppColors.cardDarkColor),
           SettingItem(
-            title: 'Clander',
-            icon: 'assets/images/calendar.svg',
+            title: 'Give us feedback',
+            icon: 'assets/images/feedback.svg',
             onTap: () {},
           ),
         ],
