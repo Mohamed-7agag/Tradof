@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 
+import 'company_switcher_widget.dart';
 import 'started_projects_section.dart';
-import 'switcher_widget.dart';
 import 'upcoming_projects_section.dart';
 
 class CompanyDashboardStack extends StatefulWidget {
@@ -21,17 +22,20 @@ class _CompanyDashboardStackState extends State<CompanyDashboardStack> {
       fit: StackFit.expand,
       children: [
         Container(
-          width: double.infinity,
-          margin: EdgeInsets.only(top: 32.5),
-          padding: EdgeInsets.only(top: 10),
-          decoration: _decoration(),
-          child: currentIndex == 0
-              ? StartedProjectsSection()
-              : UpcomingProjectsSection(),
-        ),
+            width: double.infinity,
+            margin: EdgeInsets.only(top: 32.5),
+            padding: EdgeInsets.only(top: 10),
+            decoration: _decoration(),
+            child: LazyLoadIndexedStack(
+              index: currentIndex,
+              children: [
+                StartedProjectsSection(),
+                UpcomingProjectsSection(),
+              ],
+            )),
         Positioned(
           top: 0,
-          child: SwitcherWidget(onSwitch: (index) {
+          child: CompanySwitcherWidget(onSwitch: (index) {
             setState(() => currentIndex = index);
           }),
         ),

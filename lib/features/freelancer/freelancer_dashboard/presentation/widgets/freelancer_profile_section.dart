@@ -1,30 +1,28 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 
-class ProfileSection extends StatelessWidget {
-  const ProfileSection({super.key, required this.companyModel});
-  final CompanyModel companyModel;
+class FreelancerProfileSection extends StatelessWidget {
+  const FreelancerProfileSection({super.key});
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+      horizontalTitleGap: 10,
       leading: CircleAvatar(
         radius: 24,
         backgroundColor: AppColors.white,
-        backgroundImage: CachedNetworkImageProvider(companyModel.profileImageUrl),
+        //backgroundImage: CachedNetworkImageProvider(''),
       ),
       title: Text(
-        '${companyModel.firstName} ${companyModel.lastName}',
+        'Mohamed Hagag',
         style: AppStyle.poppinsMedium14.copyWith(color: AppColors.white),
       ),
       subtitle: Text(
-        companyModel.jobTitle,
+        'Job Title',
         style: AppStyle.robotoRegular10.copyWith(color: AppColors.white),
       ),
       trailing: Row(

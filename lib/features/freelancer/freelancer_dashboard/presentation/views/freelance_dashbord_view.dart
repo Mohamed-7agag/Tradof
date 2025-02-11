@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 
-import '../../../company_profile/data/model/company_model.dart';
-import '../widgets/company_dashboard_stack.dart';
-import '../widgets/company_profile_section.dart';
+import '../widgets/freelancer_dashboard_stack.dart';
+import '../widgets/freelancer_profile_section.dart';
 
-class CompanyDashboardView extends StatelessWidget {
-  const CompanyDashboardView({super.key, required this.companyModel});
-  final CompanyModel companyModel;
+class FreelancerDashboardView extends StatelessWidget {
+  const FreelancerDashboardView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,11 +16,11 @@ class CompanyDashboardView extends StatelessWidget {
         children: [
           verticalSpace(10),
           SafeArea(
-            child: CompanyProfileSection(companyModel: companyModel),
+            child: FreelancerProfileSection(),
           ),
           verticalSpace(15),
           Expanded(
-            child: CompanyDashboardStack(),
+            child: FreelancerDashboardStack(),
           )
         ],
       ),

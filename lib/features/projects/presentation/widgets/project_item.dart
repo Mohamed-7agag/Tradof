@@ -12,7 +12,7 @@ class ProjectItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(18),
         color: AppColors.cardColor,
       ),
       child: Column(

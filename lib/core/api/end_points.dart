@@ -47,4 +47,7 @@ abstract class EndPoint {
   static String addUpateSocialMedia(String companyId) {
     return 'Company/$companyId/social-medias/add-or-update-or-remove';
   }
+
+  // Freelancer
+  static String getFreelancerbyId(String id) => 'freelancers/$id';
 }

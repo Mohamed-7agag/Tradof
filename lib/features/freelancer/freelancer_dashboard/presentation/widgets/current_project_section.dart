@@ -1,0 +1,46 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tradof/features/projects/presentation/widgets/project_item.dart';
+
+import '../../../../../core/helpers/spacing.dart';
+import 'freelancer_statistic_card.dart';
+
+class CurrentProjectsSection extends StatelessWidget {
+  const CurrentProjectsSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          verticalSpace(40),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(3, (index) {
+                return Padding(
+                  padding: EdgeInsets.only(left: index == 0 ? 8 : 0),
+                  child: FreelancerStatisticCard(),
+                );
+              }),
+            ),
+          ),
+          verticalSpace(25),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              children: [
+                ProjectItem(),
+                verticalSpace(12),
+                ProjectItem(),
+                verticalSpace(12),
+                ProjectItem(),
+              ],
+            ),
+          ),
+          verticalSpace(100),
+        ],
+      ),
+    );
+  }
+}

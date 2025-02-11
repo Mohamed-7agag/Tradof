@@ -22,7 +22,7 @@ import '../../features/company/company_profile/presentation/views/update_company
 import '../../features/company/company_setting/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
 import '../../features/company/company_setting/presentation/views/change_company_password_view.dart';
 import '../../features/company/company_setting/presentation/views/update_company_profile_view.dart';
-import '../../features/freelancer/bottom_nav_bar/presentation/views/bottom_nav_bar_freelancer_view.dart';
+import '../../features/freelancer/freelancer_bottom_nav_bar_view.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../utils/app_constants.dart';
@@ -78,7 +78,7 @@ class AppRouter {
       GoRoute(
         name: Routes.freelancerBottomNavBarViewRoute,
         path: '/freelancerBottomNavBarView',
-        builder: (context, state) => BottomNavBarFreelancerView(),
+        builder: (context, state) => FreelancerBottomNavBarView(),
       ),
       GoRoute(
         name: Routes.companyBottomNavBarViewRoute,

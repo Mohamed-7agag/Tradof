@@ -6,14 +6,14 @@ import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 
-class SwitcherWidget extends StatefulWidget {
-  const SwitcherWidget({super.key, required this.onSwitch});
+class CompanySwitcherWidget extends StatefulWidget {
+  const CompanySwitcherWidget({super.key, required this.onSwitch});
   final void Function(int index) onSwitch;
   @override
-  State<SwitcherWidget> createState() => _SwitcherWidgetState();
+  State<CompanySwitcherWidget> createState() => _CompanySwitcherWidgetState();
 }
 
-class _SwitcherWidgetState extends State<SwitcherWidget> {
+class _CompanySwitcherWidgetState extends State<CompanySwitcherWidget> {
   int index = 0;
   @override
   Widget build(BuildContext context) {
