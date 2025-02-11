@@ -3,9 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/helpers/navigation_handler.dart';
 import 'package:tradof/core/routing/routes.dart';
+import 'package:tradof/features/freelancer/freelancer_profile/data/model/freelancer_model.dart';
 import 'package:tradof/features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import 'package:tradof/features/freelancer/freelancer_profile/presentation/views/update_freelancer_social_media_view.dart';
 import 'package:tradof/features/freelancer/freelancer_setting/presentation/views/change_freelancer_password_view.dart';
+import 'package:tradof/features/freelancer/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
 import 'package:tradof/features/offers/presentation/logic/cubit/offer_cubit.dart';
 import 'package:tradof/features/offers/presentation/views/create_offer_view.dart';
 
@@ -28,6 +30,7 @@ import '../../features/company/company_setting/presentation/logic/company_settin
 import '../../features/company/company_setting/presentation/views/change_company_password_view.dart';
 import '../../features/company/company_setting/presentation/views/update_company_profile_view.dart';
 import '../../features/freelancer/freelancer_bottom_nav_bar_view.dart';
+import '../../features/freelancer/freelancer_setting/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../utils/app_constants.dart';
@@ -125,12 +128,8 @@ class AppRouter {
         path: '/updateCompanyProfileView',
         builder: (context, state) {
           final comanyModel = state.extra as CompanyModel;
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => CompanySettingCubit(getIt()),
-              ),
-            ],
+          return BlocProvider(
+            create: (context) => CompanySettingCubit(getIt()),
             child: UpdateCompanyProfileView(companyModel: comanyModel),
           );
         },
@@ -207,6 +206,19 @@ class AppRouter {
         path: '/changeFreelancerPasswordView',
         builder: (context, state) {
           return ChangeFreelancerPasswordView();
+        },
+      ),
+      GoRoute(
+        name: Routes.updateFreelancerProfileViewRoute,
+        path: '/updateFreelancerProfileView',
+        builder: (context, state) {
+          final freelancerModel = state.extra as FreelancerModel;
+          return BlocProvider(
+            create: (context) => FreelancerSettingCubit(getIt()),
+            child: UpdateFreelancerProfileView(
+              freelancerModel: freelancerModel,
+            ),
+          );
         },
       ),
     ],

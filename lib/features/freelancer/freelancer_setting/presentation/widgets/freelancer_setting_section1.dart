@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tradof/core/helpers/extensions.dart';
+import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 
 import '../../../../company/company_setting/presentation/widgets/setting_item.dart';
@@ -22,10 +24,10 @@ class FreelancerSettingsSection1 extends StatelessWidget {
             title: 'Personal info',
             icon: 'assets/images/profile.svg',
             onTap: () {
-              // context.push(
-              //   Routes.updateCompanyProfileViewRoute,
-              //   extra: companyModel,
-              // );
+              context.pushNamed(
+                Routes.updateFreelancerProfileViewRoute,
+                extra: freelancerModel,
+              );
             },
           ),
           Divider(color: AppColors.cardDarkColor),

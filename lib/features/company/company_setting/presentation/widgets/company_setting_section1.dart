@@ -23,7 +23,7 @@ class CompanySettingsSection1 extends StatelessWidget {
             title: 'Personal info',
             icon: 'assets/images/profile.svg',
             onTap: () {
-              context.push(
+              context.pushNamed(
                 Routes.updateCompanyProfileViewRoute,
                 extra: companyModel,
               );

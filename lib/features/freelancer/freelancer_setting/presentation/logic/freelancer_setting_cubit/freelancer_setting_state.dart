@@ -5,9 +5,9 @@ enum FreelancerSettingStatus {
   changePasswordLoading,
   changePasswordSuccess,
   changePasswordFailure,
-  updateCompanyProfileLoading,
-  updateCompanyProfileFailure,
-  updateCompanyProfileSuccess,
+  updateFreelancerProfileLoading,
+  updateFreelancerProfileFailure,
+  updateFreelancerProfileSuccess,
 }
 
 extension FreelancerSettingStatusX on FreelancerSettingStatus {
@@ -17,12 +17,12 @@ extension FreelancerSettingStatusX on FreelancerSettingStatus {
       this == FreelancerSettingStatus.changePasswordSuccess;
   bool get isChangePasswordFailure =>
       this == FreelancerSettingStatus.changePasswordFailure;
-  bool get isUpdateCompanyProfileLoading =>
-      this == FreelancerSettingStatus.updateCompanyProfileLoading;
-  bool get isUpdateCompanyProfileSuccess =>
-      this == FreelancerSettingStatus.updateCompanyProfileSuccess;
-  bool get isUpdateCompanyProfileFailure =>
-      this == FreelancerSettingStatus.updateCompanyProfileFailure;
+  bool get isUpdateFreelancerProfileLoading =>
+      this == FreelancerSettingStatus.updateFreelancerProfileLoading;
+  bool get isUpdateFreelancerProfileSuccess =>
+      this == FreelancerSettingStatus.updateFreelancerProfileSuccess;
+  bool get isUpdateFreelancerProfileFailure =>
+      this == FreelancerSettingStatus.updateFreelancerProfileFailure;
 }
 
 class FreelancerSettingState extends Equatable {

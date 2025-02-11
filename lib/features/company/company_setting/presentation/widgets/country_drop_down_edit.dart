@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
-import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/core/utils/models/country_model.dart';
+import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/features/auth/presentation/widgets/country_drop_down.dart';
 
 import '../../../../../core/utils/widgets/custom_failure_widget.dart';
-import '../logic/company_setting_cubit/company_setting_cubit.dart';
 
 class CountryDropDownEdit extends StatelessWidget {
-  const CountryDropDownEdit({super.key, this.initialCountryId});
+  const CountryDropDownEdit({
+    super.key,
+    this.initialCountryId,
+    this.countryName,
+    this.onChanged,
+  });
 
   final int? initialCountryId;
+  final String? countryName;
+  final void Function(CountryModel?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +37,10 @@ class CountryDropDownEdit extends StatelessWidget {
           dropdownColor: AppColors.white,
           iconColor: AppColors.darkGrey,
           textColor: AppColors.darkGrey,
-          value: _getCountryById(state.countries, initialCountryId),
-          onChanged: (value) {
-            context.read<CompanySettingCubit>().setImageProfileAndCountryId(
-                  countryId: value?.id ?? initialCountryId!,
-                );
-          },
+          value: countryName != null
+              ? _createCountry(initialCountryId!, countryName!)
+              : _getCountryById(state.countries, initialCountryId),
+          onChanged: onChanged,
         );
       },
     );
@@ -52,5 +56,9 @@ class CountryDropDownEdit extends StatelessWidget {
       }
     }
     return null;
+  }
+
+  CountryModel? _createCountry(int id, String countryName) {
+    return CountryModel(id: id, name: countryName);
   }
 }

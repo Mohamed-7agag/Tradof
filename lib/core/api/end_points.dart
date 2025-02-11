@@ -63,4 +63,7 @@ abstract class EndPoint {
   static String changeFreelancerPassword(String freelancerId) {
     return 'freelancers/$freelancerId/change-password';
   }
+  static String updateFreelancerProfile(String freelancerId) {
+    return 'freelancers/$freelancerId';
+  }
 }

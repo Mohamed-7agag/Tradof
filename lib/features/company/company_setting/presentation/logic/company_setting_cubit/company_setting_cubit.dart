@@ -77,7 +77,7 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
       (message) => emit(
         state.copyWith(
           status: CompanySettingStatus.updateCompanyProfileSuccess,
-          message: message,
+          message: 'Profile Updated Successfully',
           errMessage: null,
         ),
       ),
@@ -93,7 +93,6 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
     required String phoneNumber,
     required CompanyModel companyModel,
   }) async {
-
     String? imageUrl;
     if (state.imagePicked != null) {
       imageUrl = await uploadImageToCloudinary(state.imagePicked!);
@@ -104,9 +103,12 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
       firstName: firstName.isNullOrEmpty() ? companyModel.firstName : firstName,
       lastName: lastName.isNullOrEmpty() ? companyModel.lastName : lastName,
       email: email.isNullOrEmpty() ? companyModel.email : email,
-      companyName: companyName.isNullOrEmpty() ? companyModel.companyName : companyName,
-      companyAddress: location.isNullOrEmpty() ? companyModel.companyAddress : location,
-      phoneNumber: phoneNumber.isNullOrEmpty() ? companyModel.phone : phoneNumber,
+      companyName:
+          companyName.isNullOrEmpty() ? companyModel.companyName : companyName,
+      companyAddress:
+          location.isNullOrEmpty() ? companyModel.companyAddress : location,
+      phoneNumber:
+          phoneNumber.isNullOrEmpty() ? companyModel.phone : phoneNumber,
       profileImageUrl: imageUrl ?? companyModel.profileImageUrl,
       countryId: state.countryId ?? companyModel.countryId,
     );

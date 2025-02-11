@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -6,6 +7,7 @@ import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 
 import '../../../../auth/presentation/widgets/phone_number_text_field.dart';
 import '../../../company_profile/data/model/company_model.dart';
+import '../logic/company_setting_cubit/company_setting_cubit.dart';
 import 'country_drop_down_edit.dart';
 import 'update_company_profile_button.dart';
 import 'update_company_profile_image.dart';
@@ -131,6 +133,14 @@ class _BuildUpdateCompanyProfileViewState
                   verticalSpace(18),
                   CountryDropDownEdit(
                     initialCountryId: widget.companyModel.countryId,
+                    onChanged: (value) {
+                      context
+                          .read<CompanySettingCubit>()
+                          .setImageProfileAndCountryId(
+                            countryId:
+                                value?.id ?? widget.companyModel.countryId,
+                          );
+                    },
                   ),
                   verticalSpace(60),
                   UpdateCompanyProfileButton(
