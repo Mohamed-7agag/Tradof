@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
+import 'package:tradof/features/offers/presentation/logic/cubit/offer_cubit.dart';
+import 'package:tradof/features/offers/presentation/views/create_offer_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
 import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
@@ -34,7 +36,8 @@ class AppRouter {
 
   static final router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: _initLocation(),
+    // initialLocation: _initLocation(),
+    initialLocation: '/createOfferView',
     routes: [
       GoRoute(
         name: Routes.welcomeViewRoute,
@@ -172,6 +175,16 @@ class AppRouter {
               ),
             ],
             child: CompanyAddEmployeeView(),
+          );
+        },
+      ),
+      GoRoute(
+        name: Routes.createOfferViewRoute,
+        path: '/createOfferView',
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) => OfferCubit(getIt()),
+            child: CreateOfferView(),
           );
         },
       ),

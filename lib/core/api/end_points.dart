@@ -12,6 +12,8 @@ abstract class EndPoint {
   static const String getLanguages = 'language';
   static const String getSpecializations = 'specialization';
   static const String updateCompanyProfile = 'Company/UpdateCompany';
+  static String createOffer = 'api/propsal';
+
   // project
   static String createProject(String id) => 'project?$id';
 
