@@ -121,6 +121,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
               top: -20,
               child: BounceInUp(
                 child: InkWell(
+                  borderRadius: BorderRadius.circular(30),
                   onTap: () {
                     if (currentIndex != 2) {
                       setState(() => currentIndex = 2);

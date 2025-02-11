@@ -5,10 +5,10 @@ import 'package:tradof/core/errors/failure.dart';
 import 'package:tradof/core/helpers/handle_request_method.dart';
 import 'package:tradof/core/utils/app_constants.dart';
 
-import '../model/social_media_model.dart';
 import '../model/company_employee_model.dart';
 import '../model/company_employee_request_model.dart';
 import '../model/company_model.dart';
+import '../model/social_media_model.dart';
 import 'company_profile_repo.dart';
 
 class CompanyProfileRepoImpl implements CompanyProfileRepo {
@@ -60,7 +60,7 @@ class CompanyProfileRepoImpl implements CompanyProfileRepo {
       {required List<SocialMediaModel> socialMediaModel}) {
     return handleRequest(() async {
       final response = await _apiServices.post(
-        EndPoint.addUpateSocialMedia(AppConstants.kUserId),
+        EndPoint.freelancerSocialMediaCRUD(AppConstants.kUserId),
         data: socialMediaModel.map((e) => e.toJson()).toList(),
       );
       return response;

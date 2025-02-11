@@ -11,8 +11,8 @@ import '../../features/company/company_profile/data/repos/company_profile_repo.d
 import '../../features/company/company_profile/data/repos/company_profile_repo_impl.dart';
 import '../../features/company/company_setting/data/repo/company_setting_repo.dart';
 import '../../features/company/company_setting/data/repo/company_setting_repo_impl.dart';
-import '../../features/freelancer/freelancer_profile/data/repo/freelancer_repo.dart';
-import '../../features/freelancer/freelancer_profile/data/repo/freelancer_repo_impl.dart';
+import '../../features/freelancer/freelancer_profile/data/repo/freelancer_profile_repo.dart';
+import '../../features/freelancer/freelancer_profile/data/repo/freelancer_profile_repo_impl.dart';
 import '../../features/projects/data/repo/project_repo.dart';
 import '../../features/projects/data/repo/project_repo_impl.dart';
 import '../api/api_service.dart';
@@ -61,7 +61,7 @@ void setupGetIt() {
   );
 
   // freelancer repo
-  getIt.registerFactory<FreelancerRepo>(
-    () => FreelancerRepoImpl(apiServices: getIt()),
+  getIt.registerFactory<FreelancerProfileRepo>(
+    () => FreelancerProfileRepoImpl(apiServices: getIt()),
   );
 }

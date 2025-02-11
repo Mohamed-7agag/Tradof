@@ -10,11 +10,12 @@ import 'package:tradof/core/helpers/exit_dialog.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
-import 'package:tradof/features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_cubit.dart';
+import 'package:tradof/features/freelancer/freelancer_setting/presentation/views/freelancer_setting_view.dart';
 
 import '../../core/utils/widgets/custom_loading_widget.dart';
-import '../company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import 'freelancer_dashboard/presentation/views/freelance_dashbord_view.dart';
+import 'freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
+import 'freelancer_profile/presentation/views/freelancer_profile_view.dart';
 
 class FreelancerBottomNavBarView extends StatefulWidget {
   const FreelancerBottomNavBarView({super.key});
@@ -32,9 +33,9 @@ class _FreelancerBottomNavBarViewState
     return [
       FreelancerDashboardView(freelancerModel: state.freelancerModel!),
       FreelancerDashboardView(freelancerModel: state.freelancerModel!),
+      FreelancerProfileView(freelancerModel: state.freelancerModel!),
       FreelancerDashboardView(freelancerModel: state.freelancerModel!),
-      FreelancerDashboardView(freelancerModel: state.freelancerModel!),
-      FreelancerDashboardView(freelancerModel: state.freelancerModel!),
+      FreelancerSettingView(freelancerModel: state.freelancerModel!),
     ];
   }
 
@@ -119,6 +120,7 @@ class _FreelancerBottomNavBarViewState
               top: -20,
               child: BounceInUp(
                 child: InkWell(
+                  borderRadius: BorderRadius.circular(30),
                   onTap: () {
                     if (currentIndex != 2) {
                       setState(() => currentIndex = 2);
@@ -183,7 +185,7 @@ Widget _buildFailureWidget(
   if (currentIndex == 0) {
     return CustomRefreshIndicator(
       onRefresh: () async {
-        context.read<CompanyProfileCubit>().getCompanyProfile();
+        context.read<FreelancerProfileCubit>().getFreelancerProfile();
       },
       child: ListView(
         itemExtent: 1.sh,

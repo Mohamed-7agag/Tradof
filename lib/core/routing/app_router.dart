@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tradof/core/di/di.dart';
+import 'package:tradof/core/helpers/navigation_handler.dart';
 import 'package:tradof/core/routing/routes.dart';
-import 'package:tradof/features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_cubit.dart';
+import 'package:tradof/features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
+import 'package:tradof/features/freelancer/freelancer_profile/presentation/views/update_freelancer_social_media_view.dart';
 import 'package:tradof/features/offers/presentation/logic/cubit/offer_cubit.dart';
 import 'package:tradof/features/offers/presentation/views/create_offer_view.dart';
 
@@ -32,11 +33,8 @@ import '../utils/app_constants.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
 class AppRouter {
-  static final GlobalKey<NavigatorState> _rootNavigatorKey =
-      GlobalKey<NavigatorState>();
-
   static final router = GoRouter(
-    navigatorKey: _rootNavigatorKey,
+    navigatorKey: NavigationHandler.navigatorKey,
     initialLocation: _initLocation(),
     routes: [
       GoRoute(
@@ -189,6 +187,17 @@ class AppRouter {
           return BlocProvider(
             create: (context) => OfferCubit(getIt()),
             child: CreateOfferView(),
+          );
+        },
+      ),
+      GoRoute(
+        name: Routes.updateFreelancerSocialMediaViewRoute,
+        path: '/updateFreelancerSocialMediaView',
+        builder: (context, state) {
+          final socialMedia = state.extra as List<SocialMediaModel>;
+          return BlocProvider(
+            create: (context) => FreelancerProfileCubit(getIt()),
+            child: UpdateFreelancerSocialMediaView(socialList: socialMedia),
           );
         },
       ),

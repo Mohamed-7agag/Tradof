@@ -1,10 +1,18 @@
-part of 'freelancer_cubit.dart';
+part of 'freelancer_profile_cubit.dart';
 
 enum FreelancerProfileStatus {
   initial,
   getFreelancerLoading,
   getFreelancerSuccess,
   getFreelancerFailure,
+
+  updateSocialMediaLoading,
+  updateSocialMediaSuccess,
+  updateSocialMediaFailure,
+
+  uploadCvLoading,
+  uploadCvSuccess,
+  uploadCvFailure,
 }
 
 extension FreelancerProfileStatusX on FreelancerProfileStatus {
@@ -15,6 +23,17 @@ extension FreelancerProfileStatusX on FreelancerProfileStatus {
       this == FreelancerProfileStatus.getFreelancerSuccess;
   bool get isGetFreelancerFailure =>
       this == FreelancerProfileStatus.getFreelancerFailure;
+
+  bool get isUpdateSocialMediaLoading =>
+      this == FreelancerProfileStatus.updateSocialMediaLoading;
+  bool get isUpdateSocialMediaSuccess =>
+      this == FreelancerProfileStatus.updateSocialMediaSuccess;
+  bool get isUpdateSocialMediaFailure =>
+      this == FreelancerProfileStatus.updateSocialMediaFailure;
+
+  bool get isUploadCvLoading => this == FreelancerProfileStatus.uploadCvLoading;
+  bool get isUploadCvSuccess => this == FreelancerProfileStatus.uploadCvSuccess;
+  bool get isUploadCvFailure => this == FreelancerProfileStatus.uploadCvFailure;
 }
 
 class FreelancerProfileState extends Equatable {

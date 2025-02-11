@@ -8,8 +8,8 @@ import '../../data/model/company_model.dart';
 import 'rating.dart';
 import 'reviews.dart';
 
-class RatingAndReviews extends StatelessWidget {
-  const RatingAndReviews({super.key, required this.companyModel});
+class CompanyRatingAndReviews extends StatelessWidget {
+  const CompanyRatingAndReviews({super.key, required this.companyModel});
   final CompanyModel companyModel;
 
   @override

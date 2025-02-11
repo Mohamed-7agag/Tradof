@@ -85,4 +85,20 @@ class ApiServices implements ApiRequests {
     );
     return response.data;
   }
+// //! Download Request
+//   @override
+//   Future download(
+//     String path, {
+//     data,
+//     Map<String, dynamic>? queryParameters,
+//     bool isFormData = false,
+//   }) async {
+//     final response = await _dio.download(
+//       path,
+
+//       data: isFormData ? FormData.fromMap(data) : data,
+//       queryParameters: queryParameters,
+//     );
+//     return response.data;
+//   }
 }

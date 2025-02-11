@@ -9,8 +9,8 @@ import 'package:tradof/core/theming/app_style.dart';
 import '../../data/model/company_model.dart';
 import 'user_image_and_info.dart';
 
-class ProfileAppbar extends StatelessWidget {
-  const ProfileAppbar({super.key, required this.companyModel});
+class CompanyProfileAppbar extends StatelessWidget {
+  const CompanyProfileAppbar({super.key, required this.companyModel});
 
   final CompanyModel companyModel;
   @override
@@ -29,7 +29,8 @@ class ProfileAppbar extends StatelessWidget {
                 children: [
                   Text(
                     'Profile',
-                    style: AppStyle.robotoBold20.copyWith(color: AppColors.white),
+                    style:
+                        AppStyle.robotoBold20.copyWith(color: AppColors.white),
                   ),
                   SvgPicture.asset('assets/images/user.svg')
                 ],

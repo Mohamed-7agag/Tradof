@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 
-import 'setting_item.dart';
+import '../../../../company/company_setting/presentation/widgets/setting_item.dart';
 
-class SettingSection2 extends StatelessWidget {
-  const SettingSection2({super.key});
+class FreelancerSettingSection2 extends StatelessWidget {
+  const FreelancerSettingSection2({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +20,7 @@ class SettingSection2 extends StatelessWidget {
             title: 'Change password',
             icon: 'assets/images/password.svg',
             onTap: () {
-              context.pushNamed(Routes.changeCompanyPasswordViewRoute);
+              //
             },
           ),
           Divider(color: AppColors.cardDarkColor),

@@ -4,8 +4,8 @@ import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
-class CompanySettingAppbar extends StatelessWidget {
-  const CompanySettingAppbar({super.key});
+class SettingAppbar extends StatelessWidget {
+  const SettingAppbar({super.key});
   @override
   Widget build(BuildContext context) {
     return AppBar(

@@ -5,15 +5,15 @@ import 'package:tradof/core/helpers/spacing.dart';
 import '../../data/model/social_media_model.dart';
 import 'link_icon.dart';
 
-class SocialLinks extends StatefulWidget {
-  const SocialLinks({super.key, required this.socialMedia});
+class CompanySocialLinks extends StatefulWidget {
+  const CompanySocialLinks({super.key, required this.socialMedia});
   final List<SocialMediaModel> socialMedia;
 
   @override
-  State<SocialLinks> createState() => _SocialLinksState();
+  State<CompanySocialLinks> createState() => _CompanySocialLinksState();
 }
 
-class _SocialLinksState extends State<SocialLinks> {
+class _CompanySocialLinksState extends State<CompanySocialLinks> {
   String? facebookLink, linkedinLink, githubLink, gmailLink;
   @override
   void initState() {

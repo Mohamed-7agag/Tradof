@@ -46,10 +46,18 @@ abstract class EndPoint {
     return 'Company/RemoveSpecialization/$companyId';
   }
 
-  static String addUpateSocialMedia(String companyId) {
+  static String companySocialMediaCRUD(String companyId) {
     return 'Company/$companyId/social-medias/add-or-update-or-remove';
   }
 
+
   // Freelancer
   static String getFreelancerbyId(String id) => 'freelancers/$id';
+  static String freelancerSocialMediaCRUD(String freelancerId) {
+    return 'freelancers/$freelancerId/social-medias/add-or-update-or-remove';
+  }
+  static String uploadCv(String freelancerId) {
+    return 'freelancers/$freelancerId/upload-cv';
+  }
+
 }

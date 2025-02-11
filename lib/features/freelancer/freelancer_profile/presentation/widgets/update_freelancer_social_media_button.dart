@@ -5,11 +5,11 @@ import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 
-import '../../data/model/social_media_model.dart';
-import '../logic/company_profile_cubit/company_profile_cubit.dart';
+import '../../../../company/company_profile/data/model/social_media_model.dart';
+import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
-class AddUpdateSocialMediaButton extends StatelessWidget {
-  const AddUpdateSocialMediaButton({
+class UpdateFreelancerSocialMediaButton extends StatelessWidget {
+  const UpdateFreelancerSocialMediaButton({
     super.key,
     required this.facebookController,
     required this.linkedinController,
@@ -24,23 +24,23 @@ class AddUpdateSocialMediaButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CompanyProfileCubit, CompanyProfileState>(
+    return BlocConsumer<FreelancerProfileCubit, FreelancerProfileState>(
       listener: (context, state) {
-        if (state.status.isAddUpdateSocialMediaSuccess) {
+        if (state.status.isUpdateSocialMediaSuccess) {
           successToast(context, 'Success', state.message);
           context.pop(true);
-        } else if (state.status.isAddUpdateSocialMediaFailure) {
-          errorToast(context, 'Error', state.errorMessage);
+        } else if (state.status.isUpdateSocialMediaFailure) {
+          errorToast(context, 'Error', state.errMessage);
         }
       },
       builder: (context, state) {
-        return state.status.isAddUpdateSocialMediaLoading
+        return state.status.isUpdateSocialMediaLoading
             ? CustomLoadingWidget()
             : CustomButton(
                 text: 'Save',
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  context.read<CompanyProfileCubit>().addUpdateSocialMedia(
+                  context.read<FreelancerProfileCubit>().updateSocialMedia(
                     socialMedia: [
                       if (facebookController.text.isNotEmpty)
                         SocialMediaModel(

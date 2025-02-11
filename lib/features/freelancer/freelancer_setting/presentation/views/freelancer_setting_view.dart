@@ -1,20 +1,17 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/spacing.dart';
 
-import '../../../company_profile/data/model/company_model.dart';
-import '../widgets/setting_app_bar.dart';
-import '../widgets/delete_account_and_logout_section.dart';
-import '../widgets/setting_profile_info_section.dart';
-import '../widgets/setting_section1.dart';
-import '../widgets/setting_section2.dart';
-import '../widgets/subscription_plan_and_timer.dart';
+import '../../../../../core/helpers/spacing.dart';
+import '../../../../company/company_setting/presentation/widgets/setting_app_bar.dart';
+import '../../../freelancer_profile/data/model/freelancer_model.dart';
+import '../widgets/freelancer_setting_profile_info.dart';
+import '../widgets/freelancer_setting_section1.dart';
+import '../widgets/freelancer_setting_section2.dart';
 
-class CompanySettingView extends StatelessWidget {
-  const CompanySettingView({super.key, required this.companyModel});
-  final CompanyModel companyModel;
-
+class FreelancerSettingView extends StatelessWidget {
+  const FreelancerSettingView({super.key, required this.freelancerModel});
+  final FreelancerModel freelancerModel;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,27 +26,28 @@ class CompanySettingView extends StatelessWidget {
                   verticalSpace(15),
                   SlideInLeft(
                     from: 400,
-                    child:
-                        SettingProfileInfoSection(companyModel: companyModel),
+                    child: FreelancerSettingProfileInfo(
+                      freelancerModel: freelancerModel,
+                    ),
                   ),
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
                     delay: Duration(milliseconds: 200),
-                    child: SettingsSection1(
-                      companyModel: companyModel,
+                    child: FreelancerSettingsSection1(
+                      freelancerModel: freelancerModel,
                     ),
                   ),
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
                     delay: Duration(milliseconds: 400),
-                    child: SettingSection2(),
+                    child: FreelancerSettingSection2(),
                   ),
-                  verticalSpace(26),
-                  SubscriptionPlanAndTimer(),
-                  verticalSpace(20),
-                  DeleteAccountAndLogoutSection(),
+                  // verticalSpace(26),
+                  // SubscriptionPlanAndTimer(),
+                  // verticalSpace(20),
+                  // DeleteAccountAndLogoutSection(),
                   verticalSpace(100),
                 ],
               ),
