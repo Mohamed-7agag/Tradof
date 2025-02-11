@@ -1,7 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:tradof/features/offers/data/model/create_offer_request_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/features/offers/data/model/add_offer_request_model.dart';
 import 'package:tradof/features/offers/data/repos/offer_repo.dart';
 
 part 'offer_state.dart';
@@ -11,32 +10,34 @@ class OfferCubit extends Cubit<OfferState> {
 
   final OfferRepo _offerRepo;
 
-  TextEditingController offerDetailsController = TextEditingController();
-  DateTime selectedDate = DateTime.now().add(const Duration(days: 2));
-  double selectedBudget = 0.0;
+  Future<void> addOffer(int projectId, String offerDetails, int days) async {
+    emit(state.copyWith(status: OfferStatus.addOfferLoading));
 
-  Future<void> createOffer(
-    int projectId,
-  ) async {
-    emit(state.copyWith(status: OfferStatus.createOfferLoading));
-    final result = await _offerRepo.createOffer(
-      CreateOfferRequestModel(
-       offerPrice: selectedBudget,
-       projectDeliveryTime: selectedDate,
-       proposalDescription: offerDetailsController.text,
-       projectId: projectId
-      ),
+    final AddOfferRequestModel offerModel = AddOfferRequestModel(
+      offerPrice: state.offerPrice!,
+      days: days,
+      proposalDescription: offerDetails,
+      projectId: projectId,
     );
+
+    final result = await _offerRepo.addOffer(offerModel);
     result.fold(
       (failure) {
         emit(state.copyWith(
-          status: OfferStatus.createOfferFailure,
+          status: OfferStatus.addOfferFailure,
           errorMessage: failure.errMessage,
         ));
       },
       (response) {
-        emit(state.copyWith(status: OfferStatus.createOfferSucess));
+        emit(state.copyWith(
+          status: OfferStatus.addOfferSucess,
+          message: response,
+        ));
       },
     );
+  }
+
+  void setOfferPrice({double? price}) {
+    emit(state.copyWith(offerPrice: price));
   }
 }

@@ -2,37 +2,49 @@ part of 'offer_cubit.dart';
 
 enum OfferStatus {
   initial,
-  createOfferLoading,
-  createOfferSucess,
-  createOfferFailure,
+  addOfferLoading,
+  addOfferSucess,
+  addOfferFailure,
 }
 
 extension OfferStatusX on OfferStatus {
-  bool get isLoading => this == OfferStatus.createOfferLoading;
-  bool get iscreateOfferSucess => this == OfferStatus.createOfferSucess;
-  bool get isError => this == OfferStatus.createOfferFailure;
+  bool get isAddOfferLoading => this == OfferStatus.addOfferLoading;
+  bool get isAddOfferSuccess => this == OfferStatus.addOfferSucess;
+  bool get isAddOfferFailure => this == OfferStatus.addOfferFailure;
   bool get isInitial => this == OfferStatus.initial;
 }
 
 class OfferState extends Equatable {
   final OfferStatus status;
   final String errorMessage;
-
+  final String message;
+  final double? offerPrice;
   const OfferState({
     this.status = OfferStatus.initial,
     this.errorMessage = '',
+    this.message = '',
+    this.offerPrice,
   });
 
   OfferState copyWith({
     OfferStatus? status,
     String? errorMessage,
+    String? message,
+    double? offerPrice,
   }) {
     return OfferState(
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,
+      message: message ?? this.message,
+      offerPrice: offerPrice ?? this.offerPrice,
     );
   }
 
   @override
-  List<Object?> get props => [status, errorMessage];
+  List<Object?> get props => [
+        status,
+        errorMessage,
+        message,
+        offerPrice,
+      ];
 }

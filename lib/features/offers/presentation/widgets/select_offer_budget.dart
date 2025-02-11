@@ -14,56 +14,57 @@ class SelectOfferBudget extends StatefulWidget {
 }
 
 class _SelectOfferBudgetState extends State<SelectOfferBudget> {
-  @override
-  void initState() {
-    context.read<OfferCubit>().selectedBudget = 0;
-    super.initState();
-  }
-
+  double selectedBudget = 0.0;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Offer Budget",
-            style: AppStyle.robotoRegular15.copyWith(color: AppColors.darkGrey),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Offer Price",
+          style: AppStyle.poppinsMedium14,
+        ),
+        verticalSpace(5),
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            trackHeight: 4.5,
+            activeTrackColor: AppColors.lightOrange,
+            inactiveTrackColor: Colors.grey[300],
+            thumbColor: AppColors.lightOrange,
+            thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.0),
           ),
-          verticalSpace(10),
-          SizedBox(height: 8),
-          SliderTheme(
-            data: SliderTheme.of(context).copyWith(
-              trackHeight: 6.0,
-              activeTrackColor: AppColors.lightOrange,
-              inactiveTrackColor: Colors.grey[300],
-              thumbColor: Colors.white,
-              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
-              overlayColor: Colors.transparent,
+          child: Slider(
+            min: 0,
+            max: 5000,
+            divisions: 200,
+            value: selectedBudget,
+            onChanged: (newValue) {
+              setState(() {
+                selectedBudget = newValue;
+                context.read<OfferCubit>().setOfferPrice(price: selectedBudget);
+              });
+            },
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "0\$",
+              style: AppStyle.robotoRegular12.copyWith(
+                color: AppColors.darkGrey,
+              ),
             ),
-            child: Slider(
-              min: 0,
-              max: 5000,
-              value: context.read<OfferCubit>().selectedBudget,
-              onChanged: (newValue) {
-                setState(() {
-                  context.read<OfferCubit>().selectedBudget = newValue;
-                });
-              },
+            Text("$selectedBudget\$", style: AppStyle.poppinsMedium14),
+            Text(
+              "5000\$",
+              style: AppStyle.robotoRegular12.copyWith(
+                color: AppColors.darkGrey,
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("0", style: TextStyle(fontSize: 14, color: Colors.grey)),
-              Text("\$${context.read<OfferCubit>().selectedBudget.toInt()}",
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-              Text("5000", style: TextStyle(fontSize: 14, color: Colors.grey)),
-            ],
-          ),
-        ],
-      ),
+          ],
+        ),
+      ],
     );
   }
 }

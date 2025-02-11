@@ -1,18 +1,18 @@
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
-
-class CreateOfferRequestModel extends Equatable {
+class AddOfferRequestModel extends Equatable {
   final double offerPrice;
   final int projectId;
   final String proposalDescription;
-  final DateTime projectDeliveryTime;
-  final List<String> proposalAttachments;
+  final int days;
+  final List<MultipartFile> proposalAttachments;
 
-  const CreateOfferRequestModel({
+  const AddOfferRequestModel({
     required this.offerPrice,
     required this.projectId,
     required this.proposalDescription,
-    required this.projectDeliveryTime,
+    required this.days,
     this.proposalAttachments = const [],
   });
 
@@ -21,7 +21,7 @@ class CreateOfferRequestModel extends Equatable {
       'offerPrice': offerPrice,
       'projectId': projectId,
       'proposalDescription': proposalDescription,
-      'projectDeliveryTime': projectDeliveryTime.toIso8601String(),
+      'days': days,
       'proposalAttachments': proposalAttachments,
     };
   }
@@ -31,7 +31,7 @@ class CreateOfferRequestModel extends Equatable {
         offerPrice,
         projectId,
         proposalDescription,
-        projectDeliveryTime,
-        proposalAttachments
+        days,
+        proposalAttachments,
       ];
 }
