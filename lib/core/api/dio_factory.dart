@@ -53,7 +53,7 @@ class DioFactory {
       _createAuthInterceptor(),
     ]);
   }
-
+ static int retryCount = 0;
   static Interceptor _createAuthInterceptor() {
     return InterceptorsWrapper(
       onRequest: (options, handler) async {
@@ -62,7 +62,8 @@ class DioFactory {
         return handler.next(options);
       },
       onError: (DioException error, handler) async {
-        if (error.response?.statusCode == 401) {
+        if (error.response?.statusCode == 401 && retryCount < 1) {
+          retryCount++;
           try {
             await _tokenService.refreshToken();
             final accessToken = await _tokenService.getAccessToken();
@@ -114,6 +115,7 @@ class TokenService {
         response.data['accessToken'],
         response.data['refreshToken'],
       );
+      DioFactory.setTokenIntoHeaderAfterLogin(response.data['accessToken']);
     } catch (e) {
       if (e is DioException) {
         throw ServerFailure.fromDioError(e);

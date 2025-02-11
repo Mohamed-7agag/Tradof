@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tradof/core/helpers/extensions.dart';
+import 'package:tradof/core/routing/routes.dart';
+import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 
 class NavigationHandler {
   NavigationHandler._privateConstructor();
@@ -14,5 +16,13 @@ class NavigationHandler {
 
   BuildContext? get context => navigatorKey.currentContext;
 
-  void goToLoginView() => navigatorKey.currentContext!.goNamed('/login');
+  void goToLoginView() {
+    if (context == null) return;
+    errorToast(
+      context!,
+      'Error',
+      'Session Expired, Login Again',
+    );
+    context!.goNamed(Routes.loginViewRoute);
+  }
 }

@@ -120,7 +120,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
             Positioned(
               top: -20,
               child: BounceInUp(
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     if (currentIndex != 2) {
                       setState(() => currentIndex = 2);
@@ -147,15 +147,18 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
 
   Widget _buildNavItem(String inactiveIcon, String activeIcon, int index) {
     final isSelected = currentIndex == index;
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         if (currentIndex != index) {
           setState(() => currentIndex = index);
         }
       },
-      child: Image.asset(
-        isSelected ? activeIcon : inactiveIcon,
-        width: 24.w,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        child: Image.asset(
+          isSelected ? activeIcon : inactiveIcon,
+          width: 24.w,
+        ),
       ),
     );
   }
