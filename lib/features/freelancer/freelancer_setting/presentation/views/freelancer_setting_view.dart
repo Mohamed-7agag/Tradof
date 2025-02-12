@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helpers/spacing.dart';
+import '../../../../company/company_setting/presentation/widgets/delete_account_and_logout_section.dart';
 import '../../../../company/company_setting/presentation/widgets/setting_app_bar.dart';
+import '../../../../company/company_setting/presentation/widgets/subscription_plan_and_timer.dart';
 import '../../../freelancer_profile/data/model/freelancer_model.dart';
 import '../widgets/freelancer_setting_profile_info.dart';
 import '../widgets/freelancer_setting_section1.dart';
@@ -44,10 +46,10 @@ class FreelancerSettingView extends StatelessWidget {
                     delay: Duration(milliseconds: 400),
                     child: FreelancerSettingSection2(),
                   ),
-                  // verticalSpace(26),
-                  // SubscriptionPlanAndTimer(),
-                  // verticalSpace(20),
-                  // DeleteAccountAndLogoutSection(),
+                  verticalSpace(26),
+                  SubscriptionPlanAndTimer(),
+                  verticalSpace(20),
+                  DeleteAccountAndLogoutSection(),
                   verticalSpace(100),
                 ],
               ),

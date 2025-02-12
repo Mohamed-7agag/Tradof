@@ -29,7 +29,7 @@ class FreelancerProfileView extends StatelessWidget {
                   FreelancerSocialMedia(
                     socialMedia: freelancerModel.freelancerSocialMedias,
                   ),
-                  verticalSpace(26),
+                  verticalSpace(30),
                   FreelancerProfileTables(freelancerModel: freelancerModel),
                   verticalSpace(26),
                   FreelancerCvSection(cvUrl: freelancerModel.cvFilePath),

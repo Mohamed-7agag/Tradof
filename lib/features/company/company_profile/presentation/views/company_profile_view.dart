@@ -29,7 +29,7 @@ class ProfileCompanyView extends StatelessWidget {
                   CompanySocialLinks(
                     socialMedia: companyModel.socialMedia,
                   ),
-                  verticalSpace(26),
+                  verticalSpace(30),
                   SlideInUp(
                     from: 150,
                     child: CompanyProfileTables(companyModel: companyModel),

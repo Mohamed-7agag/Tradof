@@ -65,7 +65,7 @@ class UpdateCompanyProfileTablesView extends StatelessWidget {
       foregroundColor: AppColors.white,
       leadingWidth: 40,
       title: Text(
-        'Update Profile Info',
+        isPreferedLanguages ? 'Prefered Languages' : 'Industries Served',
         style: AppStyle.robotoBold20.copyWith(color: AppColors.white),
       ),
       actions: [
