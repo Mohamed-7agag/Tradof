@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
@@ -28,7 +28,7 @@ class UpdateFreelancerSocialMediaButton extends StatelessWidget {
       listener: (context, state) {
         if (state.status.isUpdateSocialMediaSuccess) {
           successToast(context, 'Success', state.message);
-          context.pop(true);
+          context.pop(result: true);
         } else if (state.status.isUpdateSocialMediaFailure) {
           errorToast(context, 'Error', state.errMessage);
         }

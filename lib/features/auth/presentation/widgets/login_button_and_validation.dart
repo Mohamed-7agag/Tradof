@@ -27,9 +27,15 @@ class LoginButtonAndValidation extends StatelessWidget {
       listener: (context, state) {
         if (state.status.isLogin) {
           if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
-            context.goNamed(Routes.freelancerBottomNavBarViewRoute);
+            context.pushNamedAndRemoveUntil(
+              Routes.freelancerBottomNavBarViewRoute,
+              predicate: (route) => false,
+            );
           } else {
-            context.goNamed(Routes.companyBottomNavBarViewRoute);
+            context.pushNamedAndRemoveUntil(
+              Routes.companyBottomNavBarViewRoute,
+              predicate: (route) => false,
+            );
           }
         } else if (state.status.isError) {
           errorToast(context, 'Error', state.errorMessage);

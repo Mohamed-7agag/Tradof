@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tradof/core/helpers/app_validation.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/app_constants.dart';
@@ -35,7 +34,7 @@ class AddEmployeeButton extends StatelessWidget {
       listener: (context, state) {
         if (state.status.isAddCompanyEmployeesSuccess) {
           successToast(context, 'Success', state.message);
-          GoRouter.of(context).pop(true);
+         context.pop(result: true);
         } else if (state.status.isAddCompanyEmployeesFailure) {
           errorToast(context, 'Error', state.errorMessage);
         }

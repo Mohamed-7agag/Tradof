@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/company/company_profile/data/model/social_media_model.dart';
-import 'package:tradof/features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
 import '../../../../../core/helpers/custom_url_launcher.dart';
+import '../../../../company/company_profile/data/model/social_media_model.dart';
+import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
 class FreelancerSocialMediaLinkIcon extends StatelessWidget {
   const FreelancerSocialMediaLinkIcon({
@@ -25,7 +25,7 @@ class FreelancerSocialMediaLinkIcon extends StatelessWidget {
       onLongPress: () async {
         final result = await context.pushNamed(
           Routes.updateFreelancerSocialMediaViewRoute,
-          extra: socialMedia,
+          arguments: socialMedia,
         );
         if (result == true && context.mounted) {
           context.read<FreelancerProfileCubit>().getFreelancerProfile();
@@ -37,7 +37,7 @@ class FreelancerSocialMediaLinkIcon extends StatelessWidget {
         } else {
           final result = await context.pushNamed(
             Routes.updateFreelancerSocialMediaViewRoute,
-            extra: socialMedia,
+            arguments: socialMedia,
           );
           if (result == true && context.mounted) {
             context.read<FreelancerProfileCubit>().getFreelancerProfile();

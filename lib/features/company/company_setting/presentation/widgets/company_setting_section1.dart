@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
@@ -25,7 +25,7 @@ class CompanySettingsSection1 extends StatelessWidget {
             onTap: () {
               context.pushNamed(
                 Routes.updateCompanyProfileViewRoute,
-                extra: companyModel,
+                arguments: companyModel,
               );
             },
           ),

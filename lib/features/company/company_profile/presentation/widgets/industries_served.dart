@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
@@ -29,9 +29,9 @@ class IndustriesServed extends StatelessWidget {
                   'isPreferedLanguages': false,
                   'data': companyModel
                 };
-                final result = await context.push(
+                final result = await context.pushNamed(
                   Routes.updateCompanyProfileTablesViewRoute,
-                  extra: data,
+                  arguments: data,
                 );
 
                 if (result == true && context.mounted) {

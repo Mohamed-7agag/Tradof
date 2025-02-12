@@ -41,7 +41,10 @@ class VerificationView extends StatelessWidget {
               child: CustomButton(
                 text: "Let’s Start",
                 onPressed: () {
-                  context.goNamed(Routes.loginViewRoute);
+                  context.pushNamedAndRemoveUntil(
+                    Routes.loginViewRoute,
+                    predicate: (route) => false,
+                  );
                 },
               ),
             ),

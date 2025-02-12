@@ -1,13 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tradof/core/di/di.dart';
-import 'package:tradof/core/helpers/navigation_handler.dart';
 import 'package:tradof/core/routing/routes.dart';
-import 'package:tradof/features/freelancer/freelancer_profile/data/model/freelancer_model.dart';
-import 'package:tradof/features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
-import 'package:tradof/features/freelancer/freelancer_profile/presentation/views/update_freelancer_social_media_view.dart';
-import 'package:tradof/features/freelancer/freelancer_setting/presentation/views/change_freelancer_password_view.dart';
-import 'package:tradof/features/freelancer/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
 import 'package:tradof/features/offers/presentation/logic/cubit/offer_cubit.dart';
 import 'package:tradof/features/offers/presentation/views/create_offer_view.dart';
 
@@ -30,80 +24,70 @@ import '../../features/company/company_setting/presentation/logic/company_settin
 import '../../features/company/company_setting/presentation/views/change_company_password_view.dart';
 import '../../features/company/company_setting/presentation/views/update_company_profile_view.dart';
 import '../../features/freelancer/freelancer_bottom_nav_bar_view.dart';
+import '../../features/freelancer/freelancer_profile/data/model/freelancer_model.dart';
+import '../../features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
+import '../../features/freelancer/freelancer_profile/presentation/views/update_freelancer_social_media_view.dart';
 import '../../features/freelancer/freelancer_setting/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
+import '../../features/freelancer/freelancer_setting/presentation/views/change_freelancer_password_view.dart';
+import '../../features/freelancer/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../utils/app_constants.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
 class AppRouter {
-  static final router = GoRouter(
-    navigatorKey: NavigationHandler.navigatorKey,
-    initialLocation: _initLocation(),
-    routes: [
-      GoRoute(
-        name: Routes.welcomeViewRoute,
-        path: '/welcomeView',
-        builder: (context, state) => WelcomeView(),
-      ),
-      GoRoute(
-        name: Routes.loginViewRoute,
-        path: '/loginView',
-        builder: (context, state) => BlocProvider(
-          create: (context) => AuthCubit(getIt()),
-          child: LoginView(),
-        ),
-      ),
-      GoRoute(
-        name: Routes.forgetPasswordPageViewRoute,
-        path: '/forgetPasswordPageView',
-        builder: (context, state) => BlocProvider(
-          create: (context) => AuthCubit(getIt()),
-          child: ForgetPasswordPageView(),
-        ),
-      ),
-      GoRoute(
-        name: Routes.createAccountPageViewRoute,
-        path: '/createAccountPageView',
-        builder: (context, state) => MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => RegisterationCubit(getIt())),
-            BlocProvider(
-              create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
-            ),
-          ],
-          child: CreateAccountPageView(),
-        ),
-      ),
-      GoRoute(
-        name: Routes.verificationViewRoute,
-        path: '/verificationView',
-        builder: (context, state) => VerificationView(),
-      ),
-      GoRoute(
-        name: Routes.freelancerBottomNavBarViewRoute,
-        path: '/freelancerBottomNavBarView',
-        builder: (context, state) => BlocProvider(
-          create: (context) =>
-              FreelancerProfileCubit(getIt())..getFreelancerProfile(),
-          child: FreelancerBottomNavBarView(),
-        ),
-      ),
-      GoRoute(
-        name: Routes.companyBottomNavBarViewRoute,
-        path: '/companyBottomNavBarView',
-        builder: (context, state) => BlocProvider(
-          create: (context) =>
-              CompanyProfileCubit(getIt())..getCompanyProfile(),
-          child: CompanyBottomNavBarView(),
-        ),
-      ),
-      GoRoute(
-        name: Routes.updateCompanyProfileTablesViewRoute,
-        path: '/updateCompanyProfileTablesView',
-        builder: (context, state) {
-          final data = state.extra as Map<String, dynamic>;
-          return MultiBlocProvider(
+  static Route<dynamic>? generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case Routes.welcomeViewRoute:
+        return MaterialPageRoute(builder: (_) => WelcomeView());
+      case Routes.loginViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => AuthCubit(getIt()),
+            child: LoginView(),
+          ),
+        );
+      case Routes.forgetPasswordPageViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => AuthCubit(getIt()),
+            child: ForgetPasswordPageView(),
+          ),
+        );
+      case Routes.createAccountPageViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => RegisterationCubit(getIt())),
+              BlocProvider(
+                create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
+              ),
+            ],
+            child: CreateAccountPageView(),
+          ),
+        );
+      case Routes.verificationViewRoute:
+        return MaterialPageRoute(builder: (_) => VerificationView());
+      case Routes.freelancerBottomNavBarViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                FreelancerProfileCubit(getIt())..getFreelancerProfile(),
+            child: FreelancerBottomNavBarView(),
+          ),
+        );
+      case Routes.companyBottomNavBarViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                CompanyProfileCubit(getIt())..getCompanyProfile(),
+            child: CompanyBottomNavBarView(),
+          ),
+        );
+      case Routes.updateCompanyProfileTablesViewRoute:
+        final data = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
                 create: (context) => MetaDataCubit(getIt()),
@@ -120,54 +104,37 @@ class AppRouter {
               companyModel: data['data'],
               isPreferedLanguages: data['isPreferedLanguages'],
             ),
-          );
-        },
-      ),
-      GoRoute(
-        name: Routes.updateCompanyProfileViewRoute,
-        path: '/updateCompanyProfileView',
-        builder: (context, state) {
-          final comanyModel = state.extra as CompanyModel;
-          return BlocProvider(
+          ),
+        );
+      case Routes.updateCompanyProfileViewRoute:
+        final comanyModel = settings.arguments as CompanyModel;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
             create: (context) => CompanySettingCubit(getIt()),
             child: UpdateCompanyProfileView(companyModel: comanyModel),
-          );
-        },
-      ),
-      GoRoute(
-        name: Routes.changeCompanyPasswordViewRoute,
-        path: '/changeCompanyPasswordView',
-        builder: (context, state) {
-          return ChangeCompanyPasswordView();
-        },
-      ),
-      GoRoute(
-        name: Routes.addUpdateSocialMediaViewRoute,
-        path: '/addUpdateSocialMediaView',
-        builder: (context, state) {
-          final socialMedia = state.extra as List<SocialMediaModel>;
-          return BlocProvider(
+          ),
+        );
+      case Routes.changeCompanyPasswordViewRoute:
+        return MaterialPageRoute(builder: (_) => ChangeCompanyPasswordView());
+      case Routes.addUpdateSocialMediaViewRoute:
+        final socialMedia = settings.arguments as List<SocialMediaModel>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
             create: (context) => CompanyProfileCubit(getIt()),
             child: AddUpdateSocialMediaView(socialMedia: socialMedia),
-          );
-        },
-      ),
-      GoRoute(
-        name: Routes.companyEmployeesViewRoute,
-        path: '/companyEmployeesView',
-        builder: (context, state) {
-          return BlocProvider(
+          ),
+        );
+      case Routes.companyEmployeesViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
             create: (context) =>
                 CompanyProfileCubit(getIt())..getCompanyEmployees(),
             child: CompanyEmployeesView(),
-          );
-        },
-      ),
-      GoRoute(
-        name: Routes.companyAddEmployeeViewRoute,
-        path: '/companyAddEmployeeView',
-        builder: (context, state) {
-          return MultiBlocProvider(
+          ),
+        );
+      case Routes.companyAddEmployeeViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
                 create: (context) => CompanyProfileCubit(getIt()),
@@ -177,54 +144,43 @@ class AppRouter {
               ),
             ],
             child: CompanyAddEmployeeView(),
-          );
-        },
-      ),
-      GoRoute(
-        name: Routes.createOfferViewRoute,
-        path: '/createOfferView',
-        builder: (context, state) {
-          return BlocProvider(
+          ),
+        );
+      case Routes.addOfferViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
             create: (context) => OfferCubit(getIt()),
             child: CreateOfferView(),
-          );
-        },
-      ),
-      GoRoute(
-        name: Routes.updateFreelancerSocialMediaViewRoute,
-        path: '/updateFreelancerSocialMediaView',
-        builder: (context, state) {
-          final socialMedia = state.extra as List<SocialMediaModel>;
-          return BlocProvider(
+          ),
+        );
+      case Routes.updateFreelancerSocialMediaViewRoute:
+        final socialMedia = settings.arguments as List<SocialMediaModel>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
             create: (context) => FreelancerProfileCubit(getIt()),
             child: UpdateFreelancerSocialMediaView(socialList: socialMedia),
-          );
-        },
-      ),
-      GoRoute(
-        name: Routes.changeFreelancerPasswordViewRoute,
-        path: '/changeFreelancerPasswordView',
-        builder: (context, state) {
-          return ChangeFreelancerPasswordView();
-        },
-      ),
-      GoRoute(
-        name: Routes.updateFreelancerProfileViewRoute,
-        path: '/updateFreelancerProfileView',
-        builder: (context, state) {
-          final freelancerModel = state.extra as FreelancerModel;
-          return BlocProvider(
+          ),
+        );
+      case Routes.changeFreelancerPasswordViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => ChangeFreelancerPasswordView(),
+        );
+      case Routes.updateFreelancerProfileViewRoute:
+        final freelancerModel = settings.arguments as FreelancerModel;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
             create: (context) => FreelancerSettingCubit(getIt()),
             child: UpdateFreelancerProfileView(
               freelancerModel: freelancerModel,
             ),
-          );
-        },
-      ),
-    ],
-  );
+          ),
+        );
+      default:
+        return null;
+    }
+  }
 
-  static String _initLocation() {
+  static String initialRoute() {
     if (CacheHelper.getBool(AppConstants.firstTime) == true) {
       if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
         return Routes.freelancerBottomNavBarViewRoute;

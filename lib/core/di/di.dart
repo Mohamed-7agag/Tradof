@@ -30,45 +30,45 @@ void setupGetIt() {
   getIt.registerLazySingleton<ApiServices>(() => ApiServices(dio: dio));
 
   // AuthRepo
-  getIt.registerFactory<AuthRepo>(
+  getIt.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(apiServices: getIt()),
   );
 
   // Registeration Repo
-  getIt.registerFactory<RegisterationRepo>(
+  getIt.registerLazySingleton<RegisterationRepo>(
     () => RegisterationRepoImpl(apiServices: getIt()),
   );
   // project repo
-  getIt.registerFactory<ProjectRepo>(
+  getIt.registerLazySingleton<ProjectRepo>(
     () => ProjectRepoImpl(apiServices: getIt()),
   );
   // MetaData Repo
-  getIt.registerFactory<MetaDataRepo>(
+  getIt.registerLazySingleton<MetaDataRepo>(
     () => MetaDataRepoImpl(apiServices: getIt()),
   );
 
   // profile company repo
-  getIt.registerFactory<CompanyProfileRepo>(
+  getIt.registerLazySingleton<CompanyProfileRepo>(
     () => CompanyProfileRepoImpl(apiServices: getIt()),
   );
 
   // company setting repo
-  getIt.registerFactory<CompanySettingRepo>(
+  getIt.registerLazySingleton<CompanySettingRepo>(
     () => CompanySettingRepoImpl(apiServices: getIt()),
   );
 
   // offer repo
-  getIt.registerFactory<OfferRepo>(
+  getIt.registerLazySingleton<OfferRepo>(
     () => OfferRepoImpl(apiServices: getIt()),
   );
 
   // freelancer repo
-  getIt.registerFactory<FreelancerProfileRepo>(
+  getIt.registerLazySingleton<FreelancerProfileRepo>(
     () => FreelancerProfileRepoImpl(apiServices: getIt()),
   );
 
   // freelancer setting repo
-  getIt.registerFactory<FreelancerSettingRepo>(
+  getIt.registerLazySingleton<FreelancerSettingRepo>(
     () => FreelancerSettingRepoImpl(apiServices: getIt()),
   );
 }

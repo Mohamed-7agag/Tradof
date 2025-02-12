@@ -3,7 +3,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 
 import '../../../../../core/cache/cache_helper.dart';
 import '../../../../../core/helpers/spacing.dart';
@@ -100,7 +100,10 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
       btnOkOnPress: () {
         CacheHelper.clearAllSecuredData();
         CacheHelper.removeData(key: AppConstants.role);
-        context.goNamed(Routes.loginViewRoute);
+        context.pushNamedAndRemoveUntil(
+          Routes.loginViewRoute,
+          predicate: (route) => false,
+        );
       },
     ).show();
   }

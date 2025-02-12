@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
-import 'package:tradof/features/company/company_profile/data/model/social_media_model.dart';
 
 import '../../../../../core/helpers/custom_url_launcher.dart';
+import '../../data/model/social_media_model.dart';
+import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class LinkIcon extends StatelessWidget {
   const LinkIcon({
@@ -25,7 +25,7 @@ class LinkIcon extends StatelessWidget {
       onLongPress: () async {
         final result = await context.pushNamed(
           Routes.addUpdateSocialMediaViewRoute,
-          extra: socialMedia,
+          arguments: socialMedia,
         );
         if (result == true && context.mounted) {
           context.read<CompanyProfileCubit>().getCompanyProfile();
@@ -37,7 +37,7 @@ class LinkIcon extends StatelessWidget {
         } else {
           final result = await context.pushNamed(
             Routes.addUpdateSocialMediaViewRoute,
-            extra: socialMedia,
+            arguments: socialMedia,
           );
           if (result == true && context.mounted) {
             context.read<CompanyProfileCubit>().getCompanyProfile();

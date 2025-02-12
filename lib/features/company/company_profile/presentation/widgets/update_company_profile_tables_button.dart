@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/features/auth/data/model/specialization_model.dart';
 import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
+import '../../../../../core/utils/models/language_model.dart';
 import '../../../../../core/utils/widgets/custom_button.dart';
 import '../../../../../core/utils/widgets/custom_toastification.dart';
-import '../../../../../core/utils/models/language_model.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class UpdateCompanyProfileTablesButton extends StatelessWidget {
@@ -28,7 +27,7 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
         } else if (state.status.isPreferedLanguagesSuccess ||
             state.status.isIndustriesServedSuccess) {
           successToast(context, 'Success', state.message);
-          GoRouter.of(context).pop(true);
+          context.pop(result: true);
         }
       },
       builder: (context, state) {

@@ -23,6 +23,9 @@ class NavigationHandler {
       'Error',
       'Session Expired, Login Again',
     );
-    context!.goNamed(Routes.loginViewRoute);
+    context!.pushNamedAndRemoveUntil(
+      Routes.loginViewRoute,
+      predicate: (route) => false,
+    );
   }
 }

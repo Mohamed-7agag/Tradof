@@ -26,7 +26,7 @@ class FreelancerSettingsSection1 extends StatelessWidget {
             onTap: () {
               context.pushNamed(
                 Routes.updateFreelancerProfileViewRoute,
-                extra: freelancerModel,
+                arguments: freelancerModel,
               );
             },
           ),

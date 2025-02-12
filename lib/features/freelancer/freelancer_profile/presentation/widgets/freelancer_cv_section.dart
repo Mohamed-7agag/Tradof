@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +25,6 @@ class FreelancerCvSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('builddddddddd');
     return BlocListener<FreelancerProfileCubit, FreelancerProfileState>(
       listenWhen: (previous, current) =>
           current.status.isUploadCvSuccess ||
