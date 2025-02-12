@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/features/freelancer/freelancer_setting/data/model/update_freelancer_request_model.dart';
 
 import '../../../../../../core/utils/widgets/upload_image_to_cloudinary.dart';
 import '../../../../freelancer_profile/data/model/freelancer_model.dart';
+import '../../../data/model/update_freelancer_request_model.dart';
 import '../../../data/repo/freelancer_setting_repo.dart';
 
 part 'freelancer_setting_state.dart';
@@ -71,7 +71,7 @@ class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
       (message) => emit(
         state.copyWith(
           status: FreelancerSettingStatus.updateFreelancerProfileSuccess,
-          message: message,
+          message: 'Profile Changed Successfully',
           errMessage: null,
         ),
       ),

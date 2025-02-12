@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
+import 'package:tradof/features/freelancer/freelancer_profile/presentation/views/update_freelancer_profile_tables_view.dart';
 import 'package:tradof/features/offers/presentation/logic/cubit/offer_cubit.dart';
 import 'package:tradof/features/offers/presentation/views/create_offer_view.dart';
 
@@ -172,6 +173,28 @@ class AppRouter {
             create: (context) => FreelancerSettingCubit(getIt()),
             child: UpdateFreelancerProfileView(
               freelancerModel: freelancerModel,
+            ),
+          ),
+        );
+        case Routes.updateFreelancerProfileTablesViewRoute:
+        //final data = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => MetaDataCubit(getIt()),
+              ),
+              // BlocProvider(
+              //   create: (context) => TablesCubit()
+              //     ..addInitialData(
+              //       languagePairs: data['data'].freelancerLanguagePairs,
+              //       //specializations: data['data'].specializations,
+              //     ),
+              // ),
+            ],
+            child: UpdateFreelancerProfileTablesView(
+              // freelancerModel: data['data'],
+              // isLanguagePair: data['isLanguagePair'],
             ),
           ),
         );

@@ -4,11 +4,11 @@ import 'package:tradof/core/errors/failure.dart';
 import '../model/update_freelancer_request_model.dart';
 
 abstract class FreelancerSettingRepo {
-  Future<Either<Failure, String>> changeFreelancerPassword({
+  Future<Either<Failure, Unit>> changeFreelancerPassword({
     required String currentPassword,
     required String newPassword,
   });
-  Future<Either<Failure, String>> updateCompanyProfile({
+  Future<Either<Failure, Unit>> updateCompanyProfile({
     required UpdateFreelancerRequestModel updateFreelancerRequestModel,
   });
 }

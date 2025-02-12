@@ -38,8 +38,7 @@ class UpdateFreelancerProfileButton extends StatelessWidget {
       listener: (context, state) {
         if (state.status.isUpdateFreelancerProfileSuccess) {
           successToast(context, 'Success', state.message);
-
-          context.pop();
+          context.pop(result: true);
         } else if (state.status.isUpdateFreelancerProfileFailure) {
           errorToast(context, 'Error', state.errMessage);
         }

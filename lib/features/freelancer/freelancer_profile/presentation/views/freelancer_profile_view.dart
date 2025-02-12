@@ -5,6 +5,7 @@ import 'package:tradof/core/helpers/spacing.dart';
 import '../../data/model/freelancer_model.dart';
 import '../widgets/freelancer_cv_section.dart';
 import '../widgets/freelancer_profile_app_bar.dart';
+import '../widgets/freelancer_profile_tables.dart';
 import '../widgets/freelancer_rating_and_review.dart';
 import '../widgets/freelancer_social_media.dart';
 
@@ -29,12 +30,9 @@ class FreelancerProfileView extends StatelessWidget {
                     socialMedia: freelancerModel.freelancerSocialMedias,
                   ),
                   verticalSpace(26),
-                  FreelancerCvSection(cvUrl: freelancerModel.cvFilePath),
+                  FreelancerProfileTables(freelancerModel: freelancerModel),
                   verticalSpace(26),
-                  // SlideInUp(
-                  //   from: 150,
-                  //   child: CompanyProfileTables(companyModel: companyModel),
-                  // ),
+                  FreelancerCvSection(cvUrl: freelancerModel.cvFilePath),
                   verticalSpace(100),
                 ],
               ),

@@ -14,10 +14,10 @@ class FreelancerSettingRepoImpl implements FreelancerSettingRepo {
   FreelancerSettingRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
   @override
-  Future<Either<Failure, String>> changeFreelancerPassword(
+  Future<Either<Failure, Unit>> changeFreelancerPassword(
       {required String currentPassword, required String newPassword}) {
     return handleRequest(() async {
-      final response = await _apiServices.post(
+      await _apiServices.post(
         EndPoint.changeFreelancerPassword(AppConstants.kUserId),
         data: {
           'currentPassword': currentPassword,
@@ -25,19 +25,19 @@ class FreelancerSettingRepoImpl implements FreelancerSettingRepo {
           'confirmPassword': newPassword,
         },
       );
-      return response;
+      return unit;
     });
   }
 
   @override
-  Future<Either<Failure, String>> updateCompanyProfile(
+  Future<Either<Failure, Unit>> updateCompanyProfile(
       {required UpdateFreelancerRequestModel updateFreelancerRequestModel}) {
     return handleRequest(() async {
-      final response = await _apiServices.put(
+      await _apiServices.put(
         EndPoint.updateFreelancerProfile(AppConstants.kUserId),
         data: updateFreelancerRequestModel.toJson(),
       );
-      return response;
+      return unit;
     });
   }
 }

@@ -7,12 +7,12 @@ import 'package:tradof/core/di/di.dart';
 import 'package:tradof/features/auth/presentation/widgets/industries_served_table.dart';
 import 'package:tradof/features/auth/presentation/widgets/prefered_languages_table.dart';
 import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
-import 'package:tradof/features/company/company_profile/presentation/widgets/update_company_profile_tables_button.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
+import '../widgets/update_company_profile_tables_button.dart';
 
 class UpdateCompanyProfileTablesView extends StatelessWidget {
   const UpdateCompanyProfileTablesView({

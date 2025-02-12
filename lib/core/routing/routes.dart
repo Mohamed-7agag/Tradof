@@ -28,5 +28,7 @@ abstract class Routes {
       "/changeFreelancerPasswordView";
   static const String updateFreelancerProfileViewRoute =
       "/updateFreelancerProfileView";
+  static const String updateFreelancerProfileTablesViewRoute =
+      "/updateFreelancerProfileTablesView";
   static const String addOfferViewRoute = "/addOfferView";
 }
