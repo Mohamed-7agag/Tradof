@@ -53,7 +53,8 @@ class DioFactory {
       _createAuthInterceptor(),
     ]);
   }
- static int retryCount = 0;
+
+  static int retryCount = 0;
   static Interceptor _createAuthInterceptor() {
     return InterceptorsWrapper(
       onRequest: (options, handler) async {
@@ -62,7 +63,10 @@ class DioFactory {
         return handler.next(options);
       },
       onError: (DioException error, handler) async {
-        if (error.response?.statusCode == 401 && retryCount < 1) {
+        if (error.response?.statusCode == 401 &&
+            retryCount < 1 &&
+            error.response?.toString() !=
+                'Please confirm your email before logging in.') {
           retryCount++;
           try {
             await _tokenService.refreshToken();

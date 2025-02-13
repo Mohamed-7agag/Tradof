@@ -55,7 +55,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       )),
       (message) => emit(state.copyWith(
         status: ProjectStatus.createProjectSuccess,
-        message: message,
+        message: 'Project Created Successfully',
       )),
     );
   }

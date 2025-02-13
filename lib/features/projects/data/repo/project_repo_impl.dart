@@ -15,15 +15,14 @@ class ProjectRepoImpl implements ProjectRepo {
       : _apiServices = apiServices;
 
   @override
-  Future<Either<Failure, String>> createProject(
-      CreateProjectRequestModel model) {
+  Future<Either<Failure, Unit>> createProject(CreateProjectRequestModel model) {
     return handleRequest(() async {
-      final response = await _apiServices.post(
+      await _apiServices.post(
         EndPoint.createProject(AppConstants.kUserId),
         data: model.toJson(),
         isFormData: true,
       );
-      return response;
+      return unit;
     });
   }
 }

@@ -25,7 +25,7 @@ class UpdateCompanyProfileTablesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppbar(
-        title: isPreferedLanguages ? 'Prefered Languages' : 'Industries Served',
+        title: isPreferedLanguages ? 'Update Prefered Languages' : 'Update Industries',
         actionIcon: SvgPicture.asset('assets/images/edit.svg', width: 24),
       ),
       body: Padding(
