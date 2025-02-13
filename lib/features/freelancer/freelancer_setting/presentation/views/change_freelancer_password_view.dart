@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart' show SvgPicture;
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 
-import '../../../../company/company_setting/presentation/widgets/change_company_password_app_bar.dart';
+import '../../../../../core/utils/widgets/custom_app_bar.dart';
 import '../widgets/change_freelancer_password_button.dart';
 
 class ChangeFreelancerPasswordView extends StatefulWidget {
@@ -39,49 +40,46 @@ class _ChangeFreelancerPasswordViewState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          ChangeCompanyPasswordAppbar(),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    verticalSpace(30),
-                    CustomTextField(
-                      labelText: 'Current Password',
-                      controller: currentPasswordController,
-                      outlineBorder: true,
-                      obscureText: true,
-                    ),
-                    verticalSpace(16),
-                    CustomTextField(
-                      labelText: 'New Password',
-                      controller: newPasswordController,
-                      outlineBorder: true,
-                      obscureText: true,
-                    ),
-                    verticalSpace(16),
-                    CustomTextField(
-                      labelText: 'Confirm Password',
-                      controller: confirmPasswordController,
-                      outlineBorder: true,
-                      obscureText: true,
-                    ),
-                    verticalSpace(60),
-                    ChangeFreelancerPasswordButton(
-                      currentPasswordController: currentPasswordController,
-                      newPasswordController: newPasswordController,
-                      confirmPasswordController: confirmPasswordController,
-                    ),
-                    verticalSpace(40),
-                  ],
-                ),
+      appBar: customAppbar(
+        title: 'Change Password',
+        actionIcon: SvgPicture.asset('assets/images/edit.svg', width: 24),
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              verticalSpace(30),
+              CustomTextField(
+                labelText: 'Current Password',
+                controller: currentPasswordController,
+                outlineBorder: true,
+                obscureText: true,
               ),
-            ),
-          )
-        ],
+              verticalSpace(16),
+              CustomTextField(
+                labelText: 'New Password',
+                controller: newPasswordController,
+                outlineBorder: true,
+                obscureText: true,
+              ),
+              verticalSpace(16),
+              CustomTextField(
+                labelText: 'Confirm Password',
+                controller: confirmPasswordController,
+                outlineBorder: true,
+                obscureText: true,
+              ),
+              verticalSpace(60),
+              ChangeFreelancerPasswordButton(
+                currentPasswordController: currentPasswordController,
+                newPasswordController: newPasswordController,
+                confirmPasswordController: confirmPasswordController,
+              ),
+              verticalSpace(40),
+            ],
+          ),
+        ),
       ),
     );
   }

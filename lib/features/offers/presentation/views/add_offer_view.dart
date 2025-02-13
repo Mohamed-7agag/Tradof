@@ -6,6 +6,7 @@ import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
 import '../../../../core/theming/app_colors.dart';
+import '../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../projects/presentation/logic/file_cubit.dart';
 import '../../../projects/presentation/widgets/attachment_files_section.dart';
 import '../../../projects/presentation/widgets/project_text_field.dart';
@@ -84,23 +85,13 @@ class _AddOfferViewState extends State<AddOfferView> {
   }
 
   AppBar _buildAppBAr() {
-    return AppBar(
-      backgroundColor: AppColors.primary,
-      foregroundColor: AppColors.white,
-      leadingWidth: 40,
-      title: Text(
-        'Add Offer',
-        style: AppStyle.robotoBold20,
+    return customAppbar(
+      title: 'Add Offer',
+      actionIcon: SvgPicture.asset(
+        'assets/images/pen_add_colored.svg',
+        width: 24,
+        colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
       ),
-      actions: [
-        SvgPicture.asset(
-          'assets/images/pen_add_colored.svg',
-          width: 24,
-          colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-        ),
-        horizontalSpace(16),
-      ],
-      toolbarHeight: 65,
     );
   }
 }

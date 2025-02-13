@@ -5,8 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tradof/features/freelancer/freelancer_profile/presentation/widgets/update_freelancer_social_media_button.dart';
 
 import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/theming/app_colors.dart';
-import '../../../../../core/theming/app_style.dart';
+import '../../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../../company/company_profile/data/model/social_media_model.dart';
 import '../../../../company/company_profile/presentation/widgets/social_media_item.dart';
 
@@ -57,15 +56,9 @@ class _UpdateFreelancerSocialMediaViewState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        foregroundColor: AppColors.white,
-        leadingWidth: 40,
-        title: Text('Social Media', style: AppStyle.robotoBold20),
-        actions: [
-          SvgPicture.asset('assets/images/edit.svg', width: 24),
-          horizontalSpace(16),
-        ],
+      appBar: customAppbar(
+        title: 'Social Media',
+        actionIcon: SvgPicture.asset('assets/images/edit.svg', width: 24),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),

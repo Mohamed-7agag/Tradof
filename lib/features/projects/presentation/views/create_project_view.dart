@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
+import '../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../../core/utils/widgets/custom_refresh_indicator.dart';
 import '../../../company/company_profile/data/model/company_model.dart';
 import '../logic/file_cubit.dart';
 import '../widgets/attachment_files_section.dart';
-import '../widgets/create_project_app_bar.dart';
 import '../widgets/create_project_button.dart';
 import '../widgets/create_project_industries_section.dart';
 import '../widgets/create_project_language_pair.dart';
@@ -55,7 +56,11 @@ class _CreateProjectViewState extends State<CreateProjectView> {
       create: (context) => FileCubit(),
       child: Column(
         children: [
-          CreateProjectAppbar(),
+          customAppbar(
+            title: 'Create Project',
+            actionIcon:
+                SvgPicture.asset('assets/images/create_project.svg', width: 24),
+          ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),

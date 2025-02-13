@@ -7,10 +7,8 @@ import 'package:tradof/core/di/di.dart';
 import 'package:tradof/features/auth/presentation/widgets/language_pair_table.dart';
 import 'package:tradof/features/auth/presentation/widgets/specialization_table.dart';
 
-
 import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/theming/app_colors.dart';
-import '../../../../../core/theming/app_style.dart';
+import '../../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../data/model/freelancer_model.dart';
 import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import '../widgets/update_freelancer_profile_tables_button.dart';
@@ -27,7 +25,11 @@ class UpdateFreelancerProfileTablesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: customAppbar(
+        title:
+            isLanguagePair ? 'Update Languages Pairs' : 'Update Specialization',
+        actionIcon: SvgPicture.asset('assets/images/edit.svg', width: 24),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: SingleChildScrollView(
@@ -58,23 +60,6 @@ class UpdateFreelancerProfileTablesView extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: AppColors.primary,
-      foregroundColor: AppColors.white,
-      leadingWidth: 40,
-      title: Text(
-        isLanguagePair ? 'Update Languages Pairs': 'Update Specialization' ,
-        style: AppStyle.robotoBold20.copyWith(color: AppColors.white),
-      ),
-      actions: [
-        SvgPicture.asset('assets/images/edit.svg', width: 24),
-        horizontalSpace(16),
-      ],
-      toolbarHeight: 65,
     );
   }
 }

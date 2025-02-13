@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
+import 'package:tradof/core/utils/widgets/custom_app_bar.dart';
 import 'package:tradof/core/utils/widgets/custom_drop_down_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
@@ -10,7 +11,6 @@ import 'package:tradof/features/auth/presentation/widgets/country_drop_down.dart
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
-import '../../../../../core/theming/app_style.dart';
 import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/widgets/custom_text_field.dart';
 import '../../../../auth/presentation/widgets/phone_number_text_field.dart';
@@ -60,7 +60,7 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: customAppbar(title: 'Add Employee'),
       body: Form(
         key: formKey,
         child: Padding(
@@ -205,19 +205,6 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
           ),
         ),
       ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: AppColors.primary,
-      foregroundColor: AppColors.white,
-      leadingWidth: 40,
-      title: Text(
-        'Add Employee',
-        style: AppStyle.robotoBold20,
-      ),
-      toolbarHeight: 65,
     );
   }
 }

@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 
 import '../../../../../core/theming/app_colors.dart';
-import '../../../../../core/theming/app_style.dart';
+import '../../../../../core/utils/widgets/custom_app_bar.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 import '../widgets/company_employee_item.dart';
 
@@ -19,7 +18,13 @@ class CompanyEmployeesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: customAppbar(
+          title: 'Employees',
+          actionIcon: SvgPicture.asset(
+            'assets/images/support.svg',
+            width: 24,
+            colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+          )),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
@@ -55,27 +60,6 @@ class CompanyEmployeesView extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: AppColors.primary,
-      foregroundColor: AppColors.white,
-      leadingWidth: 40,
-      title: Text(
-        'Employees',
-        style: AppStyle.robotoBold20,
-      ),
-      actions: [
-        SvgPicture.asset(
-          'assets/images/support.svg',
-          width: 24,
-          colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-        ),
-        horizontalSpace(16),
-      ],
-      toolbarHeight: 65,
     );
   }
 }

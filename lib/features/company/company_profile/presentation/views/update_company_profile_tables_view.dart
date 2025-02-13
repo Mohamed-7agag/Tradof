@@ -9,8 +9,7 @@ import 'package:tradof/features/auth/presentation/widgets/prefered_languages_tab
 import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
 import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/theming/app_colors.dart';
-import '../../../../../core/theming/app_style.dart';
+import '../../../../../core/utils/widgets/custom_app_bar.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 import '../widgets/update_company_profile_tables_button.dart';
 
@@ -25,7 +24,10 @@ class UpdateCompanyProfileTablesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: customAppbar(
+        title: isPreferedLanguages ? 'Prefered Languages' : 'Industries Served',
+        actionIcon: SvgPicture.asset('assets/images/edit.svg', width: 24),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: SingleChildScrollView(
@@ -56,23 +58,6 @@ class UpdateCompanyProfileTablesView extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: AppColors.primary,
-      foregroundColor: AppColors.white,
-      leadingWidth: 40,
-      title: Text(
-        isPreferedLanguages ? 'Prefered Languages' : 'Industries Served',
-        style: AppStyle.robotoBold20.copyWith(color: AppColors.white),
-      ),
-      actions: [
-        SvgPicture.asset('assets/images/edit.svg', width: 24),
-        horizontalSpace(16),
-      ],
-      toolbarHeight: 65,
     );
   }
 }
