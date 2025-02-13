@@ -29,8 +29,9 @@ class _SelectOfferBudgetState extends State<SelectOfferBudget> {
           data: SliderTheme.of(context).copyWith(
             trackHeight: 4.5,
             activeTrackColor: AppColors.lightOrange,
-            inactiveTrackColor: Colors.grey[300],
+            inactiveTrackColor: Colors.black12,
             thumbColor: AppColors.lightOrange,
+            year2023: false,
             thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.0),
           ),
           child: Slider(
@@ -55,7 +56,7 @@ class _SelectOfferBudgetState extends State<SelectOfferBudget> {
                 color: AppColors.darkGrey,
               ),
             ),
-            Text("$selectedBudget\$", style: AppStyle.poppinsMedium14),
+            Text("${selectedBudget.toInt()}\$", style: AppStyle.poppinsMedium14),
             Text(
               "5000\$",
               style: AppStyle.robotoRegular12.copyWith(

@@ -36,7 +36,7 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
   @override
   void initState() {
     projectNameController =
-        TextEditingController(text: widget.projectModel.projectName);
+        TextEditingController(text: widget.projectModel.name);
     projectDescriptionController =
         TextEditingController(text: widget.projectModel.description);
     minBudgetController =

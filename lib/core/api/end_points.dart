@@ -15,7 +15,7 @@ abstract class EndPoint {
   static String createOffer = 'api/propsal';
 
   // project
-  static String createProject(String id) => 'project?$id';
+  static String createProject(String id) => 'project?companyId=$id';
 
   //company
   static String changeCompanyPassword(String id) {

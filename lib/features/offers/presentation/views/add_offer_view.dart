@@ -12,14 +12,14 @@ import '../../../projects/presentation/widgets/project_text_field.dart';
 import '../widgets/bloc_create_offer_button.dart';
 import '../widgets/select_offer_budget.dart';
 
-class CreateOfferView extends StatefulWidget {
-  const CreateOfferView({super.key});
+class AddOfferView extends StatefulWidget {
+  const AddOfferView({super.key});
 
   @override
-  State<CreateOfferView> createState() => _CreateOfferViewState();
+  State<AddOfferView> createState() => _AddOfferViewState();
 }
 
-class _CreateOfferViewState extends State<CreateOfferView> {
+class _AddOfferViewState extends State<AddOfferView> {
   late final TextEditingController offerDetailsController;
   late final TextEditingController daysController;
 

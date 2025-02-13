@@ -4,7 +4,7 @@ import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/features/freelancer/freelancer_profile/presentation/views/update_freelancer_profile_tables_view.dart';
 import 'package:tradof/features/offers/presentation/logic/cubit/offer_cubit.dart';
-import 'package:tradof/features/offers/presentation/views/create_offer_view.dart';
+import 'package:tradof/features/offers/presentation/views/add_offer_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
 import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
@@ -151,7 +151,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => OfferCubit(getIt()),
-            child: CreateOfferView(),
+            child: AddOfferView(),
           ),
         );
       case Routes.updateFreelancerSocialMediaViewRoute:

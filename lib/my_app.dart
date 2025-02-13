@@ -14,16 +14,9 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) {
         return MaterialApp(
-          theme: ThemeData.light().copyWith(
-            scaffoldBackgroundColor: AppColors.background,
-            primaryColor: AppColors.primary,
-          ),
+          theme: _appTheme(),
           builder: (context, child) {
-            return MediaQuery(
-              data: MediaQuery.of(context)
-                  .copyWith(textScaler: const TextScaler.linear(1.0)),
-              child: child!,
-            );
+            return _mediaQueryWidget(context, child);
           },
           debugShowCheckedModeBanner: false,
           navigatorKey: NavigationHandler.navigatorKey,
@@ -31,6 +24,31 @@ class MyApp extends StatelessWidget {
           initialRoute: AppRouter.initialRoute(),
         );
       },
+    );
+  }
+
+  MediaQuery _mediaQueryWidget(BuildContext context, Widget? child) {
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(
+        textScaler: const TextScaler.linear(1.0),
+      ),
+      child: child!,
+    );
+  }
+
+  ThemeData _appTheme() {
+    return ThemeData.light().copyWith(
+      scaffoldBackgroundColor: AppColors.background,
+      primaryColor: AppColors.primary,
+      appBarTheme: AppBarTheme(
+        foregroundColor: AppColors.white,
+        backgroundColor: AppColors.primary,
+        toolbarHeight: 65,
+      ),
+      pageTransitionsTheme: PageTransitionsTheme(builders: {
+        TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.iOS: FadeForwardsPageTransitionsBuilder(),
+      }),
     );
   }
 }

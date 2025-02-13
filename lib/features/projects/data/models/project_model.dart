@@ -1,51 +1,105 @@
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 class ProjectModel extends Equatable {
-  final String projectName;
+  final int id;
+  final String name;
   final String description;
   final int days;
-  final int fromLanguageId;
-  final int toLanguageId;
+  final int languageFromId;
+  final int languageToId;
   final int minPrice;
   final int maxPrice;
+  final String startDate;
+  final String endDate;
+  final int status;
   final int specializationId;
-  final List<MultipartFile> files;
+  final int numberOfOffers;
+  final List<FileModel> files;
 
   const ProjectModel({
-    required this.projectName,
+    required this.id,
+    required this.name,
     required this.description,
     required this.days,
-    required this.fromLanguageId,
-    required this.toLanguageId,
+    required this.languageFromId,
+    required this.languageToId,
     required this.minPrice,
     required this.maxPrice,
-    required this.files,
+    required this.startDate,
+    required this.endDate,
+    required this.status,
     required this.specializationId,
+    required this.numberOfOffers,
+    required this.files,
   });
 
-  Map<String, dynamic> toJson() => {
-        'name': projectName,
-        'description': description,
-        'days': days,
-        'languageFromId': fromLanguageId,
-        'languageToId': toLanguageId,
-        'minPrice': minPrice,
-        'maxPrice': maxPrice,
-        'specializationId': specializationId,
-        'Files': files,
-      };
+  factory ProjectModel.fromJson(Map<String, dynamic> json) {
+    return ProjectModel(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      days: json['days'],
+      languageFromId: json['language_from_id'],
+      languageToId: json['language_to_id'],
+      minPrice: json['min_price'],
+      maxPrice: json['max_price'],
+      startDate: json['start_date'],
+      endDate: json['end_date'],
+      status: json['status'],
+      specializationId: json['specialization_id'],
+      numberOfOffers: json['number_of_offers'],
+      files: List<FileModel>.from(
+        json['files'].map((x) => FileModel.fromJson(x)),
+      ),
+    );
+  }
 
   @override
   List<Object?> get props => [
-        projectName,
+        id,
+        name,
         description,
         days,
-        fromLanguageId,
-        toLanguageId,
+        languageFromId,
+        languageToId,
         minPrice,
         maxPrice,
+        startDate,
+        endDate,
+        status,
         specializationId,
+        numberOfOffers,
         files,
+      ];
+}
+
+class FileModel extends Equatable {
+  final String fileName;
+  final String filePath;
+  final int fileType;
+  final int fileSize;
+
+  const FileModel({
+    required this.fileName,
+    required this.filePath,
+    required this.fileType,
+    required this.fileSize,
+  });
+
+  factory FileModel.fromJson(Map<String, dynamic> json) {
+    return FileModel(
+      fileName: json['file_name'],
+      filePath: json['file_path'],
+      fileType: json['file_type'],
+      fileSize: json['file_size'],
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        fileName,
+        filePath,
+        fileType,
+        fileSize,
       ];
 }
