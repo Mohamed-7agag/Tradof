@@ -10,8 +10,8 @@ import '../logic/tables_cubit/tables_cubit.dart';
 import 'show_language_pair_dialog.dart';
 
 class LanguagePairTable extends StatelessWidget {
-  const LanguagePairTable({super.key});
-
+  const LanguagePairTable({super.key, this.darkColors = false});
+  final bool darkColors;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,8 +21,9 @@ class LanguagePairTable extends StatelessWidget {
           children: [
             Text(
               'Language Pair',
-              style:
-                  AppStyle.poppinsSemiBold14.copyWith(color: AppColors.white),
+              style: AppStyle.poppinsSemiBold14.copyWith(
+                color: darkColors ? AppColors.black : AppColors.white,
+              ),
             ),
             GestureDetector(
               onTap: () {
@@ -45,7 +46,7 @@ class LanguagePairTable extends StatelessWidget {
                     label: Text(
                       'Language Pair',
                       style: AppStyle.poppinsSemiBold14.copyWith(
-                        color: AppColors.white,
+                        color: darkColors ? AppColors.black : AppColors.white,
                       ),
                     ),
                   ),
@@ -54,7 +55,7 @@ class LanguagePairTable extends StatelessWidget {
                       child: Text(
                         'IEFT tag',
                         style: AppStyle.poppinsSemiBold14.copyWith(
-                          color: AppColors.white,
+                          color: darkColors ? AppColors.black : AppColors.white,
                         ),
                       ),
                     ),
@@ -77,9 +78,11 @@ class LanguagePairTable extends StatelessWidget {
                             horizontalSpace(6),
                             Expanded(
                               child: Text(
-                                '${language.fromLanguage.languageName} - ${language.toLanguage.languageName}',
+                                '${language.fromLanguage.languageName} (${language.fromLanguage.countryCode}) - ${language.toLanguage.languageName} (${language.toLanguage.countryCode})',
                                 style: AppStyle.robotoRegular12.copyWith(
-                                  color: AppColors.white,
+                                  color: darkColors
+                                      ? AppColors.black
+                                      : AppColors.white,
                                 ),
                               ),
                             ),
@@ -90,7 +93,8 @@ class LanguagePairTable extends StatelessWidget {
                         Text(
                           '${language.fromLanguage.languageCode} - ${language.toLanguage.languageCode}',
                           style: AppStyle.robotoRegular12.copyWith(
-                            color: AppColors.white,
+                            color:
+                                darkColors ? AppColors.black : AppColors.white,
                           ),
                         ),
                       ),
@@ -99,10 +103,17 @@ class LanguagePairTable extends StatelessWidget {
                 }).toList(),
                 horizontalMargin: 12,
                 columnSpacing: 22,
+                dividerThickness: 0,
                 border: TableBorder.all(
-                  color: AppColors.white,
+                  color: darkColors ? AppColors.cardDarkColor : AppColors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
+                decoration: darkColors
+                    ? BoxDecoration(
+                        color: AppColors.cardColor,
+                        borderRadius: BorderRadius.circular(10),
+                      )
+                    : null,
               );
             },
           ),

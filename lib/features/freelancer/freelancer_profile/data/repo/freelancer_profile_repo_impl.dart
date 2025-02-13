@@ -50,4 +50,56 @@ class FreelancerProfileRepoImpl implements FreelancerProfileRepo {
       return unit;
     });
   }
+
+  @override
+  Future<Either<Failure, Unit>> addFreelancerLanguagePair({
+    required String freelancerId,
+    required List<Map<String, int>> languagesPairIds,
+  }) {
+    return handleRequest(() async {
+      await _apiServices.post(
+        EndPoint.addOrDeleteFreelancerLanguagePair(AppConstants.kUserId),
+        data: languagesPairIds,
+      );
+      return unit;
+    });
+  }
+
+  @override
+  Future<Either<Failure, Unit>> deleteFreelancerLanguagePair({
+    required String freelancerId,
+    required List<Map<String, int>> languagesPairIds,
+  }) {
+    return handleRequest(() async {
+      await _apiServices.delete(
+        EndPoint.addOrDeleteFreelancerLanguagePair(AppConstants.kUserId),
+        data: languagesPairIds,
+      );
+      return unit;
+    });
+  }
+
+  @override
+  Future<Either<Failure, String>> addSpecialization(
+      {required List<int> specializationIds}) {
+    return handleRequest(() async {
+      final response = await _apiServices.post(
+        EndPoint.addIndustries(AppConstants.kUserId),
+        data: specializationIds,
+      );
+      return response;
+    });
+  }
+
+  @override
+  Future<Either<Failure, String>> deleteSpecialization(
+      {required List<int> specializationIds}) {
+    return handleRequest(() async {
+      final response = await _apiServices.delete(
+        EndPoint.deleteIndustries(AppConstants.kUserId),
+        data: specializationIds,
+      );
+      return response;
+    });
+  }
 }

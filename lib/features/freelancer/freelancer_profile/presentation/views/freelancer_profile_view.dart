@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
@@ -27,12 +28,16 @@ class FreelancerProfileView extends StatelessWidget {
                   FreelancerRatingAndReview(freelancerModel: freelancerModel),
                   verticalSpace(20),
                   FreelancerSocialMedia(
-                    socialMedia: freelancerModel.freelancerSocialMedias,
+                    socialMedia: freelancerModel.socialMedias,
                   ),
                   verticalSpace(30),
                   FreelancerProfileTables(freelancerModel: freelancerModel),
                   verticalSpace(26),
-                  FreelancerCvSection(cvUrl: freelancerModel.cvFilePath),
+                  SlideInUp(
+                    from: 200,
+                    child:
+                        FreelancerCvSection(cvUrl: freelancerModel.cvFilePath),
+                  ),
                   verticalSpace(100),
                 ],
               ),

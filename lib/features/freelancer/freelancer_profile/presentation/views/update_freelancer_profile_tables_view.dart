@@ -1,17 +1,63 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tradof/core/di/di.dart';
+import 'package:tradof/features/auth/presentation/widgets/language_pair_table.dart';
+import 'package:tradof/features/auth/presentation/widgets/specialization_table.dart';
+
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
+import '../../data/model/freelancer_model.dart';
+import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
+import '../widgets/update_freelancer_profile_tables_button.dart';
 
 class UpdateFreelancerProfileTablesView extends StatelessWidget {
-  const UpdateFreelancerProfileTablesView({super.key});
+  const UpdateFreelancerProfileTablesView({
+    super.key,
+    required this.freelancerModel,
+    required this.isLanguagePair,
+  });
+  final FreelancerModel freelancerModel;
+  final bool isLanguagePair;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              verticalSpace(16),
+              isLanguagePair
+                  ? SlideInRight(
+                      from: 400,
+                      child: LanguagePairTable(darkColors: true),
+                    )
+                  : SlideInRight(
+                      from: 400,
+                      child: SpecializationTable(darkColors: true),
+                    ),
+              verticalSpace(50),
+              BlocProvider(
+                create: (context) => FreelancerProfileCubit(getIt()),
+                child: SlideInLeft(
+                  from: 400,
+                  child: UpdateFreelancerProfileTablesButton(
+                    freelancerModel: freelancerModel,
+                  ),
+                ),
+              ),
+              verticalSpace(40),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -21,7 +67,7 @@ class UpdateFreelancerProfileTablesView extends StatelessWidget {
       foregroundColor: AppColors.white,
       leadingWidth: 40,
       title: Text(
-        'Update Profile',
+        isLanguagePair ? 'Update Languages Pairs': 'Update Specialization' ,
         style: AppStyle.robotoBold20.copyWith(color: AppColors.white),
       ),
       actions: [

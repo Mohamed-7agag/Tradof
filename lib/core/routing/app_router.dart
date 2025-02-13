@@ -176,25 +176,25 @@ class AppRouter {
             ),
           ),
         );
-        case Routes.updateFreelancerProfileTablesViewRoute:
-        //final data = settings.arguments as Map<String, dynamic>;
+      case Routes.updateFreelancerProfileTablesViewRoute:
+        final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
                 create: (context) => MetaDataCubit(getIt()),
               ),
-              // BlocProvider(
-              //   create: (context) => TablesCubit()
-              //     ..addInitialData(
-              //       languagePairs: data['data'].freelancerLanguagePairs,
-              //       //specializations: data['data'].specializations,
-              //     ),
-              // ),
+              BlocProvider(
+                create: (context) => TablesCubit()
+                  ..addInitialData(
+                    freelancerLanguagePairs: data['data'].languagePairs,
+                    specializations: data['data'].specializations,
+                  ),
+              ),
             ],
             child: UpdateFreelancerProfileTablesView(
-              // freelancerModel: data['data'],
-              // isLanguagePair: data['isLanguagePair'],
+              freelancerModel: data['data'],
+              isLanguagePair: data['isLanguagePair'],
             ),
           ),
         );

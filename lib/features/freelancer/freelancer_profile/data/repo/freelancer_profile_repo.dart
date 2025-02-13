@@ -14,4 +14,19 @@ abstract class FreelancerProfileRepo {
     required String freelancerId,
     required PlatformFile cv,
   });
+  Future<Either<Failure, Unit>> addFreelancerLanguagePair({
+    required String freelancerId,
+    required List<Map<String, int>> languagesPairIds,
+  });
+  Future<Either<Failure, Unit>> deleteFreelancerLanguagePair({
+    required String freelancerId,
+    required List<Map<String, int>> languagesPairIds,
+  });
+
+  Future<Either<Failure, String>> addSpecialization({
+    required List<int> specializationIds,
+  });
+  Future<Either<Failure, String>> deleteSpecialization({
+    required List<int> specializationIds,
+  });
 }

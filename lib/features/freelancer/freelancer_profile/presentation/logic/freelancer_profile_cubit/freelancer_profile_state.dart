@@ -13,6 +13,14 @@ enum FreelancerProfileStatus {
   uploadCvLoading,
   uploadCvSuccess,
   uploadCvFailure,
+
+  languagePairLoading,
+  languagePairSuccess,
+  languagePairFailure,
+
+  specializationLoading,
+  specializationSuccess,
+  specializationFailure,
 }
 
 extension FreelancerProfileStatusX on FreelancerProfileStatus {
@@ -34,6 +42,20 @@ extension FreelancerProfileStatusX on FreelancerProfileStatus {
   bool get isUploadCvLoading => this == FreelancerProfileStatus.uploadCvLoading;
   bool get isUploadCvSuccess => this == FreelancerProfileStatus.uploadCvSuccess;
   bool get isUploadCvFailure => this == FreelancerProfileStatus.uploadCvFailure;
+
+  bool get isLanguagePairLoading =>
+      this == FreelancerProfileStatus.languagePairLoading;
+  bool get isLanguagePairSuccess =>
+      this == FreelancerProfileStatus.languagePairSuccess;
+  bool get isLanguagePairFailure =>
+      this == FreelancerProfileStatus.languagePairFailure;
+
+  bool get isSpecializationLoading =>
+      this == FreelancerProfileStatus.specializationLoading;
+  bool get isSpecializationSuccess =>
+      this == FreelancerProfileStatus.specializationSuccess;
+  bool get isSpecializationFailure =>
+      this == FreelancerProfileStatus.specializationFailure;
 }
 
 class FreelancerProfileState extends Equatable {

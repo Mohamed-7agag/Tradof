@@ -1,3 +1,4 @@
+import '../../../../auth/data/model/specialization_model.dart';
 import '../../../../company/company_profile/data/model/social_media_model.dart';
 import 'freelancer_langauge_pair_model.dart';
 
@@ -13,8 +14,9 @@ class FreelancerModel {
   final String phone;
   final int ratingSum;
   final int reviewCount;
-  final List<FreelancerLangaugePairModel> freelancerLanguagePairs;
-  final List<SocialMediaModel> freelancerSocialMedias;
+  final List<FreelancerLangaugePairModel> languagePairs;
+  final List<SpecializationModel> specializations;
+  final List<SocialMediaModel> socialMedias;
 
   FreelancerModel({
     required this.userId,
@@ -28,8 +30,9 @@ class FreelancerModel {
     required this.phone,
     required this.ratingSum,
     required this.reviewCount,
-    required this.freelancerLanguagePairs,
-    required this.freelancerSocialMedias,
+    required this.languagePairs,
+    required this.specializations,
+    required this.socialMedias,
   });
 
   factory FreelancerModel.fromJson(Map<String, dynamic> json) =>
@@ -45,11 +48,15 @@ class FreelancerModel {
         phone: json["phone"],
         ratingSum: json["ratingSum"],
         reviewCount: json["reviewCount"],
-        freelancerLanguagePairs: List<FreelancerLangaugePairModel>.from(
+        languagePairs: List<FreelancerLangaugePairModel>.from(
           json["freelancerLanguagePairs"]
               .map((x) => FreelancerLangaugePairModel.fromJson(x)),
         ),
-        freelancerSocialMedias: List<SocialMediaModel>.from(
+        specializations: List<SpecializationModel>.from(
+          json["freelancerSpecializations"]
+              .map((x) => SpecializationModel.fromJson(x)),
+        ),
+        socialMedias: List<SocialMediaModel>.from(
           json["freelancerSocialMedias"]
               .map((x) => SocialMediaModel.fromJson(x)),
         ),

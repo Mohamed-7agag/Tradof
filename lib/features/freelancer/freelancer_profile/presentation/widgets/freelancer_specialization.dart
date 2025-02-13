@@ -11,8 +11,8 @@ import '../../../../../core/routing/routes.dart';
 import '../../data/model/freelancer_model.dart';
 import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
-class FreelancerLanguagePair extends StatelessWidget {
-  const FreelancerLanguagePair({super.key, required this.freelancerModel});
+class FreelancerSpecialization extends StatelessWidget {
+  const FreelancerSpecialization({super.key, required this.freelancerModel});
 
   final FreelancerModel freelancerModel;
 
@@ -25,12 +25,12 @@ class FreelancerLanguagePair extends StatelessWidget {
           children: [
             SlideInLeft(
               from: 400,
-              child: Text('Language Pairs', style: AppStyle.poppinsMedium15),
+              child: Text('Specialization', style: AppStyle.poppinsMedium15),
             ),
             GestureDetector(
               onTap: () async {
                 Map<String, dynamic> data = {
-                  'isLanguagePair': true,
+                  'isLanguagePair': false,
                   'data': freelancerModel
                 };
                 final result = await context.pushNamed(
@@ -58,31 +58,17 @@ class FreelancerLanguagePair extends StatelessWidget {
               columns: [
                 DataColumn(
                   label: Text(
-                    'Language Pairs',
+                    'Specialization',
                     style: AppStyle.poppinsSemiBold14,
                   ),
                 ),
-                DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'IEFT tag',
-                      style: AppStyle.poppinsSemiBold14,
-                    ),
-                  ),
-                )
               ],
-              rows: freelancerModel.languagePairs.map((languagePair) {
+              rows: freelancerModel.specializations.map((language) {
                 return DataRow(
                   cells: [
                     DataCell(
                       Text(
-                        '${languagePair.languageFromName} (${languagePair.countryFromCode}) - ${languagePair.languageToName} (${languagePair.countryToCode})',
-                        style: AppStyle.robotoRegular12,
-                      ),
-                    ),
-                    DataCell(
-                      Text(
-                        '${languagePair.languageFromCode} - ${languagePair.languageToCode}',
+                        language.name,
                         style: AppStyle.robotoRegular12,
                       ),
                     ),

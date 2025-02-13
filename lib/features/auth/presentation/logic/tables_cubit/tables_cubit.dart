@@ -3,6 +3,7 @@ import 'package:tradof/core/utils/models/language_model.dart';
 import 'package:tradof/core/utils/models/language_pair_model.dart';
 import 'package:tradof/features/auth/data/model/specialization_model.dart';
 
+import '../../../../../core/helpers/convert_freelancer_language_pair_to_language_pair.dart';
 import '../../../../freelancer/freelancer_profile/data/model/freelancer_langauge_pair_model.dart';
 
 part 'tables_state.dart';
@@ -12,37 +13,13 @@ class TablesCubit extends Cubit<TablesState> {
 
   void addInitialData({
     List<SpecializationModel>? specializations,
-    List<FreelancerLangaugePairModel>? languagePairs,
+    List<FreelancerLangaugePairModel>? freelancerLanguagePairs,
     List<LanguageModel>? preferedLanguages,
     List<SpecializationModel>? industriesServed,
   }) {
-    List<LanguagePairModel> languagePairsList = [];
-    if (languagePairs != null) {
-      LanguageModel? languageFrom, languageTo;
-      // for (var element in languagePairs) {
-      //   languageFrom = LanguageModel(
-      //     id: element.languageFromId,
-      //     languageName: element.languageFromName,
-      //     languageCode: languageCode,
-      //     countryName: countryName,
-      //     countryCode: countryCode,
-      //   );
-      //   languageTo = LanguageModel(
-      //     id: element.languageToId,
-      //     languageName: element.languageToName,
-      //     languageCode: languageCode,
-      //     countryName: countryName,
-      //     countryCode: countryCode,
-      //   );
-      //   languagePairsList.add(LanguagePairModel(
-      //     fromLanguage: languageFrom,
-      //     toLanguage: languageTo,
-      //   ));
-      // }
-    }
     emit(state.copyWith(
       selectedSpecializations: specializations,
-      selectedLanguagePair: languagePairsList,
+      selectedLanguagePair: convertLanguagePairs(freelancerLanguagePairs),
       selectedPreferedLanguages: preferedLanguages,
       selectedIndustriesServed: industriesServed,
     ));

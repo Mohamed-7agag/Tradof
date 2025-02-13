@@ -76,4 +76,110 @@ class FreelancerProfileCubit extends Cubit<FreelancerProfileState> {
       )),
     );
   }
+
+  Future<void> updateLanguagePairs({
+    required List<Map<String, int>> addedLanguagePairsIds,
+    required List<Map<String, int>> deletedLanguagePairsIds,
+  }) async {
+    emit(state.copyWith(status: FreelancerProfileStatus.languagePairLoading));
+
+    try {
+      if (addedLanguagePairsIds.isNotEmpty) {
+        final addResult = await _freelancerRepo.addFreelancerLanguagePair(
+            freelancerId: AppConstants.kUserId,
+            languagesPairIds: addedLanguagePairsIds);
+        addResult.fold(
+          (failure) => emit(
+            state.copyWith(
+              status: FreelancerProfileStatus.languagePairFailure,
+              errMessage: failure.errMessage,
+            ),
+          ),
+          (_) => {},
+        );
+      }
+
+      if (deletedLanguagePairsIds.isNotEmpty) {
+        final deleteResult = await _freelancerRepo.deleteFreelancerLanguagePair(
+          freelancerId: AppConstants.kUserId,
+          languagesPairIds: deletedLanguagePairsIds,
+        );
+        deleteResult.fold(
+          (failure) => emit(
+            state.copyWith(
+              status: FreelancerProfileStatus.languagePairFailure,
+              errMessage: failure.errMessage,
+            ),
+          ),
+          (_) => {},
+        );
+      }
+      if (!state.status.isLanguagePairFailure) {
+        emit(state.copyWith(
+          status: FreelancerProfileStatus.languagePairSuccess,
+          message: 'Language Pairs updated successfully',
+        ));
+      }
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: FreelancerProfileStatus.languagePairFailure,
+          errMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> updateSpecialization({
+    required List<int> addedSpecializationIds,
+    required List<int> deletedSpecializationIds,
+  }) async {
+    emit(state.copyWith(status: FreelancerProfileStatus.specializationLoading));
+
+    try {
+      if (addedSpecializationIds.isNotEmpty) {
+        final addResult = await _freelancerRepo.addSpecialization(
+          specializationIds: addedSpecializationIds,
+        );
+        addResult.fold(
+          (failure) => emit(
+            state.copyWith(
+              status: FreelancerProfileStatus.specializationFailure,
+              errMessage: failure.errMessage,
+            ),
+          ),
+          (_) => {},
+        );
+      }
+
+      if (deletedSpecializationIds.isNotEmpty) {
+        final deleteResult = await _freelancerRepo.deleteSpecialization(
+          specializationIds: deletedSpecializationIds,
+        );
+        deleteResult.fold(
+          (failure) => emit(
+            state.copyWith(
+              status: FreelancerProfileStatus.specializationFailure,
+              errMessage: failure.errMessage,
+            ),
+          ),
+          (_) => {},
+        );
+      }
+
+      if (!state.status.isUpdateSocialMediaFailure) {
+        emit(state.copyWith(
+          status: FreelancerProfileStatus.specializationSuccess,
+          message: 'Specialization updated successfully',
+        ));
+      }
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: FreelancerProfileStatus.specializationFailure,
+          errMessage: e.toString(),
+        ),
+      );
+    }
+  }
 }
