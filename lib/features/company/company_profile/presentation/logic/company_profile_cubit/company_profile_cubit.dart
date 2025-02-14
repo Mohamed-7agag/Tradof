@@ -76,7 +76,7 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
     );
   }
 
-  void setGroupNameAndCountry({String? groupName, int? countryId}) {
+  void setGroupNameAndCountryId({String? groupName, int? countryId}) {
     emit(state.copyWith(groupName: groupName, countryId: countryId));
   }
 

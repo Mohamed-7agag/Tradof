@@ -154,7 +154,7 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                     onChanged: (group) {
                       context
                           .read<CompanyProfileCubit>()
-                          .setGroupNameAndCountry(groupName: group);
+                          .setGroupNameAndCountryId(groupName: group);
                     },
                   ),
                 ),
@@ -175,7 +175,9 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                           onChanged: (country) {
                             context
                                 .read<CompanyProfileCubit>()
-                                .setGroupNameAndCountry(countryId: country?.id);
+                                .setGroupNameAndCountryId(
+                                  countryId: country?.id,
+                                );
                           },
                         );
                       } else if (state.status.isError) {

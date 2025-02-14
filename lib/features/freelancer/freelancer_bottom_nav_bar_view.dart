@@ -4,14 +4,15 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 import 'package:tradof/core/helpers/exit_dialog.dart';
 import 'package:tradof/core/theming/app_colors.dart';
+import 'package:tradof/core/utils/widgets/bottom_nav_bar_center_icon.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
 import 'package:tradof/features/freelancer/freelancer_setting/presentation/views/freelancer_setting_view.dart';
 
+import '../../core/utils/widgets/bottom_nav_bar_clipper.dart';
+import '../../core/utils/widgets/custom_animated_lazy_indexed_stack.dart';
 import '../../core/utils/widgets/custom_loading_widget.dart';
 import 'freelancer_dashboard/presentation/views/freelance_dashbord_view.dart';
 import 'freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
@@ -51,7 +52,10 @@ class _FreelancerBottomNavBarViewState
               current.status.isGetFreelancerLoading,
           builder: (context, state) {
             if (state.status.isGetFreelancerSuccess) {
-              return _animatedSwitcherLazyStack(state);
+              return CustomAnimatedLazyIndexedStack(
+                currentIndex: currentIndex,
+                children: _buildIndexedStackChildren(state),
+              );
             } else if (state.status.isGetFreelancerFailure) {
               return _buildFailureWidget(
                 context,
@@ -115,49 +119,16 @@ class _FreelancerBottomNavBarViewState
             ),
             Positioned(
               top: -20,
-              child: SlideInUp(
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(30),
-                  onTap: () {
-                    if (currentIndex != 2) {
-                      setState(() => currentIndex = 2);
-                    }
-                  },
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      shape: BoxShape.circle,
-                    ),
-                    child: SvgPicture.asset('assets/images/user.svg'),
-                  ),
-                ),
+              child: BottomNavBarCenterIcon(
+                onTap: () {
+                  if (currentIndex != 2) {
+                    setState(() => currentIndex = 2);
+                  }
+                },
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  AnimatedSwitcher _animatedSwitcherLazyStack(FreelancerProfileState state) {
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
-      transitionBuilder: (Widget child, Animation<double> animation) {
-        final offsetAnimation = Tween<Offset>(
-          begin: const Offset(1.0, 0.0),
-          end: Offset.zero,
-        ).animate(
-          CurvedAnimation(parent: animation, curve: Curves.easeInOut),
-        );
-        return SlideTransition(position: offsetAnimation, child: child);
-      },
-      child: LazyLoadIndexedStack(
-        key: ValueKey<int>(currentIndex),
-        index: currentIndex,
-        children: _buildIndexedStackChildren(state),
       ),
     );
   }
@@ -179,22 +150,6 @@ class _FreelancerBottomNavBarViewState
       ),
     );
   }
-}
-
-class CustomNavBarClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.moveTo(0, 20);
-    path.quadraticBezierTo(size.width / 2, -20, size.width, 20);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
 Widget _buildFailureWidget(

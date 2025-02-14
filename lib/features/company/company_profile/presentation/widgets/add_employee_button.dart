@@ -5,10 +5,10 @@ import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/app_constants.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
-import 'package:tradof/features/company/company_profile/data/model/company_employee_request_model.dart';
-import 'package:tradof/features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 
 import '../../../../../core/utils/widgets/custom_button.dart';
+import '../../data/model/company_employee_request_model.dart';
+import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class AddEmployeeButton extends StatelessWidget {
   const AddEmployeeButton({
@@ -62,6 +62,8 @@ class AddEmployeeButton extends StatelessWidget {
   }
 
   void _addEmployeeValidation(CompanyProfileState state, BuildContext context) {
+    final groupName = context.read<CompanyProfileCubit>().state.groupName;
+    final countryId = context.read<CompanyProfileCubit>().state.countryId;
     final password = passwordController.text.trim();
     if (formKey.currentState!.validate()) {
       if (!AppValidation.emailValidation(
@@ -69,20 +71,20 @@ class AddEmployeeButton extends StatelessWidget {
       } else if (!AppValidation.passwordValidation(context, password) ||
           !AppValidation.phoneNumberValidation(
               context, phoneNumberController.text.trim())) {
-      } else if (state.groupName.isNullOrEmpty()) {
+      } else if (groupName.isNullOrEmpty()) {
         errorToast(context, 'Error', 'Please Select Group Name');
-      } else if (state.countryId == null) {
+      } else if (countryId == null) {
         errorToast(context, 'Error', 'Please Select Country');
       } else {
         final companyEmployeeModel = CompanyEmployeeRequestModel(
           jobTitle: jobTitleController.text.trim(),
-          countryId: state.countryId!,
+          countryId: countryId,
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
           phoneNumber: phoneNumberController.text.trim(),
           email: emailController.text.trim(),
           password: password,
-          groupName: state.groupName!,
+          groupName: groupName!,
           companyId: AppConstants.kUserId,
         );
         context

@@ -31,7 +31,7 @@ class SettingItem extends StatelessWidget {
       ),
       trailing: Icon(
         Icons.arrow_forward_ios_rounded,
-        size: 20,
+        size: 18,
         color: AppColors.primary,
       ),
     );

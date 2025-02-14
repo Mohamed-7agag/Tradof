@@ -5,9 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 
 import '../../../../core/theming/app_style.dart';
-import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
-import '../../../../core/utils/widgets/custom_refresh_indicator.dart';
 import '../../../company/company_profile/data/model/company_model.dart';
 import '../logic/file_cubit.dart';
 import '../widgets/attachment_files_section.dart';
@@ -64,80 +62,75 @@ class _CreateProjectViewState extends State<CreateProjectView> {
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: CustomRefreshIndicator(
-                onRefresh: () async {
-                  context.read<MetaDataCubit>().getLanguages();
-                },
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      verticalSpace(20),
-                      ProjectTextField(
-                        labelText: 'Project Name',
-                        controller: projectNameController,
-                      ),
-                      verticalSpace(25),
-                      ProjectTextField(
-                        labelText: 'Project Description',
-                        controller: projectDescriptionController,
-                        maxLines: 4,
-                      ),
-                      verticalSpace(20),
-                      Text('Language Pair', style: AppStyle.poppinsMedium14),
-                      verticalSpace(12),
-                      CreateProjectLanguagePair(
-                        companyModel: widget.companyModel,
-                      ),
-                      verticalSpace(25),
-                      CreateProjectIndustriesSection(
-                        companyModel: widget.companyModel,
-                      ),
-                      verticalSpace(30),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ProjectTextField(
-                              labelText: 'Min Budget',
-                              controller: minBudgetController,
-                              keyboardType: TextInputType.number,
-                            ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    verticalSpace(20),
+                    ProjectTextField(
+                      labelText: 'Project Name',
+                      controller: projectNameController,
+                    ),
+                    verticalSpace(25),
+                    ProjectTextField(
+                      labelText: 'Project Description',
+                      controller: projectDescriptionController,
+                      maxLines: 4,
+                    ),
+                    verticalSpace(20),
+                    Text('Language Pair', style: AppStyle.poppinsMedium14),
+                    verticalSpace(12),
+                    CreateProjectLanguagePair(
+                      companyModel: widget.companyModel,
+                    ),
+                    verticalSpace(25),
+                    CreateProjectIndustriesSection(
+                      companyModel: widget.companyModel,
+                    ),
+                    verticalSpace(30),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ProjectTextField(
+                            labelText: 'Min Budget',
+                            controller: minBudgetController,
+                            keyboardType: TextInputType.number,
                           ),
-                          horizontalSpace(10),
-                          Expanded(
-                            child: ProjectTextField(
-                              labelText: 'Max Budget',
-                              controller: maxBudgetController,
-                              keyboardType: TextInputType.number,
-                            ),
+                        ),
+                        horizontalSpace(10),
+                        Expanded(
+                          child: ProjectTextField(
+                            labelText: 'Max Budget',
+                            controller: maxBudgetController,
+                            keyboardType: TextInputType.number,
                           ),
-                        ],
-                      ),
-                      verticalSpace(25),
-                      ProjectTextField(
-                        labelText: 'Delivery Time (Days)',
-                        controller: daysController,
-                        keyboardType: TextInputType.number,
-                      ),
-                      verticalSpace(25),
-                      Text(
-                        'Attachments Files',
-                        style: AppStyle.poppinsMedium14,
-                      ),
-                      verticalSpace(12),
-                      AttachmentFilesSection(),
-                      verticalSpace(60),
-                      CreateProjectButton(
-                        projectNameController: projectNameController,
-                        projectDescriptionController:
-                            projectDescriptionController,
-                        minBudgetController: minBudgetController,
-                        maxBudgetController: maxBudgetController,
-                        daysController: daysController,
-                      ),
-                      verticalSpace(100),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                    verticalSpace(25),
+                    ProjectTextField(
+                      labelText: 'Delivery Time (Days)',
+                      controller: daysController,
+                      keyboardType: TextInputType.number,
+                    ),
+                    verticalSpace(25),
+                    Text(
+                      'Attachments Files',
+                      style: AppStyle.poppinsMedium14,
+                    ),
+                    verticalSpace(12),
+                    AttachmentFilesSection(),
+                    verticalSpace(60),
+                    CreateProjectButton(
+                      projectNameController: projectNameController,
+                      projectDescriptionController:
+                          projectDescriptionController,
+                      minBudgetController: minBudgetController,
+                      maxBudgetController: maxBudgetController,
+                      daysController: daysController,
+                    ),
+                    verticalSpace(100),
+                  ],
                 ),
               ),
             ),
