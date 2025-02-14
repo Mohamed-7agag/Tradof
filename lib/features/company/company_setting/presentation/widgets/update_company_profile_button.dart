@@ -30,14 +30,8 @@ class UpdateCompanyProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanySettingCubit, CompanySettingState>(
-      listenWhen: (previous, current) =>
-          current.status.isUpdateCompanyProfileLoading ||
-          current.status.isUpdateCompanyProfileFailure ||
-          current.status.isUpdateCompanyProfileSuccess,
-      buildWhen: (previous, current) =>
-          current.status.isUpdateCompanyProfileLoading ||
-          current.status.isUpdateCompanyProfileFailure ||
-          current.status.isUpdateCompanyProfileSuccess,
+      listenWhen: _listenAndBuildWhen,
+      buildWhen: _listenAndBuildWhen,
       listener: (context, state) {
         if (state.status.isUpdateCompanyProfileSuccess) {
           successToast(context, 'Success', state.message);
@@ -58,6 +52,12 @@ class UpdateCompanyProfileButton extends StatelessWidget {
               );
       },
     );
+  }
+
+  bool _listenAndBuildWhen(previous, current) {
+    return current.status.isUpdateCompanyProfileLoading ||
+        current.status.isUpdateCompanyProfileFailure ||
+        current.status.isUpdateCompanyProfileSuccess;
   }
 
   Future<void> _updateCompanyProfile(BuildContext context) async {

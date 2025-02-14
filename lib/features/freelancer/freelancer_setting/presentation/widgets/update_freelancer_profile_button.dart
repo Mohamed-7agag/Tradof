@@ -27,14 +27,8 @@ class UpdateFreelancerProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<FreelancerSettingCubit, FreelancerSettingState>(
-      listenWhen: (previous, current) =>
-          current.status.isUpdateFreelancerProfileLoading ||
-          current.status.isUpdateFreelancerProfileFailure ||
-          current.status.isUpdateFreelancerProfileSuccess,
-      buildWhen: (previous, current) =>
-          current.status.isUpdateFreelancerProfileLoading ||
-          current.status.isUpdateFreelancerProfileFailure ||
-          current.status.isUpdateFreelancerProfileSuccess,
+      listenWhen: _listenAndBuildWhen,
+      buildWhen: _listenAndBuildWhen,
       listener: (context, state) {
         if (state.status.isUpdateFreelancerProfileSuccess) {
           successToast(context, 'Success', state.message);
@@ -55,6 +49,12 @@ class UpdateFreelancerProfileButton extends StatelessWidget {
               );
       },
     );
+  }
+
+  bool _listenAndBuildWhen(previous, current) {
+    return current.status.isUpdateFreelancerProfileLoading ||
+        current.status.isUpdateFreelancerProfileFailure ||
+        current.status.isUpdateFreelancerProfileSuccess;
   }
 
   void _updateFreelancerProfile(BuildContext context) {

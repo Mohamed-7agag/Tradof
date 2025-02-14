@@ -35,8 +35,9 @@ class FreelancerProfileView extends StatelessWidget {
                   verticalSpace(26),
                   SlideInUp(
                     from: 200,
-                    child:
-                        FreelancerCvSection(cvUrl: freelancerModel.cvFilePath),
+                    child: FreelancerCvSection(
+                      cvUrl: freelancerModel.cvFilePath,
+                    ),
                   ),
                   verticalSpace(100),
                 ],

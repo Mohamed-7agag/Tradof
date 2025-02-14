@@ -15,11 +15,15 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
   const UpdateCompanyProfileTablesButton({
     super.key,
     required this.companyModel,
+    required this.isPreferedLanguages,
   });
   final CompanyModel companyModel;
+  final bool isPreferedLanguages;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanyProfileCubit, CompanyProfileState>(
+      listenWhen: _listenAndBuildWhen,
+      buildWhen: _listenAndBuildWhen,
       listener: (context, state) {
         if (state.status.isPreferedLanguagesFailure ||
             state.status.isIndustriesServedFailure) {
@@ -44,16 +48,13 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
                 : CustomButton(
                     text: 'Update',
                     onPressed: () {
-                      if (tablesState.selectedPreferedLanguages !=
-                          companyModel.preferredLanguages) {
+                      if (isPreferedLanguages) {
                         _getDifferencePreferedLanguagesList(
                           context,
                           tablesState.selectedPreferedLanguages,
                           companyModel.preferredLanguages,
                         );
-                      }
-                      if (tablesState.selectedIndustriesServed !=
-                          companyModel.specializations) {
+                      } else {
                         _getDifferenceIndustriesServedList(
                           context,
                           tablesState.selectedIndustriesServed,
@@ -66,6 +67,15 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
         );
       },
     );
+  }
+
+  bool _listenAndBuildWhen(previous, current) {
+    return current.status.isPreferedLanguagesFailure ||
+        current.status.isIndustriesServedFailure ||
+        current.status.isLanguagePairSuccess ||
+        current.status.isSpecializationSuccess ||
+        current.status.isPreferedLanguagesLoading ||
+        current.status.isIndustriesServedLoading;
   }
 
   void _getDifferencePreferedLanguagesList(BuildContext context,
@@ -85,7 +95,10 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
           );
     } else {
       errorToast(
-          context, 'Error', 'Please select at least one prefered language');
+        context,
+        'Error',
+        'Please select at least one prefered language',
+      );
     }
   }
 
@@ -107,7 +120,10 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
           );
     } else {
       errorToast(
-          context, 'Error', 'Please select at least one industry served');
+        context,
+        'Error',
+        'Please select at least one industry served',
+      );
     }
   }
 }

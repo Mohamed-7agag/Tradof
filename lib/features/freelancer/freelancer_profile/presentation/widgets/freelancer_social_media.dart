@@ -1,9 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:tradof/features/freelancer/freelancer_profile/presentation/widgets/freelancer_soical_media_link_icon.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../company/company_profile/data/model/social_media_model.dart';
+import 'freelancer_soical_media_link_icon.dart';
 
 class FreelancerSocialMedia extends StatefulWidget {
   const FreelancerSocialMedia({super.key, required this.socialMedia});
@@ -42,7 +42,7 @@ class _FreelancerSocialMediaState extends State<FreelancerSocialMedia> {
         Expanded(
           child: FadeInLeft(
             from: 400,
-            delay: Duration(milliseconds: 360),
+            delay: Duration(milliseconds: 240),
             child: FreelancerSocialMediaLinkIcon(
               image: 'assets/images/facebook.png',
               socialMedia: widget.socialMedia,
@@ -54,7 +54,7 @@ class _FreelancerSocialMediaState extends State<FreelancerSocialMedia> {
         Expanded(
           child: FadeInLeft(
             from: 400,
-            delay: Duration(milliseconds: 240),
+            delay: Duration(milliseconds: 160),
             child: FreelancerSocialMediaLinkIcon(
               image: 'assets/images/linkedin.png',
               socialMedia: widget.socialMedia,
@@ -66,7 +66,7 @@ class _FreelancerSocialMediaState extends State<FreelancerSocialMedia> {
         Expanded(
           child: FadeInLeft(
             from: 400,
-            delay: Duration(milliseconds: 120),
+            delay: Duration(milliseconds: 80),
             child: FreelancerSocialMediaLinkIcon(
               image: 'assets/images/github.png',
               socialMedia: widget.socialMedia,

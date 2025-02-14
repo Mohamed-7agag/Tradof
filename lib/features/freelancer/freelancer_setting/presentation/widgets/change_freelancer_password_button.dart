@@ -24,6 +24,8 @@ class ChangeFreelancerPasswordButton extends StatelessWidget {
     return BlocProvider(
       create: (context) => FreelancerSettingCubit(getIt()),
       child: BlocConsumer<FreelancerSettingCubit, FreelancerSettingState>(
+        listenWhen: _listenAndBuildWhen,
+        buildWhen: _listenAndBuildWhen,
         listener: (context, state) {
           if (state.status.isChangePasswordSuccess) {
             successToast(context, 'Success', state.message);
@@ -45,6 +47,12 @@ class ChangeFreelancerPasswordButton extends StatelessWidget {
         },
       ),
     );
+  }
+
+  bool _listenAndBuildWhen(previous, current) {
+    return current.status.isChangePasswordFailure ||
+        current.status.isChangePasswordLoading ||
+        current.status.isChangePasswordSuccess;
   }
 
   _validateAndConfirmNewPassword(BuildContext context) {

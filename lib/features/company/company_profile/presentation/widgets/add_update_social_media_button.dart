@@ -25,6 +25,8 @@ class AddUpdateSocialMediaButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanyProfileCubit, CompanyProfileState>(
+      listenWhen: _listenAndBuildWhen,
+      buildWhen: _listenAndBuildWhen,
       listener: (context, state) {
         if (state.status.isAddUpdateSocialMediaSuccess) {
           successToast(context, 'Success', state.message);
@@ -41,32 +43,42 @@ class AddUpdateSocialMediaButton extends StatelessWidget {
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
                   context.read<CompanyProfileCubit>().addUpdateSocialMedia(
-                    socialMedia: [
-                      if (facebookController.text.isNotEmpty)
-                        SocialMediaModel(
-                          platformType: 'Facebook',
-                          link: facebookController.text,
-                        ),
-                      if (linkedinController.text.isNotEmpty)
-                        SocialMediaModel(
-                          platformType: 'Linkedin',
-                          link: linkedinController.text,
-                        ),
-                      if (gmailController.text.isNotEmpty)
-                        SocialMediaModel(
-                          platformType: 'Gmail',
-                          link: gmailController.text,
-                        ),
-                      if (githubController.text.isNotEmpty)
-                        SocialMediaModel(
-                          platformType: 'Github',
-                          link: githubController.text,
-                        ),
-                    ],
-                  );
+                        socialMedia: _socialList,
+                      );
                 },
               );
       },
     );
+  }
+
+  bool _listenAndBuildWhen(previous, current) {
+    return current.status.isAddUpdateSocialMediaSuccess ||
+        current.status.isAddUpdateSocialMediaFailure ||
+        current.status.isAddUpdateSocialMediaLoading;
+  }
+
+  List<SocialMediaModel> get _socialList {
+    return [
+      if (facebookController.text.isNotEmpty)
+        SocialMediaModel(
+          platformType: 'Facebook',
+          link: facebookController.text,
+        ),
+      if (linkedinController.text.isNotEmpty)
+        SocialMediaModel(
+          platformType: 'Linkedin',
+          link: linkedinController.text,
+        ),
+      if (gmailController.text.isNotEmpty)
+        SocialMediaModel(
+          platformType: 'Gmail',
+          link: gmailController.text,
+        ),
+      if (githubController.text.isNotEmpty)
+        SocialMediaModel(
+          platformType: 'Github',
+          link: githubController.text,
+        ),
+    ];
   }
 }

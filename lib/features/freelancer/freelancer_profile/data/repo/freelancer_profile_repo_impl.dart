@@ -84,7 +84,7 @@ class FreelancerProfileRepoImpl implements FreelancerProfileRepo {
       {required List<int> specializationIds}) {
     return handleRequest(() async {
       final response = await _apiServices.post(
-        EndPoint.addIndustries(AppConstants.kUserId),
+        EndPoint.addSpecialization(AppConstants.kUserId),
         data: specializationIds,
       );
       return response;
@@ -96,7 +96,7 @@ class FreelancerProfileRepoImpl implements FreelancerProfileRepo {
       {required List<int> specializationIds}) {
     return handleRequest(() async {
       final response = await _apiServices.delete(
-        EndPoint.deleteIndustries(AppConstants.kUserId),
+        EndPoint.deleteSpecialization(AppConstants.kUserId),
         data: specializationIds,
       );
       return response;

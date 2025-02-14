@@ -41,6 +41,11 @@ class CompanyEmployeesView extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
+          buildWhen: (previous, current) {
+            return current.status.isGetCompanyEmployeesFailure ||
+                current.status.isGetCompanyEmployeesSuccess ||
+                current.status.isGetCompanyEmployeesLoading;
+          },
           builder: (context, state) {
             if (state.status.isGetCompanyEmployeesSuccess) {
               return ListView.builder(

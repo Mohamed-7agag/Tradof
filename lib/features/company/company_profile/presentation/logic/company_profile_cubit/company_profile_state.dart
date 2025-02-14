@@ -5,7 +5,7 @@ enum CompanyProfileStatus {
   getCompanyloading,
   getCompanySuccess,
   getCompanyFailure,
-  
+
   preferedLanguagesLoading,
   preferedLanguagesFailure,
   preferedLanguagesSuccess,
@@ -28,7 +28,7 @@ enum CompanyProfileStatus {
 }
 
 extension CompanyProfileStatusX on CompanyProfileStatus {
-  bool get isGetCompanyloading =>
+  bool get isGetCompanyLoading =>
       this == CompanyProfileStatus.getCompanyloading;
   bool get isGetCompanySuccess =>
       this == CompanyProfileStatus.getCompanySuccess;

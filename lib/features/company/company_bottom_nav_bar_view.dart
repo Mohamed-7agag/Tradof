@@ -51,6 +51,10 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
       onWillPop: () => exitDialog(context),
       child: Scaffold(
         body: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
+          buildWhen: (previous, current) =>
+              current.status.isGetCompanySuccess ||
+              current.status.isGetCompanyFailure ||
+              current.status.isGetCompanyLoading,
           builder: (context, state) {
             if (state.status.isGetCompanySuccess) {
               return _animatedSwitcherLazyStack(state);

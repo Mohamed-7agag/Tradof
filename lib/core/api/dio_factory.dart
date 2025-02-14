@@ -65,8 +65,7 @@ class DioFactory {
       onError: (DioException error, handler) async {
         if (error.response?.statusCode == 401 &&
             retryCount < 1 &&
-            error.response?.toString() !=
-                'Please confirm your email before logging in.') {
+            await _tokenService.getRefreshToken() != '') {
           retryCount++;
           try {
             await _tokenService.refreshToken();

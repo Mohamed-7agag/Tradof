@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/helpers/convert_freelancer_language_pair_to_language_pair.dart';
@@ -17,11 +19,15 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
   const UpdateFreelancerProfileTablesButton({
     super.key,
     required this.freelancerModel,
+    required this.islanguagePair,
   });
   final FreelancerModel freelancerModel;
+  final bool islanguagePair;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<FreelancerProfileCubit, FreelancerProfileState>(
+      listenWhen: _listenAndBuildWhen,
+      buildWhen: _listenAndBuildWhen,
       listener: (context, state) {
         if (state.status.isLanguagePairFailure ||
             state.status.isSpecializationFailure) {
@@ -45,16 +51,13 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
                 : CustomButton(
                     text: 'Update',
                     onPressed: () {
-                      if (tablesState.selectedLanguagePair !=
-                          freelancerModel.languagePairs) {
+                      if (islanguagePair) {
                         _getDifferenceLanguagePairsList(
                           context,
                           tablesState.selectedLanguagePair,
                           freelancerModel.languagePairs,
                         );
-                      }
-                      if (tablesState.selectedSpecializations !=
-                          freelancerModel.specializations) {
+                      } else {
                         _getDifferenceSpecializationList(
                           context,
                           tablesState.selectedSpecializations,
@@ -69,6 +72,15 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
     );
   }
 
+  bool _listenAndBuildWhen(previous, current) {
+    return current.status.isLanguagePairFailure ||
+        current.status.isSpecializationFailure ||
+        current.status.isLanguagePairSuccess ||
+        current.status.isSpecializationSuccess ||
+        current.status.isLanguagePairLoading ||
+        current.status.isSpecializationLoading;
+  }
+
   void _getDifferenceLanguagePairsList(
       BuildContext context,
       List<LanguagePairModel> newList,
@@ -81,6 +93,7 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
           convertedOldList.where((item) => !newList.contains(item));
       if (addedItems.isEmpty && removedItems.isEmpty) {
         infoToast(context, 'Info', 'No changes detected');
+        log('from first');
         return;
       }
       final addedLanguagePairsIds = addedItems
@@ -110,8 +123,11 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
     if (!newList.isNullOrEmpty()) {
       final addedItems = newList.where((item) => !oldList.contains(item));
       final removedItems = oldList.where((item) => !newList.contains(item));
+      log('addedItems: $addedItems');
+      log('removedItems: $removedItems');
       if (addedItems.isEmpty && removedItems.isEmpty) {
         infoToast(context, 'Info', 'No changes detected');
+        log('from Second');
         return;
       }
       final addedSpecializationIds = addedItems.map((item) => item.id).toList();

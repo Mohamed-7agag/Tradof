@@ -50,6 +50,7 @@ class UpdateCompanyProfileTablesView extends StatelessWidget {
                   from: 400,
                   child: UpdateCompanyProfileTablesButton(
                     companyModel: companyModel,
+                    isPreferedLanguages:isPreferedLanguages,
                   ),
                 ),
               ),

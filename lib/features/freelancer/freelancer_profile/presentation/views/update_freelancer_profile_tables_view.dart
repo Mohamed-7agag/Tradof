@@ -52,6 +52,7 @@ class UpdateFreelancerProfileTablesView extends StatelessWidget {
                   from: 400,
                   child: UpdateFreelancerProfileTablesButton(
                     freelancerModel: freelancerModel,
+                    islanguagePair: isLanguagePair,
                   ),
                 ),
               ),

@@ -25,6 +25,8 @@ class CreateProjectButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProjectCubit, ProjectState>(
+      listenWhen: _listenAndBuildWhen,
+      buildWhen: _listenAndBuildWhen,
       listener: (context, state) {
         if (state.status == ProjectStatus.createProjectSuccess) {
           successToast(context, 'Success', state.message);
@@ -45,6 +47,12 @@ class CreateProjectButton extends StatelessWidget {
               );
       },
     );
+  }
+
+  bool _listenAndBuildWhen(previous, current) {
+    return current.status.isCreateProjectSuccess ||
+        current.status.isCreateProjectFailure ||
+        current.status.isCreateProjectLoading;
   }
 
   void _resetData(BuildContext context) {

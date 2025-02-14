@@ -69,4 +69,11 @@ abstract class EndPoint {
   static String addOrDeleteFreelancerLanguagePair(String freelancerId) {
     return 'freelancers/$freelancerId/language-pairs';
   }
+  static String addSpecialization(String freelancerId) {
+    return 'freelancers/AddSpecialization/$freelancerId';
+  }
+
+  static String deleteSpecialization(String freelancerId) {
+    return 'freelancers/RemoveSpecialization/$freelancerId';
+  }
 }

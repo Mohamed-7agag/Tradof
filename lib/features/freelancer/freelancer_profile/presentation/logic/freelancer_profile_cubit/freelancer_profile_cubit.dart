@@ -167,7 +167,7 @@ class FreelancerProfileCubit extends Cubit<FreelancerProfileState> {
         );
       }
 
-      if (!state.status.isUpdateSocialMediaFailure) {
+      if (!state.status.isSpecializationFailure) {
         emit(state.copyWith(
           status: FreelancerProfileStatus.specializationSuccess,
           message: 'Specialization updated successfully',

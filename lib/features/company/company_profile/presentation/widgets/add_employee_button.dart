@@ -31,10 +31,12 @@ class AddEmployeeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanyProfileCubit, CompanyProfileState>(
+      listenWhen: _listenAndBuildWhen,
+      buildWhen: _listenAndBuildWhen,
       listener: (context, state) {
         if (state.status.isAddCompanyEmployeesSuccess) {
           successToast(context, 'Success', state.message);
-         context.pop(result: true);
+          context.pop(result: true);
         } else if (state.status.isAddCompanyEmployeesFailure) {
           errorToast(context, 'Error', state.errorMessage);
         }
@@ -51,6 +53,12 @@ class AddEmployeeButton extends StatelessWidget {
               );
       },
     );
+  }
+
+  bool _listenAndBuildWhen(previous, current) {
+    return current.status.isAddCompanyEmployeesSuccess ||
+        current.status.isAddCompanyEmployeesFailure ||
+        current.status.isAddCompanyEmployeesLoading;
   }
 
   void _addEmployeeValidation(CompanyProfileState state, BuildContext context) {
