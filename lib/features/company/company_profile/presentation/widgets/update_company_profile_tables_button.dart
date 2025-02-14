@@ -22,8 +22,8 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanyProfileCubit, CompanyProfileState>(
-      listenWhen: _listenAndBuildWhen,
-      buildWhen: _listenAndBuildWhen,
+      listenWhen: (previous, current) => _listenAndBuildWhen(current),
+      buildWhen: (previous, current) => _listenAndBuildWhen(current),
       listener: (context, state) {
         if (state.status.isPreferedLanguagesFailure ||
             state.status.isIndustriesServedFailure) {
@@ -69,11 +69,11 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
     );
   }
 
-  bool _listenAndBuildWhen(previous, current) {
+  bool _listenAndBuildWhen(CompanyProfileState current) {
     return current.status.isPreferedLanguagesFailure ||
         current.status.isIndustriesServedFailure ||
-        current.status.isLanguagePairSuccess ||
-        current.status.isSpecializationSuccess ||
+        current.status.isPreferedLanguagesSuccess ||
+        current.status.isIndustriesServedSuccess ||
         current.status.isPreferedLanguagesLoading ||
         current.status.isIndustriesServedLoading;
   }

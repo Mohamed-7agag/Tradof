@@ -26,7 +26,6 @@ class BuildUpdateFreelancerProfileView extends StatefulWidget {
 
 class _BuildUpdateFreelancerProfileViewState
     extends State<BuildUpdateFreelancerProfileView> {
-  late final TextEditingController emailController;
   late final TextEditingController firstNameController;
   late final TextEditingController lastNameController;
   late final TextEditingController phoneNumberController;
@@ -34,7 +33,6 @@ class _BuildUpdateFreelancerProfileViewState
   @override
   void initState() {
     super.initState();
-    emailController = TextEditingController(text: widget.freelancerModel.email);
     firstNameController =
         TextEditingController(text: widget.freelancerModel.firstName);
     lastNameController =
@@ -46,7 +44,6 @@ class _BuildUpdateFreelancerProfileViewState
   @override
   void dispose() {
     super.dispose();
-    emailController.dispose();
     firstNameController.dispose();
     lastNameController.dispose();
     phoneNumberController.dispose();
@@ -84,15 +81,6 @@ class _BuildUpdateFreelancerProfileViewState
                   outlineBorder: true,
                 ),
                 verticalSpace(20),
-                CustomTextField(
-                  labelText: 'Email',
-                  labelColor: AppColors.darkGrey,
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  labelBehavior: false,
-                  outlineBorder: true,
-                ),
-                verticalSpace(20),
                 PhoneNumberTextField(
                   labelText: 'Phone Number',
                   controller: phoneNumberController,
@@ -117,7 +105,6 @@ class _BuildUpdateFreelancerProfileViewState
                 UpdateFreelancerProfileButton(
                   firstNameController: firstNameController,
                   lastNameController: lastNameController,
-                  emailController: emailController,
                   phoneNumberController: phoneNumberController,
                   freelancerModel: widget.freelancerModel,
                 ),

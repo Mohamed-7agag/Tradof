@@ -24,8 +24,8 @@ class ChangeCompanyPasswordButton extends StatelessWidget {
     return BlocProvider(
       create: (context) => CompanySettingCubit(getIt()),
       child: BlocConsumer<CompanySettingCubit, CompanySettingState>(
-        listenWhen: _listenAndBuildWhen,
-        buildWhen: _listenAndBuildWhen,
+        listenWhen: (previous, current) => _listenAndBuildWhen(current),
+        buildWhen: (previous, current) => _listenAndBuildWhen(current),
         listener: (context, state) {
           if (state.status.isChangePasswordSuccess) {
             successToast(context, 'Success', state.message);
@@ -49,7 +49,7 @@ class ChangeCompanyPasswordButton extends StatelessWidget {
     );
   }
 
-  bool _listenAndBuildWhen(previous, current) {
+  bool _listenAndBuildWhen(CompanySettingState current) {
     return current.status.isChangePasswordSuccess ||
         current.status.isChangePasswordFailure ||
         current.status.isChangePasswordLoading;

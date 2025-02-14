@@ -47,7 +47,6 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
   Future<void> updateCompanyProfile(
     String firstName,
     String lastName,
-    String email,
     String companyName,
     String location,
     String phoneNumber,
@@ -58,7 +57,6 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
     final updateCompanyRequestModel = await _buildUpdateCompanyRequestModel(
       firstName: firstName,
       lastName: lastName,
-      email: email,
       companyName: companyName,
       location: location,
       phoneNumber: phoneNumber,
@@ -77,7 +75,7 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
       (message) => emit(
         state.copyWith(
           status: CompanySettingStatus.updateCompanyProfileSuccess,
-          message: 'Profile Updated Successfully',
+          message: message,
           errMessage: null,
         ),
       ),
@@ -87,7 +85,6 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
   Future<UpdateCompanyRequestModel> _buildUpdateCompanyRequestModel({
     required String firstName,
     required String lastName,
-    required String email,
     required String companyName,
     required String location,
     required String phoneNumber,
@@ -102,7 +99,7 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
       id: AppConstants.kUserId,
       firstName: firstName.isNullOrEmpty() ? companyModel.firstName : firstName,
       lastName: lastName.isNullOrEmpty() ? companyModel.lastName : lastName,
-      email: email.isNullOrEmpty() ? companyModel.email : email,
+      email: companyModel.email,
       companyName:
           companyName.isNullOrEmpty() ? companyModel.companyName : companyName,
       companyAddress:

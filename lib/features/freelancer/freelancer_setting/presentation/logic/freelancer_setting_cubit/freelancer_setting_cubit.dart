@@ -44,7 +44,6 @@ class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
   Future<void> updateFreelancerProfile(
     String firstName,
     String lastName,
-    String email,
     String phoneNumber,
     FreelancerModel freelancerModel,
   ) async {
@@ -54,7 +53,6 @@ class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
         await _buildUpdateFreelancerRequestModel(
       firstName: firstName,
       lastName: lastName,
-      email: email,
       phoneNumber: phoneNumber,
       freelancerModel: freelancerModel,
     );
@@ -81,7 +79,6 @@ class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
   Future<UpdateFreelancerRequestModel> _buildUpdateFreelancerRequestModel({
     required String firstName,
     required String lastName,
-    required String email,
     required String phoneNumber,
     required FreelancerModel freelancerModel,
   }) async {
@@ -94,7 +91,7 @@ class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
       firstName:
           firstName.isNullOrEmpty() ? freelancerModel.firstName : firstName,
       lastName: lastName.isNullOrEmpty() ? freelancerModel.lastName : lastName,
-      email: email.isNullOrEmpty() ? freelancerModel.email : email,
+      email: freelancerModel.email,
       phoneNumber:
           phoneNumber.isNullOrEmpty() ? freelancerModel.phone : phoneNumber,
       profileImageUrl: imageUrl ?? freelancerModel.profileImageUrl,

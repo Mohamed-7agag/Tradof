@@ -25,8 +25,8 @@ class UpdateFreelancerSocialMediaButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<FreelancerProfileCubit, FreelancerProfileState>(
-      listenWhen: _listenAndBuildWhen,
-      buildWhen: _listenAndBuildWhen,
+      listenWhen: (previous, current) => _listenAndBuildWhen(current),
+      buildWhen: (previous, current) => _listenAndBuildWhen(current),
       listener: (context, state) {
         if (state.status.isUpdateSocialMediaSuccess) {
           successToast(context, 'Success', state.message);
@@ -76,7 +76,7 @@ class UpdateFreelancerSocialMediaButton extends StatelessWidget {
     ];
   }
 
-  bool _listenAndBuildWhen(previous, current) {
+  bool _listenAndBuildWhen(FreelancerProfileState current) {
     return current.status.isUpdateSocialMediaSuccess ||
         current.status.isUpdateSocialMediaFailure ||
         current.status.isUpdateSocialMediaLoading;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/utils/widgets/custom_button.dart';
 import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_toastification.dart';
@@ -12,7 +13,6 @@ class UpdateCompanyProfileButton extends StatelessWidget {
     super.key,
     required this.firstNameController,
     required this.lastNameController,
-    required this.emailController,
     required this.phoneNumberController,
     required this.locationCompanyController,
     required this.companyModel,
@@ -21,7 +21,6 @@ class UpdateCompanyProfileButton extends StatelessWidget {
 
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
-  final TextEditingController emailController;
   final TextEditingController phoneNumberController;
   final TextEditingController locationCompanyController;
   final TextEditingController companyNameController;
@@ -30,12 +29,12 @@ class UpdateCompanyProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanySettingCubit, CompanySettingState>(
-      listenWhen: _listenAndBuildWhen,
-      buildWhen: _listenAndBuildWhen,
+      listenWhen: (previous, current) => _listenAndBuildWhen(current),
+      buildWhen: (previous, current) => _listenAndBuildWhen(current),
       listener: (context, state) {
         if (state.status.isUpdateCompanyProfileSuccess) {
           successToast(context, 'Success', state.message);
-          Navigator.pop(context);
+          context.pop(result: true);
         } else if (state.status.isUpdateCompanyProfileFailure) {
           errorToast(context, 'Error', state.errMessage);
         }
@@ -54,7 +53,7 @@ class UpdateCompanyProfileButton extends StatelessWidget {
     );
   }
 
-  bool _listenAndBuildWhen(previous, current) {
+  bool _listenAndBuildWhen(CompanySettingState current) {
     return current.status.isUpdateCompanyProfileLoading ||
         current.status.isUpdateCompanyProfileFailure ||
         current.status.isUpdateCompanyProfileSuccess;
@@ -64,7 +63,6 @@ class UpdateCompanyProfileButton extends StatelessWidget {
     context.read<CompanySettingCubit>().updateCompanyProfile(
           firstNameController.text.trim(),
           lastNameController.text.trim(),
-          emailController.text.trim(),
           companyNameController.text.trim(),
           locationCompanyController.text.trim(),
           phoneNumberController.text.trim(),

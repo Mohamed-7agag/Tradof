@@ -13,22 +13,20 @@ class UpdateFreelancerProfileButton extends StatelessWidget {
     super.key,
     required this.firstNameController,
     required this.lastNameController,
-    required this.emailController,
     required this.phoneNumberController,
     required this.freelancerModel,
   });
 
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
-  final TextEditingController emailController;
   final TextEditingController phoneNumberController;
   final FreelancerModel freelancerModel;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<FreelancerSettingCubit, FreelancerSettingState>(
-      listenWhen: _listenAndBuildWhen,
-      buildWhen: _listenAndBuildWhen,
+      listenWhen: (previous, current) => _listenAndBuildWhen(current),
+      buildWhen: (previous, current) => _listenAndBuildWhen(current),
       listener: (context, state) {
         if (state.status.isUpdateFreelancerProfileSuccess) {
           successToast(context, 'Success', state.message);
@@ -51,7 +49,7 @@ class UpdateFreelancerProfileButton extends StatelessWidget {
     );
   }
 
-  bool _listenAndBuildWhen(previous, current) {
+  bool _listenAndBuildWhen(FreelancerSettingState current) {
     return current.status.isUpdateFreelancerProfileLoading ||
         current.status.isUpdateFreelancerProfileFailure ||
         current.status.isUpdateFreelancerProfileSuccess;
@@ -61,7 +59,6 @@ class UpdateFreelancerProfileButton extends StatelessWidget {
     context.read<FreelancerSettingCubit>().updateFreelancerProfile(
           firstNameController.text.trim(),
           lastNameController.text.trim(),
-          emailController.text.trim(),
           phoneNumberController.text.trim(),
           freelancerModel,
         );

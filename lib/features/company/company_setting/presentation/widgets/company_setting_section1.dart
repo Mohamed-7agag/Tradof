@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
+import 'package:tradof/features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import 'package:tradof/features/company/company_setting/presentation/widgets/setting_item.dart';
 
 class CompanySettingsSection1 extends StatelessWidget {
@@ -22,11 +24,14 @@ class CompanySettingsSection1 extends StatelessWidget {
           SettingItem(
             title: 'Personal info',
             icon: 'assets/images/profile.svg',
-            onTap: () {
-              context.pushNamed(
+            onTap: () async {
+              final result = await context.pushNamed(
                 Routes.updateCompanyProfileViewRoute,
                 arguments: companyModel,
               );
+              if (result == true && context.mounted) {
+                context.read<CompanyProfileCubit>().getCompanyProfile();
+              }
             },
           ),
           Divider(color: AppColors.cardDarkColor),

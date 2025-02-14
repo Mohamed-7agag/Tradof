@@ -26,9 +26,6 @@ class BuildUpdateCompanyProfileView extends StatefulWidget {
 
 class _BuildUpdateCompanyProfileViewState
     extends State<BuildUpdateCompanyProfileView> {
-  late final GlobalKey<FormState> formKey;
-
-  late final TextEditingController emailController;
   late final TextEditingController firstNameController;
   late final TextEditingController lastNameController;
   late final TextEditingController phoneNumberController;
@@ -38,8 +35,6 @@ class _BuildUpdateCompanyProfileViewState
   @override
   void initState() {
     super.initState();
-    formKey = GlobalKey<FormState>();
-    emailController = TextEditingController(text: widget.companyModel.email);
     firstNameController =
         TextEditingController(text: widget.companyModel.firstName);
     lastNameController =
@@ -55,7 +50,6 @@ class _BuildUpdateCompanyProfileViewState
   @override
   void dispose() {
     super.dispose();
-    emailController.dispose();
     firstNameController.dispose();
     lastNameController.dispose();
     phoneNumberController.dispose();
@@ -65,99 +59,85 @@ class _BuildUpdateCompanyProfileViewState
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            verticalSpace(30),
-            UpdateCompanyProfileImage(
-              imageUrl: widget.companyModel.profileImageUrl,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          verticalSpace(30),
+          UpdateCompanyProfileImage(
+            imageUrl: widget.companyModel.profileImageUrl,
+          ),
+          verticalSpace(50),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              children: [
+                CustomTextField(
+                  labelText: 'First Name',
+                  labelColor: AppColors.darkGrey,
+                  controller: firstNameController,
+                  keyboardType: TextInputType.text,
+                  labelBehavior: false,
+                  outlineBorder: true,
+                ),
+                verticalSpace(20),
+                CustomTextField(
+                  labelText: 'Last Name',
+                  labelColor: AppColors.darkGrey,
+                  controller: lastNameController,
+                  keyboardType: TextInputType.text,
+                  labelBehavior: false,
+                  outlineBorder: true,
+                ),
+                verticalSpace(20),
+                CustomTextField(
+                  labelText: 'Company Name',
+                  labelColor: AppColors.darkGrey,
+                  controller: companyNameController,
+                  keyboardType: TextInputType.text,
+                  labelBehavior: false,
+                  outlineBorder: true,
+                ),
+                verticalSpace(20),
+                CustomTextField(
+                  labelText: 'Location',
+                  labelColor: AppColors.darkGrey,
+                  controller: locationCompanyController,
+                  labelBehavior: false,
+                  outlineBorder: true,
+                ),
+                verticalSpace(20),
+                PhoneNumberTextField(
+                  labelText: 'Phone Number',
+                  controller: phoneNumberController,
+                  borderColor: AppColors.darkGrey,
+                  labelBehavior: false,
+                  outlineBorder: true,
+                ),
+                verticalSpace(18),
+                CountryDropDownEdit(
+                  initialCountryId: widget.companyModel.countryId,
+                  onChanged: (value) {
+                    context
+                        .read<CompanySettingCubit>()
+                        .setImageProfileAndCountryId(
+                          countryId: value?.id ?? widget.companyModel.countryId,
+                        );
+                  },
+                ),
+                verticalSpace(60),
+                UpdateCompanyProfileButton(
+                  companyNameController: companyNameController,
+                  firstNameController: firstNameController,
+                  lastNameController: lastNameController,
+                  phoneNumberController: phoneNumberController,
+                  locationCompanyController: locationCompanyController,
+                  companyModel: widget.companyModel,
+                ),
+                verticalSpace(40),
+              ],
             ),
-            verticalSpace(50),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                children: [
-                  CustomTextField(
-                    labelText: 'First Name',
-                    labelColor: AppColors.darkGrey,
-                    controller: firstNameController,
-                    keyboardType: TextInputType.text,
-                    labelBehavior: false,
-                    outlineBorder: true,
-                  ),
-                  verticalSpace(20),
-                  CustomTextField(
-                    labelText: 'Last Name',
-                    labelColor: AppColors.darkGrey,
-                    controller: lastNameController,
-                    keyboardType: TextInputType.text,
-                    labelBehavior: false,
-                    outlineBorder: true,
-                  ),
-                  verticalSpace(20),
-                  CustomTextField(
-                    labelText: 'Company Name',
-                    labelColor: AppColors.darkGrey,
-                    controller: companyNameController,
-                    keyboardType: TextInputType.text,
-                    labelBehavior: false,
-                    outlineBorder: true,
-                  ),
-                  verticalSpace(20),
-                  CustomTextField(
-                    labelText: 'Email',
-                    labelColor: AppColors.darkGrey,
-                    controller: emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    labelBehavior: false,
-                    outlineBorder: true,
-                  ),
-                  verticalSpace(20),
-                  CustomTextField(
-                    labelText: 'Location',
-                    labelColor: AppColors.darkGrey,
-                    controller: locationCompanyController,
-                    labelBehavior: false,
-                    outlineBorder: true,
-                  ),
-                  verticalSpace(20),
-                  PhoneNumberTextField(
-                    labelText: 'Phone Number',
-                    controller: phoneNumberController,
-                    borderColor: AppColors.darkGrey,
-                    labelBehavior: false,
-                    outlineBorder: true,
-                  ),
-                  verticalSpace(18),
-                  CountryDropDownEdit(
-                    initialCountryId: widget.companyModel.countryId,
-                    onChanged: (value) {
-                      context
-                          .read<CompanySettingCubit>()
-                          .setImageProfileAndCountryId(
-                            countryId:
-                                value?.id ?? widget.companyModel.countryId,
-                          );
-                    },
-                  ),
-                  verticalSpace(60),
-                  UpdateCompanyProfileButton(
-                    companyNameController: companyNameController,
-                    firstNameController: firstNameController,
-                    lastNameController: lastNameController,
-                    emailController: emailController,
-                    phoneNumberController: phoneNumberController,
-                    locationCompanyController: locationCompanyController,
-                    companyModel: widget.companyModel,
-                  ),
-                  verticalSpace(40),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

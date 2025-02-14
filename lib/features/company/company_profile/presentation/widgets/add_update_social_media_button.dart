@@ -25,8 +25,8 @@ class AddUpdateSocialMediaButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanyProfileCubit, CompanyProfileState>(
-      listenWhen: _listenAndBuildWhen,
-      buildWhen: _listenAndBuildWhen,
+      listenWhen: (previous, current) => _listenAndBuildWhen(current),
+      buildWhen: (previous, current) => _listenAndBuildWhen(current),
       listener: (context, state) {
         if (state.status.isAddUpdateSocialMediaSuccess) {
           successToast(context, 'Success', state.message);
@@ -51,7 +51,7 @@ class AddUpdateSocialMediaButton extends StatelessWidget {
     );
   }
 
-  bool _listenAndBuildWhen(previous, current) {
+  bool _listenAndBuildWhen(CompanyProfileState current) {
     return current.status.isAddUpdateSocialMediaSuccess ||
         current.status.isAddUpdateSocialMediaFailure ||
         current.status.isAddUpdateSocialMediaLoading;
