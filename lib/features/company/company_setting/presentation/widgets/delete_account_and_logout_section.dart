@@ -23,7 +23,7 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
           flex: 5,
           child: SlideInLeft(
             from: 400,
-            delay: Duration(milliseconds: 550),
+            delay: Duration(milliseconds: 480),
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w)
                   .copyWith(right: 20.w),
@@ -52,7 +52,7 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
           flex: 4,
           child: SlideInRight(
             from: 400,
-            delay: Duration(milliseconds: 550),
+            delay: Duration(milliseconds: 480),
             child: InkWell(
               onTap: () {
                 _showLogoutDialog(context);

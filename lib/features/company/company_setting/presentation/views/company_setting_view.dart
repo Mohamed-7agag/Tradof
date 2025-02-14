@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart' show SvgPicture;
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 
 import '../../../../../core/theming/app_colors.dart';
@@ -45,7 +45,7 @@ class CompanySettingView extends StatelessWidget {
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 200),
+                    delay: Duration(milliseconds: 120),
                     child: CompanySettingsSection1(
                       companyModel: companyModel,
                     ),
@@ -53,7 +53,7 @@ class CompanySettingView extends StatelessWidget {
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 400),
+                    delay: Duration(milliseconds: 240),
                     child: CompanySettingSection2(),
                   ),
                   verticalSpace(26),

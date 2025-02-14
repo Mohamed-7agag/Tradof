@@ -44,7 +44,7 @@ class FreelancerSettingView extends StatelessWidget {
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 200),
+                    delay: Duration(milliseconds: 120),
                     child: FreelancerSettingsSection1(
                       freelancerModel: freelancerModel,
                     ),
@@ -52,7 +52,7 @@ class FreelancerSettingView extends StatelessWidget {
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 400),
+                    delay: Duration(milliseconds: 240),
                     child: FreelancerSettingSection2(),
                   ),
                   verticalSpace(26),

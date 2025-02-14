@@ -46,23 +46,16 @@ class StartedProjectChart extends StatelessWidget {
                   verticalInterval: 1,
                   show: true,
                   getDrawingHorizontalLine: (value) {
-                    return FlLine(
-                      color: AppColors.grey,
-                      strokeWidth: 1,
-                    );
+                    return FlLine(color: AppColors.grey, strokeWidth: 1);
                   },
                   getDrawingVerticalLine: (value) {
-                    return FlLine(
-                      color: AppColors.grey,
-                      strokeWidth: 1,
-                    );
+                    return FlLine(color: AppColors.grey, strokeWidth: 1);
                   },
                 ),
                 titlesData: FlTitlesData(
                   show: true,
-                  rightTitles: AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  rightTitles:
+                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
                   topTitles: AxisTitles(
                     sideTitles: SideTitles(showTitles: false),
                   ),
@@ -120,12 +113,12 @@ class StartedProjectChart extends StatelessWidget {
                 lineBarsData: [
                   LineChartBarData(
                     spots: [
-                      FlSpot(0, 3),
-                      FlSpot(1, 1),
-                      FlSpot(2, 9),
-                      FlSpot(3, 3.2),
-                      FlSpot(4, 7),
-                      FlSpot(5, 3),
+                      FlSpot(0, 0),
+                      FlSpot(1, 5.5),
+                      FlSpot(2, 2),
+                      FlSpot(3, 8),
+                      FlSpot(4, 3),
+                      FlSpot(5, 5),
                     ],
                     belowBarData: BarAreaData(
                         show: true,
@@ -142,16 +135,7 @@ class StartedProjectChart extends StatelessWidget {
                     color: AppColors.primary,
                     barWidth: 4,
                     isStrokeCapRound: true,
-                    dotData: FlDotData(
-                      show: false,
-                      getDotPainter: (spot, percent, barData, index) =>
-                          FlDotCirclePainter(
-                        radius: 4.5,
-                        color: AppColors.primary,
-                        strokeWidth: 2,
-                        strokeColor: Colors.white,
-                      ),
-                    ),
+                    dotData: FlDotData(show: false),
                   ),
                 ],
               ),

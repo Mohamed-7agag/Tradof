@@ -1,0 +1,2 @@
+C:/Users/Dell/Desktop/Flutter/tradof/android/app/.cxx/RelWithDebInfo/2i596g1f/x86/CMakeFiles/edit_cache.dir
+C:/Users/Dell/Desktop/Flutter/tradof/android/app/.cxx/RelWithDebInfo/2i596g1f/x86/CMakeFiles/rebuild_cache.dir

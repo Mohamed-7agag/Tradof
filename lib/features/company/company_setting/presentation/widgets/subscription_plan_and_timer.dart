@@ -17,7 +17,7 @@ class SubscriptionPlanAndTimer extends StatelessWidget {
             flex: 5,
             child: SlideInLeft(
               from: 400,
-              delay: Duration(milliseconds: 400),
+              delay: Duration(milliseconds: 360),
               child: Subscriptionplan(),
             ),
           ),
@@ -26,7 +26,7 @@ class SubscriptionPlanAndTimer extends StatelessWidget {
             flex: 3,
             child: SlideInRight(
               from: 400,
-              delay: Duration(milliseconds: 400),
+              delay: Duration(milliseconds: 360),
               child: TimerOFdays(),
             ),
           ),

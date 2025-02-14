@@ -28,7 +28,7 @@ class CompanyRatingAndReviews extends StatelessWidget {
           flex: 5,
           child: SlideInLeft(
             from: 400,
-            delay: Duration(milliseconds: 160),
+            delay: Duration(milliseconds: 120),
             child: Reviews(reviews: companyModel.reviewCount),
           ),
         ),
@@ -37,7 +37,7 @@ class CompanyRatingAndReviews extends StatelessWidget {
           flex: 2,
           child: SlideInRight(
             from: 400,
-            delay: Duration(milliseconds: 320),
+            delay: Duration(milliseconds: 240),
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 14, horizontal: 12),
               decoration: BoxDecoration(

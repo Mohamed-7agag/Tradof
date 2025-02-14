@@ -4,13 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 
 import '../../data/model/company_model.dart';
+import '../widgets/company_profile_appbar.dart';
 import '../widgets/company_profile_tables.dart';
 import '../widgets/company_rating_and_reviews.dart';
 import '../widgets/company_social_links.dart';
-import '../widgets/company_profile_appbar.dart';
 
-class ProfileCompanyView extends StatelessWidget {
-  const ProfileCompanyView({super.key, required this.companyModel});
+class CompanyProfileView extends StatelessWidget {
+  const CompanyProfileView({super.key, required this.companyModel});
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {

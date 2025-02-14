@@ -1,6 +1,7 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart' show SvgPicture;
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 
@@ -49,31 +50,46 @@ class _ChangeCompanyPasswordViewState extends State<ChangeCompanyPasswordView> {
           child: Column(
             children: [
               verticalSpace(30),
-              CustomTextField(
-                labelText: 'Current Password',
-                controller: currentPasswordController,
-                outlineBorder: true,
-                obscureText: true,
+              SlideInLeft(
+                from: 400,
+                child: CustomTextField(
+                  labelText: 'Current Password',
+                  controller: currentPasswordController,
+                  outlineBorder: true,
+                  obscureText: true,
+                ),
               ),
               verticalSpace(16),
-              CustomTextField(
-                labelText: 'New Password',
-                controller: newPasswordController,
-                outlineBorder: true,
-                obscureText: true,
+              SlideInLeft(
+                from: 400,
+                delay: Duration(milliseconds: 120),
+                child: CustomTextField(
+                  labelText: 'New Password',
+                  controller: newPasswordController,
+                  outlineBorder: true,
+                  obscureText: true,
+                ),
               ),
               verticalSpace(16),
-              CustomTextField(
-                labelText: 'Confirm Password',
-                controller: confirmPasswordController,
-                outlineBorder: true,
-                obscureText: true,
+              SlideInLeft(
+                from: 400,
+                delay: Duration(milliseconds: 240),
+                child: CustomTextField(
+                  labelText: 'Confirm Password',
+                  controller: confirmPasswordController,
+                  outlineBorder: true,
+                  obscureText: true,
+                ),
               ),
               verticalSpace(60),
-              ChangeCompanyPasswordButton(
-                currentPasswordController: currentPasswordController,
-                newPasswordController: newPasswordController,
-                confirmPasswordController: confirmPasswordController,
+              SlideInLeft(
+                from: 400,
+                delay: Duration(milliseconds: 360),
+                child: ChangeCompanyPasswordButton(
+                  currentPasswordController: currentPasswordController,
+                  newPasswordController: newPasswordController,
+                  confirmPasswordController: confirmPasswordController,
+                ),
               ),
               verticalSpace(40),
             ],

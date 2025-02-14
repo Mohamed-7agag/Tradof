@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 import 'package:tradof/core/helpers/exit_dialog.dart';
+import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
@@ -38,7 +39,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
         create: (context) => ProjectCubit(getIt()),
         child: CreateProjectView(companyModel: state.companyModel!),
       ),
-      ProfileCompanyView(companyModel: state.companyModel!),
+      CompanyProfileView(companyModel: state.companyModel!),
       CompanyDashboardView(companyModel: state.companyModel!),
       CompanySettingView(companyModel: state.companyModel!),
     ];
@@ -52,10 +53,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
         body: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
           builder: (context, state) {
             if (state.status.isGetCompanySuccess) {
-              return LazyLoadIndexedStack(
-                index: currentIndex,
-                children: _buildIndexedStackChildren(state),
-              );
+              return _animatedSwitcherLazyStack(state);
             } else if (state.status.isGetCompanyFailure) {
               return _buildFailureWidget(
                 context,
@@ -80,7 +78,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
                   children: [
                     SlideInLeft(
                       from: 400,
-                      delay: Duration(milliseconds: 350),
+                      delay: Duration(milliseconds: 250),
                       child: _buildNavItem(
                         'assets/images/home2_off.png',
                         'assets/images/home2_on.png',
@@ -95,7 +93,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
                         1,
                       ),
                     ),
-                    SizedBox(width: 40.w),
+                    horizontalSpace(50),
                     SlideInRight(
                       from: 400,
                       child: _buildNavItem(
@@ -106,7 +104,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
                     ),
                     SlideInRight(
                       from: 400,
-                      delay: Duration(milliseconds: 350),
+                      delay: Duration(milliseconds: 250),
                       child: _buildNavItem(
                         'assets/images/setting_off.png',
                         'assets/images/setting_on.png',
@@ -119,7 +117,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
             ),
             Positioned(
               top: -20,
-              child: BounceInUp(
+              child: SlideInUp(
                 child: InkWell(
                   borderRadius: BorderRadius.circular(30),
                   onTap: () {
@@ -142,6 +140,26 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  AnimatedSwitcher _animatedSwitcherLazyStack(CompanyProfileState state) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      transitionBuilder: (Widget child, Animation<double> animation) {
+        final offsetAnimation = Tween<Offset>(
+          begin: const Offset(1.0, 0.0),
+          end: Offset.zero,
+        ).animate(
+          CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+        );
+        return SlideTransition(position: offsetAnimation, child: child);
+      },
+      child: LazyLoadIndexedStack(
+        key: ValueKey<int>(currentIndex),
+        index: currentIndex,
+        children: _buildIndexedStackChildren(state),
       ),
     );
   }

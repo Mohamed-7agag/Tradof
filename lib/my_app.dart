@@ -46,8 +46,7 @@ class MyApp extends StatelessWidget {
         toolbarHeight: 65,
       ),
       pageTransitionsTheme: PageTransitionsTheme(builders: {
-        TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-        TargetPlatform.iOS: FadeForwardsPageTransitionsBuilder(),
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
       }),
     );
   }
