@@ -16,7 +16,7 @@ abstract class FreelancerProfileRepo {
     required List<Map<String, int>> languagesPairIds,
   });
   Future<void> deleteFreelancerLanguagePair({
-    required List<Map<String, int>> languagesPairIds,
+    required List<int> languagesPairIds,
   });
 
   Future<void> addSpecialization({

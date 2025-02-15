@@ -74,7 +74,7 @@ class FreelancerProfileCubit extends Cubit<FreelancerProfileState> {
 
   Future<void> updateLanguagePairs({
     required List<Map<String, int>> addedLanguagePairsIds,
-    required List<Map<String, int>> deletedLanguagePairsIds,
+    required List<int> deletedLanguagePairsIds,
   }) async {
     emit(state.copyWith(status: FreelancerProfileStatus.languagePairLoading));
 

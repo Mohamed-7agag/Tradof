@@ -102,12 +102,8 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
                 'languageToId': item.toLanguage.id
               })
           .toList();
-      final deletedLanguagePairsIds = removedItems
-          .map((item) => {
-                'languageFromId': item.fromLanguage.id,
-                'languageToId': item.toLanguage.id
-              })
-          .toList();
+      final deletedLanguagePairsIds =
+          removedItems.map((item) => item.id!).toList();
 
       context.read<FreelancerProfileCubit>().updateLanguagePairs(
             addedLanguagePairsIds: addedLanguagePairsIds,

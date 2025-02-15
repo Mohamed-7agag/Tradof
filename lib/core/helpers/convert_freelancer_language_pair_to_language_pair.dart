@@ -24,7 +24,10 @@ List<LanguagePairModel> convertLanguagePairs(
         countryCode: element.countryToCode,
       );
       languagePairsList.add(LanguagePairModel(
-          fromLanguage: languageFrom, toLanguage: languageTo));
+        id: element.id,
+        fromLanguage: languageFrom,
+        toLanguage: languageTo,
+      ));
     }
     return languagePairsList;
   }

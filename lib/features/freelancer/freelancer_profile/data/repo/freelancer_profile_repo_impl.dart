@@ -54,7 +54,7 @@ class FreelancerProfileRepoImpl implements FreelancerProfileRepo {
 
   @override
   Future<void> deleteFreelancerLanguagePair({
-    required List<Map<String, int>> languagesPairIds,
+    required List<int> languagesPairIds,
   }) async {
     await _apiServices.delete(
       EndPoint.addOrDeleteFreelancerLanguagePair(AppConstants.kUserId),
