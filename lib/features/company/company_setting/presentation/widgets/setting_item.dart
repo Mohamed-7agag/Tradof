@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
@@ -8,11 +7,11 @@ class SettingItem extends StatelessWidget {
   const SettingItem({
     super.key,
     required this.title,
-    required this.icon, 
-   required this.onTap,
+    required this.icon,
+    required this.onTap,
   });
   final String title;
-  final String icon;
+  final Widget icon;
   final VoidCallback? onTap;
 
   @override
@@ -23,7 +22,7 @@ class SettingItem extends StatelessWidget {
       leading: CircleAvatar(
         radius: 21.r,
         backgroundColor: AppColors.white,
-        child: SvgPicture.asset(icon),
+        child: icon,
       ),
       title: Text(
         title,

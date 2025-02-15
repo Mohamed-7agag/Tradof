@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 
@@ -42,7 +42,7 @@ class _ChangeCompanyPasswordViewState extends State<ChangeCompanyPasswordView> {
     return Scaffold(
       appBar: customAppbar(
         title: 'Change Password',
-        actionIcon: SvgPicture.asset('assets/images/edit.svg', width: 24),
+        actionIcon: HugeIcons.strokeRoundedPencilEdit02,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),

@@ -1,9 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:tradof/features/company/company_setting/presentation/widgets/subscription_plan.dart';
-import 'package:tradof/features/company/company_setting/presentation/widgets/timer.dart';
+
 
 import '../../../../../core/helpers/spacing.dart';
+import 'subscription_plan.dart';
+import 'timer.dart';
 
 class SubscriptionPlanAndTimer extends StatelessWidget {
   const SubscriptionPlanAndTimer({super.key});

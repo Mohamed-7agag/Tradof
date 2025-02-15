@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/utils/widgets/custom_app_bar.dart';
 import 'package:tradof/features/projects/data/models/project_model.dart';
 
@@ -66,7 +66,7 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
       child: Scaffold(
         appBar: customAppbar(
           title: 'Update Project',
-          actionIcon: SvgPicture.asset('assets/images/edit.svg', width: 24),
+          actionIcon: HugeIcons.strokeRoundedPencilEdit02,
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),

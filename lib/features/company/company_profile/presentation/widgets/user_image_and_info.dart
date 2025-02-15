@@ -2,7 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -46,14 +46,14 @@ class UserImageAndInfo extends StatelessWidget {
           ),
         ],
       ),
-      trailing: GestureDetector(
-        onTap: () {
+      trailing: IconButton(
+        onPressed: () {
           context.pushNamed(Routes.companyEmployeesViewRoute);
         },
-        child: SvgPicture.asset(
-          'assets/images/support.svg',
-          width: 28,
-          colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+        icon: HugeIcon(
+          icon: HugeIcons.strokeRoundedUserGroup,
+          color: Colors.white,
+          size: 28,
         ),
       ),
     );

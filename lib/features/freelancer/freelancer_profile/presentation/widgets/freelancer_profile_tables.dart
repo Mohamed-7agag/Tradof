@@ -18,7 +18,7 @@ class FreelancerProfileTables extends StatelessWidget {
         FreelancerLanguagePair(
           freelancerModel: freelancerModel,
         ),
-        verticalSpace(23),
+        verticalSpace(25),
         FreelancerSpecialization(
           freelancerModel: freelancerModel,
         ),

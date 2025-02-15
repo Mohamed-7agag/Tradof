@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 
 import '../../../../core/theming/app_style.dart';
@@ -56,8 +56,7 @@ class _CreateProjectViewState extends State<CreateProjectView> {
         children: [
           customAppbar(
             title: 'Create Project',
-            actionIcon:
-                SvgPicture.asset('assets/images/create_project.svg', width: 24),
+            actionIcon: HugeIcons.strokeRoundedPenToolAdd,
           ),
           Expanded(
             child: Padding(

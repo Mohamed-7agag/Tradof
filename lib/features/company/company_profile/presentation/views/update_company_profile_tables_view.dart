@@ -2,7 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/features/auth/presentation/widgets/industries_served_table.dart';
 import 'package:tradof/features/auth/presentation/widgets/prefered_languages_table.dart';
@@ -25,8 +25,10 @@ class UpdateCompanyProfileTablesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppbar(
-        title: isPreferedLanguages ? 'Update Prefered Languages' : 'Update Industries',
-        actionIcon: SvgPicture.asset('assets/images/edit.svg', width: 24),
+        title: isPreferedLanguages
+            ? 'Update Prefered Languages'
+            : 'Update Industries',
+        actionIcon: HugeIcons.strokeRoundedPencilEdit02,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -50,7 +52,7 @@ class UpdateCompanyProfileTablesView extends StatelessWidget {
                   from: 400,
                   child: UpdateCompanyProfileTablesButton(
                     companyModel: companyModel,
-                    isPreferedLanguages:isPreferedLanguages,
+                    isPreferedLanguages: isPreferedLanguages,
                   ),
                 ),
               ),

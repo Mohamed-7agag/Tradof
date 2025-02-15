@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -27,7 +28,8 @@ class FreelancerLanguagePair extends StatelessWidget {
               from: 400,
               child: Text('Language Pairs', style: AppStyle.poppinsMedium15),
             ),
-            GestureDetector(
+            InkWell(
+              borderRadius: BorderRadius.circular(4),
               onTap: () async {
                 Map<String, dynamic> data = {
                   'isLanguagePair': true,
@@ -44,7 +46,11 @@ class FreelancerLanguagePair extends StatelessWidget {
               },
               child: SlideInRight(
                 from: 200,
-                child: Image.asset('assets/images/edit.png', width: 25),
+                child: HugeIcon(
+                  icon: HugeIcons.strokeRoundedPencilEdit02,
+                  color: AppColors.lightOrange,
+                  size: 27,
+                ),
               ),
             )
           ],

@@ -2,7 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/di/di.dart';
 import 'package:tradof/features/auth/presentation/widgets/language_pair_table.dart';
 import 'package:tradof/features/auth/presentation/widgets/specialization_table.dart';
@@ -28,7 +28,7 @@ class UpdateFreelancerProfileTablesView extends StatelessWidget {
       appBar: customAppbar(
         title:
             isLanguagePair ? 'Update Languages Pairs' : 'Update Specialization',
-        actionIcon: SvgPicture.asset('assets/images/edit.svg', width: 24),
+        actionIcon: HugeIcons.strokeRoundedPencilEdit02,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),

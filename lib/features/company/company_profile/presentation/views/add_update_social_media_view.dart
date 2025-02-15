@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../data/model/social_media_model.dart';
@@ -13,7 +13,7 @@ class AddUpdateSocialMediaView extends StatelessWidget {
     return Scaffold(
       appBar: customAppbar(
         title: 'Social Media',
-        actionIcon: SvgPicture.asset('assets/images/edit.svg', width: 24),
+        actionIcon: HugeIcons.strokeRoundedPencilEdit02,
       ),
       body: BuildAddUpdateSocialMedia(socialMedia: socialMedia),
     );

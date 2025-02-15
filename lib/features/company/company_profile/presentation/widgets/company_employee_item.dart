@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
@@ -11,7 +12,7 @@ class CompanyEmployeeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12),
+      padding: EdgeInsets.symmetric(horizontal: 14),
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.cardColor,
@@ -23,10 +24,10 @@ class CompanyEmployeeItem extends StatelessWidget {
           ListTile(
             contentPadding: EdgeInsets.zero,
             horizontalTitleGap: 10,
-            leading: Icon(
-              Icons.account_circle,
-              size: 50,
+            leading: HugeIcon(
+              icon: HugeIcons.strokeRoundedUserStory,
               color: AppColors.primary,
+              size: 45,
             ),
             title: Text(
               employeeModel.fullName,
@@ -40,7 +41,11 @@ class CompanyEmployeeItem extends StatelessWidget {
           verticalSpace(10),
           Row(
             children: [
-              Icon(Icons.business_center_sharp, color: AppColors.primary),
+              HugeIcon(
+                icon: HugeIcons.strokeRoundedJobLink,
+                color: AppColors.primary,
+                size: 21,
+              ),
               horizontalSpace(10),
               Text(employeeModel.jobTitle),
             ],
@@ -48,7 +53,11 @@ class CompanyEmployeeItem extends StatelessWidget {
           verticalSpace(10),
           Row(
             children: [
-              Icon(Icons.phone, color: AppColors.primary),
+              HugeIcon(
+                icon: HugeIcons.strokeRoundedCall,
+                color: AppColors.primary,
+                size: 21,
+              ),
               horizontalSpace(10),
               Text(employeeModel.phoneNumber),
             ],
@@ -56,7 +65,11 @@ class CompanyEmployeeItem extends StatelessWidget {
           verticalSpace(10),
           Row(
             children: [
-              Icon(Icons.group, color: AppColors.primary),
+              HugeIcon(
+                icon: HugeIcons.strokeRoundedUserMultiple,
+                color: AppColors.primary,
+                size: 21,
+              ),
               horizontalSpace(10),
               Text(employeeModel.groupName),
             ],
@@ -64,12 +77,16 @@ class CompanyEmployeeItem extends StatelessWidget {
           verticalSpace(10),
           Row(
             children: [
-              Icon(Icons.flag, color: AppColors.primary),
+              HugeIcon(
+                icon: HugeIcons.strokeRoundedCity01,
+                color: AppColors.primary,
+                size: 21,
+              ),
               horizontalSpace(10),
               Text(employeeModel.country),
             ],
           ),
-          verticalSpace(12),
+          verticalSpace(14),
         ],
       ),
     );

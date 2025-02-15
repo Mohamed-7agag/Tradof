@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
@@ -29,7 +29,11 @@ class Subscriptionplan extends StatelessWidget {
                 'Subscription plan',
                 style: AppStyle.robotoCondensedRegular15,
               ),
-              SvgPicture.asset('assets/images/convert_card.svg'),
+              HugeIcon(
+                icon: HugeIcons.strokeRoundedCardExchange02,
+                color: Colors.black,
+                size: 22,
+              ),
             ],
           ),
           verticalSpace(12),

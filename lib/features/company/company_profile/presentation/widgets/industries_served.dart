@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -23,7 +24,8 @@ class IndustriesServed extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Industries Served', style: AppStyle.poppinsMedium15),
-            GestureDetector(
+            InkWell(
+              borderRadius: BorderRadius.circular(4),
               onTap: () async {
                 Map<String, dynamic> data = {
                   'isPreferedLanguages': false,
@@ -38,7 +40,11 @@ class IndustriesServed extends StatelessWidget {
                   context.read<CompanyProfileCubit>().getCompanyProfile();
                 }
               },
-              child: Image.asset('assets/images/edit.png', width: 25),
+              child: HugeIcon(
+                icon: HugeIcons.strokeRoundedPencilEdit02,
+                color: AppColors.lightOrange,
+                size: 27,
+              ),
             )
           ],
         ),

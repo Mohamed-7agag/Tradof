@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -20,7 +21,11 @@ class FreelancerSettingSection2 extends StatelessWidget {
         children: [
           SettingItem(
             title: 'Change password',
-            icon: 'assets/images/password.svg',
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedSquareLockPassword,
+              color: Colors.red,
+              size: 26,
+            ),
             onTap: () {
               context.pushNamed(Routes.changeFreelancerPasswordViewRoute);
             },
@@ -28,13 +33,19 @@ class FreelancerSettingSection2 extends StatelessWidget {
           Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Technical Support',
-            icon: 'assets/images/support.svg',
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedCustomerService02,
+              color: Colors.teal,
+            ),
             onTap: () {},
           ),
           Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Give us feedback',
-            icon: 'assets/images/feedback.svg',
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedComment01,
+              color: Colors.blue[600]!,
+            ),
             onTap: () {},
           ),
         ],

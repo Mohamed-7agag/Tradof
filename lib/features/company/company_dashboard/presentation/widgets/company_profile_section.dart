@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
 import '../../../../../core/helpers/spacing.dart';
@@ -32,9 +33,15 @@ class CompanyProfileSection extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset('assets/images/bell2.png', width: 22),
+          HugeIcon(
+            icon: HugeIcons.strokeRoundedNotification03,
+            color: AppColors.white,
+          ),
           horizontalSpace(18),
-          Image.asset('assets/images/calendar.png', width: 22),
+          HugeIcon(
+            icon: HugeIcons.strokeRoundedCalendar02,
+            color: AppColors.white,
+          ),
           horizontalSpace(4),
         ],
       ),

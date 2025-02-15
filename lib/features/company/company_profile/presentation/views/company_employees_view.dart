@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
@@ -19,16 +19,17 @@ class CompanyEmployeesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppbar(
-          title: 'Employees',
-          actionIcon: SvgPicture.asset(
-            'assets/images/support.svg',
-            width: 24,
-            colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-          )),
+        title: 'Employees',
+        actionIcon: HugeIcons.strokeRoundedUserGroup,
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
-        child: Icon(Icons.person_add, size: 26),
+        child: HugeIcon(
+          icon: HugeIcons.strokeRoundedUserAdd01,
+          color: AppColors.white,
+          size: 26,
+        ),
         onPressed: () async {
           final result = await context.pushNamed(
             Routes.companyAddEmployeeViewRoute,

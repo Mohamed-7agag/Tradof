@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
@@ -18,6 +18,7 @@ class IndustriesServedTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        verticalSpace(5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -30,7 +31,11 @@ class IndustriesServedTable extends StatelessWidget {
               onTap: () {
                 _showIndusteriesServedDialog(context);
               },
-              child: SvgPicture.asset('assets/images/add.svg', width: 28),
+              child: HugeIcon(
+                icon: HugeIcons.strokeRoundedAddSquare,
+                color: AppColors.lightOrange,
+                size: 27,
+              ),
             ),
           ],
         ),
@@ -65,15 +70,20 @@ class IndustriesServedTable extends StatelessWidget {
                                     .read<TablesCubit>()
                                     .removeIndustryServed(industriesServed);
                               },
-                              child: Icon(Icons.cancel, color: Colors.red),
+                              child: HugeIcon(
+                                icon:
+                                    HugeIcons.strokeRoundedCancelCircleHalfDot,
+                                color: Colors.red,
+                                size: 20,
+                              ),
                             ),
-                            SizedBox(width: 6),
+                            horizontalSpace(6),
                             Text(
                               industriesServed.name,
                               style: TextStyle(
-                                  color: darkColors
-                                      ? AppColors.black
-                                      : Colors.white),
+                                color:
+                                    darkColors ? AppColors.black : Colors.white,
+                              ),
                             ),
                           ],
                         ),

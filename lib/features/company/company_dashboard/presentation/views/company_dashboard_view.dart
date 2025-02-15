@@ -11,9 +11,9 @@ class CompanyDashboardView extends StatelessWidget {
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.primary,
-      body: Column(
+    return Container(
+      color: AppColors.primary,
+      child: Column(
         children: [
           verticalSpace(10),
           SafeArea(

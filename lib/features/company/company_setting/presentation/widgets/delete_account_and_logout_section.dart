@@ -2,7 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 
 import '../../../../../core/cache/cache_helper.dart';
@@ -25,8 +25,7 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
             from: 400,
             delay: Duration(milliseconds: 480),
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w)
-                  .copyWith(right: 20.w),
+              padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
               decoration: BoxDecoration(
                 color: AppColors.cardColor,
                 borderRadius: BorderRadius.circular(15),
@@ -41,7 +40,10 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SvgPicture.asset('assets/images/delete_account.svg'),
+                  HugeIcon(
+                    icon: HugeIcons.strokeRoundedDelete02,
+                    color: Colors.red,
+                  ),
                 ],
               ),
             ),
@@ -59,8 +61,7 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
               },
               borderRadius: BorderRadius.circular(15),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w)
-                    .copyWith(right: 20.w),
+                padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
                 decoration: BoxDecoration(
                   color: AppColors.cardColor,
                   borderRadius: BorderRadius.circular(15),
@@ -74,7 +75,10 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SvgPicture.asset('assets/images/logout.svg'),
+                    HugeIcon(
+                      icon: HugeIcons.strokeRoundedLogout01,
+                      color: AppColors.primary,
+                    ),
                   ],
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/custom_url_launcher.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/helpers/spacing.dart';
@@ -67,8 +68,12 @@ class FreelancerCvSection extends StatelessWidget {
               ),
               cvUrl == null
                   ? Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: Icon(Icons.file_upload_outlined),
+                      padding: const EdgeInsets.only(right: 6),
+                      child: HugeIcon(
+                        icon: HugeIcons.strokeRoundedUpload01,
+                        color: AppColors.lightOrange,
+                        size: 27,
+                      ),
                     )
                   : Row(
                       children: [
@@ -76,14 +81,18 @@ class FreelancerCvSection extends StatelessWidget {
                             onPressed: () {
                               _pickCV(context);
                             },
-                            icon: Icon(
-                              Icons.change_circle_rounded,
-                              size: 32,
+                            icon: HugeIcon(
+                              icon: HugeIcons.strokeRoundedExchange01,
                               color: AppColors.lightOrange,
+                              size: 27,
                             )),
                         horizontalSpace(10),
-                        Icon(Icons.open_in_new_rounded),
-                        horizontalSpace(8),
+                        HugeIcon(
+                          icon: HugeIcons.strokeRoundedSquareArrowUpRight,
+                          color: AppColors.black,
+                          size: 27,
+                        ),
+                        horizontalSpace(6),
                       ],
                     ),
             ],

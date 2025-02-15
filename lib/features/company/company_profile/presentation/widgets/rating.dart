@@ -46,7 +46,7 @@ class Rating extends StatelessWidget {
                 child: Icon(
                   size: 22,
                   Icons.star,
-                  color: Colors.yellow,
+                  color: Colors.yellow[600],
                 ),
               )
             ],

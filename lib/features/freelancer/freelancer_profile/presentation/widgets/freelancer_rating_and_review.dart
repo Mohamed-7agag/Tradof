@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
@@ -38,12 +38,15 @@ class FreelancerRatingAndReview extends StatelessWidget {
             from: 400,
             delay: Duration(milliseconds: 240),
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+              padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: SvgPicture.asset('assets/images/share.svg'),
+              child: HugeIcon(
+                icon: HugeIcons.strokeRoundedShare08,
+                color: AppColors.white,
+              ),
             ),
           ),
         )

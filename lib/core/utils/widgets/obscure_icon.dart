@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
+
 import '../../theming/app_colors.dart';
 
 class ObscureIcon extends StatelessWidget {
   const ObscureIcon({
     super.key,
     required this.isObscure,
-    required this.onPressed, this.labelColor,
+    required this.onPressed,
+    this.labelColor,
   });
 
   final bool isObscure;
@@ -15,8 +18,10 @@ class ObscureIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(
-        isObscure ? Icons.visibility : Icons.visibility_off,
+      icon: HugeIcon(
+        icon: isObscure
+            ? HugeIcons.strokeRoundedView
+            : HugeIcons.strokeRoundedViewOff,
         color: labelColor ?? AppColors.primary,
       ),
       onPressed: onPressed,

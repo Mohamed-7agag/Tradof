@@ -1,12 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/exit_dialog.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/utils/widgets/bottom_nav_bar_center_icon.dart';
+import 'package:tradof/core/utils/widgets/bottom_nav_bar_items.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
 import 'package:tradof/features/freelancer/freelancer_setting/presentation/views/freelancer_setting_view.dart';
@@ -75,45 +75,14 @@ class _FreelancerBottomNavBarViewState
               child: Container(
                 height: 85,
                 color: AppColors.white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    SlideInLeft(
-                      from: 400,
-                      delay: Duration(milliseconds: 250),
-                      child: _buildNavItem(
-                        'assets/images/home2_off.png',
-                        'assets/images/home2_on.png',
-                        0,
-                      ),
-                    ),
-                    SlideInLeft(
-                      from: 400,
-                      child: _buildNavItem(
-                        'assets/images/add_project_off.png',
-                        'assets/images/add_project_on.png',
-                        1,
-                      ),
-                    ),
-                    SizedBox(width: 40.w),
-                    SlideInRight(
-                      from: 400,
-                      child: _buildNavItem(
-                        'assets/images/wallet_off.png',
-                        'assets/images/wallet_on.png',
-                        3,
-                      ),
-                    ),
-                    SlideInRight(
-                      from: 400,
-                      delay: Duration(milliseconds: 250),
-                      child: _buildNavItem(
-                        'assets/images/setting_off.png',
-                        'assets/images/setting_on.png',
-                        4,
-                      ),
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: BottomNavBarItems(
+                    isFreelancer : true,
+                    onTabTapped: (index) {
+                      setState(() => currentIndex = index);
+                    },
+                  ),
                 ),
               ),
             ),
@@ -128,24 +97,6 @@ class _FreelancerBottomNavBarViewState
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(String inactiveIcon, String activeIcon, int index) {
-    final isSelected = currentIndex == index;
-    return InkWell(
-      onTap: () {
-        if (currentIndex != index) {
-          setState(() => currentIndex = index);
-        }
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        child: Image.asset(
-          isSelected ? activeIcon : inactiveIcon,
-          width: 24.w,
         ),
       ),
     );

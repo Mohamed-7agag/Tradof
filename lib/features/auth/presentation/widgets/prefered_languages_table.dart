@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/spacing.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
@@ -20,6 +20,7 @@ class PreferedLanguagesTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        verticalSpace(5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -28,11 +29,16 @@ class PreferedLanguagesTable extends StatelessWidget {
               style: AppStyle.poppinsSemiBold14.copyWith(
                   color: darkColors ? AppColors.black : AppColors.white),
             ),
-            GestureDetector(
+            InkWell(
+              borderRadius: BorderRadius.circular(4),
               onTap: () {
                 _showPreferedLanguageDialog(context);
               },
-              child: SvgPicture.asset('assets/images/add.svg', width: 28),
+              child: HugeIcon(
+                icon: HugeIcons.strokeRoundedAddSquare,
+                color: AppColors.lightOrange,
+                size: 27,
+              ),
             ),
           ],
         ),
@@ -72,12 +78,18 @@ class PreferedLanguagesTable extends StatelessWidget {
                         Row(
                           children: [
                             GestureDetector(
-                                onTap: () {
-                                  context
-                                      .read<TablesCubit>()
-                                      .removePreferedLanguage(language);
-                                },
-                                child: Icon(Icons.cancel, color: Colors.red)),
+                              onTap: () {
+                                context
+                                    .read<TablesCubit>()
+                                    .removePreferedLanguage(language);
+                              },
+                              child: HugeIcon(
+                                icon:
+                                    HugeIcons.strokeRoundedCancelCircleHalfDot,
+                                color: AppColors.lightOrange,
+                                size: 20,
+                              ),
+                            ),
                             horizontalSpace(6),
                             Expanded(
                               child: Text(

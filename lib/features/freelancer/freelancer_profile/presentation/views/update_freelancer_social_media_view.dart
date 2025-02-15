@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/features/freelancer/freelancer_profile/presentation/widgets/update_freelancer_social_media_button.dart';
 
 import '../../../../../core/helpers/spacing.dart';
@@ -58,7 +58,7 @@ class _UpdateFreelancerSocialMediaViewState
     return Scaffold(
       appBar: customAppbar(
         title: 'Social Media',
-        actionIcon: SvgPicture.asset('assets/images/edit.svg', width: 24),
+        actionIcon: HugeIcons.strokeRoundedPencilEdit02,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
@@ -18,7 +19,8 @@ class FreelancerProfileSection extends StatelessWidget {
       leading: CircleAvatar(
         radius: 24,
         backgroundColor: AppColors.white,
-        backgroundImage: CachedNetworkImageProvider(freelancerModel.profileImageUrl),
+        backgroundImage:
+            CachedNetworkImageProvider(freelancerModel.profileImageUrl),
       ),
       title: Text(
         '${freelancerModel.firstName} ${freelancerModel.lastName}',
@@ -31,9 +33,15 @@ class FreelancerProfileSection extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset('assets/images/bell2.png', width: 22),
+          HugeIcon(
+            icon: HugeIcons.strokeRoundedNotification03,
+            color: AppColors.white,
+          ),
           horizontalSpace(18),
-          Image.asset('assets/images/calendar.png', width: 22),
+          HugeIcon(
+            icon: HugeIcons.strokeRoundedCalendar02,
+            color: AppColors.white,
+          ),
           horizontalSpace(4),
         ],
       ),

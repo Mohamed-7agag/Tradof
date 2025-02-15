@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/features/projects/presentation/logic/file_cubit.dart';
 
 import '../../../../core/theming/app_colors.dart';
@@ -61,11 +62,15 @@ class AttachmentFilesSection extends StatelessWidget {
           right: 15,
           child: IconButton(
             onPressed: () => _pickFiles(context),
-            icon: Icon(Icons.add, size: 30),
+            icon: HugeIcon(
+            icon: HugeIcons.strokeRoundedAdd01,
+            color: AppColors.white,
+            size: 26,
+          ),
             style: IconButton.styleFrom(
                 backgroundColor: AppColors.lightOrange,
                 foregroundColor: AppColors.white,
-                padding: EdgeInsets.all(10)),
+                padding: EdgeInsets.all(12)),
           ),
         )
       ],

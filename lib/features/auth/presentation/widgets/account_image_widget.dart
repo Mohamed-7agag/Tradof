@@ -5,6 +5,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/theming/app_colors.dart';
@@ -52,9 +53,10 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
               onPressed: () {
                 _pickImageFromGallery();
               },
-              icon: Icon(
-                Icons.camera_alt,
+              icon: HugeIcon(
+                icon: HugeIcons.strokeRoundedCamera01,
                 color: AppColors.lightOrange,
+                size: 22,
               ),
               style: IconButton.styleFrom(
                 backgroundColor: AppColors.white,

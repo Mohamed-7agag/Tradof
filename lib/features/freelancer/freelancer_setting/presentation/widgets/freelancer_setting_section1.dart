@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_colors.dart';
@@ -24,7 +25,11 @@ class FreelancerSettingsSection1 extends StatelessWidget {
         children: [
           SettingItem(
             title: 'Personal info',
-            icon: 'assets/images/profile.svg',
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedUserAccount,
+              color: Colors.green,
+              size: 26,
+            ),
             onTap: () async {
               final result = await context.pushNamed(
                 Routes.updateFreelancerProfileViewRoute,
@@ -39,13 +44,19 @@ class FreelancerSettingsSection1 extends StatelessWidget {
           Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Notification',
-            icon: 'assets/images/notification.svg',
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedNotification03,
+              color: AppColors.primary,
+            ),
             onTap: () {},
           ),
           Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Clander',
-            icon: 'assets/images/calendar.svg',
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedCalendar02,
+              color: Colors.amber,
+            ),
             onTap: () {},
           ),
         ],

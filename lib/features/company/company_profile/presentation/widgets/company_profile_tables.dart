@@ -15,7 +15,7 @@ class CompanyProfileTables extends StatelessWidget {
         PreferredLanguage(
           companyModel: companyModel,
         ),
-        verticalSpace(23),
+        verticalSpace(25),
         IndustriesServed(
           companyModel: companyModel,
         ),
