@@ -1,14 +1,11 @@
-import 'package:dartz/dartz.dart';
-import 'package:tradof/core/errors/failure.dart';
-
 import '../model/update_freelancer_request_model.dart';
 
 abstract class FreelancerSettingRepo {
-  Future<Either<Failure, Unit>> changeFreelancerPassword({
+  Future<void> changeFreelancerPassword({
     required String currentPassword,
     required String newPassword,
   });
-  Future<Either<Failure, Unit>> updateCompanyProfile({
+  Future<void> updateCompanyProfile({
     required UpdateFreelancerRequestModel updateFreelancerRequestModel,
   });
 }

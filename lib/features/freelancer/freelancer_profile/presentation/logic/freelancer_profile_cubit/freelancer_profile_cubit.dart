@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/core/errors/exception.dart';
 import 'package:tradof/core/utils/app_constants.dart';
 
 import '../../../../../company/company_profile/data/model/social_media_model.dart';
@@ -16,65 +17,59 @@ class FreelancerProfileCubit extends Cubit<FreelancerProfileState> {
 
   Future<void> getFreelancerProfile() async {
     emit(state.copyWith(status: FreelancerProfileStatus.getFreelancerLoading));
-    final result = await _freelancerRepo.getFreelancerProfile();
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: FreelancerProfileStatus.getFreelancerFailure,
-          errMessage: failure.errMessage,
-        ),
-      ),
-      (freelancerModel) => emit(
-        state.copyWith(
-          status: FreelancerProfileStatus.getFreelancerSuccess,
-          freelancerModel: freelancerModel,
-        ),
-      ),
-    );
+    try {
+      final freelancerModel = await _freelancerRepo.getFreelancerProfile();
+      emit(state.copyWith(
+        status: FreelancerProfileStatus.getFreelancerSuccess,
+        freelancerModel: freelancerModel,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: FreelancerProfileStatus.getFreelancerFailure,
+        errMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   Future<void> updateSocialMedia({
     required List<SocialMediaModel> socialMedia,
   }) async {
     emit(state.copyWith(
-        status: FreelancerProfileStatus.updateSocialMediaLoading));
-    final result = await _freelancerRepo.updateFreelancerSocialMedia(
-      socialList: socialMedia,
-    );
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: FreelancerProfileStatus.updateSocialMediaFailure,
-          errMessage: failure.errMessage,
-        ),
-      ),
-      (message) => emit(state.copyWith(
+      status: FreelancerProfileStatus.updateSocialMediaLoading,
+    ));
+    try {
+      final result = await _freelancerRepo.updateFreelancerSocialMedia(
+        socialList: socialMedia,
+      );
+      emit(state.copyWith(
         status: FreelancerProfileStatus.updateSocialMediaSuccess,
-        message: message,
-        errMessage: null,
-      )),
-    );
+        message: result,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: FreelancerProfileStatus.updateSocialMediaFailure,
+        errMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   Future<void> uploadCv(PlatformFile cv) async {
     emit(state.copyWith(status: FreelancerProfileStatus.uploadCvLoading));
-    final result = await _freelancerRepo.uploadCv(
-      cv: cv,
-      freelancerId: AppConstants.kUserId,
-    );
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: FreelancerProfileStatus.uploadCvFailure,
-          errMessage: failure.errMessage,
-        ),
-      ),
-      (message) => emit(state.copyWith(
+    try {
+      await _freelancerRepo.uploadCv(
+        cv: cv,
+        freelancerId: AppConstants.kUserId,
+      );
+      emit(state.copyWith(
         status: FreelancerProfileStatus.uploadCvSuccess,
         message: 'Cv Uploaded Successfully',
-        errMessage: null,
-      )),
-    );
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: FreelancerProfileStatus.uploadCvFailure,
+        errMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   Future<void> updateLanguagePairs({
@@ -85,48 +80,25 @@ class FreelancerProfileCubit extends Cubit<FreelancerProfileState> {
 
     try {
       if (addedLanguagePairsIds.isNotEmpty) {
-        final addResult = await _freelancerRepo.addFreelancerLanguagePair(
-            freelancerId: AppConstants.kUserId,
-            languagesPairIds: addedLanguagePairsIds);
-        addResult.fold(
-          (failure) => emit(
-            state.copyWith(
-              status: FreelancerProfileStatus.languagePairFailure,
-              errMessage: failure.errMessage,
-            ),
-          ),
-          (_) => {},
+        await _freelancerRepo.addFreelancerLanguagePair(
+          languagesPairIds: addedLanguagePairsIds,
         );
       }
 
       if (deletedLanguagePairsIds.isNotEmpty) {
-        final deleteResult = await _freelancerRepo.deleteFreelancerLanguagePair(
-          freelancerId: AppConstants.kUserId,
+        await _freelancerRepo.deleteFreelancerLanguagePair(
           languagesPairIds: deletedLanguagePairsIds,
         );
-        deleteResult.fold(
-          (failure) => emit(
-            state.copyWith(
-              status: FreelancerProfileStatus.languagePairFailure,
-              errMessage: failure.errMessage,
-            ),
-          ),
-          (_) => {},
-        );
       }
-      if (!state.status.isLanguagePairFailure) {
-        emit(state.copyWith(
-          status: FreelancerProfileStatus.languagePairSuccess,
-          message: 'Language Pairs updated successfully',
-        ));
-      }
+      emit(state.copyWith(
+        status: FreelancerProfileStatus.languagePairSuccess,
+        message: 'Language Pairs updated successfully',
+      ));
     } catch (e) {
-      emit(
-        state.copyWith(
-          status: FreelancerProfileStatus.languagePairFailure,
-          errMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(
+        status: FreelancerProfileStatus.languagePairFailure,
+        errMessage: ServerFailure.fromError(e).errMessage,
+      ));
     }
   }
 
@@ -138,48 +110,26 @@ class FreelancerProfileCubit extends Cubit<FreelancerProfileState> {
 
     try {
       if (addedSpecializationIds.isNotEmpty) {
-        final addResult = await _freelancerRepo.addSpecialization(
+        _freelancerRepo.addSpecialization(
           specializationIds: addedSpecializationIds,
-        );
-        addResult.fold(
-          (failure) => emit(
-            state.copyWith(
-              status: FreelancerProfileStatus.specializationFailure,
-              errMessage: failure.errMessage,
-            ),
-          ),
-          (_) => {},
         );
       }
 
       if (deletedSpecializationIds.isNotEmpty) {
-        final deleteResult = await _freelancerRepo.deleteSpecialization(
+        await _freelancerRepo.deleteSpecialization(
           specializationIds: deletedSpecializationIds,
-        );
-        deleteResult.fold(
-          (failure) => emit(
-            state.copyWith(
-              status: FreelancerProfileStatus.specializationFailure,
-              errMessage: failure.errMessage,
-            ),
-          ),
-          (_) => {},
         );
       }
 
-      if (!state.status.isSpecializationFailure) {
-        emit(state.copyWith(
-          status: FreelancerProfileStatus.specializationSuccess,
-          message: 'Specialization updated successfully',
-        ));
-      }
+      emit(state.copyWith(
+        status: FreelancerProfileStatus.specializationSuccess,
+        message: 'Specialization updated successfully',
+      ));
     } catch (e) {
-      emit(
-        state.copyWith(
-          status: FreelancerProfileStatus.specializationFailure,
-          errMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(
+        status: FreelancerProfileStatus.specializationFailure,
+        errMessage: ServerFailure.fromError(e).errMessage,
+      ));
     }
   }
 }

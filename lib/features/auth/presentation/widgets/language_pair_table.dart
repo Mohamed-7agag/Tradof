@@ -79,7 +79,12 @@ class LanguagePairTable extends StatelessWidget {
                                     .read<TablesCubit>()
                                     .removeLanguagePair(language);
                               },
-                              child: Icon(Icons.cancel, color: Colors.red),
+                              child: HugeIcon(
+                                icon:
+                                    HugeIcons.strokeRoundedCancelCircleHalfDot,
+                                color: Colors.red,
+                                size: 20,
+                              ),
                             ),
                             horizontalSpace(6),
                             Expanded(

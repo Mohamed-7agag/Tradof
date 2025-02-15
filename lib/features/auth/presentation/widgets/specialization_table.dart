@@ -72,7 +72,12 @@ class SpecializationTable extends StatelessWidget {
                                     .read<TablesCubit>()
                                     .removeSpecialization(specialization);
                               },
-                              child: Icon(Icons.cancel, color: Colors.red),
+                              child: HugeIcon(
+                                icon:
+                                    HugeIcons.strokeRoundedCancelCircleHalfDot,
+                                color: Colors.red,
+                                size: 20,
+                              ),
                             ),
                             SizedBox(width: 6),
                             Text(

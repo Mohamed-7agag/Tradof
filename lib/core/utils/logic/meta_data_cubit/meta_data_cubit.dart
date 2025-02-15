@@ -2,9 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/utils/repo/meta_data_repo.dart';
 
+import '../../../../features/auth/data/model/specialization_model.dart';
+import '../../../errors/exception.dart';
 import '../../models/country_model.dart';
 import '../../models/language_model.dart';
-import '../../../../features/auth/data/model/specialization_model.dart';
 
 part 'meta_data_state.dart';
 
@@ -25,62 +26,61 @@ class MetaDataCubit extends Cubit<MetaDataState> {
   Future<void> getLanguages() async {
     if (state.languages.isNotEmpty) return;
     emit(state.copyWith(status: MetaDataStatus.loading));
-    final result = await _metaDataRepo.getLanguages();
-    result.fold(
-      (failure) {
-        if (isClosed) return;
-        emit(state.copyWith(
-          status: MetaDataStatus.error,
-          errorMessage: failure.errMessage,
-        ));
-      },
-      (languages) {
-        if (isClosed) return;
-        emit(state.copyWith(
-          status: MetaDataStatus.getLanguages,
-          languages: languages,
-        ));
-      },
-    );
+    try {
+      final languages = await _metaDataRepo.getLanguages();
+      if (isClosed) return;
+      emit(state.copyWith(
+        status: MetaDataStatus.getLanguages,
+        languages: languages,
+      ));
+    } catch (e) {
+      if (isClosed) return;
+      emit(state.copyWith(
+        status: MetaDataStatus.error,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   //! get Countries
   Future<void> getCountries() async {
     if (state.countries.isNotEmpty) return;
     emit(state.copyWith(status: MetaDataStatus.loading));
-    final result = await _metaDataRepo.getCountries();
-    result.fold((failure) {
-      if (isClosed) return;
-      emit(state.copyWith(
-        status: MetaDataStatus.error,
-        errorMessage: failure.errMessage,
-      ));
-    }, (countries) {
+
+    try {
+      final countries = await _metaDataRepo.getCountries();
       if (isClosed) return;
       emit(state.copyWith(
         status: MetaDataStatus.getCountries,
         countries: countries,
       ));
-    });
+    } catch (e) {
+      if (isClosed) return;
+      emit(state.copyWith(
+        status: MetaDataStatus.error,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   //! get Specializations
   Future<void> getSpecializations() async {
     if (state.specializations.isNotEmpty) return;
     emit(state.copyWith(status: MetaDataStatus.loading));
-    final result = await _metaDataRepo.getSpecaialization();
-    result.fold((failure) {
-      if (isClosed) return;
-      emit(state.copyWith(
-        status: MetaDataStatus.error,
-        errorMessage: failure.errMessage,
-      ));
-    }, (specializations) {
+
+    try {
+      final specializations = await _metaDataRepo.getSpecaialization();
       if (isClosed) return;
       emit(state.copyWith(
         status: MetaDataStatus.getSpecializations,
         specializations: specializations,
       ));
-    });
+    } catch (e) {
+      if (isClosed) return;
+      emit(state.copyWith(
+        status: MetaDataStatus.error,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 }

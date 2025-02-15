@@ -47,7 +47,7 @@ void setupGetIt() {
     () => MetaDataRepoImpl(apiServices: getIt()),
   );
 
-  // profile company repo
+  // company profile repo
   getIt.registerLazySingleton<CompanyProfileRepo>(
     () => CompanyProfileRepoImpl(apiServices: getIt()),
   );

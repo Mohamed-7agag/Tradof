@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/helpers/extensions.dart';
+import 'package:tradof/core/errors/exception.dart';
 
 import '../../../../../../core/utils/widgets/upload_image_to_cloudinary.dart';
 import '../../../../freelancer_profile/data/model/freelancer_model.dart';
@@ -15,26 +15,28 @@ class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
   FreelancerSettingCubit(this._freelancerSettingRepo)
       : super(FreelancerSettingState());
   final FreelancerSettingRepo _freelancerSettingRepo;
+
   Future<void> changeCompanyPassword({
     required String currentPassword,
     required String newPassword,
   }) async {
     emit(state.copyWith(status: FreelancerSettingStatus.changePasswordLoading));
-    final result = await _freelancerSettingRepo.changeFreelancerPassword(
-      currentPassword: currentPassword,
-      newPassword: newPassword,
-    );
-    result.fold((failure) {
-      emit(state.copyWith(
-        status: FreelancerSettingStatus.changePasswordFailure,
-        errMessage: failure.errMessage,
-      ));
-    }, (message) {
+
+    try {
+      await _freelancerSettingRepo.changeFreelancerPassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
       emit(state.copyWith(
         status: FreelancerSettingStatus.changePasswordSuccess,
         message: 'Password Changed Successfully',
       ));
-    });
+    } catch (e) {
+      emit(state.copyWith(
+        status: FreelancerSettingStatus.changePasswordFailure,
+        errMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   void setImageProfileAndCountryId({int? countryId, File? image}) {
@@ -49,31 +51,27 @@ class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
   ) async {
     emit(state.copyWith(
         status: FreelancerSettingStatus.updateFreelancerProfileLoading));
-    final updateFreelancerRequestModel =
-        await _buildUpdateFreelancerRequestModel(
-      firstName: firstName,
-      lastName: lastName,
-      phoneNumber: phoneNumber,
-      freelancerModel: freelancerModel,
-    );
-    final result = await _freelancerSettingRepo.updateCompanyProfile(
-      updateFreelancerRequestModel: updateFreelancerRequestModel,
-    );
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: FreelancerSettingStatus.updateFreelancerProfileFailure,
-          errMessage: failure.errMessage,
-        ),
-      ),
-      (message) => emit(
-        state.copyWith(
-          status: FreelancerSettingStatus.updateFreelancerProfileSuccess,
-          message: 'Profile Changed Successfully',
-          errMessage: null,
-        ),
-      ),
-    );
+    try {
+      final updateFreelancerRequestModel =
+          await _buildUpdateFreelancerRequestModel(
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        freelancerModel: freelancerModel,
+      );
+      await _freelancerSettingRepo.updateCompanyProfile(
+        updateFreelancerRequestModel: updateFreelancerRequestModel,
+      );
+      emit(state.copyWith(
+        status: FreelancerSettingStatus.updateFreelancerProfileSuccess,
+        message: 'Profile Changed Successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: FreelancerSettingStatus.updateFreelancerProfileFailure,
+        errMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   Future<UpdateFreelancerRequestModel> _buildUpdateFreelancerRequestModel({
@@ -88,12 +86,10 @@ class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
     }
 
     return UpdateFreelancerRequestModel(
-      firstName:
-          firstName.isNullOrEmpty() ? freelancerModel.firstName : firstName,
-      lastName: lastName.isNullOrEmpty() ? freelancerModel.lastName : lastName,
+      firstName: firstName.isEmpty ? freelancerModel.firstName : firstName,
+      lastName: lastName.isEmpty ? freelancerModel.lastName : lastName,
       email: freelancerModel.email,
-      phoneNumber:
-          phoneNumber.isNullOrEmpty() ? freelancerModel.phone : phoneNumber,
+      phoneNumber: phoneNumber.isEmpty ? freelancerModel.phone : phoneNumber,
       profileImageUrl: imageUrl ?? freelancerModel.profileImageUrl,
       countryId: state.countryId ?? freelancerModel.countryId,
     );

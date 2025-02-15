@@ -60,9 +60,11 @@ class PreferredLanguage extends StatelessWidget {
                 ),
               ),
               DataColumn(
-                label: Text(
-                  'IEFT tag',
-                  style: AppStyle.poppinsSemiBold14,
+                label: Expanded(
+                  child: Text(
+                    'IEFT tag',
+                    style: AppStyle.poppinsSemiBold14,
+                  ),
                 ),
               )
             ],
@@ -71,13 +73,13 @@ class PreferredLanguage extends StatelessWidget {
                 cells: [
                   DataCell(
                     Text(
-                      language.languageName,
+                      '${language.languageName} (${language.countryName})',
                       style: AppStyle.robotoRegular12,
                     ),
                   ),
                   DataCell(
                     Text(
-                      language.languageCode,
+                      '${language.languageCode} (${language.countryCode})',
                       style: AppStyle.robotoRegular12,
                     ),
                   ),

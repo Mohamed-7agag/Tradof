@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/helpers/extensions.dart';
+import 'package:tradof/core/errors/exception.dart';
 
 import '../../../../../../core/utils/app_constants.dart';
 import '../../../../../../core/utils/widgets/upload_image_to_cloudinary.dart';
@@ -23,21 +23,21 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
     required String newPassword,
   }) async {
     emit(state.copyWith(status: CompanySettingStatus.changePasswordLoading));
-    final result = await _companySettingRepo.changeCompanyPassword(
-      currentPassword: currentPassword,
-      newPassword: newPassword,
-    );
-    result.fold((failure) {
-      emit(state.copyWith(
-        status: CompanySettingStatus.changePasswordFailure,
-        errMessage: failure.errMessage,
-      ));
-    }, (message) {
+    try {
+      await _companySettingRepo.changeCompanyPassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
       emit(state.copyWith(
         status: CompanySettingStatus.changePasswordSuccess,
         message: 'Password Changed Successfully',
       ));
-    });
+    } catch (e) {
+      emit(state.copyWith(
+        status: CompanySettingStatus.changePasswordFailure,
+        errMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   void setImageProfileAndCountryId({int? countryId, File? image}) {
@@ -53,33 +53,30 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
     CompanyModel companyModel,
   ) async {
     emit(state.copyWith(
-        status: CompanySettingStatus.updateCompanyProfileLoading));
-    final updateCompanyRequestModel = await _buildUpdateCompanyRequestModel(
-      firstName: firstName,
-      lastName: lastName,
-      companyName: companyName,
-      location: location,
-      phoneNumber: phoneNumber,
-      companyModel: companyModel,
-    );
-    final result = await _companySettingRepo.updateCompanyProfile(
-      updateCompanyRequestModel: updateCompanyRequestModel,
-    );
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: CompanySettingStatus.updateCompanyProfileFailure,
-          errMessage: failure.errMessage,
-        ),
-      ),
-      (message) => emit(
-        state.copyWith(
-          status: CompanySettingStatus.updateCompanyProfileSuccess,
-          message: message,
-          errMessage: null,
-        ),
-      ),
-    );
+      status: CompanySettingStatus.updateCompanyProfileLoading,
+    ));
+    try {
+      final updateCompanyRequestModel = await _buildUpdateCompanyRequestModel(
+        firstName: firstName,
+        lastName: lastName,
+        companyName: companyName,
+        location: location,
+        phoneNumber: phoneNumber,
+        companyModel: companyModel,
+      );
+      final response = await _companySettingRepo.updateCompanyProfile(
+        updateCompanyRequestModel: updateCompanyRequestModel,
+      );
+      emit(state.copyWith(
+        status: CompanySettingStatus.updateCompanyProfileSuccess,
+        message: response,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: CompanySettingStatus.updateCompanyProfileFailure,
+        errMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   Future<UpdateCompanyRequestModel> _buildUpdateCompanyRequestModel({
@@ -97,15 +94,12 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
 
     return UpdateCompanyRequestModel(
       id: AppConstants.kUserId,
-      firstName: firstName.isNullOrEmpty() ? companyModel.firstName : firstName,
-      lastName: lastName.isNullOrEmpty() ? companyModel.lastName : lastName,
+      firstName: firstName.isEmpty ? companyModel.firstName : firstName,
+      lastName: lastName.isEmpty ? companyModel.lastName : lastName,
       email: companyModel.email,
-      companyName:
-          companyName.isNullOrEmpty() ? companyModel.companyName : companyName,
-      companyAddress:
-          location.isNullOrEmpty() ? companyModel.companyAddress : location,
-      phoneNumber:
-          phoneNumber.isNullOrEmpty() ? companyModel.phone : phoneNumber,
+      companyName: companyName.isEmpty ? companyModel.companyName : companyName,
+      companyAddress: location.isEmpty ? companyModel.companyAddress : location,
+      phoneNumber: phoneNumber.isEmpty ? companyModel.phone : phoneNumber,
       profileImageUrl: imageUrl ?? companyModel.profileImageUrl,
       countryId: state.countryId ?? companyModel.countryId,
     );

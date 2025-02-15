@@ -1,38 +1,35 @@
-import 'package:dartz/dartz.dart';
-import 'package:tradof/core/errors/failure.dart';
-
-import '../model/social_media_model.dart';
 import '../model/company_employee_model.dart';
 import '../model/company_employee_request_model.dart';
 import '../model/company_model.dart';
+import '../model/social_media_model.dart';
 
 abstract class CompanyProfileRepo {
-  Future<Either<Failure, CompanyModel>> getCompanyProfrile({
+  Future<CompanyModel> getCompanyProfrile({
     required String companyId,
   });
-  Future<Either<Failure, List<CompanyEmployeeModel>>> getCompanyEmployees({
+  Future<List<CompanyEmployeeModel>> getCompanyEmployees({
     required String companyId,
   });
 
-  Future<Either<Failure, String>> addCompanyEmployee({
+  Future<String> addCompanyEmployee({
     required CompanyEmployeeRequestModel employeeModel,
   });
 
-  Future<Either<Failure, String>> addPreferedLanguages({
+  Future<void> addPreferedLanguages({
     required List<int> languagesIds,
   });
-  Future<Either<Failure, String>> deletePreferedLanguages({
+  Future<void> deletePreferedLanguages({
     required List<int> languagesIds,
   });
 
-  Future<Either<Failure, String>> addIndustriesServed({
+  Future<void> addIndustriesServed({
     required List<int> industriesIds,
   });
-  Future<Either<Failure, String>> deleteIndustriesServed({
+  Future<void> deleteIndustriesServed({
     required List<int> industriesIds,
   });
 
-  Future<Either<Failure, String>> addUpdateSocialMedia({
+  Future<String> addUpdateSocialMedia({
     required List<SocialMediaModel> socialMediaModel,
   });
 }

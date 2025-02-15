@@ -1,7 +1,5 @@
-import 'package:dartz/dartz.dart';
-import 'package:tradof/core/errors/failure.dart';
-import 'package:tradof/features/offers/data/model/add_offer_request_model.dart';
+import '../model/add_offer_request_model.dart';
 
 abstract class OfferRepo {
-  Future<Either<Failure, String>> addOffer(AddOfferRequestModel model);
+  Future<String> addOffer(AddOfferRequestModel model);
 }

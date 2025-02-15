@@ -86,7 +86,7 @@ class PreferedLanguagesTable extends StatelessWidget {
                               child: HugeIcon(
                                 icon:
                                     HugeIcons.strokeRoundedCancelCircleHalfDot,
-                                color: AppColors.lightOrange,
+                                color: Colors.red,
                                 size: 20,
                               ),
                             ),

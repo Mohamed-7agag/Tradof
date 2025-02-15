@@ -45,7 +45,7 @@ class AttachmentFilesSection extends StatelessWidget {
                       bottom: index == files.length - 1 ? 20 : 0,
                     ),
                     title: Text(files[index].name),
-                    leading: Icon(Icons.attach_file),
+                    leading: HugeIcon(icon: HugeIcons.strokeRoundedFile02, color: AppColors.black),
                     trailing: IconButton(
                       icon: Icon(Icons.cancel, color: Colors.red),
                       onPressed: () =>

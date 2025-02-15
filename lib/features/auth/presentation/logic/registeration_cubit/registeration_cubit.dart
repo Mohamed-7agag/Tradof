@@ -2,13 +2,14 @@ import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/core/utils/models/language_model.dart';
+import 'package:tradof/core/utils/models/language_pair_model.dart';
 import 'package:tradof/core/utils/widgets/upload_image_to_cloudinary.dart';
 import 'package:tradof/features/auth/data/model/company_register_request_model.dart';
 import 'package:tradof/features/auth/data/model/freelancer_register_request_model.dart';
-import 'package:tradof/core/utils/models/language_model.dart';
-import 'package:tradof/core/utils/models/language_pair_model.dart';
 import 'package:tradof/features/auth/data/repo/registeration_repo.dart';
 
+import '../../../../../core/errors/exception.dart';
 import '../../../data/model/specialization_model.dart';
 
 part 'registeration_state.dart';
@@ -49,26 +50,27 @@ class RegisterationCubit extends Cubit<RegisterationState> {
   ) async {
     emit(state.copyWith(status: RegisterationStatus.loading));
 
-    // get FreelancerRegisterRequestModel
-    final FreelancerRegisterRequestModel freelancerRegisterRequestModel =
-        await _collectFreelancerRegisterationData(
-      specializations,
-      languagePairs,
-    );
+    try {
+      // get FreelancerRegisterRequestModel
+      final FreelancerRegisterRequestModel freelancerRegisterRequestModel =
+          await _collectFreelancerRegisterationData(
+        specializations,
+        languagePairs,
+      );
 
-    final result = await _registerationRepo.freelancerRegister(
-      freelancerRegisterRequestModel,
-    );
-    result.fold(
-      (failure) => emit(state.copyWith(
-        status: RegisterationStatus.error,
-        errorMessage: failure.errMessage,
-      )),
-      (successMessage) => emit(state.copyWith(
+      final result = await _registerationRepo.freelancerRegister(
+        freelancerRegisterRequestModel,
+      );
+      emit(state.copyWith(
         status: RegisterationStatus.success,
-        registerSuccessMessage: successMessage,
-      )),
-    );
+        registerSuccessMessage: result,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: RegisterationStatus.error,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
 //! register for company
@@ -80,24 +82,26 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     List<SpecializationModel> industriesServed,
   ) async {
     emit(state.copyWith(status: RegisterationStatus.loading));
-    // get CompanyRegisterRequestModel
-    final CompanyRegisterRequestModel companyRegisterRequestModel =
-        await _collectCompanyRegisterationData(jobTitle, companyName,
-            locationCompany, preferedLanguages, industriesServed);
 
-    final result = await _registerationRepo.companyRegister(
-      companyRegisterRequestModel,
-    );
-    result.fold(
-      (failure) => emit(state.copyWith(
-        status: RegisterationStatus.error,
-        errorMessage: failure.errMessage,
-      )),
-      (message) => emit(state.copyWith(
+    try {
+      // get CompanyRegisterRequestModel
+      final CompanyRegisterRequestModel companyRegisterRequestModel =
+          await _collectCompanyRegisterationData(jobTitle, companyName,
+              locationCompany, preferedLanguages, industriesServed);
+
+      final result = await _registerationRepo.companyRegister(
+        companyRegisterRequestModel,
+      );
+      emit(state.copyWith(
         status: RegisterationStatus.success,
-        registerSuccessMessage: message,
-      )),
-    );
+        registerSuccessMessage: result,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: RegisterationStatus.error,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   Future<FreelancerRegisterRequestModel> _collectFreelancerRegisterationData(

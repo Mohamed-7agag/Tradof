@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tradof/core/cache/cache_helper.dart';
+import 'package:tradof/core/errors/exception.dart';
 import 'package:tradof/features/auth/data/model/login_response_model.dart';
 import 'package:tradof/features/auth/data/model/reset_password_request_model.dart';
 import 'package:tradof/features/auth/data/repo/auth_repo.dart';
@@ -18,33 +19,34 @@ class AuthCubit extends Cubit<AuthState> {
   // login
   Future<void> login(String email, String password) async {
     emit(state.copyWith(status: AuthStatus.loading));
-    final result = await _authRepo.login(email, password);
-    result.fold((failure) {
+    try {
+      final result = await _authRepo.login(email, password);
+      await _cacheUserData(result);
+      emit(state.copyWith(status: AuthStatus.login));
+    } catch (e) {
       emit(state.copyWith(
         status: AuthStatus.error,
-        errorMessage: failure.errMessage,
+        errorMessage: ServerFailure.fromError(e).errMessage,
       ));
-    }, (response) async {
-      await _cacheUserData(response);
-      emit(state.copyWith(status: AuthStatus.login));
-    });
+    }
   }
 
   //forget password
   Future<void> forgetPassword(String email) async {
     emit(state.copyWith(status: AuthStatus.loading));
-    final result = await _authRepo.forgetPassword(email);
-    result.fold(
-      (failure) => emit(state.copyWith(
-        status: AuthStatus.error,
-        errorMessage: failure.errMessage,
-      )),
-      (successMessage) => emit(state.copyWith(
+    try {
+      final result = await _authRepo.forgetPassword(email);
+      emit(state.copyWith(
         status: AuthStatus.forgotPassword,
-        message: successMessage,
+        message: result,
         email: email,
-      )),
-    );
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: AuthStatus.error,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   void setOtp(String otp) {
@@ -54,41 +56,42 @@ class AuthCubit extends Cubit<AuthState> {
   // otp
   Future<void> otpVerification() async {
     emit(state.copyWith(status: AuthStatus.loading));
-    final result = await _authRepo.verifyOtp(state.email, state.otp);
-    result.fold(
-      (failure) => emit(state.copyWith(
-        status: AuthStatus.error,
-        errorMessage: failure.errMessage,
-      )),
-      (success) => emit(state.copyWith(
+    try {
+      final result = await _authRepo.verifyOtp(state.email, state.otp);
+      emit(state.copyWith(
         status: AuthStatus.otpVerification,
-        resetToken: success['resetToken'],
-      )),
-    );
+        resetToken: result['resetToken'],
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: AuthStatus.error,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   //reset password
   Future<void> resetPassword(String newPassword) async {
     emit(state.copyWith(status: AuthStatus.loading));
+    try {
+      final ResetPasswordRequestModel request = ResetPasswordRequestModel(
+        email: state.email,
+        resetToken: state.resetToken,
+        newPassword: newPassword,
+        confirmPassword: newPassword,
+      );
 
-    final ResetPasswordRequestModel request = ResetPasswordRequestModel(
-      email: state.email,
-      resetToken: state.resetToken,
-      newPassword: newPassword,
-      confirmPassword: newPassword,
-    );
-
-    final result = await _authRepo.resetPassword(request);
-    result.fold(
-      (failure) => emit(state.copyWith(
-        status: AuthStatus.error,
-        errorMessage: failure.errMessage,
-      )),
-      (successMessage) => emit(state.copyWith(
+      final result = await _authRepo.resetPassword(request);
+      emit(state.copyWith(
         status: AuthStatus.resetPassword,
-        message: successMessage,
-      )),
-    );
+        message: result,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: AuthStatus.error,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
 //! Helpers

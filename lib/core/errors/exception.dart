@@ -5,6 +5,14 @@ import 'failure.dart';
 class ServerFailure extends Failure {
   ServerFailure(String errMessage) : super(errMessage: errMessage);
 
+  factory ServerFailure.fromError(dynamic error) {
+    if (error is DioException) {
+      return ServerFailure.fromDioError(error);
+    } else {
+      return ServerFailure(error.toString());
+    }
+  }
+
   factory ServerFailure.fromDioError(DioException dioError) {
     switch (dioError.type) {
       case DioExceptionType.connectionTimeout:
@@ -31,7 +39,8 @@ class ServerFailure extends Failure {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
       return ServerFailure(response.toString());
     } else if (statusCode == 404) {
-      return ServerFailure(response?.toString() ?? 'Not found, please try again');
+      return ServerFailure(
+          response?.toString() ?? 'Not found, please try again');
     } else if (statusCode == 500) {
       return ServerFailure('Internal server error, please try again later!');
     } else {
