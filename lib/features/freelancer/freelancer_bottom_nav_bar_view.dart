@@ -4,14 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/exit_dialog.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/utils/widgets/bottom_nav_bar_center_icon.dart';
-import 'package:tradof/core/utils/widgets/bottom_nav_bar_items.dart';
+import 'package:tradof/core/utils/widgets/custom_bottom_nav_bar.dart';
 import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
 import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
 import 'package:tradof/features/freelancer/freelancer_setting/presentation/views/freelancer_setting_view.dart';
 
-import '../../core/utils/widgets/bottom_nav_bar_clipper.dart';
 import '../../core/utils/widgets/custom_animated_lazy_indexed_stack.dart';
 import '../../core/utils/widgets/custom_loading_widget.dart';
 import 'freelancer_dashboard/presentation/views/freelance_dashbord_view.dart';
@@ -66,37 +63,11 @@ class _FreelancerBottomNavBarViewState
             return const CustomLoadingWidget();
           },
         ),
-        bottomNavigationBar: Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.topCenter,
-          children: [
-            ClipPath(
-              clipper: CustomNavBarClipper(),
-              child: Container(
-                height: 85,
-                color: AppColors.white,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 6),
-                  child: BottomNavBarItems(
-                    isFreelancer : true,
-                    onTabTapped: (index) {
-                      setState(() => currentIndex = index);
-                    },
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: -20,
-              child: BottomNavBarCenterIcon(
-                onTap: () {
-                  if (currentIndex != 2) {
-                    setState(() => currentIndex = 2);
-                  }
-                },
-              ),
-            ),
-          ],
+        bottomNavigationBar: CustomBottomNavBar(
+          isFreelancer: true,
+          onTabTapped: (index) {
+            setState(() => currentIndex = index);
+          },
         ),
       ),
     );
