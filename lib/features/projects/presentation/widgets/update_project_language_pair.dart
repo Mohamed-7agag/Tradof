@@ -1,56 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
-import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
+import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
+import 'package:tradof/features/projects/data/models/project_model.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
-import '../../../../core/utils/widgets/custom_loading_widget.dart';
+import '../../../../core/utils/models/language_model.dart';
 import '../../../auth/presentation/widgets/language_drop_down.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
-class UpdateProjectLanguagePair extends StatelessWidget {
-  const UpdateProjectLanguagePair({super.key});
+class UpdateProjectLanguagePair extends StatefulWidget {
+  const UpdateProjectLanguagePair({
+    super.key,
+    required this.companyModel,
+    required this.projectModel,
+  });
+  final CompanyModel companyModel;
+  final ProjectModel projectModel;
+
+  @override
+  State<UpdateProjectLanguagePair> createState() =>
+      _UpdateProjectLanguagePairState();
+}
+
+class _UpdateProjectLanguagePairState extends State<UpdateProjectLanguagePair> {
+  LanguageModel? fromLanguage, toLanguage;
+  @override
+  void initState() {
+    fromLanguage = getLanguagebyId(
+      widget.companyModel.preferredLanguages,
+      widget.projectModel.languageFromId,
+    );
+    toLanguage = getLanguagebyId(
+      widget.companyModel.preferredLanguages,
+      widget.projectModel.languageToId,
+    );
+    context.read<ProjectCubit>().setCreateProjectData(
+          fromLanguage: fromLanguage,
+          toLanguage: toLanguage,
+        );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MetaDataCubit, MetaDataState>(
-      builder: (context, state) {
-        if (state.status.isLoading) {
-          return const CustomLoadingWidget();
-        } else if (state.status.isError) {
-          return CustomFailureWidget(
-            text: state.errorMessage,
-          );
-        }
-        return Column(
-          children: [
-            LanguageDropDown(
-              hint: 'From Language',
-              borderColor: AppColors.grey,
-              hintColor: AppColors.darkGrey,
-              items: state.languages,
-              onChanged: (value) {
-                context
-                    .read<ProjectCubit>()
-                    .setCreateProjectData(fromLanguage: value);
-              },
-            ),
-            verticalSpace(12),
-            LanguageDropDown(
-              hint: 'To Language',
-              borderColor: AppColors.grey,
-              hintColor: AppColors.darkGrey,
-              items: state.languages,
-              onChanged: (value) {
-                context
-                    .read<ProjectCubit>()
-                    .setCreateProjectData(toLanguage: value);
-              },
-            ),
-          ],
-        );
-      },
+    return Column(
+      children: [
+        LanguageDropDown(
+          hint: 'From Language',
+          borderColor: AppColors.grey,
+          hintColor: AppColors.darkGrey,
+          items: widget.companyModel.preferredLanguages,
+          isEditable: widget.projectModel.status == 0,
+          value: fromLanguage,
+          onChanged: (value) {
+            context
+                .read<ProjectCubit>()
+                .setCreateProjectData(fromLanguage: value);
+          },
+        ),
+        verticalSpace(12),
+        LanguageDropDown(
+          hint: 'To Language',
+          borderColor: AppColors.grey,
+          hintColor: AppColors.darkGrey,
+          items: widget.companyModel.preferredLanguages,
+          value: toLanguage,
+          isEditable: widget.projectModel.status == 0,
+          onChanged: (value) {
+            context
+                .read<ProjectCubit>()
+                .setCreateProjectData(toLanguage: value);
+          },
+        ),
+      ],
     );
+  }
+
+  LanguageModel getLanguagebyId(
+      List<LanguageModel> languages, int? languageId) {
+    return languages.firstWhere((element) => element.id == languageId);
   }
 }

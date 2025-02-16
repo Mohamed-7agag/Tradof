@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/helpers/upload_file_to_api.dart';
 import 'package:tradof/core/utils/models/language_model.dart';
 
@@ -16,7 +17,7 @@ class ProjectCubit extends Cubit<ProjectState> {
   ProjectCubit(this._projectRepo) : super(ProjectState());
   final ProjectRepo _projectRepo;
 
-  // create project
+  //! create project
   Future<void> createProject(
     String projectName,
     String projectDescription,
@@ -43,12 +44,15 @@ class ProjectCubit extends Cubit<ProjectState> {
         fromLanguageId: state.fromLanguage!.id,
         toLanguageId: state.toLanguage!.id,
         specializationId: state.industryId!,
-        files: await prepareFiles(), 
+        files: await prepareFiles(),
       );
 
       await _projectRepo.createProject(model);
       emit(state.copyWith(
         status: ProjectStatus.createProjectSuccess,
+        industryId: null,
+        fromLanguage: null,
+        toLanguage: null,
         message: 'Project Created Successfully',
       ));
     } catch (e) {
@@ -59,17 +63,68 @@ class ProjectCubit extends Cubit<ProjectState> {
     }
   }
 
-  void setCreateProjectData({
-    LanguageModel? fromLanguage,
-    LanguageModel? toLanguage,
+  //! update project
+  Future<void> updateProject(
+    ProjectModel projectModel, {
+    String? projectName,
+    String? projectDescription,
+    int? minBudget,
+    int? maxBudget,
     int? days,
-    int? industryId,
-  }) {
-    emit(state.copyWith(
-      fromLanguage: fromLanguage,
-      toLanguage: toLanguage,
-      industryId: industryId,
-    ));
+    List<PlatformFile>? files,
+  }) async {
+    emit(state.copyWith(status: ProjectStatus.updateProjectLoading));
+
+    try {
+      // will be refactored
+      Future<List<MultipartFile>> prepareFiles() {
+        if (files.isNullOrEmpty()) return Future.value([]);
+        final convertedFiles =
+            files!.map((file) async => await uploadFileToApi(file)).toList();
+        return Future.wait(convertedFiles);
+      }
+
+      final model = await _buildUpdatProjectModel(
+        projectName,
+        projectModel,
+        projectDescription,
+        minBudget,
+        maxBudget,
+        days,
+        prepareFiles,
+      );
+
+      await _projectRepo.updateProject(model);
+      emit(state.copyWith(
+        status: ProjectStatus.updateProjectSuccess,
+        industryId: null,
+        fromLanguage: null,
+        toLanguage: null,
+        message: 'Project Updated Successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.updateProjectFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+//! Delete project
+  Future<void> deleteProject(int projectId) async {
+    emit(state.copyWith(status: ProjectStatus.deleteProjectLoading));
+    try {
+      await _projectRepo.deleteProject(projectId);
+      emit(state.copyWith(
+        status: ProjectStatus.deleteProjectSuccess,
+        message: 'Project Deleted Successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.deleteProjectFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 
   //! get upcoming projects
@@ -88,4 +143,48 @@ class ProjectCubit extends Cubit<ProjectState> {
       ));
     }
   }
+
+void setCreateProjectData({
+    LanguageModel? fromLanguage,
+    LanguageModel? toLanguage,
+    int? industryId,
+  }) {
+    emit(state.copyWith(
+      fromLanguage: fromLanguage,
+      toLanguage: toLanguage,
+      industryId: industryId,
+    ));
+  }
+
+  Future<CreateProjectRequestModel> _buildUpdatProjectModel(
+      String? projectName,
+      ProjectModel projectModel,
+      String? projectDescription,
+      int? minBudget,
+      int? maxBudget,
+      int? days,
+      Future<List<MultipartFile>> Function() prepareFiles) async {
+    return CreateProjectRequestModel(
+      projectName:
+          projectName.isNullOrEmpty() ? projectModel.name : projectName!,
+      description: projectDescription.isNullOrEmpty()
+          ? projectModel.description
+          : projectDescription!,
+      minPrice: (minBudget.toString().isNullOrEmpty() || minBudget == 0)
+          ? projectModel.minPrice
+          : minBudget!,
+      maxPrice: (maxBudget.toString().isNullOrEmpty() || maxBudget == 0)
+          ? projectModel.maxPrice
+          : maxBudget!,
+      days: (days.toString().isNullOrEmpty() || days == 0)
+          ? projectModel.days
+          : days!,
+      fromLanguageId: state.fromLanguage!.id,
+      toLanguageId: state.toLanguage!.id,
+      specializationId: state.industryId ?? projectModel.specializationId,
+      files: await prepareFiles(),
+    );
+  }
+
+  
 }

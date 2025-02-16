@@ -15,7 +15,17 @@ class ProjectRepoImpl implements ProjectRepo {
   @override
   Future<void> createProject(CreateProjectRequestModel model) async {
     await _apiServices.post(
-      EndPoint.createProject,
+      EndPoint.project,
+      data: model.toJson(),
+      queryParameters: {"companyId": AppConstants.kUserId},
+      isFormData: true,
+    );
+  }
+
+  @override
+  Future<void> updateProject(CreateProjectRequestModel model) async {
+    await _apiServices.put(
+      EndPoint.project,
       data: model.toJson(),
       queryParameters: {"companyId": AppConstants.kUserId},
       isFormData: true,
@@ -29,6 +39,13 @@ class ProjectRepoImpl implements ProjectRepo {
     );
     return List<ProjectModel>.from(
       response.map((project) => ProjectModel.fromJson(project)),
+    );
+  }
+
+  @override
+  Future<void> deleteProject(int projectId) async {
+    await _apiServices.delete(
+      EndPoint.deleteProject(projectId),
     );
   }
 }

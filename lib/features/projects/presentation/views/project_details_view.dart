@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:tradof/core/utils/widgets/custom_app_bar.dart';
+import 'package:tradof/features/auth/data/model/specialization_model.dart';
 import 'package:tradof/features/projects/data/models/project_model.dart';
+import 'package:tradof/features/projects/presentation/widgets/delete_project_section.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_style.dart';
@@ -15,19 +17,21 @@ import '../widgets/project_text_field.dart';
 import '../widgets/update_project_button.dart';
 import '../widgets/update_project_language_pair.dart';
 
-class UpdateProjectView extends StatefulWidget {
-  const UpdateProjectView({
+class ProjectDetailsView extends StatefulWidget {
+  const ProjectDetailsView({
     super.key,
     required this.companyModel,
     required this.projectModel,
+    required this.specialization,
   });
   final CompanyModel companyModel;
   final ProjectModel projectModel;
+  final SpecializationModel specialization;
   @override
-  State<UpdateProjectView> createState() => _UpdateProjectViewState();
+  State<ProjectDetailsView> createState() => _ProjectDetailsViewState();
 }
 
-class _UpdateProjectViewState extends State<UpdateProjectView> {
+class _ProjectDetailsViewState extends State<ProjectDetailsView> {
   late final TextEditingController projectNameController;
   late final TextEditingController projectDescriptionController;
   late final TextEditingController minBudgetController;
@@ -65,8 +69,8 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
       create: (context) => FileCubit()..addFiles([]),
       child: Scaffold(
         appBar: customAppbar(
-          title: 'Update Project',
-          actionIcon: HugeIcons.strokeRoundedPencilEdit02,
+          title: 'Project Details',
+          actionIcon: HugeIcons.strokeRoundedDashboardCircleSettings,
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -74,24 +78,33 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                verticalSpace(20),
+                verticalSpace(14),
+                DeleteProjectSection(projectId: widget.projectModel.id),
+                verticalSpace(35),
                 ProjectTextField(
                   labelText: 'Project Name',
                   controller: projectNameController,
+                  readOnly: widget.projectModel.status != 0,
                 ),
                 verticalSpace(25),
                 ProjectTextField(
                   labelText: 'Project Description',
                   controller: projectDescriptionController,
+                  readOnly: widget.projectModel.status != 0,
                   maxLines: 4,
                 ),
                 verticalSpace(25),
                 Text('Language Pair', style: AppStyle.poppinsMedium14),
                 verticalSpace(12),
-                UpdateProjectLanguagePair(),
+                UpdateProjectLanguagePair(
+                  companyModel: widget.companyModel,
+                  projectModel: widget.projectModel,
+                ),
                 verticalSpace(30),
                 CreateProjectIndustriesSection(
                   companyModel: widget.companyModel,
+                  value: widget.specialization,
+                  isEditable: widget.projectModel.status == 0,
                 ),
                 verticalSpace(25),
                 Row(
@@ -101,6 +114,7 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
                         labelText: 'Min Budget',
                         controller: minBudgetController,
                         keyboardType: TextInputType.number,
+                        readOnly: widget.projectModel.status != 0,
                       ),
                     ),
                     horizontalSpace(10),
@@ -109,6 +123,7 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
                         labelText: 'Max Budget',
                         controller: maxBudgetController,
                         keyboardType: TextInputType.number,
+                        readOnly: widget.projectModel.status != 0,
                       ),
                     ),
                   ],
@@ -118,6 +133,7 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
                   labelText: 'Delivery Time (Days)',
                   controller: daysController,
                   keyboardType: TextInputType.number,
+                  readOnly: widget.projectModel.status != 0,
                 ),
                 verticalSpace(25),
                 Text(
@@ -133,6 +149,7 @@ class _UpdateProjectViewState extends State<UpdateProjectView> {
                   minBudgetController: minBudgetController,
                   maxBudgetController: maxBudgetController,
                   daysController: daysController,
+                  projectModel: widget.projectModel,
                 ),
                 verticalSpace(40),
               ],

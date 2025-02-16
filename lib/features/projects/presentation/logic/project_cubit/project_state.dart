@@ -7,7 +7,13 @@ enum ProjectStatus {
   createProjectFailure,
   getUpcomingProjectsLoading,
   getUpcomingProjectsSuccess,
-  getUpcomingProjectsFailure
+  getUpcomingProjectsFailure,
+  updateProjectLoading,
+  updateProjectSuccess,
+  updateProjectFailure,
+  deleteProjectLoading,
+  deleteProjectSuccess,
+  deleteProjectFailure,
 }
 
 extension ProjectStatusX on ProjectStatus {
@@ -21,6 +27,14 @@ extension ProjectStatusX on ProjectStatus {
       this == ProjectStatus.getUpcomingProjectsSuccess;
   bool get isGetUpcomingProjectsFailure =>
       this == ProjectStatus.getUpcomingProjectsFailure;
+
+  bool get isUpdateProjectLoading => this == ProjectStatus.updateProjectLoading;
+  bool get isUpdateProjectSuccess => this == ProjectStatus.updateProjectSuccess;
+  bool get isUpdateProjectFailure => this == ProjectStatus.updateProjectFailure;
+
+  bool get isDeleteProjectLoading => this == ProjectStatus.deleteProjectLoading;
+  bool get isDeleteProjectSuccess => this == ProjectStatus.deleteProjectSuccess;
+  bool get isDeleteProjectFailure => this == ProjectStatus.deleteProjectFailure;
 }
 
 class ProjectState extends Equatable {

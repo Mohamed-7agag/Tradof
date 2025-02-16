@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tradof/core/helpers/extensions.dart';
 import 'package:tradof/core/helpers/spacing.dart';
+import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
 import '../../../../core/theming/app_colors.dart';
+import '../../../auth/data/model/specialization_model.dart';
 import '../../../company/company_profile/data/model/company_model.dart';
 import '../../data/models/project_model.dart';
+import '../logic/project_cubit/project_cubit.dart';
 
 class UpcomingProjectItem extends StatefulWidget {
   const UpcomingProjectItem({
@@ -13,6 +17,7 @@ class UpcomingProjectItem extends StatefulWidget {
     required this.project,
     required this.companyModel,
   });
+
   final ProjectModel project;
   final CompanyModel companyModel;
 
@@ -21,97 +26,111 @@ class UpcomingProjectItem extends StatefulWidget {
 }
 
 class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
-  String getSpecialization() {
-    String specialization = widget.companyModel.specializations
-        .firstWhere((element) => element.id == widget.project.specializationId)
-        .name;
-    return specialization;
+  SpecializationModel getSpecialization() {
+    return widget.companyModel.specializations
+        .firstWhere((element) => element.id == widget.project.specializationId);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      margin: EdgeInsets.only(bottom: 14),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
-        color: AppColors.cardColor,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(
-              getSpecialization(),
-              style: AppStyle.robotoRegular14,
+    return InkWell(
+      onTap: () async {
+        final result =
+            await context.pushNamed(Routes.updateProjectViewRoute, arguments: {
+          'projectModel': widget.project,
+          'companyModel': widget.companyModel,
+          'specialization': getSpecialization(),
+        });
+        if (result == true && context.mounted) {
+          context.read<ProjectCubit>().getUpcomingProjects();
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.only(bottom: 12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: AppColors.cardColor,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  getSpecialization().name,
+                  style: AppStyle.robotoRegular12.copyWith(
+                    color: AppColors.black,
+                  ),
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.green.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    'Active',
+                    style: AppStyle.robotoRegular10.copyWith(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            verticalSpace(8),
+            Text(
+              widget.project.name,
+              style: AppStyle.robotoCondensedMedium15.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            subtitle: RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'status: ',
-                    style: AppStyle.robotoRegular10
-                        .copyWith(color: AppColors.black),
-                  ),
-                  TextSpan(
-                    text: 'Active',
-                    style: AppStyle.robotoRegular10.copyWith(
-                        color: Colors.green, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+            verticalSpace(16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildInfoColumn('Price',
+                    '${widget.project.minPrice} - ${widget.project.maxPrice}\$'),
+                SizedBox(
+                  height: 35,
+                  child: const VerticalDivider(color: AppColors.cardDarkColor),
+                ),
+                _buildInfoColumn('Deadline', '${widget.project.days} Days'),
+                SizedBox(
+                  height: 35,
+                  child: const VerticalDivider(color: AppColors.cardDarkColor),
+                ),
+                _buildInfoColumn('Offers', '${widget.project.numberOfOffers}'),
+              ],
             ),
-            trailing: InkWell(
-              onTap: () {},
-              child: HugeIcon(
-                icon: HugeIcons.strokeRoundedCancel02,
-                color: Colors.red,
-              ),
-            ),
-          ),
-          Text(
-            widget.project.name,
-            style: AppStyle.robotoCondensedMedium15,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-          verticalSpace(16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Text('Price', style: AppStyle.robotoCondensedBold14),
-                  verticalSpace(4),
-                  Text(
-                      '${widget.project.minPrice} - ${widget.project.maxPrice}\$',
-                      style: AppStyle.robotoCondensedMedium12),
-                ],
-              ),
-              Column(
-                children: [
-                  Text('Deadline', style: AppStyle.robotoCondensedBold14),
-                  verticalSpace(4),
-                  Text('${widget.project.days} Days',
-                      style: AppStyle.robotoCondensedMedium12),
-                ],
-              ),
-              Column(
-                children: [
-                  Text('Offers', style: AppStyle.robotoCondensedBold14),
-                  verticalSpace(4),
-                  Text('${widget.project.numberOfOffers}',
-                      style: AppStyle.robotoCondensedMedium12),
-                ],
-              ),
-            ],
-          ),
-          verticalSpace(14),
-        ],
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildInfoColumn(String title, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          title,
+          style: AppStyle.robotoCondensedBold14.copyWith(
+            color: AppColors.black,
+          ),
+        ),
+        verticalSpace(4),
+        Text(
+          value,
+          style: AppStyle.robotoRegular12
+              .copyWith(color: AppColors.primary, fontWeight: FontWeight.bold),
+        ),
+      ],
     );
   }
 }

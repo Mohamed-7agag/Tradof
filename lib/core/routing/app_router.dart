@@ -5,6 +5,8 @@ import 'package:tradof/core/routing/routes.dart';
 import 'package:tradof/features/freelancer/freelancer_profile/presentation/views/update_freelancer_profile_tables_view.dart';
 import 'package:tradof/features/offers/presentation/logic/cubit/offer_cubit.dart';
 import 'package:tradof/features/offers/presentation/views/add_offer_view.dart';
+import 'package:tradof/features/projects/presentation/logic/project_cubit/project_cubit.dart';
+import 'package:tradof/features/projects/presentation/views/project_details_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
 import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
@@ -195,6 +197,18 @@ class AppRouter {
             child: UpdateFreelancerProfileTablesView(
               freelancerModel: data['data'],
               isLanguagePair: data['isLanguagePair'],
+            ),
+          ),
+        );
+      case Routes.updateProjectViewRoute:
+        final data = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ProjectCubit(getIt()),
+            child: ProjectDetailsView(
+              companyModel: data['companyModel'],
+              projectModel: data['projectModel'],
+              specialization: data['specialization'],
             ),
           ),
         );

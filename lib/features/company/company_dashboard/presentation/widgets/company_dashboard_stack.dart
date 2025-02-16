@@ -13,13 +13,12 @@ import 'upcoming_projects_section.dart';
 
 class CompanyDashboardStack extends StatefulWidget {
   const CompanyDashboardStack({super.key, required this.companyModel});
-final CompanyModel companyModel;
+  final CompanyModel companyModel;
   @override
   State<CompanyDashboardStack> createState() => _CompanyDashboardStackState();
 }
 
 class _CompanyDashboardStackState extends State<CompanyDashboardStack> {
-
   final ValueNotifier<int> currentIndexNotifier = ValueNotifier<int>(0);
   @override
   void dispose() {
@@ -43,14 +42,7 @@ class _CompanyDashboardStackState extends State<CompanyDashboardStack> {
             builder: (context, currentIndex, child) {
               return LazyLoadIndexedStack(
                 index: currentIndex,
-                children: [
-                  StartedProjectsSection(),
-                  BlocProvider(
-                    create: (context) =>
-                        ProjectCubit(getIt())..getUpcomingProjects(),
-                    child: UpcomingProjectsSection(companyModel: widget.companyModel),
-                  ),
-                ],
+                children: _companyDashboardChildren,
               );
             },
           ),
@@ -65,6 +57,16 @@ class _CompanyDashboardStackState extends State<CompanyDashboardStack> {
         ),
       ],
     );
+  }
+
+  List<Widget> get _companyDashboardChildren {
+    return [
+      StartedProjectsSection(),
+      BlocProvider(
+        create: (context) => ProjectCubit(getIt())..getUpcomingProjects(),
+        child: UpcomingProjectsSection(companyModel: widget.companyModel),
+      ),
+    ];
   }
 
   BoxDecoration _decoration() {

@@ -14,6 +14,7 @@ class LanguageDropDown extends StatefulWidget {
     this.borderColor,
     this.hintColor,
     this.value,
+    this.isEditable = true,
   });
   final String hint;
   final List<LanguageModel> items;
@@ -21,6 +22,7 @@ class LanguageDropDown extends StatefulWidget {
   final Color? borderColor;
   final Color? hintColor;
   final LanguageModel? value;
+  final bool isEditable;
 
   @override
   State<LanguageDropDown> createState() => _LanguageDropDownState();
@@ -72,12 +74,14 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
               ),
             )
             .toList(),
-        onChanged: (value) {
-          setState(() {
-            selectedLanguage = value;
-            widget.onChanged!(value);
-          });
-        },
+        onChanged: widget.isEditable
+            ? (value) {
+                setState(() {
+                  selectedLanguage = value;
+                  widget.onChanged!(value);
+                });
+              }
+            : null,
       ),
     );
   }

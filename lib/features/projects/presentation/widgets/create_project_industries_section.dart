@@ -13,9 +13,11 @@ class CreateProjectIndustriesSection extends StatefulWidget {
     super.key,
     required this.companyModel,
     this.value,
+    this.isEditable = true,
   });
   final CompanyModel companyModel;
   final SpecializationModel? value;
+  final bool isEditable;
 
   @override
   State<CreateProjectIndustriesSection> createState() =>
@@ -36,7 +38,9 @@ class _CreateProjectIndustriesSectionState
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        _showIndustries(context, widget.companyModel);
+        if (widget.isEditable) {
+          _showIndustries(context, widget.companyModel);
+        }
       },
       borderRadius: BorderRadius.circular(12),
       child: Container(
@@ -61,7 +65,7 @@ class _CreateProjectIndustriesSectionState
                       color: AppColors.darkGrey,
                     ),
             ),
-            Icon(Icons.arrow_drop_down,color: AppColors.grey),
+            Icon(Icons.arrow_drop_down, color: AppColors.grey),
           ],
         ),
       ),
