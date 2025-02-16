@@ -100,7 +100,9 @@ class AuthCubit extends Cubit<AuthState> {
     await CacheHelper.setSecuredString(AppConstants.token, response.token);
     AppConstants.kUserId = response.userId;
     await CacheHelper.setSecuredString(
-        AppConstants.refreshToken, response.refreshToken);
+      AppConstants.refreshToken,
+      response.refreshToken,
+    );
     CacheHelper.setData(key: AppConstants.role, value: response.role);
     DioFactory.setTokenIntoHeaderAfterLogin(response.token);
   }

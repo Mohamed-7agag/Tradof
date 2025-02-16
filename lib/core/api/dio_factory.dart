@@ -21,7 +21,9 @@ class DioFactory {
       dio!
         ..options.baseUrl = EndPoint.baseUrl
         ..options.connectTimeout = timeOut
-        ..options.receiveTimeout = timeOut;
+        ..options.receiveTimeout = timeOut
+        ..options.contentType = 'application/json'
+        ..options.headers = {'Accept': 'application/json'};
       addDioHeaders();
       addDioInterceptor();
       return dio!;
@@ -32,11 +34,7 @@ class DioFactory {
 
   static void addDioHeaders() async {
     final userToken = await CacheHelper.getSecuredString(AppConstants.token);
-    dio?.options.headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $userToken',
-    };
+    dio?.options.headers = {'Authorization': 'Bearer $userToken'};
   }
 
   static void setTokenIntoHeaderAfterLogin(String token) {
@@ -122,7 +120,7 @@ class TokenService {
         response.data['accessToken'],
       );
     } catch (e) {
-     throw ServerFailure.fromError(e);
+      throw ServerFailure.fromError(e);
     }
   }
 }

@@ -109,7 +109,7 @@ class _CreateProjectIndustriesSectionState
                       setState(() {
                         selectedIndustries =
                             companyModel.specializations[index];
-                        context.read<ProjectCubit>().setCreateProjectData(
+                        cubit.setCreateProjectData(
                               industryId: selectedIndustries!.id,
                             );
                       });

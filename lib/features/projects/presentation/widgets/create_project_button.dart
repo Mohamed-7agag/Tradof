@@ -30,7 +30,6 @@ class CreateProjectButton extends StatelessWidget {
       listener: (context, state) {
         if (state.status.isCreateProjectSuccess) {
           successToast(context, 'Success', state.message);
-          _resetData(context);
         } else if (state.status.isCreateProjectFailure) {
           errorToast(context, 'Error', state.errorMessage);
         }
@@ -53,15 +52,6 @@ class CreateProjectButton extends StatelessWidget {
     return current.status.isCreateProjectSuccess ||
         current.status.isCreateProjectFailure ||
         current.status.isCreateProjectLoading;
-  }
-
-  void _resetData(BuildContext context) {
-    projectNameController.clear();
-    projectDescriptionController.clear();
-    minBudgetController.clear();
-    maxBudgetController.clear();
-    daysController.clear();
-    context.read<FileCubit>().resetFiles();
   }
 
   void _validateAndCreateProject(BuildContext context) {
@@ -88,8 +78,7 @@ class CreateProjectButton extends StatelessWidget {
       errorToast(
           context, 'Error', 'Min budget cannot be greater than max budget');
     } else if (minBudget == 0 || maxBudget == 0) {
-      errorToast(
-          context, 'Error', 'Please enter a valid min and max budget');
+      errorToast(context, 'Error', 'Please enter a valid min and max budget');
     } else if (context.read<ProjectCubit>().state.fromLanguage == null ||
         context.read<ProjectCubit>().state.toLanguage == null) {
       errorToast(context, 'Error', 'Please select a language pair');

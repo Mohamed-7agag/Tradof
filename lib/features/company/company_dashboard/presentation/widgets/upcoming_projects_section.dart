@@ -52,16 +52,18 @@ class BuildUpcomingProjects extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      padding: EdgeInsets.only(top: 40, bottom: 100),
-      itemCount: projects.length,
-      itemBuilder: (BuildContext context, int index) {
-        return UpcomingProjectItem(
-          project: projects[index],
-          companyModel: companyModel,
-        );
-      },
-    );
+    return projects.isEmpty
+        ? const CustomFailureWidget(text: 'No Projects Found')
+        : ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            padding: EdgeInsets.only(top: 40, bottom: 100),
+            itemCount: projects.length,
+            itemBuilder: (BuildContext context, int index) {
+              return UpcomingProjectItem(
+                project: projects[index],
+                companyModel: companyModel,
+              );
+            },
+          );
   }
 }
