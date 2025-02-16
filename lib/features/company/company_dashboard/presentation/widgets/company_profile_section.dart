@@ -27,7 +27,7 @@ class CompanyProfileSection extends StatelessWidget {
         style: AppStyle.poppinsMedium14.copyWith(color: AppColors.white),
       ),
       subtitle: Text(
-        companyModel.jobTitle,
+        companyModel.email,
         style: AppStyle.robotoRegular10.copyWith(color: AppColors.white),
       ),
       trailing: Row(

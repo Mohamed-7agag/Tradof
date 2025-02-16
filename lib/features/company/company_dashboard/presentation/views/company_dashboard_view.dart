@@ -21,7 +21,7 @@ class CompanyDashboardView extends StatelessWidget {
           ),
           verticalSpace(15),
           Expanded(
-            child: CompanyDashboardStack(),
+            child: CompanyDashboardStack(companyModel: companyModel),
           )
         ],
       ),

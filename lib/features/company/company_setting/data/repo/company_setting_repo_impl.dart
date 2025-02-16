@@ -15,14 +15,13 @@ class CompanySettingRepoImpl implements CompanySettingRepo {
     required String currentPassword,
     required String newPassword,
   }) async {
-    await _apiServices.put(
-      EndPoint.changeCompanyPassword(AppConstants.kUserId),
-      data: {
-        'currentPassword': currentPassword,
-        'newPassword': newPassword,
-        'confirmPassword': newPassword,
-      },
-    );
+    await _apiServices.put(EndPoint.changeCompanyPassword, data: {
+      'currentPassword': currentPassword,
+      'newPassword': newPassword,
+      'confirmPassword': newPassword,
+    }, queryParameters: {
+      "companyId": AppConstants.kUserId,
+    });
   }
 
   @override

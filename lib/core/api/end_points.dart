@@ -12,15 +12,16 @@ abstract class EndPoint {
   static const String getLanguages = 'language';
   static const String getSpecializations = 'specialization';
   static const String updateCompanyProfile = 'Company/UpdateCompany';
-  static String createOffer = 'api/propsal';
+
+  // offer
+  static String addOffer = 'api/propsal';
 
   // project
-  static String createProject(String id) => 'project?companyId=$id';
+  static String createProject = 'project';
+  static String getUpcomingProjects = 'project/allincomingprojects';
 
   //company
-  static String changeCompanyPassword(String id) {
-    return 'Company/ChangePassword?companyId=$id';
-  }
+  static String changeCompanyPassword = 'Company/ChangePassword';
 
   static String getCompanyEmployees(String id) {
     return 'company/$id/employees';
@@ -50,12 +51,12 @@ abstract class EndPoint {
     return 'Company/$companyId/social-medias/add-or-update-or-remove';
   }
 
-
   // Freelancer
   static String getFreelancerbyId(String id) => 'freelancers/$id';
   static String freelancerSocialMediaCRUD(String freelancerId) {
     return 'freelancers/$freelancerId/social-medias/add-or-update-or-remove';
   }
+
   static String uploadCv(String freelancerId) {
     return 'freelancers/$freelancerId/upload-cv';
   }
@@ -63,12 +64,15 @@ abstract class EndPoint {
   static String changeFreelancerPassword(String freelancerId) {
     return 'freelancers/$freelancerId/change-password';
   }
+
   static String updateFreelancerProfile(String freelancerId) {
     return 'freelancers/$freelancerId';
   }
+
   static String addOrDeleteFreelancerLanguagePair(String freelancerId) {
     return 'freelancers/$freelancerId/language-pairs';
   }
+
   static String addSpecialization(String freelancerId) {
     return 'freelancers/AddSpecialization/$freelancerId';
   }

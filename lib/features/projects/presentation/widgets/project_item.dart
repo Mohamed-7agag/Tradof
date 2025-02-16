@@ -6,7 +6,6 @@ import '../../../../core/theming/app_colors.dart';
 
 class ProjectItem extends StatelessWidget {
   const ProjectItem({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(

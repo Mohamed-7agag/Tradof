@@ -11,7 +11,7 @@ class OfferRepoImpl implements OfferRepo {
   @override
   Future<String> addOffer(AddOfferRequestModel model) async {
     final response = await apiServices.post(
-      EndPoint.createOffer,
+      EndPoint.addOffer,
       data: model.toJson(),
     );
     return response;

@@ -5,15 +5,15 @@ import 'failure.dart';
 class ServerFailure extends Failure {
   ServerFailure(String errMessage) : super(errMessage: errMessage);
 
-  factory ServerFailure.fromError(dynamic error) {
-    if (error is DioException) {
-      return ServerFailure.fromDioError(error);
+  factory ServerFailure.fromError(dynamic e) {
+    if (e is DioException) {
+      return ServerFailure._fromDioError(e);
     } else {
-      return ServerFailure(error.toString());
+      return ServerFailure(e.toString());
     }
   }
 
-  factory ServerFailure.fromDioError(DioException dioError) {
+  factory ServerFailure._fromDioError(DioException dioError) {
     switch (dioError.type) {
       case DioExceptionType.connectionTimeout:
         return ServerFailure('Connection to the server timed out');
@@ -22,7 +22,7 @@ class ServerFailure extends Failure {
       case DioExceptionType.receiveTimeout:
         return ServerFailure('Receiving data from the server timed out');
       case DioExceptionType.badResponse:
-        return ServerFailure.fromResponse(
+        return ServerFailure._fromResponse(
             dioError.response!.statusCode!, dioError.response!.data);
       case DioExceptionType.cancel:
         return ServerFailure('Request to the server was canceled');
@@ -35,9 +35,9 @@ class ServerFailure extends Failure {
     }
   }
 
-  factory ServerFailure.fromResponse(int statusCode, dynamic response) {
+  factory ServerFailure._fromResponse(int statusCode, dynamic response) {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
-      return ServerFailure(response.toString());
+      return ServerFailure(response?.toString() ?? 'Bad request, please try again');
     } else if (statusCode == 404) {
       return ServerFailure(
           response?.toString() ?? 'Not found, please try again');

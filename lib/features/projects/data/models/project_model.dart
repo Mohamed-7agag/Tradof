@@ -9,8 +9,8 @@ class ProjectModel extends Equatable {
   final int languageToId;
   final int minPrice;
   final int maxPrice;
-  final String startDate;
-  final String endDate;
+  final String? startDate;
+  final String? endDate;
   final int status;
   final int specializationId;
   final int numberOfOffers;
@@ -39,15 +39,15 @@ class ProjectModel extends Equatable {
       name: json['name'],
       description: json['description'],
       days: json['days'],
-      languageFromId: json['language_from_id'],
-      languageToId: json['language_to_id'],
-      minPrice: json['min_price'],
-      maxPrice: json['max_price'],
+      languageFromId: json['languageFromId'],
+      languageToId: json['languageToId'],
+      minPrice: json['minPrice'],
+      maxPrice: json['maxPrice'],
       startDate: json['start_date'],
       endDate: json['end_date'],
       status: json['status'],
-      specializationId: json['specialization_id'],
-      numberOfOffers: json['number_of_offers'],
+      specializationId: json['specializationId'],
+      numberOfOffers: json['numberOfOffers'],
       files: List<FileModel>.from(
         json['files'].map((x) => FileModel.fromJson(x)),
       ),

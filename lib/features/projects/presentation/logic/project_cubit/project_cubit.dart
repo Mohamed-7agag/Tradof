@@ -7,6 +7,7 @@ import 'package:tradof/core/utils/models/language_model.dart';
 
 import '../../../../../core/errors/exception.dart';
 import '../../../data/models/create_project_request_model.dart';
+import '../../../data/models/project_model.dart';
 import '../../../data/repo/project_repo.dart';
 
 part 'project_state.dart';
@@ -42,7 +43,7 @@ class ProjectCubit extends Cubit<ProjectState> {
         fromLanguageId: state.fromLanguage!.id,
         toLanguageId: state.toLanguage!.id,
         specializationId: state.industryId!,
-        files: await prepareFiles(), //!
+        files: await prepareFiles(), 
       );
 
       await _projectRepo.createProject(model);
@@ -69,5 +70,22 @@ class ProjectCubit extends Cubit<ProjectState> {
       toLanguage: toLanguage,
       industryId: industryId,
     ));
+  }
+
+  //! get upcoming projects
+  Future<void> getUpcomingProjects() async {
+    emit(state.copyWith(status: ProjectStatus.getUpcomingProjectsLoading));
+    try {
+      final projects = await _projectRepo.getUpcomingProjects();
+      emit(state.copyWith(
+        status: ProjectStatus.getUpcomingProjectsSuccess,
+        upcomingProjects: projects,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.getUpcomingProjectsFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 }

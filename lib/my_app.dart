@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
           },
           debugShowCheckedModeBanner: false,
           navigatorKey: NavigationHandler.navigatorKey,
-          onGenerateRoute: AppRouter.generateRoute,
           initialRoute: AppRouter.initialRoute(),
+          onGenerateRoute: AppRouter.generateRoute,
         );
       },
     );

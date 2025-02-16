@@ -118,13 +118,11 @@ class TokenService {
         response.data['accessToken'],
         response.data['refreshToken'],
       );
-      DioFactory.setTokenIntoHeaderAfterLogin(response.data['accessToken']);
+      DioFactory.setTokenIntoHeaderAfterLogin(
+        response.data['accessToken'],
+      );
     } catch (e) {
-      if (e is DioException) {
-        throw ServerFailure.fromDioError(e);
-      } else {
-        throw ServerFailure(e.toString());
-      }
+     throw ServerFailure.fromError(e);
     }
   }
 }

@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
+import 'package:tradof/core/di/di.dart';
 import 'package:tradof/core/theming/app_colors.dart';
 
+import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart';
+import '../../../company_profile/data/model/company_model.dart';
 import 'company_switcher_widget.dart';
 import 'started_projects_section.dart';
 import 'upcoming_projects_section.dart';
 
 class CompanyDashboardStack extends StatefulWidget {
-  const CompanyDashboardStack({super.key});
-
+  const CompanyDashboardStack({super.key, required this.companyModel});
+final CompanyModel companyModel;
   @override
   State<CompanyDashboardStack> createState() => _CompanyDashboardStackState();
 }
 
 class _CompanyDashboardStackState extends State<CompanyDashboardStack> {
-  int currentIndex = 0;
+
+  final ValueNotifier<int> currentIndexNotifier = ValueNotifier<int>(0);
+  @override
+  void dispose() {
+    currentIndexNotifier.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -22,22 +34,34 @@ class _CompanyDashboardStackState extends State<CompanyDashboardStack> {
       fit: StackFit.expand,
       children: [
         Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(top: 32.5),
-            padding: EdgeInsets.only(top: 10),
-            decoration: _decoration(),
-            child: LazyLoadIndexedStack(
-              index: currentIndex,
-              children: [
-                StartedProjectsSection(),
-                UpcomingProjectsSection(),
-              ],
-            )),
+          width: double.infinity,
+          margin: EdgeInsets.only(top: 32.5),
+          padding: EdgeInsets.only(top: 10, left: 16.w, right: 16.w),
+          decoration: _decoration(),
+          child: ValueListenableBuilder<int>(
+            valueListenable: currentIndexNotifier,
+            builder: (context, currentIndex, child) {
+              return LazyLoadIndexedStack(
+                index: currentIndex,
+                children: [
+                  StartedProjectsSection(),
+                  BlocProvider(
+                    create: (context) =>
+                        ProjectCubit(getIt())..getUpcomingProjects(),
+                    child: UpcomingProjectsSection(companyModel: widget.companyModel),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
         Positioned(
           top: 0,
-          child: CompanySwitcherWidget(onSwitch: (index) {
-            setState(() => currentIndex = index);
-          }),
+          child: CompanySwitcherWidget(
+            onSwitch: (index) {
+              currentIndexNotifier.value = index;
+            },
+          ),
         ),
       ],
     );
