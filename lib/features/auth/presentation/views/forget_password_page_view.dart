@@ -38,14 +38,14 @@ class _ForgetPasswordPageViewState extends State<ForgetPasswordPageView> {
           Expanded(
             child: PageView(
               controller: _pageController,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               onPageChanged: (int page) {
                 setState(() => _currentPage = page);
               },
               children: [
                 ForgetPasswordView(pageController: _pageController),
                 OtpView(pageController: _pageController),
-                ResetPasswordView(),
+                const ResetPasswordView(),
               ],
             ),
           ),

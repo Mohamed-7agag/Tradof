@@ -5,14 +5,14 @@ import 'package:tradof/core/theming/app_colors.dart';
 import 'package:tradof/core/theming/app_style.dart';
 
 class Reviews extends StatelessWidget {
-  const Reviews({super.key, required this.reviews});
+  const Reviews({required this.reviews, super.key});
 
   final int reviews;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 11, horizontal: 12),
+      padding: const EdgeInsets.symmetric(vertical: 11, horizontal: 12),
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(12),

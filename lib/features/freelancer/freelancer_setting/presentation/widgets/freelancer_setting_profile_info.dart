@@ -8,8 +8,8 @@ import '../../../freelancer_profile/data/model/freelancer_model.dart';
 
 class FreelancerSettingProfileInfo extends StatelessWidget {
   const FreelancerSettingProfileInfo({
-    super.key,
     required this.freelancerModel,
+    super.key,
   });
   final FreelancerModel freelancerModel;
   @override
@@ -47,8 +47,8 @@ class FreelancerSettingProfileInfo extends StatelessWidget {
             ),
           ],
         ),
-        trailing: Padding(
-          padding: const EdgeInsets.only(right: 8),
+        trailing: const Padding(
+          padding: EdgeInsets.only(right: 8),
           child: CircleAvatar(
             radius: 4,
             backgroundColor: Colors.green,

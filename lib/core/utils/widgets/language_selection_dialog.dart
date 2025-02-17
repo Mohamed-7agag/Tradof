@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 import 'package:tradof/core/utils/models/language_model.dart';
+import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 
 import '../../../features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import '../../theming/app_colors.dart';
@@ -24,7 +24,7 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
   late final TextEditingController _searchController;
   String _searchQuery = '';
 
-@override
+  @override
   void initState() {
     _searchController = TextEditingController();
     super.initState();
@@ -97,8 +97,8 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
 
 class LanguagesListView extends StatelessWidget {
   const LanguagesListView({
-    super.key,
     required this.filteredLanguages,
+    super.key,
   });
 
   final List<LanguageModel> filteredLanguages;
@@ -108,7 +108,7 @@ class LanguagesListView extends StatelessWidget {
     return ListView.separated(
       itemCount: filteredLanguages.length,
       separatorBuilder: (BuildContext context, int index) =>
-          Divider(color: Colors.white10, height: 0),
+          const Divider(color: Colors.white10, height: 0),
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           contentPadding: EdgeInsets.zero,

@@ -29,7 +29,7 @@ class Subscriptionplan extends StatelessWidget {
                 'Subscription plan',
                 style: AppStyle.robotoCondensedRegular15,
               ),
-              HugeIcon(
+              const HugeIcon(
                 icon: HugeIcons.strokeRoundedCardExchange02,
                 color: Colors.black,
                 size: 22,

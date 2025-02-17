@@ -8,8 +8,8 @@ import '../widgets/freelancer_profile_section.dart';
 
 class FreelancerDashboardView extends StatelessWidget {
   const FreelancerDashboardView({
-    super.key,
     required this.freelancerModel,
+    super.key,
   });
   final FreelancerModel freelancerModel;
   @override
@@ -23,7 +23,7 @@ class FreelancerDashboardView extends StatelessWidget {
             child: FreelancerProfileSection(freelancerModel: freelancerModel),
           ),
           verticalSpace(15),
-          Expanded(
+          const Expanded(
             child: FreelancerDashboardStack(),
           )
         ],

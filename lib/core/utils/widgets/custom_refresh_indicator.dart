@@ -4,9 +4,9 @@ import '../../theming/app_colors.dart';
 
 class CustomRefreshIndicator extends StatelessWidget {
   const CustomRefreshIndicator({
-    super.key,
     required this.child,
     required this.onRefresh,
+    super.key,
     this.reversColors = false,
   });
   final Widget child;

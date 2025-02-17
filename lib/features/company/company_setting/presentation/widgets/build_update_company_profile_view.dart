@@ -14,8 +14,8 @@ import 'update_company_profile_image.dart';
 
 class BuildUpdateCompanyProfileView extends StatefulWidget {
   const BuildUpdateCompanyProfileView({
-    super.key,
     required this.companyModel,
+    super.key,
   });
   final CompanyModel companyModel;
 
@@ -76,7 +76,6 @@ class _BuildUpdateCompanyProfileViewState
                   labelColor: AppColors.darkGrey,
                   controller: firstNameController,
                   keyboardType: TextInputType.text,
-                  labelBehavior: false,
                   outlineBorder: true,
                 ),
                 verticalSpace(20),
@@ -85,7 +84,6 @@ class _BuildUpdateCompanyProfileViewState
                   labelColor: AppColors.darkGrey,
                   controller: lastNameController,
                   keyboardType: TextInputType.text,
-                  labelBehavior: false,
                   outlineBorder: true,
                 ),
                 verticalSpace(20),
@@ -94,7 +92,6 @@ class _BuildUpdateCompanyProfileViewState
                   labelColor: AppColors.darkGrey,
                   controller: companyNameController,
                   keyboardType: TextInputType.text,
-                  labelBehavior: false,
                   outlineBorder: true,
                 ),
                 verticalSpace(20),
@@ -102,7 +99,6 @@ class _BuildUpdateCompanyProfileViewState
                   labelText: 'Location',
                   labelColor: AppColors.darkGrey,
                   controller: locationCompanyController,
-                  labelBehavior: false,
                   outlineBorder: true,
                 ),
                 verticalSpace(20),
@@ -110,7 +106,6 @@ class _BuildUpdateCompanyProfileViewState
                   labelText: 'Phone Number',
                   controller: phoneNumberController,
                   borderColor: AppColors.darkGrey,
-                  labelBehavior: false,
                   outlineBorder: true,
                 ),
                 verticalSpace(18),

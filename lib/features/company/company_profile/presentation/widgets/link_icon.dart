@@ -10,10 +10,10 @@ import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class LinkIcon extends StatelessWidget {
   const LinkIcon({
-    super.key,
     required this.image,
     required this.socialMedia,
     required this.link,
+    super.key,
   });
   final String image;
   final List<SocialMediaModel> socialMedia;
@@ -45,7 +45,7 @@ class LinkIcon extends StatelessWidget {
         }
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 11, horizontal: 12),
+        padding: const EdgeInsets.symmetric(vertical: 11, horizontal: 12),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(12),

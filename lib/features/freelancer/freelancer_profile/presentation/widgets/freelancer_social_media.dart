@@ -6,7 +6,7 @@ import '../../../../company/company_profile/data/model/social_media_model.dart';
 import 'freelancer_soical_media_link_icon.dart';
 
 class FreelancerSocialMedia extends StatefulWidget {
-  const FreelancerSocialMedia({super.key, required this.socialMedia});
+  const FreelancerSocialMedia({required this.socialMedia, super.key});
   final List<SocialMediaModel> socialMedia;
   @override
   State<FreelancerSocialMedia> createState() => _FreelancerSocialMediaState();
@@ -42,7 +42,7 @@ class _FreelancerSocialMediaState extends State<FreelancerSocialMedia> {
         Expanded(
           child: FadeInLeft(
             from: 400,
-            delay: Duration(milliseconds: 240),
+            delay: const Duration(milliseconds: 240),
             child: FreelancerSocialMediaLinkIcon(
               image: 'assets/images/facebook.png',
               socialMedia: widget.socialMedia,
@@ -54,7 +54,7 @@ class _FreelancerSocialMediaState extends State<FreelancerSocialMedia> {
         Expanded(
           child: FadeInLeft(
             from: 400,
-            delay: Duration(milliseconds: 160),
+            delay: const Duration(milliseconds: 160),
             child: FreelancerSocialMediaLinkIcon(
               image: 'assets/images/linkedin.png',
               socialMedia: widget.socialMedia,
@@ -66,7 +66,7 @@ class _FreelancerSocialMediaState extends State<FreelancerSocialMedia> {
         Expanded(
           child: FadeInLeft(
             from: 400,
-            delay: Duration(milliseconds: 80),
+            delay: const Duration(milliseconds: 80),
             child: FreelancerSocialMediaLinkIcon(
               image: 'assets/images/github.png',
               socialMedia: widget.socialMedia,

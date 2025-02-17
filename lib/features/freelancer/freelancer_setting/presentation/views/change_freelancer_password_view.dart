@@ -63,7 +63,7 @@ class _ChangeFreelancerPasswordViewState
               verticalSpace(16),
               SlideInLeft(
                 from: 400,
-                delay: Duration(milliseconds: 120),
+                delay: const Duration(milliseconds: 120),
                 child: CustomTextField(
                   labelText: 'New Password',
                   controller: newPasswordController,
@@ -74,7 +74,7 @@ class _ChangeFreelancerPasswordViewState
               verticalSpace(16),
               SlideInLeft(
                 from: 400,
-                delay: Duration(milliseconds: 240),
+                delay: const Duration(milliseconds: 240),
                 child: CustomTextField(
                   labelText: 'Confirm Password',
                   controller: confirmPasswordController,
@@ -85,7 +85,7 @@ class _ChangeFreelancerPasswordViewState
               verticalSpace(60),
               SlideInLeft(
                 from: 400,
-                delay: Duration(milliseconds: 360),
+                delay: const Duration(milliseconds: 360),
                 child: ChangeFreelancerPasswordButton(
                   currentPasswordController: currentPasswordController,
                   newPasswordController: newPasswordController,

@@ -10,7 +10,7 @@ import '../../../../company/company_profile/data/model/social_media_model.dart';
 import '../../../../company/company_profile/presentation/widgets/social_media_item.dart';
 
 class UpdateFreelancerSocialMediaView extends StatefulWidget {
-  const UpdateFreelancerSocialMediaView({super.key, required this.socialList});
+  const UpdateFreelancerSocialMediaView({required this.socialList, super.key});
   final List<SocialMediaModel> socialList;
   @override
   State<UpdateFreelancerSocialMediaView> createState() =>
@@ -79,7 +79,7 @@ class _UpdateFreelancerSocialMediaViewState
                   verticalSpace(28),
                   SlideInRight(
                     from: 400,
-                    delay: Duration(milliseconds: 100),
+                    delay: const Duration(milliseconds: 100),
                     child: SocialMediaItem(
                       image: 'assets/images/linkedin.png',
                       controller: linkedinController,
@@ -88,7 +88,7 @@ class _UpdateFreelancerSocialMediaViewState
                   verticalSpace(28),
                   SlideInRight(
                     from: 400,
-                    delay: Duration(milliseconds: 200),
+                    delay: const Duration(milliseconds: 200),
                     child: SocialMediaItem(
                       image: 'assets/images/github.png',
                       controller: githubController,
@@ -97,7 +97,7 @@ class _UpdateFreelancerSocialMediaViewState
                   verticalSpace(28),
                   SlideInRight(
                     from: 400,
-                    delay: Duration(milliseconds: 300),
+                    delay: const Duration(milliseconds: 300),
                     child: SocialMediaItem(
                       image: 'assets/images/gmail.png',
                       controller: gmailController,
@@ -106,7 +106,7 @@ class _UpdateFreelancerSocialMediaViewState
                   Expanded(child: verticalSpace(40)),
                   SlideInUp(
                     from: 400,
-                    delay: Duration(milliseconds: 400),
+                    delay: const Duration(milliseconds: 400),
                     child: UpdateFreelancerSocialMediaButton(
                       facebookController: facebookController,
                       linkedinController: linkedinController,

@@ -9,7 +9,7 @@ import '../../../freelancer_profile/data/model/freelancer_model.dart';
 import '../widgets/build_update_freelancer_profile_view.dart';
 
 class UpdateFreelancerProfileView extends StatelessWidget {
-  const UpdateFreelancerProfileView({super.key, required this.freelancerModel});
+  const UpdateFreelancerProfileView({required this.freelancerModel, super.key});
   final FreelancerModel freelancerModel;
   @override
   Widget build(BuildContext context) {

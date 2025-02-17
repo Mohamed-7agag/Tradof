@@ -12,7 +12,6 @@ import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class AddEmployeeButton extends StatelessWidget {
   const AddEmployeeButton({
-    super.key,
     required this.firstNameController,
     required this.lastNameController,
     required this.emailController,
@@ -20,6 +19,7 @@ class AddEmployeeButton extends StatelessWidget {
     required this.jobTitleController,
     required this.phoneNumberController,
     required this.formKey,
+    super.key,
   });
   final GlobalKey<FormState> formKey;
   final TextEditingController firstNameController;
@@ -43,7 +43,7 @@ class AddEmployeeButton extends StatelessWidget {
       },
       builder: (context, state) {
         return state.status.isAddCompanyEmployeesLoading
-            ? CustomLoadingWidget()
+            ? const CustomLoadingWidget()
             : CustomButton(
                 text: 'Add',
                 onPressed: () {

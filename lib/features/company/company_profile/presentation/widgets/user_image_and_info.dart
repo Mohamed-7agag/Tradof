@@ -10,7 +10,7 @@ import 'package:tradof/core/theming/app_style.dart';
 import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
 class UserImageAndInfo extends StatelessWidget {
-  const UserImageAndInfo({super.key, required this.companyModel});
+  const UserImageAndInfo({required this.companyModel, super.key});
 
   final CompanyModel companyModel;
 
@@ -50,7 +50,7 @@ class UserImageAndInfo extends StatelessWidget {
         onPressed: () {
           context.pushNamed(Routes.companyEmployeesViewRoute);
         },
-        icon: HugeIcon(
+        icon: const HugeIcon(
           icon: HugeIcons.strokeRoundedUserGroup,
           color: Colors.white,
           size: 28,

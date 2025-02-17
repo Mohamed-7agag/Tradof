@@ -10,8 +10,8 @@ import '../logic/project_cubit/project_cubit.dart';
 
 class CreateProjectIndustriesSection extends StatefulWidget {
   const CreateProjectIndustriesSection({
-    super.key,
     required this.companyModel,
+    super.key,
     this.value,
     this.isEditable = true,
   });
@@ -44,7 +44,7 @@ class _CreateProjectIndustriesSectionState
       },
       borderRadius: BorderRadius.circular(12),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         width: 1.sw,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -65,7 +65,7 @@ class _CreateProjectIndustriesSectionState
                       color: AppColors.darkGrey,
                     ),
             ),
-            Icon(Icons.arrow_drop_down, color: AppColors.grey),
+            const Icon(Icons.arrow_drop_down, color: AppColors.grey),
           ],
         ),
       ),
@@ -94,7 +94,7 @@ class _CreateProjectIndustriesSectionState
               child: ListView.separated(
                 itemCount: companyModel.specializations.length,
                 separatorBuilder: (BuildContext context, int index) =>
-                    Divider(color: Colors.white10, height: 0),
+                    const Divider(color: Colors.white10, height: 0),
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
@@ -110,8 +110,8 @@ class _CreateProjectIndustriesSectionState
                         selectedIndustries =
                             companyModel.specializations[index];
                         cubit.setCreateProjectData(
-                              industryId: selectedIndustries!.id,
-                            );
+                          industryId: selectedIndustries!.id,
+                        );
                       });
                       Navigator.pop(context);
                     },

@@ -12,10 +12,10 @@ import '../logic/registeration_cubit/registeration_cubit.dart';
 
 class CompanyRegisterationButton extends StatelessWidget {
   const CompanyRegisterationButton({
-    super.key,
     required this.jobTitleController,
     required this.locationCompanyController,
     required this.companyNameController,
+    super.key,
   });
   final TextEditingController jobTitleController;
   final TextEditingController locationCompanyController;

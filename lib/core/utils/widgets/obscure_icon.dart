@@ -5,9 +5,9 @@ import '../../theming/app_colors.dart';
 
 class ObscureIcon extends StatelessWidget {
   const ObscureIcon({
-    super.key,
     required this.isObscure,
     required this.onPressed,
+    super.key,
     this.labelColor,
   });
 

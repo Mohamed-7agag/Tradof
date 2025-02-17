@@ -16,8 +16,7 @@ class FreelancerCvSection extends StatelessWidget {
   const FreelancerCvSection({super.key, this.cvUrl});
   final String? cvUrl;
   Future<void> _pickCV(BuildContext context) async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: false);
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null && context.mounted) {
       context.read<FreelancerProfileCubit>().uploadCv(result.files.first);
@@ -67,8 +66,8 @@ class FreelancerCvSection extends StatelessWidget {
                 style: AppStyle.poppinsMedium14,
               ),
               cvUrl == null
-                  ? Padding(
-                      padding: const EdgeInsets.only(right: 6),
+                  ? const Padding(
+                      padding: EdgeInsets.only(right: 6),
                       child: HugeIcon(
                         icon: HugeIcons.strokeRoundedUpload01,
                         color: AppColors.lightOrange,
@@ -81,13 +80,13 @@ class FreelancerCvSection extends StatelessWidget {
                             onPressed: () {
                               _pickCV(context);
                             },
-                            icon: HugeIcon(
+                            icon: const HugeIcon(
                               icon: HugeIcons.strokeRoundedExchange01,
                               color: AppColors.lightOrange,
                               size: 27,
                             )),
                         horizontalSpace(10),
-                        HugeIcon(
+                        const HugeIcon(
                           icon: HugeIcons.strokeRoundedSquareArrowUpRight,
                           color: AppColors.black,
                           size: 27,

@@ -8,7 +8,7 @@ import '../../../../../core/theming/app_colors.dart';
 import '../../data/model/freelancer_model.dart';
 
 class FreelancerImageAndInfo extends StatelessWidget {
-  const FreelancerImageAndInfo({super.key, required this.freelancerModel});
+  const FreelancerImageAndInfo({required this.freelancerModel, super.key});
   final FreelancerModel freelancerModel;
   @override
   Widget build(BuildContext context) {

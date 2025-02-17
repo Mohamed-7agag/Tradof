@@ -14,7 +14,7 @@ class ResetPasswordView extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          AuthShape(),
+          const AuthShape(),
           SlideInLeft(
             from: 400,
             child: Text(
@@ -23,7 +23,7 @@ class ResetPasswordView extends StatelessWidget {
             ),
           ),
           verticalSpace(30),
-          ResetPasswordForm(),
+          const ResetPasswordForm(),
         ],
       ),
     );

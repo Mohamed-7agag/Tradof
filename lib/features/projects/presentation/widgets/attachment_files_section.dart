@@ -37,7 +37,7 @@ class AttachmentFilesSection extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 itemCount: files.length,
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return ListTile(
                     contentPadding: EdgeInsets.only(
@@ -45,9 +45,11 @@ class AttachmentFilesSection extends StatelessWidget {
                       bottom: index == files.length - 1 ? 20 : 0,
                     ),
                     title: Text(files[index].name),
-                    leading: HugeIcon(icon: HugeIcons.strokeRoundedFile02, color: AppColors.black),
+                    leading: const HugeIcon(
+                        icon: HugeIcons.strokeRoundedFile02,
+                        color: AppColors.black),
                     trailing: IconButton(
-                      icon: Icon(Icons.cancel, color: Colors.red),
+                      icon: const Icon(Icons.cancel, color: Colors.red),
                       onPressed: () =>
                           context.read<FileCubit>().removeFile(index),
                     ),
@@ -62,15 +64,15 @@ class AttachmentFilesSection extends StatelessWidget {
           right: 15,
           child: IconButton(
             onPressed: () => _pickFiles(context),
-            icon: HugeIcon(
-            icon: HugeIcons.strokeRoundedAdd01,
-            color: AppColors.white,
-            size: 26,
-          ),
+            icon: const HugeIcon(
+              icon: HugeIcons.strokeRoundedAdd01,
+              color: AppColors.white,
+              size: 26,
+            ),
             style: IconButton.styleFrom(
                 backgroundColor: AppColors.lightOrange,
                 foregroundColor: AppColors.white,
-                padding: EdgeInsets.all(12)),
+                padding: const EdgeInsets.all(12)),
           ),
         )
       ],

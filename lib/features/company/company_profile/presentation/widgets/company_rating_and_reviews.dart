@@ -9,7 +9,7 @@ import 'rating.dart';
 import 'reviews.dart';
 
 class CompanyRatingAndReviews extends StatelessWidget {
-  const CompanyRatingAndReviews({super.key, required this.companyModel});
+  const CompanyRatingAndReviews({required this.companyModel, super.key});
   final CompanyModel companyModel;
 
   @override
@@ -28,7 +28,7 @@ class CompanyRatingAndReviews extends StatelessWidget {
           flex: 5,
           child: SlideInLeft(
             from: 400,
-            delay: Duration(milliseconds: 120),
+            delay: const Duration(milliseconds: 120),
             child: Reviews(reviews: companyModel.reviewCount),
           ),
         ),
@@ -37,14 +37,14 @@ class CompanyRatingAndReviews extends StatelessWidget {
           flex: 2,
           child: SlideInRight(
             from: 400,
-            delay: Duration(milliseconds: 240),
+            delay: const Duration(milliseconds: 240),
             child: Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: HugeIcon(
+              child: const HugeIcon(
                 icon: HugeIcons.strokeRoundedShare08,
                 color: AppColors.white,
               ),

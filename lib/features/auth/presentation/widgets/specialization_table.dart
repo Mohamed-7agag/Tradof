@@ -33,7 +33,7 @@ class SpecializationTable extends StatelessWidget {
               onTap: () {
                 _showSpecializationDialog(context);
               },
-              child: HugeIcon(
+              child: const HugeIcon(
                 icon: HugeIcons.strokeRoundedAddSquare,
                 color: AppColors.lightOrange,
                 size: 27,
@@ -72,14 +72,14 @@ class SpecializationTable extends StatelessWidget {
                                     .read<TablesCubit>()
                                     .removeSpecialization(specialization);
                               },
-                              child: HugeIcon(
+                              child: const HugeIcon(
                                 icon:
                                     HugeIcons.strokeRoundedCancelCircleHalfDot,
                                 color: Colors.red,
                                 size: 20,
                               ),
                             ),
-                            SizedBox(width: 6),
+                            const SizedBox(width: 6),
                             Text(
                               specialization.name,
                               style: TextStyle(
@@ -153,7 +153,7 @@ class SpecializationTable extends StatelessWidget {
                   return ListView.separated(
                     itemCount: state.specializations.length,
                     separatorBuilder: (BuildContext context, int index) =>
-                        Divider(color: Colors.white10, height: 0),
+                        const Divider(color: Colors.white10, height: 0),
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         contentPadding: EdgeInsets.zero,

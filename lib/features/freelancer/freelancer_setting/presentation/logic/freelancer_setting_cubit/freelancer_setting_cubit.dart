@@ -13,7 +13,7 @@ part 'freelancer_setting_state.dart';
 
 class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
   FreelancerSettingCubit(this._freelancerSettingRepo)
-      : super(FreelancerSettingState());
+      : super(const FreelancerSettingState());
   final FreelancerSettingRepo _freelancerSettingRepo;
 
   Future<void> changeCompanyPassword({
@@ -82,7 +82,7 @@ class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
   }) async {
     String? imageUrl;
     if (state.imagePicked != null) {
-      imageUrl = await uploadImageToCloudinary(state.imagePicked!);
+      imageUrl = await uploadImageToCloudinary(state.imagePicked);
     }
 
     return UpdateFreelancerRequestModel(

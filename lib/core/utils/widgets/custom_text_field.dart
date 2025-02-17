@@ -7,10 +7,10 @@ import 'obscure_icon.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
-    super.key,
     required this.labelText,
-    this.keyboardType,
     required this.controller,
+    super.key,
+    this.keyboardType,
     this.obscureText = false,
     this.labelColor,
     this.outlineBorder = false,
@@ -44,7 +44,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       cursorColor: widget.labelColor ?? AppColors.primary,
-      cursorRadius: Radius.circular(10),
+      cursorRadius: const Radius.circular(10),
       obscureText: _isObscure,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
@@ -76,7 +76,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           widget.labelText,
           style: AppStyle.robotoRegular14.copyWith(color: widget.labelColor),
         ),
-        floatingLabelStyle: TextStyle(color: AppColors.primary),
+        floatingLabelStyle: const TextStyle(color: AppColors.primary),
         floatingLabelBehavior: widget.labelBehavior == true
             ? FloatingLabelBehavior.never
             : FloatingLabelBehavior.auto,

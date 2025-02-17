@@ -10,10 +10,10 @@ import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
 class FreelancerSocialMediaLinkIcon extends StatelessWidget {
   const FreelancerSocialMediaLinkIcon({
-    super.key,
     required this.image,
     required this.socialMedia,
     required this.link,
+    super.key,
   });
   final String image;
   final List<SocialMediaModel> socialMedia;
@@ -45,7 +45,7 @@ class FreelancerSocialMediaLinkIcon extends StatelessWidget {
         }
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 11, horizontal: 12),
+        padding: const EdgeInsets.symmetric(vertical: 11, horizontal: 12),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(12),

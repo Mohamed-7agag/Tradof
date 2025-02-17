@@ -10,13 +10,13 @@ import '../../data/model/freelancer_model.dart';
 import 'freelancer_image_and_info.dart';
 
 class FreelancerProfileAppBar extends StatelessWidget {
-  const FreelancerProfileAppBar({super.key, required this.freelancerModel});
+  const FreelancerProfileAppBar({required this.freelancerModel, super.key});
   final FreelancerModel freelancerModel;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      decoration: BoxDecoration(color: AppColors.primary),
+      decoration: const BoxDecoration(color: AppColors.primary),
       child: SafeArea(
         child: Column(
           children: [

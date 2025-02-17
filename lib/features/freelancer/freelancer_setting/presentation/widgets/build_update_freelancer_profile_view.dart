@@ -14,8 +14,8 @@ import 'update_freelancer_profile_image.dart';
 
 class BuildUpdateFreelancerProfileView extends StatefulWidget {
   const BuildUpdateFreelancerProfileView({
-    super.key,
     required this.freelancerModel,
+    super.key,
   });
   final FreelancerModel freelancerModel;
 
@@ -68,7 +68,6 @@ class _BuildUpdateFreelancerProfileViewState
                   labelColor: AppColors.darkGrey,
                   controller: firstNameController,
                   keyboardType: TextInputType.text,
-                  labelBehavior: false,
                   outlineBorder: true,
                 ),
                 verticalSpace(20),
@@ -77,7 +76,6 @@ class _BuildUpdateFreelancerProfileViewState
                   labelColor: AppColors.darkGrey,
                   controller: lastNameController,
                   keyboardType: TextInputType.text,
-                  labelBehavior: false,
                   outlineBorder: true,
                 ),
                 verticalSpace(20),
@@ -85,7 +83,6 @@ class _BuildUpdateFreelancerProfileViewState
                   labelText: 'Phone Number',
                   controller: phoneNumberController,
                   borderColor: AppColors.darkGrey,
-                  labelBehavior: false,
                   outlineBorder: true,
                 ),
                 verticalSpace(18),

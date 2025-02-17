@@ -13,7 +13,7 @@ import '../../data/model/freelancer_model.dart';
 import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
 class FreelancerSpecialization extends StatelessWidget {
-  const FreelancerSpecialization({super.key, required this.freelancerModel});
+  const FreelancerSpecialization({required this.freelancerModel, super.key});
 
   final FreelancerModel freelancerModel;
 
@@ -46,11 +46,11 @@ class FreelancerSpecialization extends StatelessWidget {
               },
               child: SlideInRight(
                 from: 200,
-                child: HugeIcon(
-                icon: HugeIcons.strokeRoundedPencilEdit02,
-                color: AppColors.lightOrange,
-                size: 27,
-              ),
+                child: const HugeIcon(
+                  icon: HugeIcons.strokeRoundedPencilEdit02,
+                  color: AppColors.lightOrange,
+                  size: 27,
+                ),
               ),
             )
           ],

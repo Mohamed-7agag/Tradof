@@ -8,8 +8,8 @@ import '../../../../../core/theming/app_style.dart';
 
 class CompanySettingProfileInfo extends StatelessWidget {
   const CompanySettingProfileInfo({
-    super.key,
     required this.companyModel,
+    super.key,
   });
   final CompanyModel companyModel;
   @override
@@ -47,8 +47,8 @@ class CompanySettingProfileInfo extends StatelessWidget {
             ),
           ],
         ),
-        trailing: Padding(
-          padding: const EdgeInsets.only(right: 8),
+        trailing: const Padding(
+          padding: EdgeInsets.only(right: 8),
           child: CircleAvatar(
             radius: 4,
             backgroundColor: Colors.green,

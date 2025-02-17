@@ -23,7 +23,7 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
           flex: 5,
           child: SlideInLeft(
             from: 400,
-            delay: Duration(milliseconds: 480),
+            delay: const Duration(milliseconds: 480),
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
               decoration: BoxDecoration(
@@ -40,7 +40,7 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  HugeIcon(
+                  const HugeIcon(
                     icon: HugeIcons.strokeRoundedDelete02,
                     color: Colors.red,
                   ),
@@ -54,7 +54,7 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
           flex: 4,
           child: SlideInRight(
             from: 400,
-            delay: Duration(milliseconds: 480),
+            delay: const Duration(milliseconds: 480),
             child: InkWell(
               onTap: () {
                 _showLogoutDialog(context);
@@ -75,7 +75,7 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    HugeIcon(
+                    const HugeIcon(
                       icon: HugeIcons.strokeRoundedLogout01,
                       color: AppColors.primary,
                     ),
@@ -89,7 +89,7 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
     );
   }
 
-  void _showLogoutDialog(BuildContext context) async {
+  Future<void> _showLogoutDialog(BuildContext context) async {
     AwesomeDialog(
       context: context,
       animType: AnimType.rightSlide,

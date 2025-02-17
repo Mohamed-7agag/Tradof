@@ -10,11 +10,11 @@ import '../logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
 
 class UpdateFreelancerProfileButton extends StatelessWidget {
   const UpdateFreelancerProfileButton({
-    super.key,
     required this.firstNameController,
     required this.lastNameController,
     required this.phoneNumberController,
     required this.freelancerModel,
+    super.key,
   });
 
   final TextEditingController firstNameController;

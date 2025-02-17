@@ -5,10 +5,10 @@ import 'package:tradof/core/theming/app_style.dart';
 
 class SettingItem extends StatelessWidget {
   const SettingItem({
-    super.key,
     required this.title,
     required this.icon,
     required this.onTap,
+    super.key,
   });
   final String title;
   final Widget icon;
@@ -18,7 +18,7 @@ class SettingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      contentPadding: EdgeInsets.only(right: 6),
+      contentPadding: const EdgeInsets.only(right: 6),
       leading: CircleAvatar(
         radius: 21.r,
         backgroundColor: AppColors.white,
@@ -28,7 +28,7 @@ class SettingItem extends StatelessWidget {
         title,
         style: AppStyle.robotoCondensedRegular15,
       ),
-      trailing: Icon(
+      trailing: const Icon(
         Icons.arrow_forward_ios_rounded,
         size: 18,
         color: AppColors.primary,

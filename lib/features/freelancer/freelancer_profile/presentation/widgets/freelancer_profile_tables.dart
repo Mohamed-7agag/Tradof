@@ -7,8 +7,8 @@ import 'freelancer_specialization.dart';
 
 class FreelancerProfileTables extends StatelessWidget {
   const FreelancerProfileTables({
-    super.key,
     required this.freelancerModel,
+    super.key,
   });
   final FreelancerModel freelancerModel;
   @override

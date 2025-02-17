@@ -118,7 +118,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
             ))
         .toList();
 
-    final imageUrl = await uploadImageToCloudinary(state.imageProfile!);
+    final imageUrl = await uploadImageToCloudinary(state.imageProfile);
 
     final FreelancerRegisterRequestModel freelancerRegisterRequestModel =
         FreelancerRegisterRequestModel(
@@ -148,7 +148,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     List<int> preferredLanguageIds =
         preferedLanguages.map((language) => language.id).toList();
 
-    final imageUrl = await uploadImageToCloudinary(state.imageProfile!);
+    final imageUrl = await uploadImageToCloudinary(state.imageProfile);
 
     final CompanyRegisterRequestModel companyRegisterRequestModel =
         CompanyRegisterRequestModel(

@@ -10,19 +10,19 @@ import '../logic/auth_cubit/auth_cubit.dart';
 import 'otp_widget.dart';
 
 class OtpWidgetAndButton extends StatelessWidget {
-  const OtpWidgetAndButton({super.key, required this.pageController});
+  const OtpWidgetAndButton({required this.pageController, super.key});
   final PageController pageController;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        OtpWidget(),
+        const OtpWidget(),
         verticalSpace(38),
         BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state.status.isOtpVerification) {
               pageController.nextPage(
-                duration: Duration(milliseconds: 350),
+                duration: const Duration(milliseconds: 350),
                 curve: Curves.easeInOut,
               );
             } else if (state.status.isError) {

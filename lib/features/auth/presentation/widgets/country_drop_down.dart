@@ -7,9 +7,9 @@ import '../../../../core/theming/app_style.dart';
 
 class CountryDropDown extends StatefulWidget {
   const CountryDropDown({
-    super.key,
     required this.hint,
     required this.items,
+    super.key,
     this.onChanged,
     this.borderColor = AppColors.white,
     this.textColor = AppColors.white,

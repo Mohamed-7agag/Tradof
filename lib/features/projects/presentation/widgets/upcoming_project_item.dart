@@ -14,9 +14,9 @@ import '../logic/project_cubit/project_cubit.dart';
 
 class UpcomingProjectItem extends StatefulWidget {
   const UpcomingProjectItem({
-    super.key,
     required this.project,
     required this.companyModel,
+    super.key,
   });
 
   final ProjectModel project;
@@ -30,8 +30,9 @@ class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
   SpecializationModel getSpecialization() {
     return widget.companyModel.specializations.firstWhere(
       (element) => element.id == widget.project.specializationId,
-      orElse: () => SpecializationModel(id: 0, name: 'Not Supported Specialization'),
-      );
+      orElse: () => const SpecializationModel(
+          id: 0, name: 'Not Supported Specialization'),
+    );
   }
 
   @override
@@ -101,16 +102,17 @@ class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
                 children: [
                   _buildInfoColumn('Price',
                       '${widget.project.minPrice} - ${widget.project.maxPrice}\$'),
-                  SizedBox(
+                  const SizedBox(
                     height: 35,
-                    child: const VerticalDivider(color: AppColors.cardDarkColor),
+                    child: VerticalDivider(color: AppColors.cardDarkColor),
                   ),
                   _buildInfoColumn('Deadline', '${widget.project.days} Days'),
-                  SizedBox(
+                  const SizedBox(
                     height: 35,
-                    child: const VerticalDivider(color: AppColors.cardDarkColor),
+                    child: VerticalDivider(color: AppColors.cardDarkColor),
                   ),
-                  _buildInfoColumn('Offers', '${widget.project.numberOfOffers}'),
+                  _buildInfoColumn(
+                      'Offers', '${widget.project.numberOfOffers}'),
                 ],
               ),
             ],
@@ -122,7 +124,6 @@ class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
 
   Widget _buildInfoColumn(String title, String value) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           title,

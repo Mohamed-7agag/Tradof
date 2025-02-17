@@ -11,10 +11,10 @@ import '../logic/auth_cubit/auth_cubit.dart';
 
 class ResetPasswordButton extends StatelessWidget {
   const ResetPasswordButton({
-    super.key,
     required this.formKey,
     required this.passwordController,
     required this.confirmPasswordController,
+    super.key,
   });
   final GlobalKey<FormState> formKey;
   final TextEditingController passwordController, confirmPasswordController;
@@ -35,7 +35,7 @@ class ResetPasswordButton extends StatelessWidget {
             ? const CustomLoadingWidget()
             : SlideInUp(
                 from: 400,
-                delay: Duration(milliseconds: 300),
+                delay: const Duration(milliseconds: 300),
                 child: CustomButton(
                   text: 'Submit',
                   onPressed: () {

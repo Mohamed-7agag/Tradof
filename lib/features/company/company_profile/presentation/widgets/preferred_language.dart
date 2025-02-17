@@ -12,7 +12,7 @@ import 'package:tradof/features/company/company_profile/data/model/company_model
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class PreferredLanguage extends StatelessWidget {
-  const PreferredLanguage({super.key, required this.companyModel});
+  const PreferredLanguage({required this.companyModel, super.key});
 
   final CompanyModel companyModel;
 
@@ -40,7 +40,7 @@ class PreferredLanguage extends StatelessWidget {
                   context.read<CompanyProfileCubit>().getCompanyProfile();
                 }
               },
-              child: HugeIcon(
+              child: const HugeIcon(
                 icon: HugeIcons.strokeRoundedPencilEdit02,
                 color: AppColors.lightOrange,
                 size: 27,

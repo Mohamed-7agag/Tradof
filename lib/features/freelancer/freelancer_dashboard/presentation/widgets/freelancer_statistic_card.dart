@@ -12,7 +12,7 @@ class FreelancerStatisticCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 0.85.sw,
-      padding: EdgeInsets.only(top: 12, bottom: 20),
+      padding: const EdgeInsets.only(top: 12, bottom: 20),
       margin: EdgeInsets.only(right: 8.w),
       decoration: BoxDecoration(
         color: AppColors.primary,
@@ -20,7 +20,6 @@ class FreelancerStatisticCard extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +32,7 @@ class FreelancerStatisticCard extends StatelessWidget {
               verticalSpace(8),
               Row(
                 children: [
-                  Icon(Icons.task_alt, color: Colors.green, size: 18),
+                  const Icon(Icons.task_alt, color: Colors.green, size: 18),
                   horizontalSpace(6),
                   Text(
                     "10 from total 20",

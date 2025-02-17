@@ -9,9 +9,7 @@ import '../../../../core/utils/widgets/custom_loading_widget.dart';
 
 class CreateOfferButton extends StatelessWidget {
   const CreateOfferButton(
-      {super.key,
-      required this.offerDetailsController,
-      required this.daysController});
+      {required this.offerDetailsController, required this.daysController, super.key});
   final TextEditingController offerDetailsController;
   final TextEditingController daysController;
   @override

@@ -9,8 +9,8 @@ import 'social_media_item.dart';
 
 class BuildAddUpdateSocialMedia extends StatefulWidget {
   const BuildAddUpdateSocialMedia({
-    super.key,
     required this.socialMedia,
+    super.key,
   });
   final List<SocialMediaModel> socialMedia;
 
@@ -75,7 +75,7 @@ class _BuildAddUpdateSocialMediaState extends State<BuildAddUpdateSocialMedia> {
                 verticalSpace(28),
                 SlideInRight(
                   from: 400,
-                  delay: Duration(milliseconds: 100),
+                  delay: const Duration(milliseconds: 100),
                   child: SocialMediaItem(
                     image: 'assets/images/linkedin.png',
                     controller: linkedinController,
@@ -84,7 +84,7 @@ class _BuildAddUpdateSocialMediaState extends State<BuildAddUpdateSocialMedia> {
                 verticalSpace(28),
                 SlideInRight(
                   from: 400,
-                  delay: Duration(milliseconds: 200),
+                  delay: const Duration(milliseconds: 200),
                   child: SocialMediaItem(
                     image: 'assets/images/github.png',
                     controller: githubController,
@@ -93,7 +93,7 @@ class _BuildAddUpdateSocialMediaState extends State<BuildAddUpdateSocialMedia> {
                 verticalSpace(28),
                 SlideInRight(
                   from: 400,
-                  delay: Duration(milliseconds: 300),
+                  delay: const Duration(milliseconds: 300),
                   child: SocialMediaItem(
                     image: 'assets/images/gmail.png',
                     controller: gmailController,
@@ -102,7 +102,7 @@ class _BuildAddUpdateSocialMediaState extends State<BuildAddUpdateSocialMedia> {
                 Expanded(child: verticalSpace(40)),
                 SlideInUp(
                   from: 400,
-                  delay: Duration(milliseconds: 400),
+                  delay: const Duration(milliseconds: 400),
                   child: AddUpdateSocialMediaButton(
                     facebookController: facebookController,
                     linkedinController: linkedinController,

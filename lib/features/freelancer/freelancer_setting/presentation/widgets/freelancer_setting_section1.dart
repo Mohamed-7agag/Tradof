@@ -11,7 +11,7 @@ import '../../../freelancer_profile/data/model/freelancer_model.dart';
 import '../../../freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
 class FreelancerSettingsSection1 extends StatelessWidget {
-  const FreelancerSettingsSection1({super.key, required this.freelancerModel});
+  const FreelancerSettingsSection1({required this.freelancerModel, super.key});
   final FreelancerModel freelancerModel;
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class FreelancerSettingsSection1 extends StatelessWidget {
         children: [
           SettingItem(
             title: 'Personal info',
-            icon: HugeIcon(
+            icon: const HugeIcon(
               icon: HugeIcons.strokeRoundedUserAccount,
               color: Colors.green,
               size: 26,
@@ -41,19 +41,19 @@ class FreelancerSettingsSection1 extends StatelessWidget {
               }
             },
           ),
-          Divider(color: AppColors.cardDarkColor),
+          const Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Notification',
-            icon: HugeIcon(
+            icon: const HugeIcon(
               icon: HugeIcons.strokeRoundedNotification03,
               color: AppColors.primary,
             ),
             onTap: () {},
           ),
-          Divider(color: AppColors.cardDarkColor),
+          const Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Clander',
-            icon: HugeIcon(
+            icon: const HugeIcon(
               icon: HugeIcons.strokeRoundedCalendar02,
               color: Colors.amber,
             ),

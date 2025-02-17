@@ -43,7 +43,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
           children: [
             SlideInRight(
               from: 400,
-              delay: Duration(milliseconds: 100),
+              delay: const Duration(milliseconds: 100),
               child: CustomTextField(
                 labelText: 'New Password',
                 controller: passwordController,
@@ -54,7 +54,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
             verticalSpace(12),
             SlideInRight(
               from: 400,
-              delay: Duration(milliseconds: 200),
+              delay: const Duration(milliseconds: 200),
               child: CustomTextField(
                 labelText: 'Confirm Password',
                 controller: confirmPasswordController,

@@ -24,12 +24,12 @@ class _FreelancerDashboardStackState extends State<FreelancerDashboardStack> {
       children: [
         Container(
           width: double.infinity,
-          margin: EdgeInsets.only(top: 32.5),
-          padding: EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: 32.5),
+          padding: const EdgeInsets.only(top: 10),
           decoration: _decoration(),
           child: LazyLoadIndexedStack(
             index: currentIndex,
-            children: [
+            children: const [
               CurrentProjectsSection(),
               AllProjectsSection(),
             ],
@@ -46,7 +46,7 @@ class _FreelancerDashboardStackState extends State<FreelancerDashboardStack> {
   }
 
   BoxDecoration _decoration() {
-    return BoxDecoration(
+    return const BoxDecoration(
       color: AppColors.background,
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(33),

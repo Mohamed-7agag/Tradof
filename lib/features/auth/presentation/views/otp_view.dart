@@ -9,7 +9,7 @@ import '../../../../core/theming/app_style.dart';
 import '../widgets/auth_shape.dart';
 
 class OtpView extends StatelessWidget {
-  const OtpView({super.key, required this.pageController});
+  const OtpView({required this.pageController, super.key});
   final PageController pageController;
 
   @override
@@ -17,7 +17,7 @@ class OtpView extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          AuthShape(),
+          const AuthShape(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
@@ -39,10 +39,10 @@ class OtpView extends StatelessWidget {
                 verticalSpace(16),
                 SlideInLeft(
                   from: 400,
-                  delay: Duration(milliseconds: 250),
+                  delay: const Duration(milliseconds: 250),
                   child: Row(
                     children: [
-                      Text('Didn\'t receive OTP? ',
+                      Text("Didn't receive OTP? ",
                           style: AppStyle.robotoRegular12),
                       Text(
                         'Resend OTP',

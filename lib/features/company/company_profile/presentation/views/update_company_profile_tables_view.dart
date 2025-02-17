@@ -15,9 +15,9 @@ import '../widgets/update_company_profile_tables_button.dart';
 
 class UpdateCompanyProfileTablesView extends StatelessWidget {
   const UpdateCompanyProfileTablesView({
-    super.key,
     required this.companyModel,
     required this.isPreferedLanguages,
+    super.key,
   });
   final CompanyModel companyModel;
   final bool isPreferedLanguages;
@@ -39,11 +39,11 @@ class UpdateCompanyProfileTablesView extends StatelessWidget {
               isPreferedLanguages
                   ? SlideInRight(
                       from: 400,
-                      child: PreferedLanguagesTable(darkColors: true),
+                      child: const PreferedLanguagesTable(darkColors: true),
                     )
                   : SlideInRight(
                       from: 400,
-                      child: IndustriesServedTable(darkColors: true),
+                      child: const IndustriesServedTable(darkColors: true),
                     ),
               verticalSpace(50),
               BlocProvider(

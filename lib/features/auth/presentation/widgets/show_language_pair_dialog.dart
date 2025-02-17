@@ -56,13 +56,13 @@ showLanguagePairDialog(BuildContext context) {
               textColor: AppColors.white,
             );
           }
-          return CustomLoadingWidget(
+          return const CustomLoadingWidget(
             color: AppColors.white,
           );
         },
       ),
     ),
-    padding: EdgeInsets.symmetric(horizontal: 14),
+    padding: const EdgeInsets.symmetric(horizontal: 14),
     dialogBackgroundColor: AppColors.darkGrey,
     btnOkText: 'Add',
     btnOkOnPress: () {

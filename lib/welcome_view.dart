@@ -21,7 +21,7 @@ class WelcomeView extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Spacer(flex: 3),
+          const Spacer(flex: 3),
           BounceInDown(
               from: 400,
               child: SvgPicture.asset('assets/images/icon.svg', width: 100.w)),
@@ -52,12 +52,12 @@ class WelcomeView extends StatelessWidget {
               ),
               style: IconButton.styleFrom(
                 backgroundColor: AppColors.white,
-                padding: EdgeInsets.all(15),
-                shape: CircleBorder(),
+                padding: const EdgeInsets.all(15),
+                shape: const CircleBorder(),
               ),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Image.asset('assets/images/splash_bottom.png'),
         ],
       ),

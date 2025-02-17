@@ -10,13 +10,13 @@ import '../logic/company_setting_cubit/company_setting_cubit.dart';
 
 class UpdateCompanyProfileButton extends StatelessWidget {
   const UpdateCompanyProfileButton({
-    super.key,
     required this.firstNameController,
     required this.lastNameController,
     required this.phoneNumberController,
     required this.locationCompanyController,
     required this.companyModel,
     required this.companyNameController,
+    super.key,
   });
 
   final TextEditingController firstNameController;

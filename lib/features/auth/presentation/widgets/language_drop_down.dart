@@ -7,9 +7,9 @@ import '../../../../core/theming/app_style.dart';
 
 class LanguageDropDown extends StatefulWidget {
   const LanguageDropDown({
-    super.key,
     required this.hint,
     required this.items,
+    super.key,
     this.onChanged,
     this.borderColor,
     this.hintColor,
@@ -52,7 +52,7 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
         isExpanded: true,
         menuWidth: 1.sw - 60,
         menuMaxHeight: 0.8.sh,
-        underline: SizedBox.shrink(),
+        underline: const SizedBox.shrink(),
         elevation: 4,
         value: selectedLanguage,
         borderRadius: BorderRadius.circular(12),

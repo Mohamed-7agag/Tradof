@@ -15,9 +15,7 @@ Future<bool> exitDialog(BuildContext context) async {
             style: AppStyle.robotoRegular14.copyWith(height: 1.8),
           ),
           btnCancelOnPress: () {},
-          btnOkOnPress: () {
-            SystemNavigator.pop();
-          },
+          btnOkOnPress: SystemNavigator.pop,
           btnOkText: 'Yes',
           btnCancelText: 'No')
       .show();

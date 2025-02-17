@@ -21,7 +21,7 @@ class CompanySettingSection2 extends StatelessWidget {
         children: [
           SettingItem(
             title: 'Change password',
-            icon: HugeIcon(
+            icon: const HugeIcon(
               icon: HugeIcons.strokeRoundedSquareLockPassword,
               color: Colors.red,
               size: 26,
@@ -30,16 +30,16 @@ class CompanySettingSection2 extends StatelessWidget {
               context.pushNamed(Routes.changeCompanyPasswordViewRoute);
             },
           ),
-          Divider(color: AppColors.cardDarkColor),
+          const Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Technical Support',
-            icon: HugeIcon(
+            icon: const HugeIcon(
               icon: HugeIcons.strokeRoundedCustomerService02,
               color: Colors.teal,
             ),
             onTap: () {},
           ),
-          Divider(color: AppColors.cardDarkColor),
+          const Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Give us feedback',
             icon: HugeIcon(

@@ -13,7 +13,7 @@ import '../widgets/delete_account_and_logout_section.dart';
 import '../widgets/subscription_plan_and_timer.dart';
 
 class CompanySettingView extends StatelessWidget {
-  const CompanySettingView({super.key, required this.companyModel});
+  const CompanySettingView({required this.companyModel, super.key});
   final CompanyModel companyModel;
 
   @override
@@ -40,7 +40,7 @@ class CompanySettingView extends StatelessWidget {
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 120),
+                    delay: const Duration(milliseconds: 120),
                     child: CompanySettingsSection1(
                       companyModel: companyModel,
                     ),
@@ -48,13 +48,13 @@ class CompanySettingView extends StatelessWidget {
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 240),
-                    child: CompanySettingSection2(),
+                    delay: const Duration(milliseconds: 240),
+                    child: const CompanySettingSection2(),
                   ),
                   verticalSpace(26),
-                  SubscriptionPlanAndTimer(),
+                  const SubscriptionPlanAndTimer(),
                   verticalSpace(20),
-                  DeleteAccountAndLogoutSection(),
+                  const DeleteAccountAndLogoutSection(),
                   verticalSpace(100),
                 ],
               ),

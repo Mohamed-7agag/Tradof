@@ -5,7 +5,7 @@ import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 
 class PrivacyPolicyCheckBox extends StatefulWidget {
-  const PrivacyPolicyCheckBox({super.key, required this.onChanged});
+  const PrivacyPolicyCheckBox({required this.onChanged, super.key});
   final Function(bool) onChanged;
   @override
   State<PrivacyPolicyCheckBox> createState() => _PrivacyPolicyCheckBoxState();
@@ -32,7 +32,7 @@ class _PrivacyPolicyCheckBoxState extends State<PrivacyPolicyCheckBox> {
         checkboxShape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        side: BorderSide(color: AppColors.white),
+        side: const BorderSide(color: AppColors.white),
         selectedTileColor: AppColors.primary,
         controlAffinity: ListTileControlAffinity.leading,
         activeColor: AppColors.white,

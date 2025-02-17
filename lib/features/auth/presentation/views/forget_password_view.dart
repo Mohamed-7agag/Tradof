@@ -10,7 +10,7 @@ import '../../../../core/theming/app_style.dart';
 import '../widgets/auth_shape.dart';
 
 class ForgetPasswordView extends StatefulWidget {
-  const ForgetPasswordView({super.key, required this.pageController});
+  const ForgetPasswordView({required this.pageController, super.key});
   final PageController pageController;
 
   @override
@@ -36,7 +36,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          AuthShape(),
+          const AuthShape(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
@@ -58,7 +58,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                 verticalSpace(30),
                 SlideInRight(
                   from: 400,
-                  delay: Duration(milliseconds: 100),
+                  delay: const Duration(milliseconds: 100),
                   child: CustomTextField(
                     labelText: 'Email',
                     controller: emailController,
@@ -68,7 +68,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                 verticalSpace(45),
                 SlideInUp(
                   from: 400,
-                  delay: Duration(milliseconds: 200),
+                  delay: const Duration(milliseconds: 200),
                   child: ForgetPasswordButton(
                     emailController: emailController,
                     pageController: widget.pageController,

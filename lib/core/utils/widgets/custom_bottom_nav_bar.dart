@@ -8,8 +8,8 @@ import 'bottom_nav_bar_center_icon.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
   const CustomBottomNavBar({
-    super.key,
     required this.onTabTapped,
+    super.key,
     this.isFreelancer = false,
   });
   final void Function(int index) onTabTapped;
@@ -29,7 +29,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         Container(
           height: 75,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(38),
                 topRight: Radius.circular(38),
               ),
@@ -45,7 +45,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             children: [
               SlideInLeft(
                 from: 400,
-                delay: Duration(milliseconds: 250),
+                delay: const Duration(milliseconds: 250),
                 child: _buildNavItem(
                   HugeIcons.strokeRoundedHome04,
                   0,
@@ -70,7 +70,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
               ),
               SlideInRight(
                 from: 400,
-                delay: Duration(milliseconds: 250),
+                delay: const Duration(milliseconds: 250),
                 child: _buildNavItem(
                   HugeIcons.strokeRoundedSettings02,
                   4,
@@ -112,7 +112,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             isSelected ? AppColors.primary.withValues(alpha: 0.2) : null,
       ),
       icon: AnimatedPadding(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         padding: EdgeInsets.symmetric(horizontal: isSelected ? 18 : 0),
         child: HugeIcon(
           icon: icon,

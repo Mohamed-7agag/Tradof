@@ -8,7 +8,7 @@ import '../../../auth/presentation/widgets/language_drop_down.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
 class CreateProjectLanguagePair extends StatelessWidget {
-  const CreateProjectLanguagePair({super.key, required this.companyModel});
+  const CreateProjectLanguagePair({required this.companyModel, super.key});
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {

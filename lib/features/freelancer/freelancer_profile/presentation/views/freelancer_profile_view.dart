@@ -11,7 +11,7 @@ import '../widgets/freelancer_rating_and_review.dart';
 import '../widgets/freelancer_social_media.dart';
 
 class FreelancerProfileView extends StatelessWidget {
-  const FreelancerProfileView({super.key, required this.freelancerModel});
+  const FreelancerProfileView({required this.freelancerModel, super.key});
   final FreelancerModel freelancerModel;
   @override
   Widget build(BuildContext context) {

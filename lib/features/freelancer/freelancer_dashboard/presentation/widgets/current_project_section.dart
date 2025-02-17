@@ -20,7 +20,7 @@ class CurrentProjectsSection extends StatelessWidget {
               children: List.generate(3, (index) {
                 return Padding(
                   padding: EdgeInsets.only(left: index == 0 ? 8 : 0),
-                  child: FreelancerStatisticCard(),
+                  child: const FreelancerStatisticCard(),
                 );
               }),
             ),
@@ -30,11 +30,11 @@ class CurrentProjectsSection extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               children: [
-                ProjectItem(),
+                const ProjectItem(),
                 verticalSpace(12),
-                ProjectItem(),
+                const ProjectItem(),
                 verticalSpace(12),
-                ProjectItem(),
+                const ProjectItem(),
               ],
             ),
           ),

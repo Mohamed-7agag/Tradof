@@ -9,7 +9,7 @@ import '../../../../../core/utils/widgets/custom_app_bar.dart';
 import '../widgets/build_update_company_profile_view.dart';
 
 class UpdateCompanyProfileView extends StatelessWidget {
-  const UpdateCompanyProfileView({super.key, required this.companyModel});
+  const UpdateCompanyProfileView({required this.companyModel, super.key});
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {

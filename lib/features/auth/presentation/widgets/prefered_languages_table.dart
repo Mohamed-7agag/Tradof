@@ -34,7 +34,7 @@ class PreferedLanguagesTable extends StatelessWidget {
               onTap: () {
                 _showPreferedLanguageDialog(context);
               },
-              child: HugeIcon(
+              child: const HugeIcon(
                 icon: HugeIcons.strokeRoundedAddSquare,
                 color: AppColors.lightOrange,
                 size: 27,
@@ -83,7 +83,7 @@ class PreferedLanguagesTable extends StatelessWidget {
                                     .read<TablesCubit>()
                                     .removePreferedLanguage(language);
                               },
-                              child: HugeIcon(
+                              child: const HugeIcon(
                                 icon:
                                     HugeIcons.strokeRoundedCancelCircleHalfDot,
                                 color: Colors.red,
@@ -149,7 +149,7 @@ class PreferedLanguagesTable extends StatelessWidget {
             BlocProvider.value(value: cubit),
             BlocProvider.value(value: metaDataCubit..getLanguages()),
           ],
-          child: LanguageSelectionDialog(),
+          child: const LanguageSelectionDialog(),
         );
       },
     );

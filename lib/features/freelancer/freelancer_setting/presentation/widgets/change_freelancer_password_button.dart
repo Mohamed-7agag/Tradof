@@ -11,10 +11,10 @@ import '../logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
 
 class ChangeFreelancerPasswordButton extends StatelessWidget {
   const ChangeFreelancerPasswordButton({
-    super.key,
     required this.currentPasswordController,
     required this.newPasswordController,
     required this.confirmPasswordController,
+    super.key,
   });
   final TextEditingController currentPasswordController;
   final TextEditingController newPasswordController;

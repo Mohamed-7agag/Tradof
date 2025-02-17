@@ -9,7 +9,7 @@ import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 
 class CompanyProfileSection extends StatelessWidget {
-  const CompanyProfileSection({super.key, required this.companyModel});
+  const CompanyProfileSection({required this.companyModel, super.key});
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {
@@ -33,12 +33,12 @@ class CompanyProfileSection extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          HugeIcon(
+          const HugeIcon(
             icon: HugeIcons.strokeRoundedNotification03,
             color: AppColors.white,
           ),
           horizontalSpace(18),
-          HugeIcon(
+          const HugeIcon(
             icon: HugeIcons.strokeRoundedCalendar02,
             color: AppColors.white,
           ),

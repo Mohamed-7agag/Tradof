@@ -15,8 +15,8 @@ class BottomNavBarCenterIcon extends StatelessWidget {
         child: Container(
           width: 60,
           height: 60,
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.all(10),
+          decoration: const BoxDecoration(
             color: AppColors.primary,
             shape: BoxShape.circle,
           ),

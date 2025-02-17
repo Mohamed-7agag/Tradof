@@ -6,10 +6,10 @@ import '../../../../core/theming/app_style.dart';
 
 class ProjectTextField extends StatelessWidget {
   const ProjectTextField({
-    super.key,
     required this.labelText,
-    this.keyboardType,
     required this.controller,
+    super.key,
+    this.keyboardType,
     this.labelColor,
     this.maxLines = 1,
     this.readOnly = false,
@@ -26,7 +26,7 @@ class ProjectTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       cursorColor: labelColor ?? AppColors.darkGrey,
-      cursorRadius: Radius.circular(10),
+      cursorRadius: const Radius.circular(10),
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
@@ -45,7 +45,7 @@ class ProjectTextField extends StatelessWidget {
           focusedBorder: _buildBorder(color: labelColor ?? AppColors.darkGrey),
           errorBorder: _buildBorder(color: Colors.red),
           labelText: labelText,
-          floatingLabelStyle: TextStyle(color: AppColors.darkGrey),
+          floatingLabelStyle: const TextStyle(color: AppColors.darkGrey),
           floatingLabelBehavior: FloatingLabelBehavior.always),
     );
   }

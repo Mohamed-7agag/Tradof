@@ -15,9 +15,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           theme: _appTheme(),
-          builder: (context, child) {
-            return _mediaQueryWidget(context, child);
-          },
+          builder: _mediaQueryWidget,
           debugShowCheckedModeBanner: false,
           navigatorKey: NavigationHandler.navigatorKey,
           initialRoute: AppRouter.initialRoute(),
@@ -40,12 +38,12 @@ class MyApp extends StatelessWidget {
     return ThemeData.light().copyWith(
       scaffoldBackgroundColor: AppColors.background,
       primaryColor: AppColors.primary,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         foregroundColor: AppColors.white,
         backgroundColor: AppColors.primary,
         toolbarHeight: 65,
       ),
-      pageTransitionsTheme: PageTransitionsTheme(builders: {
+      pageTransitionsTheme: const PageTransitionsTheme(builders: {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
       }),
     );

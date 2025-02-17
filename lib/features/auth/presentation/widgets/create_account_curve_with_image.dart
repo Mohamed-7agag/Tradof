@@ -15,13 +15,13 @@ class CreateAccountCurveWithImage extends StatelessWidget {
         alignment: Alignment.center,
         height: 325.h,
         width: 1.sw,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.background,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(flex: 4),
+            const Spacer(flex: 4),
             Text(
               'Create Account',
               style: AppStyle.poppinsBold22.copyWith(
@@ -29,8 +29,8 @@ class CreateAccountCurveWithImage extends StatelessWidget {
               ),
             ),
             verticalSpace(20),
-            AccountImageWidget(),
-            Spacer(flex: 5),
+            const AccountImageWidget(),
+            const Spacer(flex: 5),
           ],
         ),
       ),

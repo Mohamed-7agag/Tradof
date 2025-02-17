@@ -6,7 +6,7 @@ import '../../data/model/social_media_model.dart';
 import 'link_icon.dart';
 
 class CompanySocialLinks extends StatefulWidget {
-  const CompanySocialLinks({super.key, required this.socialMedia});
+  const CompanySocialLinks({required this.socialMedia, super.key});
   final List<SocialMediaModel> socialMedia;
 
   @override
@@ -43,7 +43,7 @@ class _CompanySocialLinksState extends State<CompanySocialLinks> {
         Expanded(
           child: FadeInLeft(
             from: 400,
-            delay: Duration(milliseconds: 240),
+            delay: const Duration(milliseconds: 240),
             child: LinkIcon(
               image: 'assets/images/facebook.png',
               socialMedia: widget.socialMedia,
@@ -55,7 +55,7 @@ class _CompanySocialLinksState extends State<CompanySocialLinks> {
         Expanded(
           child: FadeInLeft(
             from: 400,
-            delay: Duration(milliseconds: 160),
+            delay: const Duration(milliseconds: 160),
             child: LinkIcon(
               image: 'assets/images/linkedin.png',
               socialMedia: widget.socialMedia,
@@ -67,7 +67,7 @@ class _CompanySocialLinksState extends State<CompanySocialLinks> {
         Expanded(
           child: FadeInLeft(
             from: 400,
-            delay: Duration(milliseconds: 80),
+            delay: const Duration(milliseconds: 80),
             child: LinkIcon(
               image: 'assets/images/github.png',
               socialMedia: widget.socialMedia,

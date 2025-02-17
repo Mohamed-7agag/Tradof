@@ -19,10 +19,10 @@ import '../widgets/update_project_language_pair.dart';
 
 class ProjectDetailsView extends StatefulWidget {
   const ProjectDetailsView({
-    super.key,
     required this.companyModel,
     required this.projectModel,
     required this.specialization,
+    super.key,
   });
   final CompanyModel companyModel;
   final ProjectModel projectModel;
@@ -141,7 +141,7 @@ class _ProjectDetailsViewState extends State<ProjectDetailsView> {
                   style: AppStyle.poppinsMedium14,
                 ),
                 verticalSpace(12),
-                AttachmentFilesSection(),
+                const AttachmentFilesSection(),
                 verticalSpace(60),
                 UpdateProjectButton(
                   projectNameController: projectNameController,

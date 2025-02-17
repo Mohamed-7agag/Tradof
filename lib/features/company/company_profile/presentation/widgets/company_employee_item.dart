@@ -7,13 +7,13 @@ import 'package:tradof/core/theming/app_style.dart';
 import '../../data/model/company_employee_model.dart';
 
 class CompanyEmployeeItem extends StatelessWidget {
-  const CompanyEmployeeItem({super.key, required this.employeeModel});
+  const CompanyEmployeeItem({required this.employeeModel, super.key});
   final CompanyEmployeeModel employeeModel;
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 14),
-      margin: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 14),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.cardColor,
         borderRadius: BorderRadius.circular(16),
@@ -24,7 +24,7 @@ class CompanyEmployeeItem extends StatelessWidget {
           ListTile(
             contentPadding: EdgeInsets.zero,
             horizontalTitleGap: 10,
-            leading: HugeIcon(
+            leading: const HugeIcon(
               icon: HugeIcons.strokeRoundedUserStory,
               color: AppColors.primary,
               size: 45,
@@ -41,7 +41,7 @@ class CompanyEmployeeItem extends StatelessWidget {
           verticalSpace(10),
           Row(
             children: [
-              HugeIcon(
+              const HugeIcon(
                 icon: HugeIcons.strokeRoundedJobLink,
                 color: AppColors.primary,
                 size: 21,
@@ -53,7 +53,7 @@ class CompanyEmployeeItem extends StatelessWidget {
           verticalSpace(10),
           Row(
             children: [
-              HugeIcon(
+              const HugeIcon(
                 icon: HugeIcons.strokeRoundedCall,
                 color: AppColors.primary,
                 size: 21,
@@ -65,7 +65,7 @@ class CompanyEmployeeItem extends StatelessWidget {
           verticalSpace(10),
           Row(
             children: [
-              HugeIcon(
+              const HugeIcon(
                 icon: HugeIcons.strokeRoundedUserMultiple,
                 color: AppColors.primary,
                 size: 21,
@@ -77,7 +77,7 @@ class CompanyEmployeeItem extends StatelessWidget {
           verticalSpace(10),
           Row(
             children: [
-              HugeIcon(
+              const HugeIcon(
                 icon: HugeIcons.strokeRoundedCity01,
                 color: AppColors.primary,
                 size: 21,

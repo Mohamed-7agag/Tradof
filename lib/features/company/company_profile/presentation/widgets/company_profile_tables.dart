@@ -6,7 +6,7 @@ import 'industries_served.dart';
 import 'preferred_language.dart';
 
 class CompanyProfileTables extends StatelessWidget {
-  const CompanyProfileTables({super.key, required this.companyModel});
+  const CompanyProfileTables({required this.companyModel, super.key});
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {

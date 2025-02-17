@@ -26,7 +26,7 @@ class SelectAccountTypeSection extends StatelessWidget {
                 .copyWith(color: AppColors.darkGrey),
           ),
           verticalSpace(22),
-          AccountTypesSection()
+          const AccountTypesSection()
         ],
       ),
     );

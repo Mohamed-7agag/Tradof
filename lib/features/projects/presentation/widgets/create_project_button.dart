@@ -9,12 +9,12 @@ import '../logic/project_cubit/project_cubit.dart';
 
 class CreateProjectButton extends StatelessWidget {
   const CreateProjectButton({
-    super.key,
     required this.projectNameController,
     required this.projectDescriptionController,
     required this.minBudgetController,
     required this.maxBudgetController,
     required this.daysController,
+    super.key,
   });
   final TextEditingController projectNameController;
   final TextEditingController projectDescriptionController;

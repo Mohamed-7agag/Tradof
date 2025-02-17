@@ -9,7 +9,7 @@ class ProjectItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         color: AppColors.cardColor,
@@ -20,8 +20,8 @@ class ProjectItem extends StatelessWidget {
           ListTile(
             contentPadding: EdgeInsets.zero,
             horizontalTitleGap: 10,
-            leading:
-                CircleAvatar(radius: 22, backgroundColor: AppColors.primary),
+            leading: const CircleAvatar(
+                radius: 22, backgroundColor: AppColors.primary),
             title: Text('Yousef Ghareb', style: AppStyle.robotoRegular14),
             subtitle: Text('Job Title', style: AppStyle.robotoRegular12),
             trailing: Text(

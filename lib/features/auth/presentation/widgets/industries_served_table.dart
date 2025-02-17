@@ -31,7 +31,7 @@ class IndustriesServedTable extends StatelessWidget {
               onTap: () {
                 _showIndusteriesServedDialog(context);
               },
-              child: HugeIcon(
+              child: const HugeIcon(
                 icon: HugeIcons.strokeRoundedAddSquare,
                 color: AppColors.lightOrange,
                 size: 27,
@@ -70,7 +70,7 @@ class IndustriesServedTable extends StatelessWidget {
                                     .read<TablesCubit>()
                                     .removeIndustryServed(industriesServed);
                               },
-                              child: HugeIcon(
+                              child: const HugeIcon(
                                 icon:
                                     HugeIcons.strokeRoundedCancelCircleHalfDot,
                                 color: Colors.red,
@@ -151,7 +151,7 @@ class IndustriesServedTable extends StatelessWidget {
                   return ListView.separated(
                     itemCount: state.specializations.length,
                     separatorBuilder: (BuildContext context, int index) =>
-                        Divider(color: Colors.white10, height: 0),
+                        const Divider(color: Colors.white10, height: 0),
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         contentPadding: EdgeInsets.zero,

@@ -25,7 +25,6 @@ class FreelancerModel {
     required this.profileImageUrl,
     required this.countryName,
     required this.countryId,
-    this.cvFilePath,
     required this.email,
     required this.phone,
     required this.ratingSum,
@@ -33,6 +32,7 @@ class FreelancerModel {
     required this.languagePairs,
     required this.specializations,
     required this.socialMedias,
+    this.cvFilePath,
   });
 
   factory FreelancerModel.fromJson(Map<String, dynamic> json) =>

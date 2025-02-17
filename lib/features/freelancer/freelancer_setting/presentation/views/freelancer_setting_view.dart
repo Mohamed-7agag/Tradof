@@ -13,7 +13,7 @@ import '../widgets/freelancer_setting_section1.dart';
 import '../widgets/freelancer_setting_section2.dart';
 
 class FreelancerSettingView extends StatelessWidget {
-  const FreelancerSettingView({super.key, required this.freelancerModel});
+  const FreelancerSettingView({required this.freelancerModel, super.key});
   final FreelancerModel freelancerModel;
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class FreelancerSettingView extends StatelessWidget {
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 120),
+                    delay: const Duration(milliseconds: 120),
                     child: FreelancerSettingsSection1(
                       freelancerModel: freelancerModel,
                     ),
@@ -47,13 +47,13 @@ class FreelancerSettingView extends StatelessWidget {
                   verticalSpace(20),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 240),
-                    child: FreelancerSettingSection2(),
+                    delay: const Duration(milliseconds: 240),
+                    child: const FreelancerSettingSection2(),
                   ),
                   verticalSpace(26),
-                  SubscriptionPlanAndTimer(),
+                  const SubscriptionPlanAndTimer(),
                   verticalSpace(20),
-                  DeleteAccountAndLogoutSection(),
+                  const DeleteAccountAndLogoutSection(),
                   verticalSpace(100),
                 ],
               ),

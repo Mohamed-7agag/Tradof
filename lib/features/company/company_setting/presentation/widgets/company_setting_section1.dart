@@ -10,7 +10,7 @@ import 'package:tradof/features/company/company_profile/presentation/logic/compa
 import 'package:tradof/features/company/company_setting/presentation/widgets/setting_item.dart';
 
 class CompanySettingsSection1 extends StatelessWidget {
-  const CompanySettingsSection1({super.key, required this.companyModel});
+  const CompanySettingsSection1({required this.companyModel, super.key});
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class CompanySettingsSection1 extends StatelessWidget {
         children: [
           SettingItem(
             title: 'Personal info',
-            icon: HugeIcon(
+            icon: const HugeIcon(
               icon: HugeIcons.strokeRoundedUserAccount,
               color: Colors.green,
               size: 26,
@@ -39,19 +39,19 @@ class CompanySettingsSection1 extends StatelessWidget {
               }
             },
           ),
-          Divider(color: AppColors.cardDarkColor),
+          const Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Notification',
-            icon: HugeIcon(
+            icon: const HugeIcon(
               icon: HugeIcons.strokeRoundedNotification03,
               color: AppColors.primary,
             ),
             onTap: () {},
           ),
-          Divider(color: AppColors.cardDarkColor),
+          const Divider(color: AppColors.cardDarkColor),
           SettingItem(
             title: 'Clander',
-            icon: HugeIcon(
+            icon: const HugeIcon(
               icon: HugeIcons.strokeRoundedCalendar02,
               color: Colors.amber,
             ),

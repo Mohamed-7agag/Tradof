@@ -31,7 +31,7 @@ class LanguagePairTable extends StatelessWidget {
               onTap: () {
                 showLanguagePairDialog(context);
               },
-              child: HugeIcon(
+              child: const HugeIcon(
                 icon: HugeIcons.strokeRoundedAddSquare,
                 color: AppColors.lightOrange,
                 size: 27,
@@ -79,7 +79,7 @@ class LanguagePairTable extends StatelessWidget {
                                     .read<TablesCubit>()
                                     .removeLanguagePair(language);
                               },
-                              child: HugeIcon(
+                              child: const HugeIcon(
                                 icon:
                                     HugeIcons.strokeRoundedCancelCircleHalfDot,
                                 color: Colors.red,

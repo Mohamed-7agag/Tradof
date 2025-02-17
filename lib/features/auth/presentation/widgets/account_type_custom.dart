@@ -5,11 +5,11 @@ import 'package:tradof/core/theming/app_style.dart';
 
 class AccountTypeCustom extends StatelessWidget {
   const AccountTypeCustom({
-    super.key,
     required this.image,
     required this.title,
     required this.description,
     required this.onTap,
+    super.key,
   });
   final String image;
   final String title;

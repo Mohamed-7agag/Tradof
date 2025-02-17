@@ -32,7 +32,7 @@ class DioFactory {
     }
   }
 
-  static void addDioHeaders() async {
+  static Future<void> addDioHeaders() async {
     final userToken = await CacheHelper.getSecuredString(AppConstants.token);
     dio?.options.headers = {'Authorization': 'Bearer $userToken'};
   }

@@ -1,7 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
-
 import '../../../../../core/helpers/spacing.dart';
 import 'subscription_plan.dart';
 import 'timer.dart';
@@ -18,8 +17,8 @@ class SubscriptionPlanAndTimer extends StatelessWidget {
             flex: 5,
             child: SlideInLeft(
               from: 400,
-              delay: Duration(milliseconds: 360),
-              child: Subscriptionplan(),
+              delay: const Duration(milliseconds: 360),
+              child: const Subscriptionplan(),
             ),
           ),
           horizontalSpace(10),
@@ -27,8 +26,8 @@ class SubscriptionPlanAndTimer extends StatelessWidget {
             flex: 3,
             child: SlideInRight(
               from: 400,
-              delay: Duration(milliseconds: 360),
-              child: TimerOFdays(),
+              delay: const Duration(milliseconds: 360),
+              child: const TimerOFdays(),
             ),
           ),
         ],

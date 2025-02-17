@@ -9,7 +9,7 @@ import 'package:tradof/features/auth/presentation/widgets/select_account_type_se
 import '../widgets/privacy_policy_check_box.dart';
 
 class SelectAccountTypeView extends StatefulWidget {
-  const SelectAccountTypeView({super.key, required this.pageController});
+  const SelectAccountTypeView({required this.pageController, super.key});
   final PageController pageController;
 
   @override
@@ -25,15 +25,14 @@ class _SelectAccountTypeViewState extends State<SelectAccountTypeView> {
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
-          CreateAccountContainerCurve(),
+          const CreateAccountContainerCurve(),
           Positioned(
             top: 210.h,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SlideInLeft(
                   from: 400,
-                  child: SelectAccountTypeSection(),
+                  child: const SelectAccountTypeSection(),
                 ),
                 SizedBox(
                   width: 1.sw,

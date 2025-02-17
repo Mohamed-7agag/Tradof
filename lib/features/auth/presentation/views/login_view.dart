@@ -19,14 +19,14 @@ class LoginView extends StatelessWidget {
             hasScrollBody: false,
             child: Column(
               children: [
-                SlideInDown(from: 200, child: AuthShape()),
+                SlideInDown(from: 200, child: const AuthShape()),
                 SlideInDown(
                   child: Text('Login', style: AppStyle.robotoExtraBold32),
                 ),
                 verticalSpace(25),
-                LoginForm(),
-                Spacer(),
-                HaveNotAccountSection(),
+                const LoginForm(),
+                const Spacer(),
+                const HaveNotAccountSection(),
                 verticalSpace(16),
               ],
             ),

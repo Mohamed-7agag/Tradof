@@ -15,9 +15,9 @@ import '../widgets/update_freelancer_profile_tables_button.dart';
 
 class UpdateFreelancerProfileTablesView extends StatelessWidget {
   const UpdateFreelancerProfileTablesView({
-    super.key,
     required this.freelancerModel,
     required this.isLanguagePair,
+    super.key,
   });
   final FreelancerModel freelancerModel;
   final bool isLanguagePair;
@@ -39,11 +39,11 @@ class UpdateFreelancerProfileTablesView extends StatelessWidget {
               isLanguagePair
                   ? SlideInRight(
                       from: 400,
-                      child: LanguagePairTable(darkColors: true),
+                      child: const LanguagePairTable(darkColors: true),
                     )
                   : SlideInRight(
                       from: 400,
-                      child: SpecializationTable(darkColors: true),
+                      child: const SpecializationTable(darkColors: true),
                     ),
               verticalSpace(50),
               BlocProvider(

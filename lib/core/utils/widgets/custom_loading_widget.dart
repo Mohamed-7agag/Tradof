@@ -11,7 +11,6 @@ class CustomLoadingWidget extends StatelessWidget {
     return Center(
       child: SpinKitCircle(
         color: color ?? AppColors.primary,
-        size: 50.0,
       ),
     );
   }

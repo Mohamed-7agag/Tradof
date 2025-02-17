@@ -10,11 +10,11 @@ import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class AddUpdateSocialMediaButton extends StatelessWidget {
   const AddUpdateSocialMediaButton({
-    super.key,
     required this.facebookController,
     required this.linkedinController,
     required this.gmailController,
     required this.githubController,
+    super.key,
   });
 
   final TextEditingController facebookController;
@@ -37,7 +37,7 @@ class AddUpdateSocialMediaButton extends StatelessWidget {
       },
       builder: (context, state) {
         return state.status.isAddUpdateSocialMediaLoading
-            ? CustomLoadingWidget()
+            ? const CustomLoadingWidget()
             : CustomButton(
                 text: 'Save',
                 onPressed: () {

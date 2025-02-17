@@ -9,9 +9,9 @@ import '../../../../core/utils/widgets/custom_toastification.dart';
 
 class ForgetPasswordButton extends StatelessWidget {
   const ForgetPasswordButton({
-    super.key,
     required this.emailController,
     required this.pageController,
+    super.key,
   });
   final TextEditingController emailController;
   final PageController pageController;
@@ -22,7 +22,7 @@ class ForgetPasswordButton extends StatelessWidget {
         if (state.status.isForgotPassword) {
           successToast(context, 'Success', state.message);
           pageController.nextPage(
-            duration: Duration(milliseconds: 350),
+            duration: const Duration(milliseconds: 350),
             curve: Curves.easeInOut,
           );
         } else if (state.status.isError) {

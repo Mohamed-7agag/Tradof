@@ -7,11 +7,11 @@ loadingDialog(BuildContext context, {Color? dialogBackgroundColor}) {
   return AwesomeDialog(
     context: context,
     animType: AnimType.rightSlide,
-    body: CustomLoadingWidget(),
+    body: const CustomLoadingWidget(),
     dialogType: DialogType.noHeader,
     dialogBorderRadius: BorderRadius.circular(16),
     width: 180,
-    padding: EdgeInsets.symmetric(vertical: 20),
+    padding: const EdgeInsets.symmetric(vertical: 20),
     dialogBackgroundColor: dialogBackgroundColor,
     dismissOnTouchOutside: false,
     dismissOnBackKeyPress: false,

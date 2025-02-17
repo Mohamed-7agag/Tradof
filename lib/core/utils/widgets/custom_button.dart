@@ -6,9 +6,9 @@ import '../../theming/app_style.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
-    super.key,
     required this.text,
     required this.onPressed,
+    super.key,
     this.color,
     this.width,
     this.height,
@@ -25,7 +25,8 @@ class CustomButton extends StatelessWidget {
       style: _buttonStyle(),
       child: FittedBox(
         fit: BoxFit.scaleDown,
-        child: Text(text, style: AppStyle.poppinsMedium14.copyWith(fontSize: 15.sp)),
+        child: Text(text,
+            style: AppStyle.poppinsMedium14.copyWith(fontSize: 15.sp)),
       ),
     );
   }

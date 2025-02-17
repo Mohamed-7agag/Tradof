@@ -13,13 +13,13 @@ import '../logic/project_cubit/project_cubit.dart';
 
 class UpdateProjectButton extends StatelessWidget {
   const UpdateProjectButton({
-    super.key,
     required this.projectNameController,
     required this.projectDescriptionController,
     required this.minBudgetController,
     required this.maxBudgetController,
     required this.daysController,
     required this.projectModel,
+    super.key,
   });
   final TextEditingController projectNameController;
   final TextEditingController projectDescriptionController;
@@ -65,7 +65,6 @@ class UpdateProjectButton extends StatelessWidget {
     log(context.read<ProjectCubit>().state.fromLanguage.toString());
     log(context.read<ProjectCubit>().state.toLanguage.toString());
 
-    
     final days = daysController.text.trim() == ''
         ? 0
         : int.parse(daysController.text.trim());

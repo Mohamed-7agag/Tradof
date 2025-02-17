@@ -89,7 +89,7 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
   }) async {
     String? imageUrl;
     if (state.imagePicked != null) {
-      imageUrl = await uploadImageToCloudinary(state.imagePicked!);
+      imageUrl = await uploadImageToCloudinary(state.imagePicked);
     }
 
     return UpdateCompanyRequestModel(

@@ -7,7 +7,7 @@ import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 
 class CompanySwitcherWidget extends StatefulWidget {
-  const CompanySwitcherWidget({super.key, required this.onSwitch});
+  const CompanySwitcherWidget({required this.onSwitch, super.key});
   final void Function(int index) onSwitch;
   @override
   State<CompanySwitcherWidget> createState() => _CompanySwitcherWidgetState();
@@ -18,11 +18,11 @@ class _CompanySwitcherWidgetState extends State<CompanySwitcherWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 13),
+      padding: const EdgeInsets.symmetric(vertical: 13),
       width: 0.85.sw,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: AppColors.grey,
             blurRadius: 0.25,

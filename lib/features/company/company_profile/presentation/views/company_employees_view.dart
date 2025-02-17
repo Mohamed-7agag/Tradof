@@ -25,7 +25,7 @@ class CompanyEmployeesView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
-        child: HugeIcon(
+        child: const HugeIcon(
           icon: HugeIcons.strokeRoundedUserAdd01,
           color: AppColors.white,
           size: 26,
@@ -51,7 +51,7 @@ class CompanyEmployeesView extends StatelessWidget {
             if (state.status.isGetCompanyEmployeesSuccess) {
               return ListView.builder(
                 itemCount: state.companyEmployees.length,
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 itemBuilder: (BuildContext context, int index) {
                   return CompanyEmployeeItem(
                     employeeModel: state.companyEmployees[
@@ -62,7 +62,7 @@ class CompanyEmployeesView extends StatelessWidget {
             } else if (state.status.isGetCompanyEmployeesFailure) {
               return CustomFailureWidget(text: state.errorMessage);
             }
-            return CustomLoadingWidget();
+            return const CustomLoadingWidget();
           },
         ),
       ),

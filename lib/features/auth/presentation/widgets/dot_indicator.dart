@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class DotIndicator extends StatelessWidget {
   const DotIndicator({
-    super.key,
     required this.currentPage,
     required this.activeColor,
     required this.inActiveColor,
+    super.key,
   });
   final int currentPage;
   final Color activeColor, inActiveColor;
@@ -15,7 +15,7 @@ class DotIndicator extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(3, (index) {
         return Container(
-          margin: EdgeInsets.symmetric(horizontal: 4),
+          margin: const EdgeInsets.symmetric(horizontal: 4),
           width: 32,
           height: 4,
           decoration: BoxDecoration(

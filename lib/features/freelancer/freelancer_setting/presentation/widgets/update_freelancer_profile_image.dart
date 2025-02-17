@@ -54,10 +54,8 @@ class _UpdateFreelancerProfileImageState
           child: SlideInRight(
             from: 400,
             child: IconButton(
-              onPressed: () {
-                _pickImageFromGallery();
-              },
-              icon: HugeIcon(
+              onPressed: _pickImageFromGallery,
+              icon: const HugeIcon(
                 icon: HugeIcons.strokeRoundedCamera01,
                 color: AppColors.lightOrange,
                 size: 22,

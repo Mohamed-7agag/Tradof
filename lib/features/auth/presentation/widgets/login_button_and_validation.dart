@@ -13,10 +13,10 @@ import '../logic/auth_cubit/auth_cubit.dart';
 
 class LoginButtonAndValidation extends StatelessWidget {
   const LoginButtonAndValidation({
-    super.key,
     required this.emailController,
     required this.passwordController,
     required this.formKey,
+    super.key,
   });
   final TextEditingController emailController;
   final TextEditingController passwordController;

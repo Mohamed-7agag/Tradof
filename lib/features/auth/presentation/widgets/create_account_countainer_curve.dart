@@ -13,20 +13,20 @@ class CreateAccountContainerCurve extends StatelessWidget {
         alignment: Alignment.center,
         height: 325.h,
         width: 1.sw,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.background,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(flex: 3),
+            const Spacer(flex: 3),
             Text(
               'Create Account',
               style: AppStyle.poppinsBold22.copyWith(
                 color: AppColors.primary,
               ),
             ),
-            Spacer(flex: 4),
+            const Spacer(flex: 4),
           ],
         ),
       ),

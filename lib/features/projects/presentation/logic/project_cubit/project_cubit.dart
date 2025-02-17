@@ -14,7 +14,7 @@ import '../../../data/repo/project_repo.dart';
 part 'project_state.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
-  ProjectCubit(this._projectRepo) : super(ProjectState());
+  ProjectCubit(this._projectRepo) : super(const ProjectState());
   final ProjectRepo _projectRepo;
 
   //! create project
@@ -94,9 +94,6 @@ class ProjectCubit extends Cubit<ProjectState> {
       await _projectRepo.updateProject(model);
       emit(state.copyWith(
         status: ProjectStatus.updateProjectSuccess,
-        industryId: null,
-        fromLanguage: null,
-        toLanguage: null,
         message: 'Project Updated Successfully',
       ));
     } catch (e) {

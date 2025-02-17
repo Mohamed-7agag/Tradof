@@ -9,7 +9,7 @@ import '../../../../../core/theming/app_style.dart';
 import '../../../freelancer_profile/data/model/freelancer_model.dart';
 
 class FreelancerProfileSection extends StatelessWidget {
-  const FreelancerProfileSection({super.key, required this.freelancerModel});
+  const FreelancerProfileSection({required this.freelancerModel, super.key});
   final FreelancerModel freelancerModel;
   @override
   Widget build(BuildContext context) {
@@ -33,12 +33,12 @@ class FreelancerProfileSection extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          HugeIcon(
+          const HugeIcon(
             icon: HugeIcons.strokeRoundedNotification03,
             color: AppColors.white,
           ),
           horizontalSpace(18),
-          HugeIcon(
+          const HugeIcon(
             icon: HugeIcons.strokeRoundedCalendar02,
             color: AppColors.white,
           ),

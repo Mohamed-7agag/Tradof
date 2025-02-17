@@ -10,14 +10,14 @@ import '../../data/model/company_model.dart';
 import 'user_image_and_info.dart';
 
 class CompanyProfileAppbar extends StatelessWidget {
-  const CompanyProfileAppbar({super.key, required this.companyModel});
+  const CompanyProfileAppbar({required this.companyModel, super.key});
 
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      decoration: BoxDecoration(color: AppColors.primary),
+      decoration: const BoxDecoration(color: AppColors.primary),
       child: SafeArea(
         child: Column(
           children: [

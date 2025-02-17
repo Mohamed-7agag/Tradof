@@ -11,7 +11,7 @@ import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart
 import '../../../company_profile/data/model/company_model.dart';
 
 class UpcomingProjectsSection extends StatelessWidget {
-  const UpcomingProjectsSection({super.key, required this.companyModel});
+  const UpcomingProjectsSection({required this.companyModel, super.key});
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {
@@ -42,9 +42,9 @@ class UpcomingProjectsSection extends StatelessWidget {
 
 class BuildUpcomingProjects extends StatelessWidget {
   const BuildUpcomingProjects({
-    super.key,
     required this.companyModel,
     required this.projects,
+    super.key,
   });
 
   final CompanyModel companyModel;
@@ -56,7 +56,7 @@ class BuildUpcomingProjects extends StatelessWidget {
         ? const CustomFailureWidget(text: 'No Projects Found')
         : ListView.builder(
             physics: const BouncingScrollPhysics(),
-            padding: EdgeInsets.only(top: 40, bottom: 100),
+            padding: const EdgeInsets.only(top: 40, bottom: 100),
             itemCount: projects.length,
             itemBuilder: (BuildContext context, int index) {
               return UpcomingProjectItem(

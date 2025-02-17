@@ -47,29 +47,29 @@ class _FreelancerRegisterViewState extends State<FreelancerRegisterView> {
         },
         child: Column(
           children: [
-            CreateAccountCurveWithImage(),
+            const CreateAccountCurveWithImage(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 children: [
-                  CountryDropDownSection(),
+                  const CountryDropDownSection(),
                   verticalSpace(28),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 125),
-                    child: LanguagePairTable(),
+                    delay: const Duration(milliseconds: 125),
+                    child: const LanguagePairTable(),
                   ),
                   verticalSpace(28),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 250),
-                    child: SpecializationTable(),
+                    delay: const Duration(milliseconds: 250),
+                    child: const SpecializationTable(),
                   ),
                   verticalSpace(42),
                   SlideInUp(
                     from: 400,
-                    delay: Duration(milliseconds: 375),
-                    child: FreelancerRegisterationButton(),
+                    delay: const Duration(milliseconds: 375),
+                    child: const FreelancerRegisterationButton(),
                   ),
                   verticalSpace(20),
                 ],

@@ -12,7 +12,7 @@ import '../../../../../core/routing/routes.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class IndustriesServed extends StatelessWidget {
-  const IndustriesServed({super.key, required this.companyModel});
+  const IndustriesServed({required this.companyModel, super.key});
 
   final CompanyModel companyModel;
 
@@ -40,7 +40,7 @@ class IndustriesServed extends StatelessWidget {
                   context.read<CompanyProfileCubit>().getCompanyProfile();
                 }
               },
-              child: HugeIcon(
+              child: const HugeIcon(
                 icon: HugeIcons.strokeRoundedPencilEdit02,
                 color: AppColors.lightOrange,
                 size: 27,

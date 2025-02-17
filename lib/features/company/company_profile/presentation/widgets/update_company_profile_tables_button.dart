@@ -13,9 +13,9 @@ import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class UpdateCompanyProfileTablesButton extends StatelessWidget {
   const UpdateCompanyProfileTablesButton({
-    super.key,
     required this.companyModel,
     required this.isPreferedLanguages,
+    super.key,
   });
   final CompanyModel companyModel;
   final bool isPreferedLanguages;
@@ -44,7 +44,7 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
           builder: (context, tablesState) {
             return (state.status.isPreferedLanguagesLoading ||
                     state.status.isIndustriesServedLoading)
-                ? CustomLoadingWidget()
+                ? const CustomLoadingWidget()
                 : CustomButton(
                     text: 'Update',
                     onPressed: () {

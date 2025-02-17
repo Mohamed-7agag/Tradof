@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../theming/app_style.dart';
 
 class CustomFailureWidget extends StatelessWidget {
-  const CustomFailureWidget({super.key, required this.text, this.textColor});
+  const CustomFailureWidget({required this.text, super.key, this.textColor});
   final String text;
   final Color? textColor;
   @override

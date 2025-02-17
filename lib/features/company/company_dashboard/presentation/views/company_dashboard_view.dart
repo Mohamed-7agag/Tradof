@@ -7,7 +7,7 @@ import '../widgets/company_dashboard_stack.dart';
 import '../widgets/company_profile_section.dart';
 
 class CompanyDashboardView extends StatelessWidget {
-  const CompanyDashboardView({super.key, required this.companyModel});
+  const CompanyDashboardView({required this.companyModel, super.key});
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {

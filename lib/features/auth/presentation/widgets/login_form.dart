@@ -45,7 +45,7 @@ class _LoginFormState extends State<LoginForm> {
           children: [
             SlideInRight(
               from: 400,
-              delay: Duration(milliseconds: 150),
+              delay: const Duration(milliseconds: 150),
               child: CustomTextField(
                 labelText: 'Email',
                 controller: emailController,
@@ -55,7 +55,7 @@ class _LoginFormState extends State<LoginForm> {
             verticalSpace(12),
             SlideInRight(
               from: 400,
-              delay: Duration(milliseconds: 350),
+              delay: const Duration(milliseconds: 350),
               child: CustomTextField(
                 labelText: 'Password',
                 controller: passwordController,
@@ -77,7 +77,7 @@ class _LoginFormState extends State<LoginForm> {
             verticalSpace(50),
             SlideInUp(
               from: 400,
-              delay: Duration(milliseconds: 500),
+              delay: const Duration(milliseconds: 500),
               child: LoginButtonAndValidation(
                 formKey: formKey,
                 emailController: emailController,

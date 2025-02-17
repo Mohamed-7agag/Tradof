@@ -11,7 +11,7 @@ import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
 class DeleteProjectSection extends StatelessWidget {
-  const DeleteProjectSection({super.key, required this.projectId});
+  const DeleteProjectSection({required this.projectId, super.key});
   final int projectId;
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class DeleteProjectSection extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Colors.red.withValues(alpha:0.15),
+            color: Colors.red.withValues(alpha: 0.15),
           ),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -47,7 +47,8 @@ class DeleteProjectSection extends StatelessWidget {
               'Delete Project',
               style: AppStyle.poppinsSemiBold14.copyWith(color: Colors.red),
             ),
-            HugeIcon(icon: HugeIcons.strokeRoundedDelete02, color: Colors.red)
+            const HugeIcon(
+                icon: HugeIcons.strokeRoundedDelete02, color: Colors.red)
           ]),
         ),
       ),

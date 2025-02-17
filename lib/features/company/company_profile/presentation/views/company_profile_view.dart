@@ -10,7 +10,7 @@ import '../widgets/company_rating_and_reviews.dart';
 import '../widgets/company_social_links.dart';
 
 class CompanyProfileView extends StatelessWidget {
-  const CompanyProfileView({super.key, required this.companyModel});
+  const CompanyProfileView({required this.companyModel, super.key});
   final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {

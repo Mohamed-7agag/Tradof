@@ -5,9 +5,9 @@ import '../../theming/app_style.dart';
 
 class CustomDropDownWidget extends StatelessWidget {
   const CustomDropDownWidget({
-    super.key,
     required this.hint,
     required this.items,
+    super.key,
     this.value,
     this.onChanged,
     this.borderColor = AppColors.grey,

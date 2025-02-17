@@ -6,7 +6,7 @@ import '../../data/model/social_media_model.dart';
 import '../widgets/build_add_update_social_media.dart';
 
 class AddUpdateSocialMediaView extends StatelessWidget {
-  const AddUpdateSocialMediaView({super.key, required this.socialMedia});
+  const AddUpdateSocialMediaView({required this.socialMedia, super.key});
   final List<SocialMediaModel> socialMedia;
   @override
   Widget build(BuildContext context) {

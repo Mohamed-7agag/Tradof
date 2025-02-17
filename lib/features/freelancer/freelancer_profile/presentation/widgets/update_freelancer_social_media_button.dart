@@ -10,11 +10,11 @@ import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
 class UpdateFreelancerSocialMediaButton extends StatelessWidget {
   const UpdateFreelancerSocialMediaButton({
-    super.key,
     required this.facebookController,
     required this.linkedinController,
     required this.gmailController,
     required this.githubController,
+    super.key,
   });
 
   final TextEditingController facebookController;
@@ -37,7 +37,7 @@ class UpdateFreelancerSocialMediaButton extends StatelessWidget {
       },
       builder: (context, state) {
         return state.status.isUpdateSocialMediaLoading
-            ? CustomLoadingWidget()
+            ? const CustomLoadingWidget()
             : CustomButton(
                 text: 'Save',
                 onPressed: () {

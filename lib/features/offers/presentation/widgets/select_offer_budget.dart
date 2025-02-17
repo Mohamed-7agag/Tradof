@@ -32,10 +32,9 @@ class _SelectOfferBudgetState extends State<SelectOfferBudget> {
             inactiveTrackColor: Colors.black12,
             thumbColor: AppColors.lightOrange,
             year2023: false,
-            thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.0),
+            thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8.0),
           ),
           child: Slider(
-            min: 0,
             max: 5000,
             divisions: 200,
             value: selectedBudget,
@@ -56,7 +55,8 @@ class _SelectOfferBudgetState extends State<SelectOfferBudget> {
                 color: AppColors.darkGrey,
               ),
             ),
-            Text("${selectedBudget.toInt()}\$", style: AppStyle.poppinsMedium14),
+            Text("${selectedBudget.toInt()}\$",
+                style: AppStyle.poppinsMedium14),
             Text(
               "5000\$",
               style: AppStyle.robotoRegular12.copyWith(

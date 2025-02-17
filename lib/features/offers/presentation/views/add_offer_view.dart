@@ -65,14 +65,14 @@ class _AddOfferViewState extends State<AddOfferView> {
                     keyboardType: TextInputType.number,
                   ),
                   verticalSpace(25),
-                  SelectOfferBudget(),
+                  const SelectOfferBudget(),
                   verticalSpace(35),
                   Text(
                     "Attachments Files",
                     style: AppStyle.poppinsMedium14,
                   ),
                   verticalSpace(12),
-                  AttachmentFilesSection(),
+                  const AttachmentFilesSection(),
                   verticalSpace(60),
                   CreateOfferButton(
                     offerDetailsController: offerDetailsController,

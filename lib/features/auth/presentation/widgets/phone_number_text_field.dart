@@ -8,9 +8,9 @@ import '../../../../core/theming/app_style.dart';
 
 class PhoneNumberTextField extends StatelessWidget {
   const PhoneNumberTextField({
-    super.key,
     required this.labelText,
     required this.controller,
+    super.key,
     this.borderColor,
     this.labelBehavior = false,
     this.outlineBorder = false,
@@ -26,7 +26,7 @@ class PhoneNumberTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntlPhoneField(
       cursorColor: borderColor ?? AppColors.white,
-      cursorRadius: Radius.circular(10),
+      cursorRadius: const Radius.circular(10),
       controller: controller,
       initialCountryCode: 'EG',
       dropdownTextStyle: TextStyle(color: borderColor ?? AppColors.white),
@@ -34,7 +34,7 @@ class PhoneNumberTextField extends StatelessWidget {
           Icon(Icons.arrow_drop_down, color: borderColor ?? AppColors.white),
       pickerDialogStyle: PickerDialogStyle(
         searchFieldCursorColor: AppColors.primary,
-        listTileDivider: Divider(height: 0),
+        listTileDivider: const Divider(height: 0),
       ),
       style: AppStyle.robotoRegular15
           .copyWith(color: borderColor ?? AppColors.white),
@@ -56,7 +56,7 @@ class PhoneNumberTextField extends StatelessWidget {
           style: AppStyle.robotoRegular14
               .copyWith(color: borderColor ?? AppColors.white),
         ),
-        floatingLabelStyle: TextStyle(color: AppColors.primary),
+        floatingLabelStyle: const TextStyle(color: AppColors.primary),
         floatingLabelBehavior: labelBehavior == true
             ? FloatingLabelBehavior.never
             : FloatingLabelBehavior.auto,

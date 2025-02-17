@@ -63,7 +63,7 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
         },
         child: Column(
           children: [
-            CreateAccountCurveWithImage(),
+            const CreateAccountCurveWithImage(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
@@ -81,7 +81,7 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
                   verticalSpace(12),
                   SlideInRight(
                     from: 400,
-                    delay: Duration(milliseconds: 125),
+                    delay: const Duration(milliseconds: 125),
                     child: CustomTextField(
                       labelText: 'Company Name',
                       labelColor: AppColors.white,
@@ -91,11 +91,11 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
                     ),
                   ),
                   verticalSpace(12),
-                  CountryDropDownSection(),
+                  const CountryDropDownSection(),
                   verticalSpace(12),
                   SlideInRight(
                     from: 400,
-                    delay: Duration(milliseconds: 375),
+                    delay: const Duration(milliseconds: 375),
                     child: CustomTextField(
                       labelText: 'Location Company',
                       labelColor: AppColors.white,
@@ -107,19 +107,19 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
                   verticalSpace(28),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 500),
-                    child: PreferedLanguagesTable(),
+                    delay: const Duration(milliseconds: 500),
+                    child: const PreferedLanguagesTable(),
                   ),
                   verticalSpace(28),
                   SlideInLeft(
                     from: 400,
-                    delay: Duration(milliseconds: 625),
-                    child: IndustriesServedTable(),
+                    delay: const Duration(milliseconds: 625),
+                    child: const IndustriesServedTable(),
                   ),
                   verticalSpace(40),
                   SlideInUp(
                     from: 400,
-                    delay: Duration(milliseconds: 750),
+                    delay: const Duration(milliseconds: 750),
                     child: CompanyRegisterationButton(
                       jobTitleController: jobTitleController,
                       locationCompanyController: locationCompanyController,

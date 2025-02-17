@@ -13,7 +13,7 @@ import '../logic/registeration_cubit/registeration_cubit.dart';
 import 'phone_number_text_field.dart';
 
 class RegisterForm extends StatefulWidget {
-  const RegisterForm({super.key, required this.pageController});
+  const RegisterForm({required this.pageController, super.key});
   final PageController pageController;
 
   @override
@@ -73,7 +73,7 @@ class _RegisterFormState extends State<RegisterForm> {
               verticalSpace(12),
               SlideInRight(
                 from: 400,
-                delay: Duration(milliseconds: 100),
+                delay: const Duration(milliseconds: 100),
                 child: CustomTextField(
                   labelText: 'Last Name',
                   labelColor: AppColors.white,
@@ -84,7 +84,7 @@ class _RegisterFormState extends State<RegisterForm> {
               verticalSpace(12),
               SlideInRight(
                 from: 400,
-                delay: Duration(milliseconds: 200),
+                delay: const Duration(milliseconds: 200),
                 child: CustomTextField(
                   labelText: 'Email',
                   labelColor: AppColors.white,
@@ -95,7 +95,7 @@ class _RegisterFormState extends State<RegisterForm> {
               verticalSpace(12),
               SlideInRight(
                 from: 400,
-                delay: Duration(milliseconds: 300),
+                delay: const Duration(milliseconds: 300),
                 child: PhoneNumberTextField(
                   labelText: 'Phone Number',
                   controller: phoneNumberController,
@@ -104,7 +104,7 @@ class _RegisterFormState extends State<RegisterForm> {
               verticalSpace(2),
               SlideInRight(
                 from: 400,
-                delay: Duration(milliseconds: 400),
+                delay: const Duration(milliseconds: 400),
                 child: CustomTextField(
                   labelText: 'Password',
                   labelColor: AppColors.white,
@@ -116,7 +116,7 @@ class _RegisterFormState extends State<RegisterForm> {
               verticalSpace(12),
               SlideInRight(
                 from: 400,
-                delay: Duration(milliseconds: 500),
+                delay: const Duration(milliseconds: 500),
                 child: CustomTextField(
                   labelText: 'Confirm Password',
                   labelColor: AppColors.white,
@@ -128,7 +128,7 @@ class _RegisterFormState extends State<RegisterForm> {
               verticalSpace(45),
               SlideInUp(
                 from: 400,
-                delay: Duration(milliseconds: 600),
+                delay: const Duration(milliseconds: 600),
                 child: CustomButton(
                   text: 'Continue',
                   color: AppColors.lightOrange,

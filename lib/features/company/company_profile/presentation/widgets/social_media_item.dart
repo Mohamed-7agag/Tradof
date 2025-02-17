@@ -5,7 +5,7 @@ import '../../../../../core/utils/widgets/custom_text_field.dart';
 
 class SocialMediaItem extends StatelessWidget {
   const SocialMediaItem(
-      {super.key, required this.image, required this.controller});
+      {required this.image, required this.controller, super.key});
   final String image;
   final TextEditingController controller;
   @override

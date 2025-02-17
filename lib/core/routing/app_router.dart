@@ -42,19 +42,19 @@ class AppRouter {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.welcomeViewRoute:
-        return MaterialPageRoute(builder: (_) => WelcomeView());
+        return MaterialPageRoute(builder: (_) => const WelcomeView());
       case Routes.loginViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => AuthCubit(getIt()),
-            child: LoginView(),
+            child: const LoginView(),
           ),
         );
       case Routes.forgetPasswordPageViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => AuthCubit(getIt()),
-            child: ForgetPasswordPageView(),
+            child: const ForgetPasswordPageView(),
           ),
         );
       case Routes.createAccountPageViewRoute:
@@ -66,17 +66,17 @@ class AppRouter {
                 create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
               ),
             ],
-            child: CreateAccountPageView(),
+            child: const CreateAccountPageView(),
           ),
         );
       case Routes.verificationViewRoute:
-        return MaterialPageRoute(builder: (_) => VerificationView());
+        return MaterialPageRoute(builder: (_) => const VerificationView());
       case Routes.freelancerBottomNavBarViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) =>
                 FreelancerProfileCubit(getIt())..getFreelancerProfile(),
-            child: FreelancerBottomNavBarView(),
+            child: const FreelancerBottomNavBarView(),
           ),
         );
       case Routes.companyBottomNavBarViewRoute:
@@ -84,7 +84,7 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) =>
                 CompanyProfileCubit(getIt())..getCompanyProfile(),
-            child: CompanyBottomNavBarView(),
+            child: const CompanyBottomNavBarView(),
           ),
         );
       case Routes.updateCompanyProfileTablesViewRoute:
@@ -118,7 +118,8 @@ class AppRouter {
           ),
         );
       case Routes.changeCompanyPasswordViewRoute:
-        return MaterialPageRoute(builder: (_) => ChangeCompanyPasswordView());
+        return MaterialPageRoute(
+            builder: (_) => const ChangeCompanyPasswordView());
       case Routes.addUpdateSocialMediaViewRoute:
         final socialMedia = settings.arguments as List<SocialMediaModel>;
         return MaterialPageRoute(
@@ -132,7 +133,7 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) =>
                 CompanyProfileCubit(getIt())..getCompanyEmployees(),
-            child: CompanyEmployeesView(),
+            child: const CompanyEmployeesView(),
           ),
         );
       case Routes.companyAddEmployeeViewRoute:
@@ -146,14 +147,14 @@ class AppRouter {
                 create: (context) => MetaDataCubit(getIt())..getCountries(),
               ),
             ],
-            child: CompanyAddEmployeeView(),
+            child: const CompanyAddEmployeeView(),
           ),
         );
       case Routes.addOfferViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => OfferCubit(getIt()),
-            child: AddOfferView(),
+            child: const AddOfferView(),
           ),
         );
       case Routes.updateFreelancerSocialMediaViewRoute:
@@ -166,7 +167,7 @@ class AppRouter {
         );
       case Routes.changeFreelancerPasswordViewRoute:
         return MaterialPageRoute(
-          builder: (_) => ChangeFreelancerPasswordView(),
+          builder: (_) => const ChangeFreelancerPasswordView(),
         );
       case Routes.updateFreelancerProfileViewRoute:
         final freelancerModel = settings.arguments as FreelancerModel;

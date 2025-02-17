@@ -12,7 +12,7 @@ import 'core/helpers/cubit_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initializeDateFormatting('en_US', null);
+  initializeDateFormatting('en_US');
   setupGetIt();
   Bloc.observer = MyBlocObserver();
   await Future.wait([

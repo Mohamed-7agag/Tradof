@@ -82,7 +82,7 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                 verticalSpace(14),
                 SlideInRight(
                   from: 400,
-                  delay: Duration(milliseconds: 75),
+                  delay: const Duration(milliseconds: 75),
                   child: CustomTextField(
                     labelText: 'Last Name',
                     controller: lastNameController,
@@ -94,7 +94,7 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                 verticalSpace(14),
                 SlideInRight(
                   from: 400,
-                  delay: Duration(milliseconds: 150),
+                  delay: const Duration(milliseconds: 150),
                   child: CustomTextField(
                     labelText: 'Email',
                     controller: emailController,
@@ -106,7 +106,7 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                 verticalSpace(14),
                 SlideInRight(
                   from: 400,
-                  delay: Duration(milliseconds: 225),
+                  delay: const Duration(milliseconds: 225),
                   child: CustomTextField(
                     labelText: 'Password',
                     controller: passwordController,
@@ -119,7 +119,7 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                 verticalSpace(14),
                 SlideInRight(
                   from: 400,
-                  delay: Duration(milliseconds: 300),
+                  delay: const Duration(milliseconds: 300),
                   child: CustomTextField(
                     labelText: 'Job Title',
                     controller: jobTitleController,
@@ -131,7 +131,7 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                 verticalSpace(14),
                 SlideInRight(
                   from: 400,
-                  delay: Duration(milliseconds: 375),
+                  delay: const Duration(milliseconds: 375),
                   child: PhoneNumberTextField(
                     labelText: 'Phone Number',
                     borderColor: AppColors.darkGrey,
@@ -142,11 +142,10 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                 verticalSpace(14),
                 SlideInRight(
                   from: 400,
-                  delay: Duration(milliseconds: 450),
+                  delay: const Duration(milliseconds: 450),
                   child: CustomDropDownWidget(
                     hint: 'Group Name',
                     items: employeesGroups,
-                    borderColor: AppColors.grey,
                     focusedBorderColor: AppColors.grey,
                     textColor: AppColors.darkGrey,
                     dropdownColor: AppColors.white,
@@ -161,7 +160,7 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                 verticalSpace(14),
                 SlideInRight(
                   from: 400,
-                  delay: Duration(milliseconds: 525),
+                  delay: const Duration(milliseconds: 525),
                   child: BlocBuilder<MetaDataCubit, MetaDataState>(
                     builder: (context, state) {
                       if (state.status.isGetCountries) {
@@ -183,14 +182,14 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                       } else if (state.status.isError) {
                         return CustomFailureWidget(text: state.errorMessage);
                       }
-                      return CustomLoadingWidget();
+                      return const CustomLoadingWidget();
                     },
                   ),
                 ),
                 verticalSpace(50),
                 SlideInUp(
                   from: 400,
-                  delay: Duration(milliseconds: 600),
+                  delay: const Duration(milliseconds: 600),
                   child: AddEmployeeButton(
                     firstNameController: firstNameController,
                     lastNameController: lastNameController,

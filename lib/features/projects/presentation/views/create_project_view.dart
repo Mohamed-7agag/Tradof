@@ -15,7 +15,7 @@ import '../widgets/create_project_language_pair.dart';
 import '../widgets/project_text_field.dart';
 
 class CreateProjectView extends StatefulWidget {
-  const CreateProjectView({super.key, required this.companyModel});
+  const CreateProjectView({required this.companyModel, super.key});
   final CompanyModel companyModel;
   @override
   State<CreateProjectView> createState() => _CreateProjectViewState();
@@ -118,7 +118,7 @@ class _CreateProjectViewState extends State<CreateProjectView> {
                       style: AppStyle.poppinsMedium14,
                     ),
                     verticalSpace(12),
-                    AttachmentFilesSection(),
+                    const AttachmentFilesSection(),
                     verticalSpace(60),
                     CreateProjectButton(
                       projectNameController: projectNameController,

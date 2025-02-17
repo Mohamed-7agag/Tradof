@@ -9,7 +9,7 @@ import '../../../../company/company_profile/presentation/widgets/reviews.dart';
 import '../../data/model/freelancer_model.dart';
 
 class FreelancerRatingAndReview extends StatelessWidget {
-  const FreelancerRatingAndReview({super.key, required this.freelancerModel});
+  const FreelancerRatingAndReview({required this.freelancerModel, super.key});
   final FreelancerModel freelancerModel;
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class FreelancerRatingAndReview extends StatelessWidget {
           flex: 5,
           child: SlideInLeft(
             from: 400,
-            delay: Duration(milliseconds: 120),
+            delay: const Duration(milliseconds: 120),
             child: Reviews(reviews: freelancerModel.reviewCount),
           ),
         ),
@@ -36,14 +36,14 @@ class FreelancerRatingAndReview extends StatelessWidget {
           flex: 2,
           child: SlideInRight(
             from: 400,
-            delay: Duration(milliseconds: 240),
+            delay: const Duration(milliseconds: 240),
             child: Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: HugeIcon(
+              child: const HugeIcon(
                 icon: HugeIcons.strokeRoundedShare08,
                 color: AppColors.white,
               ),

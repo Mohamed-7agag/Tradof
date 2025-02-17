@@ -3,9 +3,9 @@ import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 class CustomAnimatedLazyIndexedStack extends StatelessWidget {
   const CustomAnimatedLazyIndexedStack({
-    super.key,
     required this.currentIndex,
     required this.children,
+    super.key,
   });
   final int currentIndex;
   final List<Widget> children;

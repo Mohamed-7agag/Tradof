@@ -15,13 +15,13 @@ class AllProjectsSection extends StatelessWidget {
         child: Column(
           children: [
             verticalSpace(40),
-            ProjectItem(),
+            const ProjectItem(),
             verticalSpace(12),
-            ProjectItem(),
+            const ProjectItem(),
             verticalSpace(12),
-            ProjectItem(),
+            const ProjectItem(),
             verticalSpace(12),
-            ProjectItem(),
+            const ProjectItem(),
             verticalSpace(100),
           ],
         ),

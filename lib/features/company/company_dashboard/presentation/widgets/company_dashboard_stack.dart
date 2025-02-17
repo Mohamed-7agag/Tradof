@@ -12,7 +12,7 @@ import 'started_projects_section.dart';
 import 'upcoming_projects_section.dart';
 
 class CompanyDashboardStack extends StatefulWidget {
-  const CompanyDashboardStack({super.key, required this.companyModel});
+  const CompanyDashboardStack({required this.companyModel, super.key});
   final CompanyModel companyModel;
   @override
   State<CompanyDashboardStack> createState() => _CompanyDashboardStackState();
@@ -34,7 +34,7 @@ class _CompanyDashboardStackState extends State<CompanyDashboardStack> {
       children: [
         Container(
           width: double.infinity,
-          margin: EdgeInsets.only(top: 32.5),
+          margin: const EdgeInsets.only(top: 32.5),
           padding: EdgeInsets.only(top: 10, left: 16.w, right: 16.w),
           decoration: _decoration(),
           child: ValueListenableBuilder<int>(
@@ -61,7 +61,7 @@ class _CompanyDashboardStackState extends State<CompanyDashboardStack> {
 
   List<Widget> get _companyDashboardChildren {
     return [
-      StartedProjectsSection(),
+      const StartedProjectsSection(),
       BlocProvider(
         create: (context) => ProjectCubit(getIt())..getUpcomingProjects(),
         child: UpcomingProjectsSection(companyModel: widget.companyModel),
@@ -70,7 +70,7 @@ class _CompanyDashboardStackState extends State<CompanyDashboardStack> {
   }
 
   BoxDecoration _decoration() {
-    return BoxDecoration(
+    return const BoxDecoration(
       color: AppColors.background,
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(33),

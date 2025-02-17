@@ -47,7 +47,7 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
                 Expanded(
                   child: ExpandablePageView(
                     controller: _pageController,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     onPageChanged: (int page) {
                       setState(() => _currentPage = page);
                     },
@@ -56,8 +56,8 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
                       RegisterView(pageController: _pageController),
                       context.read<RegisterationCubit>().state.userRole ==
                               UserRole.freelancer
-                          ? FreelancerRegisterView()
-                          : CompanyRegisterView(),
+                          ? const FreelancerRegisterView()
+                          : const CompanyRegisterView(),
                     ],
                   ),
                 ),

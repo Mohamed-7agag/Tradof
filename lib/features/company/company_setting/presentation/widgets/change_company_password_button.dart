@@ -11,10 +11,10 @@ import '../logic/company_setting_cubit/company_setting_cubit.dart';
 
 class ChangeCompanyPasswordButton extends StatelessWidget {
   const ChangeCompanyPasswordButton({
-    super.key,
     required this.currentPasswordController,
     required this.newPasswordController,
     required this.confirmPasswordController,
+    super.key,
   });
   final TextEditingController currentPasswordController;
   final TextEditingController newPasswordController;

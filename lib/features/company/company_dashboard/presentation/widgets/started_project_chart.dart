@@ -14,7 +14,7 @@ class StartedProjectChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 14, bottom: 12, left: 12, right: 16),
+      padding: const EdgeInsets.only(top: 14, bottom: 12, left: 12, right: 16),
       decoration: BoxDecoration(
         color: AppColors.cardColor,
         borderRadius: BorderRadius.circular(8),
@@ -44,21 +44,16 @@ class StartedProjectChart extends StatelessWidget {
                 gridData: FlGridData(
                   horizontalInterval: 2,
                   verticalInterval: 1,
-                  show: true,
                   getDrawingHorizontalLine: (value) {
-                    return FlLine(color: AppColors.grey, strokeWidth: 1);
+                    return const FlLine(color: AppColors.grey, strokeWidth: 1);
                   },
                   getDrawingVerticalLine: (value) {
-                    return FlLine(color: AppColors.grey, strokeWidth: 1);
+                    return const FlLine(color: AppColors.grey, strokeWidth: 1);
                   },
                 ),
                 titlesData: FlTitlesData(
-                  show: true,
-                  rightTitles:
-                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  topTitles: AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  rightTitles: const AxisTitles(),
+                  topTitles: const AxisTitles(),
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -91,7 +86,6 @@ class StartedProjectChart extends StatelessWidget {
                   show: true,
                   border: Border.all(
                     color: AppColors.grey,
-                    width: 1,
                   ),
                 ),
                 lineTouchData: LineTouchData(
@@ -113,12 +107,12 @@ class StartedProjectChart extends StatelessWidget {
                 lineBarsData: [
                   LineChartBarData(
                     spots: [
-                      FlSpot(0, 0),
-                      FlSpot(1, 5.5),
-                      FlSpot(2, 2),
-                      FlSpot(3, 8),
-                      FlSpot(4, 3),
-                      FlSpot(5, 5),
+                      const FlSpot(0, 0),
+                      const FlSpot(1, 5.5),
+                      const FlSpot(2, 2),
+                      const FlSpot(3, 8),
+                      const FlSpot(4, 3),
+                      const FlSpot(5, 5),
                     ],
                     belowBarData: BarAreaData(
                         show: true,
@@ -135,7 +129,7 @@ class StartedProjectChart extends StatelessWidget {
                     color: AppColors.primary,
                     barWidth: 4,
                     isStrokeCapRound: true,
-                    dotData: FlDotData(show: false),
+                    dotData: const FlDotData(show: false),
                   ),
                 ],
               ),

@@ -17,9 +17,9 @@ import '../../data/model/freelancer_model.dart';
 
 class UpdateFreelancerProfileTablesButton extends StatelessWidget {
   const UpdateFreelancerProfileTablesButton({
-    super.key,
     required this.freelancerModel,
     required this.islanguagePair,
+    super.key,
   });
   final FreelancerModel freelancerModel;
   final bool islanguagePair;
@@ -47,7 +47,7 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
           builder: (context, tablesState) {
             return (state.status.isLanguagePairLoading ||
                     state.status.isSpecializationLoading)
-                ? CustomLoadingWidget()
+                ? const CustomLoadingWidget()
                 : CustomButton(
                     text: 'Update',
                     onPressed: () {

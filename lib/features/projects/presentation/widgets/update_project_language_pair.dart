@@ -11,9 +11,9 @@ import '../logic/project_cubit/project_cubit.dart';
 
 class UpdateProjectLanguagePair extends StatefulWidget {
   const UpdateProjectLanguagePair({
-    super.key,
     required this.companyModel,
     required this.projectModel,
+    super.key,
   });
   final CompanyModel companyModel;
   final ProjectModel projectModel;
