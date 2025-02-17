@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tradof/core/helpers/extensions.dart';
 
+import '../../../../core/helpers/extensions.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 

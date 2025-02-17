@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/di/di.dart';
-import 'package:tradof/features/auth/presentation/widgets/language_pair_table.dart';
-import 'package:tradof/features/auth/presentation/widgets/specialization_table.dart';
 
+import '../../../../../core/di/di.dart';
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/utils/widgets/custom_app_bar.dart';
+import '../../../../auth/presentation/widgets/language_pair_table.dart';
+import '../../../../auth/presentation/widgets/specialization_table.dart';
 import '../../data/model/freelancer_model.dart';
 import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import '../widgets/update_freelancer_profile_tables_button.dart';

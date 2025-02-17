@@ -2,18 +2,18 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/helpers/convert_freelancer_language_pair_to_language_pair.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
-import 'package:tradof/features/auth/data/model/specialization_model.dart';
-import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
-import 'package:tradof/features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
+import '../../../../../core/helpers/convert_freelancer_language_pair_to_language_pair.dart';
+import '../../../../../core/helpers/extensions.dart';
 import '../../../../../core/utils/models/language_pair_model.dart';
 import '../../../../../core/utils/widgets/custom_button.dart';
+import '../../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../../core/utils/widgets/custom_toastification.dart';
+import '../../../../auth/data/model/specialization_model.dart';
+import '../../../../auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import '../../data/model/freelancer_langauge_pair_model.dart';
 import '../../data/model/freelancer_model.dart';
+import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
 class UpdateFreelancerProfileTablesButton extends StatelessWidget {
   const UpdateFreelancerProfileTablesButton({

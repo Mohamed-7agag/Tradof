@@ -1,9 +1,9 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:tradof/core/api/api_service.dart';
-import 'package:tradof/core/helpers/upload_file_to_api.dart';
-import 'package:tradof/core/utils/app_constants.dart';
 
+import '../../../../../core/api/api_service.dart';
 import '../../../../../core/api/end_points.dart';
+import '../../../../../core/helpers/upload_file_to_api.dart';
+import '../../../../../core/utils/app_constants.dart';
 import '../../../../company/company_profile/data/model/social_media_model.dart';
 import '../model/freelancer_model.dart';
 import 'freelancer_profile_repo.dart';

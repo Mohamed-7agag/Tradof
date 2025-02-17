@@ -1,8 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/errors/exception.dart';
-import 'package:tradof/features/offers/data/model/add_offer_request_model.dart';
-import 'package:tradof/features/offers/data/repos/offer_repo.dart';
+
+import '../../../../../core/errors/exception.dart';
+import '../../../data/model/add_offer_request_model.dart';
+import '../../../data/repos/offer_repo.dart';
 
 part 'offer_state.dart';
 

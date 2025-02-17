@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/di/di.dart';
-import 'package:tradof/features/auth/presentation/widgets/industries_served_table.dart';
-import 'package:tradof/features/auth/presentation/widgets/prefered_languages_table.dart';
-import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
+import '../../../../../core/di/di.dart';
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/utils/widgets/custom_app_bar.dart';
+import '../../../../auth/presentation/widgets/industries_served_table.dart';
+import '../../../../auth/presentation/widgets/prefered_languages_table.dart';
+import '../../data/model/company_model.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 import '../widgets/update_company_profile_tables_button.dart';
 

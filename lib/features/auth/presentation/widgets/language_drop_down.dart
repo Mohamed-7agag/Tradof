@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/utils/models/language_model.dart';
 
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../../../core/utils/models/language_model.dart';
 
 class LanguageDropDown extends StatefulWidget {
   const LanguageDropDown({

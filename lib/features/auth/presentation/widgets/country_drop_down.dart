@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/utils/models/country_model.dart';
 
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../../../core/utils/models/country_model.dart';
 
 class CountryDropDown extends StatefulWidget {
   const CountryDropDown({

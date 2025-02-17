@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
+import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../logic/registeration_cubit/registeration_cubit.dart';
 import 'country_drop_down.dart';
 

@@ -1,10 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/features/auth/presentation/widgets/auth_shape.dart';
-import 'package:tradof/features/auth/presentation/widgets/have_and_have_not_account_section.dart';
 
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/theming/app_style.dart';
+import '../widgets/auth_shape.dart';
+import '../widgets/have_and_have_not_account_section.dart';
 import '../widgets/login_form.dart';
 
 class LoginView extends StatelessWidget {

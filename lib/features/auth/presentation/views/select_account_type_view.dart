@@ -1,12 +1,12 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/utils/widgets/custom_button.dart';
-import 'package:tradof/features/auth/presentation/widgets/create_account_countainer_curve.dart';
-import 'package:tradof/features/auth/presentation/widgets/select_account_type_section.dart';
 
+import '../../../../core/theming/app_colors.dart';
+import '../../../../core/utils/widgets/custom_button.dart';
+import '../widgets/create_account_countainer_curve.dart';
 import '../widgets/privacy_policy_check_box.dart';
+import '../widgets/select_account_type_section.dart';
 
 class SelectAccountTypeView extends StatefulWidget {
   const SelectAccountTypeView({required this.pageController, super.key});

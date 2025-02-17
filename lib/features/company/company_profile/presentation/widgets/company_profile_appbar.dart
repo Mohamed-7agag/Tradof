@@ -2,10 +2,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/theming/app_style.dart';
 
+import '../../../../../core/helpers/spacing.dart';
+import '../../../../../core/theming/app_colors.dart';
+import '../../../../../core/theming/app_style.dart';
 import '../../data/model/company_model.dart';
 import 'user_image_and_info.dart';
 

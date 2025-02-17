@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
-import 'package:tradof/core/theming/app_colors.dart';
 
+import '../../../../../core/theming/app_colors.dart';
 import 'all_project_section.dart';
 import 'current_project_section.dart';
 import 'freelancer_switcher_widget.dart';

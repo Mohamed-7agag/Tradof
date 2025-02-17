@@ -2,10 +2,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 
+import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/utils/widgets/custom_app_bar.dart';
+import '../../../../../core/utils/widgets/custom_text_field.dart';
 import '../widgets/change_company_password_button.dart';
 
 class ChangeCompanyPasswordView extends StatefulWidget {

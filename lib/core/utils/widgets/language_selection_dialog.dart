@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/utils/models/language_model.dart';
-import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 
 import '../../../features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
+import '../../helpers/spacing.dart';
 import '../../theming/app_colors.dart';
 import '../../theming/app_style.dart';
 import '../logic/meta_data_cubit/meta_data_cubit.dart';
+import '../models/language_model.dart';
 import 'custom_failure_widget.dart';
 import 'custom_loading_widget.dart';
+import 'custom_text_field.dart';
 
 class LanguageSelectionDialog extends StatefulWidget {
   const LanguageSelectionDialog({super.key});

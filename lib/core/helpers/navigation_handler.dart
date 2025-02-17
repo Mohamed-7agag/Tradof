@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/routing/routes.dart';
 
+import '../routing/routes.dart';
 import '../utils/widgets/custom_toastification.dart';
+import 'extensions.dart';
 
 class NavigationHandler {
   NavigationHandler._privateConstructor();

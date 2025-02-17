@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/theming/app_style.dart';
 
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/theming/app_colors.dart';
+import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../core/utils/widgets/language_selection_dialog.dart';
 import '../logic/tables_cubit/tables_cubit.dart';

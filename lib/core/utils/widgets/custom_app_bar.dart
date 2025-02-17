@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_style.dart';
 
+import '../../helpers/spacing.dart';
 import '../../theming/app_colors.dart';
+import '../../theming/app_style.dart';
 
 AppBar customAppbar({required String title, IconData? actionIcon}) {
   return AppBar(

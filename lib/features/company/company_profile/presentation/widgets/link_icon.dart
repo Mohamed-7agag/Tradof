@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/routing/routes.dart';
-import 'package:tradof/core/theming/app_colors.dart';
 
 import '../../../../../core/helpers/custom_url_launcher.dart';
+import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/routing/routes.dart';
+import '../../../../../core/theming/app_colors.dart';
 import '../../data/model/social_media_model.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 

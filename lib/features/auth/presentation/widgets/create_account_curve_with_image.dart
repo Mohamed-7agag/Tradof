@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/features/auth/presentation/widgets/account_image_widget.dart';
+
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/theming/app_colors.dart';
+import '../../../../core/theming/app_style.dart';
+import 'account_image_widget.dart';
 
 class CreateAccountCurveWithImage extends StatelessWidget {
   const CreateAccountCurveWithImage({super.key});

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/utils/widgets/custom_button.dart';
-import 'package:tradof/core/utils/widgets/custom_toastification.dart';
-import 'package:tradof/features/offers/presentation/logic/cubit/offer_cubit.dart';
 
+import '../../../../core/helpers/extensions.dart';
+import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
+import '../../../../core/utils/widgets/custom_toastification.dart';
+import '../logic/cubit/offer_cubit.dart';
 
 class CreateOfferButton extends StatelessWidget {
   const CreateOfferButton(
-      {required this.offerDetailsController, required this.daysController, super.key});
+      {required this.offerDetailsController,
+      required this.daysController,
+      super.key});
   final TextEditingController offerDetailsController;
   final TextEditingController daysController;
   @override

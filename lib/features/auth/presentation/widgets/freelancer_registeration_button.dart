@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 
+import '../../../../core/helpers/extensions.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
+import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../logic/registeration_cubit/registeration_cubit.dart';
 import '../logic/tables_cubit/tables_cubit.dart';
 

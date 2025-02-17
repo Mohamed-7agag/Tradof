@@ -2,8 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/helpers/spacing.dart';
 
+import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../company_profile/data/model/company_model.dart';
 import '../widgets/company_setting_profile_info.dart';

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/navigation_handler.dart';
-import 'package:tradof/core/routing/app_router.dart';
-import 'package:tradof/core/theming/app_colors.dart';
+
+import 'core/helpers/navigation_handler.dart';
+import 'core/routing/app_router.dart';
+import 'core/theming/app_colors.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

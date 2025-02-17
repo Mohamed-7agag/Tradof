@@ -2,12 +2,12 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/features/freelancer/freelancer_profile/presentation/widgets/update_freelancer_social_media_button.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../../company/company_profile/data/model/social_media_model.dart';
 import '../../../../company/company_profile/presentation/widgets/social_media_item.dart';
+import '../widgets/update_freelancer_social_media_button.dart';
 
 class UpdateFreelancerSocialMediaView extends StatefulWidget {
   const UpdateFreelancerSocialMediaView({required this.socialList, super.key});

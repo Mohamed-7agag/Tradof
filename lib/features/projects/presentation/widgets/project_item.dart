@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_style.dart';
 
+import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
+import '../../../../core/theming/app_style.dart';
 
 class ProjectItem extends StatelessWidget {
   const ProjectItem({super.key});

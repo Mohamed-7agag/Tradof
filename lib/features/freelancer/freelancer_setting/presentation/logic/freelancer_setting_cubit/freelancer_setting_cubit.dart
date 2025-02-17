@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/errors/exception.dart';
 
+import '../../../../../../core/errors/exception.dart';
 import '../../../../../../core/utils/widgets/upload_image_to_cloudinary.dart';
 import '../../../../freelancer_profile/data/model/freelancer_model.dart';
 import '../../../data/model/update_freelancer_request_model.dart';

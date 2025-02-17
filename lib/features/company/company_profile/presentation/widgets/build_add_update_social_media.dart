@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/spacing.dart';
 
+import '../../../../../core/helpers/spacing.dart';
 import '../../data/model/social_media_model.dart';
 import 'add_update_social_media_button.dart';
 import 'social_media_item.dart';

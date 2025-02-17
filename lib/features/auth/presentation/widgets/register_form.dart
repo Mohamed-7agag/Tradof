@@ -2,13 +2,13 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/app_validation.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 
+import '../../../../core/helpers/app_validation.dart';
 import '../../../../core/helpers/spacing.dart';
+import '../../../../core/theming/app_colors.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
+import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../logic/registeration_cubit/registeration_cubit.dart';
 import 'phone_number_text_field.dart';
 

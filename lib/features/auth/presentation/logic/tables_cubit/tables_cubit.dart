@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/utils/models/language_model.dart';
-import 'package:tradof/core/utils/models/language_pair_model.dart';
-import 'package:tradof/features/auth/data/model/specialization_model.dart';
 
 import '../../../../../core/helpers/convert_freelancer_language_pair_to_language_pair.dart';
+import '../../../../../core/utils/models/language_model.dart';
+import '../../../../../core/utils/models/language_pair_model.dart';
 import '../../../../freelancer/freelancer_profile/data/model/freelancer_langauge_pair_model.dart';
+import '../../../data/model/specialization_model.dart';
 
 part 'tables_state.dart';
 

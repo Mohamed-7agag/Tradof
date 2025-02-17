@@ -2,14 +2,14 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/helpers/custom_url_launcher.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/core/utils/widgets/custom_loading_dialog.dart';
-import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 
+import '../../../../../core/helpers/custom_url_launcher.dart';
+import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/helpers/spacing.dart';
+import '../../../../../core/theming/app_colors.dart';
+import '../../../../../core/theming/app_style.dart';
+import '../../../../../core/utils/widgets/custom_loading_dialog.dart';
+import '../../../../../core/utils/widgets/custom_toastification.dart';
 import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
 class FreelancerCvSection extends StatelessWidget {

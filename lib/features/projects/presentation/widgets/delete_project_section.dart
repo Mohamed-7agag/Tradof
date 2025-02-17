@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/core/utils/widgets/custom_loading_dialog.dart';
 
+import '../../../../core/helpers/extensions.dart';
+import '../../../../core/theming/app_style.dart';
+import '../../../../core/utils/widgets/custom_loading_dialog.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../logic/project_cubit/project_cubit.dart';
 

@@ -1,10 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/features/auth/presentation/widgets/reset_password_button.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
+import 'reset_password_button.dart';
 
 class ResetPasswordForm extends StatefulWidget {
   const ResetPasswordForm({super.key});

@@ -2,9 +2,10 @@
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/theming/app_style.dart';
+
+import '../../../../../core/helpers/spacing.dart';
+import '../../../../../core/theming/app_colors.dart';
+import '../../../../../core/theming/app_style.dart';
 
 class StartedProjectChart extends StatelessWidget {
   const StartedProjectChart({super.key});

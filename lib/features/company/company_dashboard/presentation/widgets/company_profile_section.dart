@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
+import '../../../company_profile/data/model/company_model.dart';
 
 class CompanyProfileSection extends StatelessWidget {
   const CompanyProfileSection({required this.companyModel, super.key});

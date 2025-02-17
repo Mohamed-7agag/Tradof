@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/exit_dialog.dart';
-import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
-import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
 
 import '../../core/di/di.dart';
+import '../../core/helpers/exit_dialog.dart';
 import '../../core/utils/widgets/custom_animated_lazy_indexed_stack.dart';
 import '../../core/utils/widgets/custom_bottom_nav_bar.dart';
+import '../../core/utils/widgets/custom_failure_widget.dart';
 import '../../core/utils/widgets/custom_loading_widget.dart';
+import '../../core/utils/widgets/custom_refresh_indicator.dart';
 import '../projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../projects/presentation/views/create_project_view.dart';
 import 'company_dashboard/presentation/views/company_dashboard_view.dart';

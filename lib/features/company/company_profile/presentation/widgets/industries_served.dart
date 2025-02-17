@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
 
+import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/routing/routes.dart';
+import '../../../../../core/theming/app_colors.dart';
+import '../../../../../core/theming/app_style.dart';
+import '../../data/model/company_model.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
 class IndustriesServed extends StatelessWidget {

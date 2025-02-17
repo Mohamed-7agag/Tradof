@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/utils/repo/meta_data_repo.dart';
 
 import '../../../../features/auth/data/model/specialization_model.dart';
 import '../../../errors/exception.dart';
 import '../../models/country_model.dart';
 import '../../models/language_model.dart';
+import '../../repo/meta_data_repo.dart';
 
 part 'meta_data_state.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/features/projects/presentation/widgets/project_item.dart';
 
 import '../../../../../core/helpers/spacing.dart';
+import '../../../../projects/presentation/widgets/project_item.dart';
 import 'freelancer_statistic_card.dart';
 
 class CurrentProjectsSection extends StatelessWidget {

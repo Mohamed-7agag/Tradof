@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/di/di.dart';
-import 'package:tradof/core/routing/routes.dart';
-import 'package:tradof/features/freelancer/freelancer_profile/presentation/views/update_freelancer_profile_tables_view.dart';
-import 'package:tradof/features/offers/presentation/logic/cubit/offer_cubit.dart';
-import 'package:tradof/features/offers/presentation/views/add_offer_view.dart';
-import 'package:tradof/features/projects/presentation/logic/project_cubit/project_cubit.dart';
-import 'package:tradof/features/projects/presentation/views/project_details_view.dart';
 
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
 import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
@@ -29,14 +22,21 @@ import '../../features/company/company_setting/presentation/views/update_company
 import '../../features/freelancer/freelancer_bottom_nav_bar_view.dart';
 import '../../features/freelancer/freelancer_profile/data/model/freelancer_model.dart';
 import '../../features/freelancer/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
+import '../../features/freelancer/freelancer_profile/presentation/views/update_freelancer_profile_tables_view.dart';
 import '../../features/freelancer/freelancer_profile/presentation/views/update_freelancer_social_media_view.dart';
 import '../../features/freelancer/freelancer_setting/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
 import '../../features/freelancer/freelancer_setting/presentation/views/change_freelancer_password_view.dart';
 import '../../features/freelancer/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
+import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
+import '../../features/offers/presentation/views/add_offer_view.dart';
+import '../../features/projects/presentation/logic/project_cubit/project_cubit.dart';
+import '../../features/projects/presentation/views/project_details_view.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
+import '../di/di.dart';
 import '../utils/app_constants.dart';
 import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
+import 'routes.dart';
 
 class AppRouter {
   static Route<dynamic>? generateRoute(RouteSettings settings) {

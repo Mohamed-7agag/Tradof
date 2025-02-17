@@ -3,11 +3,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/routing/routes.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
+
+import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/routing/routes.dart';
+import '../../../../../core/theming/app_colors.dart';
+import '../../../../../core/theming/app_style.dart';
+import '../../data/model/company_model.dart';
 
 class UserImageAndInfo extends StatelessWidget {
   const UserImageAndInfo({required this.companyModel, super.key});

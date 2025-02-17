@@ -1,9 +1,8 @@
-import 'package:tradof/core/api/api_service.dart';
-import 'package:tradof/features/auth/data/repo/auth_repo.dart';
-
+import '../../../../core/api/api_service.dart';
 import '../../../../core/api/end_points.dart';
 import '../model/login_response_model.dart';
 import '../model/reset_password_request_model.dart';
+import 'auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final ApiServices _apiServices;

@@ -1,9 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/theming/app_colors.dart';
 
 import '../../helpers/spacing.dart';
+import '../../theming/app_colors.dart';
 import 'bottom_nav_bar_center_icon.dart';
 
 class CustomBottomNavBar extends StatefulWidget {

@@ -37,5 +37,6 @@ linter:
     - prefer_null_aware_operators
     - prefer_spread_collections
     - unnecessary_lambdas
+    - prefer_relative_imports
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/utils/models/language_model.dart';
-import 'package:tradof/core/utils/models/language_pair_model.dart';
-import 'package:tradof/core/utils/widgets/upload_image_to_cloudinary.dart';
-import 'package:tradof/features/auth/data/model/company_register_request_model.dart';
-import 'package:tradof/features/auth/data/model/freelancer_register_request_model.dart';
-import 'package:tradof/features/auth/data/repo/registeration_repo.dart';
 
 import '../../../../../core/errors/exception.dart';
+import '../../../../../core/utils/models/language_model.dart';
+import '../../../../../core/utils/models/language_pair_model.dart';
+import '../../../../../core/utils/widgets/upload_image_to_cloudinary.dart';
+import '../../../data/model/company_register_request_model.dart';
+import '../../../data/model/freelancer_register_request_model.dart';
 import '../../../data/model/specialization_model.dart';
+import '../../../data/repo/registeration_repo.dart';
 
 part 'registeration_state.dart';
 

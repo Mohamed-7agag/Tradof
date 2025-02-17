@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/spacing.dart';
 
+import '../../../../../core/helpers/spacing.dart';
 import '../../data/model/company_model.dart';
 import '../widgets/company_profile_appbar.dart';
 import '../widgets/company_profile_tables.dart';

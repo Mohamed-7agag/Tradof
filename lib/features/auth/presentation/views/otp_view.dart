@@ -1,12 +1,12 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/auth/presentation/widgets/otp_widget_and_button.dart';
 
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../widgets/auth_shape.dart';
+import '../widgets/otp_widget_and_button.dart';
 
 class OtpView extends StatelessWidget {
   const OtpView({required this.pageController, super.key});

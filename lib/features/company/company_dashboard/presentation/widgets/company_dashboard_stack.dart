@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
-import 'package:tradof/core/di/di.dart';
-import 'package:tradof/core/theming/app_colors.dart';
 
+import '../../../../../core/di/di.dart';
+import '../../../../../core/theming/app_colors.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../../company_profile/data/model/company_model.dart';
 import 'company_switcher_widget.dart';

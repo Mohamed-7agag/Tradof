@@ -2,20 +2,20 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/utils/widgets/custom_text_field.dart';
-import 'package:tradof/features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
-import 'package:tradof/features/auth/presentation/widgets/country_drop_down_section.dart';
-import 'package:tradof/features/auth/presentation/widgets/industries_served_table.dart';
-import 'package:tradof/features/auth/presentation/widgets/prefered_languages_table.dart';
 
+import '../../../../core/helpers/extensions.dart';
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/theming/app_colors.dart';
 import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../core/utils/widgets/custom_loading_dialog.dart';
+import '../../../../core/utils/widgets/custom_text_field.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
+import '../logic/tables_cubit/tables_cubit.dart';
 import '../widgets/company_registeration_button.dart';
+import '../widgets/country_drop_down_section.dart';
 import '../widgets/create_account_curve_with_image.dart';
+import '../widgets/industries_served_table.dart';
+import '../widgets/prefered_languages_table.dart';
 
 class CompanyRegisterView extends StatefulWidget {
   const CompanyRegisterView({super.key});

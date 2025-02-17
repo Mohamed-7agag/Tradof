@@ -1,15 +1,15 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
-import 'package:tradof/features/auth/presentation/views/register_view.dart';
-import 'package:tradof/features/auth/presentation/views/select_account_type_view.dart';
 
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/theming/app_colors.dart';
+import '../logic/registeration_cubit/registeration_cubit.dart';
 import '../widgets/dot_indicator.dart';
 import 'company_register_view.dart';
 import 'freelancer_register_view.dart';
+import 'register_view.dart';
+import 'select_account_type_view.dart';
 
 class CreateAccountPageView extends StatefulWidget {
   const CreateAccountPageView({super.key});

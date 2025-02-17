@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
-import 'package:tradof/core/utils/models/country_model.dart';
-import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
-import 'package:tradof/features/auth/presentation/widgets/country_drop_down.dart';
 
+import '../../../../../core/theming/app_colors.dart';
+import '../../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
+import '../../../../../core/utils/models/country_model.dart';
 import '../../../../../core/utils/widgets/custom_failure_widget.dart';
+import '../../../../../core/utils/widgets/custom_loading_widget.dart';
+import '../../../../auth/presentation/widgets/country_drop_down.dart';
 
 class CountryDropDownEdit extends StatelessWidget {
   const CountryDropDownEdit({

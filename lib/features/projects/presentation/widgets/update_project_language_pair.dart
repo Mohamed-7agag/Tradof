@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
-import 'package:tradof/features/projects/data/models/project_model.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/utils/models/language_model.dart';
 import '../../../auth/presentation/widgets/language_drop_down.dart';
+import '../../../company/company_profile/data/model/company_model.dart';
+import '../../data/models/project_model.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
 class UpdateProjectLanguagePair extends StatefulWidget {

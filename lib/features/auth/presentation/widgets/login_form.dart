@@ -1,12 +1,13 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/routing/routes.dart';
-import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/core/utils/widgets/custom_text_field.dart';
-import 'package:tradof/features/auth/presentation/widgets/login_button_and_validation.dart';
+
+import '../../../../core/helpers/extensions.dart';
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/app_style.dart';
+import '../../../../core/utils/widgets/custom_text_field.dart';
+import 'login_button_and_validation.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});

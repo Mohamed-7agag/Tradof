@@ -1,13 +1,13 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/utils/widgets/custom_text_field.dart';
-import 'package:tradof/features/auth/presentation/widgets/forget_password_button.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../../../core/utils/widgets/custom_text_field.dart';
 import '../widgets/auth_shape.dart';
+import '../widgets/forget_password_button.dart';
 
 class ForgetPasswordView extends StatefulWidget {
   const ForgetPasswordView({required this.pageController, super.key});

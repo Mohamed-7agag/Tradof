@@ -2,13 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/utils/widgets/custom_toastification.dart';
-import 'package:tradof/features/projects/data/models/project_model.dart';
-import 'package:tradof/features/projects/presentation/logic/file_cubit.dart';
 
+import '../../../../core/helpers/extensions.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
+import '../../../../core/utils/widgets/custom_toastification.dart';
+import '../../data/models/project_model.dart';
+import '../logic/file_cubit.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
 class UpdateProjectButton extends StatelessWidget {

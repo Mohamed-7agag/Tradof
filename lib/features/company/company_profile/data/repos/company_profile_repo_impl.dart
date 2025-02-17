@@ -1,7 +1,6 @@
-import 'package:tradof/core/api/api_service.dart';
-import 'package:tradof/core/api/end_points.dart';
-import 'package:tradof/core/utils/app_constants.dart';
-
+import '../../../../../core/api/api_service.dart';
+import '../../../../../core/api/end_points.dart';
+import '../../../../../core/utils/app_constants.dart';
 import '../model/company_employee_model.dart';
 import '../model/company_employee_request_model.dart';
 import '../model/company_model.dart';

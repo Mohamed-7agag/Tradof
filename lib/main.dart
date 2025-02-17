@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:tradof/core/di/di.dart';
-import 'package:tradof/core/utils/app_constants.dart';
-import 'package:tradof/my_app.dart';
 
 import 'core/cache/cache_helper.dart';
+import 'core/di/di.dart';
 import 'core/helpers/cubit_observer.dart';
+import 'core/utils/app_constants.dart';
+import 'my_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

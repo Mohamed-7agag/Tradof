@@ -2,9 +2,9 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/theming/app_style.dart';
 
 import '../../../../../core/theming/app_colors.dart';
+import '../../../../../core/theming/app_style.dart';
 import '../../data/model/freelancer_model.dart';
 
 class FreelancerImageAndInfo extends StatelessWidget {

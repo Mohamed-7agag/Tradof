@@ -1,5 +1,5 @@
-import 'package:tradof/features/projects/data/models/create_project_request_model.dart';
-import 'package:tradof/features/projects/data/models/project_model.dart';
+import '../models/create_project_request_model.dart';
+import '../models/project_model.dart';
 
 abstract class ProjectRepo {
   Future<void> createProject(CreateProjectRequestModel model);

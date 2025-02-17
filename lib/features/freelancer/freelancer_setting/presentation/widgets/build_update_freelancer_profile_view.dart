@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/utils/widgets/custom_text_field.dart';
 
+import '../../../../../core/helpers/spacing.dart';
+import '../../../../../core/theming/app_colors.dart';
+import '../../../../../core/utils/widgets/custom_text_field.dart';
 import '../../../../auth/presentation/widgets/phone_number_text_field.dart';
 import '../../../../company/company_setting/presentation/widgets/country_drop_down_edit.dart';
 import '../../../freelancer_profile/data/model/freelancer_model.dart';

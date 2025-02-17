@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/core/theming/app_style.dart';
-import 'package:tradof/features/auth/presentation/widgets/account_types_section.dart';
+
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/theming/app_colors.dart';
+import '../../../../core/theming/app_style.dart';
+import 'account_types_section.dart';
 
 class SelectAccountTypeSection extends StatelessWidget {
   const SelectAccountTypeSection({super.key});

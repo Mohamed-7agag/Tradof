@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/cache/cache_helper.dart';
-import 'package:tradof/core/errors/exception.dart';
-import 'package:tradof/features/auth/data/model/login_response_model.dart';
-import 'package:tradof/features/auth/data/model/reset_password_request_model.dart';
-import 'package:tradof/features/auth/data/repo/auth_repo.dart';
 
 import '../../../../../core/api/dio_factory.dart';
+import '../../../../../core/cache/cache_helper.dart';
+import '../../../../../core/errors/exception.dart';
 import '../../../../../core/utils/app_constants.dart';
+import '../../../data/model/login_response_model.dart';
+import '../../../data/model/reset_password_request_model.dart';
+import '../../../data/repo/auth_repo.dart';
 
 part 'auth_state.dart';
 

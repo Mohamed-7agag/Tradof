@@ -1,7 +1,6 @@
-import 'package:tradof/core/api/api_service.dart';
-import 'package:tradof/core/utils/app_constants.dart';
-
+import '../../../../core/api/api_service.dart';
 import '../../../../core/api/end_points.dart';
+import '../../../../core/utils/app_constants.dart';
 import '../models/create_project_request_model.dart';
 import '../models/project_model.dart';
 import 'project_repo.dart';

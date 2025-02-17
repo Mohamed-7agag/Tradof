@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/auth/presentation/views/forget_password_view.dart';
-import 'package:tradof/features/auth/presentation/views/otp_view.dart';
-import 'package:tradof/features/auth/presentation/views/reset_password_view.dart';
 
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/theming/app_colors.dart';
 import '../widgets/dot_indicator.dart';
+import 'forget_password_view.dart';
+import 'otp_view.dart';
+import 'reset_password_view.dart';
 
 class ForgetPasswordPageView extends StatefulWidget {
   const ForgetPasswordPageView({super.key});

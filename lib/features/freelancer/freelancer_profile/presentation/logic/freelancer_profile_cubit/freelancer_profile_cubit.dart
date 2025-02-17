@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/errors/exception.dart';
-import 'package:tradof/core/utils/app_constants.dart';
+import '../../../../../../core/errors/exception.dart';
+import '../../../../../../core/utils/app_constants.dart';
 
 import '../../../../../company/company_profile/data/model/social_media_model.dart';
 import '../../../data/model/freelancer_model.dart';

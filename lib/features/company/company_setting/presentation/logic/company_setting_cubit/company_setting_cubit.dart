@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/errors/exception.dart';
 
+import '../../../../../../core/errors/exception.dart';
 import '../../../../../../core/utils/app_constants.dart';
 import '../../../../../../core/utils/widgets/upload_image_to_cloudinary.dart';
 import '../../../../company_profile/data/model/company_model.dart';

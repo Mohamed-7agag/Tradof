@@ -3,17 +3,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/exit_dialog.dart';
-import 'package:tradof/core/utils/widgets/custom_bottom_nav_bar.dart';
-import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
-import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
-import 'package:tradof/features/freelancer/freelancer_setting/presentation/views/freelancer_setting_view.dart';
 
+import '../../core/helpers/exit_dialog.dart';
 import '../../core/utils/widgets/custom_animated_lazy_indexed_stack.dart';
+import '../../core/utils/widgets/custom_bottom_nav_bar.dart';
+import '../../core/utils/widgets/custom_failure_widget.dart';
 import '../../core/utils/widgets/custom_loading_widget.dart';
+import '../../core/utils/widgets/custom_refresh_indicator.dart';
 import 'freelancer_dashboard/presentation/views/freelance_dashbord_view.dart';
 import 'freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import 'freelancer_profile/presentation/views/freelancer_profile_view.dart';
+import 'freelancer_setting/presentation/views/freelancer_setting_view.dart';
 
 class FreelancerBottomNavBarView extends StatefulWidget {
   const FreelancerBottomNavBarView({super.key});

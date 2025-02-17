@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/helpers/upload_file_to_api.dart';
-import 'package:tradof/core/utils/models/language_model.dart';
 
 import '../../../../../core/errors/exception.dart';
+import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/helpers/upload_file_to_api.dart';
+import '../../../../../core/utils/models/language_model.dart';
 import '../../../data/models/create_project_request_model.dart';
 import '../../../data/models/project_model.dart';
 import '../../../data/repo/project_repo.dart';

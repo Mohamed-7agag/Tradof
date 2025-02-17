@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tradof/core/helpers/extensions.dart';
 
 import '../utils/widgets/custom_toastification.dart';
 import 'app_regex.dart';
+import 'extensions.dart';
 
 class AppValidation {
   static bool passwordValidation(BuildContext context, String password) {

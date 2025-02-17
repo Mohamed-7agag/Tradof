@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
-import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
-import 'package:tradof/core/utils/widgets/custom_refresh_indicator.dart';
-import 'package:tradof/features/projects/data/models/project_model.dart';
-import 'package:tradof/features/projects/presentation/widgets/upcoming_project_item.dart';
 
+import '../../../../../core/utils/widgets/custom_failure_widget.dart';
+import '../../../../../core/utils/widgets/custom_loading_widget.dart';
+import '../../../../../core/utils/widgets/custom_refresh_indicator.dart';
+import '../../../../projects/data/models/project_model.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart';
+import '../../../../projects/presentation/widgets/upcoming_project_item.dart';
 import '../../../company_profile/data/model/company_model.dart';
 
 class UpcomingProjectsSection extends StatelessWidget {

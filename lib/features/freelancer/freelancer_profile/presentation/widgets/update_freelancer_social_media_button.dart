@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/utils/widgets/custom_button.dart';
-import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
-import 'package:tradof/core/utils/widgets/custom_toastification.dart';
 
+import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/utils/widgets/custom_button.dart';
+import '../../../../../core/utils/widgets/custom_loading_widget.dart';
+import '../../../../../core/utils/widgets/custom_toastification.dart';
 import '../../../../company/company_profile/data/model/social_media_model.dart';
 import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 

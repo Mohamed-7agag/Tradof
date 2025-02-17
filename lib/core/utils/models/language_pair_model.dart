@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:tradof/core/utils/models/language_model.dart';
+
+import 'language_model.dart';
 
 class LanguagePairModel extends Equatable {
   final int? id;

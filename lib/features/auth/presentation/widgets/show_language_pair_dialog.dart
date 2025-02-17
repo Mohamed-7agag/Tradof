@@ -1,14 +1,14 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tradof/core/utils/models/language_model.dart';
-import 'package:tradof/core/utils/widgets/custom_failure_widget.dart';
-import 'package:tradof/core/utils/widgets/custom_loading_widget.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
+import '../../../../core/utils/models/language_model.dart';
 import '../../../../core/utils/models/language_pair_model.dart';
+import '../../../../core/utils/widgets/custom_failure_widget.dart';
+import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../logic/tables_cubit/tables_cubit.dart';
 import 'language_drop_down.dart';

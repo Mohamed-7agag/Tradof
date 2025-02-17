@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:tradof/core/helpers/spacing.dart';
 
+import '../../../../../core/helpers/spacing.dart';
 import '../../data/model/social_media_model.dart';
 import 'link_icon.dart';
 

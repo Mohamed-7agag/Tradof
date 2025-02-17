@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
 
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../logic/auth_cubit/auth_cubit.dart';
 
 class OtpWidget extends StatelessWidget {
   const OtpWidget({super.key});

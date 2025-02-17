@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tradof/core/helpers/spacing.dart';
 
+import '../../../../../core/helpers/spacing.dart';
 import '../../data/model/freelancer_model.dart';
 import '../widgets/freelancer_cv_section.dart';
 import '../widgets/freelancer_profile_app_bar.dart';

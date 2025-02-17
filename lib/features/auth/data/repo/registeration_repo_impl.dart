@@ -1,6 +1,5 @@
-import 'package:tradof/core/api/end_points.dart';
-
 import '../../../../core/api/api_service.dart';
+import '../../../../core/api/end_points.dart';
 import '../model/company_register_request_model.dart';
 import '../model/freelancer_register_request_model.dart';
 import 'registeration_repo.dart';

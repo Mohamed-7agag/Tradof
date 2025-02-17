@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/routing/routes.dart';
-import 'package:tradof/core/theming/app_colors.dart';
 
+import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/routing/routes.dart';
+import '../../../../../core/theming/app_colors.dart';
 import 'setting_item.dart';
 
 class CompanySettingSection2 extends StatelessWidget {

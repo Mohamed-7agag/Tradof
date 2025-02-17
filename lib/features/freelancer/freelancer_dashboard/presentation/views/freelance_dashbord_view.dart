@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tradof/core/helpers/spacing.dart';
-import 'package:tradof/core/theming/app_colors.dart';
 
+import '../../../../../core/helpers/spacing.dart';
+import '../../../../../core/theming/app_colors.dart';
 import '../../../freelancer_profile/data/model/freelancer_model.dart';
 import '../widgets/freelancer_dashboard_stack.dart';
 import '../widgets/freelancer_profile_section.dart';

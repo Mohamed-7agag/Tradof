@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/routing/routes.dart';
 
+import '../../../../core/helpers/extensions.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/theming/font_weight_helper.dart';
@@ -40,7 +40,8 @@ class HaveAccountSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Have an Account?', style: AppStyle.robotoRegular12.copyWith(color: AppColors.white)),
+        Text('Have an Account?',
+            style: AppStyle.robotoRegular12.copyWith(color: AppColors.white)),
         TextButton(
           onPressed: () {},
           child: Text(

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:tradof/core/helpers/extensions.dart';
-import 'package:tradof/core/routing/routes.dart';
-import 'package:tradof/core/theming/app_colors.dart';
-import 'package:tradof/features/company/company_profile/data/model/company_model.dart';
-import 'package:tradof/features/company/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
-import 'package:tradof/features/company/company_setting/presentation/widgets/setting_item.dart';
+
+import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/routing/routes.dart';
+import '../../../../../core/theming/app_colors.dart';
+import '../../../company_profile/data/model/company_model.dart';
+import '../../../company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
+import 'setting_item.dart';
 
 class CompanySettingsSection1 extends StatelessWidget {
   const CompanySettingsSection1({required this.companyModel, super.key});
