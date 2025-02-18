@@ -138,6 +138,23 @@ class ProjectCubit extends Cubit<ProjectState> {
     }
   }
 
+  //! get started projects
+  Future<void> getStartedProjects() async {
+    emit(state.copyWith(status: ProjectStatus.getStartedtProjectsLoading));
+    try {
+      final projects = await _projectRepo.getStartedProjects();
+      emit(state.copyWith(
+        status: ProjectStatus.getStartedtProjectsSuccess,
+        startedProjects: projects,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.getStartedtProjectsFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
   void setCreateProjectData({
     LanguageModel? fromLanguage,
     LanguageModel? toLanguage,

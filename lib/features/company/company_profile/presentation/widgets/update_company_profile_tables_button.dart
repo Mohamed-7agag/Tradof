@@ -37,10 +37,7 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
       builder: (context, state) {
         return BlocBuilder<TablesCubit, TablesState>(
           buildWhen: (previous, current) =>
-              current.selectedPreferedLanguages !=
-                  previous.selectedPreferedLanguages ||
-              current.selectedIndustriesServed !=
-                  previous.selectedIndustriesServed,
+              _buildWhenTablesCubit(current, previous),
           builder: (context, tablesState) {
             return (state.status.isPreferedLanguagesLoading ||
                     state.status.isIndustriesServedLoading)
@@ -49,13 +46,13 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
                     text: 'Update',
                     onPressed: () {
                       if (isPreferedLanguages) {
-                        _getDifferencePreferedLanguagesList(
+                        _updatePreferedLanguages(
                           context,
                           tablesState.selectedPreferedLanguages,
                           companyModel.preferredLanguages,
                         );
                       } else {
-                        _getDifferenceIndustriesServedList(
+                        _updateIndustriesServed(
                           context,
                           tablesState.selectedIndustriesServed,
                           companyModel.specializations,
@@ -69,6 +66,12 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
     );
   }
 
+  bool _buildWhenTablesCubit(TablesState current, TablesState previous) {
+    return current.selectedPreferedLanguages !=
+            previous.selectedPreferedLanguages ||
+        current.selectedIndustriesServed != previous.selectedIndustriesServed;
+  }
+
   bool _listenAndBuildWhen(CompanyProfileState current) {
     return current.status.isPreferedLanguagesFailure ||
         current.status.isIndustriesServedFailure ||
@@ -78,11 +81,15 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
         current.status.isIndustriesServedLoading;
   }
 
-  void _getDifferencePreferedLanguagesList(BuildContext context,
-      List<LanguageModel> newList, List<LanguageModel> oldList) {
-    if (!newList.isNullOrEmpty()) {
-      final addedItems = newList.where((item) => !oldList.contains(item));
-      final removedItems = oldList.where((item) => !newList.contains(item));
+  void _updatePreferedLanguages(
+      BuildContext context,
+      List<LanguageModel> newPreferedLanguages,
+      List<LanguageModel> oldPreferedLanguages) {
+    if (newPreferedLanguages.isNotEmpty) {
+      final addedItems = newPreferedLanguages
+          .where((item) => !oldPreferedLanguages.contains(item));
+      final removedItems = oldPreferedLanguages
+          .where((item) => !newPreferedLanguages.contains(item));
       if (addedItems.isEmpty && removedItems.isEmpty) {
         infoToast(context, 'Info', 'No changes detected');
         return;
@@ -102,11 +109,15 @@ class UpdateCompanyProfileTablesButton extends StatelessWidget {
     }
   }
 
-  void _getDifferenceIndustriesServedList(BuildContext context,
-      List<SpecializationModel> newList, List<SpecializationModel> oldList) {
-    if (!newList.isNullOrEmpty()) {
-      final addedItems = newList.where((item) => !oldList.contains(item));
-      final removedItems = oldList.where((item) => !newList.contains(item));
+  void _updateIndustriesServed(
+      BuildContext context,
+      List<SpecializationModel> newIndustries,
+      List<SpecializationModel> oldIndustries) {
+    if (newIndustries.isNotEmpty) {
+      final addedItems =
+          newIndustries.where((item) => !oldIndustries.contains(item));
+      final removedItems =
+          oldIndustries.where((item) => !newIndustries.contains(item));
       if (addedItems.isEmpty && removedItems.isEmpty) {
         infoToast(context, 'Info', 'No changes detected');
         return;

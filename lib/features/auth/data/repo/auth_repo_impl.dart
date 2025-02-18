@@ -6,8 +6,8 @@ import 'auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final ApiServices _apiServices;
-
   AuthRepoImpl({required ApiServices apiServices}) : _apiServices = apiServices;
+
   @override
   Future<LoginResponseModel> login(String email, String password) async {
     final response = await _apiServices.post(

@@ -42,9 +42,21 @@ class ProjectRepoImpl implements ProjectRepo {
   }
 
   @override
+  Future<List<ProjectModel>> getStartedProjects() async{
+    final response = await _apiServices.get(
+      EndPoint.getStartedProjects,
+    );
+    return List<ProjectModel>.from(
+      response.map((project) => ProjectModel.fromJson(project)),
+    );
+  }
+
+  @override
   Future<void> deleteProject(int projectId) async {
     await _apiServices.delete(
       EndPoint.deleteProject(projectId),
     );
   }
+  
+  
 }

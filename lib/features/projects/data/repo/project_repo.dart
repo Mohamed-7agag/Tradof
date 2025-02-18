@@ -6,4 +6,5 @@ abstract class ProjectRepo {
   Future<void> updateProject(CreateProjectRequestModel model);
   Future<void> deleteProject(int projectId);
   Future<List<ProjectModel>> getUpcomingProjects();
+  Future<List<ProjectModel>> getStartedProjects();
 }

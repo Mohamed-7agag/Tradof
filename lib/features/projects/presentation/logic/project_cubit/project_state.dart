@@ -8,6 +8,9 @@ enum ProjectStatus {
   getUpcomingProjectsLoading,
   getUpcomingProjectsSuccess,
   getUpcomingProjectsFailure,
+  getStartedtProjectsLoading,
+  getStartedtProjectsSuccess,
+  getStartedtProjectsFailure,
   updateProjectLoading,
   updateProjectSuccess,
   updateProjectFailure,
@@ -28,6 +31,13 @@ extension ProjectStatusX on ProjectStatus {
   bool get isGetUpcomingProjectsFailure =>
       this == ProjectStatus.getUpcomingProjectsFailure;
 
+  bool get isGetStartedtProjectsLoading =>
+      this == ProjectStatus.getStartedtProjectsLoading;
+  bool get isGetStartedtProjectsSuccess =>
+      this == ProjectStatus.getStartedtProjectsSuccess;
+  bool get isGetStartedtProjectsFailure =>
+      this == ProjectStatus.getStartedtProjectsFailure;
+
   bool get isUpdateProjectLoading => this == ProjectStatus.updateProjectLoading;
   bool get isUpdateProjectSuccess => this == ProjectStatus.updateProjectSuccess;
   bool get isUpdateProjectFailure => this == ProjectStatus.updateProjectFailure;
@@ -45,6 +55,7 @@ class ProjectState extends Equatable {
   final LanguageModel? toLanguage;
   final int? industryId;
   final List<ProjectModel> upcomingProjects;
+  final List<ProjectModel> startedProjects;
 
   const ProjectState({
     this.status = ProjectStatus.initial,
@@ -54,6 +65,7 @@ class ProjectState extends Equatable {
     this.toLanguage,
     this.industryId,
     this.upcomingProjects = const [],
+    this.startedProjects = const [],
   });
 
   ProjectState copyWith({
@@ -64,6 +76,7 @@ class ProjectState extends Equatable {
     LanguageModel? toLanguage,
     int? industryId,
     List<ProjectModel>? upcomingProjects,
+    List<ProjectModel>? startedProjects,
   }) {
     return ProjectState(
       status: status ?? this.status,
@@ -73,6 +86,7 @@ class ProjectState extends Equatable {
       toLanguage: toLanguage ?? this.toLanguage,
       industryId: industryId ?? this.industryId,
       upcomingProjects: upcomingProjects ?? this.upcomingProjects,
+      startedProjects: startedProjects ?? this.startedProjects,
     );
   }
 
@@ -85,5 +99,6 @@ class ProjectState extends Equatable {
         toLanguage,
         industryId,
         upcomingProjects,
+        startedProjects,
       ];
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,9 +39,7 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
       builder: (context, state) {
         return BlocBuilder<TablesCubit, TablesState>(
           buildWhen: (previous, current) =>
-              current.selectedLanguagePair != previous.selectedLanguagePair ||
-              current.selectedSpecializations !=
-                  previous.selectedSpecializations,
+              _buildWhenTablesCubit(current, previous),
           builder: (context, tablesState) {
             return (state.status.isLanguagePairLoading ||
                     state.status.isSpecializationLoading)
@@ -52,13 +48,13 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
                     text: 'Update',
                     onPressed: () {
                       if (islanguagePair) {
-                        _getDifferenceLanguagePairsList(
+                        _updateLanguagePairs(
                           context,
                           tablesState.selectedLanguagePair,
                           freelancerModel.languagePairs,
                         );
                       } else {
-                        _getDifferenceSpecializationList(
+                        _updateSpecializations(
                           context,
                           tablesState.selectedSpecializations,
                           freelancerModel.specializations,
@@ -72,6 +68,11 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
     );
   }
 
+  bool _buildWhenTablesCubit(TablesState current, TablesState previous) {
+    return current.selectedLanguagePair != previous.selectedLanguagePair ||
+        current.selectedSpecializations != previous.selectedSpecializations;
+  }
+
   bool _listenAndBuildWhen(FreelancerProfileState current) {
     return current.status.isLanguagePairFailure ||
         current.status.isSpecializationFailure ||
@@ -81,19 +82,18 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
         current.status.isSpecializationLoading;
   }
 
-  void _getDifferenceLanguagePairsList(
+  void _updateLanguagePairs(
       BuildContext context,
-      List<LanguagePairModel> newList,
-      List<FreelancerLangaugePairModel> oldList) {
-    if (!newList.isNullOrEmpty()) {
-      final convertedOldList = convertLanguagePairs(oldList);
+      List<LanguagePairModel> newLanguagePairs,
+      List<FreelancerLangaugePairModel> oldLanguagePairs) {
+    if (newLanguagePairs.isNotEmpty) {
+      final convertedOldList = convertLanguagePairs(oldLanguagePairs);
       final addedItems =
-          newList.where((item) => !convertedOldList.contains(item));
+          newLanguagePairs.where((item) => !convertedOldList.contains(item));
       final removedItems =
-          convertedOldList.where((item) => !newList.contains(item));
+          convertedOldList.where((item) => !newLanguagePairs.contains(item));
       if (addedItems.isEmpty && removedItems.isEmpty) {
         infoToast(context, 'Info', 'No changes detected');
-        log('from first');
         return;
       }
       final addedLanguagePairsIds = addedItems
@@ -114,16 +114,17 @@ class UpdateFreelancerProfileTablesButton extends StatelessWidget {
     }
   }
 
-  void _getDifferenceSpecializationList(BuildContext context,
-      List<SpecializationModel> newList, List<SpecializationModel> oldList) {
-    if (!newList.isNullOrEmpty()) {
-      final addedItems = newList.where((item) => !oldList.contains(item));
-      final removedItems = oldList.where((item) => !newList.contains(item));
-      log('addedItems: $addedItems');
-      log('removedItems: $removedItems');
+  void _updateSpecializations(
+      BuildContext context,
+      List<SpecializationModel> newSpecializations,
+      List<SpecializationModel> oldSpecializations) {
+    if (newSpecializations.isNotEmpty) {
+      final addedItems = newSpecializations
+          .where((item) => !oldSpecializations.contains(item));
+      final removedItems = oldSpecializations
+          .where((item) => !newSpecializations.contains(item));
       if (addedItems.isEmpty && removedItems.isEmpty) {
         infoToast(context, 'Info', 'No changes detected');
-        log('from Second');
         return;
       }
       final addedSpecializationIds = addedItems.map((item) => item.id).toList();
