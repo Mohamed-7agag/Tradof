@@ -31,6 +31,13 @@ class SpecializationTable extends StatelessWidget {
             InkWell(
               borderRadius: BorderRadius.circular(4),
               onTap: () {
+                if (context
+                    .read<MetaDataCubit>()
+                    .state
+                    .specializations
+                    .isEmpty) {
+                  context.read<MetaDataCubit>().getSpecializations();
+                }
                 _showSpecializationDialog(context);
               },
               child: const HugeIcon(
@@ -116,16 +123,12 @@ class SpecializationTable extends StatelessWidget {
 
   _showSpecializationDialog(BuildContext context) {
     final tablesCubit = context.read<TablesCubit>();
-    final metaDataCubit = context.read<MetaDataCubit>();
 
     showDialog(
       context: context,
       builder: (context) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider.value(value: tablesCubit),
-            BlocProvider.value(value: metaDataCubit..getSpecializations()),
-          ],
+        return BlocProvider.value(
+          value: tablesCubit,
           child: AlertDialog(
             title: Text(
               'Select Specialization',

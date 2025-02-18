@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/di/di.dart';
 import '../../core/helpers/exit_dialog.dart';
+import '../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../core/utils/widgets/custom_animated_lazy_indexed_stack.dart';
 import '../../core/utils/widgets/custom_bottom_nav_bar.dart';
 import '../../core/utils/widgets/custom_failure_widget.dart';
@@ -28,6 +29,15 @@ class CompanyBottomNavBarView extends StatefulWidget {
 
 class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
   int currentIndex = 0;
+
+  @override
+  void initState() {
+    //! call using isolate
+    if (context.read<MetaDataCubit>().state.isLoaded == false) {
+      context.read<MetaDataCubit>().fetchAllMetaData();
+    }
+    super.initState();
+  }
 
   List<Widget> _buildIndexedStackChildren(CompanyProfileState state) {
     return [

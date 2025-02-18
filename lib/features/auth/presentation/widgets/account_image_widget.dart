@@ -53,11 +53,11 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
               onPressed: _pickImageFromGallery,
               icon: const HugeIcon(
                 icon: HugeIcons.strokeRoundedCamera01,
-                color: AppColors.lightOrange,
+                color: AppColors.white,
                 size: 22,
               ),
               style: IconButton.styleFrom(
-                backgroundColor: AppColors.white,
+                backgroundColor: AppColors.lightOrange,
                 shadowColor: AppColors.grey,
                 elevation: 0.01,
               ),
@@ -74,14 +74,14 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
             borderRadius: BorderRadius.circular(50),
             child: Image.file(
               _image!,
-              width: 90,
-              height: 90,
-              fit: BoxFit.contain,
+              width: 88,
+              height: 88,
+              fit: BoxFit.cover,
             ),
           )
         : SlideInLeft(
             from: 400,
-            child: SvgPicture.asset('assets/images/person.svg', width: 90),
+            child: SvgPicture.asset('assets/images/person.svg', width: 85),
           );
   }
 }

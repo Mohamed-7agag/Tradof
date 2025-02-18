@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
+import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../logic/registeration_cubit/registeration_cubit.dart';
 import '../widgets/dot_indicator.dart';
 import 'company_register_view.dart';
@@ -25,6 +26,10 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
   @override
   void initState() {
     _pageController = PageController();
+    //! call using isolate
+    if (context.read<MetaDataCubit>().state.isLoaded == false) {
+      context.read<MetaDataCubit>().fetchAllMetaData();
+    }
     super.initState();
   }
 

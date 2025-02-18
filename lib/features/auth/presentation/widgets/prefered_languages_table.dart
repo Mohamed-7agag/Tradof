@@ -32,6 +32,9 @@ class PreferedLanguagesTable extends StatelessWidget {
             InkWell(
               borderRadius: BorderRadius.circular(4),
               onTap: () {
+                if (context.read<MetaDataCubit>().state.languages.isEmpty) {
+                  context.read<MetaDataCubit>().getLanguages();
+                }
                 _showPreferedLanguageDialog(context);
               },
               child: const HugeIcon(
@@ -138,17 +141,13 @@ class PreferedLanguagesTable extends StatelessWidget {
   }
 
   _showPreferedLanguageDialog(BuildContext context) {
-    final cubit = context.read<TablesCubit>();
-    final metaDataCubit = context.read<MetaDataCubit>();
+    final tablesCubit = context.read<TablesCubit>();
 
     showDialog(
       context: context,
       builder: (context) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider.value(value: cubit),
-            BlocProvider.value(value: metaDataCubit..getLanguages()),
-          ],
+        return BlocProvider.value(
+          value: tablesCubit,
           child: const LanguageSelectionDialog(),
         );
       },

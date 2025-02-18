@@ -20,6 +20,7 @@ class FreelancerSettingProfileInfo extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: ListTile(
+        horizontalTitleGap: 12,
         contentPadding: EdgeInsets.symmetric(
           vertical: 5.h,
           horizontal: 14.w,

@@ -10,9 +10,15 @@ import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart
 import '../../../../projects/presentation/widgets/upcoming_project_item.dart';
 import '../../../company_profile/data/model/company_model.dart';
 
-class UpcomingProjectsSection extends StatelessWidget {
+class UpcomingProjectsSection extends StatefulWidget {
   const UpcomingProjectsSection({required this.companyModel, super.key});
   final CompanyModel companyModel;
+
+  @override
+  State<UpcomingProjectsSection> createState() => _UpcomingProjectsSectionState();
+}
+
+class _UpcomingProjectsSectionState extends State<UpcomingProjectsSection> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProjectCubit, ProjectState>(
@@ -23,7 +29,7 @@ class UpcomingProjectsSection extends StatelessWidget {
           },
           child: state.status.isGetUpcomingProjectsSuccess
               ? BuildUpcomingProjects(
-                  companyModel: companyModel,
+                  companyModel: widget.companyModel,
                   projects: state.upcomingProjects,
                 )
               : state.status.isGetUpcomingProjectsFailure

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
+import '../../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../../core/utils/widgets/custom_text_field.dart';
 import '../../../../auth/presentation/widgets/phone_number_text_field.dart';
 import '../../../company_profile/data/model/company_model.dart';
@@ -45,6 +46,9 @@ class _BuildUpdateCompanyProfileViewState
         TextEditingController(text: widget.companyModel.companyAddress);
     companyNameController =
         TextEditingController(text: widget.companyModel.companyName);
+    if (context.read<MetaDataCubit>().state.countries.isEmpty) {
+      context.read<MetaDataCubit>().getCountries();
+    }
   }
 
   @override

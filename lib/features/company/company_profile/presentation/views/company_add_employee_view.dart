@@ -43,6 +43,9 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
     phoneNumberController = TextEditingController();
     passwordController = TextEditingController();
     jobTitleController = TextEditingController();
+    if (context.read<MetaDataCubit>().state.countries.isEmpty) {
+      context.read<MetaDataCubit>().getCountries();
+    }
     super.initState();
   }
 
@@ -163,26 +166,27 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
                   delay: const Duration(milliseconds: 525),
                   child: BlocBuilder<MetaDataCubit, MetaDataState>(
                     builder: (context, state) {
-                      if (state.status.isGetCountries) {
-                        return CountryDropDown(
-                          hint: 'Country',
-                          items: state.countries,
-                          borderColor: AppColors.grey,
-                          textColor: AppColors.darkGrey,
-                          dropdownColor: AppColors.white,
-                          iconColor: AppColors.darkGrey,
-                          onChanged: (country) {
-                            context
-                                .read<CompanyProfileCubit>()
-                                .setGroupNameAndCountryId(
-                                  countryId: country?.id,
-                                );
-                          },
-                        );
-                      } else if (state.status.isError) {
+                      if (state.status.isError) {
                         return CustomFailureWidget(text: state.errorMessage);
+                      } else if (state.status.isLoading) {
+                        return const CustomLoadingWidget();
                       }
-                      return const CustomLoadingWidget();
+
+                      return CountryDropDown(
+                        hint: 'Country',
+                        items: state.countries,
+                        borderColor: AppColors.grey,
+                        textColor: AppColors.darkGrey,
+                        dropdownColor: AppColors.white,
+                        iconColor: AppColors.darkGrey,
+                        onChanged: (country) {
+                          context
+                              .read<CompanyProfileCubit>()
+                              .setGroupNameAndCountryId(
+                                countryId: country?.id,
+                              );
+                        },
+                      );
                     },
                   ),
                 ),

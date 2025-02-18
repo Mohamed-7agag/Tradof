@@ -3,13 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/helpers/extensions.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
-import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
-import '../../../../core/utils/widgets/custom_loading_dialog.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
-import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../logic/tables_cubit/tables_cubit.dart';
 import '../widgets/company_registeration_button.dart';
 import '../widgets/country_drop_down_section.dart';
@@ -30,7 +26,6 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
   late final TextEditingController companyNameController;
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => loadingDialog(context));
     jobTitleController = TextEditingController();
     locationCompanyController = TextEditingController();
     companyNameController = TextEditingController();
@@ -49,89 +44,76 @@ class _CompanyRegisterViewState extends State<CompanyRegisterView> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TablesCubit(),
-      child: BlocListener<MetaDataCubit, MetaDataState>(
-        listener: (context, state) {
-          if (state.status.isError) {
-            context.pop();
-            context.pop();
-            errorToast(context, 'Error', state.errorMessage);
-          } else if (state.languages.isNotEmpty &&
-              state.countries.isNotEmpty &&
-              state.specializations.isNotEmpty) {
-            context.pop();
-          }
-        },
-        child: Column(
-          children: [
-            const CreateAccountCurveWithImage(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                children: [
-                  SlideInRight(
-                    from: 400,
-                    child: CustomTextField(
-                      labelText: 'Job Title',
-                      labelColor: AppColors.white,
-                      controller: jobTitleController,
-                      keyboardType: TextInputType.text,
-                      outlineBorder: true,
-                    ),
+      child: Column(
+        children: [
+          const CreateAccountCurveWithImage(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              children: [
+                SlideInRight(
+                  from: 400,
+                  child: CustomTextField(
+                    labelText: 'Job Title',
+                    labelColor: AppColors.white,
+                    controller: jobTitleController,
+                    keyboardType: TextInputType.text,
+                    outlineBorder: true,
                   ),
-                  verticalSpace(12),
-                  SlideInRight(
-                    from: 400,
-                    delay: const Duration(milliseconds: 125),
-                    child: CustomTextField(
-                      labelText: 'Company Name',
-                      labelColor: AppColors.white,
-                      controller: companyNameController,
-                      keyboardType: TextInputType.text,
-                      outlineBorder: true,
-                    ),
+                ),
+                verticalSpace(12),
+                SlideInRight(
+                  from: 400,
+                  delay: const Duration(milliseconds: 125),
+                  child: CustomTextField(
+                    labelText: 'Company Name',
+                    labelColor: AppColors.white,
+                    controller: companyNameController,
+                    keyboardType: TextInputType.text,
+                    outlineBorder: true,
                   ),
-                  verticalSpace(12),
-                  const CountryDropDownSection(),
-                  verticalSpace(12),
-                  SlideInRight(
-                    from: 400,
-                    delay: const Duration(milliseconds: 375),
-                    child: CustomTextField(
-                      labelText: 'Location Company',
-                      labelColor: AppColors.white,
-                      controller: locationCompanyController,
-                      keyboardType: TextInputType.text,
-                      outlineBorder: true,
-                    ),
+                ),
+                verticalSpace(12),
+                const CountryDropDownSection(),
+                verticalSpace(12),
+                SlideInRight(
+                  from: 400,
+                  delay: const Duration(milliseconds: 375),
+                  child: CustomTextField(
+                    labelText: 'Company Location',
+                    labelColor: AppColors.white,
+                    controller: locationCompanyController,
+                    keyboardType: TextInputType.text,
+                    outlineBorder: true,
                   ),
-                  verticalSpace(28),
-                  SlideInLeft(
-                    from: 400,
-                    delay: const Duration(milliseconds: 500),
-                    child: const PreferedLanguagesTable(),
+                ),
+                verticalSpace(28),
+                SlideInLeft(
+                  from: 400,
+                  delay: const Duration(milliseconds: 500),
+                  child: const PreferedLanguagesTable(),
+                ),
+                verticalSpace(28),
+                SlideInLeft(
+                  from: 400,
+                  delay: const Duration(milliseconds: 625),
+                  child: const IndustriesServedTable(),
+                ),
+                verticalSpace(40),
+                SlideInUp(
+                  from: 400,
+                  delay: const Duration(milliseconds: 750),
+                  child: CompanyRegisterationButton(
+                    jobTitleController: jobTitleController,
+                    locationCompanyController: locationCompanyController,
+                    companyNameController: companyNameController,
                   ),
-                  verticalSpace(28),
-                  SlideInLeft(
-                    from: 400,
-                    delay: const Duration(milliseconds: 625),
-                    child: const IndustriesServedTable(),
-                  ),
-                  verticalSpace(40),
-                  SlideInUp(
-                    from: 400,
-                    delay: const Duration(milliseconds: 750),
-                    child: CompanyRegisterationButton(
-                      jobTitleController: jobTitleController,
-                      locationCompanyController: locationCompanyController,
-                      companyNameController: companyNameController,
-                    ),
-                  ),
-                  verticalSpace(20),
-                ],
-              ),
+                ),
+                verticalSpace(20),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

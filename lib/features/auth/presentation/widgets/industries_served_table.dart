@@ -29,6 +29,13 @@ class IndustriesServedTable extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
+                if (context
+                    .read<MetaDataCubit>()
+                    .state
+                    .specializations
+                    .isEmpty) {
+                  context.read<MetaDataCubit>().getSpecializations();
+                }
                 _showIndusteriesServedDialog(context);
               },
               child: const HugeIcon(
@@ -114,16 +121,12 @@ class IndustriesServedTable extends StatelessWidget {
 
   _showIndusteriesServedDialog(BuildContext context) {
     final tablesCubit = context.read<TablesCubit>();
-    final metaDataCubit = context.read<MetaDataCubit>();
 
     showDialog(
       context: context,
       builder: (context) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider.value(value: tablesCubit),
-            BlocProvider.value(value: metaDataCubit..getSpecializations()),
-          ],
+        return BlocProvider.value(
+          value: tablesCubit,
           child: AlertDialog(
             title: Text(
               'Industries Served',

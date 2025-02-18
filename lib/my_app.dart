@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'core/di/di.dart';
 import 'core/helpers/navigation_handler.dart';
 import 'core/routing/app_router.dart';
 import 'core/theming/app_colors.dart';
+import 'core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,13 +17,16 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       builder: (context, child) {
-        return MaterialApp(
-          theme: _appTheme(),
-          builder: _mediaQueryWidget,
-          debugShowCheckedModeBanner: false,
-          navigatorKey: NavigationHandler.navigatorKey,
-          initialRoute: AppRouter.initialRoute(),
-          onGenerateRoute: AppRouter.generateRoute,
+        return BlocProvider(
+          create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
+          child: MaterialApp(
+            theme: _appTheme(),
+            builder: _mediaQueryWidget,
+            debugShowCheckedModeBanner: false,
+            navigatorKey: NavigationHandler.navigatorKey,
+            initialRoute: AppRouter.initialRoute(),
+            onGenerateRoute: AppRouter.generateRoute,
+          ),
         );
       },
     );

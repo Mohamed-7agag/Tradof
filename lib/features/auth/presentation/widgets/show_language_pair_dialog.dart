@@ -15,7 +15,6 @@ import 'language_drop_down.dart';
 
 showLanguagePairDialog(BuildContext context) {
   final tablesCubit = context.read<TablesCubit>();
-  final metaDataCubit = context.read<MetaDataCubit>();
   LanguageModel? fromLanguage, toLanguage;
   AwesomeDialog(
     context: context,
@@ -23,44 +22,41 @@ showLanguagePairDialog(BuildContext context) {
     animType: AnimType.rightSlide,
     title: 'Language Pair',
     dialogBorderRadius: BorderRadius.circular(12),
-    body: BlocProvider.value(
-      value: metaDataCubit..getLanguages(),
-      child: BlocBuilder<MetaDataCubit, MetaDataState>(
-        builder: (context, state) {
-          if (state.status.isGetLanguages) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Column(
-                children: [
-                  LanguageDropDown(
-                    hint: 'From',
-                    items: state.languages,
-                    onChanged: (value) {
-                      fromLanguage = value;
-                    },
-                  ),
-                  verticalSpace(12),
-                  LanguageDropDown(
-                    hint: 'To',
-                    items: state.languages,
-                    onChanged: (value) {
-                      toLanguage = value;
-                    },
-                  ),
-                ],
-              ),
-            );
-          } else if (state.status.isError) {
-            return CustomFailureWidget(
-              text: state.errorMessage,
-              textColor: AppColors.white,
-            );
-          }
+    body: BlocBuilder<MetaDataCubit, MetaDataState>(
+      builder: (context, state) {
+        if (state.status.isError) {
+          return CustomFailureWidget(
+            text: state.errorMessage,
+            textColor: AppColors.white,
+          );
+        } else if (state.status.isLoading) {
           return const CustomLoadingWidget(
             color: AppColors.white,
           );
-        },
-      ),
+        }
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: Column(
+            children: [
+              LanguageDropDown(
+                hint: 'From',
+                items: state.languages,
+                onChanged: (value) {
+                  fromLanguage = value;
+                },
+              ),
+              verticalSpace(12),
+              LanguageDropDown(
+                hint: 'To',
+                items: state.languages,
+                onChanged: (value) {
+                  toLanguage = value;
+                },
+              ),
+            ],
+          ),
+        );
+      },
     ),
     padding: const EdgeInsets.symmetric(horizontal: 14),
     dialogBackgroundColor: AppColors.darkGrey,

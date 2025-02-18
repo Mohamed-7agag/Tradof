@@ -56,11 +56,11 @@ class _UpdateCompanyProfileImageState extends State<UpdateCompanyProfileImage> {
               onPressed: _pickImageFromGallery,
               icon: const HugeIcon(
                 icon: HugeIcons.strokeRoundedCamera01,
-                color: AppColors.lightOrange,
+                color: AppColors.white,
                 size: 22,
               ),
               style: IconButton.styleFrom(
-                backgroundColor: AppColors.white,
+                backgroundColor: AppColors.lightOrange,
                 shadowColor: AppColors.grey,
                 elevation: 0.01,
               ),
@@ -77,22 +77,22 @@ class _UpdateCompanyProfileImageState extends State<UpdateCompanyProfileImage> {
             borderRadius: BorderRadius.circular(50),
             child: Image.file(
               _image!,
-              width: 90,
-              height: 90,
-              fit: BoxFit.contain,
+              width: 88,
+              height: 88,
+              fit: BoxFit.cover,
             ),
           )
         : SlideInLeft(
             from: 400,
             child: widget.imageUrl == null
-                ? SvgPicture.asset('assets/images/person.svg', width: 90)
+                ? SvgPicture.asset('assets/images/person.svg', width: 88)
                 : ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: CachedNetworkImage(
                       imageUrl: widget.imageUrl!,
-                      width: 90,
-                      height: 90,
-                      fit: BoxFit.contain,
+                      width: 88,
+                      height: 88,
+                      fit: BoxFit.cover,
                     ),
                   ),
           );

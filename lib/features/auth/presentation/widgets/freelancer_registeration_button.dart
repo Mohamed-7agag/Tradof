@@ -48,9 +48,9 @@ class FreelancerRegisterationButton extends StatelessWidget {
         context.read<TablesCubit>().state.selectedSpecializations;
     if (state.countryId == null) {
       errorToast(context, 'Error', 'Please select a country');
-    } else if (languagePairs.isNullOrEmpty()) {
+    } else if (languagePairs.isEmpty) {
       errorToast(context, 'Error', 'Please select at least one language pair');
-    } else if (specializations.isNullOrEmpty()) {
+    } else if (specializations.isEmpty) {
       errorToast(context, 'Error', 'Please select at least one specialization');
     } else {
       context

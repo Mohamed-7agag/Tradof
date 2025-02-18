@@ -35,7 +35,6 @@ import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../di/di.dart';
 import '../utils/app_constants.dart';
-import '../utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -59,13 +58,8 @@ class AppRouter {
         );
       case Routes.createAccountPageViewRoute:
         return MaterialPageRoute(
-          builder: (_) => MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (context) => RegisterationCubit(getIt())),
-              BlocProvider(
-                create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
-              ),
-            ],
+          builder: (_) => BlocProvider(
+            create: (context) => RegisterationCubit(getIt()),
             child: const CreateAccountPageView(),
           ),
         );
@@ -81,28 +75,25 @@ class AppRouter {
         );
       case Routes.companyBottomNavBarViewRoute:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                CompanyProfileCubit(getIt())..getCompanyProfile(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    CompanyProfileCubit(getIt())..getCompanyProfile(),
+              ),
+            ],
             child: const CompanyBottomNavBarView(),
           ),
         );
       case Routes.updateCompanyProfileTablesViewRoute:
         final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
-          builder: (_) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => MetaDataCubit(getIt()),
+          builder: (_) => BlocProvider(
+            create: (context) => TablesCubit()
+              ..addInitialData(
+                industriesServed: data['data'].specializations,
+                preferedLanguages: data['data'].preferredLanguages,
               ),
-              BlocProvider(
-                create: (context) => TablesCubit()
-                  ..addInitialData(
-                    industriesServed: data['data'].specializations,
-                    preferedLanguages: data['data'].preferredLanguages,
-                  ),
-              ),
-            ],
             child: UpdateCompanyProfileTablesView(
               companyModel: data['data'],
               isPreferedLanguages: data['isPreferedLanguages'],
@@ -119,7 +110,8 @@ class AppRouter {
         );
       case Routes.changeCompanyPasswordViewRoute:
         return MaterialPageRoute(
-            builder: (_) => const ChangeCompanyPasswordView());
+          builder: (_) => const ChangeCompanyPasswordView(),
+        );
       case Routes.addUpdateSocialMediaViewRoute:
         final socialMedia = settings.arguments as List<SocialMediaModel>;
         return MaterialPageRoute(
@@ -142,9 +134,6 @@ class AppRouter {
             providers: [
               BlocProvider(
                 create: (context) => CompanyProfileCubit(getIt()),
-              ),
-              BlocProvider(
-                create: (context) => MetaDataCubit(getIt())..getCountries(),
               ),
             ],
             child: const CompanyAddEmployeeView(),
@@ -182,19 +171,12 @@ class AppRouter {
       case Routes.updateFreelancerProfileTablesViewRoute:
         final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
-          builder: (_) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => MetaDataCubit(getIt()),
+          builder: (_) => BlocProvider(
+            create: (context) => TablesCubit()
+              ..addInitialData(
+                freelancerLanguagePairs: data['data'].languagePairs,
+                specializations: data['data'].specializations,
               ),
-              BlocProvider(
-                create: (context) => TablesCubit()
-                  ..addInitialData(
-                    freelancerLanguagePairs: data['data'].languagePairs,
-                    specializations: data['data'].specializations,
-                  ),
-              ),
-            ],
             child: UpdateFreelancerProfileTablesView(
               freelancerModel: data['data'],
               isLanguagePair: data['isLanguagePair'],
