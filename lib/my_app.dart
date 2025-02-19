@@ -19,16 +19,20 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return BlocProvider(
           create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
-          child: MaterialApp(
-            theme: _appTheme(),
-            builder: _mediaQueryWidget,
-            debugShowCheckedModeBanner: false,
-            navigatorKey: NavigationHandler.navigatorKey,
-            initialRoute: AppRouter.initialRoute(),
-            onGenerateRoute: AppRouter.generateRoute,
-          ),
+          child: _myMaterialApp(),
         );
       },
+    );
+  }
+
+  MaterialApp _myMaterialApp() {
+    return MaterialApp(
+      theme: _appTheme(),
+      builder: _mediaQueryWidget,
+      debugShowCheckedModeBanner: false,
+      navigatorKey: NavigationHandler.navigatorKey,
+      initialRoute: AppRouter.initialRoute(),
+      onGenerateRoute: AppRouter.generateRoute,
     );
   }
 

@@ -21,7 +21,7 @@ class DeleteProjectSection extends StatelessWidget {
         if (state.status.isDeleteProjectSuccess) {
           context.pop();
           successToast(context, 'Success', state.message);
-          context.pop();
+          context.pop(result: true);
         } else if (state.status.isDeleteProjectFailure) {
           context.pop();
           errorToast(context, 'Error', state.message);

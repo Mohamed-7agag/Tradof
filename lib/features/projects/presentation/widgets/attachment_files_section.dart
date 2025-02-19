@@ -60,7 +60,7 @@ class AttachmentFilesSection extends StatelessWidget {
           },
         ),
         Positioned(
-          bottom: -25,
+          bottom: -20,
           right: 15,
           child: IconButton(
             onPressed: () => _pickFiles(context),

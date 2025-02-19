@@ -7,7 +7,6 @@ import '../../features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
-import '../../features/auth/presentation/views/verification_view.dart';
 import '../../features/company/company_bottom_nav_bar_view.dart';
 import '../../features/company/company_profile/data/model/company_model.dart';
 import '../../features/company/company_profile/data/model/social_media_model.dart';
@@ -41,7 +40,9 @@ class AppRouter {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.welcomeViewRoute:
-        return MaterialPageRoute(builder: (_) => const WelcomeView());
+        return MaterialPageRoute(
+          builder: (_) => const WelcomeView(),
+        );
       case Routes.loginViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -63,8 +64,6 @@ class AppRouter {
             child: const CreateAccountPageView(),
           ),
         );
-      case Routes.verificationViewRoute:
-        return MaterialPageRoute(builder: (_) => const VerificationView());
       case Routes.freelancerBottomNavBarViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -77,6 +76,9 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
+              BlocProvider(
+                create: (context) => ProjectCubit(getIt()),
+              ),
               BlocProvider(
                 create: (context) =>
                     CompanyProfileCubit(getIt())..getCompanyProfile(),
@@ -183,7 +185,7 @@ class AppRouter {
             ),
           ),
         );
-      case Routes.updateProjectViewRoute:
+      case Routes.projectDetailsViewRoute:
         final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
