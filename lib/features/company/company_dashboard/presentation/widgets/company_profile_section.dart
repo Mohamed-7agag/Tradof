@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+import '../../../../../core/helpers/extensions.dart';
 import '../../../../../core/helpers/spacing.dart';
+import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 import '../../../company_profile/data/model/company_model.dart';
@@ -38,9 +40,14 @@ class CompanyProfileSection extends StatelessWidget {
             color: AppColors.white,
           ),
           horizontalSpace(18),
-          const HugeIcon(
-            icon: HugeIcons.strokeRoundedCalendar02,
-            color: AppColors.white,
+          GestureDetector(
+            onTap: () {
+              context.pushNamed(Routes.projectWorkspaceViewRoute);
+            },
+            child: const HugeIcon(
+              icon: HugeIcons.strokeRoundedCalendar02,
+              color: AppColors.white,
+            ),
           ),
           horizontalSpace(4),
         ],

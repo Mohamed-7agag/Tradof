@@ -30,6 +30,7 @@ import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../features/offers/presentation/views/add_offer_view.dart';
 import '../../features/projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../features/projects/presentation/views/project_details_view.dart';
+import '../../features/projects/presentation/views/project_workspace_view.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../di/di.dart';
@@ -196,6 +197,10 @@ class AppRouter {
               specialization: data['specialization'],
             ),
           ),
+        );
+      case Routes.projectWorkspaceViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => const ProjectWorkspaceView(),
         );
       default:
         return null;
