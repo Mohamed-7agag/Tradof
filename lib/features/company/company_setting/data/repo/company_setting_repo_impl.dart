@@ -5,10 +5,10 @@ import '../model/update_company_request_model.dart';
 import 'company_setting_repo.dart';
 
 class CompanySettingRepoImpl implements CompanySettingRepo {
-  final ApiServices _apiServices;
 
   CompanySettingRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
+  final ApiServices _apiServices;
   @override
   Future<void> changeCompanyPassword({
     required String currentPassword,

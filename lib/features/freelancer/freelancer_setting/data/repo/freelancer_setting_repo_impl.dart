@@ -5,10 +5,10 @@ import '../model/update_freelancer_request_model.dart';
 import 'freelancer_setting_repo.dart';
 
 class FreelancerSettingRepoImpl implements FreelancerSettingRepo {
-  final ApiServices _apiServices;
 
   FreelancerSettingRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
+  final ApiServices _apiServices;
   @override
   Future<void> changeFreelancerPassword(
       {required String currentPassword, required String newPassword}) async {

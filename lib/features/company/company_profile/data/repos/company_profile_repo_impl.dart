@@ -8,10 +8,10 @@ import '../model/social_media_model.dart';
 import 'company_profile_repo.dart';
 
 class CompanyProfileRepoImpl implements CompanyProfileRepo {
-  final ApiServices _apiServices;
 
   CompanyProfileRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
+  final ApiServices _apiServices;
 
   @override
   Future<CompanyModel> getCompanyProfrile({required String companyId}) async {

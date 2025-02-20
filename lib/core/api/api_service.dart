@@ -3,9 +3,9 @@ import 'package:dio/dio.dart';
 import 'api_requests.dart';
 
 class ApiServices implements ApiRequests {
-  final Dio _dio;
 
   ApiServices({required Dio dio}) : _dio = dio;
+  final Dio _dio;
 
 //! Get Request
   @override

@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class CountryModel extends Equatable {
-  final int id;
-  final String name;
 
   const CountryModel({
     required this.id,
@@ -15,6 +13,8 @@ class CountryModel extends Equatable {
       name: json['name'],
     );
   }
+  final int id;
+  final String name;
 
   Map<String, dynamic> toJson() => {'id': id, 'name': name};
 

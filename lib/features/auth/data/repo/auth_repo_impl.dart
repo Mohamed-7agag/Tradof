@@ -5,8 +5,8 @@ import '../model/reset_password_request_model.dart';
 import 'auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepo {
-  final ApiServices _apiServices;
   AuthRepoImpl({required ApiServices apiServices}) : _apiServices = apiServices;
+  final ApiServices _apiServices;
 
   @override
   Future<LoginResponseModel> login(String email, String password) async {

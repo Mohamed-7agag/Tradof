@@ -23,17 +23,22 @@ class WelcomeView extends StatelessWidget {
         children: [
           const Spacer(flex: 3),
           BounceInDown(
-              from: 400,
-              child: SvgPicture.asset('assets/images/icon.svg', width: 100.w)),
+            from: 400,
+            child: SvgPicture.asset(
+              'assets/images/icon.svg',
+              width: 100.w,
+            ),
+          ),
           verticalSpace(20),
           Text(
             'TRADOF',
-            style:
-                AppStyle.robotoCondensedBold50.copyWith(color: AppColors.white),
+            style: AppStyle.robotoCondensedBold50.copyWith(
+              color: AppColors.white,
+            ),
           ),
           verticalSpace(5),
           Text(
-            ' Your Trusted Partner in Language Translation',
+            'Your Trusted Partner in Language Translation',
             style: AppStyle.robotoCondensedRegular15
                 .copyWith(color: AppColors.white),
           ),

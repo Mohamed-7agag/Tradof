@@ -59,10 +59,6 @@ extension FreelancerProfileStatusX on FreelancerProfileStatus {
 }
 
 class FreelancerProfileState extends Equatable {
-  final FreelancerProfileStatus status;
-  final FreelancerModel? freelancerModel;
-  final String errMessage;
-  final String message;
 
   const FreelancerProfileState({
     this.status = FreelancerProfileStatus.initial,
@@ -70,6 +66,10 @@ class FreelancerProfileState extends Equatable {
     this.errMessage = '',
     this.message = '',
   });
+  final FreelancerProfileStatus status;
+  final FreelancerModel? freelancerModel;
+  final String errMessage;
+  final String message;
 
   FreelancerProfileState copyWith({
     FreelancerProfileStatus? status,

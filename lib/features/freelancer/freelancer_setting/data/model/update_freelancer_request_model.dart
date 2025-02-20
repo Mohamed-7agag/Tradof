@@ -1,12 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class UpdateFreelancerRequestModel extends Equatable {
-  final int countryId;
-  final String firstName;
-  final String lastName;
-  final String phoneNumber;
-  final String email;
-  final String profileImageUrl;
 
   const UpdateFreelancerRequestModel({
     required this.countryId,
@@ -16,6 +10,12 @@ class UpdateFreelancerRequestModel extends Equatable {
     required this.email,
     required this.profileImageUrl,
   });
+  final int countryId;
+  final String firstName;
+  final String lastName;
+  final String phoneNumber;
+  final String email;
+  final String profileImageUrl;
 
   Map<String, dynamic> toJson() {
     return {

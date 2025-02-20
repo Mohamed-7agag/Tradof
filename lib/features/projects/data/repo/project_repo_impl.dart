@@ -6,10 +6,10 @@ import '../models/project_model.dart';
 import 'project_repo.dart';
 
 class ProjectRepoImpl implements ProjectRepo {
-  final ApiServices _apiServices;
 
   ProjectRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
+  final ApiServices _apiServices;
 
   @override
   Future<void> createProject(CreateProjectRequestModel model) async {

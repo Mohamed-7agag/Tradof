@@ -21,11 +21,6 @@ extension MetaDataStatusX on MetaDataStatus {
 }
 
 class MetaDataState extends Equatable {
-  final MetaDataStatus status;
-  final List<CountryModel> countries;
-  final List<LanguageModel> languages;
-  final List<SpecializationModel> specializations;
-  final String errorMessage;
 
   const MetaDataState({
     this.status = MetaDataStatus.initial,
@@ -34,6 +29,11 @@ class MetaDataState extends Equatable {
     this.specializations = const [],
     this.errorMessage = '',
   });
+  final MetaDataStatus status;
+  final List<CountryModel> countries;
+  final List<LanguageModel> languages;
+  final List<SpecializationModel> specializations;
+  final String errorMessage;
 
   /// ✅ **Check if all metadata is fetched**
   bool get isLoaded => 

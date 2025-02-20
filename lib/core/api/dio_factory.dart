@@ -14,7 +14,7 @@ class DioFactory {
   static final _tokenService = TokenService();
 
   static Dio getDio() {
-    Duration timeOut = const Duration(seconds: 60);
+    const Duration timeOut = Duration(seconds: 60);
 
     if (dio == null) {
       dio = Dio();

@@ -5,10 +5,10 @@ import '../model/freelancer_register_request_model.dart';
 import 'registeration_repo.dart';
 
 class RegisterationRepoImpl implements RegisterationRepo {
-  final ApiServices _apiServices;
 
   RegisterationRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
+  final ApiServices _apiServices;
 
   @override
   Future<String> freelancerRegister(

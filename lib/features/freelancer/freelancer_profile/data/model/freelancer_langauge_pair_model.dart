@@ -1,15 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class FreelancerLangaugePairModel extends Equatable {
-  final int id;
-  final int languageFromId;
-  final String languageFromName;
-  final String languageFromCode;
-  final String countryFromCode;
-  final int languageToId;
-  final String languageToName;
-  final String languageToCode;
-  final String countryToCode;
 
   const FreelancerLangaugePairModel({
     required this.id,
@@ -36,6 +27,15 @@ class FreelancerLangaugePairModel extends Equatable {
       countryToCode: map['countryToCode']?.toString() ?? '',
     );
   }
+  final int id;
+  final int languageFromId;
+  final String languageFromName;
+  final String languageFromCode;
+  final String countryFromCode;
+  final int languageToId;
+  final String languageToName;
+  final String languageToCode;
+  final String countryToCode;
 
   Map<String, dynamic> toJson() {
     return {

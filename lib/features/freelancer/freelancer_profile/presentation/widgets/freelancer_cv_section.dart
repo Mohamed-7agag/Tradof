@@ -16,7 +16,7 @@ class FreelancerCvSection extends StatelessWidget {
   const FreelancerCvSection({super.key, this.cvUrl});
   final String? cvUrl;
   Future<void> _pickCV(BuildContext context) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    final FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null && context.mounted) {
       context.read<FreelancerProfileCubit>().uploadCv(result.files.first);

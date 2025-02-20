@@ -26,7 +26,7 @@ final getIt = GetIt.instance;
 
 void setupGetIt() {
   // Dio & ApiServices
-  Dio dio = DioFactory.getDio();
+  final Dio dio = DioFactory.getDio();
   getIt.registerLazySingleton<ApiServices>(() => ApiServices(dio: dio));
 
   // AuthRepo

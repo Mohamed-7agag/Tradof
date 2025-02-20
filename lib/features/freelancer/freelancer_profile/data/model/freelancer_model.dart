@@ -3,20 +3,6 @@ import '../../../../company/company_profile/data/model/social_media_model.dart';
 import 'freelancer_langauge_pair_model.dart';
 
 class FreelancerModel {
-  final String userId;
-  final String firstName;
-  final String lastName;
-  final String profileImageUrl;
-  final String countryName;
-  final int countryId;
-  final String? cvFilePath;
-  final String email;
-  final String phone;
-  final int ratingSum;
-  final int reviewCount;
-  final List<FreelancerLangaugePairModel> languagePairs;
-  final List<SpecializationModel> specializations;
-  final List<SocialMediaModel> socialMedias;
 
   FreelancerModel({
     required this.userId,
@@ -61,4 +47,18 @@ class FreelancerModel {
               .map((x) => SocialMediaModel.fromJson(x)),
         ),
       );
+  final String userId;
+  final String firstName;
+  final String lastName;
+  final String profileImageUrl;
+  final String countryName;
+  final int countryId;
+  final String? cvFilePath;
+  final String email;
+  final String phone;
+  final int ratingSum;
+  final int reviewCount;
+  final List<FreelancerLangaugePairModel> languagePairs;
+  final List<SpecializationModel> specializations;
+  final List<SocialMediaModel> socialMedias;
 }

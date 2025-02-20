@@ -1,20 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class ProjectModel extends Equatable {
-  final int id;
-  final String name;
-  final String description;
-  final int days;
-  final int languageFromId;
-  final int languageToId;
-  final int minPrice;
-  final int maxPrice;
-  final String? startDate;
-  final String? endDate;
-  final int status;
-  final int specializationId;
-  final int numberOfOffers;
-  final List<FileModel> files;
 
   const ProjectModel({
     required this.id,
@@ -53,6 +39,20 @@ class ProjectModel extends Equatable {
       ),
     );
   }
+  final int id;
+  final String name;
+  final String description;
+  final int days;
+  final int languageFromId;
+  final int languageToId;
+  final int minPrice;
+  final int maxPrice;
+  final String? startDate;
+  final String? endDate;
+  final int status;
+  final int specializationId;
+  final int numberOfOffers;
+  final List<FileModel> files;
 
   @override
   List<Object?> get props => [
@@ -74,10 +74,6 @@ class ProjectModel extends Equatable {
 }
 
 class FileModel extends Equatable {
-  final String fileName;
-  final String filePath;
-  final int fileType;
-  final int fileSize;
 
   const FileModel({
     required this.fileName,
@@ -94,6 +90,10 @@ class FileModel extends Equatable {
       fileSize: json['file_size'],
     );
   }
+  final String fileName;
+  final String filePath;
+  final int fileType;
+  final int fileSize;
 
   @override
   List<Object?> get props => [

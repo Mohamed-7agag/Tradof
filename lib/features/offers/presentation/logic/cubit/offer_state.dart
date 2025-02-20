@@ -15,16 +15,16 @@ extension OfferStatusX on OfferStatus {
 }
 
 class OfferState extends Equatable {
-  final OfferStatus status;
-  final String errorMessage;
-  final String message;
-  final double? offerPrice;
   const OfferState({
     this.status = OfferStatus.initial,
     this.errorMessage = '',
     this.message = '',
     this.offerPrice,
   });
+  final OfferStatus status;
+  final String errorMessage;
+  final String message;
+  final double? offerPrice;
 
   OfferState copyWith({
     OfferStatus? status,

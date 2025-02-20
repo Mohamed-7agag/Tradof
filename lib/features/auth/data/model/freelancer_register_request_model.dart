@@ -1,13 +1,4 @@
 class FreelancerRegisterRequestModel {
-  final String email;
-  final String password;
-  final String firstName;
-  final String lastName;
-  final int countryId;
-  final String phoneNumber;
-  final List<int> specializationIds;
-  final List<LanguagePair> languagePairs;
-  final String profileImageUrl;
 
   FreelancerRegisterRequestModel({
     required this.email,
@@ -20,6 +11,15 @@ class FreelancerRegisterRequestModel {
     required this.languagePairs,
     this.profileImageUrl = '',
   });
+  final String email;
+  final String password;
+  final String firstName;
+  final String lastName;
+  final int countryId;
+  final String phoneNumber;
+  final List<int> specializationIds;
+  final List<LanguagePair> languagePairs;
+  final String profileImageUrl;
 
   Map<String, dynamic> toJson() {
     return {
@@ -38,13 +38,13 @@ class FreelancerRegisterRequestModel {
 }
 
 class LanguagePair {
-  final int languageFromId;
-  final int languageToId;
 
   LanguagePair({
     required this.languageFromId,
     required this.languageToId,
   });
+  final int languageFromId;
+  final int languageToId;
 
   Map<String, dynamic> toJson() {
     return {

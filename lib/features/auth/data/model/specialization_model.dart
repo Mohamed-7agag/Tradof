@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class SpecializationModel extends Equatable {
-  final int id;
-  final String name;
 
   const SpecializationModel({
     required this.id,
@@ -15,6 +13,8 @@ class SpecializationModel extends Equatable {
       name: json['name'],
     );
   }
+  final int id;
+  final String name;
 
   Map<String, dynamic> toJson() => {'id': id, 'name': name};
 

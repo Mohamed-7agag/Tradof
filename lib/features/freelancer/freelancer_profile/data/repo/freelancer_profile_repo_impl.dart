@@ -9,10 +9,10 @@ import '../model/freelancer_model.dart';
 import 'freelancer_profile_repo.dart';
 
 class FreelancerProfileRepoImpl implements FreelancerProfileRepo {
-  final ApiServices _apiServices;
 
   FreelancerProfileRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
+  final ApiServices _apiServices;
 
   @override
   Future<FreelancerModel> getFreelancerProfile() async {

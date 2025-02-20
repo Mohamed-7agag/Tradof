@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import '../theming/app_style.dart';
 
 Future<bool> exitDialog(BuildContext context) async {
-  bool? exitApp = await AwesomeDialog(
+  final bool? exitApp = await AwesomeDialog(
           context: context,
           dialogType: DialogType.question,
           animType: AnimType.rightSlide,

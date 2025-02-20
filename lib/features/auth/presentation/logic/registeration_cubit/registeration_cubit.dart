@@ -108,10 +108,10 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     List<SpecializationModel> specializations,
     List<LanguagePairModel> languagePairs,
   ) async {
-    List<int> specializationIds =
+    final List<int> specializationIds =
         specializations.map((specialization) => specialization.id).toList();
 
-    List<LanguagePair> languagePairIds = languagePairs
+    final List<LanguagePair> languagePairIds = languagePairs
         .map((languagePair) => LanguagePair(
               languageFromId: languagePair.fromLanguage.id,
               languageToId: languagePair.toLanguage.id,
@@ -142,10 +142,10 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     List<LanguageModel> preferedLanguages,
     List<SpecializationModel> industriesServed,
   ) async {
-    List<int> specializationIds =
+    final List<int> specializationIds =
         industriesServed.map((specialization) => specialization.id).toList();
 
-    List<int> preferredLanguageIds =
+    final List<int> preferredLanguageIds =
         preferedLanguages.map((language) => language.id).toList();
 
     final imageUrl = await uploadImageToCloudinary(state.imageProfile);

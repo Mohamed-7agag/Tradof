@@ -1,10 +1,6 @@
 part of 'tables_cubit.dart';
 
 class TablesState {
-  final List<SpecializationModel> selectedSpecializations;
-  final List<SpecializationModel> selectedIndustriesServed;
-  final List<LanguageModel> selectedPreferedLanguages;
-  final List<LanguagePairModel> selectedLanguagePair;
 
   TablesState({
     this.selectedSpecializations = const <SpecializationModel>[],
@@ -12,6 +8,10 @@ class TablesState {
     this.selectedLanguagePair = const <LanguagePairModel>[],
     this.selectedPreferedLanguages = const <LanguageModel>[],
   });
+  final List<SpecializationModel> selectedSpecializations;
+  final List<SpecializationModel> selectedIndustriesServed;
+  final List<LanguageModel> selectedPreferedLanguages;
+  final List<LanguagePairModel> selectedLanguagePair;
 
   TablesState copyWith({
     List<SpecializationModel>? selectedSpecializations,

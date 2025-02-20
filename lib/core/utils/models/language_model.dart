@@ -1,11 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class LanguageModel extends Equatable {
-  final int id;
-  final String languageName;
-  final String languageCode;
-  final String? countryName;
-  final String? countryCode;
 
   const LanguageModel({
     required this.id,
@@ -24,6 +19,11 @@ class LanguageModel extends Equatable {
       countryCode: json['countryCode'],
     );
   }
+  final int id;
+  final String languageName;
+  final String languageCode;
+  final String? countryName;
+  final String? countryCode;
 
   Map<String, dynamic> toJson() => {
         'id': id,

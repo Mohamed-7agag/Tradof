@@ -27,7 +27,7 @@ class PreferredLanguage extends StatelessWidget {
             InkWell(
               borderRadius: BorderRadius.circular(4),
               onTap: () async {
-                Map<String, dynamic> data = {
+                final Map<String, dynamic> data = {
                   'isPreferedLanguages': true,
                   'data': companyModel
                 };

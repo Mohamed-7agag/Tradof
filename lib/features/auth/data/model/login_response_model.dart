@@ -1,8 +1,4 @@
 class LoginResponseModel {
-  final String userId;
-  final String role;
-  final String token;
-  final String refreshToken;
 
   const LoginResponseModel({
     required this.userId,
@@ -19,4 +15,8 @@ class LoginResponseModel {
       refreshToken: json['refreshToken'],
     );
   }
+  final String userId;
+  final String role;
+  final String token;
+  final String refreshToken;
 }

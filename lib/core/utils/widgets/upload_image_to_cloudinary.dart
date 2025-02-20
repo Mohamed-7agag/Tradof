@@ -10,13 +10,13 @@ Future<String> uploadImageToCloudinary(File? image) async {
   const uploadPreset = 'tradof-images';
 
   try {
-    FormData formData = FormData.fromMap({
+    final FormData formData = FormData.fromMap({
       'upload_preset': uploadPreset,
       'file': await MultipartFile.fromFile(image.path),
     });
 
-    Dio dio = Dio();
-    Response response = await dio.post(cloudinaryUrl, data: formData);
+    final Dio dio = Dio();
+    final Response response = await dio.post(cloudinaryUrl, data: formData);
 
     if (response.statusCode == 200) {
       final jsonMap = response.data;

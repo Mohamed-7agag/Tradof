@@ -16,17 +16,6 @@ extension RegisterationStepX on RegisterationStatus {
 }
 
 class RegisterationState extends Equatable {
-  final RegisterationStatus status;
-  final UserRole userRole;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phoneNumber;
-  final String password;
-  final String errorMessage;
-  final String registerSuccessMessage;
-  final File? imageProfile;
-  final int? countryId;
 
   const RegisterationState({
     this.status = RegisterationStatus.initial,
@@ -41,6 +30,17 @@ class RegisterationState extends Equatable {
     this.imageProfile,
     this.countryId,
   });
+  final RegisterationStatus status;
+  final UserRole userRole;
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String phoneNumber;
+  final String password;
+  final String errorMessage;
+  final String registerSuccessMessage;
+  final File? imageProfile;
+  final int? countryId;
 
   RegisterationState copyWith({
     RegisterationStatus? status,

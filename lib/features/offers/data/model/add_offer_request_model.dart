@@ -2,11 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 class AddOfferRequestModel extends Equatable {
-  final double offerPrice;
-  final int projectId;
-  final String proposalDescription;
-  final int days;
-  final List<MultipartFile> proposalAttachments;
 
   const AddOfferRequestModel({
     required this.offerPrice,
@@ -15,6 +10,11 @@ class AddOfferRequestModel extends Equatable {
     required this.days,
     this.proposalAttachments = const [],
   });
+  final double offerPrice;
+  final int projectId;
+  final String proposalDescription;
+  final int days;
+  final List<MultipartFile> proposalAttachments;
 
   Map<String, dynamic> toJson() {
     return {

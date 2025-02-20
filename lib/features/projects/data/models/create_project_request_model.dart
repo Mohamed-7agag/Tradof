@@ -1,15 +1,6 @@
 import 'package:dio/dio.dart';
 
 class CreateProjectRequestModel {
-  final String projectName;
-  final String description;
-  final int days;
-  final int fromLanguageId;
-  final int toLanguageId;
-  final int minPrice;
-  final int maxPrice;
-  final int specializationId;
-  final List<MultipartFile> files;
 
   CreateProjectRequestModel({
     required this.projectName,
@@ -22,6 +13,15 @@ class CreateProjectRequestModel {
     required this.files,
     required this.specializationId,
   });
+  final String projectName;
+  final String description;
+  final int days;
+  final int fromLanguageId;
+  final int toLanguageId;
+  final int minPrice;
+  final int maxPrice;
+  final int specializationId;
+  final List<MultipartFile> files;
 
   Map<String, dynamic> toJson() => {
         'name': projectName,

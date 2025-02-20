@@ -26,11 +26,6 @@ extension FreelancerSettingStatusX on FreelancerSettingStatus {
 }
 
 class FreelancerSettingState extends Equatable {
-  final FreelancerSettingStatus status;
-  final String errMessage;
-  final String message;
-  final int? countryId;
-  final File? imagePicked;
 
   const FreelancerSettingState({
     this.status = FreelancerSettingStatus.initial,
@@ -39,6 +34,11 @@ class FreelancerSettingState extends Equatable {
     this.countryId,
     this.imagePicked,
   });
+  final FreelancerSettingStatus status;
+  final String errMessage;
+  final String message;
+  final int? countryId;
+  final File? imagePicked;
 
   FreelancerSettingState copyWith({
     FreelancerSettingStatus? status,

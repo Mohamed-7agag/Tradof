@@ -11,7 +11,7 @@ class AttachmentFilesSection extends StatelessWidget {
   const AttachmentFilesSection({super.key});
 
   Future<void> _pickFiles(BuildContext context) async {
-    FilePickerResult? result =
+    final FilePickerResult? result =
         await FilePicker.platform.pickFiles(allowMultiple: true);
 
     if (result != null && context.mounted) {

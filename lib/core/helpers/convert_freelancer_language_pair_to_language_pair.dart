@@ -5,7 +5,7 @@ import '../utils/models/language_pair_model.dart';
 /// Convert [FreelancerLangaugePairModel] to [LanguagePairModel]
 List<LanguagePairModel> convertLanguagePairs(
     List<FreelancerLangaugePairModel>? freelancerLanguagePairs) {
-  List<LanguagePairModel> languagePairsList = [];
+  final List<LanguagePairModel> languagePairsList = [];
   if (freelancerLanguagePairs != null) {
     LanguageModel? languageFrom, languageTo;
     for (var element in freelancerLanguagePairs) {

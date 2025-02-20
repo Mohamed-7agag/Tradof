@@ -6,17 +6,17 @@ import '../models/language_model.dart';
 import 'meta_data_repo.dart';
 
 class MetaDataRepoImpl implements MetaDataRepo {
-  final ApiServices _apiServices;
 
   MetaDataRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
+  final ApiServices _apiServices;
 
   @override
   Future<List<CountryModel>> getCountries() async {
     final response = await _apiServices.get(
       EndPoint.getCountries,
     );
-    List<CountryModel> countries = List<CountryModel>.from(
+    final List<CountryModel> countries = List<CountryModel>.from(
       response.map((country) => CountryModel.fromJson(country)),
     );
     return countries;
@@ -27,7 +27,7 @@ class MetaDataRepoImpl implements MetaDataRepo {
     final response = await _apiServices.get(
       EndPoint.getLanguages,
     );
-    List<LanguageModel> languages = List<LanguageModel>.from(
+    final List<LanguageModel> languages = List<LanguageModel>.from(
       response.map((language) => LanguageModel.fromJson(language)),
     );
     return languages;
@@ -38,7 +38,7 @@ class MetaDataRepoImpl implements MetaDataRepo {
     final response = await _apiServices.get(
       EndPoint.getSpecializations,
     );
-    List<SpecializationModel> specializations =
+    final List<SpecializationModel> specializations =
         List<SpecializationModel>.from(response.map(
       (specialization) => SpecializationModel.fromJson(specialization),
     ));

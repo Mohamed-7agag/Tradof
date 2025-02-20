@@ -20,12 +20,6 @@ extension AuthStepX on AuthStatus {
 }
 
 class AuthState extends Equatable {
-  final AuthStatus status;
-  final String email;
-  final String otp;
-  final String errorMessage;
-  final String message;
-  final String resetToken;
 
   const AuthState({
     this.status = AuthStatus.initial,
@@ -35,6 +29,12 @@ class AuthState extends Equatable {
     this.message = '',
     this.resetToken = '',
   });
+  final AuthStatus status;
+  final String email;
+  final String otp;
+  final String errorMessage;
+  final String message;
+  final String resetToken;
 
   AuthState copyWith({
     AuthStatus? status,

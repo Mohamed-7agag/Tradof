@@ -1,13 +1,4 @@
 class CompanyEmployeeRequestModel {
-  final String jobTitle;
-  final int countryId;
-  final String firstName;
-  final String lastName;
-  final String phoneNumber;
-  final String email;
-  final String password;
-  final String groupName;
-  final String companyId;
 
   const CompanyEmployeeRequestModel({
     required this.jobTitle,
@@ -20,6 +11,15 @@ class CompanyEmployeeRequestModel {
     required this.groupName,
     required this.companyId,
   });
+  final String jobTitle;
+  final int countryId;
+  final String firstName;
+  final String lastName;
+  final String phoneNumber;
+  final String email;
+  final String password;
+  final String groupName;
+  final String companyId;
 
   Map<String, dynamic> toJson() {
     return {

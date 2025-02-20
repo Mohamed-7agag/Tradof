@@ -1,9 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class SocialMediaModel extends Equatable {
-  final String platformType;
-  final String link;
-  final String? id;
 
   const SocialMediaModel({
     required this.platformType,
@@ -18,6 +15,9 @@ class SocialMediaModel extends Equatable {
       id: json['_id'],
     );
   }
+  final String platformType;
+  final String link;
+  final String? id;
 
   Map<String, dynamic> toJson() {
     return {

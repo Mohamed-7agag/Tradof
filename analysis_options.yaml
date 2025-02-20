@@ -38,5 +38,11 @@ linter:
     - prefer_spread_collections
     - unnecessary_lambdas
     - prefer_relative_imports
+    - avoid_shadowing_type_parameters
+    - prefer_final_locals
+    - prefer_inlined_adds
+    - prefer_null_aware_method_calls
+    - prefer_typing_uninitialized_variables
+    - sort_constructors_first
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

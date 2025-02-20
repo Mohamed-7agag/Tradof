@@ -48,14 +48,6 @@ extension ProjectStatusX on ProjectStatus {
 }
 
 class ProjectState extends Equatable {
-  final ProjectStatus status;
-  final String message;
-  final String errorMessage;
-  final LanguageModel? fromLanguage;
-  final LanguageModel? toLanguage;
-  final int? industryId;
-  final List<ProjectModel> upcomingProjects;
-  final List<ProjectModel> startedProjects;
 
   const ProjectState({
     this.status = ProjectStatus.initial,
@@ -67,6 +59,14 @@ class ProjectState extends Equatable {
     this.upcomingProjects = const [],
     this.startedProjects = const [],
   });
+  final ProjectStatus status;
+  final String message;
+  final String errorMessage;
+  final LanguageModel? fromLanguage;
+  final LanguageModel? toLanguage;
+  final int? industryId;
+  final List<ProjectModel> upcomingProjects;
+  final List<ProjectModel> startedProjects;
 
   ProjectState copyWith({
     ProjectStatus? status,

@@ -140,13 +140,13 @@ Future<MetaDataResult> _fetchMetaDataInIsolate(
 }
 
 class MetaDataResult {
-  final List<LanguageModel> languages;
-  final List<CountryModel> countries;
-  final List<SpecializationModel> specializations;
 
   MetaDataResult({
     required this.languages,
     required this.countries,
     required this.specializations,
   });
+  final List<LanguageModel> languages;
+  final List<CountryModel> countries;
+  final List<SpecializationModel> specializations;
 }

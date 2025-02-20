@@ -73,13 +73,6 @@ extension CompanyProfileStatusX on CompanyProfileStatus {
 }
 
 class CompanyProfileState extends Equatable {
-  final CompanyProfileStatus status;
-  final CompanyModel? companyModel;
-  final List<CompanyEmployeeModel> companyEmployees;
-  final String errorMessage;
-  final String? groupName;
-  final int? countryId;
-  final String message;
 
   const CompanyProfileState({
     this.status = CompanyProfileStatus.initial,
@@ -90,6 +83,13 @@ class CompanyProfileState extends Equatable {
     this.groupName,
     this.countryId,
   });
+  final CompanyProfileStatus status;
+  final CompanyModel? companyModel;
+  final List<CompanyEmployeeModel> companyEmployees;
+  final String errorMessage;
+  final String? groupName;
+  final int? countryId;
+  final String message;
 
   CompanyProfileState copyWith({
     CompanyProfileStatus? status,

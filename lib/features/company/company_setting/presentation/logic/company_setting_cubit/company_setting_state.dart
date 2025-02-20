@@ -26,11 +26,6 @@ extension CompanySettingStatusX on CompanySettingStatus {
 }
 
 class CompanySettingState extends Equatable {
-  final CompanySettingStatus status;
-  final String errMessage;
-  final String message;
-  final int? countryId;
-  final File? imagePicked;
 
   const CompanySettingState({
     this.status = CompanySettingStatus.initial,
@@ -39,6 +34,11 @@ class CompanySettingState extends Equatable {
     this.countryId,
     this.imagePicked,
   });
+  final CompanySettingStatus status;
+  final String errMessage;
+  final String message;
+  final int? countryId;
+  final File? imagePicked;
 
   CompanySettingState copyWith({
     CompanySettingStatus? status,

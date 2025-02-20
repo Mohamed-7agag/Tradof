@@ -1,16 +1,4 @@
 class CompanyRegisterRequestModel {
-  final String email;
-  final String password;
-  final String firstName;
-  final String lastName;
-  final String phoneNumber;
-  final int countryId;
-  final String companyAddress;
-  final String companyName;
-  final String jobTitle;
-  final List<int> specializationIds;
-  final List<int> preferredLanguageIds;
-  final String profileImageUrl;
 
   CompanyRegisterRequestModel({
     required this.email,
@@ -26,6 +14,18 @@ class CompanyRegisterRequestModel {
     required this.preferredLanguageIds,
     this.profileImageUrl = '',
   });
+  final String email;
+  final String password;
+  final String firstName;
+  final String lastName;
+  final String phoneNumber;
+  final int countryId;
+  final String companyAddress;
+  final String companyName;
+  final String jobTitle;
+  final List<int> specializationIds;
+  final List<int> preferredLanguageIds;
+  final String profileImageUrl;
 
   Map<String, dynamic> toJson() {
     return {

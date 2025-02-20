@@ -7,6 +7,14 @@ import '../utils/widgets/custom_toastification.dart';
 import 'extensions.dart';
 
 class NavigationHandler {
+
+  NavigationHandler() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (context != null) {
+        _contextController.add(context!);
+      }
+    });
+  }
   NavigationHandler._privateConstructor();
 
   static final NavigationHandler _instance =
@@ -21,14 +29,6 @@ class NavigationHandler {
       StreamController<BuildContext>.broadcast();
 
   BuildContext? get context => navigatorKey.currentContext;
-
-  NavigationHandler() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (context != null) {
-        _contextController.add(context!);
-      }
-    });
-  }
 
   void goToLoginView() {
     if (context != null) {

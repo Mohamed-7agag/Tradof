@@ -1,13 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class CompanyEmployeeModel extends Equatable {
-  final String id;
-  final String fullName;
-  final String jobTitle;
-  final String email;
-  final String phoneNumber;
-  final String groupName;
-  final String country;
 
   const CompanyEmployeeModel({
     required this.id,
@@ -30,6 +23,13 @@ class CompanyEmployeeModel extends Equatable {
       country: json['country'],
     );
   }
+  final String id;
+  final String fullName;
+  final String jobTitle;
+  final String email;
+  final String phoneNumber;
+  final String groupName;
+  final String country;
 
   @override
   List<Object?> get props => [

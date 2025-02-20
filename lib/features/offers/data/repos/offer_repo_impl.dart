@@ -4,9 +4,9 @@ import '../model/add_offer_request_model.dart';
 import 'offer_repo.dart';
 
 class OfferRepoImpl implements OfferRepo {
-  final ApiServices apiServices;
 
   OfferRepoImpl({required this.apiServices});
+  final ApiServices apiServices;
 
   @override
   Future<String> addOffer(AddOfferRequestModel model) async {
