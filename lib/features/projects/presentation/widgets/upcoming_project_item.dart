@@ -30,8 +30,6 @@ class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
   SpecializationModel getSpecialization() {
     return widget.companyModel.specializations.firstWhere(
       (element) => element.id == widget.project.specializationId,
-      orElse: () => const SpecializationModel(
-          id: 0, name: 'Not Supported Specialization'),
     );
   }
 
@@ -40,7 +38,7 @@ class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
     return InkWell(
       onTap: () async {
         final result =
-            await context.pushNamed(Routes.updateProjectViewRoute, arguments: {
+            await context.pushNamed(Routes.projectDetailsViewRoute, arguments: {
           'projectModel': widget.project,
           'companyModel': widget.companyModel,
           'specialization': getSpecialization(),

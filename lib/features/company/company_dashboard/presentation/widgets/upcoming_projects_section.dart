@@ -15,10 +15,19 @@ class UpcomingProjectsSection extends StatefulWidget {
   final CompanyModel companyModel;
 
   @override
-  State<UpcomingProjectsSection> createState() => _UpcomingProjectsSectionState();
+  State<UpcomingProjectsSection> createState() =>
+      _UpcomingProjectsSectionState();
 }
 
 class _UpcomingProjectsSectionState extends State<UpcomingProjectsSection> {
+  @override
+  void initState() {
+    if (context.read<ProjectCubit>().state.upcomingProjects.isEmpty) {
+      context.read<ProjectCubit>().getUpcomingProjects();
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProjectCubit, ProjectState>(
