@@ -16,4 +16,24 @@ class OfferRepoImpl implements OfferRepo {
     );
     return response;
   }
+
+  @override
+  Future<String> updateOffer(int offerId,AddOfferRequestModel model) async {
+    final response = await apiServices.put(
+      EndPoint.updateProposal(),
+      data: {
+      "id": offerId,  
+      ...model.toJson(),
+    },
+    );
+    return response;
+  }
+
+  @override
+  Future<String> deleteOffer({required int id}) async {
+    final response = await apiServices.delete(
+      EndPoint.deleteProposal(id),
+    );
+    return response;
+  }
 }

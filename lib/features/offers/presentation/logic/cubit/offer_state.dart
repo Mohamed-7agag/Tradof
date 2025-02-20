@@ -5,13 +5,25 @@ enum OfferStatus {
   addOfferLoading,
   addOfferSucess,
   addOfferFailure,
+  updateOfferLoading,
+  updateOfferSuccess,
+  updateOfferFailure,
+  deleteOfferLoading, 
+  deleteOfferSuccess,
+  deleteOfferFailure,
 }
 
-extension OfferStatusX on OfferStatus {
+extension OfferStatusExtension on OfferStatus {
+  bool get isInitial => this == OfferStatus.initial;
   bool get isAddOfferLoading => this == OfferStatus.addOfferLoading;
   bool get isAddOfferSuccess => this == OfferStatus.addOfferSucess;
   bool get isAddOfferFailure => this == OfferStatus.addOfferFailure;
-  bool get isInitial => this == OfferStatus.initial;
+  bool get isUpdateOfferLoading => this == OfferStatus.updateOfferLoading;
+  bool get isUpdateOfferSuccess => this == OfferStatus.updateOfferSuccess;
+  bool get isUpdateOfferFailure => this == OfferStatus.updateOfferFailure;
+  bool get isDeleteOfferLoading => this == OfferStatus.deleteOfferLoading;
+  bool get isDeleteOfferSuccess => this == OfferStatus.deleteOfferSuccess;
+  bool get isDeleteOfferFailure => this == OfferStatus.deleteOfferFailure;
 }
 
 class OfferState extends Equatable {

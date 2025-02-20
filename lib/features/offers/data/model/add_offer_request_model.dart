@@ -33,5 +33,5 @@ class AddOfferRequestModel extends Equatable {
         proposalDescription,
         days,
         proposalAttachments,
-      ];
+  ];
 }

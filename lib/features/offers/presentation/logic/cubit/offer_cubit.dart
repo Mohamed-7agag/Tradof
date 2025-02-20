@@ -36,6 +36,48 @@ class OfferCubit extends Cubit<OfferState> {
     }
   }
 
+  Future<void> updateOffer(
+      int projectId, String offerDetails, int days,int offerId) async {
+    emit(state.copyWith(status: OfferStatus.updateOfferLoading));
+
+    try {
+      final AddOfferRequestModel offerModel = AddOfferRequestModel(
+        offerPrice: state.offerPrice!,
+        projectId: projectId,
+        proposalDescription: offerDetails,
+        days: days,
+      );
+
+      final result = await _offerRepo.updateOffer(offerId,offerModel);
+      emit(state.copyWith(
+        status: OfferStatus.updateOfferSuccess,
+        message: result,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: OfferStatus.updateOfferFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  Future<void> deleteOffer(int id) async {
+    emit(state.copyWith(status: OfferStatus.deleteOfferLoading));
+
+    try {
+      final result = await _offerRepo.deleteOffer(id: id);
+      emit(state.copyWith(
+        status: OfferStatus.deleteOfferSuccess,
+        message: result,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: OfferStatus.deleteOfferFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
   void setOfferPrice({double? price}) {
     emit(state.copyWith(offerPrice: price));
   }
