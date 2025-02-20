@@ -29,8 +29,9 @@ import '../../features/freelancer/freelancer_setting/presentation/views/update_f
 import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../features/offers/presentation/views/add_offer_view.dart';
 import '../../features/projects/presentation/logic/project_cubit/project_cubit.dart';
+import '../../features/projects/presentation/views/company_project_workspace_view.dart';
+import '../../features/projects/presentation/views/freelancer_project_workspace_view.dart';
 import '../../features/projects/presentation/views/project_details_view.dart';
-import '../../features/projects/presentation/views/project_workspace_view.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../di/di.dart';
@@ -198,9 +199,13 @@ class AppRouter {
             ),
           ),
         );
-      case Routes.projectWorkspaceViewRoute:
+      case Routes.companyProjectWorkspaceViewRoute:
         return MaterialPageRoute(
-          builder: (_) => const ProjectWorkspaceView(),
+          builder: (_) => const CompanyProjectWorkspaceView(),
+        );
+      case Routes.freelancerProjectWorkspaceViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => const FreelancerProjectWorkspaceView(),
         );
       default:
         return null;

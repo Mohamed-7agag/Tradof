@@ -19,7 +19,10 @@ abstract class Routes {
   static const String addUpdateSocialMediaViewRoute =
       "/addUpdateSocialMediaView";
   static const String projectDetailsViewRoute = "/projectDetailsView";
-  static const String projectWorkspaceViewRoute = "/projectWorkspaceView";
+  static const String companyProjectWorkspaceViewRoute =
+      "/companyProjectWorkspaceView";
+  static const String freelancerProjectWorkspaceViewRoute =
+      "/freelancerProjectWorkspaceView";
 
   //! Freelancer Routes
   static const String freelancerBottomNavBarViewRoute =

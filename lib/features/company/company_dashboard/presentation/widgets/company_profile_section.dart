@@ -42,7 +42,7 @@ class CompanyProfileSection extends StatelessWidget {
           horizontalSpace(18),
           GestureDetector(
             onTap: () {
-              context.pushNamed(Routes.projectWorkspaceViewRoute);
+              context.pushNamed(Routes.companyProjectWorkspaceViewRoute);
             },
             child: const HugeIcon(
               icon: HugeIcons.strokeRoundedCalendar02,
