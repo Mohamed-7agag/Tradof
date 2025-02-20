@@ -161,12 +161,12 @@ class _RegisterFormState extends State<RegisterForm> {
           duration: const Duration(milliseconds: 350),
           curve: Curves.easeInOut,
         );
-        context.read<RegisterationCubit>().setCommonRegisterationData(
-              firstNameController.text.trim(),
-              lastNameController.text.trim(),
-              email,
-              phoneNumber,
-              password,
+        context.read<RegisterationCubit>().setRegisterationData(
+              firstName: firstNameController.text.trim(),
+              lastName: lastNameController.text.trim(),
+              email: email,
+              phoneNumber: phoneNumber,
+              password: password,
             );
       }
     }

@@ -10,31 +10,28 @@ import '../../../../../core/utils/widgets/upload_image_to_cloudinary.dart';
 import '../../../data/model/company_register_request_model.dart';
 import '../../../data/model/freelancer_register_request_model.dart';
 import '../../../data/model/specialization_model.dart';
-import '../../../data/repo/registeration_repo.dart';
+import '../../../data/repo/auth_repo.dart';
 
 part 'registeration_state.dart';
 
 class RegisterationCubit extends Cubit<RegisterationState> {
-  RegisterationCubit(this._registerationRepo)
-      : super(const RegisterationState());
-  final RegisterationRepo _registerationRepo;
+  RegisterationCubit(this._authRepo) : super(const RegisterationState());
+  final AuthRepo _authRepo;
 
-  void setUserRole(UserRole role) {
-    emit(state.copyWith(userRole: role));
-  }
-
-  void setCountryAndImageProfile({int? countryId, File? imageProfile}) {
-    emit(state.copyWith(countryId: countryId, imageProfile: imageProfile));
-  }
-
-  void setCommonRegisterationData(
-    String firstName,
-    String lastName,
-    String email,
-    String phoneNumber,
-    String password,
-  ) {
+  void setRegisterationData({
+    UserRole? userRole,
+    int? countryId,
+    File? imageProfile,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? phoneNumber,
+    String? password,
+  }) {
     emit(state.copyWith(
+      userRole: userRole,
+      countryId: countryId,
+      imageProfile: imageProfile,
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -48,26 +45,27 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     List<SpecializationModel> specializations,
     List<LanguagePairModel> languagePairs,
   ) async {
-    emit(state.copyWith(status: RegisterationStatus.loading));
+    emit(state.copyWith(
+      status: RegisterationStatus.registerationLoading,
+    ));
 
     try {
-      // get FreelancerRegisterRequestModel
-      final FreelancerRegisterRequestModel freelancerRegisterRequestModel =
-          await _collectFreelancerRegisterationData(
+      final freelancerRegisterRequestModel =
+          await _fetchFreelancerRegistrationData(
         specializations,
         languagePairs,
       );
 
-      final result = await _registerationRepo.freelancerRegister(
+      final result = await _authRepo.freelancerRegister(
         freelancerRegisterRequestModel,
       );
       emit(state.copyWith(
-        status: RegisterationStatus.success,
+        status: RegisterationStatus.registerationSuccess,
         registerSuccessMessage: result,
       ));
     } catch (e) {
       emit(state.copyWith(
-        status: RegisterationStatus.error,
+        status: RegisterationStatus.registerationFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }
@@ -81,34 +79,39 @@ class RegisterationCubit extends Cubit<RegisterationState> {
     List<LanguageModel> preferedLanguages,
     List<SpecializationModel> industriesServed,
   ) async {
-    emit(state.copyWith(status: RegisterationStatus.loading));
+    emit(state.copyWith(
+      status: RegisterationStatus.registerationLoading,
+    ));
 
     try {
-      // get CompanyRegisterRequestModel
-      final CompanyRegisterRequestModel companyRegisterRequestModel =
-          await _collectCompanyRegisterationData(jobTitle, companyName,
-              locationCompany, preferedLanguages, industriesServed);
+      final companyRegisterRequestModel = await _fetchCompanyRegistrationData(
+        jobTitle,
+        companyName,
+        locationCompany,
+        preferedLanguages,
+        industriesServed,
+      );
 
-      final result = await _registerationRepo.companyRegister(
+      final result = await _authRepo.companyRegister(
         companyRegisterRequestModel,
       );
       emit(state.copyWith(
-        status: RegisterationStatus.success,
+        status: RegisterationStatus.registerationSuccess,
         registerSuccessMessage: result,
       ));
     } catch (e) {
       emit(state.copyWith(
-        status: RegisterationStatus.error,
+        status: RegisterationStatus.registerationFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }
   }
 
-  Future<FreelancerRegisterRequestModel> _collectFreelancerRegisterationData(
+  Future<FreelancerRegisterRequestModel> _fetchFreelancerRegistrationData(
     List<SpecializationModel> specializations,
     List<LanguagePairModel> languagePairs,
   ) async {
-    final List<int> specializationIds =
+    final specializationIds =
         specializations.map((specialization) => specialization.id).toList();
 
     final List<LanguagePair> languagePairIds = languagePairs
@@ -120,8 +123,7 @@ class RegisterationCubit extends Cubit<RegisterationState> {
 
     final imageUrl = await uploadImageToCloudinary(state.imageProfile);
 
-    final FreelancerRegisterRequestModel freelancerRegisterRequestModel =
-        FreelancerRegisterRequestModel(
+    return FreelancerRegisterRequestModel(
       email: state.email,
       firstName: state.firstName,
       lastName: state.lastName,
@@ -132,26 +134,24 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       languagePairs: languagePairIds,
       specializationIds: specializationIds,
     );
-    return freelancerRegisterRequestModel;
   }
 
-  Future<CompanyRegisterRequestModel> _collectCompanyRegisterationData(
+  Future<CompanyRegisterRequestModel> _fetchCompanyRegistrationData(
     String jobTitle,
     String companyName,
     String locationCompany,
     List<LanguageModel> preferedLanguages,
     List<SpecializationModel> industriesServed,
   ) async {
-    final List<int> specializationIds =
+    final specializationIds =
         industriesServed.map((specialization) => specialization.id).toList();
 
-    final List<int> preferredLanguageIds =
+    final preferredLanguageIds =
         preferedLanguages.map((language) => language.id).toList();
 
     final imageUrl = await uploadImageToCloudinary(state.imageProfile);
 
-    final CompanyRegisterRequestModel companyRegisterRequestModel =
-        CompanyRegisterRequestModel(
+    return CompanyRegisterRequestModel(
       email: state.email,
       firstName: state.firstName,
       lastName: state.lastName,
@@ -165,6 +165,5 @@ class RegisterationCubit extends Cubit<RegisterationState> {
       specializationIds: specializationIds,
       preferredLanguageIds: preferredLanguageIds,
     );
-    return companyRegisterRequestModel;
   }
 }

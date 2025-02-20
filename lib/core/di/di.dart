@@ -3,8 +3,6 @@ import 'package:get_it/get_it.dart';
 
 import '../../features/auth/data/repo/auth_repo.dart';
 import '../../features/auth/data/repo/auth_repo_impl.dart';
-import '../../features/auth/data/repo/registeration_repo.dart';
-import '../../features/auth/data/repo/registeration_repo_impl.dart';
 import '../../features/company/company_profile/data/repos/company_profile_repo.dart';
 import '../../features/company/company_profile/data/repos/company_profile_repo_impl.dart';
 import '../../features/company/company_setting/data/repo/company_setting_repo.dart';
@@ -32,11 +30,6 @@ void setupGetIt() {
   // AuthRepo
   getIt.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(apiServices: getIt()),
-  );
-
-  // Registeration Repo
-  getIt.registerLazySingleton<RegisterationRepo>(
-    () => RegisterationRepoImpl(apiServices: getIt()),
   );
   // project repo
   getIt.registerLazySingleton<ProjectRepo>(

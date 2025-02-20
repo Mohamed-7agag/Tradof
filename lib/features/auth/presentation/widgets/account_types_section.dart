@@ -24,7 +24,7 @@ class _AccountTypesSectionState extends State<AccountTypesSection> {
               _selectedAccountType = 0;
               context
                   .read<RegisterationCubit>()
-                  .setUserRole(UserRole.freelancer);
+                  .setRegisterationData(userRole: UserRole.freelancer);
             });
           },
           image: _selectedAccountType == 0
@@ -39,7 +39,9 @@ class _AccountTypesSectionState extends State<AccountTypesSection> {
           onTap: () {
             setState(() {
               _selectedAccountType = 1;
-              context.read<RegisterationCubit>().setUserRole(UserRole.company);
+              context
+                  .read<RegisterationCubit>()
+                  .setRegisterationData(userRole: UserRole.company);
             });
           },
           image: _selectedAccountType == 1

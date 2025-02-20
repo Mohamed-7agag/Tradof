@@ -29,7 +29,7 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
           _image = File(image.path);
           context
               .read<RegisterationCubit>()
-              .setCountryAndImageProfile(imageProfile: _image);
+              .setRegisterationData(imageProfile: _image);
         });
       }
     } catch (e) {

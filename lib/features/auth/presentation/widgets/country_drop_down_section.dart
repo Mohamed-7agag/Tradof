@@ -45,7 +45,7 @@ class _CountryDropDownSectionState extends State<CountryDropDownSection> {
           onChanged: (value) {
             context
                 .read<RegisterationCubit>()
-                .setCountryAndImageProfile(countryId: value?.id);
+                .setRegisterationData(countryId: value?.id);
           },
         );
       },

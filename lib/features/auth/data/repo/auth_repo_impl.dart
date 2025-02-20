@@ -1,5 +1,7 @@
 import '../../../../core/api/api_service.dart';
 import '../../../../core/api/end_points.dart';
+import '../model/company_register_request_model.dart';
+import '../model/freelancer_register_request_model.dart';
 import '../model/login_response_model.dart';
 import '../model/reset_password_request_model.dart';
 import 'auth_repo.dart';
@@ -19,29 +21,44 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<String> forgetPassword(String email) async {
-    final response = await _apiServices.post(
+    return await _apiServices.post(
       EndPoint.forgetPassword,
       data: {'email': email},
     );
-    return response;
   }
 
   @override
   Future<Map<String, dynamic>> verifyOtp(String email, String otp) async {
-    final response = await _apiServices.post(
+    return await _apiServices.post(
       EndPoint.verifyOtp,
       data: {'email': email, 'otp': otp},
     );
-    return response;
   }
 
   @override
   Future<String> resetPassword(
       ResetPasswordRequestModel resetPasswordRequestModel) async {
-    final response = await _apiServices.post(
+    return await _apiServices.post(
       EndPoint.resetPassword,
       data: resetPasswordRequestModel.toJson(),
     );
-    return response;
+  }
+
+  @override
+  Future<String> freelancerRegister(
+      FreelancerRegisterRequestModel freelancerRegisterRequestModel) async {
+    return await _apiServices.post(
+      EndPoint.registerFreelancer,
+      data: freelancerRegisterRequestModel.toJson(),
+    );
+  }
+
+  @override
+  Future<String> companyRegister(
+      CompanyRegisterRequestModel companyRegisterRequestModel) async {
+    return await _apiServices.post(
+      EndPoint.registerCompany,
+      data: companyRegisterRequestModel.toJson(),
+    );
   }
 }

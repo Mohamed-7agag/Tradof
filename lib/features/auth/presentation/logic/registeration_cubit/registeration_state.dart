@@ -2,26 +2,28 @@ part of 'registeration_cubit.dart';
 
 enum RegisterationStatus {
   initial,
-  loading,
-  success,
-  error,
+  registerationLoading,
+  registerationSuccess,
+  registerationFailure,
 }
 
 enum UserRole { freelancer, company }
 
 extension RegisterationStepX on RegisterationStatus {
-  bool get isLoading => this == RegisterationStatus.loading;
-  bool get isRegistered => this == RegisterationStatus.success;
-  bool get isError => this == RegisterationStatus.error;
+  bool get isRegisterationLoading =>
+      this == RegisterationStatus.registerationLoading;
+  bool get isRegisterationSuccess =>
+      this == RegisterationStatus.registerationSuccess;
+  bool get isRegisterationFailure =>
+      this == RegisterationStatus.registerationFailure;
 }
 
 class RegisterationState extends Equatable {
-
   const RegisterationState({
     this.status = RegisterationStatus.initial,
     this.userRole = UserRole.freelancer,
     this.errorMessage = '',
-    this.registerSuccessMessage = '',
+    this.successMessage = '',
     this.email = '',
     this.phoneNumber = '',
     this.password = '',
@@ -38,7 +40,7 @@ class RegisterationState extends Equatable {
   final String phoneNumber;
   final String password;
   final String errorMessage;
-  final String registerSuccessMessage;
+  final String successMessage;
   final File? imageProfile;
   final int? countryId;
 
@@ -59,8 +61,7 @@ class RegisterationState extends Equatable {
       status: status ?? this.status,
       userRole: userRole ?? this.userRole,
       errorMessage: errorMessage ?? this.errorMessage,
-      registerSuccessMessage:
-          registerSuccessMessage ?? this.registerSuccessMessage,
+      successMessage: registerSuccessMessage ?? successMessage,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       password: password ?? this.password,
@@ -76,7 +77,7 @@ class RegisterationState extends Equatable {
         status,
         userRole,
         errorMessage,
-        registerSuccessMessage,
+        successMessage,
         email,
         phoneNumber,
         password,

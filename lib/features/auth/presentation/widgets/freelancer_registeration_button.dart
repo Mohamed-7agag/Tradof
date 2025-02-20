@@ -16,18 +16,18 @@ class FreelancerRegisterationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterationCubit, RegisterationState>(
       listener: (context, state) {
-        if (state.status.isRegistered) {
+        if (state.status.isRegisterationSuccess) {
           context.pushNamedAndRemoveUntil(
             Routes.loginViewRoute,
             predicate: (route) => false,
           );
-          successToast(context, 'Success', state.registerSuccessMessage);
-        } else if (state.status.isError) {
+          successToast(context, 'Success', state.successMessage);
+        } else if (state.status.isRegisterationFailure) {
           errorToast(context, 'Error', state.errorMessage);
         }
       },
       builder: (context, state) {
-        return state.status.isLoading
+        return state.status.isRegisterationLoading
             ? const CustomLoadingWidget(color: AppColors.white)
             : CustomButton(
                 text: 'Submit',
