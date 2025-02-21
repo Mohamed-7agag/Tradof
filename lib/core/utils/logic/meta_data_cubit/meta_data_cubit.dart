@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart'; // For compute()
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,10 +17,9 @@ class MetaDataCubit extends Cubit<MetaDataState> {
   final MetaDataRepo _metaDataRepo;
 
   Future<void> fetchAllMetaData() async {
-    if (state.isLoaded) return; // Avoid duplicate calls
+    if (state.status.isFetchAllMetaDataSuccess) return;
 
     emit(state.copyWith(status: MetaDataStatus.loading));
-
     try {
       final RootIsolateToken rootIsolateToken = RootIsolateToken.instance!;
 
@@ -28,10 +27,10 @@ class MetaDataCubit extends Cubit<MetaDataState> {
         'repo': _metaDataRepo,
         'token': rootIsolateToken,
       });
-      if (isClosed) return;
 
+      if (isClosed) return;
       emit(state.copyWith(
-        status: MetaDataStatus.success,
+        status: MetaDataStatus.fetchAllMetaDataSuccess,
         languages: result.languages,
         countries: result.countries,
         specializations: result.specializations,
@@ -60,8 +59,7 @@ class MetaDataCubit extends Cubit<MetaDataState> {
       if (isClosed) return;
       emit(state.copyWith(
         status: MetaDataStatus.error,
-        errorMessage:
-            "Failed to load languages: ${ServerFailure.fromError(e).errMessage}",
+        errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }
   }
@@ -81,8 +79,7 @@ class MetaDataCubit extends Cubit<MetaDataState> {
       if (isClosed) return;
       emit(state.copyWith(
         status: MetaDataStatus.error,
-        errorMessage:
-            "Failed to load countries: ${ServerFailure.fromError(e).errMessage}",
+        errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }
   }
@@ -102,8 +99,7 @@ class MetaDataCubit extends Cubit<MetaDataState> {
       if (isClosed) return;
       emit(state.copyWith(
         status: MetaDataStatus.error,
-        errorMessage:
-            "Failed to load specializations: ${ServerFailure.fromError(e).errMessage}",
+        errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }
   }
@@ -118,8 +114,8 @@ class MetaDataCubit extends Cubit<MetaDataState> {
 Future<MetaDataResult> _fetchMetaDataInIsolate(
     Map<String, dynamic> params) async {
   BackgroundIsolateBinaryMessenger.ensureInitialized(
-      params['token'] as RootIsolateToken);
-
+    params['token'] as RootIsolateToken,
+  );
   final MetaDataRepo repo = params['repo'] as MetaDataRepo;
 
   try {
@@ -137,16 +133,4 @@ Future<MetaDataResult> _fetchMetaDataInIsolate(
   } catch (e) {
     throw Exception("Failed to fetch metadata: ${e.toString()}");
   }
-}
-
-class MetaDataResult {
-
-  MetaDataResult({
-    required this.languages,
-    required this.countries,
-    required this.specializations,
-  });
-  final List<LanguageModel> languages;
-  final List<CountryModel> countries;
-  final List<SpecializationModel> specializations;
 }

@@ -74,7 +74,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> resetPassword(String newPassword) async {
     emit(state.copyWith(status: AuthStatus.loading));
     try {
-      final ResetPasswordRequestModel request = ResetPasswordRequestModel(
+      final request = ResetPasswordRequestModel(
         email: state.email,
         resetToken: state.resetToken,
         newPassword: newPassword,

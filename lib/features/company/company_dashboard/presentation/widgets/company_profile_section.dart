@@ -21,16 +21,21 @@ class CompanyProfileSection extends StatelessWidget {
       leading: CircleAvatar(
         radius: 24,
         backgroundColor: AppColors.white,
-        backgroundImage:
-            CachedNetworkImageProvider(companyModel.profileImageUrl),
+        backgroundImage: CachedNetworkImageProvider(
+          companyModel.profileImageUrl,
+        ),
       ),
       title: Text(
         '${companyModel.firstName} ${companyModel.lastName}',
-        style: AppStyle.poppinsMedium14.copyWith(color: AppColors.white),
+        style: AppStyle.poppinsMedium14.copyWith(
+          color: AppColors.white,
+        ),
       ),
       subtitle: Text(
         companyModel.email,
-        style: AppStyle.robotoRegular10.copyWith(color: AppColors.white),
+        style: AppStyle.robotoRegular10.copyWith(
+          color: AppColors.white,
+        ),
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

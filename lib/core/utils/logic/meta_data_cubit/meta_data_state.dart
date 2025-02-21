@@ -6,7 +6,7 @@ enum MetaDataStatus {
   getCountries,
   getLanguages,
   getSpecializations,
-  success, // ✅ Added success state
+  fetchAllMetaDataSuccess,
   error,
 }
 
@@ -16,12 +16,11 @@ extension MetaDataStatusX on MetaDataStatus {
   bool get isGetCountries => this == MetaDataStatus.getCountries;
   bool get isGetLanguages => this == MetaDataStatus.getLanguages;
   bool get isGetSpecializations => this == MetaDataStatus.getSpecializations;
-  bool get isSuccess => this == MetaDataStatus.success; // ✅ Added success check
+  bool get isFetchAllMetaDataSuccess => this == MetaDataStatus.fetchAllMetaDataSuccess;
   bool get isError => this == MetaDataStatus.error;
 }
 
 class MetaDataState extends Equatable {
-
   const MetaDataState({
     this.status = MetaDataStatus.initial,
     this.countries = const [],
@@ -34,13 +33,6 @@ class MetaDataState extends Equatable {
   final List<LanguageModel> languages;
   final List<SpecializationModel> specializations;
   final String errorMessage;
-
-  /// ✅ **Check if all metadata is fetched**
-  bool get isLoaded => 
-      countries.isNotEmpty && languages.isNotEmpty && specializations.isNotEmpty;
-
-  /// ✅ **Check if an error occurred for any metadata type**
-  bool get hasError => errorMessage.isNotEmpty;
 
   MetaDataState copyWith({
     MetaDataStatus? status,
@@ -66,4 +58,16 @@ class MetaDataState extends Equatable {
         specializations,
         errorMessage,
       ];
+}
+
+
+class MetaDataResult {
+  MetaDataResult({
+    required this.languages,
+    required this.countries,
+    required this.specializations,
+  });
+  final List<LanguageModel> languages;
+  final List<CountryModel> countries;
+  final List<SpecializationModel> specializations;
 }

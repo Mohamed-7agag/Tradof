@@ -17,11 +17,15 @@ class CompanyDashboardView extends StatelessWidget {
         children: [
           verticalSpace(10),
           SafeArea(
-            child: CompanyProfileSection(companyModel: companyModel),
+            child: CompanyProfileSection(
+              companyModel: companyModel,
+            ),
           ),
           verticalSpace(15),
           Expanded(
-            child: CompanyDashboardStack(companyModel: companyModel),
+            child: CompanyDashboardStack(
+              companyModel: companyModel,
+            ),
           )
         ],
       ),

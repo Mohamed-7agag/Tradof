@@ -22,13 +22,13 @@ class _CompanySwitcherWidgetState extends State<CompanySwitcherWidget> {
       width: 0.85.sw,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
+        color: AppColors.white,
         boxShadow: const [
           BoxShadow(
             color: AppColors.grey,
             blurRadius: 0.25,
           ),
         ],
-        color: AppColors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -55,7 +55,7 @@ class _CompanySwitcherWidgetState extends State<CompanySwitcherWidget> {
               ],
             ),
           ),
-          InkWell(
+          GestureDetector(
             onTap: () {
               if (index != 1) {
                 setState(() => index = 1);

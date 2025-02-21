@@ -2,15 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/helpers/exit_dialog.dart';
 import '../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../core/utils/widgets/custom_animated_lazy_indexed_stack.dart';
 import '../../core/utils/widgets/custom_bottom_nav_bar.dart';
-import '../../core/utils/widgets/custom_failure_widget.dart';
 import '../../core/utils/widgets/custom_loading_widget.dart';
-import '../../core/utils/widgets/custom_refresh_indicator.dart';
+import '../company/company_bottom_nav_bar_view.dart';
 import 'freelancer_dashboard/presentation/views/freelance_dashbord_view.dart';
 import 'freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import 'freelancer_profile/presentation/views/freelancer_profile_view.dart';
@@ -30,8 +28,7 @@ class _FreelancerBottomNavBarViewState
   @override
   void initState() {
     super.initState();
-    //! call using isolate
-    if (context.read<MetaDataCubit>().state.isLoaded == false) {
+    if (!context.read<MetaDataCubit>().state.status.isFetchAllMetaDataSuccess) {
       context.read<MetaDataCubit>().fetchAllMetaData();
     }
   }
@@ -52,10 +49,7 @@ class _FreelancerBottomNavBarViewState
       onWillPop: () => exitDialog(context),
       child: Scaffold(
         body: BlocBuilder<FreelancerProfileCubit, FreelancerProfileState>(
-          buildWhen: (previous, current) =>
-              current.status.isGetFreelancerFailure ||
-              current.status.isGetFreelancerSuccess ||
-              current.status.isGetFreelancerLoading,
+          buildWhen: (previous, current) => _buildWhen(current),
           builder: (context, state) {
             if (state.status.isGetFreelancerSuccess) {
               return CustomAnimatedLazyIndexedStack(
@@ -63,10 +57,11 @@ class _FreelancerBottomNavBarViewState
                 children: _buildIndexedStackChildren(state),
               );
             } else if (state.status.isGetFreelancerFailure) {
-              return _buildFailureWidget(
+              return failureWithRefreshIndicatorWidget(
                 context,
                 currentIndex,
                 state.errMessage,
+                context.read<FreelancerProfileCubit>().getFreelancerProfile(),
               );
             }
             return const CustomLoadingWidget();
@@ -83,21 +78,8 @@ class _FreelancerBottomNavBarViewState
   }
 }
 
-Widget _buildFailureWidget(
-    BuildContext context, int currentIndex, String errorMessage) {
-  if (currentIndex == 0) {
-    return CustomRefreshIndicator(
-      onRefresh: () async {
-        context.read<FreelancerProfileCubit>().getFreelancerProfile();
-      },
-      child: ListView(
-        itemExtent: 1.sh,
-        children: [
-          CustomFailureWidget(text: errorMessage),
-        ],
-      ),
-    );
-  } else {
-    return CustomFailureWidget(text: errorMessage);
-  }
+_buildWhen(FreelancerProfileState current) {
+  return current.status.isGetFreelancerFailure ||
+      current.status.isGetFreelancerSuccess ||
+      current.status.isGetFreelancerLoading;
 }

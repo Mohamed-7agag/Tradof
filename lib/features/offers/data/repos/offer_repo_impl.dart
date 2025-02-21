@@ -4,36 +4,32 @@ import '../model/add_offer_request_model.dart';
 import 'offer_repo.dart';
 
 class OfferRepoImpl implements OfferRepo {
-
   OfferRepoImpl({required this.apiServices});
   final ApiServices apiServices;
 
   @override
   Future<String> addOffer(AddOfferRequestModel model) async {
-    final response = await apiServices.post(
+    return await apiServices.post(
       EndPoint.addOffer,
       data: model.toJson(),
     );
-    return response;
   }
 
   @override
-  Future<String> updateOffer(int offerId,AddOfferRequestModel model) async {
-    final response = await apiServices.put(
+  Future<String> updateOffer(int offerId, AddOfferRequestModel model) async {
+    return await apiServices.put(
       EndPoint.updateProposal(),
       data: {
-      "id": offerId,  
-      ...model.toJson(),
-    },
+        "id": offerId,
+        ...model.toJson(),
+      },
     );
-    return response;
   }
 
   @override
   Future<String> deleteOffer({required int id}) async {
-    final response = await apiServices.delete(
+    return await apiServices.delete(
       EndPoint.deleteProposal(id),
     );
-    return response;
   }
 }

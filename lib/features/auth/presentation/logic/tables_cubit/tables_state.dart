@@ -1,7 +1,6 @@
 part of 'tables_cubit.dart';
 
 class TablesState {
-
   TablesState({
     this.selectedSpecializations = const <SpecializationModel>[],
     this.selectedIndustriesServed = const <SpecializationModel>[],

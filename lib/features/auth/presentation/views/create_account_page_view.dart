@@ -26,8 +26,7 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
   @override
   void initState() {
     _pageController = PageController();
-    //! call using isolate
-    if (context.read<MetaDataCubit>().state.isLoaded == false) {
+    if (!context.read<MetaDataCubit>().state.status.isFetchAllMetaDataSuccess) {
       context.read<MetaDataCubit>().fetchAllMetaData();
     }
     super.initState();

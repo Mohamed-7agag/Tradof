@@ -30,8 +30,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
 
   @override
   void initState() {
-    //! call using isolate
-    if (context.read<MetaDataCubit>().state.isLoaded == false) {
+    if (!context.read<MetaDataCubit>().state.status.isFetchAllMetaDataSuccess) {
       context.read<MetaDataCubit>().fetchAllMetaData();
     }
     super.initState();
@@ -53,10 +52,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
       onWillPop: () => exitDialog(context),
       child: Scaffold(
         body: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
-          buildWhen: (previous, current) =>
-              current.status.isGetCompanySuccess ||
-              current.status.isGetCompanyFailure ||
-              current.status.isGetCompanyLoading,
+          buildWhen: (previous, current) => _buildWhen(current),
           builder: (context, state) {
             if (state.status.isGetCompanySuccess) {
               return CustomAnimatedLazyIndexedStack(
@@ -64,10 +60,11 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
                 children: _buildIndexedStackChildren(state),
               );
             } else if (state.status.isGetCompanyFailure) {
-              return _buildFailureWidget(
+              return failureWithRefreshIndicatorWidget(
                 context,
                 currentIndex,
                 state.errorMessage,
+                context.read<CompanyProfileCubit>().getCompanyProfile(),
               );
             }
             return const CustomLoadingWidget();
@@ -83,12 +80,22 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
   }
 }
 
-Widget _buildFailureWidget(
-    BuildContext context, int currentIndex, String errorMessage) {
+_buildWhen(CompanyProfileState current) {
+  return current.status.isGetCompanySuccess ||
+      current.status.isGetCompanyFailure ||
+      current.status.isGetCompanyLoading;
+}
+
+Widget failureWithRefreshIndicatorWidget(
+  BuildContext context,
+  int currentIndex,
+  String errorMessage,
+  Future<void> onRefresh,
+) {
   if (currentIndex == 0) {
     return CustomRefreshIndicator(
       onRefresh: () async {
-        context.read<CompanyProfileCubit>().getCompanyProfile();
+        onRefresh;
       },
       child: ListView(
         itemExtent: 1.sh,

@@ -57,6 +57,4 @@ class ProjectRepoImpl implements ProjectRepo {
       EndPoint.deleteProject(projectId),
     );
   }
-  
-  
 }
