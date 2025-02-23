@@ -58,7 +58,6 @@ class _FreelancerBottomNavBarViewState
               );
             } else if (state.status.isGetFreelancerFailure) {
               return failureWithRefreshIndicatorWidget(
-                context,
                 currentIndex,
                 state.errMessage,
                 context.read<FreelancerProfileCubit>().getFreelancerProfile(),

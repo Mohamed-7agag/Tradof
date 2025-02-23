@@ -42,7 +42,7 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         border: Border.all(color: widget.borderColor ?? AppColors.white),
       ),
       child: DropdownButton<LanguageModel>(
@@ -55,7 +55,7 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
         underline: const SizedBox.shrink(),
         elevation: 4,
         value: selectedLanguage,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         hint: Text(
           widget.hint,
           style: AppStyle.robotoRegular14

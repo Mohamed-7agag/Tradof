@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
-import '../../../../core/utils/models/language_model.dart';
 import '../../../auth/presentation/widgets/language_drop_down.dart';
 import '../../../company/company_profile/data/model/company_model.dart';
 import '../../data/models/project_model.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
-class UpdateProjectLanguagePair extends StatefulWidget {
+class UpdateProjectLanguagePair extends StatelessWidget {
   const UpdateProjectLanguagePair({
     required this.companyModel,
     required this.projectModel,
@@ -19,30 +18,6 @@ class UpdateProjectLanguagePair extends StatefulWidget {
   final ProjectModel projectModel;
 
   @override
-  State<UpdateProjectLanguagePair> createState() =>
-      _UpdateProjectLanguagePairState();
-}
-
-class _UpdateProjectLanguagePairState extends State<UpdateProjectLanguagePair> {
-  LanguageModel? fromLanguage, toLanguage;
-  @override
-  void initState() {
-    fromLanguage = getLanguagebyId(
-      widget.companyModel.preferredLanguages,
-      widget.projectModel.languageFromId,
-    );
-    toLanguage = getLanguagebyId(
-      widget.companyModel.preferredLanguages,
-      widget.projectModel.languageToId,
-    );
-    context.read<ProjectCubit>().setCreateProjectData(
-          fromLanguage: fromLanguage,
-          toLanguage: toLanguage,
-        );
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -50,9 +25,9 @@ class _UpdateProjectLanguagePairState extends State<UpdateProjectLanguagePair> {
           hint: 'From Language',
           borderColor: AppColors.grey,
           hintColor: AppColors.darkGrey,
-          items: widget.companyModel.preferredLanguages,
-          isEditable: widget.projectModel.status == 0,
-          value: fromLanguage,
+          items: companyModel.preferredLanguages,
+          isEditable: projectModel.status.value == 0,
+          value: projectModel.languageFrom,
           onChanged: (value) {
             context
                 .read<ProjectCubit>()
@@ -64,9 +39,9 @@ class _UpdateProjectLanguagePairState extends State<UpdateProjectLanguagePair> {
           hint: 'To Language',
           borderColor: AppColors.grey,
           hintColor: AppColors.darkGrey,
-          items: widget.companyModel.preferredLanguages,
-          value: toLanguage,
-          isEditable: widget.projectModel.status == 0,
+          items: companyModel.preferredLanguages,
+          value: projectModel.languageTo,
+          isEditable: projectModel.status.value == 0,
           onChanged: (value) {
             context
                 .read<ProjectCubit>()
@@ -75,10 +50,5 @@ class _UpdateProjectLanguagePairState extends State<UpdateProjectLanguagePair> {
         ),
       ],
     );
-  }
-
-  LanguageModel? getLanguagebyId(
-      List<LanguageModel> languages, int? languageId) {
-    return languages.firstWhere((element) => element.id == languageId);
   }
 }

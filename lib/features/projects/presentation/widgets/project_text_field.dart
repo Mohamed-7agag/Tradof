@@ -52,7 +52,7 @@ class ProjectTextField extends StatelessWidget {
 
   _buildBorder({Color? color}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
       borderSide: BorderSide(color: color ?? AppColors.grey),
     );
   }

@@ -18,8 +18,8 @@ class CompanyWorkStatusWidget extends StatelessWidget {
           Container(
             width: 0.8.sw,
             padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
               color: AppColors.cardColor,
             ),
             child: Column(
@@ -28,10 +28,9 @@ class CompanyWorkStatusWidget extends StatelessWidget {
                 Text(
                   'The project is currently being worked on by the freelancer',
                   style: AppStyle.poppinsMedium15.copyWith(
-                    color: AppColors.primary,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 16.sp
-                  ),
+                      color: AppColors.primary,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 16.sp),
                   textAlign: TextAlign.center,
                 ),
                 verticalSpace(14),

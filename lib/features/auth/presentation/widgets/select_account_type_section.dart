@@ -14,9 +14,9 @@ class SelectAccountTypeSection extends StatelessWidget {
     return Container(
       width: MediaQuery.sizeOf(context).width - 40.w,
       padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

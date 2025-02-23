@@ -19,7 +19,7 @@ class DotIndicator extends StatelessWidget {
           width: 32,
           height: 4,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
             color: currentPage == index ? activeColor : inActiveColor,
           ),
         );

@@ -30,7 +30,7 @@ class AttachmentFilesSection extends StatelessWidget {
               width: 1.sw,
               height: files.isEmpty ? 80 : null,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
                 border: Border.all(color: AppColors.grey),
               ),
               child: ListView.builder(

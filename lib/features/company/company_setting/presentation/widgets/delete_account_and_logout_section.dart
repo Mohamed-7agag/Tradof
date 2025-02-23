@@ -26,9 +26,9 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
             delay: const Duration(milliseconds: 480),
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.cardColor,
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,12 +59,12 @@ class DeleteAccountAndLogoutSection extends StatelessWidget {
               onTap: () {
                 _showLogoutDialog(context);
               },
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColors.cardColor,
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

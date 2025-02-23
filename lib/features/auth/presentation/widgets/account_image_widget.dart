@@ -71,7 +71,7 @@ class _AccountImageWidgetState extends State<AccountImageWidget> {
   Widget userImage() {
     return _image != null
         ? ClipRRect(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: const BorderRadius.all(Radius.circular(50)),
             child: Image.file(
               _image!,
               width: 88,

@@ -20,10 +20,10 @@ class _CompanySwitcherWidgetState extends State<CompanySwitcherWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 13),
       width: 0.85.sw,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
         color: AppColors.white,
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
             color: AppColors.grey,
             blurRadius: 0.25,

@@ -24,8 +24,9 @@ class CompanyReviewStatusWidget extends StatelessWidget {
                 Container(
                   height: 200,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.grey)),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    border: Border.all(color: AppColors.grey),
+                  ),
                 ),
                 Expanded(child: verticalSpace(20)),
                 Align(

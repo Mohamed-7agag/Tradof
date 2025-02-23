@@ -40,9 +40,9 @@ class CompanyRatingAndReviews extends StatelessWidget {
             delay: const Duration(milliseconds: 240),
             child: Container(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.primary,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.all(Radius.circular(12)),
               ),
               child: const HugeIcon(
                 icon: HugeIcons.strokeRoundedShare08,

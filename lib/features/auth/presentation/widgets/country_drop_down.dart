@@ -44,7 +44,7 @@ class _CountryDropDownState extends State<CountryDropDown> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         border: Border.all(color: widget.borderColor),
       ),
       child: DropdownButton<CountryModel>(
@@ -53,7 +53,7 @@ class _CountryDropDownState extends State<CountryDropDown> {
         isExpanded: true,
         menuWidth: 1.sw - 70,
         underline: const SizedBox.shrink(),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         elevation: 4,
         value: selectedCountry,
         hint: Text(

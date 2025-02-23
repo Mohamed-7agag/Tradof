@@ -9,7 +9,7 @@ loadingDialog(BuildContext context, {Color? dialogBackgroundColor}) {
     animType: AnimType.rightSlide,
     body: const CustomLoadingWidget(),
     dialogType: DialogType.noHeader,
-    dialogBorderRadius: BorderRadius.circular(16),
+    dialogBorderRadius: const BorderRadius.all(Radius.circular(16)),
     width: 180,
     padding: const EdgeInsets.symmetric(vertical: 20),
     dialogBackgroundColor: dialogBackgroundColor,

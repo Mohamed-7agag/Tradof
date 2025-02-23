@@ -74,7 +74,7 @@ class _UpdateCompanyProfileImageState extends State<UpdateCompanyProfileImage> {
   Widget userImage() {
     return _image != null
         ? ClipRRect(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: const BorderRadius.all(Radius.circular(50)),
             child: Image.file(
               _image!,
               width: 88,
@@ -87,7 +87,7 @@ class _UpdateCompanyProfileImageState extends State<UpdateCompanyProfileImage> {
             child: widget.imageUrl == null
                 ? SvgPicture.asset('assets/images/person.svg', width: 88)
                 : ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: const BorderRadius.all(Radius.circular(50)),
                     child: CachedNetworkImage(
                       imageUrl: widget.imageUrl!,
                       width: 88,

@@ -15,9 +15,9 @@ class Subscriptionplan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 16.w),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.cardColor,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.all(Radius.circular(15)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

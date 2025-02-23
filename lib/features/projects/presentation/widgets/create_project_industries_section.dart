@@ -42,12 +42,12 @@ class _CreateProjectIndustriesSectionState
           _showIndustries(context, widget.companyModel);
         }
       },
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         width: 1.sw,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
           border: Border.all(color: AppColors.grey),
         ),
         child: Row(
@@ -85,8 +85,8 @@ class _CreateProjectIndustriesSectionState
               style: AppStyle.poppinsBold22,
             ),
             backgroundColor: AppColors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(14)),
             ),
             content: SizedBox(
               width: 0.9.sw,
@@ -98,8 +98,8 @@ class _CreateProjectIndustriesSectionState
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
                     title: Text(
                       '${index + 1}. ${companyModel.specializations[index].name}',

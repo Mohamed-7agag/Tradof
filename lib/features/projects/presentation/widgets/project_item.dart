@@ -10,8 +10,8 @@ class ProjectItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(18)),
         color: AppColors.cardColor,
       ),
       child: Column(
@@ -21,7 +21,9 @@ class ProjectItem extends StatelessWidget {
             contentPadding: EdgeInsets.zero,
             horizontalTitleGap: 10,
             leading: const CircleAvatar(
-                radius: 22, backgroundColor: AppColors.primary),
+              radius: 22,
+              backgroundColor: AppColors.primary,
+            ),
             title: Text('Yousef Ghareb', style: AppStyle.robotoRegular14),
             subtitle: Text('Job Title', style: AppStyle.robotoRegular12),
             trailing: Text(

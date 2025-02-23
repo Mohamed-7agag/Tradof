@@ -6,7 +6,6 @@ import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
-import '../../../auth/data/model/specialization_model.dart';
 import '../../../company/company_profile/data/model/company_model.dart';
 import '../../data/models/project_model.dart';
 import '../logic/file_cubit.dart';
@@ -21,12 +20,10 @@ class ProjectDetailsView extends StatefulWidget {
   const ProjectDetailsView({
     required this.companyModel,
     required this.projectModel,
-    required this.specialization,
     super.key,
   });
   final CompanyModel companyModel;
   final ProjectModel projectModel;
-  final SpecializationModel specialization;
   @override
   State<ProjectDetailsView> createState() => _ProjectDetailsViewState();
 }
@@ -84,13 +81,13 @@ class _ProjectDetailsViewState extends State<ProjectDetailsView> {
                 ProjectTextField(
                   labelText: 'Project Name',
                   controller: projectNameController,
-                  readOnly: widget.projectModel.status != 0,
+                  readOnly: widget.projectModel.status.value != 0,
                 ),
                 verticalSpace(25),
                 ProjectTextField(
                   labelText: 'Project Description',
                   controller: projectDescriptionController,
-                  readOnly: widget.projectModel.status != 0,
+                  readOnly: widget.projectModel.status.value != 0,
                   maxLines: 4,
                 ),
                 verticalSpace(25),
@@ -103,8 +100,8 @@ class _ProjectDetailsViewState extends State<ProjectDetailsView> {
                 verticalSpace(30),
                 CreateProjectIndustriesSection(
                   companyModel: widget.companyModel,
-                  value: widget.specialization,
-                  isEditable: widget.projectModel.status == 0,
+                  value: widget.projectModel.specialization,
+                  isEditable: widget.projectModel.status.value == 0,
                 ),
                 verticalSpace(25),
                 Row(
@@ -114,7 +111,7 @@ class _ProjectDetailsViewState extends State<ProjectDetailsView> {
                         labelText: 'Min Budget',
                         controller: minBudgetController,
                         keyboardType: TextInputType.number,
-                        readOnly: widget.projectModel.status != 0,
+                        readOnly: widget.projectModel.status.value != 0,
                       ),
                     ),
                     horizontalSpace(10),
@@ -123,7 +120,7 @@ class _ProjectDetailsViewState extends State<ProjectDetailsView> {
                         labelText: 'Max Budget',
                         controller: maxBudgetController,
                         keyboardType: TextInputType.number,
-                        readOnly: widget.projectModel.status != 0,
+                        readOnly: widget.projectModel.status.value != 0,
                       ),
                     ),
                   ],
@@ -133,7 +130,7 @@ class _ProjectDetailsViewState extends State<ProjectDetailsView> {
                   labelText: 'Delivery Time (Days)',
                   controller: daysController,
                   keyboardType: TextInputType.number,
-                  readOnly: widget.projectModel.status != 0,
+                  readOnly: widget.projectModel.status.value != 0,
                 ),
                 verticalSpace(25),
                 Text(

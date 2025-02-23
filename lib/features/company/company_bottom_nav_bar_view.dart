@@ -61,7 +61,6 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
               );
             } else if (state.status.isGetCompanyFailure) {
               return failureWithRefreshIndicatorWidget(
-                context,
                 currentIndex,
                 state.errorMessage,
                 context.read<CompanyProfileCubit>().getCompanyProfile(),
@@ -87,7 +86,6 @@ _buildWhen(CompanyProfileState current) {
 }
 
 Widget failureWithRefreshIndicatorWidget(
-  BuildContext context,
   int currentIndex,
   String errorMessage,
   Future<void> onRefresh,

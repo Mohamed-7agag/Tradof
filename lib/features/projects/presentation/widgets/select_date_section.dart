@@ -25,7 +25,7 @@ class _SelectDateSectionState extends State<SelectDateSection> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
       onTap: () async {
         final date = await customDatePicker(context);
         if (date != null) {
@@ -39,7 +39,7 @@ class _SelectDateSectionState extends State<SelectDateSection> {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 17.h),
         width: 1.sw,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
           border: Border.all(color: AppColors.grey),
         ),
         child: Text(

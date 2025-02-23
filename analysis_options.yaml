@@ -11,38 +11,37 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
-    - prefer_const_constructors
-    - prefer_const_literals_to_create_immutables
-    - prefer_interpolation_to_compose_strings
-    - prefer_const_declarations
-    - avoid_print
-    - prefer_final_fields
-    - avoid_unnecessary_containers
-    - unnecessary_null_checks
-    - use_key_in_widget_constructors
-    - avoid_escaping_inner_quotes
-    - prefer_foreach
-    - avoid_function_literals_in_foreach_calls
-    - prefer_iterable_whereType
     - always_put_required_named_parameters_first
     - avoid_empty_else
+    - avoid_escaping_inner_quotes
+    - avoid_function_literals_in_foreach_calls
+    - avoid_print
     - avoid_redundant_argument_values
     - avoid_returning_null
+    - avoid_shadowing_type_parameters
+    - avoid_unnecessary_containers
     - avoid_unused_constructor_parameters
     - avoid_void_async
     - curly_braces_in_flow_control_structures
     - prefer_conditional_assignment
+    - prefer_const_constructors
+    - prefer_const_declarations
+    - prefer_const_literals_to_create_immutables
+    - prefer_final_fields
+    - prefer_final_locals
+    - prefer_foreach
+    - prefer_inlined_adds
+    - prefer_interpolation_to_compose_strings
     - prefer_is_empty
     - prefer_is_not_empty
-    - prefer_null_aware_operators
-    - prefer_spread_collections
-    - unnecessary_lambdas
-    - prefer_relative_imports
-    - avoid_shadowing_type_parameters
-    - prefer_final_locals
-    - prefer_inlined_adds
+    - prefer_iterable_whereType
     - prefer_null_aware_method_calls
+    - prefer_null_aware_operators
+    - prefer_relative_imports
+    - prefer_spread_collections
     - prefer_typing_uninitialized_variables
-    - sort_constructors_first
+    - unnecessary_lambdas
+    - unnecessary_null_checks
+    - use_key_in_widget_constructors
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

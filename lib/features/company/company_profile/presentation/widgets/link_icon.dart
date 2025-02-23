@@ -46,9 +46,9 @@ class LinkIcon extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 11, horizontal: 12),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: Image.asset(
           image,

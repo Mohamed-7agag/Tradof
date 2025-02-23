@@ -62,7 +62,7 @@ class CustomDropDownWidget extends StatelessWidget {
 
   OutlineInputBorder _buildBorder({required Color color}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
       borderSide: BorderSide(color: color),
     );
   }

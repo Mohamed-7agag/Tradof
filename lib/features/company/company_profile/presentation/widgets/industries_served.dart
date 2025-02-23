@@ -25,7 +25,7 @@ class IndustriesServed extends StatelessWidget {
           children: [
             Text('Industries Served', style: AppStyle.poppinsMedium15),
             InkWell(
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: const BorderRadius.all(Radius.circular(4)),
               onTap: () async {
                 final Map<String, dynamic> data = {
                   'isPreferedLanguages': false,
@@ -75,13 +75,13 @@ class IndustriesServed extends StatelessWidget {
             horizontalMargin: 14,
             columnSpacing: 26,
             dividerThickness: 0,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.cardColor,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             border: TableBorder.all(
               color: AppColors.cardDarkColor,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
             ),
           ),
         ),

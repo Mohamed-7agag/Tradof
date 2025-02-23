@@ -11,7 +11,7 @@ class BottomNavBarCenterIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return SlideInUp(
       child: InkWell(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: const BorderRadius.all(Radius.circular(30)),
         onTap: onTap,
         child: Container(
           width: 60,

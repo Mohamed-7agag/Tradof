@@ -13,7 +13,7 @@ class ProjectWorkspaceStatusSection extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         boxShadow: [
           BoxShadow(color: Colors.grey[200]!, blurRadius: 4),
         ],

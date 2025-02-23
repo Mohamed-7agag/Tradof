@@ -29,9 +29,12 @@ class _PrivacyPolicyCheckBoxState extends State<PrivacyPolicyCheckBox> {
           "I agree to the Terms of Service and Privacy Policy.",
           style: AppStyle.robotoRegular10.copyWith(color: AppColors.white),
         ),
-        checkboxShape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        checkboxShape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
         side: const BorderSide(color: AppColors.white),
         selectedTileColor: AppColors.primary,
         controlAffinity: ListTileControlAffinity.leading,

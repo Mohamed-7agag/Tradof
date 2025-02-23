@@ -50,12 +50,14 @@ class FreelancerCvSection extends StatelessWidget {
             customUrlLauncher(context, cvUrl!);
           }
         },
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: const BorderRadius.all(Radius.circular(14)),
         child: Container(
           padding: EdgeInsets.symmetric(
-              horizontal: 12, vertical: cvUrl == null ? 18 : 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+            horizontal: 12,
+            vertical: cvUrl == null ? 18 : 8,
+          ),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
             color: AppColors.cardColor,
           ),
           child: Row(

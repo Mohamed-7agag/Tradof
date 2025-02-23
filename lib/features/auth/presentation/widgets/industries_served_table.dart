@@ -103,12 +103,12 @@ class IndustriesServedTable extends StatelessWidget {
                 dividerThickness: 0,
                 border: TableBorder.all(
                   color: darkColors ? AppColors.cardDarkColor : AppColors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
                 decoration: darkColors
-                    ? BoxDecoration(
+                    ? const BoxDecoration(
                         color: AppColors.cardColor,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       )
                     : null,
               );
@@ -133,8 +133,8 @@ class IndustriesServedTable extends StatelessWidget {
               style: AppStyle.poppinsBold22.copyWith(color: Colors.white),
             ),
             backgroundColor: AppColors.darkGrey,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(14)),
             ),
             content: SizedBox(
               width: 0.9.sw,
@@ -158,8 +158,8 @@ class IndustriesServedTable extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         contentPadding: EdgeInsets.zero,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
                         ),
                         title: Text(
                           '${index + 1}. ${state.specializations[index].name}',

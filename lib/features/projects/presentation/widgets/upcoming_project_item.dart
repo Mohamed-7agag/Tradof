@@ -7,12 +7,11 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
-import '../../../auth/data/model/specialization_model.dart';
 import '../../../company/company_profile/data/model/company_model.dart';
 import '../../data/models/project_model.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
-class UpcomingProjectItem extends StatefulWidget {
+class UpcomingProjectItem extends StatelessWidget {
   const UpcomingProjectItem({
     required this.project,
     required this.companyModel,
@@ -23,25 +22,13 @@ class UpcomingProjectItem extends StatefulWidget {
   final CompanyModel companyModel;
 
   @override
-  State<UpcomingProjectItem> createState() => _UpcomingProjectItemState();
-}
-
-class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
-  SpecializationModel getSpecialization() {
-    return widget.companyModel.specializations.firstWhere(
-      (element) => element.id == widget.project.specializationId,
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
         final result =
             await context.pushNamed(Routes.projectDetailsViewRoute, arguments: {
-          'projectModel': widget.project,
-          'companyModel': widget.companyModel,
-          'specialization': getSpecialization(),
+          'projectModel': project,
+          'companyModel': companyModel,
         });
         if (result == true && context.mounted) {
           context.read<ProjectCubit>().getUpcomingProjects();
@@ -52,8 +39,8 @@ class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
         child: Container(
           padding: const EdgeInsets.all(16),
           margin: const EdgeInsets.only(bottom: 12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(16)),
             color: AppColors.cardColor,
           ),
           child: Column(
@@ -63,7 +50,7 @@ class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    getSpecialization().name,
+                    project.specialization.name,
                     style: AppStyle.robotoRegular12.copyWith(
                       color: AppColors.black,
                     ),
@@ -73,10 +60,10 @@ class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
                       color: Colors.green.withValues(alpha: 0.15),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
                     ),
                     child: Text(
-                      'Active',
+                      project.status.name,
                       style: AppStyle.robotoRegular10.copyWith(
                         color: Colors.green,
                         fontWeight: FontWeight.bold,
@@ -87,7 +74,7 @@ class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
               ),
               verticalSpace(8),
               Text(
-                widget.project.name,
+                project.name,
                 style: AppStyle.robotoCondensedMedium15.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -98,19 +85,18 @@ class _UpcomingProjectItemState extends State<UpcomingProjectItem> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildInfoColumn('Price',
-                      '${widget.project.minPrice} - ${widget.project.maxPrice}\$'),
-                  const SizedBox(
-                    height: 35,
-                    child: VerticalDivider(color: AppColors.cardDarkColor),
-                  ),
-                  _buildInfoColumn('Deadline', '${widget.project.days} Days'),
-                  const SizedBox(
-                    height: 35,
-                    child: VerticalDivider(color: AppColors.cardDarkColor),
-                  ),
                   _buildInfoColumn(
-                      'Offers', '${widget.project.numberOfOffers}'),
+                      'Price', '${project.minPrice} - ${project.maxPrice}\$'),
+                  const SizedBox(
+                    height: 35,
+                    child: VerticalDivider(color: AppColors.cardDarkColor),
+                  ),
+                  _buildInfoColumn('Deadline', '${project.days} Days'),
+                  const SizedBox(
+                    height: 35,
+                    child: VerticalDivider(color: AppColors.cardDarkColor),
+                  ),
+                  _buildInfoColumn('Offers', '${project.numberOfOffers}'),
                 ],
               ),
             ],

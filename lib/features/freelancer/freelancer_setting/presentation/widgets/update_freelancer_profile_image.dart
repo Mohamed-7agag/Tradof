@@ -75,7 +75,7 @@ class _UpdateFreelancerProfileImageState
   Widget userImage() {
     return _image != null
         ? ClipRRect(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: const BorderRadius.all(Radius.circular(50)),
             child: Image.file(
               width: 88,
               height: 88,
@@ -88,7 +88,7 @@ class _UpdateFreelancerProfileImageState
             child: widget.imageUrl == null
                 ? SvgPicture.asset('assets/images/person.svg', width: 88)
                 : ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: const BorderRadius.all(Radius.circular(50)),
                     child: CachedNetworkImage(
                       imageUrl: widget.imageUrl!,
                       width: 88,

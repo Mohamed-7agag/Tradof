@@ -16,9 +16,9 @@ class StartedProjectChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 14, bottom: 12, left: 12, right: 16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.cardColor,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       child: Column(
         children: [

@@ -21,7 +21,7 @@ showLanguagePairDialog(BuildContext context) {
     dialogType: DialogType.noHeader,
     animType: AnimType.rightSlide,
     title: 'Language Pair',
-    dialogBorderRadius: BorderRadius.circular(12),
+    dialogBorderRadius: const BorderRadius.all(Radius.circular(12)),
     body: BlocBuilder<MetaDataCubit, MetaDataState>(
       builder: (context, state) {
         if (state.status.isError) {

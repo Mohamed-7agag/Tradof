@@ -16,35 +16,38 @@ class StatusItem extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
-    return status == index ? Container(
-      padding: EdgeInsets.symmetric(vertical: 7, horizontal: 16.w),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: getStatusColor(index),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          HugeIcon(
-            icon: getStatusIcon(index),
-            color: AppColors.white,
-            size: 20,
-          ),
-          horizontalSpace(8),
-          Text(
-            getStatusName(index),
-            style: AppStyle.robotoRegular14.copyWith(color: AppColors.white),
-          ),
-        ],
-      ),
-    ) : Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: HugeIcon(
+    return status == index
+        ? Container(
+            padding: EdgeInsets.symmetric(vertical: 7, horizontal: 16.w),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(50)),
+              color: getStatusColor(index),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                HugeIcon(
+                  icon: getStatusIcon(index),
+                  color: AppColors.white,
+                  size: 20,
+                ),
+                horizontalSpace(8),
+                Text(
+                  getStatusName(index),
+                  style:
+                      AppStyle.robotoRegular14.copyWith(color: AppColors.white),
+                ),
+              ],
+            ),
+          )
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: HugeIcon(
               icon: getStatusIcon(index),
               color: Colors.grey,
               size: 20,
             ),
-    );
+          );
   }
 
   Color getStatusColor(int status) {

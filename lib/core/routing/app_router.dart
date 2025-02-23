@@ -195,7 +195,6 @@ class AppRouter {
             child: ProjectDetailsView(
               companyModel: data['companyModel'],
               projectModel: data['projectModel'],
-              specialization: data['specialization'],
             ),
           ),
         );

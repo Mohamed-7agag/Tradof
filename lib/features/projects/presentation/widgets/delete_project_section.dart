@@ -34,11 +34,11 @@ class DeleteProjectSection extends StatelessWidget {
           FocusManager.instance.primaryFocus?.unfocus();
           _showDeleteDialog(context, projectId);
         },
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
             color: Colors.red.withValues(alpha: 0.15),
           ),
           child:
@@ -48,7 +48,9 @@ class DeleteProjectSection extends StatelessWidget {
               style: AppStyle.poppinsSemiBold14.copyWith(color: Colors.red),
             ),
             const HugeIcon(
-                icon: HugeIcons.strokeRoundedDelete02, color: Colors.red)
+              icon: HugeIcons.strokeRoundedDelete02,
+              color: Colors.red,
+            )
           ]),
         ),
       ),

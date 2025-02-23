@@ -13,9 +13,9 @@ class FreelancerSettingSection2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.cardColor,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       child: Column(
         children: [

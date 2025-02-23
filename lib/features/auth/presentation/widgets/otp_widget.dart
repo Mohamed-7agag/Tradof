@@ -16,7 +16,7 @@ class OtpWidget extends StatelessWidget {
       enabledBorderColor: AppColors.grey,
       //autoFocus: true,
       cursorColor: AppColors.primary,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
       fieldWidth: MediaQuery.sizeOf(context).width / 8,
       showFieldAsBox: true,
       contentPadding: EdgeInsets.symmetric(vertical: 18.h),

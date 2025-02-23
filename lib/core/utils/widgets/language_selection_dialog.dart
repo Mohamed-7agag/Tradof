@@ -44,8 +44,8 @@ class _LanguageSelectionDialogState extends State<LanguageSelectionDialog> {
         style: AppStyle.poppinsBold22.copyWith(color: Colors.white),
       ),
       backgroundColor: AppColors.darkGrey,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(14),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(14)),
       ),
       content: SizedBox(
         width: 1.sw,
@@ -112,8 +112,8 @@ class LanguagesListView extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           contentPadding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
           title: Text(
             '${filteredLanguages[index].languageName} (${filteredLanguages[index].countryName})',

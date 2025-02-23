@@ -28,7 +28,7 @@ class LanguagePairTable extends StatelessWidget {
               ),
             ),
             InkWell(
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: const BorderRadius.all(Radius.circular(4)),
               onTap: () {
                 if (context.read<MetaDataCubit>().state.languages.isEmpty) {
                   context.read<MetaDataCubit>().getLanguages();
@@ -121,12 +121,12 @@ class LanguagePairTable extends StatelessWidget {
                 dividerThickness: 0,
                 border: TableBorder.all(
                   color: darkColors ? AppColors.cardDarkColor : AppColors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
                 decoration: darkColors
-                    ? BoxDecoration(
+                    ? const BoxDecoration(
                         color: AppColors.cardColor,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       )
                     : null,
               );

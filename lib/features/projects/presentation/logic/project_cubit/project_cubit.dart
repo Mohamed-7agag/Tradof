@@ -192,7 +192,7 @@ class ProjectCubit extends Cubit<ProjectState> {
           : days!,
       fromLanguageId: state.fromLanguage!.id,
       toLanguageId: state.toLanguage!.id,
-      specializationId: state.industryId ?? projectModel.specializationId,
+      specializationId: state.industryId ?? projectModel.specialization.id,
       files: await prepareFiles(),
     );
   }

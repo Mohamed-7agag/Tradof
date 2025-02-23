@@ -21,9 +21,9 @@ class _FreelancerSwitcherWidgetState extends State<FreelancerSwitcherWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 13),
       width: 0.85.sw,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        boxShadow: [
           BoxShadow(
             color: AppColors.grey,
             blurRadius: 0.25,

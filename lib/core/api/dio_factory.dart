@@ -14,14 +14,12 @@ class DioFactory {
   static final _tokenService = TokenService();
 
   static Dio getDio() {
-    const Duration timeOut = Duration(seconds: 60);
-
     if (dio == null) {
       dio = Dio();
       dio!
         ..options.baseUrl = EndPoint.baseUrl
-        ..options.connectTimeout = timeOut
-        ..options.receiveTimeout = timeOut
+        ..options.connectTimeout = const Duration(seconds: 45)
+        ..options.receiveTimeout = const Duration(minutes: 5)
         ..options.contentType = 'application/json'
         ..options.headers = {'Accept': 'application/json'};
       addDioHeaders();
