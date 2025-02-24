@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../../core/errors/exception.dart';
 import '../../../../../../core/utils/app_constants.dart';
-
 import '../../../../../company/company_profile/data/model/social_media_model.dart';
 import '../../../data/model/freelancer_model.dart';
 import '../../../data/repo/freelancer_profile_repo.dart';
@@ -59,14 +59,19 @@ class FreelancerProfileCubit extends Cubit<FreelancerProfileState> {
       await _freelancerRepo.uploadCv(
         cv: cv,
         freelancerId: AppConstants.kUserId,
+        onProgress: (progress) => emit(
+          state.copyWith(progress: progress),
+        ),
       );
       emit(state.copyWith(
         status: FreelancerProfileStatus.uploadCvSuccess,
-        message: 'Cv Uploaded Successfully',
+        progress: 0,
+        message: 'CV Uploaded Successfully',
       ));
     } catch (e) {
       emit(state.copyWith(
         status: FreelancerProfileStatus.uploadCvFailure,
+        progress: 0,
         errMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

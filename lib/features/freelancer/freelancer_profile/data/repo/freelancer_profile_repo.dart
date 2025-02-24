@@ -11,6 +11,7 @@ abstract class FreelancerProfileRepo {
   Future<void> uploadCv({
     required String freelancerId,
     required PlatformFile cv,
+     required Function(double) onProgress,
   });
   Future<void> addFreelancerLanguagePair({
     required List<Map<String, int>> languagesPairIds,

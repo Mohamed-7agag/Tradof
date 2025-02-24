@@ -41,7 +41,9 @@ class CustomDropDownWidget extends StatelessWidget {
       elevation: 4,
       hint: Text(
         hint,
-        style: AppStyle.robotoRegular14.copyWith(color: textColor),
+        style: AppStyle.robotoRegular14.copyWith(
+          color: textColor,
+        ),
       ),
       items: items
           .map(

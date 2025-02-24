@@ -48,9 +48,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: _isObscure,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
-      style: AppStyle.robotoRegular15.copyWith(color: widget.labelColor),
+      style: AppStyle.robotoRegular15.copyWith(
+        color: widget.labelColor,
+      ),
       validator: (value) {
-        if (value!.trim().isNullOrEmpty()) {
+        if (value == null || value.trim().isNullOrEmpty()) {
           return 'required';
         }
         return null;
@@ -91,7 +93,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
             borderSide: BorderSide(color: color ?? AppColors.grey),
           )
         : UnderlineInputBorder(
-            borderSide: BorderSide(color: color ?? AppColors.grey),
+            borderSide: BorderSide(
+              color: color ?? AppColors.grey,
+            ),
           );
   }
 }

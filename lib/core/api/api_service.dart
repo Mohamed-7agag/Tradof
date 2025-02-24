@@ -28,12 +28,14 @@ class ApiServices implements ApiRequests {
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
+     void Function(int, int)? onSendProgress,
     bool isFormData = false,
   }) async {
     final response = await _dio.post(
       path,
       data: isFormData ? FormData.fromMap(data) : data,
       queryParameters: queryParameters,
+       onSendProgress: onSendProgress,
     );
     return response.data;
   }

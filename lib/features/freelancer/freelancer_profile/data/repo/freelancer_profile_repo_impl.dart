@@ -9,7 +9,6 @@ import '../model/freelancer_model.dart';
 import 'freelancer_profile_repo.dart';
 
 class FreelancerProfileRepoImpl implements FreelancerProfileRepo {
-
   FreelancerProfileRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
   final ApiServices _apiServices;
@@ -33,11 +32,15 @@ class FreelancerProfileRepoImpl implements FreelancerProfileRepo {
   }
 
   @override
-  Future<void> uploadCv(
-      {required String freelancerId, required PlatformFile cv}) async {
+  Future<void> uploadCv({
+    required String freelancerId,
+    required PlatformFile cv,
+    required Function(double) onProgress,
+  }) async {
     await _apiServices.post(
       EndPoint.uploadCv(AppConstants.kUserId),
       data: {'file': await uploadFileToApi(cv)},
+      onSendProgress: (send, total) =>  onProgress(send / total),
       isFormData: true,
     );
   }

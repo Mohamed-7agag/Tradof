@@ -29,15 +29,20 @@ class PhoneNumberTextField extends StatelessWidget {
       cursorRadius: const Radius.circular(10),
       controller: controller,
       initialCountryCode: 'EG',
-      dropdownTextStyle: TextStyle(color: borderColor ?? AppColors.white),
-      dropdownIcon:
-          Icon(Icons.arrow_drop_down, color: borderColor ?? AppColors.white),
+      dropdownTextStyle: TextStyle(
+        color: borderColor ?? AppColors.white,
+      ),
+      dropdownIcon: Icon(
+        Icons.arrow_drop_down,
+        color: borderColor ?? AppColors.white,
+      ),
       pickerDialogStyle: PickerDialogStyle(
         searchFieldCursorColor: AppColors.primary,
         listTileDivider: const Divider(height: 0),
       ),
-      style: AppStyle.robotoRegular15
-          .copyWith(color: borderColor ?? AppColors.white),
+      style: AppStyle.robotoRegular15.copyWith(
+        color: borderColor ?? AppColors.white,
+      ),
       validator: (value) {
         if (value == null || value.completeNumber.isNullOrEmpty()) {
           return 'required';
@@ -71,8 +76,9 @@ class PhoneNumberTextField extends StatelessWidget {
             borderSide: BorderSide(color: color ?? AppColors.grey),
           )
         : UnderlineInputBorder(
-            borderSide:
-                BorderSide(color: color ?? borderColor ?? AppColors.white),
+            borderSide: BorderSide(
+              color: color ?? borderColor ?? AppColors.white,
+            ),
           );
   }
 }

@@ -1,81 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:toastification/toastification.dart';
 
 import '../../theming/app_colors.dart';
 import '../../theming/app_style.dart';
 
-successToast(BuildContext context, String title, String description) {
-  return toastification.show(
+// Convenience wrapper functions
+void successToast(BuildContext context, String title, String description) {
+  return _showToast(
     context: context,
-    title: Text(
-      title,
-      style: AppStyle.poppinsSemiBold14,
-    ),
-    description: Text(
-      description,
-      style: AppStyle.robotoRegular14.copyWith(color: AppColors.white),
-    ),
+    title: title,
+    description: description,
     type: ToastificationType.success,
-    style: ToastificationStyle.fillColored,
-    autoCloseDuration: const Duration(milliseconds: 3500),
-    animationDuration: const Duration(milliseconds: 600),
-    showProgressBar: false,
   );
 }
 
-errorToast(BuildContext context, String title, String description) {
-  return toastification.show(
+void errorToast(BuildContext context, String title, String description) {
+  return _showToast(
     context: context,
-    title: Text(
-      title,
-      style: AppStyle.poppinsSemiBold14,
-    ),
-    description: Text(
-      description,
-      style: AppStyle.robotoRegular14.copyWith(color: AppColors.white),
-    ),
+    title: title,
+    description: description,
     type: ToastificationType.error,
-    style: ToastificationStyle.fillColored,
-    autoCloseDuration: const Duration(milliseconds: 3500),
-    animationDuration: const Duration(milliseconds: 600),
-    showProgressBar: false,
   );
 }
 
-warningToast(BuildContext context, String title, String description) {
-  return toastification.show(
+void warningToast(BuildContext context, String title, String description) {
+  return _showToast(
     context: context,
-    title: Text(
-      title,
-      style: AppStyle.poppinsSemiBold14,
-    ),
-    description: Text(
-      description,
-      style: AppStyle.robotoRegular14.copyWith(color: AppColors.white),
-    ),
+    title: title,
+    description: description,
     type: ToastificationType.warning,
-    style: ToastificationStyle.fillColored,
-    autoCloseDuration: const Duration(milliseconds: 3500),
-    animationDuration: const Duration(milliseconds: 600),
-    showProgressBar: false,
   );
 }
 
-infoToast(BuildContext context, String title, String description) {
-  return toastification.show(
+void infoToast(BuildContext context, String title, String description) {
+  return _showToast(
     context: context,
-    title: Text(
-      title,
-      style: AppStyle.poppinsSemiBold14,
-    ),
+    title: title,
+    description: description,
+    type: ToastificationType.info,
+  );
+}
+
+void _showToast({
+  required BuildContext context,
+  required String title,
+  required String description,
+  required ToastificationType type,
+}) {
+  toastification.show(
+    context: context,
+    title: Text(title, style: AppStyle.poppinsSemiBold14),
     description: Text(
       description,
-      style: AppStyle.robotoRegular14.copyWith(color: AppColors.white),
+      style: AppStyle.robotoRegular14.copyWith(fontSize: 13.sp),
     ),
-    type: ToastificationType.info,
+    type: type,
     style: ToastificationStyle.fillColored,
-    autoCloseDuration: const Duration(milliseconds: 3500),
     animationDuration: const Duration(milliseconds: 600),
+    autoCloseDuration: const Duration(seconds: 3),
+    foregroundColor: AppColors.white,
     showProgressBar: false,
   );
 }
