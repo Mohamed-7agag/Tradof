@@ -37,10 +37,20 @@ class ProjectItem extends StatelessWidget {
               ),
               title: Text('Yousef Ghareb', style: AppStyle.robotoRegular14),
               subtitle: Text('Job Title', style: AppStyle.robotoRegular12),
-              trailing: Text(
-                projectModel.status.name,
-                style: AppStyle.robotoRegular10
-                    .copyWith(color: Colors.green, fontWeight: FontWeight.bold),
+              trailing: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.green.withValues(alpha: 0.15),
+                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                ),
+                child: Text(
+                  projectModel.status.name,
+                  style: AppStyle.robotoRegular8.copyWith(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
             Text(
@@ -64,8 +74,10 @@ class ProjectItem extends StatelessWidget {
                   children: [
                     Text('Deadline', style: AppStyle.robotoCondensedBold14),
                     verticalSpace(4),
-                    Text('${projectModel.days} Days',
-                        style: AppStyle.robotoCondensedMedium12),
+                    Text(
+                      '${projectModel.days} Days',
+                      style: AppStyle.robotoCondensedMedium12,
+                    ),
                   ],
                 ),
                 Column(
@@ -73,8 +85,9 @@ class ProjectItem extends StatelessWidget {
                     Text('Price', style: AppStyle.robotoCondensedBold14),
                     verticalSpace(4),
                     Text(
-                        '${projectModel.minPrice} - ${projectModel.maxPrice}\$',
-                        style: AppStyle.robotoCondensedMedium12),
+                      '${projectModel.minPrice} - ${projectModel.maxPrice}\$',
+                      style: AppStyle.robotoCondensedMedium12,
+                    ),
                   ],
                 ),
               ],

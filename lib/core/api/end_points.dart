@@ -85,11 +85,9 @@ abstract class EndPoint {
     return 'freelancers/RemoveSpecialization/$freelancerId';
   }
 
-  static String deleteProposal(int proposalId) {
+  static String deleteOffer(int proposalId) {
     return 'propsal/id=$proposalId';
   }
 
-  static String updateProposal() {
-    return 'propsal';
-  }
+  static String offer = 'propsal';
 }

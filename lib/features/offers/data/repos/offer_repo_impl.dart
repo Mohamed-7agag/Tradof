@@ -17,19 +17,16 @@ class OfferRepoImpl implements OfferRepo {
 
   @override
   Future<String> updateOffer(int offerId, AddOfferRequestModel model) async {
-    return await apiServices.put(
-      EndPoint.updateProposal(),
-      data: {
-        "id": offerId,
-        ...model.toJson(),
-      },
-    );
+    return await apiServices.put(EndPoint.offer, data: {
+      "id": offerId,
+      ...model.toJson(),
+    });
   }
 
   @override
   Future<String> deleteOffer({required int id}) async {
     return await apiServices.delete(
-      EndPoint.deleteProposal(id),
+      EndPoint.deleteOffer(id),
     );
   }
 }
