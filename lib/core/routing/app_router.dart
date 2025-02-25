@@ -28,10 +28,12 @@ import '../../features/freelancer/freelancer_setting/presentation/views/change_f
 import '../../features/freelancer/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
 import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../features/offers/presentation/views/add_offer_view.dart';
+import '../../features/projects/data/models/project_model.dart';
 import '../../features/projects/presentation/logic/project_cubit/project_cubit.dart';
+import '../../features/projects/presentation/views/company_project_details_view.dart';
 import '../../features/projects/presentation/views/company_project_workspace_view.dart';
+import '../../features/projects/presentation/views/freelancer_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_workspace_view.dart';
-import '../../features/projects/presentation/views/project_details_view.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../di/di.dart';
@@ -151,10 +153,11 @@ class AppRouter {
           ),
         );
       case Routes.addOfferViewRoute:
+        final id = settings.arguments as int;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => OfferCubit(getIt()),
-            child: const AddOfferView(),
+            child: AddOfferView(projectId: id),
           ),
         );
       case Routes.updateFreelancerSocialMediaViewRoute:
@@ -194,12 +197,12 @@ class AppRouter {
             ),
           ),
         );
-      case Routes.projectDetailsViewRoute:
+      case Routes.companyProjectDetailsViewRoute:
         final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => ProjectCubit(getIt()),
-            child: ProjectDetailsView(
+            child: CompanyProjectDetailsView(
               companyModel: data['companyModel'],
               projectModel: data['projectModel'],
             ),
@@ -212,6 +215,13 @@ class AppRouter {
       case Routes.freelancerProjectWorkspaceViewRoute:
         return MaterialPageRoute(
           builder: (_) => const FreelancerProjectWorkspaceView(),
+        );
+      case Routes.freelancerProjectDetailsViewRoute:
+        final data = settings.arguments as ProjectModel;
+        return MaterialPageRoute(
+          builder: (_) => FreelancerProjectDetailsView(
+            projectModel: data,
+          ),
         );
       default:
         return null;

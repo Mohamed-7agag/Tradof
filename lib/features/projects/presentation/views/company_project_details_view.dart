@@ -16,8 +16,8 @@ import '../widgets/project_text_field.dart';
 import '../widgets/update_project_button.dart';
 import '../widgets/update_project_language_pair.dart';
 
-class ProjectDetailsView extends StatefulWidget {
-  const ProjectDetailsView({
+class CompanyProjectDetailsView extends StatefulWidget {
+  const CompanyProjectDetailsView({
     required this.companyModel,
     required this.projectModel,
     super.key,
@@ -25,10 +25,11 @@ class ProjectDetailsView extends StatefulWidget {
   final CompanyModel companyModel;
   final ProjectModel projectModel;
   @override
-  State<ProjectDetailsView> createState() => _ProjectDetailsViewState();
+  State<CompanyProjectDetailsView> createState() =>
+      _CompanyProjectDetailsViewState();
 }
 
-class _ProjectDetailsViewState extends State<ProjectDetailsView> {
+class _CompanyProjectDetailsViewState extends State<CompanyProjectDetailsView> {
   late final TextEditingController projectNameController;
   late final TextEditingController projectDescriptionController;
   late final TextEditingController minBudgetController;

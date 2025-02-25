@@ -9,12 +9,12 @@ import '../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../projects/presentation/logic/file_cubit.dart';
 import '../../../projects/presentation/widgets/attachment_files_section.dart';
 import '../../../projects/presentation/widgets/project_text_field.dart';
-import '../widgets/bloc_create_offer_button.dart';
+import '../widgets/add_offer_button.dart';
 import '../widgets/select_offer_budget.dart';
 
 class AddOfferView extends StatefulWidget {
-  const AddOfferView({super.key});
-
+  const AddOfferView({required this.projectId, super.key});
+  final int projectId;
   @override
   State<AddOfferView> createState() => _AddOfferViewState();
 }
@@ -48,39 +48,45 @@ class _AddOfferViewState extends State<AddOfferView> {
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  verticalSpace(25),
-                  ProjectTextField(
-                    labelText: 'Offer details',
-                    controller: offerDetailsController,
-                    maxLines: 4,
+            child: CustomScrollView(
+              slivers: [
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      verticalSpace(25),
+                      ProjectTextField(
+                        labelText: 'Offer details',
+                        controller: offerDetailsController,
+                        maxLines: 4,
+                      ),
+                      verticalSpace(25),
+                      ProjectTextField(
+                        labelText: 'Delivery Time (Days)',
+                        controller: daysController,
+                        keyboardType: TextInputType.number,
+                      ),
+                      verticalSpace(25),
+                      const SelectOfferBudget(),
+                      verticalSpace(35),
+                      Text(
+                        "Attachments Files",
+                        style: AppStyle.poppinsMedium14,
+                      ),
+                      verticalSpace(12),
+                      const AttachmentFilesSection(),
+                      Expanded(child: verticalSpace(40)),
+                      AddOfferButton(
+                        projectId: widget.projectId,
+                        offerDetailsController: offerDetailsController,
+                        daysController: daysController,
+                      ),
+                      verticalSpace(20),
+                    ],
                   ),
-                  verticalSpace(25),
-                  ProjectTextField(
-                    labelText: 'Delivery Time (Days)',
-                    controller: daysController,
-                    keyboardType: TextInputType.number,
-                  ),
-                  verticalSpace(25),
-                  const SelectOfferBudget(),
-                  verticalSpace(35),
-                  Text(
-                    "Attachments Files",
-                    style: AppStyle.poppinsMedium14,
-                  ),
-                  verticalSpace(12),
-                  const AttachmentFilesSection(),
-                  verticalSpace(60),
-                  CreateOfferButton(
-                    offerDetailsController: offerDetailsController,
-                    daysController: daysController,
-                  ),
-                  verticalSpace(100),
-                ],
-              ),
+                )
+              ],
             ),
           )),
     );

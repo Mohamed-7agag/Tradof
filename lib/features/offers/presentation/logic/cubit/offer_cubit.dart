@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/errors/exception.dart';
+import '../../../../../core/helpers/prepare_files.dart';
 import '../../../data/model/add_offer_request_model.dart';
 import '../../../data/repos/offer_repo.dart';
 
@@ -12,7 +14,12 @@ class OfferCubit extends Cubit<OfferState> {
 
   final OfferRepo _offerRepo;
 
-  Future<void> addOffer(int projectId, String offerDetails, int days) async {
+  Future<void> addOffer(
+    int projectId,
+    String offerDetails,
+    int days, {
+    List<PlatformFile>? files,
+  }) async {
     emit(state.copyWith(status: OfferStatus.addOfferLoading));
 
     try {
@@ -21,6 +28,7 @@ class OfferCubit extends Cubit<OfferState> {
         days: days,
         proposalDescription: offerDetails,
         projectId: projectId,
+        proposalAttachments: await prepareFiles(files),
       );
 
       final result = await _offerRepo.addOffer(offerModel);
@@ -37,7 +45,7 @@ class OfferCubit extends Cubit<OfferState> {
   }
 
   Future<void> updateOffer(
-      int projectId, String offerDetails, int days,int offerId) async {
+      int projectId, String offerDetails, int days, int offerId) async {
     emit(state.copyWith(status: OfferStatus.updateOfferLoading));
 
     try {
@@ -48,7 +56,7 @@ class OfferCubit extends Cubit<OfferState> {
         days: days,
       );
 
-      final result = await _offerRepo.updateOffer(offerId,offerModel);
+      final result = await _offerRepo.updateOffer(offerId, offerModel);
       emit(state.copyWith(
         status: OfferStatus.updateOfferSuccess,
         message: result,

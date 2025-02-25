@@ -25,8 +25,8 @@ class UpcomingProjectItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        final result =
-            await context.pushNamed(Routes.projectDetailsViewRoute, arguments: {
+        final result = await context
+            .pushNamed(Routes.companyProjectDetailsViewRoute, arguments: {
           'projectModel': project,
           'companyModel': companyModel,
         });

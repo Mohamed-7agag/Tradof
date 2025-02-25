@@ -1,11 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/errors/exception.dart';
 import '../../../../../core/helpers/extensions.dart';
-import '../../../../../core/helpers/upload_file_to_api.dart';
+import '../../../../../core/helpers/prepare_files.dart';
 import '../../../../../core/utils/models/language_model.dart';
 import '../../../data/models/create_project_request_model.dart';
 import '../../../data/models/project_model.dart';
@@ -96,12 +95,6 @@ class ProjectCubit extends Cubit<ProjectState> {
     emit(state.copyWith(status: ProjectStatus.createProjectLoading));
 
     try {
-      Future<List<MultipartFile>> prepareFiles() {
-        final convertedFiles =
-            files.map((file) async => await uploadFileToApi(file)).toList();
-        return Future.wait(convertedFiles);
-      }
-
       final model = CreateProjectRequestModel(
         projectName: projectName,
         description: projectDescription,
@@ -111,7 +104,7 @@ class ProjectCubit extends Cubit<ProjectState> {
         fromLanguageId: state.fromLanguage!.id,
         toLanguageId: state.toLanguage!.id,
         specializationId: state.industryId!,
-        files: await prepareFiles(),
+        files: await prepareFiles(files),
       );
 
       await _projectRepo.createProject(model);
@@ -140,14 +133,6 @@ class ProjectCubit extends Cubit<ProjectState> {
     emit(state.copyWith(status: ProjectStatus.updateProjectLoading));
 
     try {
-      // will be refactored
-      Future<List<MultipartFile>> prepareFiles() {
-        if (files.isNullOrEmpty()) return Future.value([]);
-        final convertedFiles =
-            files!.map((file) async => await uploadFileToApi(file)).toList();
-        return Future.wait(convertedFiles);
-      }
-
       final model = await _buildUpdatProjectModel(
         projectName,
         projectModel,
@@ -155,7 +140,7 @@ class ProjectCubit extends Cubit<ProjectState> {
         minBudget,
         maxBudget,
         days,
-        prepareFiles,
+        files,
       );
 
       await _projectRepo.updateProject(model);
@@ -207,7 +192,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       int? minBudget,
       int? maxBudget,
       int? days,
-      Future<List<MultipartFile>> Function() prepareFiles) async {
+      List<PlatformFile>? files) async {
     return CreateProjectRequestModel(
       projectName:
           projectName.isNullOrEmpty() ? projectModel.name : projectName!,
@@ -226,7 +211,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       fromLanguageId: state.fromLanguage!.id,
       toLanguageId: state.toLanguage!.id,
       specializationId: state.industryId ?? projectModel.specialization.id,
-      files: await prepareFiles(),
+      files: await prepareFiles(files),
     );
   }
 }

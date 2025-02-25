@@ -33,29 +33,28 @@ class AttachmentFilesSection extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
                 border: Border.all(color: AppColors.grey),
               ),
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                itemCount: files.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
+                child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: files.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final file = entry.value;
                   return ListTile(
-                    contentPadding: EdgeInsets.only(
-                      left: 10.w,
-                      bottom: index == files.length - 1 ? 20 : 0,
-                    ),
-                    title: Text(files[index].name),
-                    leading: const HugeIcon(
-                        icon: HugeIcons.strokeRoundedFile02,
-                        color: AppColors.black),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.cancel, color: Colors.red),
-                      onPressed: () =>
-                          context.read<FileCubit>().removeFile(index),
-                    ),
+                  contentPadding: EdgeInsets.only(
+                    left: 10.w,
+                    bottom: index == files.length - 1 ? 20 : 0,
+                  ),
+                  title: Text(file.name),
+                  leading: const HugeIcon(
+                    icon: HugeIcons.strokeRoundedFile02,
+                    color: AppColors.black),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.cancel, color: Colors.red),
+                    onPressed: () =>
+                      context.read<FileCubit>().removeFile(index),
+                  ),
                   );
-                },
-              ),
+                }).toList(),
+                ),
             );
           },
         ),

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -69,13 +70,16 @@ class _AllProjectsSectionState extends State<AllProjectsSection> {
           },
           child: PagedListView<int, ProjectModel>(
             pagingController: _pagingController,
-            padding: const EdgeInsets.symmetric(vertical: 50),
+            padding: const EdgeInsets.symmetric(vertical: 45),
             physics: const BouncingScrollPhysics(),
             builderDelegate: PagedChildBuilderDelegate<ProjectModel>(
               itemBuilder: (context, project, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 12),
-                  child: ProjectItem(projectModel: project),
+                  child: SlideInLeft(
+                    from: 400,
+                    child: ProjectItem(projectModel: project),
+                  ),
                 );
               },
               firstPageProgressIndicatorBuilder: (context) {

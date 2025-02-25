@@ -14,29 +14,34 @@ class FreelancerWorkStatusWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            verticalSpace(30),
-            Text('Upload Files', style: AppStyle.poppinsMedium14),
-            verticalSpace(12),
-            BlocProvider(
-              create: (context) => FileCubit(),
-              child: const AttachmentFilesSection(),
+      child: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                verticalSpace(30),
+                Text('Upload Files', style: AppStyle.poppinsMedium14),
+                verticalSpace(12),
+                BlocProvider(
+                  create: (context) => FileCubit(),
+                  child: const AttachmentFilesSection(),
+                ),
+                Expanded(child: verticalSpace(40)),
+                Align(
+                  child: CustomButton(
+                    text: 'Review Request',
+                    color: AppColors.lightOrange,
+                    width: 0.6,
+                    onPressed: () {},
+                  ),
+                ),
+                verticalSpace(20),
+              ],
             ),
-            verticalSpace(60),
-            Align(
-              child: CustomButton(
-                text: 'Review Request',
-                color: AppColors.lightOrange,
-                width: 0.6,
-                onPressed: () {},
-              ),
-            ),
-            verticalSpace(20),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

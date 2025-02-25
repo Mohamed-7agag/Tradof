@@ -5,15 +5,19 @@ import '../../../../core/helpers/extensions.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
+import '../../../projects/presentation/logic/file_cubit.dart';
 import '../logic/cubit/offer_cubit.dart';
 
-class CreateOfferButton extends StatelessWidget {
-  const CreateOfferButton(
-      {required this.offerDetailsController,
-      required this.daysController,
-      super.key});
+class AddOfferButton extends StatelessWidget {
+  const AddOfferButton({
+    required this.offerDetailsController,
+    required this.daysController,
+    required this.projectId,
+    super.key,
+  });
   final TextEditingController offerDetailsController;
   final TextEditingController daysController;
+  final int projectId;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<OfferCubit, OfferState>(
@@ -42,16 +46,17 @@ class CreateOfferButton extends StatelessWidget {
   void _addOfferValidation(BuildContext context, OfferState state) {
     if (offerDetailsController.text.trim().isNullOrEmpty()) {
       errorToast(context, 'Error', 'Please Enter Offer Details');
-    } else if (daysController.text.trim().isNullOrEmpty()) {
-      errorToast(context, 'Error', 'Please Enter Delivery Time');
+    } else if (daysController.text.trim().isNullOrEmpty() ||
+        daysController.text == '0') {
+      errorToast(context, 'Error', 'Please Enter valid Delivery Time');
     } else if (state.offerPrice == null || state.offerPrice == 0) {
       errorToast(context, 'Error', 'Please Enter Offer Price');
     } else {
       context.read<OfferCubit>().addOffer(
-            context.read(),
-            offerDetailsController.text.trim(),
-            int.parse(daysController.text.trim()),
-          );
+          projectId,
+          offerDetailsController.text.trim(),
+          int.parse(daysController.text.trim()),
+          files: context.read<FileCubit>().state);
     }
   }
 }
