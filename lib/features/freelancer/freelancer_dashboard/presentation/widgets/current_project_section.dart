@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helpers/spacing.dart';
-import '../../../../projects/presentation/widgets/project_item.dart';
 import 'freelancer_statistic_card.dart';
 
 class CurrentProjectsSection extends StatelessWidget {
@@ -28,15 +27,7 @@ class CurrentProjectsSection extends StatelessWidget {
           verticalSpace(25),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              children: [
-                const ProjectItem(),
-                verticalSpace(12),
-                const ProjectItem(),
-                verticalSpace(12),
-                const ProjectItem(),
-              ],
-            ),
+            child: const Column(),
           ),
           verticalSpace(100),
         ],

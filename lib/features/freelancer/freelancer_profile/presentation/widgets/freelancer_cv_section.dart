@@ -37,7 +37,10 @@ class FreelancerCvSection extends StatelessWidget {
       },
       builder: (context, state) {
         return state.status.isUploadCvLoading
-            ? CustomLinearProgressIndicator(progress: state.progress)
+            ? CustomLinearProgressIndicator(
+                progress: state.progress,
+                endText: 'upload CV',
+              )
             : InkWell(
                 onTap: () {
                   if (cvUrl == null) {

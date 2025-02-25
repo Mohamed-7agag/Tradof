@@ -8,6 +8,9 @@ enum ProjectStatus {
   getUpcomingProjectsLoading,
   getUpcomingProjectsSuccess,
   getUpcomingProjectsFailure,
+  getAllProjectsLoading,
+  getAllProjectsSuccess,
+  getAllProjectsFailure,
   getStartedtProjectsLoading,
   getStartedtProjectsSuccess,
   getStartedtProjectsFailure,
@@ -45,9 +48,29 @@ extension ProjectStatusX on ProjectStatus {
   bool get isDeleteProjectLoading => this == ProjectStatus.deleteProjectLoading;
   bool get isDeleteProjectSuccess => this == ProjectStatus.deleteProjectSuccess;
   bool get isDeleteProjectFailure => this == ProjectStatus.deleteProjectFailure;
+
+  bool get isGetAllProjectsLoading =>
+      this == ProjectStatus.getAllProjectsLoading;
+  bool get isGetAllProjectsSuccess =>
+      this == ProjectStatus.getAllProjectsSuccess;
+  bool get isGetAllProjectsFailure =>
+      this == ProjectStatus.getAllProjectsFailure;
 }
 
 class ProjectState extends Equatable {
+  final ProjectStatus status;
+  final String message;
+  final String errorMessage;
+  final LanguageModel? fromLanguage;
+  final LanguageModel? toLanguage;
+  final int? industryId;
+  final List<ProjectModel> upcomingProjects;
+  final List<ProjectModel> startedProjects;
+  final List<ProjectModel> allProjects;
+  final int pageIndex;
+  final int pageSize;
+  final int count;
+  final bool hasReachedMax;
 
   const ProjectState({
     this.status = ProjectStatus.initial,
@@ -58,15 +81,12 @@ class ProjectState extends Equatable {
     this.industryId,
     this.upcomingProjects = const [],
     this.startedProjects = const [],
+    this.allProjects = const [],
+    this.pageIndex = 1,
+    this.pageSize = 8,
+    this.count = 0,
+    this.hasReachedMax = false,
   });
-  final ProjectStatus status;
-  final String message;
-  final String errorMessage;
-  final LanguageModel? fromLanguage;
-  final LanguageModel? toLanguage;
-  final int? industryId;
-  final List<ProjectModel> upcomingProjects;
-  final List<ProjectModel> startedProjects;
 
   ProjectState copyWith({
     ProjectStatus? status,
@@ -77,6 +97,11 @@ class ProjectState extends Equatable {
     int? industryId,
     List<ProjectModel>? upcomingProjects,
     List<ProjectModel>? startedProjects,
+    List<ProjectModel>? allProjects,
+    int? pageIndex,
+    int? pageSize,
+    int? count,
+    bool? hasReachedMax,
   }) {
     return ProjectState(
       status: status ?? this.status,
@@ -87,6 +112,11 @@ class ProjectState extends Equatable {
       industryId: industryId ?? this.industryId,
       upcomingProjects: upcomingProjects ?? this.upcomingProjects,
       startedProjects: startedProjects ?? this.startedProjects,
+      allProjects: allProjects ?? this.allProjects,
+      pageIndex: pageIndex ?? this.pageIndex,
+      pageSize: pageSize ?? this.pageSize,
+      count: count ?? this.count,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
     );
   }
 
@@ -100,5 +130,10 @@ class ProjectState extends Equatable {
         industryId,
         upcomingProjects,
         startedProjects,
+        allProjects,
+        pageIndex,
+        pageSize,
+        count,
+        hasReachedMax
       ];
 }

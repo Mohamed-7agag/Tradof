@@ -3,10 +3,10 @@ import '../../../../core/api/end_points.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../models/create_project_request_model.dart';
 import '../models/project_model.dart';
+import '../models/project_response_model.dart';
 import 'project_repo.dart';
 
 class ProjectRepoImpl implements ProjectRepo {
-
   ProjectRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
   final ApiServices _apiServices;
@@ -42,7 +42,7 @@ class ProjectRepoImpl implements ProjectRepo {
   }
 
   @override
-  Future<List<ProjectModel>> getStartedProjects() async{
+  Future<List<ProjectModel>> getStartedProjects() async {
     final response = await _apiServices.get(
       EndPoint.getStartedProjects,
     );
@@ -56,5 +56,15 @@ class ProjectRepoImpl implements ProjectRepo {
     await _apiServices.delete(
       EndPoint.deleteProject(projectId),
     );
+  }
+
+  @override
+  Future<ProjectResponseModel> getAllProjects(
+      {required int pageIndex, required int pageSize}) async {
+    final response = await _apiServices.get(EndPoint.project, queryParameters: {
+      'pageIndex': pageIndex,
+      'pageSize': pageSize,
+    });
+    return ProjectResponseModel.fromJson(response);
   }
 }

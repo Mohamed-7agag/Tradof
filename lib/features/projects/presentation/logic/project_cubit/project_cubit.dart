@@ -17,6 +17,73 @@ class ProjectCubit extends Cubit<ProjectState> {
   ProjectCubit(this._projectRepo) : super(const ProjectState());
   final ProjectRepo _projectRepo;
 
+//! get upcoming projects
+  Future<void> getUpcomingProjects() async {
+    emit(state.copyWith(status: ProjectStatus.getUpcomingProjectsLoading));
+    try {
+      final projects = await _projectRepo.getUpcomingProjects();
+      emit(state.copyWith(
+        status: ProjectStatus.getUpcomingProjectsSuccess,
+        upcomingProjects: projects,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.getUpcomingProjectsFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! get started projects
+  Future<void> getStartedProjects() async {
+    emit(state.copyWith(status: ProjectStatus.getStartedtProjectsLoading));
+    try {
+      final projects = await _projectRepo.getStartedProjects();
+      emit(state.copyWith(
+        status: ProjectStatus.getStartedtProjectsSuccess,
+        startedProjects: projects,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.getStartedtProjectsFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  Future<void> getAllProjects({bool loadMore = false}) async {
+    if (loadMore && state.hasReachedMax) return;
+
+    final nextPageIndex = loadMore ? state.pageIndex + 1 : 1;
+
+    emit(state.copyWith(status: ProjectStatus.getAllProjectsLoading));
+
+    try {
+      final response = await _projectRepo.getAllProjects(
+        pageIndex: nextPageIndex,
+        pageSize: state.pageSize,
+      );
+
+      final newProjects = response.items;
+      final hasReachedMax = newProjects.length < state.pageSize;
+
+      emit(state.copyWith(
+        status: ProjectStatus.getAllProjectsSuccess,
+        allProjects: loadMore
+            ? [...state.upcomingProjects, ...newProjects]
+            : newProjects,
+        pageIndex: nextPageIndex,
+        hasReachedMax: hasReachedMax,
+        count: response.count,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.getAllProjectsFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
   //! create project
   Future<void> createProject(
     String projectName,
@@ -116,40 +183,6 @@ class ProjectCubit extends Cubit<ProjectState> {
     } catch (e) {
       emit(state.copyWith(
         status: ProjectStatus.deleteProjectFailure,
-        errorMessage: ServerFailure.fromError(e).errMessage,
-      ));
-    }
-  }
-
-  //! get upcoming projects
-  Future<void> getUpcomingProjects() async {
-    emit(state.copyWith(status: ProjectStatus.getUpcomingProjectsLoading));
-    try {
-      final projects = await _projectRepo.getUpcomingProjects();
-      emit(state.copyWith(
-        status: ProjectStatus.getUpcomingProjectsSuccess,
-        upcomingProjects: projects,
-      ));
-    } catch (e) {
-      emit(state.copyWith(
-        status: ProjectStatus.getUpcomingProjectsFailure,
-        errorMessage: ServerFailure.fromError(e).errMessage,
-      ));
-    }
-  }
-
-  //! get started projects
-  Future<void> getStartedProjects() async {
-    emit(state.copyWith(status: ProjectStatus.getStartedtProjectsLoading));
-    try {
-      final projects = await _projectRepo.getStartedProjects();
-      emit(state.copyWith(
-        status: ProjectStatus.getStartedtProjectsSuccess,
-        startedProjects: projects,
-      ));
-    } catch (e) {
-      emit(state.copyWith(
-        status: ProjectStatus.getStartedtProjectsFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

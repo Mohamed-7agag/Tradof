@@ -68,9 +68,16 @@ class AppRouter {
         );
       case Routes.freelancerBottomNavBarViewRoute:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                FreelancerProfileCubit(getIt())..getFreelancerProfile(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    FreelancerProfileCubit(getIt())..getFreelancerProfile(),
+              ),
+              BlocProvider(
+                create: (context) => ProjectCubit(getIt()),
+              ),
+            ],
             child: const FreelancerBottomNavBarView(),
           ),
         );

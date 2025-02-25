@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../data/models/project_model.dart';
 
 class ProjectItem extends StatelessWidget {
-  const ProjectItem({super.key});
+  const ProjectItem({required this.projectModel, super.key});
+  final ProjectModel projectModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,13 +29,13 @@ class ProjectItem extends StatelessWidget {
             title: Text('Yousef Ghareb', style: AppStyle.robotoRegular14),
             subtitle: Text('Job Title', style: AppStyle.robotoRegular12),
             trailing: Text(
-              'Active',
+              projectModel.status.name,
               style: AppStyle.robotoRegular10
                   .copyWith(color: Colors.green, fontWeight: FontWeight.bold),
             ),
           ),
           Text(
-            'Translation of an article about medical tools,nson of an article about medical tools',
+            projectModel.name,
             style: AppStyle.robotoCondensedMedium15,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -53,19 +55,19 @@ class ProjectItem extends StatelessWidget {
                 children: [
                   Text('Deadline', style: AppStyle.robotoCondensedBold14),
                   verticalSpace(4),
-                  Text('24 Days', style: AppStyle.robotoCondensedMedium12),
+                  Text('${projectModel.days} Days', style: AppStyle.robotoCondensedMedium12),
                 ],
               ),
               Column(
                 children: [
                   Text('Price', style: AppStyle.robotoCondensedBold14),
                   verticalSpace(4),
-                  Text('100\$', style: AppStyle.robotoCondensedMedium12),
+                  Text('${projectModel.minPrice} - ${projectModel.maxPrice}\$', style: AppStyle.robotoCondensedMedium12),
                 ],
               ),
             ],
           ),
-          verticalSpace(12),
+          verticalSpace(14),
         ],
       ),
     );

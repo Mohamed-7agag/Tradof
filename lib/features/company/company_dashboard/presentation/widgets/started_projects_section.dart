@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helpers/spacing.dart';
-import '../../../../projects/presentation/widgets/project_item.dart';
 import 'started_project_chart.dart';
 
 class StartedProjectsSection extends StatelessWidget {
@@ -15,11 +14,11 @@ class StartedProjectsSection extends StatelessWidget {
           verticalSpace(40),
           const StartedProjectChart(),
           verticalSpace(25),
-          const ProjectItem(),
-          verticalSpace(12),
-          const ProjectItem(),
-          verticalSpace(12),
-          const ProjectItem(),
+          // const ProjectItem(),
+          // verticalSpace(12),
+          // const ProjectItem(),
+          // verticalSpace(12),
+          // const ProjectItem(),
           verticalSpace(100),
         ],
       ),

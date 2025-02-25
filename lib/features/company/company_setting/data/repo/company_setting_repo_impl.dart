@@ -5,7 +5,6 @@ import '../model/update_company_request_model.dart';
 import 'company_setting_repo.dart';
 
 class CompanySettingRepoImpl implements CompanySettingRepo {
-
   CompanySettingRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
   final ApiServices _apiServices;
@@ -14,13 +13,14 @@ class CompanySettingRepoImpl implements CompanySettingRepo {
     required String currentPassword,
     required String newPassword,
   }) async {
-    await _apiServices.put(EndPoint.changeCompanyPassword, data: {
-      'currentPassword': currentPassword,
-      'newPassword': newPassword,
-      'confirmPassword': newPassword,
-    }, queryParameters: {
-      "companyId": AppConstants.kUserId,
-    });
+    await _apiServices.post(
+      EndPoint.changeCompanyPassword(AppConstants.kUserId),
+      data: {
+        'currentPassword': currentPassword,
+        'newPassword': newPassword,
+        'confirmPassword': newPassword,
+      },
+    );
   }
 
   @override

@@ -19,7 +19,7 @@ class DioFactory {
       dio!
         ..options.baseUrl = EndPoint.baseUrl
         ..options.connectTimeout = const Duration(seconds: 45)
-        ..options.receiveTimeout = const Duration(minutes: 5)
+        ..options.receiveTimeout = const Duration(minutes: 10)
         ..options.contentType = 'application/json'
         ..options.headers = {'Accept': 'application/json'};
       addDioHeaders();

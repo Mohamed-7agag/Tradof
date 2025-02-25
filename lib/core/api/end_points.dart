@@ -23,7 +23,9 @@ abstract class EndPoint {
   static String deleteProject(int projectId) => 'project/$projectId';
 
   //company
-  static String changeCompanyPassword = 'Company/ChangePassword';
+  static String changeCompanyPassword(String id) {
+    return 'Company/$id/ChangePassword';
+  }
 
   static String getCompanyEmployees(String id) {
     return 'company/$id/employees';
@@ -90,6 +92,4 @@ abstract class EndPoint {
   static String updateProposal() {
     return 'propsal';
   }
-
 }
-

@@ -1,7 +1,11 @@
 import 'project_model.dart';
 
 class ProjectResponseModel {
-
+  final int pageIndex;
+  final int pageSize;
+  final int count;
+  final List<ProjectModel> items;
+  
   ProjectResponseModel({
     required this.pageIndex,
     required this.pageSize,
@@ -19,8 +23,4 @@ class ProjectResponseModel {
       ),
     );
   }
-  final int pageIndex;
-  final int pageSize;
-  final int count;
-  final List<ProjectModel> items;
 }

@@ -15,10 +15,10 @@ class FileModel extends Equatable {
 
   factory FileModel.fromJson(Map<String, dynamic> json) {
     return FileModel(
-      fileName: json['file_name'],
-      filePath: json['file_path'],
-      fileType: json['file_type'],
-      fileSize: json['file_size'],
+      fileName: json['fileName'],
+      filePath: json['filePath'],
+      fileType: json['fileType'],
+      fileSize: json['fileSize'],
     );
   }
 
