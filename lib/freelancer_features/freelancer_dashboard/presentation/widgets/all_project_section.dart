@@ -65,9 +65,7 @@ class _AllProjectsSectionState extends State<AllProjectsSection> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: CustomRefreshIndicator(
-          onRefresh: () async {
-            _refreshData();
-          },
+          onRefresh: () async => _refreshData(),
           child: PagedListView<int, ProjectModel>(
             pagingController: _pagingController,
             padding: const EdgeInsets.symmetric(vertical: 45),
@@ -86,10 +84,7 @@ class _AllProjectsSectionState extends State<AllProjectsSection> {
                 return const CustomLoadingWidget();
               },
               newPageProgressIndicatorBuilder: (context) {
-                return const Padding(
-                  padding: EdgeInsets.only(top: 8, bottom: 20),
-                  child: CustomLoadingWidget(),
-                );
+                return const CustomLoadingWidget();
               },
               firstPageErrorIndicatorBuilder: (context) {
                 return CustomFailureWidget(

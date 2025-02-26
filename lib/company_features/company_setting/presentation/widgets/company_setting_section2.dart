@@ -46,7 +46,9 @@ class CompanySettingSection2 extends StatelessWidget {
               icon: HugeIcons.strokeRoundedComment01,
               color: Colors.blue[600]!,
             ),
-            onTap: () {},
+            onTap: () {
+              context.pushNamed(Routes.feedbackViewRoute);
+            },
           ),
         ],
       ),

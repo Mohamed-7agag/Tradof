@@ -57,6 +57,7 @@ class _CreateProjectViewState extends State<CreateProjectView> {
           customAppbar(
             title: 'Create Project',
             actionIcon: HugeIcons.strokeRoundedPenToolAdd,
+            titlePadding: 16.w,
           ),
           Expanded(
             child: Padding(

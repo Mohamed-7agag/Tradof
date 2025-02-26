@@ -28,6 +28,7 @@ import '../../shared_features/auth/presentation/logic/tables_cubit/tables_cubit.
 import '../../shared_features/auth/presentation/views/create_account_page_view.dart';
 import '../../shared_features/auth/presentation/views/forget_password_page_view.dart';
 import '../../shared_features/auth/presentation/views/login_view.dart';
+import '../../freelancer_features/freelancer_setting/presentation/views/feedback_view.dart';
 import '../../shared_features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../shared_features/offers/presentation/views/add_offer_view.dart';
 import '../../shared_features/projects/data/models/project_model.dart';
@@ -242,6 +243,10 @@ class AppRouter {
               ..getCompanyProfile(companyId: companyId),
             child: const CompanyProfileDisplayView(),
           ),
+        );
+        case Routes.feedbackViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => const FeedbackView(),
         );
       default:
         return null;

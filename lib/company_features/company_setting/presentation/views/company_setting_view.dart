@@ -23,6 +23,7 @@ class CompanySettingView extends StatelessWidget {
         customAppbar(
           title: 'Settings',
           actionIcon: HugeIcons.strokeRoundedSettings02,
+          titlePadding: 16.w,
         ),
         Expanded(
           child: Padding(

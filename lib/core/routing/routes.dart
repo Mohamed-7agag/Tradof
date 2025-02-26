@@ -39,5 +39,7 @@ abstract class Routes {
   static const String addOfferViewRoute = "/addOfferView";
     static const String freelancerProjectDetailsViewRoute = "/freelancerProjectDetailsView";
     static const String freelancerProfileDisplayViewRoute = "/freelancerProfileDisplayView";
-
+    
+    
+    static const String feedbackViewRoute = "/feedbackView";
 }
