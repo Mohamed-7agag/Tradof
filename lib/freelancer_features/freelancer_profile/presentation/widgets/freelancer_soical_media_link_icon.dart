@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../company_features/company_profile/data/model/social_media_model.dart';
 import '../../../../core/helpers/custom_url_launcher.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
-import '../../../../company_features/company_profile/data/model/social_media_model.dart';
 import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
 class FreelancerSocialMediaLinkIcon extends StatelessWidget {
@@ -13,16 +13,19 @@ class FreelancerSocialMediaLinkIcon extends StatelessWidget {
     required this.image,
     required this.socialMedia,
     required this.link,
+    required this.isForDisplay,
     super.key,
   });
   final String image;
   final List<SocialMediaModel> socialMedia;
   final String? link;
+  final bool isForDisplay;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () async {
+        if (isForDisplay) return;
         final result = await context.pushNamed(
           Routes.updateFreelancerSocialMediaViewRoute,
           arguments: socialMedia,
@@ -32,9 +35,11 @@ class FreelancerSocialMediaLinkIcon extends StatelessWidget {
         }
       },
       onTap: () async {
+        
         if (link != null) {
           customUrlLauncher(context, link!);
         } else {
+          if (isForDisplay) return;
           final result = await context.pushNamed(
             Routes.updateFreelancerSocialMediaViewRoute,
             arguments: socialMedia,

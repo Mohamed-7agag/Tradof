@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../shared_features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
-import '../../shared_features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
-import '../../shared_features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
-import '../../shared_features/auth/presentation/views/create_account_page_view.dart';
-import '../../shared_features/auth/presentation/views/forget_password_page_view.dart';
-import '../../shared_features/auth/presentation/views/login_view.dart';
 import '../../company_features/company_bottom_nav_bar_view.dart';
 import '../../company_features/company_profile/data/model/company_model.dart';
 import '../../company_features/company_profile/data/model/social_media_model.dart';
@@ -21,11 +15,18 @@ import '../../company_features/company_setting/presentation/views/update_company
 import '../../freelancer_features/freelancer_bottom_nav_bar_view.dart';
 import '../../freelancer_features/freelancer_profile/data/model/freelancer_model.dart';
 import '../../freelancer_features/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
+import '../../freelancer_features/freelancer_profile/presentation/views/freelancer_profile_display_view.dart';
 import '../../freelancer_features/freelancer_profile/presentation/views/update_freelancer_profile_tables_view.dart';
 import '../../freelancer_features/freelancer_profile/presentation/views/update_freelancer_social_media_view.dart';
 import '../../freelancer_features/freelancer_setting/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
 import '../../freelancer_features/freelancer_setting/presentation/views/change_freelancer_password_view.dart';
 import '../../freelancer_features/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
+import '../../shared_features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
+import '../../shared_features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
+import '../../shared_features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
+import '../../shared_features/auth/presentation/views/create_account_page_view.dart';
+import '../../shared_features/auth/presentation/views/forget_password_page_view.dart';
+import '../../shared_features/auth/presentation/views/login_view.dart';
 import '../../shared_features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../shared_features/offers/presentation/views/add_offer_view.dart';
 import '../../shared_features/projects/data/models/project_model.dart';
@@ -221,6 +222,15 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => FreelancerProjectDetailsView(
             projectModel: data,
+          ),
+        );
+      case Routes.freelancerProfileDisplayViewRoute:
+        final freelancerId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => FreelancerProfileCubit(getIt())
+              ..getFreelancerProfile(freelancerId: freelancerId),
+            child: const FreelancerProfileDisplayView(),
           ),
         );
       default:

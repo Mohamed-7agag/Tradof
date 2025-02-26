@@ -9,6 +9,7 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../../../core/utils/app_constants.dart';
 import '../../data/model/freelancer_model.dart';
 import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
@@ -28,6 +29,7 @@ class FreelancerLanguagePair extends StatelessWidget {
               from: 400,
               child: Text('Language Pairs', style: AppStyle.poppinsMedium15),
             ),
+            if(freelancerModel.userId == AppConstants.kUserId)
             InkWell(
               borderRadius: const BorderRadius.all(Radius.circular(4)),
               onTap: () async {

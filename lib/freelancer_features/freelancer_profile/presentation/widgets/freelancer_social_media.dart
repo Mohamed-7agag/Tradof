@@ -2,36 +2,50 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/spacing.dart';
-import '../../../../company_features/company_profile/data/model/social_media_model.dart';
+import '../../../../core/utils/app_constants.dart';
+import '../../data/model/freelancer_model.dart';
 import 'freelancer_soical_media_link_icon.dart';
 
 class FreelancerSocialMedia extends StatefulWidget {
-  const FreelancerSocialMedia({required this.socialMedia, super.key});
-  final List<SocialMediaModel> socialMedia;
+  const FreelancerSocialMedia({required this.freelancerModel, super.key});
+  final FreelancerModel freelancerModel;
+
   @override
   State<FreelancerSocialMedia> createState() => _FreelancerSocialMediaState();
 }
 
 class _FreelancerSocialMediaState extends State<FreelancerSocialMedia> {
   String? facebookLink, linkedinLink, githubLink, gmailLink;
+  bool isForDisplay = false;
+
   @override
   void initState() {
     assignLinks();
+    isForDisplay = widget.freelancerModel.userId != AppConstants.kUserId;
     super.initState();
   }
 
   void assignLinks() {
-    for (var element in widget.socialMedia) {
-      if (element.platformType == 'Facebook') {
-        facebookLink = element.link;
-      } else if (element.platformType == 'LinkedIn') {
-        linkedinLink = element.link;
-      } else if (element.platformType == 'Gmail') {
-        gmailLink = element.link;
-      } else if (element.platformType == 'GitHub') {
-        githubLink = element.link;
+    for (var element in widget.freelancerModel.socialMedias) {
+      switch (element.platformType) {
+        case 'Facebook':
+          facebookLink = element.link;
+          break;
+        case 'LinkedIn':
+          linkedinLink = element.link;
+          break;
+        case 'Gmail':
+          gmailLink = element.link;
+          break;
+        case 'GitHub':
+          githubLink = element.link;
+          break;
       }
     }
+  }
+
+  bool _shouldDisplayLink(String? link) {
+    return (isForDisplay && link != null) || !isForDisplay;
   }
 
   @override
@@ -39,53 +53,57 @@ class _FreelancerSocialMediaState extends State<FreelancerSocialMedia> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          child: FadeInLeft(
-            from: 400,
+        if (_shouldDisplayLink(facebookLink)) ...[
+          _buildSocialMediaIcon(
+            image: 'assets/images/facebook.png',
+            link: facebookLink,
             delay: const Duration(milliseconds: 240),
-            child: FreelancerSocialMediaLinkIcon(
-              image: 'assets/images/facebook.png',
-              socialMedia: widget.socialMedia,
-              link: facebookLink,
-            ),
           ),
-        ),
-        horizontalSpace(8),
-        Expanded(
-          child: FadeInLeft(
-            from: 400,
+          horizontalSpace(8),
+        ],
+        if (_shouldDisplayLink(linkedinLink)) ...[
+          _buildSocialMediaIcon(
+            image: 'assets/images/linkedin.png',
+            link: linkedinLink,
             delay: const Duration(milliseconds: 160),
-            child: FreelancerSocialMediaLinkIcon(
-              image: 'assets/images/linkedin.png',
-              socialMedia: widget.socialMedia,
-              link: linkedinLink,
-            ),
           ),
-        ),
-        horizontalSpace(8),
-        Expanded(
-          child: FadeInLeft(
-            from: 400,
+          horizontalSpace(8),
+        ],
+        if (_shouldDisplayLink(githubLink)) ...[
+          _buildSocialMediaIcon(
+            image: 'assets/images/github.png',
+            link: githubLink,
             delay: const Duration(milliseconds: 80),
-            child: FreelancerSocialMediaLinkIcon(
-              image: 'assets/images/github.png',
-              socialMedia: widget.socialMedia,
-              link: githubLink,
-            ),
           ),
-        ),
-        horizontalSpace(8),
-        Expanded(
-          child: FadeInLeft(
-            from: 400,
-            child: FreelancerSocialMediaLinkIcon(
-              image: 'assets/images/gmail.png',
-              socialMedia: widget.socialMedia,
-              link: gmailLink,
-            ),
+          horizontalSpace(8),
+        ],
+        if (_shouldDisplayLink(gmailLink)) ...[
+          _buildSocialMediaIcon(
+            image: 'assets/images/gmail.png',
+            link: gmailLink,
+            delay: Duration.zero,
           ),
-        ),
+        ],
       ],
+    );
+  }
+
+  Widget _buildSocialMediaIcon({
+    required String image,
+    required String? link,
+    required Duration delay,
+  }) {
+    return Expanded(
+      child: FadeInLeft(
+        from: 400,
+        delay: delay,
+        child: FreelancerSocialMediaLinkIcon(
+          image: image,
+          socialMedia: widget.freelancerModel.socialMedias,
+          link: link,
+          isForDisplay: isForDisplay,
+        ),
+      ),
     );
   }
 }
