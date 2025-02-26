@@ -1,4 +1,4 @@
-import '../../../features/auth/data/model/specialization_model.dart';
+import '../../../shared_features/auth/data/model/specialization_model.dart';
 import '../models/country_model.dart';
 import '../models/language_model.dart';
 

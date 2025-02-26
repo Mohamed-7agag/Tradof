@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
+import '../../../shared_features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
 import '../../helpers/spacing.dart';
 import '../../theming/app_colors.dart';
 import '../../theming/app_style.dart';

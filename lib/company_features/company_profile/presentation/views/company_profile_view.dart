@@ -1,0 +1,46 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/helpers/spacing.dart';
+import '../../data/model/company_model.dart';
+import '../widgets/company_profile_appbar.dart';
+import '../widgets/company_profile_tables.dart';
+import '../widgets/company_rating_and_reviews.dart';
+import '../widgets/company_social_links.dart';
+
+class CompanyProfileView extends StatelessWidget {
+  const CompanyProfileView({required this.companyModel, super.key});
+  final CompanyModel companyModel;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CompanyProfileAppbar(companyModel: companyModel),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                children: [
+                  verticalSpace(16),
+                  CompanyRatingAndReviews(companyModel: companyModel),
+                  verticalSpace(20),
+                  CompanySocialLinks(
+                    socialMedia: companyModel.socialMedia,
+                  ),
+                  verticalSpace(30),
+                  SlideInUp(
+                    from: 150,
+                    child: CompanyProfileTables(companyModel: companyModel),
+                  ),
+                  verticalSpace(100),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
