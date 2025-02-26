@@ -8,6 +8,7 @@ import '../../company_features/company_profile/presentation/logic/company_profil
 import '../../company_features/company_profile/presentation/views/add_update_social_media_view.dart';
 import '../../company_features/company_profile/presentation/views/company_add_employee_view.dart';
 import '../../company_features/company_profile/presentation/views/company_employees_view.dart';
+import '../../company_features/company_profile/presentation/views/company_profile_display_view.dart';
 import '../../company_features/company_profile/presentation/views/update_company_profile_tables_view.dart';
 import '../../company_features/company_setting/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
 import '../../company_features/company_setting/presentation/views/change_company_password_view.dart';
@@ -231,6 +232,15 @@ class AppRouter {
             create: (context) => FreelancerProfileCubit(getIt())
               ..getFreelancerProfile(freelancerId: freelancerId),
             child: const FreelancerProfileDisplayView(),
+          ),
+        );
+      case Routes.companyProfileDisplayViewRoute:
+        final companyId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => CompanyProfileCubit(getIt())
+              ..getCompanyProfile(companyId: companyId),
+            child: const CompanyProfileDisplayView(),
           ),
         );
       default:

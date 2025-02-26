@@ -17,11 +17,11 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
 
   final CompanyProfileRepo _profileCompanyRepo;
 
-  Future<void> getCompanyProfile() async {
+  Future<void> getCompanyProfile({String? companyId}) async {
     emit(state.copyWith(status: CompanyProfileStatus.getCompanyloading));
     try {
       final company = await _profileCompanyRepo.getCompanyProfrile(
-        companyId: AppConstants.kUserId,
+        companyId: companyId ?? AppConstants.kUserId,
       );
       emit(state.copyWith(
         status: CompanyProfileStatus.getCompanySuccess,

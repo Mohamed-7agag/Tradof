@@ -13,16 +13,19 @@ class LinkIcon extends StatelessWidget {
     required this.image,
     required this.socialMedia,
     required this.link,
+    required this.isForDisplay,
     super.key,
   });
   final String image;
   final List<SocialMediaModel> socialMedia;
   final String? link;
+  final bool isForDisplay;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () async {
+        if (isForDisplay) return;
         final result = await context.pushNamed(
           Routes.addUpdateSocialMediaViewRoute,
           arguments: socialMedia,
@@ -35,6 +38,7 @@ class LinkIcon extends StatelessWidget {
         if (link != null) {
           customUrlLauncher(context, link!);
         } else {
+          if (isForDisplay) return;
           final result = await context.pushNamed(
             Routes.addUpdateSocialMediaViewRoute,
             arguments: socialMedia,

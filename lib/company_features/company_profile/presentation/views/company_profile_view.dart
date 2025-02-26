@@ -26,9 +26,7 @@ class CompanyProfileView extends StatelessWidget {
                   verticalSpace(16),
                   CompanyRatingAndReviews(companyModel: companyModel),
                   verticalSpace(20),
-                  CompanySocialLinks(
-                    socialMedia: companyModel.socialMedia,
-                  ),
+                  CompanySocialLinks(companyModel: companyModel),
                   verticalSpace(30),
                   SlideInUp(
                     from: 150,

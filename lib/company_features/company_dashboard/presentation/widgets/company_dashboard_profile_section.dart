@@ -6,11 +6,11 @@ import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
-import '../../../freelancer_profile/data/model/freelancer_model.dart';
+import '../../../company_profile/data/model/company_model.dart';
 
-class FreelancerProfileSection extends StatelessWidget {
-  const FreelancerProfileSection({required this.freelancerModel, super.key});
-  final FreelancerModel freelancerModel;
+class CompanyDashboardProfileSection extends StatelessWidget {
+  const CompanyDashboardProfileSection({required this.companyModel, super.key});
+  final CompanyModel companyModel;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -19,16 +19,21 @@ class FreelancerProfileSection extends StatelessWidget {
       leading: CircleAvatar(
         radius: 24,
         backgroundColor: AppColors.white,
-        backgroundImage:
-            CachedNetworkImageProvider(freelancerModel.profileImageUrl),
+        backgroundImage: CachedNetworkImageProvider(
+          companyModel.profileImageUrl,
+        ),
       ),
       title: Text(
-        '${freelancerModel.firstName} ${freelancerModel.lastName}',
-        style: AppStyle.poppinsMedium14.copyWith(color: AppColors.white),
+        '${companyModel.firstName} ${companyModel.lastName}',
+        style: AppStyle.poppinsMedium14.copyWith(
+          color: AppColors.white,
+        ),
       ),
       subtitle: Text(
-        freelancerModel.email,
-        style: AppStyle.robotoRegular10.copyWith(color: AppColors.white),
+        companyModel.email,
+        style: AppStyle.robotoRegular10.copyWith(
+          color: AppColors.white,
+        ),
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

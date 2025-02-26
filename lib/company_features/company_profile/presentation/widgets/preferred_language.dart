@@ -8,6 +8,7 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../../../core/utils/app_constants.dart';
 import '../../data/model/company_model.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
@@ -24,6 +25,7 @@ class PreferredLanguage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Preferred Language', style: AppStyle.poppinsMedium15),
+            if(companyModel.id == AppConstants.kUserId)
             InkWell(
               borderRadius: const BorderRadius.all(Radius.circular(4)),
               onTap: () async {

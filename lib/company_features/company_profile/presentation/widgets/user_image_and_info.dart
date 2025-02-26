@@ -8,6 +8,7 @@ import '../../../../core/helpers/extensions.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../../../core/utils/app_constants.dart';
 import '../../data/model/company_model.dart';
 
 class UserImageAndInfo extends StatelessWidget {
@@ -47,16 +48,18 @@ class UserImageAndInfo extends StatelessWidget {
           ),
         ],
       ),
-      trailing: IconButton(
-        onPressed: () {
-          context.pushNamed(Routes.companyEmployeesViewRoute);
-        },
-        icon: const HugeIcon(
-          icon: HugeIcons.strokeRoundedUserGroup,
-          color: Colors.white,
-          size: 28,
-        ),
-      ),
+      trailing: companyModel.id == AppConstants.kUserId
+          ? IconButton(
+              onPressed: () {
+                context.pushNamed(Routes.companyEmployeesViewRoute);
+              },
+              icon: const HugeIcon(
+                icon: HugeIcons.strokeRoundedUserGroup,
+                color: Colors.white,
+                size: 28,
+              ),
+            )
+          : null,
     );
   }
 }
