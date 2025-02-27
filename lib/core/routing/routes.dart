@@ -12,34 +12,34 @@ abstract class Routes {
       "/updateCompanyProfileTablesView";
   static const String updateCompanyProfileViewRoute =
       "/updateCompanyProfileView";
-  static const String changeCompanyPasswordViewRoute =
-      "/changeCompanyPasswordView";
   static const String companyEmployeesViewRoute = "/companyEmployeesView";
   static const String companyAddEmployeeViewRoute = "/companyAddEmployeeView";
   static const String addUpdateSocialMediaViewRoute =
       "/addUpdateSocialMediaView";
-  static const String companyProjectDetailsViewRoute = "/companyProjectDetailsView";
+  static const String companyProjectDetailsViewRoute =
+      "/companyProjectDetailsView";
   static const String companyProjectWorkspaceViewRoute =
       "/companyProjectWorkspaceView";
   static const String freelancerProjectWorkspaceViewRoute =
       "/freelancerProjectWorkspaceView";
 
-  static const String companyProfileDisplayViewRoute = "/companyProfileDisplayView";
+  static const String companyProfileDisplayViewRoute =
+      "/companyProfileDisplayView";
   //! Freelancer Routes
   static const String freelancerBottomNavBarViewRoute =
       "/freelancerBottomNavBarView";
   static const String updateFreelancerSocialMediaViewRoute =
       "/updateFreelancerSocialMediaView";
-  static const String changeFreelancerPasswordViewRoute =
-      "/changeFreelancerPasswordView";
   static const String updateFreelancerProfileViewRoute =
       "/updateFreelancerProfileView";
   static const String updateFreelancerProfileTablesViewRoute =
       "/updateFreelancerProfileTablesView";
   static const String addOfferViewRoute = "/addOfferView";
-    static const String freelancerProjectDetailsViewRoute = "/freelancerProjectDetailsView";
-    static const String freelancerProfileDisplayViewRoute = "/freelancerProfileDisplayView";
-    
-    
-    static const String feedbackViewRoute = "/feedbackView";
+  static const String freelancerProjectDetailsViewRoute =
+      "/freelancerProjectDetailsView";
+  static const String freelancerProfileDisplayViewRoute =
+      "/freelancerProfileDisplayView";
+
+  static const String changePasswordViewRoute = "/changePasswordView";
+  static const String feedbackViewRoute = "/feedbackView";
 }

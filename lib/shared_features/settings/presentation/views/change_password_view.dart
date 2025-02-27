@@ -3,21 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+import '../../../../company_features/company_setting/presentation/widgets/change_company_password_button.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
-import '../widgets/change_freelancer_password_button.dart';
+import '../../../../freelancer_features/freelancer_setting/presentation/widgets/change_freelancer_password_button.dart';
 
-class ChangeFreelancerPasswordView extends StatefulWidget {
-  const ChangeFreelancerPasswordView({super.key});
-
+class ChangePasswordView extends StatefulWidget {
+  const ChangePasswordView({required this.isFreelancer, super.key});
+  final bool isFreelancer;
   @override
-  State<ChangeFreelancerPasswordView> createState() =>
-      _ChangeFreelancerPasswordViewState();
+  State<ChangePasswordView> createState() => _ChangePasswordViewState();
 }
 
-class _ChangeFreelancerPasswordViewState
-    extends State<ChangeFreelancerPasswordView> {
+class _ChangePasswordViewState extends State<ChangePasswordView> {
   late final TextEditingController currentPasswordController;
   late final TextEditingController newPasswordController;
   late final TextEditingController confirmPasswordController;
@@ -86,11 +85,7 @@ class _ChangeFreelancerPasswordViewState
               SlideInLeft(
                 from: 400,
                 delay: const Duration(milliseconds: 360),
-                child: ChangeFreelancerPasswordButton(
-                  currentPasswordController: currentPasswordController,
-                  newPasswordController: newPasswordController,
-                  confirmPasswordController: confirmPasswordController,
-                ),
+                child: _changePasswordButton(),
               ),
               verticalSpace(40),
             ],
@@ -98,5 +93,19 @@ class _ChangeFreelancerPasswordViewState
         ),
       ),
     );
+  }
+
+  StatelessWidget _changePasswordButton() {
+    return widget.isFreelancer
+        ? ChangeFreelancerPasswordButton(
+            currentPasswordController: currentPasswordController,
+            newPasswordController: newPasswordController,
+            confirmPasswordController: confirmPasswordController,
+          )
+        : ChangeCompanyPasswordButton(
+            currentPasswordController: currentPasswordController,
+            newPasswordController: newPasswordController,
+            confirmPasswordController: confirmPasswordController,
+          );
   }
 }

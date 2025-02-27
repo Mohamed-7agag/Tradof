@@ -68,145 +68,151 @@ class _CompanyAddEmployeeViewState extends State<CompanyAddEmployeeView> {
         key: formKey,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                verticalSpace(20),
-                SlideInRight(
-                  from: 400,
-                  child: CustomTextField(
-                    labelText: 'First Name',
-                    controller: firstNameController,
-                    keyboardType: TextInputType.text,
-                    labelColor: AppColors.darkGrey,
-                    outlineBorder: true,
-                  ),
-                ),
-                verticalSpace(14),
-                SlideInRight(
-                  from: 400,
-                  delay: const Duration(milliseconds: 75),
-                  child: CustomTextField(
-                    labelText: 'Last Name',
-                    controller: lastNameController,
-                    keyboardType: TextInputType.text,
-                    labelColor: AppColors.darkGrey,
-                    outlineBorder: true,
-                  ),
-                ),
-                verticalSpace(14),
-                SlideInRight(
-                  from: 400,
-                  delay: const Duration(milliseconds: 150),
-                  child: CustomTextField(
-                    labelText: 'Email',
-                    controller: emailController,
-                    labelColor: AppColors.darkGrey,
-                    keyboardType: TextInputType.emailAddress,
-                    outlineBorder: true,
-                  ),
-                ),
-                verticalSpace(14),
-                SlideInRight(
-                  from: 400,
-                  delay: const Duration(milliseconds: 225),
-                  child: CustomTextField(
-                    labelText: 'Password',
-                    controller: passwordController,
-                    keyboardType: TextInputType.text,
-                    obscureText: true,
-                    labelColor: AppColors.darkGrey,
-                    outlineBorder: true,
-                  ),
-                ),
-                verticalSpace(14),
-                SlideInRight(
-                  from: 400,
-                  delay: const Duration(milliseconds: 300),
-                  child: CustomTextField(
-                    labelText: 'Job Title',
-                    controller: jobTitleController,
-                    keyboardType: TextInputType.text,
-                    labelColor: AppColors.darkGrey,
-                    outlineBorder: true,
-                  ),
-                ),
-                verticalSpace(14),
-                SlideInRight(
-                  from: 400,
-                  delay: const Duration(milliseconds: 375),
-                  child: PhoneNumberTextField(
-                    labelText: 'Phone Number',
-                    borderColor: AppColors.darkGrey,
-                    controller: phoneNumberController,
-                    outlineBorder: true,
-                  ),
-                ),
-                verticalSpace(14),
-                SlideInRight(
-                  from: 400,
-                  delay: const Duration(milliseconds: 450),
-                  child: CustomDropDownWidget(
-                    hint: 'Group Name',
-                    items: employeesGroups,
-                    focusedBorderColor: AppColors.grey,
-                    textColor: AppColors.darkGrey,
-                    dropdownColor: AppColors.white,
-                    iconColor: AppColors.darkGrey,
-                    onChanged: (group) {
-                      context
-                          .read<CompanyProfileCubit>()
-                          .setGroupNameAndCountryId(groupName: group);
-                    },
-                  ),
-                ),
-                verticalSpace(14),
-                SlideInRight(
-                  from: 400,
-                  delay: const Duration(milliseconds: 525),
-                  child: BlocBuilder<MetaDataCubit, MetaDataState>(
-                    builder: (context, state) {
-                      if (state.status.isError) {
-                        return CustomFailureWidget(text: state.errorMessage);
-                      } else if (state.status.isLoading) {
-                        return const CustomLoadingWidget();
-                      }
-
-                      return CountryDropDown(
-                        hint: 'Country',
-                        items: state.countries,
-                        borderColor: AppColors.grey,
+          child: CustomScrollView(
+            slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Column(
+                  children: [
+                    verticalSpace(20),
+                    SlideInRight(
+                      from: 400,
+                      child: CustomTextField(
+                        labelText: 'First Name',
+                        controller: firstNameController,
+                        keyboardType: TextInputType.text,
+                        labelColor: AppColors.darkGrey,
+                        outlineBorder: true,
+                      ),
+                    ),
+                    verticalSpace(14),
+                    SlideInRight(
+                      from: 400,
+                      delay: const Duration(milliseconds: 75),
+                      child: CustomTextField(
+                        labelText: 'Last Name',
+                        controller: lastNameController,
+                        keyboardType: TextInputType.text,
+                        labelColor: AppColors.darkGrey,
+                        outlineBorder: true,
+                      ),
+                    ),
+                    verticalSpace(14),
+                    SlideInRight(
+                      from: 400,
+                      delay: const Duration(milliseconds: 150),
+                      child: CustomTextField(
+                        labelText: 'Email',
+                        controller: emailController,
+                        labelColor: AppColors.darkGrey,
+                        keyboardType: TextInputType.emailAddress,
+                        outlineBorder: true,
+                      ),
+                    ),
+                    verticalSpace(14),
+                    SlideInRight(
+                      from: 400,
+                      delay: const Duration(milliseconds: 225),
+                      child: CustomTextField(
+                        labelText: 'Password',
+                        controller: passwordController,
+                        keyboardType: TextInputType.text,
+                        obscureText: true,
+                        labelColor: AppColors.darkGrey,
+                        outlineBorder: true,
+                      ),
+                    ),
+                    verticalSpace(14),
+                    SlideInRight(
+                      from: 400,
+                      delay: const Duration(milliseconds: 300),
+                      child: CustomTextField(
+                        labelText: 'Job Title',
+                        controller: jobTitleController,
+                        keyboardType: TextInputType.text,
+                        labelColor: AppColors.darkGrey,
+                        outlineBorder: true,
+                      ),
+                    ),
+                    verticalSpace(14),
+                    SlideInRight(
+                      from: 400,
+                      delay: const Duration(milliseconds: 375),
+                      child: PhoneNumberTextField(
+                        labelText: 'Phone Number',
+                        borderColor: AppColors.darkGrey,
+                        controller: phoneNumberController,
+                        outlineBorder: true,
+                      ),
+                    ),
+                    verticalSpace(14),
+                    SlideInRight(
+                      from: 400,
+                      delay: const Duration(milliseconds: 450),
+                      child: CustomDropDownWidget(
+                        hint: 'Group Name',
+                        items: employeesGroups,
+                        focusedBorderColor: AppColors.grey,
                         textColor: AppColors.darkGrey,
                         dropdownColor: AppColors.white,
                         iconColor: AppColors.darkGrey,
-                        onChanged: (country) {
+                        onChanged: (group) {
                           context
                               .read<CompanyProfileCubit>()
-                              .setGroupNameAndCountryId(
-                                countryId: country?.id,
-                              );
+                              .setGroupNameAndCountryId(groupName: group);
                         },
-                      );
-                    },
-                  ),
+                      ),
+                    ),
+                    verticalSpace(14),
+                    SlideInRight(
+                      from: 400,
+                      delay: const Duration(milliseconds: 525),
+                      child: BlocBuilder<MetaDataCubit, MetaDataState>(
+                        builder: (context, state) {
+                          if (state.status.isError) {
+                            return CustomFailureWidget(
+                                text: state.errorMessage);
+                          } else if (state.status.isLoading) {
+                            return const CustomLoadingWidget();
+                          }
+
+                          return CountryDropDown(
+                            hint: 'Country',
+                            items: state.countries,
+                            borderColor: AppColors.grey,
+                            textColor: AppColors.darkGrey,
+                            dropdownColor: AppColors.white,
+                            iconColor: AppColors.darkGrey,
+                            onChanged: (country) {
+                              context
+                                  .read<CompanyProfileCubit>()
+                                  .setGroupNameAndCountryId(
+                                    countryId: country?.id,
+                                  );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    Expanded(child: verticalSpace(20)),
+                    SlideInUp(
+                      from: 400,
+                      delay: const Duration(milliseconds: 600),
+                      child: AddEmployeeButton(
+                        firstNameController: firstNameController,
+                        lastNameController: lastNameController,
+                        emailController: emailController,
+                        passwordController: passwordController,
+                        jobTitleController: jobTitleController,
+                        phoneNumberController: phoneNumberController,
+                        formKey: formKey,
+                      ),
+                    ),
+                    verticalSpace(20),
+                  ],
                 ),
-                verticalSpace(50),
-                SlideInUp(
-                  from: 400,
-                  delay: const Duration(milliseconds: 600),
-                  child: AddEmployeeButton(
-                    firstNameController: firstNameController,
-                    lastNameController: lastNameController,
-                    emailController: emailController,
-                    passwordController: passwordController,
-                    jobTitleController: jobTitleController,
-                    phoneNumberController: phoneNumberController,
-                    formKey: formKey,
-                  ),
-                ),
-                verticalSpace(40),
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),

@@ -63,18 +63,19 @@ class _BuildUpdateCompanyProfileViewState
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          verticalSpace(30),
-          UpdateCompanyProfileImage(
-            imageUrl: widget.companyModel.profileImageUrl,
-          ),
-          verticalSpace(50),
-          Padding(
+    return CustomScrollView(
+      slivers: [
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               children: [
+                verticalSpace(30),
+                UpdateCompanyProfileImage(
+                  imageUrl: widget.companyModel.profileImageUrl,
+                ),
+                verticalSpace(50),
                 CustomTextField(
                   labelText: 'First Name',
                   labelColor: AppColors.darkGrey,
@@ -123,7 +124,7 @@ class _BuildUpdateCompanyProfileViewState
                         );
                   },
                 ),
-                verticalSpace(60),
+                Expanded(child: verticalSpace(20)),
                 UpdateCompanyProfileButton(
                   companyNameController: companyNameController,
                   firstNameController: firstNameController,
@@ -132,12 +133,12 @@ class _BuildUpdateCompanyProfileViewState
                   locationCompanyController: locationCompanyController,
                   companyModel: widget.companyModel,
                 ),
-                verticalSpace(40),
+                verticalSpace(20),
               ],
             ),
           ),
-        ],
-      ),
+        )
+      ],
     );
   }
 }

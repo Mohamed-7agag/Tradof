@@ -7,7 +7,7 @@ import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
-import '../../../../shared_features/projects/presentation/widgets/project_text_field.dart';
+import '../../../projects/presentation/widgets/project_text_field.dart';
 import '../widgets/feedback_switcher_section.dart';
 
 class FeedbackView extends StatelessWidget {

@@ -27,7 +27,7 @@ class CompanySettingSection2 extends StatelessWidget {
               size: 26,
             ),
             onTap: () {
-              context.pushNamed(Routes.changeCompanyPasswordViewRoute);
+              context.pushNamed(Routes.changePasswordViewRoute,arguments: false);
             },
           ),
           const Divider(color: AppColors.cardDarkColor),

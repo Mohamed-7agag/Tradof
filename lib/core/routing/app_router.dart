@@ -11,7 +11,6 @@ import '../../company_features/company_profile/presentation/views/company_employ
 import '../../company_features/company_profile/presentation/views/company_profile_display_view.dart';
 import '../../company_features/company_profile/presentation/views/update_company_profile_tables_view.dart';
 import '../../company_features/company_setting/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
-import '../../company_features/company_setting/presentation/views/change_company_password_view.dart';
 import '../../company_features/company_setting/presentation/views/update_company_profile_view.dart';
 import '../../freelancer_features/freelancer_bottom_nav_bar_view.dart';
 import '../../freelancer_features/freelancer_profile/data/model/freelancer_model.dart';
@@ -20,7 +19,7 @@ import '../../freelancer_features/freelancer_profile/presentation/views/freelanc
 import '../../freelancer_features/freelancer_profile/presentation/views/update_freelancer_profile_tables_view.dart';
 import '../../freelancer_features/freelancer_profile/presentation/views/update_freelancer_social_media_view.dart';
 import '../../freelancer_features/freelancer_setting/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
-import '../../freelancer_features/freelancer_setting/presentation/views/change_freelancer_password_view.dart';
+import '../../shared_features/settings/presentation/views/change_password_view.dart';
 import '../../freelancer_features/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
 import '../../shared_features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
 import '../../shared_features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
@@ -28,7 +27,6 @@ import '../../shared_features/auth/presentation/logic/tables_cubit/tables_cubit.
 import '../../shared_features/auth/presentation/views/create_account_page_view.dart';
 import '../../shared_features/auth/presentation/views/forget_password_page_view.dart';
 import '../../shared_features/auth/presentation/views/login_view.dart';
-import '../../freelancer_features/freelancer_setting/presentation/views/feedback_view.dart';
 import '../../shared_features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../shared_features/offers/presentation/views/add_offer_view.dart';
 import '../../shared_features/projects/data/models/project_model.dart';
@@ -37,6 +35,7 @@ import '../../shared_features/projects/presentation/views/company_project_detail
 import '../../shared_features/projects/presentation/views/company_project_workspace_view.dart';
 import '../../shared_features/projects/presentation/views/freelancer_project_details_view.dart';
 import '../../shared_features/projects/presentation/views/freelancer_project_workspace_view.dart';
+import '../../shared_features/settings/presentation/views/feedback_view.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../di/di.dart';
@@ -124,10 +123,6 @@ class AppRouter {
             child: UpdateCompanyProfileView(companyModel: comanyModel),
           ),
         );
-      case Routes.changeCompanyPasswordViewRoute:
-        return MaterialPageRoute(
-          builder: (_) => const ChangeCompanyPasswordView(),
-        );
       case Routes.addUpdateSocialMediaViewRoute:
         final socialMedia = settings.arguments as List<SocialMediaModel>;
         return MaterialPageRoute(
@@ -171,9 +166,10 @@ class AppRouter {
             child: UpdateFreelancerSocialMediaView(socialList: socialMedia),
           ),
         );
-      case Routes.changeFreelancerPasswordViewRoute:
+      case Routes.changePasswordViewRoute:
+        final args = settings.arguments as bool;
         return MaterialPageRoute(
-          builder: (_) => const ChangeFreelancerPasswordView(),
+          builder: (_) => ChangePasswordView(isFreelancer: args),
         );
       case Routes.updateFreelancerProfileViewRoute:
         final freelancerModel = settings.arguments as FreelancerModel;
@@ -244,7 +240,7 @@ class AppRouter {
             child: const CompanyProfileDisplayView(),
           ),
         );
-        case Routes.feedbackViewRoute:
+      case Routes.feedbackViewRoute:
         return MaterialPageRoute(
           builder: (_) => const FeedbackView(),
         );

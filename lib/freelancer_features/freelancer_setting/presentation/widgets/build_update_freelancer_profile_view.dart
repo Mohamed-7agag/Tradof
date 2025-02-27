@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../company_features/company_setting/presentation/widgets/country_drop_down_edit.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
 import '../../../../shared_features/auth/presentation/widgets/phone_number_text_field.dart';
-import '../../../../company_features/company_setting/presentation/widgets/country_drop_down_edit.dart';
 import '../../../freelancer_profile/data/model/freelancer_model.dart';
 import '../logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
 import 'update_freelancer_profile_button.dart';
@@ -55,18 +55,19 @@ class _BuildUpdateFreelancerProfileViewState
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          verticalSpace(30),
-          UpdateFreelancerProfileImage(
-            imageUrl: widget.freelancerModel.profileImageUrl,
-          ),
-          verticalSpace(50),
-          Padding(
+    return CustomScrollView(
+      slivers: [
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               children: [
+                verticalSpace(30),
+                UpdateFreelancerProfileImage(
+                  imageUrl: widget.freelancerModel.profileImageUrl,
+                ),
+                verticalSpace(50),
                 CustomTextField(
                   labelText: 'First Name',
                   labelColor: AppColors.darkGrey,
@@ -102,19 +103,19 @@ class _BuildUpdateFreelancerProfileViewState
                         );
                   },
                 ),
-                verticalSpace(60),
+                Expanded(child: verticalSpace(20)),
                 UpdateFreelancerProfileButton(
                   firstNameController: firstNameController,
                   lastNameController: lastNameController,
                   phoneNumberController: phoneNumberController,
                   freelancerModel: widget.freelancerModel,
                 ),
-                verticalSpace(40),
+                verticalSpace(20),
               ],
             ),
           ),
-        ],
-      ),
+        )
+      ],
     );
   }
 }

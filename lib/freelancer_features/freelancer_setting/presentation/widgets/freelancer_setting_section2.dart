@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+import '../../../../company_features/company_setting/presentation/widgets/setting_item.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
-import '../../../../company_features/company_setting/presentation/widgets/setting_item.dart';
 
 class FreelancerSettingSection2 extends StatelessWidget {
   const FreelancerSettingSection2({super.key});
@@ -27,7 +27,7 @@ class FreelancerSettingSection2 extends StatelessWidget {
               size: 26,
             ),
             onTap: () {
-              context.pushNamed(Routes.changeFreelancerPasswordViewRoute);
+              context.pushNamed(Routes.changePasswordViewRoute,arguments: true);
             },
           ),
           const Divider(color: AppColors.cardDarkColor),
