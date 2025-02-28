@@ -49,13 +49,14 @@ class FreelancerProjectDetailsBody extends StatelessWidget {
           Row(
             children: [
               ProjectDetailsBodyItem(
-                title: 'DeadLine',
-                value: '${projectModel.days} Days',
-              ),
-              const Spacer(flex: 2),
-              ProjectDetailsBodyItem(
                 title: 'Price',
                 value: '${projectModel.minPrice} - ${projectModel.maxPrice}\$',
+              ),
+              
+              const Spacer(flex: 2),
+              ProjectDetailsBodyItem(
+                title: 'DeadLine',
+                value: '${projectModel.days} Days',
               ),
               const Spacer(flex: 2),
               ProjectDetailsBodyItem(

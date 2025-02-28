@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -34,27 +35,41 @@ class FreelancerProjectDetailsView extends StatelessWidget {
                   verticalSpace(20),
                   SlideInRight(
                     from: 400,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(14)),
-                        color: AppColors.cardColor,
-                      ),
-                      child: ListTile(
-                        horizontalTitleGap: 10,
-                        leading: const CircleAvatar(
-                          radius: 22,
-                          backgroundColor: AppColors.primary,
+                    child: InkWell(
+                      borderRadius: const BorderRadius.all(Radius.circular(14)),
+                      onTap: () {
+                        context.pushNamed(
+                          Routes.freelancerProfileDisplayViewRoute,
+                          arguments: projectModel.companyId,
+                        );
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(14)),
+                          color: AppColors.cardColor,
                         ),
-                        title: Text(
-                          'Yousef Ghareb',
-                          style: AppStyle.robotoRegular14,
-                        ),
-                        subtitle:
-                            Text('Job Title', style: AppStyle.robotoRegular12),
-                        trailing: const HugeIcon(
-                          icon: HugeIcons.strokeRoundedSquareArrowUpRight,
-                          color: AppColors.primary,
-                          size: 26,
+                        child: ListTile(
+                          horizontalTitleGap: 10,
+                          leading: CircleAvatar(
+                            radius: 22,
+                            backgroundColor: AppColors.cardDarkColor,
+                            backgroundImage: CachedNetworkImageProvider(
+                              projectModel.profileImageUrl ?? '',
+                            ),
+                          ),
+                          title: Text(
+                            '${projectModel.firstName} ${projectModel.lastName}',
+                            style: AppStyle.robotoRegular14,
+                          ),
+                          subtitle: Text(
+                            projectModel.jobTitle,
+                            style: AppStyle.robotoRegular12,
+                          ),
+                          trailing: const HugeIcon(
+                            icon: HugeIcons.strokeRoundedSquareArrowUpRight,
+                            color: AppColors.primary,
+                            size: 26,
+                          ),
                         ),
                       ),
                     ),

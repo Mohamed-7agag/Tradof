@@ -35,6 +35,7 @@ class ProjectRepoImpl implements ProjectRepo {
   Future<List<ProjectModel>> getUpcomingProjects() async {
     final response = await _apiServices.get(
       EndPoint.getUpcomingProjects,
+      queryParameters: {"companyId": AppConstants.kUserId},
     );
     return List<ProjectModel>.from(
       response.map((project) => ProjectModel.fromJson(project)),

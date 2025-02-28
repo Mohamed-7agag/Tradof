@@ -1,13 +1,14 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../company_features/company_profile/data/model/company_model.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
-import '../../../../company_features/company_profile/data/model/company_model.dart';
 import '../../data/models/project_model.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
@@ -24,6 +25,7 @@ class UpcomingProjectItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: const BorderRadius.all(Radius.circular(16)),
       onTap: () async {
         final result = await context
             .pushNamed(Routes.companyProjectDetailsViewRoute, arguments: {
@@ -37,7 +39,7 @@ class UpcomingProjectItem extends StatelessWidget {
       child: SlideInLeft(
         from: 400,
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           margin: const EdgeInsets.only(bottom: 12),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -46,31 +48,43 @@ class UpcomingProjectItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    project.specialization.name,
-                    style: AppStyle.robotoRegular12.copyWith(
-                      color: AppColors.black,
-                    ),
+               ListTile(
+              contentPadding: EdgeInsets.zero,
+              horizontalTitleGap: 10,
+              leading: CircleAvatar(
+                radius: 22,
+                backgroundColor: AppColors.cardDarkColor,
+                backgroundImage: CachedNetworkImageProvider(
+                  project.profileImageUrl ?? '',
+                ),
+              ),
+              title: Text(
+                '${project.firstName} ${project.lastName}',
+                style: AppStyle.robotoRegular14,
+              ),
+              subtitle:
+                  Text(project.jobTitle, style: AppStyle.robotoRegular12),
+              trailing: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.green.withValues(alpha: 0.15),
+                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                ),
+                child: Text(
+                  project.status.name,
+                  style: AppStyle.robotoRegular8.copyWith(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.green.withValues(alpha: 0.15),
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                    ),
-                    child: Text(
-                      project.status.name,
-                      style: AppStyle.robotoRegular10.copyWith(
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
+              ),
+            ),
+              Text(
+                project.specialization.name,
+                style: AppStyle.robotoRegular12.copyWith(
+                  color: AppColors.black,
+                ),
               ),
               verticalSpace(8),
               Text(
@@ -81,7 +95,7 @@ class UpcomingProjectItem extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              verticalSpace(16),
+              verticalSpace(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -99,6 +113,8 @@ class UpcomingProjectItem extends StatelessWidget {
                   _buildInfoColumn('Offers', '${project.numberOfOffers}'),
                 ],
               ),
+              verticalSpace(16),
+
             ],
           ),
         ),
@@ -111,15 +127,15 @@ class UpcomingProjectItem extends StatelessWidget {
       children: [
         Text(
           title,
-          style: AppStyle.robotoCondensedBold14.copyWith(
-            color: AppColors.black,
-          ),
+          style: AppStyle.robotoCondensedRegular12,
         ),
         verticalSpace(4),
         Text(
           value,
-          style: AppStyle.robotoRegular12
-              .copyWith(color: AppColors.primary, fontWeight: FontWeight.bold),
+          style: AppStyle.robotoRegular12.copyWith(
+            color: AppColors.primary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );

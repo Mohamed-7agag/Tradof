@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/extensions.dart';
@@ -31,12 +32,19 @@ class ProjectItem extends StatelessWidget {
             ListTile(
               contentPadding: EdgeInsets.zero,
               horizontalTitleGap: 10,
-              leading: const CircleAvatar(
+              leading: CircleAvatar(
                 radius: 22,
-                backgroundColor: AppColors.primary,
+                backgroundColor: AppColors.cardDarkColor,
+                backgroundImage: CachedNetworkImageProvider(
+                  projectModel.profileImageUrl ?? '',
+                ),
               ),
-              title: Text('Yousef Ghareb', style: AppStyle.robotoRegular14),
-              subtitle: Text('Job Title', style: AppStyle.robotoRegular12),
+              title: Text(
+                '${projectModel.firstName} ${projectModel.lastName}',
+                style: AppStyle.robotoRegular14,
+              ),
+              subtitle:
+                  Text(projectModel.jobTitle, style: AppStyle.robotoRegular12),
               trailing: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -54,48 +62,61 @@ class ProjectItem extends StatelessWidget {
               ),
             ),
             Text(
+              projectModel.specialization.name,
+              style: AppStyle.robotoRegular12.copyWith(
+                color: AppColors.black,
+              ),
+            ),
+            verticalSpace(8),
+            Text(
               projectModel.name,
-              style: AppStyle.robotoCondensedMedium15,
+              style: AppStyle.robotoCondensedMedium15.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            verticalSpace(14),
+            verticalSpace(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Column(
-                  children: [
-                    Text('Start At', style: AppStyle.robotoCondensedBold14),
-                    verticalSpace(4),
-                    Text('11/11/2023', style: AppStyle.robotoCondensedMedium12),
-                  ],
+                _buildInfoColumn('Price',
+                    '${projectModel.minPrice} - ${projectModel.maxPrice}\$'),
+                const SizedBox(
+                  height: 35,
+                  child: VerticalDivider(color: AppColors.cardDarkColor),
                 ),
-                Column(
-                  children: [
-                    Text('Deadline', style: AppStyle.robotoCondensedBold14),
-                    verticalSpace(4),
-                    Text(
-                      '${projectModel.days} Days',
-                      style: AppStyle.robotoCondensedMedium12,
-                    ),
-                  ],
+                _buildInfoColumn('Deadline', '${projectModel.days} Days'),
+                const SizedBox(
+                  height: 35,
+                  child: VerticalDivider(color: AppColors.cardDarkColor),
                 ),
-                Column(
-                  children: [
-                    Text('Price', style: AppStyle.robotoCondensedBold14),
-                    verticalSpace(4),
-                    Text(
-                      '${projectModel.minPrice} - ${projectModel.maxPrice}\$',
-                      style: AppStyle.robotoCondensedMedium12,
-                    ),
-                  ],
-                ),
+                _buildInfoColumn('Offers', '${projectModel.numberOfOffers}'),
               ],
             ),
-            verticalSpace(14),
+            verticalSpace(16),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildInfoColumn(String title, String value) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: AppStyle.robotoCondensedRegular12,
+        ),
+        verticalSpace(6),
+        Text(
+          value,
+          style: AppStyle.robotoRegular12.copyWith(
+            color: AppColors.primary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 }
