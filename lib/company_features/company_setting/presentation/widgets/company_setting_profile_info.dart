@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hugeicons/hugeicons.dart';
 
+import '../../../../core/helpers/extensions.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../company_profile/data/model/company_model.dart';
@@ -27,9 +29,18 @@ class CompanySettingProfileInfo extends StatelessWidget {
         ),
         leading: CircleAvatar(
           radius: 26,
-          backgroundColor: AppColors.white,
-          backgroundImage:
-              CachedNetworkImageProvider(companyModel.profileImageUrl),
+          backgroundColor: AppColors.cardDarkColor,
+          backgroundImage: companyModel.profileImageUrl.isNullOrEmpty()
+              ? null
+              : CachedNetworkImageProvider(
+                  companyModel.profileImageUrl!,
+                ),
+          child: companyModel.profileImageUrl.isNullOrEmpty()
+              ? const HugeIcon(
+                  icon: HugeIcons.strokeRoundedUser,
+                  color: AppColors.primary,
+                )
+              : null,
         ),
         title: Text(
           '${companyModel.firstName} ${companyModel.lastName}',

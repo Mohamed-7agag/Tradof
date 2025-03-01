@@ -33,7 +33,7 @@ abstract class EndPoint {
 
   static String addCompanyEmployee = 'Company/AddEmployee';
 
-  static String getCompanybyId(String id) => 'Company/$id';
+  static String getCompanyById(String id) => 'Company/$id';
 
   static String addPreferredLanguage(String companyId) {
     return 'Company/AddLanguage/$companyId';
@@ -56,7 +56,7 @@ abstract class EndPoint {
   }
 
   // Freelancer
-  static String getFreelancerbyId(String id) => 'freelancers/$id';
+  static String getFreelancerById(String id) => 'freelancers/$id';
   static String freelancerSocialMediaCRUD(String freelancerId) {
     return 'freelancers/$freelancerId/social-medias/add-or-update-or-remove';
   }

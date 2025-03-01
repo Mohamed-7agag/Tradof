@@ -1,10 +1,10 @@
 import 'package:file_picker/file_picker.dart';
 
+import '../../../../company_features/company_profile/data/model/social_media_model.dart';
 import '../../../../core/api/api_service.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/helpers/upload_file_to_api.dart';
 import '../../../../core/utils/app_constants.dart';
-import '../../../../company_features/company_profile/data/model/social_media_model.dart';
 import '../model/freelancer_model.dart';
 import 'freelancer_profile_repo.dart';
 
@@ -14,9 +14,10 @@ class FreelancerProfileRepoImpl implements FreelancerProfileRepo {
   final ApiServices _apiServices;
 
   @override
-  Future<FreelancerModel> getFreelancerProfile({required String freelancerId}) async {
+  Future<FreelancerModel> getFreelancerProfile(
+      {required String freelancerId}) async {
     final response = await _apiServices.get(
-      EndPoint.getFreelancerbyId(freelancerId),
+      EndPoint.getFreelancerById(freelancerId),
     );
     return FreelancerModel.fromJson(response);
   }
@@ -40,7 +41,7 @@ class FreelancerProfileRepoImpl implements FreelancerProfileRepo {
     await _apiServices.post(
       EndPoint.uploadCv(AppConstants.kUserId),
       data: {'file': await uploadFileToApi(cv)},
-      onSendProgress: (send, total) =>  onProgress(send / total),
+      onSendProgress: (send, total) => onProgress(send / total),
       isFormData: true,
     );
   }

@@ -100,7 +100,7 @@ class CompanySettingCubit extends Cubit<CompanySettingState> {
       companyName: companyName.isEmpty ? companyModel.companyName : companyName,
       companyAddress: location.isEmpty ? companyModel.companyAddress : location,
       phoneNumber: phoneNumber.isEmpty ? companyModel.phone : phoneNumber,
-      profileImageUrl: imageUrl ?? companyModel.profileImageUrl,
+      profileImageUrl: imageUrl ?? companyModel.profileImageUrl ?? '',
       countryId: state.countryId ?? companyModel.countryId,
     );
   }

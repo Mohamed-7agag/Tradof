@@ -39,7 +39,7 @@ class FreelancerProjectDetailsView extends StatelessWidget {
                       borderRadius: const BorderRadius.all(Radius.circular(14)),
                       onTap: () {
                         context.pushNamed(
-                          Routes.freelancerProfileDisplayViewRoute,
+                          Routes.companyProfileDisplayViewRoute,
                           arguments: projectModel.companyId,
                         );
                       },
@@ -51,11 +51,20 @@ class FreelancerProjectDetailsView extends StatelessWidget {
                         child: ListTile(
                           horizontalTitleGap: 10,
                           leading: CircleAvatar(
-                            radius: 22,
+                            radius: 24,
                             backgroundColor: AppColors.cardDarkColor,
-                            backgroundImage: CachedNetworkImageProvider(
-                              projectModel.profileImageUrl ?? '',
-                            ),
+                            backgroundImage:
+                                projectModel.profileImageUrl.isNullOrEmpty()
+                                    ? null
+                                    : CachedNetworkImageProvider(
+                                        projectModel.profileImageUrl!,
+                                      ),
+                            child: projectModel.profileImageUrl.isNullOrEmpty()
+                                ? const HugeIcon(
+                                    icon: HugeIcons.strokeRoundedUser,
+                                    color: AppColors.primary,
+                                  )
+                                : null,
                           ),
                           title: Text(
                             '${projectModel.firstName} ${projectModel.lastName}',

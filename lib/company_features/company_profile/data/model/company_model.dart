@@ -58,7 +58,7 @@ class CompanyModel extends Equatable {
   final int ratingSum;
   final int reviewCount;
   final int countryId;
-  final String profileImageUrl;
+  final String? profileImageUrl;
   final List<SpecializationModel> specializations;
   final List<LanguageModel> preferredLanguages;
   final List<SocialMediaModel> socialMedia;

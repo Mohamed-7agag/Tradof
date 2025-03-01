@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+import '../../../../core/helpers/extensions.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_refresh_indicator.dart';
@@ -72,11 +74,16 @@ class _AllProjectsSectionState extends State<AllProjectsSection> {
             physics: const BouncingScrollPhysics(),
             builderDelegate: PagedChildBuilderDelegate<ProjectModel>(
               itemBuilder: (context, project, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: SlideInLeft(
-                    from: 400,
-                    child: ProjectItem(projectModel: project),
+                return SlideInLeft(
+                  from: 400,
+                  child: ProjectItem(
+                    project: project,
+                    onTap: () {
+                      context.pushNamed(
+                        Routes.freelancerProjectDetailsViewRoute,
+                        arguments: project,
+                      );
+                    },
                   ),
                 );
               },

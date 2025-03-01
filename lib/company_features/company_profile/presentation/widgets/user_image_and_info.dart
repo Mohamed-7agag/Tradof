@@ -23,11 +23,19 @@ class UserImageAndInfo extends StatelessWidget {
       leading: SlideInLeft(
         from: 400,
         child: CircleAvatar(
-          radius: 26.r,
-          backgroundColor: AppColors.white,
-          backgroundImage: CachedNetworkImageProvider(
-            companyModel.profileImageUrl,
-          ),
+          radius: 26,
+          backgroundColor: AppColors.cardDarkColor,
+          backgroundImage: companyModel.profileImageUrl.isNullOrEmpty()
+              ? null
+              : CachedNetworkImageProvider(
+                  companyModel.profileImageUrl!,
+                ),
+          child: companyModel.profileImageUrl.isNullOrEmpty()
+              ? const HugeIcon(
+                  icon: HugeIcons.strokeRoundedUser,
+                  color: AppColors.primary,
+                )
+              : null,
         ),
       ),
       title: Text(

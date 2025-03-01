@@ -50,7 +50,7 @@ class FreelancerModel {
   final String userId;
   final String firstName;
   final String lastName;
-  final String profileImageUrl;
+  final String? profileImageUrl;
   final String countryName;
   final int countryId;
   final String? cvFilePath;

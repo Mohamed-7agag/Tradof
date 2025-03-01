@@ -90,7 +90,7 @@ class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
       lastName: lastName.isEmpty ? freelancerModel.lastName : lastName,
       email: freelancerModel.email,
       phoneNumber: phoneNumber.isEmpty ? freelancerModel.phone : phoneNumber,
-      profileImageUrl: imageUrl ?? freelancerModel.profileImageUrl,
+      profileImageUrl: imageUrl ?? freelancerModel.profileImageUrl ?? '',
       countryId: state.countryId ?? freelancerModel.countryId,
     );
   }

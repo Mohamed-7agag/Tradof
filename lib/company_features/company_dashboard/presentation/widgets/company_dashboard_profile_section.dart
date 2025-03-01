@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+import '../../../../core/helpers/extensions.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
@@ -18,10 +19,18 @@ class CompanyDashboardProfileSection extends StatelessWidget {
       horizontalTitleGap: 10,
       leading: CircleAvatar(
         radius: 24,
-        backgroundColor: AppColors.white,
-        backgroundImage: CachedNetworkImageProvider(
-          companyModel.profileImageUrl,
-        ),
+        backgroundColor: AppColors.cardDarkColor,
+        backgroundImage: companyModel.profileImageUrl.isNullOrEmpty()
+            ? null
+            : CachedNetworkImageProvider(
+                companyModel.profileImageUrl!,
+              ),
+        child: companyModel.profileImageUrl.isNullOrEmpty()
+            ? const HugeIcon(
+                icon: HugeIcons.strokeRoundedUser,
+                color: AppColors.primary,
+              )
+            : null,
       ),
       title: Text(
         '${companyModel.firstName} ${companyModel.lastName}',

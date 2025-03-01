@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+import '../../../../core/helpers/extensions.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
@@ -19,9 +20,18 @@ class FreelancerDashboardProfileSection extends StatelessWidget {
       horizontalTitleGap: 10,
       leading: CircleAvatar(
         radius: 24,
-        backgroundColor: AppColors.white,
-        backgroundImage:
-            CachedNetworkImageProvider(freelancerModel.profileImageUrl),
+        backgroundColor: AppColors.cardDarkColor,
+        backgroundImage: freelancerModel.profileImageUrl.isNullOrEmpty()
+            ? null
+            : CachedNetworkImageProvider(
+                freelancerModel.profileImageUrl!,
+              ),
+        child: freelancerModel.profileImageUrl.isNullOrEmpty()
+            ? const HugeIcon(
+                icon: HugeIcons.strokeRoundedUser,
+                color: AppColors.primary,
+              )
+            : null,
       ),
       title: Text(
         '${freelancerModel.firstName} ${freelancerModel.lastName}',

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/helpers/extensions.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../../../core/utils/app_constants.dart';
 import '../../data/model/freelancer_model.dart';
 import 'freelancer_image_and_info.dart';
 
@@ -24,13 +26,23 @@ class FreelancerProfileAppBar extends StatelessWidget {
             SlideInDown(
               from: 400,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  if (freelancerModel.userId != AppConstants.kUserId) ...[
+                    GestureDetector(
+                      onTap: () => context.pop(),
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: AppColors.white,
+                      ),
+                    ),
+                    horizontalSpace(12)
+                  ],
                   Text(
                     'Profile',
                     style:
                         AppStyle.robotoBold20.copyWith(color: AppColors.white),
                   ),
+                  const Spacer(),
                   SvgPicture.asset('assets/images/user.svg')
                 ],
               ),

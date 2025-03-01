@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/helpers/extensions.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_refresh_indicator.dart';
 import '../../../../shared_features/projects/data/models/project_model.dart';
 import '../../../../shared_features/projects/presentation/logic/project_cubit/project_cubit.dart';
-import '../../../../shared_features/projects/presentation/widgets/upcoming_project_item.dart';
+import '../../../../shared_features/projects/presentation/widgets/project_item.dart';
 import '../../../company_profile/data/model/company_model.dart';
 
 class UpcomingProjectsSection extends StatefulWidget {
@@ -74,9 +76,19 @@ class BuildUpcomingProjects extends StatelessWidget {
             padding: const EdgeInsets.only(top: 40, bottom: 100),
             itemCount: projects.length,
             itemBuilder: (BuildContext context, int index) {
-              return UpcomingProjectItem(
+              return ProjectItem(
                 project: projects[index],
-                companyModel: companyModel,
+                onTap: () async {
+                  final result = await context.pushNamed(
+                      Routes.companyProjectDetailsViewRoute,
+                      arguments: {
+                        'projectModel': projects[index],
+                        'companyModel': companyModel,
+                      });
+                  if (result == true && context.mounted) {
+                    context.read<ProjectCubit>().getUpcomingProjects();
+                  }
+                },
               );
             },
           );
