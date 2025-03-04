@@ -83,7 +83,7 @@ class SpecializationTable extends StatelessWidget {
                                 icon:
                                     HugeIcons.strokeRoundedCancelCircleHalfDot,
                                 color: Colors.red,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                             const SizedBox(width: 6),

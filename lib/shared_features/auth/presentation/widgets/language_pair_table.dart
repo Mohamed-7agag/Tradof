@@ -87,7 +87,7 @@ class LanguagePairTable extends StatelessWidget {
                                 icon:
                                     HugeIcons.strokeRoundedCancelCircleHalfDot,
                                 color: Colors.red,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                             horizontalSpace(6),
