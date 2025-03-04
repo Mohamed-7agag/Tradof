@@ -58,10 +58,11 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
                 children: _buildIndexedStackChildren(state),
               );
             } else if (state.status.isGetCompanyFailure) {
-              return failureWithRefreshIndicatorWidget(
-                currentIndex,
-                state.errorMessage,
-                context.read<CompanyProfileCubit>().getCompanyProfile(),
+              return CustomFailureWidget(
+                text: state.errorMessage,
+                onRetry: () async {
+                  context.read<CompanyProfileCubit>().getCompanyProfile();
+                },
               );
             }
             return const CustomLoadingWidget();
@@ -81,15 +82,4 @@ bool _buildWhen(CompanyProfileState current) {
   return current.status.isGetCompanySuccess ||
       current.status.isGetCompanyFailure ||
       current.status.isGetCompanyLoading;
-}
-
-Widget failureWithRefreshIndicatorWidget(
-  int currentIndex,
-  String errorMessage,
-  Future<void> onRefresh,
-) {
-  return CustomFailureWidget(
-    text: errorMessage,
-    onRetry: () async => onRefresh,
-  );
 }

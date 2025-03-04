@@ -7,8 +7,8 @@ import '../core/helpers/exit_dialog.dart';
 import '../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../core/utils/widgets/custom_animated_lazy_indexed_stack.dart';
 import '../core/utils/widgets/custom_bottom_nav_bar.dart';
+import '../core/utils/widgets/custom_failure_widget.dart';
 import '../core/utils/widgets/custom_loading_widget.dart';
-import '../company_features/company_bottom_nav_bar_view.dart';
 import 'freelancer_dashboard/presentation/views/freelance_dashbord_view.dart';
 import 'freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import 'freelancer_profile/presentation/views/freelancer_profile_view.dart';
@@ -57,10 +57,11 @@ class _FreelancerBottomNavBarViewState
                 children: _buildIndexedStackChildren(state),
               );
             } else if (state.status.isGetFreelancerFailure) {
-              return failureWithRefreshIndicatorWidget(
-                currentIndex,
-                state.errMessage,
-                context.read<FreelancerProfileCubit>().getFreelancerProfile(),
+              return CustomFailureWidget(
+                text: state.errMessage,
+                onRetry: () async {
+                  context.read<FreelancerProfileCubit>().getFreelancerProfile();
+                },
               );
             }
             return const CustomLoadingWidget();

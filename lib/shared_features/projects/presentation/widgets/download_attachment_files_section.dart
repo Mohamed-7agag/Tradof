@@ -24,7 +24,7 @@ class DownloadAttachmentFilesSection extends StatelessWidget {
         children: [
           verticalSpace(12),
           Text(
-            'Attachment Files',
+            'Project Files',
             style: AppStyle.robotoCondensedRegular15,
           ),
           verticalSpace(6),
