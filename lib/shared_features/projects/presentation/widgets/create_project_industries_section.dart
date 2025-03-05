@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../company_features/company_profile/data/model/company_model.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../auth/data/model/specialization_model.dart';
-import '../../../../company_features/company_profile/data/model/company_model.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
 class CreateProjectIndustriesSection extends StatefulWidget {
@@ -31,6 +31,9 @@ class _CreateProjectIndustriesSectionState
   @override
   void initState() {
     selectedIndustries = widget.value;
+    context
+        .read<ProjectCubit>()
+        .setProjectData(industryId: selectedIndustries?.id);
     super.initState();
   }
 
@@ -109,7 +112,7 @@ class _CreateProjectIndustriesSectionState
                       setState(() {
                         selectedIndustries =
                             companyModel.specializations[index];
-                        cubit.setCreateProjectData(
+                        cubit.setProjectData(
                           industryId: selectedIndustries!.id,
                         );
                       });

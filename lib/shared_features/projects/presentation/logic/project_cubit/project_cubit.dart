@@ -143,7 +143,7 @@ class ProjectCubit extends Cubit<ProjectState> {
         files,
       );
 
-      await _projectRepo.updateProject(model);
+      await _projectRepo.updateProject(model, projectModel.id);
       emit(state.copyWith(
         status: ProjectStatus.updateProjectSuccess,
         message: 'Project Updated Successfully',
@@ -173,7 +173,7 @@ class ProjectCubit extends Cubit<ProjectState> {
     }
   }
 
-  void setCreateProjectData({
+  void setProjectData({
     LanguageModel? fromLanguage,
     LanguageModel? toLanguage,
     int? industryId,
@@ -210,7 +210,7 @@ class ProjectCubit extends Cubit<ProjectState> {
           : days!,
       fromLanguageId: state.fromLanguage!.id,
       toLanguageId: state.toLanguage!.id,
-      specializationId: state.industryId ?? projectModel.specialization.id,
+      specializationId: state.industryId!,
       files: await prepareFiles(files),
     );
   }

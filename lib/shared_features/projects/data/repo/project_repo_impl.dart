@@ -22,10 +22,13 @@ class ProjectRepoImpl implements ProjectRepo {
   }
 
   @override
-  Future<void> updateProject(CreateProjectRequestModel model) async {
+  Future<void> updateProject(CreateProjectRequestModel model, int projectId) async {
     await _apiServices.put(
       EndPoint.project,
-      data: model.toJson(),
+      data: {
+        "id": projectId,
+        ...model.toJson(),
+      },
       queryParameters: {"companyId": AppConstants.kUserId},
       isFormData: true,
     );

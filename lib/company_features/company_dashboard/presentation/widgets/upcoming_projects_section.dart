@@ -33,6 +33,10 @@ class _UpcomingProjectsSectionState extends State<UpcomingProjectsSection> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProjectCubit, ProjectState>(
+      buildWhen: (previous, current) =>
+          current.status.isGetUpcomingProjectsSuccess ||
+          current.status.isGetUpcomingProjectsFailure ||
+          current.status.isGetUpcomingProjectsLoading,
       builder: (context, state) {
         return CustomRefreshIndicator(
           onRefresh: () async {

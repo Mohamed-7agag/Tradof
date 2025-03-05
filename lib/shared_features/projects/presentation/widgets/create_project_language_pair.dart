@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../company_features/company_profile/data/model/company_model.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../auth/presentation/widgets/language_drop_down.dart';
-import '../../../../company_features/company_profile/data/model/company_model.dart';
 import '../logic/project_cubit/project_cubit.dart';
 
 class CreateProjectLanguagePair extends StatelessWidget {
@@ -20,9 +20,7 @@ class CreateProjectLanguagePair extends StatelessWidget {
           hintColor: AppColors.darkGrey,
           items: companyModel.preferredLanguages,
           onChanged: (value) {
-            context
-                .read<ProjectCubit>()
-                .setCreateProjectData(fromLanguage: value);
+            context.read<ProjectCubit>().setProjectData(fromLanguage: value);
           },
         ),
         verticalSpace(12),
@@ -32,9 +30,7 @@ class CreateProjectLanguagePair extends StatelessWidget {
           hintColor: AppColors.darkGrey,
           items: companyModel.preferredLanguages,
           onChanged: (value) {
-            context
-                .read<ProjectCubit>()
-                .setCreateProjectData(toLanguage: value);
+            context.read<ProjectCubit>().setProjectData(toLanguage: value);
           },
         ),
       ],

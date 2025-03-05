@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -48,7 +46,7 @@ class UpdateProjectButton extends StatelessWidget {
                 text: 'Update Project',
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  _validateAndUpdateProject(context, state);
+                  _verifyProjectModification(context, state);
                 },
               );
       },
@@ -61,10 +59,7 @@ class UpdateProjectButton extends StatelessWidget {
         current.status.isUpdateProjectLoading;
   }
 
-  void _validateAndUpdateProject(BuildContext context, ProjectState state) {
-    log(context.read<ProjectCubit>().state.fromLanguage.toString());
-    log(context.read<ProjectCubit>().state.toLanguage.toString());
-
+  void _verifyProjectModification(BuildContext context, ProjectState state) {
     final days = daysController.text.trim() == ''
         ? 0
         : int.parse(daysController.text.trim());
@@ -78,8 +73,7 @@ class UpdateProjectButton extends StatelessWidget {
     if (minBudget > maxBudget) {
       errorToast(
           context, 'Error', 'Min budget cannot be greater than Max budget');
-    } else if (context.read<ProjectCubit>().state.fromLanguage ==
-        context.read<ProjectCubit>().state.toLanguage) {
+    } else if (state.fromLanguage == state.toLanguage) {
       errorToast(context, 'Error', 'Please select different languages');
     } else {
       context.read<ProjectCubit>().updateProject(
