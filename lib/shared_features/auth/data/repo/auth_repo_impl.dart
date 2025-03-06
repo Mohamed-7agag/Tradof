@@ -36,6 +36,14 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
+  Future<String> resendOtp(String email) async {
+    return await _apiServices.post(
+      EndPoint.resendOtp,
+      data: {'email': email},
+    );
+  }
+
+  @override
   Future<String> resetPassword(
       ResetPasswordRequestModel resetPasswordRequestModel) async {
     return await _apiServices.post(

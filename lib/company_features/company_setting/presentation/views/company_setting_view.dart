@@ -9,7 +9,6 @@ import '../../../company_profile/data/model/company_model.dart';
 import '../widgets/company_setting_profile_info.dart';
 import '../widgets/company_setting_section1.dart';
 import '../widgets/company_setting_section2.dart';
-import '../widgets/delete_account_and_logout_section.dart';
 import '../widgets/subscription_plan_and_timer.dart';
 
 class CompanySettingView extends StatelessWidget {
@@ -54,8 +53,6 @@ class CompanySettingView extends StatelessWidget {
                   ),
                   verticalSpace(26),
                   const SubscriptionPlanAndTimer(),
-                  verticalSpace(20),
-                  const DeleteAccountAndLogoutSection(),
                   verticalSpace(100),
                 ],
               ),

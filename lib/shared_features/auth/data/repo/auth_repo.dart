@@ -15,6 +15,9 @@ abstract class AuthRepo {
     String email,
     String otp,
   );
+  Future<String> resendOtp(
+    String email,
+  );
   Future<String> resetPassword(
     ResetPasswordRequestModel resetPasswordRequestModel,
   );

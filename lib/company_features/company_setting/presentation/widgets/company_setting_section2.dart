@@ -5,6 +5,7 @@ import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
+import 'logout_dialog.dart';
 import 'setting_item.dart';
 
 class CompanySettingSection2 extends StatelessWidget {
@@ -27,7 +28,8 @@ class CompanySettingSection2 extends StatelessWidget {
               size: 26,
             ),
             onTap: () {
-              context.pushNamed(Routes.changePasswordViewRoute,arguments: false);
+              context.pushNamed(Routes.changePasswordViewRoute,
+                  arguments: false);
             },
           ),
           const Divider(color: AppColors.cardDarkColor),
@@ -48,6 +50,17 @@ class CompanySettingSection2 extends StatelessWidget {
             ),
             onTap: () {
               context.pushNamed(Routes.feedbackViewRoute);
+            },
+          ),
+          const Divider(color: AppColors.cardDarkColor),
+          SettingItem(
+            title: 'Logout',
+            icon: const HugeIcon(
+              icon: HugeIcons.strokeRoundedLogin01,
+              color: Colors.red,
+            ),
+            onTap: () {
+              showLogoutDialog(context);
             },
           ),
         ],

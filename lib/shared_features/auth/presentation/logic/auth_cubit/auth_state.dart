@@ -5,6 +5,7 @@ enum AuthStatus {
   login,
   forgotPassword,
   otpVerification,
+  resendOtp,
   resetPassword,
   error,
   loading,
@@ -15,6 +16,7 @@ extension AuthStepX on AuthStatus {
   bool get isForgotPassword => this == AuthStatus.forgotPassword;
   bool get isOtpVerification => this == AuthStatus.otpVerification;
   bool get isResetPassword => this == AuthStatus.resetPassword;
+  bool get isResendOtp => this == AuthStatus.resendOtp;
   bool get isError => this == AuthStatus.error;
   bool get isLoading => this == AuthStatus.loading;
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+import '../../../../company_features/company_setting/presentation/widgets/logout_dialog.dart';
 import '../../../../company_features/company_setting/presentation/widgets/setting_item.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/routing/routes.dart';
@@ -27,7 +28,8 @@ class FreelancerSettingSection2 extends StatelessWidget {
               size: 26,
             ),
             onTap: () {
-              context.pushNamed(Routes.changePasswordViewRoute,arguments: true);
+              context.pushNamed(Routes.changePasswordViewRoute,
+                  arguments: true);
             },
           ),
           const Divider(color: AppColors.cardDarkColor),
@@ -50,6 +52,17 @@ class FreelancerSettingSection2 extends StatelessWidget {
               context.pushNamed(Routes.feedbackViewRoute);
             },
           ),
+          const Divider(color: AppColors.cardDarkColor),
+          SettingItem(
+            title: 'Logout',
+            icon: const HugeIcon(
+              icon: HugeIcons.strokeRoundedLogin01,
+              color: Colors.red,
+            ),
+            onTap: () {
+              showLogoutDialog(context);
+            },
+          )
         ],
       ),
     );

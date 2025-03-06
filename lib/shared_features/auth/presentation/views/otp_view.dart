@@ -7,6 +7,7 @@ import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../widgets/auth_shape.dart';
 import '../widgets/otp_widget_and_button.dart';
+import '../widgets/resend_otp_section.dart';
 
 class OtpView extends StatelessWidget {
   const OtpView({required this.pageController, super.key});
@@ -42,15 +43,11 @@ class OtpView extends StatelessWidget {
                   delay: const Duration(milliseconds: 250),
                   child: Row(
                     children: [
-                      Text("Didn't receive OTP? ",
-                          style: AppStyle.robotoRegular12),
                       Text(
-                        'Resend OTP',
-                        style: AppStyle.robotoRegular12.copyWith(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        "Didn't receive OTP? ",
+                        style: AppStyle.robotoRegular12,
                       ),
+                      const ResendOtpSection(),
                     ],
                   ),
                 ),

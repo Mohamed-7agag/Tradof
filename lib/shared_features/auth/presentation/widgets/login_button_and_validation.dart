@@ -26,17 +26,12 @@ class LoginButtonAndValidation extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state.status.isLogin) {
-          if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
-            context.pushNamedAndRemoveUntil(
-              Routes.freelancerBottomNavBarViewRoute,
-              predicate: (route) => false,
-            );
-          } else {
-            context.pushNamedAndRemoveUntil(
-              Routes.companyBottomNavBarViewRoute,
-              predicate: (route) => false,
-            );
-          }
+          context.pushNamedAndRemoveUntil(
+            CacheHelper.getString(AppConstants.role) == 'Freelancer'
+                ? Routes.freelancerBottomNavBarViewRoute
+                : Routes.companyBottomNavBarViewRoute,
+            predicate: (route) => false,
+          );
         } else if (state.status.isError) {
           errorToast(context, 'Error', state.errorMessage);
         }
