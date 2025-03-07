@@ -96,7 +96,7 @@ class _CompanySocialLinksState extends State<CompanySocialLinks> {
       child: FadeInLeft(
         from: 400,
         delay: delay,
-        child: LinkIcon(
+        child: CompanySocialMediaLinkIcon(
           image: image,
           socialMedia: widget.companyModel.socialMedia,
           link: link,

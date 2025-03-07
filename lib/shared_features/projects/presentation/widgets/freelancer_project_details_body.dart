@@ -43,7 +43,7 @@ class FreelancerProjectDetailsBody extends StatelessWidget {
           ProjectDetailsBodyItem(
             title: 'Language Pair',
             value:
-                '${projectModel.languageFrom.languageName} (${projectModel.languageFrom.countryCode}) - ${projectModel.languageTo.languageName} (${projectModel.languageTo.countryCode})',
+                '${projectModel.languageFrom.languageName} (${projectModel.languageFrom.countryName}) - ${projectModel.languageTo.languageName} (${projectModel.languageTo.countryName})',
           ),
           const Divider(color: AppColors.cardDarkColor, height: 40),
           Row(
@@ -62,7 +62,7 @@ class FreelancerProjectDetailsBody extends StatelessWidget {
               ProjectDetailsBodyItem(
                 title: 'IEFT tag',
                 value:
-                    '${projectModel.languageFrom.languageCode} - ${projectModel.languageTo.languageCode}',
+                    '${projectModel.languageFrom.languageCode} (${projectModel.languageFrom.countryCode}) - ${projectModel.languageTo.languageCode} (${projectModel.languageTo.countryCode})',
               ),
               const Spacer(),
             ],

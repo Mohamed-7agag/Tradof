@@ -29,7 +29,7 @@ abstract class CompanyProfileRepo {
     required List<int> industriesIds,
   });
 
-  Future<String> addUpdateSocialMedia({
+  Future<String> updateSocialMedia({
     required List<SocialMediaModel> socialMediaModel,
   });
 }

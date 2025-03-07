@@ -26,7 +26,7 @@ class FreelancerProfileRepoImpl implements FreelancerProfileRepo {
   Future<String> updateFreelancerSocialMedia(
       {required List<SocialMediaModel> socialList}) async {
     final response = await _apiServices.post(
-      EndPoint.freelancerSocialMediaCRUD(AppConstants.kUserId),
+      EndPoint.updateFreelancerSocialMedia(AppConstants.kUserId),
       data: socialList.map((e) => e.toJson()).toList(),
     );
     return response;

@@ -22,9 +22,9 @@ enum CompanyProfileStatus {
   addCompanyEmployeesSuccess,
   addCompanyEmployeesFailure,
 
-  addUpdateSocialMediaLoading,
-  addUpdateSocialMediaFailure,
-  addUpdateSocialMediaSuccess,
+  updateSocialMediaLoading,
+  updateSocialMediaFailure,
+  updateSocialMediaSuccess,
 }
 
 extension CompanyProfileStatusX on CompanyProfileStatus {
@@ -64,16 +64,15 @@ extension CompanyProfileStatusX on CompanyProfileStatus {
   bool get isAddCompanyEmployeesFailure =>
       this == CompanyProfileStatus.addCompanyEmployeesFailure;
 
-  bool get isAddUpdateSocialMediaLoading =>
-      this == CompanyProfileStatus.addUpdateSocialMediaLoading;
-  bool get isAddUpdateSocialMediaSuccess =>
-      this == CompanyProfileStatus.addUpdateSocialMediaSuccess;
-  bool get isAddUpdateSocialMediaFailure =>
-      this == CompanyProfileStatus.addUpdateSocialMediaFailure;
+  bool get isUpdateCompanySocialMediaLoading =>
+      this == CompanyProfileStatus.updateSocialMediaLoading;
+  bool get isUpdateCompanySocialMediaSuccess =>
+      this == CompanyProfileStatus.updateSocialMediaSuccess;
+  bool get isUpdateCompanySocialMediaFailure =>
+      this == CompanyProfileStatus.updateSocialMediaFailure;
 }
 
 class CompanyProfileState extends Equatable {
-
   const CompanyProfileState({
     this.status = CompanyProfileStatus.initial,
     this.companyEmployees = const [],

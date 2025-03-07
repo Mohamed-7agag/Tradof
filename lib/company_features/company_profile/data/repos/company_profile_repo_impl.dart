@@ -44,10 +44,10 @@ class CompanyProfileRepoImpl implements CompanyProfileRepo {
   }
 
   @override
-  Future<String> addUpdateSocialMedia(
+  Future<String> updateSocialMedia(
       {required List<SocialMediaModel> socialMediaModel}) async {
     final response = await _apiServices.post(
-      EndPoint.freelancerSocialMediaCRUD(AppConstants.kUserId),
+      EndPoint.updateCompanySocialMedia(AppConstants.kUserId),
       data: socialMediaModel.map((e) => e.toJson()).toList(),
     );
     return response;

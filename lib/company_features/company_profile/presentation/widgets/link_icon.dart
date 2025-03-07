@@ -8,8 +8,8 @@ import '../../../../core/theming/app_colors.dart';
 import '../../data/model/social_media_model.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 
-class LinkIcon extends StatelessWidget {
-  const LinkIcon({
+class CompanySocialMediaLinkIcon extends StatelessWidget {
+  const CompanySocialMediaLinkIcon({
     required this.image,
     required this.socialMedia,
     required this.link,
@@ -27,8 +27,11 @@ class LinkIcon extends StatelessWidget {
       onLongPress: () async {
         if (isForDisplay) return;
         final result = await context.pushNamed(
-          Routes.addUpdateSocialMediaViewRoute,
-          arguments: socialMedia,
+          Routes.updateSocialMediaViewRoute,
+          arguments: {
+            'socialMedia': socialMedia,
+            'isFreelancer': false,
+          },
         );
         if (result == true && context.mounted) {
           context.read<CompanyProfileCubit>().getCompanyProfile();
@@ -40,8 +43,11 @@ class LinkIcon extends StatelessWidget {
         } else {
           if (isForDisplay) return;
           final result = await context.pushNamed(
-            Routes.addUpdateSocialMediaViewRoute,
-            arguments: socialMedia,
+            Routes.updateSocialMediaViewRoute,
+            arguments: {
+              'socialMedia': socialMedia,
+              'isFreelancer': false,
+            },
           );
           if (result == true && context.mounted) {
             context.read<CompanyProfileCubit>().getCompanyProfile();

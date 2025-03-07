@@ -52,13 +52,13 @@ abstract class EndPoint {
     return 'Company/RemoveSpecialization/$companyId';
   }
 
-  static String companySocialMediaCRUD(String companyId) {
+  static String updateCompanySocialMedia(String companyId) {
     return 'Company/$companyId/social-medias/add-or-update-or-remove';
   }
 
   // Freelancer
   static String getFreelancerById(String id) => 'freelancers/$id';
-  static String freelancerSocialMediaCRUD(String freelancerId) {
+  static String updateFreelancerSocialMedia(String freelancerId) {
     return 'freelancers/$freelancerId/social-medias/add-or-update-or-remove';
   }
 

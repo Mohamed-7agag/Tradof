@@ -81,23 +81,23 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
     emit(state.copyWith(groupName: groupName, countryId: countryId));
   }
 
-  Future<void> addUpdateSocialMedia({
+  Future<void> updateSocialMedia({
     required List<SocialMediaModel> socialMedia,
   }) async {
     emit(state.copyWith(
-      status: CompanyProfileStatus.addUpdateSocialMediaLoading,
+      status: CompanyProfileStatus.updateSocialMediaLoading,
     ));
     try {
-      final result = await _profileCompanyRepo.addUpdateSocialMedia(
+      final result = await _profileCompanyRepo.updateSocialMedia(
         socialMediaModel: socialMedia,
       );
       emit(state.copyWith(
-        status: CompanyProfileStatus.addUpdateSocialMediaSuccess,
+        status: CompanyProfileStatus.updateSocialMediaSuccess,
         message: result,
       ));
     } catch (e) {
       emit(state.copyWith(
-        status: CompanyProfileStatus.addUpdateSocialMediaFailure,
+        status: CompanyProfileStatus.updateSocialMediaFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

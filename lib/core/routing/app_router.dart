@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../company_features/company_bottom_nav_bar_view.dart';
 import '../../company_features/company_profile/data/model/company_model.dart';
-import '../../company_features/company_profile/data/model/social_media_model.dart';
 import '../../company_features/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
-import '../../company_features/company_profile/presentation/views/add_update_social_media_view.dart';
 import '../../company_features/company_profile/presentation/views/company_add_employee_view.dart';
 import '../../company_features/company_profile/presentation/views/company_employees_view.dart';
 import '../../company_features/company_profile/presentation/views/company_profile_display_view.dart';
@@ -17,9 +15,8 @@ import '../../freelancer_features/freelancer_profile/data/model/freelancer_model
 import '../../freelancer_features/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import '../../freelancer_features/freelancer_profile/presentation/views/freelancer_profile_display_view.dart';
 import '../../freelancer_features/freelancer_profile/presentation/views/update_freelancer_profile_tables_view.dart';
-import '../../freelancer_features/freelancer_profile/presentation/views/update_freelancer_social_media_view.dart';
+import '../../shared_features/shared_views/views/update_social_media_view.dart';
 import '../../freelancer_features/freelancer_setting/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
-import '../../shared_features/settings/presentation/views/change_password_view.dart';
 import '../../freelancer_features/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
 import '../../shared_features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
 import '../../shared_features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
@@ -35,6 +32,7 @@ import '../../shared_features/projects/presentation/views/company_project_detail
 import '../../shared_features/projects/presentation/views/company_project_workspace_view.dart';
 import '../../shared_features/projects/presentation/views/freelancer_project_details_view.dart';
 import '../../shared_features/projects/presentation/views/freelancer_project_workspace_view.dart';
+import '../../shared_features/settings/presentation/views/change_password_view.dart';
 import '../../shared_features/settings/presentation/views/feedback_view.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
@@ -123,14 +121,6 @@ class AppRouter {
             child: UpdateCompanyProfileView(companyModel: comanyModel),
           ),
         );
-      case Routes.addUpdateSocialMediaViewRoute:
-        final socialMedia = settings.arguments as List<SocialMediaModel>;
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => CompanyProfileCubit(getIt()),
-            child: AddUpdateSocialMediaView(socialMedia: socialMedia),
-          ),
-        );
       case Routes.companyEmployeesViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -158,12 +148,12 @@ class AppRouter {
             child: AddOfferView(projectId: id),
           ),
         );
-      case Routes.updateFreelancerSocialMediaViewRoute:
-        final socialMedia = settings.arguments as List<SocialMediaModel>;
+      case Routes.updateSocialMediaViewRoute:
+        final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => FreelancerProfileCubit(getIt()),
-            child: UpdateFreelancerSocialMediaView(socialList: socialMedia),
+          builder: (_) => UpdateSocialMediaView(
+            socialList: data['socialMedia'],
+            isFreelancer: data['isFreelancer'],
           ),
         );
       case Routes.changePasswordViewRoute:

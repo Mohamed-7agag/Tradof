@@ -59,9 +59,7 @@ class FreelancerSettingSection2 extends StatelessWidget {
               icon: HugeIcons.strokeRoundedLogin01,
               color: Colors.red,
             ),
-            onTap: () {
-              showLogoutDialog(context);
-            },
+            onTap: () => showLogoutDialog(context),
           )
         ],
       ),

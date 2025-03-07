@@ -3,22 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../core/helpers/spacing.dart';
-import '../../../../core/utils/widgets/custom_app_bar.dart';
-import '../../../../company_features/company_profile/data/model/social_media_model.dart';
-import '../../../../company_features/company_profile/presentation/widgets/social_media_item.dart';
+import '../../../company_features/company_profile/data/model/social_media_model.dart';
+import '../widgets/update_company_social_media_button.dart';
+import '../../../company_features/company_profile/presentation/widgets/social_media_item.dart';
+import '../../../core/helpers/spacing.dart';
+import '../../../core/utils/widgets/custom_app_bar.dart';
 import '../widgets/update_freelancer_social_media_button.dart';
 
-class UpdateFreelancerSocialMediaView extends StatefulWidget {
-  const UpdateFreelancerSocialMediaView({required this.socialList, super.key});
+class UpdateSocialMediaView extends StatefulWidget {
+  const UpdateSocialMediaView({
+    required this.socialList,
+    required this.isFreelancer,
+    super.key,
+  });
   final List<SocialMediaModel> socialList;
+  final bool isFreelancer;
   @override
-  State<UpdateFreelancerSocialMediaView> createState() =>
-      _UpdateFreelancerSocialMediaViewState();
+  State<UpdateSocialMediaView> createState() => _UpdateSocialMediaViewState();
 }
 
-class _UpdateFreelancerSocialMediaViewState
-    extends State<UpdateFreelancerSocialMediaView> {
+class _UpdateSocialMediaViewState extends State<UpdateSocialMediaView> {
   late TextEditingController facebookController;
   late TextEditingController linkedinController;
   late TextEditingController gmailController;
@@ -107,12 +111,19 @@ class _UpdateFreelancerSocialMediaViewState
                   SlideInUp(
                     from: 400,
                     delay: const Duration(milliseconds: 400),
-                    child: UpdateFreelancerSocialMediaButton(
-                      facebookController: facebookController,
-                      linkedinController: linkedinController,
-                      gmailController: gmailController,
-                      githubController: githubController,
-                    ),
+                    child: widget.isFreelancer
+                        ? UpdateFreelancerSocialMediaButton(
+                            facebookController: facebookController,
+                            linkedinController: linkedinController,
+                            gmailController: gmailController,
+                            githubController: githubController,
+                          )
+                        : UpdateCompanySocialMediaButton(
+                            facebookController: facebookController,
+                            linkedinController: linkedinController,
+                            gmailController: gmailController,
+                            githubController: githubController,
+                          ),
                   ),
                   verticalSpace(20),
                 ],

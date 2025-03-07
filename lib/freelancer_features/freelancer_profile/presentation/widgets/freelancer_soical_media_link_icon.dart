@@ -27,22 +27,27 @@ class FreelancerSocialMediaLinkIcon extends StatelessWidget {
       onLongPress: () async {
         if (isForDisplay) return;
         final result = await context.pushNamed(
-          Routes.updateFreelancerSocialMediaViewRoute,
-          arguments: socialMedia,
+          Routes.updateSocialMediaViewRoute,
+          arguments: {
+            'socialMedia': socialMedia,
+            'isFreelancer': true,
+          },
         );
         if (result == true && context.mounted) {
           context.read<FreelancerProfileCubit>().getFreelancerProfile();
         }
       },
       onTap: () async {
-        
         if (link != null) {
           customUrlLauncher(context, link!);
         } else {
           if (isForDisplay) return;
           final result = await context.pushNamed(
-            Routes.updateFreelancerSocialMediaViewRoute,
-            arguments: socialMedia,
+            Routes.updateSocialMediaViewRoute,
+            arguments: {
+              'socialMedia': socialMedia,
+              'isFreelancer': true,
+            },
           );
           if (result == true && context.mounted) {
             context.read<FreelancerProfileCubit>().getFreelancerProfile();
