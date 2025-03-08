@@ -53,10 +53,11 @@ class AddOfferButton extends StatelessWidget {
       errorToast(context, 'Error', 'Please Enter Offer Price');
     } else {
       context.read<OfferCubit>().addOffer(
-          projectId,
-          offerDetailsController.text.trim(),
-          int.parse(daysController.text.trim()),
-          files: context.read<FileCubit>().state);
+            projectId,
+            offerDetailsController.text.trim(),
+            int.parse(daysController.text.trim()),
+            files: context.read<FileCubit>().state,
+          );
     }
   }
 }

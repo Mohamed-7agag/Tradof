@@ -55,8 +55,10 @@ class _SelectOfferBudgetState extends State<SelectOfferBudget> {
                 color: AppColors.darkGrey,
               ),
             ),
-            Text("${selectedBudget.toInt()}\$",
-                style: AppStyle.poppinsMedium14),
+            Text(
+              "${selectedBudget.ceil()}\$",
+              style: AppStyle.poppinsMedium14,
+            ),
             Text(
               "5000\$",
               style: AppStyle.robotoRegular12.copyWith(

@@ -21,7 +21,7 @@ class AddOfferRequestModel extends Equatable {
       'offerPrice': offerPrice,
       'projectId': projectId,
       'proposalDescription': proposalDescription,
-      'days': days,
+      'Days': days,
       'proposalAttachments': proposalAttachments,
     };
   }

@@ -70,7 +70,7 @@ class ProjectModel extends Equatable {
       companyId: json['companyId'],
       firstName: json['firstName'],
       lastName: json['lastName'],
-      jobTitle: json['jopTitle'],
+      jobTitle: json['jobTitle'],
       profileImageUrl: json['profileImageUrl'],
     );
   }

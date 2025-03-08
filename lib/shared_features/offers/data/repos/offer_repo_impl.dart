@@ -10,8 +10,9 @@ class OfferRepoImpl implements OfferRepo {
   @override
   Future<String> addOffer(AddOfferRequestModel model) async {
     return await apiServices.post(
-      EndPoint.addOffer,
+      EndPoint.offer,
       data: model.toJson(),
+      isFormData: true,
     );
   }
 

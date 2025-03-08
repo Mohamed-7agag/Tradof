@@ -14,13 +14,12 @@ class CreateAccountCurveWithImage extends StatelessWidget {
       clipper: CurveClipper(),
       child: Container(
         alignment: Alignment.center,
-        height: 325.h,
+        height: 290.h,
         width: 1.sw,
         decoration: const BoxDecoration(
           color: AppColors.background,
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(flex: 4),
             Text(
