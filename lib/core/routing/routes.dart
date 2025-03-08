@@ -39,4 +39,5 @@ abstract class Routes {
 
   static const String changePasswordViewRoute = "/changePasswordView";
   static const String feedbackViewRoute = "/feedbackView";
+  static const String updateOfferViewRoute = "/updateOfferView";
 }
