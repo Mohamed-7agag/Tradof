@@ -15,6 +15,7 @@ import '../../freelancer_features/freelancer_profile/data/model/freelancer_model
 import '../../freelancer_features/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import '../../freelancer_features/freelancer_profile/presentation/views/freelancer_profile_display_view.dart';
 import '../../freelancer_features/freelancer_profile/presentation/views/update_freelancer_profile_tables_view.dart';
+import '../../shared_features/offers/presentation/views/update_offer_view.dart';
 import '../../shared_features/shared_views/views/update_social_media_view.dart';
 import '../../freelancer_features/freelancer_setting/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
 import '../../freelancer_features/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
@@ -233,6 +234,10 @@ class AppRouter {
       case Routes.feedbackViewRoute:
         return MaterialPageRoute(
           builder: (_) => const FeedbackView(),
+        );
+      case Routes.updateOfferViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => const UpdateOfferView(),
         );
       default:
         return null;

@@ -9,6 +9,7 @@ import '../core/utils/widgets/custom_animated_lazy_indexed_stack.dart';
 import '../core/utils/widgets/custom_bottom_nav_bar.dart';
 import '../core/utils/widgets/custom_failure_widget.dart';
 import '../core/utils/widgets/custom_loading_widget.dart';
+import '../shared_features/offers/presentation/views/get_all_offers_view.dart';
 import 'freelancer_dashboard/presentation/views/freelance_dashbord_view.dart';
 import 'freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import 'freelancer_profile/presentation/views/freelancer_profile_view.dart';
@@ -36,7 +37,7 @@ class _FreelancerBottomNavBarViewState
   List<Widget> _buildIndexedStackChildren(FreelancerProfileState state) {
     return [
       FreelancerDashboardView(freelancerModel: state.freelancerModel!),
-      FreelancerDashboardView(freelancerModel: state.freelancerModel!),
+      const GetAllOffersView(),
       FreelancerProfileView(freelancerModel: state.freelancerModel!),
       FreelancerDashboardView(freelancerModel: state.freelancerModel!),
       FreelancerSettingView(freelancerModel: state.freelancerModel!),
