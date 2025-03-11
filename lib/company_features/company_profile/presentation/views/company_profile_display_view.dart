@@ -6,11 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
+import '../../../../freelancer_features/freelancer_profile/presentation/widgets/social_media_section.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 import '../widgets/company_profile_appbar.dart';
 import '../widgets/company_profile_tables.dart';
 import '../widgets/company_rating_and_reviews.dart';
-import '../widgets/company_social_links.dart';
 
 class CompanyProfileDisplayView extends StatelessWidget {
   const CompanyProfileDisplayView({super.key});
@@ -36,7 +36,11 @@ class CompanyProfileDisplayView extends StatelessWidget {
                             companyModel: state.companyModel!,
                           ),
                           verticalSpace(20),
-                          CompanySocialLinks(companyModel: state.companyModel!),
+                          SocialMediaSection(
+                            userId: state.companyModel!.id,
+                            socialMedia: state.companyModel!.socialMedia,
+                            isFreeLancer: false,
+                          ),
                           verticalSpace(30),
                           SlideInUp(
                             from: 150,

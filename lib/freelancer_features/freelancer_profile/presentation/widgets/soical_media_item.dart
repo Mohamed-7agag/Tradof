@@ -1,57 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../company_features/company_profile/data/model/social_media_model.dart';
+import '../../../../company_features/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import '../../../../core/helpers/custom_url_launcher.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
-import '../../data/model/social_media_model.dart';
-import '../logic/company_profile_cubit/company_profile_cubit.dart';
+import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 
-class CompanySocialMediaLinkIcon extends StatelessWidget {
-  const CompanySocialMediaLinkIcon({
+class SocialMediaItem extends StatelessWidget {
+  const SocialMediaItem({
     required this.image,
     required this.socialMedia,
     required this.link,
     required this.isForDisplay,
+    required this.isFreelancer,
     super.key,
   });
   final String image;
   final List<SocialMediaModel> socialMedia;
   final String? link;
   final bool isForDisplay;
-
+  final bool? isFreelancer;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () async {
         if (isForDisplay) return;
-        final result = await context.pushNamed(
-          Routes.updateSocialMediaViewRoute,
-          arguments: {
-            'socialMedia': socialMedia,
-            'isFreelancer': false,
-          },
-        );
-        if (result == true && context.mounted) {
-          context.read<CompanyProfileCubit>().getCompanyProfile();
-        }
+        await _handleLinkPress(context);
       },
       onTap: () async {
         if (link != null) {
           customUrlLauncher(context, link!);
         } else {
           if (isForDisplay) return;
-          final result = await context.pushNamed(
-            Routes.updateSocialMediaViewRoute,
-            arguments: {
-              'socialMedia': socialMedia,
-              'isFreelancer': false,
-            },
-          );
-          if (result == true && context.mounted) {
-            context.read<CompanyProfileCubit>().getCompanyProfile();
-          }
+          await _handleLinkPress(context);
         }
       },
       child: Container(
@@ -60,11 +44,25 @@ class CompanySocialMediaLinkIcon extends StatelessWidget {
           color: AppColors.white,
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
-        child: Image.asset(
-          image,
-          height: 32,
-        ),
+        child: Image.asset(image, height: 32),
       ),
     );
+  }
+
+  Future<void> _handleLinkPress(BuildContext context) async {
+    final result = await context.pushNamed(
+      Routes.updateSocialMediaViewRoute,
+      arguments: {
+        'socialMedia': socialMedia,
+        'isFreelancer': isFreelancer,
+      },
+    );
+    if (result == true && context.mounted) {
+      if (isFreelancer == true) {
+        context.read<FreelancerProfileCubit>().getFreelancerProfile();
+      } else {
+        context.read<CompanyProfileCubit>().getCompanyProfile();
+      }
+    }
   }
 }

@@ -1,32 +1,38 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../company_features/company_profile/data/model/social_media_model.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/utils/app_constants.dart';
-import '../../data/model/freelancer_model.dart';
-import 'freelancer_soical_media_link_icon.dart';
+import 'soical_media_item.dart';
 
-class FreelancerSocialMedia extends StatefulWidget {
-  const FreelancerSocialMedia({required this.freelancerModel, super.key});
-  final FreelancerModel freelancerModel;
-
+class SocialMediaSection extends StatefulWidget {
+  const SocialMediaSection({
+    required this.userId,
+    required this.socialMedia,
+    required this.isFreeLancer,
+    super.key,
+  });
+  final String userId;
+  final List<SocialMediaModel> socialMedia;
+  final bool isFreeLancer;
   @override
-  State<FreelancerSocialMedia> createState() => _FreelancerSocialMediaState();
+  State<SocialMediaSection> createState() => _SocialMediaSectionState();
 }
 
-class _FreelancerSocialMediaState extends State<FreelancerSocialMedia> {
+class _SocialMediaSectionState extends State<SocialMediaSection> {
   String? facebookLink, linkedinLink, githubLink, gmailLink;
   bool isForDisplay = false;
 
   @override
   void initState() {
     assignLinks();
-    isForDisplay = widget.freelancerModel.userId != AppConstants.kUserId;
+    isForDisplay = widget.userId != AppConstants.kUserId;
     super.initState();
   }
 
   void assignLinks() {
-    for (var element in widget.freelancerModel.socialMedias) {
+    for (var element in widget.socialMedia) {
       switch (element.platformType) {
         case 'Facebook':
           facebookLink = element.link;
@@ -97,11 +103,12 @@ class _FreelancerSocialMediaState extends State<FreelancerSocialMedia> {
       child: FadeInLeft(
         from: 400,
         delay: delay,
-        child: FreelancerSocialMediaLinkIcon(
+        child: SocialMediaItem(
           image: image,
-          socialMedia: widget.freelancerModel.socialMedias,
+          socialMedia: widget.socialMedia,
           link: link,
           isForDisplay: isForDisplay,
+          isFreelancer: widget.isFreeLancer,
         ),
       ),
     );

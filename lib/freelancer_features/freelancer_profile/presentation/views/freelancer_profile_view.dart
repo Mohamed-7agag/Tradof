@@ -8,7 +8,7 @@ import '../widgets/freelancer_cv_section.dart';
 import '../widgets/freelancer_profile_app_bar.dart';
 import '../widgets/freelancer_profile_tables.dart';
 import '../widgets/freelancer_rating_and_review.dart';
-import '../widgets/freelancer_social_media.dart';
+import '../widgets/social_media_section.dart';
 
 class FreelancerProfileView extends StatelessWidget {
   const FreelancerProfileView({required this.freelancerModel, super.key});
@@ -27,7 +27,11 @@ class FreelancerProfileView extends StatelessWidget {
                   verticalSpace(16),
                   FreelancerRatingAndReview(freelancerModel: freelancerModel),
                   verticalSpace(20),
-                  FreelancerSocialMedia(freelancerModel: freelancerModel),
+                  SocialMediaSection(
+                    userId: freelancerModel.userId,
+                    socialMedia: freelancerModel.socialMedias,
+                    isFreeLancer: true,
+                  ),
                   verticalSpace(30),
                   FreelancerProfileTables(freelancerModel: freelancerModel),
                   verticalSpace(26),
