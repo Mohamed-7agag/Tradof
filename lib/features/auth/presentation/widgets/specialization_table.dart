@@ -9,7 +9,7 @@ import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
-import '../logic/tables_cubit/tables_cubit.dart';
+import '../../../../core/utils/logic/tables_cubit/tables_cubit.dart';
 
 class SpecializationTable extends StatelessWidget {
   const SpecializationTable({super.key, this.darkColors = false});

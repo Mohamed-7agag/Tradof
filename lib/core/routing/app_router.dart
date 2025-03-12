@@ -21,7 +21,7 @@ import '../../features/profile/freelancer_profile/presentation/views/update_free
 import '../../features/offers/presentation/views/update_offer_view.dart';
 import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
 import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
-import '../../features/auth/presentation/logic/tables_cubit/tables_cubit.dart';
+import '../utils/logic/tables_cubit/tables_cubit.dart';
 import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';

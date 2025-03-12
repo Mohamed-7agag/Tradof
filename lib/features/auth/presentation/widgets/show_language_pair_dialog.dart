@@ -10,7 +10,7 @@ import '../../../../core/utils/models/language_pair_model.dart';
 import '../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
-import '../logic/tables_cubit/tables_cubit.dart';
+import '../../../../core/utils/logic/tables_cubit/tables_cubit.dart';
 import 'language_drop_down.dart';
 
 showLanguagePairDialog(BuildContext context) {

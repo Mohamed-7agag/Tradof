@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
-import '../logic/tables_cubit/tables_cubit.dart';
+import '../../../../core/utils/logic/tables_cubit/tables_cubit.dart';
 import '../widgets/company_registeration_button.dart';
 import '../widgets/country_drop_down_section.dart';
 import '../widgets/create_account_curve_with_image.dart';

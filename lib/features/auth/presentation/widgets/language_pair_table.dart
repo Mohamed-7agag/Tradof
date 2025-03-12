@@ -7,7 +7,7 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
-import '../logic/tables_cubit/tables_cubit.dart';
+import '../../../../core/utils/logic/tables_cubit/tables_cubit.dart';
 import 'show_language_pair_dialog.dart';
 
 class LanguagePairTable extends StatelessWidget {

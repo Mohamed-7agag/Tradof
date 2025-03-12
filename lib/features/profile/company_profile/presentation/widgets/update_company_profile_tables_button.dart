@@ -7,7 +7,7 @@ import '../../../../../core/utils/widgets/custom_button.dart';
 import '../../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../../core/utils/widgets/custom_toastification.dart';
 import '../../../../../core/utils/models/specialization_model.dart';
-import '../../../../auth/presentation/logic/tables_cubit/tables_cubit.dart';
+import '../../../../../core/utils/logic/tables_cubit/tables_cubit.dart';
 import '../../data/model/company_model.dart';
 import '../logic/company_profile_cubit/company_profile_cubit.dart';
 

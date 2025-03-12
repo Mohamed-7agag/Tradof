@@ -8,7 +8,7 @@ import '../../../../../core/utils/widgets/custom_button.dart';
 import '../../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../../core/utils/widgets/custom_toastification.dart';
 import '../../../../../core/utils/models/specialization_model.dart';
-import '../../../../auth/presentation/logic/tables_cubit/tables_cubit.dart';
+import '../../../../../core/utils/logic/tables_cubit/tables_cubit.dart';
 import '../../data/model/freelancer_langauge_pair_model.dart';
 import '../../data/model/freelancer_model.dart';
 import '../logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
