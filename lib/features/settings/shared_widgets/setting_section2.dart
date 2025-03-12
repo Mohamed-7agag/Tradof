@@ -2,14 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../../core/helpers/extensions.dart';
-import '../../../../../core/routing/routes.dart';
-import '../../../../../core/theming/app_colors.dart';
-import 'logout_dialog.dart';
+import '../../../core/theming/app_colors.dart';
 import 'setting_item.dart';
 
-class CompanySettingSection2 extends StatelessWidget {
-  const CompanySettingSection2({super.key});
+class SettingSection2 extends StatelessWidget {
+  const SettingSection2({
+    required this.onChangePasswordTap,
+    required this.onTechnicalSupportTap,
+    required this.onGiveUsFeedbackTap,
+    required this.onLogoutTap,
+    super.key,
+  });
+  final VoidCallback onChangePasswordTap;
+  final VoidCallback onTechnicalSupportTap;
+  final VoidCallback onGiveUsFeedbackTap;
+  final VoidCallback onLogoutTap;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,12 +35,7 @@ class CompanySettingSection2 extends StatelessWidget {
               color: Colors.red,
               size: 26,
             ),
-            onTap: () {
-              context.pushNamed(
-                Routes.changePasswordViewRoute,
-                arguments: false,
-              );
-            },
+            onTap: onChangePasswordTap,
           ),
           const Divider(color: AppColors.cardDarkColor),
           SettingItem(
@@ -41,7 +44,7 @@ class CompanySettingSection2 extends StatelessWidget {
               icon: HugeIcons.strokeRoundedCustomerService02,
               color: Colors.teal,
             ),
-            onTap: () {},
+            onTap: onTechnicalSupportTap,
           ),
           const Divider(color: AppColors.cardDarkColor),
           SettingItem(
@@ -50,9 +53,7 @@ class CompanySettingSection2 extends StatelessWidget {
               icon: HugeIcons.strokeRoundedComment01,
               color: Colors.blue[600]!,
             ),
-            onTap: () {
-              context.pushNamed(Routes.feedbackViewRoute);
-            },
+            onTap: onGiveUsFeedbackTap,
           ),
           const Divider(color: AppColors.cardDarkColor),
           SettingItem(
@@ -61,7 +62,7 @@ class CompanySettingSection2 extends StatelessWidget {
               icon: HugeIcons.strokeRoundedLogin01,
               color: Colors.red,
             ),
-            onTap: () => showLogoutDialog(context),
+            onTap: onLogoutTap,
           ),
         ],
       ),

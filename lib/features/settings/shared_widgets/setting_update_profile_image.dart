@@ -9,19 +9,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../../core/theming/app_colors.dart';
-import '../logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
+import '../../../core/theming/app_colors.dart';
+import '../company_setting/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
 
-class UpdateFreelancerProfileImage extends StatefulWidget {
-  const UpdateFreelancerProfileImage({super.key, this.imageUrl});
+class SettingUpdateProfileImage extends StatefulWidget {
+  const SettingUpdateProfileImage({super.key, this.imageUrl});
   final String? imageUrl;
   @override
-  State<UpdateFreelancerProfileImage> createState() =>
-      _UpdateFreelancerProfileImageState();
+  State<SettingUpdateProfileImage> createState() =>
+      _SettingUpdateProfileImageState();
 }
 
-class _UpdateFreelancerProfileImageState
-    extends State<UpdateFreelancerProfileImage> {
+class _SettingUpdateProfileImageState extends State<SettingUpdateProfileImage> {
   File? _image;
 
   Future<void> _pickImageFromGallery() async {
@@ -32,7 +31,7 @@ class _UpdateFreelancerProfileImageState
         setState(() {
           _image = File(image.path);
           context
-              .read<FreelancerSettingCubit>()
+              .read<CompanySettingCubit>()
               .setImageProfileAndCountryId(image: _image);
         });
       }
@@ -77,9 +76,9 @@ class _UpdateFreelancerProfileImageState
         ? ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(50)),
             child: Image.file(
+              _image!,
               width: 88,
               height: 88,
-              _image!,
               fit: BoxFit.cover,
             ),
           )

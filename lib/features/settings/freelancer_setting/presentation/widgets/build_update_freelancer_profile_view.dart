@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../company_setting/presentation/widgets/country_drop_down_edit.dart';
+import '../../../shared_widgets/country_drop_down_edit.dart';
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../../core/utils/widgets/custom_text_field.dart';
 import '../../../../auth/presentation/widgets/phone_number_text_field.dart';
 import '../../../../profile/freelancer_profile/data/model/freelancer_model.dart';
+import '../../../shared_widgets/setting_update_profile_image.dart';
 import '../logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
 import 'update_freelancer_profile_button.dart';
-import 'update_freelancer_profile_image.dart';
 
 class BuildUpdateFreelancerProfileView extends StatefulWidget {
   const BuildUpdateFreelancerProfileView({
@@ -64,7 +64,7 @@ class _BuildUpdateFreelancerProfileViewState
             child: Column(
               children: [
                 verticalSpace(30),
-                UpdateFreelancerProfileImage(
+                SettingUpdateProfileImage(
                   imageUrl: widget.freelancerModel.profileImageUrl,
                 ),
                 verticalSpace(50),

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/theming/app_colors.dart';
-import '../../../../../core/theming/app_style.dart';
+import '../../../core/theming/app_colors.dart';
+import '../../../core/theming/app_style.dart';
 
 class SettingItem extends StatelessWidget {
   const SettingItem({
@@ -21,7 +20,7 @@ class SettingItem extends StatelessWidget {
       onTap: onTap,
       contentPadding: const EdgeInsets.only(right: 6),
       leading: CircleAvatar(
-        radius: 21.r,
+        radius: 22,
         backgroundColor: AppColors.white,
         child: icon,
       ),

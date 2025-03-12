@@ -8,10 +8,10 @@ import '../../../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../../../core/utils/widgets/custom_text_field.dart';
 import '../../../../auth/presentation/widgets/phone_number_text_field.dart';
 import '../../../../profile/company_profile/data/model/company_model.dart';
+import '../../../shared_widgets/setting_update_profile_image.dart';
 import '../logic/company_setting_cubit/company_setting_cubit.dart';
-import 'country_drop_down_edit.dart';
+import '../../../shared_widgets/country_drop_down_edit.dart';
 import 'update_company_profile_button.dart';
-import 'update_company_profile_image.dart';
 
 class BuildUpdateCompanyProfileView extends StatefulWidget {
   const BuildUpdateCompanyProfileView({
@@ -72,7 +72,7 @@ class _BuildUpdateCompanyProfileViewState
             child: Column(
               children: [
                 verticalSpace(30),
-                UpdateCompanyProfileImage(
+                SettingUpdateProfileImage(
                   imageUrl: widget.companyModel.profileImageUrl,
                 ),
                 verticalSpace(50),

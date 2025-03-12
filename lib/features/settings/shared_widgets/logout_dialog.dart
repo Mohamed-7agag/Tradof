@@ -1,11 +1,11 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/cache/cache_helper.dart';
-import '../../../../../core/helpers/extensions.dart';
-import '../../../../../core/routing/routes.dart';
-import '../../../../../core/theming/app_style.dart';
-import '../../../../../core/utils/app_constants.dart';
+import '../../../core/cache/cache_helper.dart';
+import '../../../core/helpers/extensions.dart';
+import '../../../core/routing/routes.dart';
+import '../../../core/theming/app_style.dart';
+import '../../../core/utils/app_constants.dart';
 
 Future<void> showLogoutDialog(BuildContext context) async {
     AwesomeDialog(

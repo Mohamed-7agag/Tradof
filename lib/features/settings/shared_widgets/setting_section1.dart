@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../../core/helpers/extensions.dart';
-import '../../../../../core/routing/routes.dart';
-import '../../../../../core/theming/app_colors.dart';
-import '../../../../profile/company_profile/data/model/company_model.dart';
-import '../../../../profile/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
+import '../../../core/theming/app_colors.dart';
 import 'setting_item.dart';
 
-class CompanySettingsSection1 extends StatelessWidget {
-  const CompanySettingsSection1({required this.companyModel, super.key});
-  final CompanyModel companyModel;
+class SettingsSection1 extends StatelessWidget {
+  const SettingsSection1({
+    required this.onPersonalInfoTap,
+    required this.onNotificationTap,
+    required this.onCalenderTap,
+    super.key,
+  });
+  final VoidCallback onPersonalInfoTap;
+  final VoidCallback onNotificationTap;
+  final VoidCallback onCalenderTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,15 +32,7 @@ class CompanySettingsSection1 extends StatelessWidget {
               color: Colors.green,
               size: 26,
             ),
-            onTap: () async {
-              final result = await context.pushNamed(
-                Routes.updateCompanyProfileViewRoute,
-                arguments: companyModel,
-              );
-              if (result == true && context.mounted) {
-                context.read<CompanyProfileCubit>().getCompanyProfile();
-              }
-            },
+            onTap: onPersonalInfoTap,
           ),
           const Divider(color: AppColors.cardDarkColor),
           SettingItem(
@@ -47,7 +41,7 @@ class CompanySettingsSection1 extends StatelessWidget {
               icon: HugeIcons.strokeRoundedNotification03,
               color: AppColors.primary,
             ),
-            onTap: () {},
+            onTap: onNotificationTap,
           ),
           const Divider(color: AppColors.cardDarkColor),
           SettingItem(
@@ -56,7 +50,7 @@ class CompanySettingsSection1 extends StatelessWidget {
               icon: HugeIcons.strokeRoundedCalendar02,
               color: Colors.amber,
             ),
-            onTap: () {},
+            onTap: onCalenderTap,
           ),
         ],
       ),

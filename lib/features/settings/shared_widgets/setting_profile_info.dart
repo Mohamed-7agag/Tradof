@@ -3,17 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../../core/helpers/extensions.dart';
-import '../../../../../core/theming/app_colors.dart';
-import '../../../../../core/theming/app_style.dart';
-import '../../../../profile/freelancer_profile/data/model/freelancer_model.dart';
+import '../../../core/helpers/extensions.dart';
+import '../../../core/theming/app_colors.dart';
+import '../../../core/theming/app_style.dart';
 
-class FreelancerSettingProfileInfo extends StatelessWidget {
-  const FreelancerSettingProfileInfo({
-    required this.freelancerModel,
+class SettingProfileInfo extends StatelessWidget {
+  const SettingProfileInfo({
+    required this.userName,
+    required this.email,
+    required this.role,
     super.key,
+    this.profileImageUrl,
   });
-  final FreelancerModel freelancerModel;
+  final String userName;
+  final String email;
+  final String? profileImageUrl;
+  final String role;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,12 +36,12 @@ class FreelancerSettingProfileInfo extends StatelessWidget {
         leading: CircleAvatar(
           radius: 26,
           backgroundColor: AppColors.cardDarkColor,
-          backgroundImage: freelancerModel.profileImageUrl.isNullOrEmpty()
+          backgroundImage: profileImageUrl.isNullOrEmpty()
               ? null
               : CachedNetworkImageProvider(
-                  freelancerModel.profileImageUrl!,
+                  profileImageUrl!,
                 ),
-          child: freelancerModel.profileImageUrl.isNullOrEmpty()
+          child: profileImageUrl.isNullOrEmpty()
               ? const HugeIcon(
                   icon: HugeIcons.strokeRoundedUser,
                   color: AppColors.primary,
@@ -43,18 +49,18 @@ class FreelancerSettingProfileInfo extends StatelessWidget {
               : null,
         ),
         title: Text(
-          '${freelancerModel.firstName} ${freelancerModel.lastName}',
+          userName,
           style: AppStyle.robotoCondensedRegular15,
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              freelancerModel.email,
+              email,
               style: AppStyle.robotoCondensedRegular12,
             ),
             Text(
-              'Freelancer',
+              role,
               style: AppStyle.robotoRegular10,
             ),
           ],

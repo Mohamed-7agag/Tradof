@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/theming/app_colors.dart';
-import '../../../../../core/theming/app_style.dart';
+import '../../../core/helpers/spacing.dart';
+import '../../../core/theming/app_colors.dart';
+import '../../../core/theming/app_style.dart';
 
 class Subscriptionplan extends StatelessWidget {
   const Subscriptionplan({
