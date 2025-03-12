@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hugeicons/hugeicons.dart';
+
+import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/routing/routes.dart';
+import '../../../../../core/theming/app_colors.dart';
+import '../../../../../core/utils/widgets/custom_app_bar.dart';
+import '../../../../../core/utils/widgets/custom_failure_widget.dart';
+import '../../../../../core/utils/widgets/custom_loading_widget.dart';
+import '../logic/company_profile_cubit/company_profile_cubit.dart';
+import '../widgets/company_employee_item.dart';
+
+class CompanyEmployeesView extends StatelessWidget {
+  const CompanyEmployeesView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: customAppbar(
+        title: 'Employees',
+        actionIcon: HugeIcons.strokeRoundedUserGroup,
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
+        child: const HugeIcon(
+          icon: HugeIcons.strokeRoundedUserAdd01,
+          color: AppColors.white,
+          size: 26,
+        ),
+        onPressed: () async {
+          final result = await context.pushNamed(
+            Routes.companyAddEmployeeViewRoute,
+          );
+          if (result == true && context.mounted) {
+            context.read<CompanyProfileCubit>().getCompanyEmployees();
+          }
+        },
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: BlocBuilder<CompanyProfileCubit, CompanyProfileState>(
+          buildWhen: (previous, current) {
+            return current.status.isGetCompanyEmployeesFailure ||
+                current.status.isGetCompanyEmployeesSuccess ||
+                current.status.isGetCompanyEmployeesLoading;
+          },
+          builder: (context, state) {
+            if (state.status.isGetCompanyEmployeesSuccess) {
+              return ListView.builder(
+                itemCount: state.companyEmployees.length,
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                itemBuilder: (BuildContext context, int index) {
+                  return CompanyEmployeeItem(
+                    employeeModel: state.companyEmployees[
+                        state.companyEmployees.length - index - 1],
+                  );
+                },
+              );
+            } else if (state.status.isGetCompanyEmployeesFailure) {
+              return CustomFailureWidget(text: state.errorMessage,onRetry: () {
+                context.read<CompanyProfileCubit>().getCompanyEmployees();
+              },);
+            }
+            return const CustomLoadingWidget();
+          },
+        ),
+      ),
+    );
+  }
+}
