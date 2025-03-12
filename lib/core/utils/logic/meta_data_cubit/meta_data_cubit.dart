@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../shared_features/auth/data/model/specialization_model.dart';
+import '../../models/specialization_model.dart';
 import '../../../errors/exception.dart';
 import '../../models/country_model.dart';
 import '../../models/language_model.dart';

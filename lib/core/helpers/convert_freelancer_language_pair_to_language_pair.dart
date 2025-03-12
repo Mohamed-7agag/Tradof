@@ -1,4 +1,4 @@
-import '../../freelancer_features/freelancer_profile/data/model/freelancer_langauge_pair_model.dart';
+import '../../features/profile/freelancer_profile/data/model/freelancer_langauge_pair_model.dart';
 import '../utils/models/language_model.dart';
 import '../utils/models/language_pair_model.dart';
 

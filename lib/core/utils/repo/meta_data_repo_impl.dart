@@ -1,4 +1,4 @@
-import '../../../shared_features/auth/data/model/specialization_model.dart';
+import '../models/specialization_model.dart';
 import '../../api/api_service.dart';
 import '../../api/end_points.dart';
 import '../models/country_model.dart';
