@@ -7,7 +7,7 @@ import '../../../../../../core/errors/exception.dart';
 import '../../../../../../core/utils/app_constants.dart';
 import '../../../../../../core/utils/widgets/upload_image_to_cloudinary.dart';
 import '../../../../../profile/company_profile/data/model/company_model.dart';
-import '../../../data/model/update_company_request_model.dart';
+import '../../../../model/update_company_request_model.dart';
 import '../../../data/repo/company_setting_repo.dart';
 
 part 'company_setting_state.dart';

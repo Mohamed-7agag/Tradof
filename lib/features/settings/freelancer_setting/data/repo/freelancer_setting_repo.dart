@@ -1,4 +1,4 @@
-import '../model/update_freelancer_request_model.dart';
+import '../../../model/update_freelancer_request_model.dart';
 
 abstract class FreelancerSettingRepo {
   Future<void> changeFreelancerPassword({

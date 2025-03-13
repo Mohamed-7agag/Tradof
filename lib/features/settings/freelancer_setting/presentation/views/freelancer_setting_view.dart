@@ -49,7 +49,9 @@ class FreelancerSettingView extends StatelessWidget {
                         await _onPersonalInfoTap(context);
                       },
                       onNotificationTap: () {},
-                      onCalenderTap: () {},
+                      onCalenderTap: () {
+                        context.pushNamed(Routes.calendarViewRoute);
+                      },
                     ),
                   ),
                   verticalSpace(20),

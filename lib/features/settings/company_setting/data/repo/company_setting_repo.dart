@@ -1,4 +1,4 @@
-import '../model/update_company_request_model.dart';
+import '../../../model/update_company_request_model.dart';
 
 abstract class CompanySettingRepo {
   Future<void> changeCompanyPassword({

@@ -1,7 +1,7 @@
 import '../../../../../core/api/api_service.dart';
 import '../../../../../core/api/end_points.dart';
 import '../../../../../core/utils/app_constants.dart';
-import '../model/update_freelancer_request_model.dart';
+import '../../../model/update_freelancer_request_model.dart';
 import 'freelancer_setting_repo.dart';
 
 class FreelancerSettingRepoImpl implements FreelancerSettingRepo {

@@ -1,44 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
+import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
+import '../../features/auth/presentation/views/create_account_page_view.dart';
+import '../../features/auth/presentation/views/forget_password_page_view.dart';
+import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/bottom_nav_bar/views/company_bottom_nav_bar_view.dart';
+import '../../features/bottom_nav_bar/views/freelancer_bottom_nav_bar_view.dart';
+import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
+import '../../features/offers/presentation/views/add_offer_view.dart';
+import '../../features/offers/presentation/views/update_offer_view.dart';
 import '../../features/profile/company_profile/data/model/company_model.dart';
 import '../../features/profile/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import '../../features/profile/company_profile/presentation/views/company_add_employee_view.dart';
 import '../../features/profile/company_profile/presentation/views/company_employees_view.dart';
 import '../../features/profile/company_profile/presentation/views/company_profile_display_view.dart';
 import '../../features/profile/company_profile/presentation/views/update_company_profile_tables_view.dart';
-import '../../features/settings/company_setting/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
-import '../../features/settings/company_setting/presentation/views/update_company_profile_view.dart';
-import '../../features/settings/freelancer_setting/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
-import '../../features/settings/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
-import '../../features/profile/shared_views/update_social_media_view.dart';
-import '../../features/bottom_nav_bar/views/freelancer_bottom_nav_bar_view.dart';
 import '../../features/profile/freelancer_profile/data/model/freelancer_model.dart';
 import '../../features/profile/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import '../../features/profile/freelancer_profile/presentation/views/freelancer_profile_display_view.dart';
 import '../../features/profile/freelancer_profile/presentation/views/update_freelancer_profile_tables_view.dart';
-import '../../features/offers/presentation/views/update_offer_view.dart';
-import '../../features/auth/presentation/logic/auth_cubit/auth_cubit.dart';
-import '../../features/auth/presentation/logic/registeration_cubit/registeration_cubit.dart';
-import '../utils/logic/tables_cubit/tables_cubit.dart';
-import '../../features/auth/presentation/views/create_account_page_view.dart';
-import '../../features/auth/presentation/views/forget_password_page_view.dart';
-import '../../features/auth/presentation/views/login_view.dart';
-import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
-import '../../features/offers/presentation/views/add_offer_view.dart';
+import '../../features/profile/shared_views/update_social_media_view.dart';
 import '../../features/projects/data/models/project_model.dart';
 import '../../features/projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../features/projects/presentation/views/company_project_details_view.dart';
 import '../../features/projects/presentation/views/company_project_workspace_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_workspace_view.dart';
+import '../../features/settings/company_setting/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
+import '../../features/settings/company_setting/presentation/views/update_company_profile_view.dart';
+import '../../features/settings/freelancer_setting/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
+import '../../features/settings/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
+import '../../features/settings/shared_views/calender_view.dart';
 import '../../features/settings/shared_views/change_password_view.dart';
 import '../../features/settings/shared_views/feedback_view.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../di/di.dart';
 import '../utils/app_constants.dart';
+import '../utils/logic/tables_cubit/tables_cubit.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -238,6 +239,10 @@ class AppRouter {
       case Routes.updateOfferViewRoute:
         return MaterialPageRoute(
           builder: (_) => const UpdateOfferView(),
+        );
+      case Routes.calendarViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => const CalenderView(),
         );
       default:
         return null;
