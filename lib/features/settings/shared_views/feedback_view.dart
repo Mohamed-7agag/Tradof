@@ -29,16 +29,16 @@ class FeedbackView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  verticalSpace(20),
+                  verticalSpace(30),
                   Text(
                     'What do you think of the issue search experience within Tradof projects',
                     style:
                         AppStyle.robotoRegular14.copyWith(color: Colors.grey),
                     textAlign: TextAlign.center,
                   ),
-                  verticalSpace(30),
+                  verticalSpace(50),
                   const FeedbackSwitcherSection(),
-                  verticalSpace(35),
+                  verticalSpace(50),
                   Text(
                     'What are the main reason for your rating',
                     style: AppStyle.robotoRegular12
@@ -48,22 +48,10 @@ class FeedbackView extends StatelessWidget {
                   ProjectTextField(
                     labelText: '',
                     controller: TextEditingController(),
-                    maxLines: 4,
-                  ),
-                  verticalSpace(40),
-                  Text(
-                    'If you have ideas to improve the experience, share with us.',
-                    style: AppStyle.robotoRegular12
-                        .copyWith(color: AppColors.primary),
-                  ),
-                  verticalSpace(10),
-                  ProjectTextField(
-                    labelText: '',
-                    controller: TextEditingController(),
-                    maxLines: 5,
+                    maxLines: 8,
                   ),
                   Expanded(child: verticalSpace(20)),
-                  CustomButton(text: 'Send', onPressed: () {}),
+                  CustomButton(text: 'Send Feedback', onPressed: () {}),
                   verticalSpace(20),
                 ],
               ),
@@ -74,6 +62,3 @@ class FeedbackView extends StatelessWidget {
     );
   }
 }
-
-
-

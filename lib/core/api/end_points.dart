@@ -1,5 +1,6 @@
 abstract class EndPoint {
   static const String baseUrl = 'http://tradof.runasp.net/api/';
+  static const String baseUrl2 = 'https://tradof-api.vercel.app/api/';
   // auth
   static const String login = 'auth/log-in';
   static const String registerFreelancer = 'auth/register-freelancer';
@@ -88,4 +89,5 @@ abstract class EndPoint {
   }
 
   static String offer = 'proposal';
+  static String feedback = 'feedback/';
 }

@@ -122,3 +122,39 @@ class TokenService {
     }
   }
 }
+
+// class NonAuthenticatedDioFactory {
+//   NonAuthenticatedDioFactory._();
+
+//   static Dio? _dio;
+
+//   // Get a non-authenticated Dio instance
+//   static Dio getDio() {
+//     _dio ??= _createDio();
+//     return _dio!;
+//   }
+
+//   // Helper method to create a basic Dio instance
+//   static Dio _createDio() {
+//     final dio = Dio();
+//     dio
+//       ..options.baseUrl = EndPoint.baseUrl2
+//       ..options.connectTimeout = const Duration(seconds: 45)
+//       ..options.receiveTimeout = const Duration(minutes: 10)
+//       ..options.contentType = 'application/json'
+//       ..options.headers = {'Accept': 'application/json'};
+//     _addLoggingInterceptor(dio);
+//     return dio;
+//   }
+
+//   // Add logging interceptor (optional)
+//   static void _addLoggingInterceptor(Dio dio) {
+//     dio.interceptors.add(
+//       PrettyDioLogger(
+//         requestBody: true,
+//         requestHeader: true,
+//         responseHeader: true,
+//       ),
+//     );
+//   }
+// }
