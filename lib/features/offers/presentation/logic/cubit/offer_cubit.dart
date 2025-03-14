@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/errors/exception.dart';
 import '../../../../../core/helpers/prepare_files.dart';
 import '../../../data/model/add_offer_request_model.dart';
+import '../../../data/model/offer_model.dart';
 import '../../../data/repos/offer_repo.dart';
 
 part 'offer_state.dart';
@@ -32,6 +33,7 @@ class OfferCubit extends Cubit<OfferState> {
       );
 
       final result = await _offerRepo.addOffer(offerModel);
+
       emit(state.copyWith(
         status: OfferStatus.addOfferSucess,
         message: result,
@@ -39,6 +41,39 @@ class OfferCubit extends Cubit<OfferState> {
     } catch (e) {
       emit(state.copyWith(
         status: OfferStatus.addOfferFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  Future<void> getAllOffers({bool loadMore = false})async
+  {
+    if (loadMore && state.hasReachedMax) return;
+
+    final nextPageIndex = loadMore ? state.pageIndex + 1 : 1;
+
+    emit(state.copyWith(status: OfferStatus.getAllOffersLoading));
+    try {
+      final response = await _offerRepo.getAllOffers(
+        pageIndex: nextPageIndex, 
+        pageSize: state.pageSize,
+      );
+
+      final newOffers = response.items;
+      final hasReachedMax = newOffers.length < state.pageSize;
+
+      emit(state.copyWith(
+        status: OfferStatus.getAllOffersSuccess,
+        allOffers: loadMore
+            ? [...state.allOffers, ...newOffers]
+            : newOffers,
+        pageIndex: nextPageIndex,
+        hasReachedMax: hasReachedMax,
+        count: response.count,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: OfferStatus.getAllOffersFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

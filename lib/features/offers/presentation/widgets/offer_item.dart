@@ -45,7 +45,7 @@ class OfferItem extends StatelessWidget {
                   backgroundImage: offer.freelancerImageUrl.isNullOrEmpty()
                       ? null
                       : CachedNetworkImageProvider(
-                          offer.freelancerImageUrl,
+                          offer.freelancerImageUrl ?? '',
                         ),
                   child: offer.freelancerImageUrl.isNullOrEmpty()
                       ? const HugeIcon(
@@ -55,10 +55,10 @@ class OfferItem extends StatelessWidget {
                       : null,
                 ),
                 title: Text(
-                  offer.freelancerName,
+                  offer.freelancerName ?? '',
                   style: AppStyle.robotoRegular14,
                 ),
-                subtitle: Text(offer.freelancerJobtitle,
+                subtitle: Text(offer.freelancerJobtitle ?? '',
                     style: AppStyle.robotoRegular12),
                 trailing: Container(
                   padding:
@@ -88,8 +88,7 @@ class OfferItem extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildInfoColumn(
-                      'Delivery Time', '${offer.projectDeliveryTime} Days'),
+                  _buildInfoColumn('Delivery Time', '${offer.days} Days'),
                   const SizedBox(
                     height: 35,
                     child: VerticalDivider(color: AppColors.cardDarkColor),
@@ -99,7 +98,8 @@ class OfferItem extends StatelessWidget {
                     height: 35,
                     child: VerticalDivider(color: AppColors.cardDarkColor),
                   ),
-                  _buildInfoColumn('Status', offer.proposalStatus, true),
+                  _buildInfoColumn(
+                      'Status', offer.proposalStatus.toString(), true),
                 ],
               ),
               verticalSpace(16),
@@ -127,7 +127,7 @@ class OfferItem extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(12)),
                 ),
                 child: Text(
-                  offer.proposalStatus,
+                  offer.proposalStatus.toString(),
                   style: AppStyle.robotoRegular8.copyWith(
                     color: Colors.green,
                     fontWeight: FontWeight.bold,

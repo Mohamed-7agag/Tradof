@@ -81,6 +81,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) => ProjectCubit(getIt()),
               ),
+              BlocProvider(
+                create: (context) => OfferCubit(getIt()),
+              ),
             ],
             child: const FreelancerBottomNavBarView(),
           ),

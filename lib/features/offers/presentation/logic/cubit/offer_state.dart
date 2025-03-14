@@ -11,6 +11,9 @@ enum OfferStatus {
   deleteOfferLoading, 
   deleteOfferSuccess,
   deleteOfferFailure,
+  getAllOffersLoading,
+  getAllOffersSuccess,
+  getAllOffersFailure,
 }
 
 extension OfferStatusExtension on OfferStatus {
@@ -24,6 +27,9 @@ extension OfferStatusExtension on OfferStatus {
   bool get isDeleteOfferLoading => this == OfferStatus.deleteOfferLoading;
   bool get isDeleteOfferSuccess => this == OfferStatus.deleteOfferSuccess;
   bool get isDeleteOfferFailure => this == OfferStatus.deleteOfferFailure;
+  bool get isGetAllOffersLoading => this == OfferStatus.getAllOffersLoading;
+  bool get isGetAllOffersSuccess => this == OfferStatus.getAllOffersSuccess;
+  bool get isGetAllOffersFailure => this == OfferStatus.getAllOffersFailure;
 }
 
 class OfferState extends Equatable {
@@ -32,17 +38,32 @@ class OfferState extends Equatable {
     this.errorMessage = '',
     this.message = '',
     this.offerPrice,
+    this.allOffers = const [],
+    this.pageIndex = 1,
+    this.pageSize = 8,
+    this.count = 0,
+    this.hasReachedMax = false,
   });
   final OfferStatus status;
   final String errorMessage;
   final String message;
   final double? offerPrice;
+  final List<OfferModel> allOffers;
+  final int pageIndex;
+  final int pageSize;
+  final int count;
+  final bool hasReachedMax;
 
   OfferState copyWith({
     OfferStatus? status,
     String? errorMessage,
     String? message,
     double? offerPrice,
+    List<OfferModel>? allOffers,
+    int? pageIndex,
+    int? pageSize,
+    int? count,
+    bool? hasReachedMax,
   }) {
     return OfferState(
       status: status ?? this.status,

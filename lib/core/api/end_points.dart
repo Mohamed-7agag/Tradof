@@ -84,8 +84,8 @@ abstract class EndPoint {
   }
 
   static String deleteOffer(int proposalId) {
-    return 'propsal/id=$proposalId';
+    return 'proposal/id=$proposalId';
   }
 
-  static String offer = 'propsal';
+  static String offer = 'proposal';
 }

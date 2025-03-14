@@ -4,24 +4,24 @@ class OfferModel extends Equatable {
   final int id;
   final int projectId;
   final int freelancerId;
-  final String proposalStatus;
+  final int proposalStatus;
   final String proposalDescription;
-  final int projectDeliveryTime;
-  final String freelancerName;
+  final int days;
+  final String? freelancerName;
   final double offerPrice;
-  final String freelancerImageUrl;
-  final String freelancerJobtitle;
+  final String? freelancerImageUrl;
+  final String? freelancerJobtitle;
   final String projecttitle;
   final DateTime timePosted;
   final List<Attachment> proposalAttachments;
 
- const OfferModel({
+  const OfferModel({
     required this.id,
     required this.projectId,
     required this.freelancerId,
     required this.proposalStatus,
     required this.proposalDescription,
-    required this.projectDeliveryTime,
+    required this.days,
     required this.freelancerName,
     required this.offerPrice,
     required this.freelancerImageUrl,
@@ -33,19 +33,19 @@ class OfferModel extends Equatable {
 
   factory OfferModel.fromJson(Map<String, dynamic> json) {
     return OfferModel(
-      id: json['Id'],
-      projectId: json['ProjectId'],
-      freelancerId: json['FreelancerId'],
-      proposalStatus: json['ProposalStatus'],
-      proposalDescription: json['ProposalDescription'],
-      projectDeliveryTime: json['ProjectDeliveryTime'],
-      freelancerName: json['FreelancerName'],
-      offerPrice: json['OfferPrice'].toDouble(),
-      freelancerImageUrl: json['FreelancerImageUrl'],
-      freelancerJobtitle: json['FreelancerJobtitle'],
-      projecttitle: json['Projecttitle'],
-      timePosted: DateTime.parse(json['TimePosted']),
-      proposalAttachments: (json['ProposalAttachments'] as List)
+      id: json['id'],
+      projectId: json['projectId'],
+      freelancerId: json['freelancerId'],
+      proposalStatus: json['proposalStatus'],
+      proposalDescription: json['proposalDescription'],
+      days: json['days'],
+      freelancerName: json['freelancerName'],
+      offerPrice: json['offerPrice'].toDouble(),
+      freelancerImageUrl: json['freelancerImageUrl'],
+      freelancerJobtitle: json['freelancerJobtitle'],
+      projecttitle: json['projecttitle'],
+      timePosted: DateTime.parse(json['timePosted']),
+      proposalAttachments: (json['proposalAttachments'] as List)
           .map((i) => Attachment.fromJson(i))
           .toList(),
     );
@@ -53,19 +53,19 @@ class OfferModel extends Equatable {
 
   Map<String, dynamic> toJson() {
     return {
-      'Id': id,
-      'ProjectId': projectId,
-      'FreelancerId': freelancerId,
-      'ProposalStatus': proposalStatus,
-      'ProposalDescription': proposalDescription,
-      'ProjectDeliveryTime': projectDeliveryTime,
-      'FreelancerName': freelancerName,
-      'OfferPrice': offerPrice,
-      'FreelancerImageUrl': freelancerImageUrl,
-      'FreelancerJobtitle': freelancerJobtitle,
-      'Projecttitle': projecttitle,
-      'TimePosted': timePosted.toIso8601String(),
-      'ProposalAttachments':
+      'id': id,
+      'projectId': projectId,
+      'freelancerId': freelancerId,
+      'proposalStatus': proposalStatus,
+      'proposalDescription': proposalDescription,
+      'days': days,
+      'freelancerName': freelancerName,
+      'offerPrice': offerPrice,
+      'freelancerImageUrl': freelancerImageUrl,
+      'freelancerJobtitle': freelancerJobtitle,
+      'projecttitle': projecttitle,
+      'timePosted': timePosted.toIso8601String(),
+      'proposalAttachments':
           proposalAttachments.map((a) => a.toJson()).toList(),
     };
   }
@@ -77,7 +77,7 @@ class OfferModel extends Equatable {
         freelancerId,
         proposalStatus,
         proposalDescription,
-        projectDeliveryTime,
+        days,
         freelancerName,
         offerPrice,
         freelancerImageUrl,
@@ -90,18 +90,19 @@ class OfferModel extends Equatable {
 
 class Attachment {
   int attachmentId;
-  String attachmentName;
+  // String attachmentName;
   String attachmentUrl;
 
-  Attachment(
-      {required this.attachmentId,
-      required this.attachmentName,
-      required this.attachmentUrl});
+  Attachment({
+    required this.attachmentId,
+    // required this.attachmentName,
+    required this.attachmentUrl,
+  });
 
   factory Attachment.fromJson(Map<String, dynamic> json) {
     return Attachment(
       attachmentId: json['AttachmentId'],
-      attachmentName: json['AttachmentName'],
+      // attachmentName: json['AttachmentName'],
       attachmentUrl: json['AttachmentUrl'],
     );
   }
@@ -109,7 +110,7 @@ class Attachment {
   Map<String, dynamic> toJson() {
     return {
       'AttachmentId': attachmentId,
-      'AttachmentName': attachmentName,
+      // 'AttachmentName': attachmentName,
       'AttachmentUrl': attachmentUrl,
     };
   }
