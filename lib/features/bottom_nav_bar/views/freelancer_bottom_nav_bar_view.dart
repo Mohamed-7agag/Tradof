@@ -37,7 +37,7 @@ class _FreelancerBottomNavBarViewState
   List<Widget> _buildIndexedStackChildren(FreelancerProfileState state) {
     return [
       FreelancerDashboardView(freelancerModel: state.freelancerModel!),
-      GetAllOffersView(),
+      const GetAllOffersView(),
       FreelancerProfileView(freelancerModel: state.freelancerModel!),
       FreelancerDashboardView(freelancerModel: state.freelancerModel!),
       FreelancerSettingView(freelancerModel: state.freelancerModel!),
