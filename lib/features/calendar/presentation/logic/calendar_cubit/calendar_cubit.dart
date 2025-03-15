@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/cache/cache_helper.dart';
 import '../../../../../core/errors/exception.dart';
 import '../../../../../core/utils/app_constants.dart';
-import '../../../../settings/model/event_model.dart';
+import '../../../../settings/data/model/event_model.dart';
 import '../../../data/model/create_event_request_model.dart';
 import '../../../data/repo/calendar_repo.dart';
 

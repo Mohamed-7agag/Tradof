@@ -10,7 +10,7 @@ import '../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
-import '../../../settings/model/event_model.dart';
+import '../../../settings/data/model/event_model.dart';
 import '../../data/model/create_event_request_model.dart';
 import '../logic/calendar_cubit/calendar_cubit.dart';
 

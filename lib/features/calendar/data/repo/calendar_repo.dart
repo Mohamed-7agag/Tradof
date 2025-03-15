@@ -1,4 +1,4 @@
-import '../../../settings/model/event_model.dart';
+import '../../../settings/data/model/event_model.dart';
 import '../model/create_event_request_model.dart';
 
 abstract class CalendarRepo {

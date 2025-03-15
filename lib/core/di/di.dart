@@ -13,10 +13,8 @@ import '../../features/profile/freelancer_profile/data/repo/freelancer_profile_r
 import '../../features/profile/freelancer_profile/data/repo/freelancer_profile_repo_impl.dart';
 import '../../features/projects/data/repo/project_repo.dart';
 import '../../features/projects/data/repo/project_repo_impl.dart';
-import '../../features/settings/company_setting/data/repo/company_setting_repo.dart';
-import '../../features/settings/company_setting/data/repo/company_setting_repo_impl.dart';
-import '../../features/settings/freelancer_setting/data/repo/freelancer_setting_repo.dart';
-import '../../features/settings/freelancer_setting/data/repo/freelancer_setting_repo_impl.dart';
+import '../../features/settings/data/repo/setting_repo.dart';
+import '../../features/settings/data/repo/setting_repo_impl.dart';
 import '../api/api_service.dart';
 import '../api/dio_factory.dart';
 import '../utils/repo/meta_data_repo.dart';
@@ -53,9 +51,9 @@ void setupGetIt() {
     () => CompanyProfileRepoImpl(apiServices: getIt()),
   );
 
-  // company setting repo
-  getIt.registerLazySingleton<CompanySettingRepo>(
-    () => CompanySettingRepoImpl(apiServices: getIt()),
+  // Setting repo
+  getIt.registerLazySingleton<SettingRepo>(
+    () => SettingRepoImpl(apiServices: getIt()),
   );
 
   // offer repo
@@ -68,10 +66,6 @@ void setupGetIt() {
     () => FreelancerProfileRepoImpl(apiServices: getIt()),
   );
 
-  // freelancer setting repo
-  getIt.registerLazySingleton<FreelancerSettingRepo>(
-    () => FreelancerSettingRepoImpl(apiServices: getIt()),
-  );
   // calendar repo
   getIt.registerLazySingleton<CalendarRepo>(
     () => CalendarRepoImpl(
@@ -79,5 +73,3 @@ void setupGetIt() {
     ),
   );
 }
-
-// getIt<ApiServices>(instanceName: 'NonAuthenticatedApiServices')

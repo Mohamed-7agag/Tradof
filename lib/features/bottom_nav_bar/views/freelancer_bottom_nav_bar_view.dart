@@ -12,7 +12,7 @@ import '../../dashboard/freelancer_dashboard/presentation/views/freelance_dashbo
 import '../../offers/presentation/views/get_all_offers_view.dart';
 import '../../profile/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import '../../profile/freelancer_profile/presentation/views/freelancer_profile_view.dart';
-import '../../settings/freelancer_setting/presentation/views/freelancer_setting_view.dart';
+import '../../settings/presentation/views/freelancer_setting_view.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
 
 class FreelancerBottomNavBarView extends StatefulWidget {

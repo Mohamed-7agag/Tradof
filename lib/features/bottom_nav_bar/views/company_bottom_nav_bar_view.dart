@@ -13,7 +13,7 @@ import '../../projects/presentation/views/create_project_view.dart';
 import '../../dashboard/company_dashboard/presentation/views/company_dashboard_view.dart';
 import '../../profile/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import '../../profile/company_profile/presentation/views/company_profile_view.dart';
-import '../../settings/company_setting/presentation/views/company_setting_view.dart';
+import '../../settings/presentation/views/company_setting_view.dart';
 
 class CompanyBottomNavBarView extends StatefulWidget {
   const CompanyBottomNavBarView({super.key});
