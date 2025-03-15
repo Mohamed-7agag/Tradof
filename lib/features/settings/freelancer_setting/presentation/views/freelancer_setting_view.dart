@@ -8,7 +8,6 @@ import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../profile/freelancer_profile/data/model/freelancer_model.dart';
 import '../../../../profile/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
-import '../../../shared_widgets/logout_dialog.dart';
 import '../../../shared_widgets/setting_app_bar.dart';
 import '../../../shared_widgets/setting_profile_info.dart';
 import '../../../shared_widgets/setting_section1.dart';
@@ -49,9 +48,6 @@ class FreelancerSettingView extends StatelessWidget {
                         await _onPersonalInfoTap(context);
                       },
                       onNotificationTap: () {},
-                      onCalenderTap: () {
-                        context.pushNamed(Routes.calendarViewRoute);
-                      },
                     ),
                   ),
                   verticalSpace(20),
@@ -65,11 +61,8 @@ class FreelancerSettingView extends StatelessWidget {
                           arguments: true,
                         );
                       },
-                      onGiveUsFeedbackTap: () {
-                        context.pushNamed(Routes.feedbackViewRoute);
-                      },
-                      onLogoutTap: () => showLogoutDialog(context),
                       onTechnicalSupportTap: () {},
+                      onAskQuestionTap: () {},
                     ),
                   ),
                   verticalSpace(26),

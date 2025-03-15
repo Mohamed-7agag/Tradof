@@ -8,7 +8,6 @@ import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../profile/company_profile/data/model/company_model.dart';
 import '../../../../profile/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
-import '../../../shared_widgets/logout_dialog.dart';
 import '../../../shared_widgets/setting_app_bar.dart';
 import '../../../shared_widgets/setting_profile_info.dart';
 import '../../../shared_widgets/setting_section1.dart';
@@ -50,7 +49,6 @@ class CompanySettingView extends StatelessWidget {
                         await _onPersonalInfoTap(context);
                       },
                       onNotificationTap: () {},
-                      onCalenderTap: () {},
                     ),
                   ),
                   verticalSpace(20),
@@ -64,11 +62,8 @@ class CompanySettingView extends StatelessWidget {
                           arguments: false,
                         );
                       },
-                      onGiveUsFeedbackTap: () {
-                        context.pushNamed(Routes.feedbackViewRoute);
-                      },
-                      onLogoutTap: () => showLogoutDialog(context),
                       onTechnicalSupportTap: () {},
+                      onAskQuestionTap: () {},
                     ),
                   ),
                   verticalSpace(26),
