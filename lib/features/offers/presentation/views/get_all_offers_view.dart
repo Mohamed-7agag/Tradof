@@ -13,8 +13,8 @@ class GetAllOffersView extends StatelessWidget {
     return Column(
       children: [
         customAppbar(
-          title: 'Your Offers',
-          actionIcon: HugeIcons.strokeRoundedPenToolAdd,
+          title: 'My Offers',
+          actionIcon: HugeIcons.strokeRoundedClipboard,
           titlePadding: 16.w,
         ),
         const Expanded(

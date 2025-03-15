@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -74,17 +73,14 @@ class _AllProjectsSectionState extends State<AllProjectsSection> {
             physics: const BouncingScrollPhysics(),
             builderDelegate: PagedChildBuilderDelegate<ProjectModel>(
               itemBuilder: (context, project, index) {
-                return SlideInLeft(
-                  from: 400,
-                  child: ProjectItem(
-                    project: project,
-                    onTap: () {
-                      context.pushNamed(
-                        Routes.freelancerProjectDetailsViewRoute,
-                        arguments: project,
-                      );
-                    },
-                  ),
+                return ProjectItem(
+                  project: project,
+                  onTap: () {
+                    context.pushNamed(
+                      Routes.freelancerProjectDetailsViewRoute,
+                      arguments: project,
+                    );
+                  },
                 );
               },
               firstPageProgressIndicatorBuilder: (context) {

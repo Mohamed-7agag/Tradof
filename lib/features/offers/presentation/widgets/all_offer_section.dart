@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,7 +53,6 @@ class _AllOfferSectionState extends State<AllOfferSection> {
           current.status.isGetAllOffersLoading,
       listener: (context, state) {
         if (state.status.isGetAllOffersSuccess) {
-          log(state.allOffers.toString());
           if (state.hasReachedMax) {
             _pagingController.appendLastPage(state.allOffers);
           } else {
@@ -72,12 +68,12 @@ class _AllOfferSectionState extends State<AllOfferSection> {
           onRefresh: () async => _refreshData(),
           child: PagedListView<int, OfferModel>(
             pagingController: _pagingController,
-            padding: const EdgeInsets.symmetric(vertical: 45),
+            padding: const EdgeInsets.only(top: 20, bottom: 100),
             physics: const BouncingScrollPhysics(),
             builderDelegate: PagedChildBuilderDelegate<OfferModel>(
               itemBuilder: (context, offer, index) {
-                return SlideInLeft(
-                  from: 400,
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 14),
                   child: OfferItem(
                     offer: offer,
                     onTap: () {
@@ -104,8 +100,8 @@ class _AllOfferSectionState extends State<AllOfferSection> {
               },
               noItemsFoundIndicatorBuilder: (context) {
                 return CustomFailureWidget(
-                  text: _pagingController.error?.toString() ??
-                      'No projects found',
+                  text:
+                      _pagingController.error?.toString() ?? 'No Offers Found',
                 );
               },
             ),

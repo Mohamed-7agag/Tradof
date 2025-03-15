@@ -1,9 +1,7 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../core/helpers/extensions.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
@@ -27,8 +25,7 @@ class OfferItem extends StatelessWidget {
       child: SlideInLeft(
         from: 400,
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          margin: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.all(16),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(16)),
             color: AppColors.cardColor,
@@ -36,53 +33,61 @@ class OfferItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                horizontalTitleGap: 10,
-                leading: CircleAvatar(
-                  radius: 22,
-                  backgroundColor: AppColors.cardDarkColor,
-                  backgroundImage: offer.freelancerImageUrl.isNullOrEmpty()
-                      ? null
-                      : CachedNetworkImageProvider(
-                          offer.freelancerImageUrl ?? '',
-                        ),
-                  child: offer.freelancerImageUrl.isNullOrEmpty()
-                      ? const HugeIcon(
-                          icon: HugeIcons.strokeRoundedUser,
-                          color: AppColors.primary,
-                        )
-                      : null,
-                ),
-                title: Text(
-                  offer.freelancerName ?? '',
-                  style: AppStyle.robotoRegular14,
-                ),
-                subtitle: Text(offer.freelancerJobtitle ?? '',
-                    style: AppStyle.robotoRegular12),
-                trailing: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  child: const HugeIcon(
-                    icon: HugeIcons.strokeRoundedCalendar02,
-                    color: AppColors.grey,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Project',
+                    style: AppStyle.robotoCondensedRegular12.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ),
-              Text(
-                offer.projecttitle,
-                style: AppStyle.robotoRegular12.copyWith(
-                  color: AppColors.black,
-                ),
+                  const HugeIcon(
+                    icon: HugeIcons.strokeRoundedSquareArrowUpRight,
+                    color: AppColors.primary,
+                  )
+                ],
               ),
               verticalSpace(8),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: const BoxDecoration(
+                  color: AppColors.cardDarkColor,
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                child: Text(
+                  offer.projecttitle,
+                  style: AppStyle.robotoRegular12.copyWith(
+                    color: AppColors.black,
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              verticalSpace(12),
               Text(
-                offer.proposalDescription,
-                style: AppStyle.robotoCondensedMedium15.copyWith(
+                'Offer',
+                style: AppStyle.robotoCondensedRegular12.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+              ),
+              verticalSpace(6),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: const BoxDecoration(
+                  color: AppColors.cardDarkColor,
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                child: Text(
+                  offer.proposalDescription,
+                  style: AppStyle.robotoRegular12.copyWith(
+                    color: AppColors.black,
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               verticalSpace(20),
               Row(
@@ -102,7 +107,6 @@ class OfferItem extends StatelessWidget {
                       'Status', offer.proposalStatus.toString(), true),
                 ],
               ),
-              verticalSpace(16),
             ],
           ),
         ),

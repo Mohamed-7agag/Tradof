@@ -89,29 +89,15 @@ class OfferModel extends Equatable {
 }
 
 class Attachment {
-  int attachmentId;
-  // String attachmentName;
   String attachmentUrl;
 
-  Attachment({
-    required this.attachmentId,
-    // required this.attachmentName,
-    required this.attachmentUrl,
-  });
+  Attachment({required this.attachmentUrl});
 
   factory Attachment.fromJson(Map<String, dynamic> json) {
-    return Attachment(
-      attachmentId: json['AttachmentId'],
-      // attachmentName: json['AttachmentName'],
-      attachmentUrl: json['AttachmentUrl'],
-    );
+    return Attachment(attachmentUrl: json['attachmentUrl']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'AttachmentId': attachmentId,
-      // 'AttachmentName': attachmentName,
-      'AttachmentUrl': attachmentUrl,
-    };
+    return {'attachmentUrl': attachmentUrl};
   }
 }
