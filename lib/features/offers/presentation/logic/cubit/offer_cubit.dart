@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/errors/exception.dart';
 import '../../../../../core/helpers/prepare_files.dart';
+import '../../../../../core/utils/app_constants.dart';
 import '../../../data/model/add_offer_request_model.dart';
 import '../../../data/model/offer_model.dart';
 import '../../../data/repos/offer_repo.dart';
@@ -46,8 +49,7 @@ class OfferCubit extends Cubit<OfferState> {
     }
   }
 
-  Future<void> getAllOffers({bool loadMore = false})async
-  {
+  Future<void> getAllOffers({bool loadMore = false}) async {
     if (loadMore && state.hasReachedMax) return;
 
     final nextPageIndex = loadMore ? state.pageIndex + 1 : 1;
@@ -55,18 +57,19 @@ class OfferCubit extends Cubit<OfferState> {
     emit(state.copyWith(status: OfferStatus.getAllOffersLoading));
     try {
       final response = await _offerRepo.getAllOffers(
-        pageIndex: nextPageIndex, 
+        freelancerId: AppConstants.kUserId,
+        pageIndex: nextPageIndex,
         pageSize: state.pageSize,
       );
 
       final newOffers = response.items;
+      log('newOffers: ${newOffers.toString()}');
+      log('allOffers: ${state.allOffers.toString()}');
       final hasReachedMax = newOffers.length < state.pageSize;
 
       emit(state.copyWith(
         status: OfferStatus.getAllOffersSuccess,
-        allOffers: loadMore
-            ? [...state.allOffers, ...newOffers]
-            : newOffers,
+        allOffers: loadMore ? [...state.allOffers, ...newOffers] : newOffers,
         pageIndex: nextPageIndex,
         hasReachedMax: hasReachedMax,
         count: response.count,
@@ -80,7 +83,11 @@ class OfferCubit extends Cubit<OfferState> {
   }
 
   Future<void> updateOffer(
-      int projectId, String offerDetails, int days, int offerId) async {
+    int projectId,
+    String offerDetails,
+    int days,
+    int offerId,
+  ) async {
     emit(state.copyWith(status: OfferStatus.updateOfferLoading));
 
     try {

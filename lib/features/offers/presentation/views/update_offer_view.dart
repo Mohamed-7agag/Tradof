@@ -9,10 +9,14 @@ import '../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../projects/presentation/logic/file_cubit.dart';
 import '../../../projects/presentation/widgets/attachment_files_section.dart';
 import '../../../projects/presentation/widgets/project_text_field.dart';
+import '../../data/model/offer_model.dart';
 import '../widgets/select_offer_budget.dart' show SelectOfferBudget;
+import '../widgets/update_offer_button.dart';
 
 class UpdateOfferView extends StatefulWidget {
-  const UpdateOfferView({super.key});
+  const UpdateOfferView({required this.offer, super.key});
+
+  final OfferModel offer;
 
   @override
   State<UpdateOfferView> createState() => _UpdateOfferViewState();
@@ -25,8 +29,9 @@ class _UpdateOfferViewState extends State<UpdateOfferView> {
   @override
   void initState() {
     super.initState();
-    offerDetailsController = TextEditingController();
-    daysController = TextEditingController();
+    offerDetailsController =
+        TextEditingController(text: widget.offer.proposalDescription);
+    daysController = TextEditingController(text: widget.offer.days.toString());
   }
 
   @override
@@ -67,7 +72,7 @@ class _UpdateOfferViewState extends State<UpdateOfferView> {
                         keyboardType: TextInputType.number,
                       ),
                       verticalSpace(25),
-                      const SelectOfferBudget(),
+                      SelectOfferBudget(initialPrice: widget.offer.offerPrice),
                       verticalSpace(35),
                       Text(
                         "Attachments Files",
@@ -76,11 +81,12 @@ class _UpdateOfferViewState extends State<UpdateOfferView> {
                       verticalSpace(12),
                       const AttachmentFilesSection(),
                       Expanded(child: verticalSpace(40)),
-                      // AddOfferButton(
-                      //   projectId: widget.projectId,
-                      //   offerDetailsController: offerDetailsController,
-                      //   daysController: daysController,
-                      // ),
+                      UpdateOfferButton(
+                        offerDetailsController: offerDetailsController,
+                        daysController: daysController,
+                        projectId: widget.offer.projectId,
+                        offerId: widget.offer.id,
+                      ),
                       verticalSpace(20),
                     ],
                   ),

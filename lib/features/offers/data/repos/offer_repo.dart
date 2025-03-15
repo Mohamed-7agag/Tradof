@@ -6,7 +6,7 @@ abstract class OfferRepo {
 
   Future<String> updateOffer(int offerId,AddOfferRequestModel model);
 
-  Future<OfferResponseModel> getAllOffers({required int pageIndex, required int pageSize});
+  Future<OfferResponseModel> getAllOffers({required int pageIndex, required int pageSize, required String freelancerId});
 
   Future<String> deleteOffer({required int id});
 }

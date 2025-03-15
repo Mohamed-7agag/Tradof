@@ -88,6 +88,10 @@ abstract class EndPoint {
     return 'proposal/id=$proposalId';
   }
 
+  static String getProposalByFreelancerId(String freelancerId) {
+    return 'proposal/freelancer-proposals?freelancerId=$freelancerId';
+  }
+
   static String offer = 'proposal';
   static String feedback = 'feedback/';
 }
