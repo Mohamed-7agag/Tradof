@@ -36,11 +36,12 @@ class OfferRepoImpl implements OfferRepo {
 
   @override
   Future<OfferResponseModel> getAllOffers({
+    required String freelancerId,
     required int pageIndex,
     required int pageSize,
   }) async{
     final response= await apiServices.get(
-      EndPoint.offer,
+      EndPoint.getProposalByFreelancerId(freelancerId),
       queryParameters: {
         'pageIndex': pageIndex,
         'pageSize': pageSize,

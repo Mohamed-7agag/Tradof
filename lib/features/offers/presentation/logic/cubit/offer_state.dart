@@ -70,6 +70,11 @@ class OfferState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
       message: message ?? this.message,
       offerPrice: offerPrice ?? this.offerPrice,
+      allOffers: allOffers ?? this.allOffers,
+      pageIndex: pageIndex ?? this.pageIndex,
+      pageSize: pageSize ?? this.pageSize,
+      count: count ?? this.count,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
     );
   }
 

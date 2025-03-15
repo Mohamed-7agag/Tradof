@@ -7,7 +7,9 @@ import '../../../../core/theming/app_style.dart';
 import '../logic/cubit/offer_cubit.dart';
 
 class SelectOfferBudget extends StatefulWidget {
-  const SelectOfferBudget({super.key});
+  const SelectOfferBudget({super.key, this.initialPrice});
+
+  final double? initialPrice;
 
   @override
   State<SelectOfferBudget> createState() => _SelectOfferBudgetState();
@@ -15,6 +17,11 @@ class SelectOfferBudget extends StatefulWidget {
 
 class _SelectOfferBudgetState extends State<SelectOfferBudget> {
   double selectedBudget = 0.0;
+  @override
+  void initState() {
+    super.initState();
+    selectedBudget = widget.initialPrice ?? 0.0;
+  }
   @override
   Widget build(BuildContext context) {
     return Column(

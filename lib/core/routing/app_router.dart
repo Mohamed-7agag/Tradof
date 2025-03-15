@@ -8,6 +8,7 @@ import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/bottom_nav_bar/views/company_bottom_nav_bar_view.dart';
 import '../../features/bottom_nav_bar/views/freelancer_bottom_nav_bar_view.dart';
+import '../../features/offers/data/model/offer_model.dart';
 import '../../features/calendar/presentation/logic/calendar_cubit/calendar_cubit.dart';
 import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../features/offers/presentation/views/add_offer_view.dart';
@@ -241,8 +242,14 @@ class AppRouter {
           builder: (_) => const FeedbackView(),
         );
       case Routes.updateOfferViewRoute:
+        final offer = settings.arguments as OfferModel;
         return MaterialPageRoute(
-          builder: (_) => const UpdateOfferView(),
+          builder: (_) => BlocProvider(
+            create: (context) => OfferCubit(getIt()),
+            child: UpdateOfferView(
+              offer: offer,
+            ),
+          ),
         );
       case Routes.calendarViewRoute:
         return MaterialPageRoute(

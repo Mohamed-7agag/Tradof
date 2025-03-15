@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +9,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import '../../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../../core/utils/widgets/custom_refresh_indicator.dart';
+import '../../../../core/helpers/extensions.dart';
+import '../../../../core/routing/routes.dart';
 import '../../data/model/offer_model.dart';
 import '../logic/cubit/offer_cubit.dart';
 import 'offer_item.dart';
@@ -52,6 +56,7 @@ class _AllOfferSectionState extends State<AllOfferSection> {
           current.status.isGetAllOffersLoading,
       listener: (context, state) {
         if (state.status.isGetAllOffersSuccess) {
+          log(state.allOffers.toString());
           if (state.hasReachedMax) {
             _pagingController.appendLastPage(state.allOffers);
           } else {
@@ -75,7 +80,12 @@ class _AllOfferSectionState extends State<AllOfferSection> {
                   from: 400,
                   child: OfferItem(
                     offer: offer,
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed(
+                        Routes.updateOfferViewRoute,
+                        arguments: offer,
+                      );
+                    },
                   ),
                 );
               },
