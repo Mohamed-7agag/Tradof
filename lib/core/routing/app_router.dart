@@ -8,8 +8,9 @@ import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/bottom_nav_bar/views/company_bottom_nav_bar_view.dart';
 import '../../features/bottom_nav_bar/views/freelancer_bottom_nav_bar_view.dart';
-import '../../features/offers/data/model/offer_model.dart';
 import '../../features/calendar/presentation/logic/calendar_cubit/calendar_cubit.dart';
+import '../../features/calendar/presentation/views/calender_view.dart';
+import '../../features/offers/data/model/offer_model.dart';
 import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../features/offers/presentation/views/add_offer_view.dart';
 import '../../features/offers/presentation/views/update_offer_view.dart';
@@ -31,12 +32,12 @@ import '../../features/projects/presentation/views/company_project_workspace_vie
 import '../../features/projects/presentation/views/freelancer_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_workspace_view.dart';
 import '../../features/settings/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
-import '../../features/settings/presentation/views/update_company_profile_view.dart';
+import '../../features/settings/presentation/logic/feedback_cubit/feedback_cubit.dart';
 import '../../features/settings/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
-import '../../features/settings/presentation/views/update_freelancer_profile_view.dart';
-import '../../features/calendar/presentation/views/calender_view.dart';
 import '../../features/settings/presentation/views/change_password_view.dart';
 import '../../features/settings/presentation/views/feedback_view.dart';
+import '../../features/settings/presentation/views/update_company_profile_view.dart';
+import '../../features/settings/presentation/views/update_freelancer_profile_view.dart';
 import '../../welcome_view.dart';
 import '../cache/cache_helper.dart';
 import '../di/di.dart';
@@ -239,7 +240,10 @@ class AppRouter {
         );
       case Routes.feedbackViewRoute:
         return MaterialPageRoute(
-          builder: (_) => const FeedbackView(),
+          builder: (_) => BlocProvider(
+            create: (context) => FeedbackCubit(getIt()),
+            child: const FeedbackView(),
+          ),
         );
       case Routes.updateOfferViewRoute:
         final offer = settings.arguments as OfferModel;

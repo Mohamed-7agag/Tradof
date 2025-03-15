@@ -7,7 +7,7 @@ import '../../../../../core/errors/exception.dart';
 import '../../../../../core/utils/widgets/upload_image_to_cloudinary.dart';
 import '../../../../profile/freelancer_profile/data/model/freelancer_model.dart';
 import '../../../data/model/update_freelancer_request_model.dart';
-import '../../../data/repo/setting_repo.dart';
+import '../../../data/repo/setting_repo/setting_repo.dart';
 
 part 'freelancer_setting_state.dart';
 

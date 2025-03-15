@@ -13,8 +13,10 @@ import '../../features/profile/freelancer_profile/data/repo/freelancer_profile_r
 import '../../features/profile/freelancer_profile/data/repo/freelancer_profile_repo_impl.dart';
 import '../../features/projects/data/repo/project_repo.dart';
 import '../../features/projects/data/repo/project_repo_impl.dart';
-import '../../features/settings/data/repo/setting_repo.dart';
-import '../../features/settings/data/repo/setting_repo_impl.dart';
+import '../../features/settings/data/repo/feedback_repo/feedback_repo.dart';
+import '../../features/settings/data/repo/feedback_repo/feedback_repo_impl.dart';
+import '../../features/settings/data/repo/setting_repo/setting_repo.dart';
+import '../../features/settings/data/repo/setting_repo/setting_repo_impl.dart';
 import '../api/api_service.dart';
 import '../api/dio_factory.dart';
 import '../utils/repo/meta_data_repo.dart';
@@ -67,9 +69,12 @@ void setupGetIt() {
   );
 
   // calendar repo
-  getIt.registerLazySingleton<CalendarRepo>(
-    () => CalendarRepoImpl(
-      apiServices: getIt(instanceName: 'NonAuthenticatedApiServices'),
-    ),
-  );
+  getIt.registerLazySingleton<CalendarRepo>(() => CalendarRepoImpl(
+        apiServices: getIt(instanceName: 'NonAuthenticatedApiServices'),
+      ));
+
+  // feedback repo
+  getIt.registerLazySingleton<FeedbackRepo>(() => FeedbackRepoImpl(
+        apiServices: getIt(instanceName: 'NonAuthenticatedApiServices'),
+      ));
 }

@@ -1,8 +1,8 @@
-import '../../../../core/api/api_service.dart';
-import '../../../../core/api/end_points.dart';
-import '../../../../core/utils/app_constants.dart';
-import '../model/update_company_request_model.dart';
-import '../model/update_freelancer_request_model.dart';
+import '../../../../../core/api/api_service.dart';
+import '../../../../../core/api/end_points.dart';
+import '../../../../../core/utils/app_constants.dart';
+import '../../model/update_company_request_model.dart';
+import '../../model/update_freelancer_request_model.dart';
 import 'setting_repo.dart';
 
 class SettingRepoImpl implements SettingRepo {

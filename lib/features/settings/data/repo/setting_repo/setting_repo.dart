@@ -1,5 +1,5 @@
-import '../model/update_company_request_model.dart';
-import '../model/update_freelancer_request_model.dart';
+import '../../model/update_company_request_model.dart';
+import '../../model/update_freelancer_request_model.dart';
 
 abstract class SettingRepo {
   Future<void> changePassword({

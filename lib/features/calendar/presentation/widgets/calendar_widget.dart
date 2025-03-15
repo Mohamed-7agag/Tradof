@@ -95,8 +95,8 @@ class CalendarWidget extends StatelessWidget {
         ),
       ),
       btnOkOnPress: () {
-        if (titleController.text.isEmpty ||
-            descriptionController.text.isEmpty) {
+        if (titleController.text.trim().isEmpty ||
+            descriptionController.text.trim().isEmpty) {
           errorToast(context, 'Error', 'Please fill all the fields');
           return;
         }

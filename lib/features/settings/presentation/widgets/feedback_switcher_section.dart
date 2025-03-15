@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/theming/app_colors.dart';
+import '../logic/feedback_cubit/feedback_cubit.dart';
 import 'feedback_switcher_item.dart';
 
 class FeedbackSwitcherSection extends StatefulWidget {
@@ -54,6 +56,7 @@ class _FeedbackSwitcherSectionState extends State<FeedbackSwitcherSection> {
           return InkWell(
             onTap: () {
               setState(() => selectedIndex = index);
+              context.read<FeedbackCubit>().setRate(_feedbackNames[index]!);
             },
             child: FeedbackSwitcherItem(
               isSelected: selectedIndex == index,
