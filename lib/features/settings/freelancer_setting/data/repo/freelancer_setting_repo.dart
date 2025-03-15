@@ -5,7 +5,7 @@ abstract class FreelancerSettingRepo {
     required String currentPassword,
     required String newPassword,
   });
-  Future<void> updateCompanyProfile({
+  Future<void> updateFreelancerProfile({
     required UpdateFreelancerRequestModel updateFreelancerRequestModel,
   });
 }

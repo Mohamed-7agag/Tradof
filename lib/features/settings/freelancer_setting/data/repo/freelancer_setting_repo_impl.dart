@@ -5,7 +5,6 @@ import '../../../model/update_freelancer_request_model.dart';
 import 'freelancer_setting_repo.dart';
 
 class FreelancerSettingRepoImpl implements FreelancerSettingRepo {
-
   FreelancerSettingRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
   final ApiServices _apiServices;
@@ -23,7 +22,7 @@ class FreelancerSettingRepoImpl implements FreelancerSettingRepo {
   }
 
   @override
-  Future<void> updateCompanyProfile({
+  Future<void> updateFreelancerProfile({
     required UpdateFreelancerRequestModel updateFreelancerRequestModel,
   }) async {
     await _apiServices.put(

@@ -3,6 +3,8 @@ import 'package:get_it/get_it.dart';
 
 import '../../features/auth/data/repo/auth_repo.dart';
 import '../../features/auth/data/repo/auth_repo_impl.dart';
+import '../../features/calendar/data/repo/calendar_repo.dart';
+import '../../features/calendar/data/repo/calendar_repo_impl.dart';
 import '../../features/offers/data/repos/offer_repo.dart';
 import '../../features/offers/data/repos/offer_repo_impl.dart';
 import '../../features/profile/company_profile/data/repos/company_profile_repo.dart';
@@ -27,11 +29,11 @@ void setupGetIt() {
   final Dio dio = DioFactory.getDio();
   getIt.registerLazySingleton<ApiServices>(() => ApiServices(dio: dio));
 
-  // Non-authenticated Dio instance with a different base URL
-  // final Dio nonAuthenticatedDio = NonAuthenticatedDioFactory.getDio();
-  // getIt.registerLazySingleton<ApiServices>(
-  //     () => ApiServices(dio: nonAuthenticatedDio),
-  //     instanceName: 'NonAuthenticatedApiServices');
+  //Non-authenticated Dio instance with a different base URL
+  final Dio nonAuthenticatedDio = NonAuthenticatedDioFactory.getDio();
+  getIt.registerLazySingleton<ApiServices>(
+      () => ApiServices(dio: nonAuthenticatedDio),
+      instanceName: 'NonAuthenticatedApiServices');
 
   // AuthRepo
   getIt.registerLazySingleton<AuthRepo>(
@@ -69,6 +71,12 @@ void setupGetIt() {
   // freelancer setting repo
   getIt.registerLazySingleton<FreelancerSettingRepo>(
     () => FreelancerSettingRepoImpl(apiServices: getIt()),
+  );
+  // calendar repo
+  getIt.registerLazySingleton<CalendarRepo>(
+    () => CalendarRepoImpl(
+      apiServices: getIt(instanceName: 'NonAuthenticatedApiServices'),
+    ),
   );
 }
 

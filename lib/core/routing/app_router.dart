@@ -9,6 +9,7 @@ import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/bottom_nav_bar/views/company_bottom_nav_bar_view.dart';
 import '../../features/bottom_nav_bar/views/freelancer_bottom_nav_bar_view.dart';
 import '../../features/offers/data/model/offer_model.dart';
+import '../../features/calendar/presentation/logic/calendar_cubit/calendar_cubit.dart';
 import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../features/offers/presentation/views/add_offer_view.dart';
 import '../../features/offers/presentation/views/update_offer_view.dart';
@@ -33,7 +34,7 @@ import '../../features/settings/company_setting/presentation/logic/company_setti
 import '../../features/settings/company_setting/presentation/views/update_company_profile_view.dart';
 import '../../features/settings/freelancer_setting/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
 import '../../features/settings/freelancer_setting/presentation/views/update_freelancer_profile_view.dart';
-import '../../features/settings/shared_views/calender_view.dart';
+import '../../features/calendar/presentation/views/calender_view.dart';
 import '../../features/settings/shared_views/change_password_view.dart';
 import '../../features/settings/shared_views/feedback_view.dart';
 import '../../welcome_view.dart';
@@ -252,7 +253,10 @@ class AppRouter {
         );
       case Routes.calendarViewRoute:
         return MaterialPageRoute(
-          builder: (_) => const CalenderView(),
+          builder: (_) => BlocProvider(
+            create: (context) => CalendarCubit(getIt())..getAllEvents(),
+            child: const CalenderView(),
+          ),
         );
       default:
         return null;

@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+import '../../../core/helpers/extensions.dart';
+import '../../../core/routing/routes.dart';
 import '../../../core/theming/app_colors.dart';
+import 'logout_dialog.dart';
 import 'setting_item.dart';
 
 class SettingSection2 extends StatelessWidget {
   const SettingSection2({
     required this.onChangePasswordTap,
     required this.onTechnicalSupportTap,
-    required this.onGiveUsFeedbackTap,
-    required this.onLogoutTap,
+    required this.onAskQuestionTap,
     super.key,
   });
   final VoidCallback onChangePasswordTap;
   final VoidCallback onTechnicalSupportTap;
-  final VoidCallback onGiveUsFeedbackTap;
-  final VoidCallback onLogoutTap;
+  final VoidCallback onAskQuestionTap;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,17 @@ class SettingSection2 extends StatelessWidget {
               icon: HugeIcons.strokeRoundedComment01,
               color: Colors.blue[600]!,
             ),
-            onTap: onGiveUsFeedbackTap,
+            onTap: ()=> context.pushNamed(Routes.feedbackViewRoute),
+          ),
+          const Divider(color: AppColors.cardDarkColor),
+          SettingItem(
+            title: 'Ask Question',
+            icon: const HugeIcon(
+              icon: HugeIcons.strokeRoundedHelpCircle,
+              color: Colors.lightBlueAccent,
+              size: 26,
+            ),
+            onTap: onAskQuestionTap,
           ),
           const Divider(color: AppColors.cardDarkColor),
           SettingItem(
@@ -62,7 +73,7 @@ class SettingSection2 extends StatelessWidget {
               icon: HugeIcons.strokeRoundedLogin01,
               color: Colors.red,
             ),
-            onTap: onLogoutTap,
+            onTap: () => showLogoutDialog(context),
           ),
         ],
       ),

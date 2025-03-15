@@ -59,7 +59,7 @@ class FreelancerSettingCubit extends Cubit<FreelancerSettingState> {
         phoneNumber: phoneNumber,
         freelancerModel: freelancerModel,
       );
-      await _freelancerSettingRepo.updateCompanyProfile(
+      await _freelancerSettingRepo.updateFreelancerProfile(
         updateFreelancerRequestModel: updateFreelancerRequestModel,
       );
       emit(state.copyWith(

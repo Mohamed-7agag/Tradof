@@ -94,4 +94,11 @@ abstract class EndPoint {
 
   static String offer = 'proposal';
   static String feedback = 'feedback/';
+  static String calendar = 'calendar/';
+  static String createEvent(String calendarId) {
+    return 'calendar/$calendarId/event';
+  }
+  static String getAllEvents(String calendarId) {
+    return 'calendar/events/$calendarId';
+  }
 }

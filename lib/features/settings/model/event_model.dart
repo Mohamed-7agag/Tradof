@@ -15,7 +15,7 @@ class EventModel {
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(
-      id: json['id'],
+      id: json['_id'],
       title: json['title'],
       description: json['description'],
       startTime: DateTime.parse(json['startTime']),
@@ -25,7 +25,7 @@ class EventModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      '_id': id,
       'title': title,
       'description': description,
       'startTime': startTime.toIso8601String(),
