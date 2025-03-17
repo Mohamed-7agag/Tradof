@@ -12,12 +12,10 @@ class SettingSection2 extends StatelessWidget {
   const SettingSection2({
     required this.onChangePasswordTap,
     required this.onTechnicalSupportTap,
-    required this.onAskQuestionTap,
     super.key,
   });
   final VoidCallback onChangePasswordTap;
   final VoidCallback onTechnicalSupportTap;
-  final VoidCallback onAskQuestionTap;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +52,7 @@ class SettingSection2 extends StatelessWidget {
               icon: HugeIcons.strokeRoundedComment01,
               color: Colors.blue[600]!,
             ),
-            onTap: ()=> context.pushNamed(Routes.feedbackViewRoute),
+            onTap: () => context.pushNamed(Routes.feedbackViewRoute),
           ),
           const Divider(color: AppColors.cardDarkColor),
           SettingItem(
@@ -64,7 +62,7 @@ class SettingSection2 extends StatelessWidget {
               color: Colors.lightBlueAccent,
               size: 26,
             ),
-            onTap: onAskQuestionTap,
+            onTap: () => context.pushNamed(Routes.askQuestionRoute),
           ),
           const Divider(color: AppColors.cardDarkColor),
           SettingItem(

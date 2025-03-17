@@ -5,12 +5,18 @@ enum FeedbackStatus {
   sendFeedbackLoading,
   sendFeedbackSuccess,
   sendFeedbackFailure,
+  askQuestionLoading,
+  askQuestionSuccess,
+  askQuestionFailure,
 }
 
 extension FeedbackStatusX on FeedbackStatus {
   bool get isSendFeedbackLoading => this == FeedbackStatus.sendFeedbackLoading;
   bool get isSendFeedbackSuccess => this == FeedbackStatus.sendFeedbackSuccess;
   bool get isSendFeedbackFailure => this == FeedbackStatus.sendFeedbackFailure;
+  bool get isAskQuestionLoading => this == FeedbackStatus.askQuestionLoading;
+  bool get isAskQuestionSuccess => this == FeedbackStatus.askQuestionSuccess;
+  bool get isAskQuestionFailure => this == FeedbackStatus.askQuestionFailure;
 }
 
 class FeedbackState extends Equatable {

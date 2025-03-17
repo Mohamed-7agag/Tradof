@@ -27,13 +27,13 @@ class _CalenderViewState extends State<CalenderView> {
       body: BlocListener<CalendarCubit, CalendarState>(
         listenWhen: (previous, current) => _listenWhen(current),
         listener: (context, state) {
-          if (state.status.isCreateEventSuccess) {
+          if (state.status.isCreateOrUpdateOrDeleteEventSuccess) {
             context.pop();
             successToast(context, 'Success', state.message);
-          } else if (state.status.isCreateEventFailure) {
+          } else if (state.status.isCreateOrUpdateOrDeleteEventFailure) {
             context.pop();
             errorToast(context, 'Error', state.errorMessage);
-          } else if (state.status.isCreateEventLoading) {
+          } else if (state.status.isCreateOrUpdateOrDeleteEventLoading) {
             loadingDialog(context);
           }
         },
@@ -43,8 +43,8 @@ class _CalenderViewState extends State<CalenderView> {
   }
 
   bool _listenWhen(CalendarState current) {
-    return current.status.isCreateEventSuccess ||
-        current.status.isCreateEventFailure ||
-        current.status.isCreateEventLoading;
+    return current.status.isCreateOrUpdateOrDeleteEventSuccess ||
+        current.status.isCreateOrUpdateOrDeleteEventFailure ||
+        current.status.isCreateOrUpdateOrDeleteEventLoading;
   }
 }

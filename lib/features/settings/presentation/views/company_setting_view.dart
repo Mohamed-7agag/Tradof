@@ -63,7 +63,6 @@ class CompanySettingView extends StatelessWidget {
                         );
                       },
                       onTechnicalSupportTap: () {},
-                      onAskQuestionTap: () {},
                     ),
                   ),
                   verticalSpace(26),

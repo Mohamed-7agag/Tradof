@@ -33,30 +33,42 @@ class CalendarCubit extends Cubit<CalendarState> {
     }
   }
 
-  Future<void> createEvent({required CreateEventRequestModel model}) async {
-    emit(state.copyWith(status: CalendarStatus.createEventLoading));
+  Future<void> createEvent({required EventRequestModel model}) async {
+    emit(state.copyWith(
+        status: CalendarStatus.createOrUpdateOrDeleteEventLoading));
     try {
-      await _calendarRepo.createEvent(
+      final response = await _calendarRepo.createEvent(
         model: model,
         calendarId: CacheHelper.getString(AppConstants.calenderId),
       );
       emit(state.copyWith(
-        status: CalendarStatus.createEventSuccess,
+        status: CalendarStatus.createOrUpdateOrDeleteEventSuccess,
         message: 'Event created successfully',
+      ));
+      emit(state.copyWith(
+        status: CalendarStatus.getAllEventsSuccess,
+        events: [...state.events, response],
       ));
     } catch (e) {
       emit(state.copyWith(
-        status: CalendarStatus.createEventFailure,
+        status: CalendarStatus.createOrUpdateOrDeleteEventFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }
   }
 
-  Future<void> getAllEvents() async {
+  Future<void> getAllEvents({
+    required int year,
+    required int month,
+    required int day,
+  }) async {
     emit(state.copyWith(status: CalendarStatus.getAllEventsLoading));
     try {
       final allEvents = await _calendarRepo.getAllEvents(
         calendarId: CacheHelper.getString(AppConstants.calenderId),
+        year : year,
+        month : month,
+        day : day,
       );
       emit(state.copyWith(
         status: CalendarStatus.getAllEventsSuccess,
@@ -65,6 +77,59 @@ class CalendarCubit extends Cubit<CalendarState> {
     } catch (e) {
       emit(state.copyWith(
         status: CalendarStatus.getAllEventsFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  Future<void> updateEvent(
+      {required EventRequestModel model, required String eventId}) async {
+    emit(state.copyWith(
+        status: CalendarStatus.createOrUpdateOrDeleteEventLoading));
+    try {
+      final response = await _calendarRepo.updateEvent(
+        model: model,
+        eventId: eventId,
+      );
+      final updatedEvents = state.events.map((event) {
+        return event.id == response.id ? response : event;
+      }).toList();
+      emit(state.copyWith(
+        status: CalendarStatus.createOrUpdateOrDeleteEventSuccess,
+        message: 'Event Updated successfully',
+      ));
+      emit(state.copyWith(
+        status: CalendarStatus.getAllEventsSuccess,
+        events: updatedEvents,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: CalendarStatus.createOrUpdateOrDeleteEventFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  Future<void> deleteEvent({required String eventId}) async {
+    emit(state.copyWith(
+        status: CalendarStatus.createOrUpdateOrDeleteEventLoading));
+    try {
+      await _calendarRepo.deleteEvent(eventId: eventId);
+
+      final newEvents =
+          state.events.where((event) => event.id != eventId).toList();
+
+      emit(state.copyWith(
+        status: CalendarStatus.createOrUpdateOrDeleteEventSuccess,
+        message: 'Event Deleted successfully',
+      ));
+      emit(state.copyWith(
+        status: CalendarStatus.getAllEventsSuccess,
+        events: newEvents,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: CalendarStatus.createOrUpdateOrDeleteEventFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

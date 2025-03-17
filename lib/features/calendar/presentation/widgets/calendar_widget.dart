@@ -1,18 +1,15 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
-import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
-import '../../../../core/utils/widgets/custom_text_field.dart';
-import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../../../settings/data/model/event_model.dart';
-import '../../data/model/create_event_request_model.dart';
 import '../logic/calendar_cubit/calendar_cubit.dart';
+import 'add_event_dialog.dart';
+import 'event_details_dialog.dart';
+import 'update_or_delete_event_dialog.dart';
 
 class CalendarWidget extends StatelessWidget {
   const CalendarWidget({super.key});
@@ -33,15 +30,30 @@ class CalendarWidget extends StatelessWidget {
             ],
             firstDayOfWeek: 6,
             dataSource: EventDataSource(state.events),
+            headerStyle: const CalendarHeaderStyle(
+              backgroundColor: AppColors.background,
+            ),
             onTap: (CalendarTapDetails details) {
               if (details.targetElement == CalendarElement.calendarCell) {
-                _showAddEventDialog(context, details.date!);
+                showAddEventDialog(context, details.date!);
+              } else {
+                showEventDetailDialog(
+                  context,
+                  details.appointments!.first,
+                );
+              }
+            },
+            onLongPress: (details) {
+              if (details.targetElement != CalendarElement.calendarCell) {
+                showUpdateOrDeleteEventDialog(
+                  context,
+                  details.appointments!.first,
+                );
               }
             },
             showTodayButton: true,
             showDatePickerButton: true,
             monthViewSettings: const MonthViewSettings(
-              appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
               showAgenda: true,
             ),
           );
@@ -57,60 +69,6 @@ class CalendarWidget extends StatelessWidget {
     return current.status.isGetAllEventsSuccess ||
         current.status.isGetAllEventsFailure ||
         current.status.isGetAllEventsLoading;
-  }
-
-  void _showAddEventDialog(BuildContext context, DateTime selectedDate) {
-    final TextEditingController titleController = TextEditingController();
-    final TextEditingController descriptionController = TextEditingController();
-    final DateTime startTime = selectedDate;
-    final DateTime endTime = selectedDate.add(const Duration(hours: 1));
-
-    AwesomeDialog(
-      context: context,
-      animType: AnimType.rightSlide,
-      dialogType: DialogType.noHeader,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Add Event',
-              style: AppStyle.poppinsMedium15,
-            ),
-            verticalSpace(16),
-            CustomTextField(
-              labelText: 'Title',
-              controller: titleController,
-              outlineBorder: true,
-            ),
-            verticalSpace(14),
-            CustomTextField(
-              labelText: 'Description',
-              controller: descriptionController,
-              outlineBorder: true,
-            ),
-          ],
-        ),
-      ),
-      btnOkOnPress: () {
-        if (titleController.text.trim().isEmpty ||
-            descriptionController.text.trim().isEmpty) {
-          errorToast(context, 'Error', 'Please fill all the fields');
-          return;
-        }
-        final event = CreateEventRequestModel(
-          title: titleController.text,
-          description: descriptionController.text,
-          startTime: startTime,
-          endTime: endTime,
-        );
-        context.read<CalendarCubit>().createEvent(model: event);
-      },
-      btnOkText: 'Add',
-      btnCancelOnPress: () {},
-    ).show();
   }
 }
 

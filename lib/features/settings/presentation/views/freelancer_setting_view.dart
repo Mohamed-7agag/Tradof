@@ -62,7 +62,6 @@ class FreelancerSettingView extends StatelessWidget {
                         );
                       },
                       onTechnicalSupportTap: () {},
-                      onAskQuestionTap: () {},
                     ),
                   ),
                   verticalSpace(26),

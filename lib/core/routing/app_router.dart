@@ -34,6 +34,7 @@ import '../../features/projects/presentation/views/freelancer_project_workspace_
 import '../../features/settings/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
 import '../../features/settings/presentation/logic/feedback_cubit/feedback_cubit.dart';
 import '../../features/settings/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
+import '../../features/settings/presentation/views/ask_question_view.dart';
 import '../../features/settings/presentation/views/change_password_view.dart';
 import '../../features/settings/presentation/views/feedback_view.dart';
 import '../../features/settings/presentation/views/update_company_profile_view.dart';
@@ -258,8 +259,20 @@ class AppRouter {
       case Routes.calendarViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => CalendarCubit(getIt())..getAllEvents(),
+            create: (context) => CalendarCubit(getIt())
+              ..getAllEvents(
+                year: DateTime.now().year,
+                month: DateTime.now().month,
+                day: DateTime.now().day,
+              ),
             child: const CalenderView(),
+          ),
+        );
+      case Routes.askQuestionRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => FeedbackCubit(getIt()),
+            child: const AskQuestionView(),
           ),
         );
       default:

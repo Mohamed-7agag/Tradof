@@ -9,7 +9,16 @@ class FeedbackRepoImpl implements FeedbackRepo {
   FeedbackRepoImpl({required ApiServices apiServices})
       : _apiServices = apiServices;
   @override
-  Future<void> sendFeedback({required SendFeedbackRequestModel model}) async{
-      await _apiServices.post(EndPoint.feedback, data: model.toJson());
+  Future<void> sendFeedback({required SendFeedbackRequestModel model}) async {
+    await _apiServices.post(EndPoint.feedback, data: model.toJson());
+  }
+
+  @override
+  Future<void> askQuestion(
+      {required String userId, required String question}) async {
+    await _apiServices.post(
+      EndPoint.askQuestion,
+      data: {'userId': userId, 'question': question},
+    );
   }
 }

@@ -5,9 +5,9 @@ enum CalendarStatus {
   createCalendarLoading,
   createCalendarSuccess,
   createCalendarFailure,
-  createEventLoading,
-  createEventSuccess,
-  createEventFailure,
+  createOrUpdateOrDeleteEventLoading,
+  createOrUpdateOrDeleteEventSuccess,
+  createOrUpdateOrDeleteEventFailure,
   getAllEventsLoading,
   getAllEventsSuccess,
   getAllEventsFailure
@@ -21,9 +21,12 @@ extension CalendarStatusX on CalendarStatus {
   bool get isCreateCalendarFailure =>
       this == CalendarStatus.createCalendarFailure;
 
-  bool get isCreateEventLoading => this == CalendarStatus.createEventLoading;
-  bool get isCreateEventSuccess => this == CalendarStatus.createEventSuccess;
-  bool get isCreateEventFailure => this == CalendarStatus.createEventFailure;
+  bool get isCreateOrUpdateOrDeleteEventLoading =>
+      this == CalendarStatus.createOrUpdateOrDeleteEventLoading;
+  bool get isCreateOrUpdateOrDeleteEventSuccess =>
+      this == CalendarStatus.createOrUpdateOrDeleteEventSuccess;
+  bool get isCreateOrUpdateOrDeleteEventFailure =>
+      this == CalendarStatus.createOrUpdateOrDeleteEventFailure;
 
   bool get isGetAllEventsLoading => this == CalendarStatus.getAllEventsLoading;
   bool get isGetAllEventsSuccess => this == CalendarStatus.getAllEventsSuccess;

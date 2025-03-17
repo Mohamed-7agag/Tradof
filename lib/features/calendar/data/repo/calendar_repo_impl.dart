@@ -19,26 +19,47 @@ class CalendarRepoImpl implements CalendarRepo {
   }
 
   @override
-  Future<void> createEvent({
-    required CreateEventRequestModel model,
+  Future<EventModel> createEvent({
+    required EventRequestModel model,
     required String calendarId,
   }) async {
-    await _apiServices.post(
+    final response = await _apiServices.post(
       EndPoint.createEvent(calendarId),
       data: model.toJson(),
     );
+    return EventModel.fromJson(response['event']);
   }
 
   @override
-  Future<List<EventModel>> getAllEvents({required String calendarId}) async {
-    final response = await _apiServices
-        .get(EndPoint.getAllEvents(calendarId), queryParameters: {
-      'day': DateTime.now().day,
-      'month': DateTime.now().month,
-      'year': DateTime.now().year
-    });
+  Future<List<EventModel>> getAllEvents({
+    required String calendarId,
+    required int year,
+    required int month,
+    required int day,
+  }) async {
+    final response = await _apiServices.get(EndPoint.getAllEvents(calendarId),
+        queryParameters: {'day': day, 'month': month, 'year': year});
     return List<EventModel>.from(response['events'].map(
       (e) => EventModel.fromJson(e),
     ));
+  }
+
+  @override
+  Future<EventModel> updateEvent({
+    required EventRequestModel model,
+    required String eventId,
+  }) async {
+    final response = await _apiServices.put(
+      EndPoint.updateOrDeleteEvent(eventId),
+      data: model.toJson(),
+    );
+    return EventModel.fromJson(response['event']);
+  }
+
+  @override
+  Future<void> deleteEvent({required String eventId}) async {
+    await _apiServices.delete(
+      EndPoint.updateOrDeleteEvent(eventId),
+    );
   }
 }
