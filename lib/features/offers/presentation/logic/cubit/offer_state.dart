@@ -17,6 +17,12 @@ enum OfferStatus {
   getProjectOffersLoading,
   getProjectOffersSuccess,
   getProjectOffersFailure,
+  acceptOfferLoading,
+  acceptOfferSuccess,
+  acceptOfferFailure,
+  denyOfferLoading,
+  denyOfferSuccess,
+  denyOfferFailure,
 }
 
 extension OfferStatusExtension on OfferStatus {
@@ -39,6 +45,12 @@ extension OfferStatusExtension on OfferStatus {
       this == OfferStatus.getProjectOffersSuccess;
   bool get isGetProjectOffersFailure =>
       this == OfferStatus.getProjectOffersFailure;
+  bool get isAcceptOfferLoading => this == OfferStatus.acceptOfferLoading;
+  bool get isAcceptOfferSuccess => this == OfferStatus.acceptOfferSuccess;
+  bool get isAcceptOfferFailure => this == OfferStatus.acceptOfferFailure;
+  bool get isDenyOfferLoading => this == OfferStatus.denyOfferLoading;
+  bool get isDenyOfferSuccess => this == OfferStatus.denyOfferSuccess;
+  bool get isDenyOfferFailure => this == OfferStatus.denyOfferFailure;
 }
 
 class OfferState extends Equatable {

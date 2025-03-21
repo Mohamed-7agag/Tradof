@@ -7,8 +7,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
-import '../../../offers/data/model/offer_model.dart';
-import '../../../offers/presentation/logic/cubit/offer_cubit.dart';
+import '../../data/model/offer_model.dart';
+import '../logic/cubit/offer_cubit.dart';
 import '../widgets/project_offer_item.dart';
 
 class ProjectOffersView extends StatefulWidget {

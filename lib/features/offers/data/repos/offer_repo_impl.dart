@@ -54,7 +54,7 @@ class OfferRepoImpl implements OfferRepo {
   Future<OfferResponseModel> getProjectOffers({
     required int pageIndex,
     required int pageSize,
-    required String projectId,
+    required int projectId,
   }) async {
     final response = await apiServices.get(
       EndPoint.offer,
@@ -65,5 +65,23 @@ class OfferRepoImpl implements OfferRepo {
       },
     );
     return OfferResponseModel.fromJson(response);
+  }
+
+  @override
+  Future<void> acceptOffer(
+      {required int projectId, required int offerId}) async {
+    await apiServices.post(EndPoint.acceptOffer, queryParameters: {
+      'projectId': projectId,
+      'proposalId': offerId,
+    });
+  }
+
+  @override
+  Future<void> denyOffer(
+      {required int projectId, required int offerId}) async {
+    await apiServices.post(EndPoint.denyOffer, queryParameters: {
+      'projectId': projectId,
+      'proposalId': offerId,
+    });
   }
 }

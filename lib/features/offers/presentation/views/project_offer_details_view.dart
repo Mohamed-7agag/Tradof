@@ -9,9 +9,10 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
-import '../../../../core/utils/widgets/custom_button.dart';
-import '../../../offers/data/model/offer_model.dart';
-import '../widgets/download_attachment_files_section.dart';
+import '../../../projects/presentation/widgets/download_attachment_files_section.dart';
+import '../../data/model/offer_model.dart';
+import '../widgets/accept_offer_button.dart';
+import '../widgets/deny_offer_button.dart';
 
 class ProjectOfferDetailsView extends StatelessWidget {
   const ProjectOfferDetailsView({required this.offer, super.key});
@@ -125,18 +126,16 @@ class ProjectOfferDetailsView extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: CustomButton(
-                          text: 'Deny',
-                          onPressed: () {},
-                          color: Colors.red,
+                        child: DenyOfferButton(
+                          projectId: offer.projectId,
+                          offerId: offer.id,
                         ),
                       ),
                       horizontalSpace(10),
                       Expanded(
-                        child: CustomButton(
-                          text: 'Accept',
-                          onPressed: () {},
-                          color: Colors.green,
+                        child: AcceptOfferButton(
+                          projectId: offer.projectId,
+                          offerId: offer.id,
                         ),
                       ),
                     ],

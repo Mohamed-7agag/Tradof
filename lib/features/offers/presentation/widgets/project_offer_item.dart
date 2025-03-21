@@ -7,7 +7,7 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
-import '../../../offers/data/model/offer_model.dart';
+import '../../data/model/offer_model.dart';
 
 class ProjectOfferItem extends StatelessWidget {
   const ProjectOfferItem({required this.offer, super.key});

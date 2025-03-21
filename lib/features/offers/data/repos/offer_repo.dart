@@ -14,8 +14,18 @@ abstract class OfferRepo {
   Future<OfferResponseModel> getProjectOffers({
     required int pageIndex,
     required int pageSize,
-    required String projectId,
+    required int projectId,
   });
 
-  Future<String> deleteOffer({required int id});
+  Future<String> deleteOffer({
+    required int id,
+  });
+  Future<void> acceptOffer({
+    required int projectId,
+    required int offerId,
+  });
+  Future<void> denyOffer({
+    required int projectId,
+    required int offerId,
+  });
 }

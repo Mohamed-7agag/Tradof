@@ -139,7 +139,7 @@ class OfferCubit extends Cubit<OfferState> {
     emit(state.copyWith(status: OfferStatus.getProjectOffersLoading));
     try {
       final response = await _offerRepo.getProjectOffers(
-        projectId: projectId.toString(),
+        projectId: projectId,
         pageIndex: nextPageIndex,
         pageSize: state.allOffersPageSize,
       );
@@ -156,6 +156,40 @@ class OfferCubit extends Cubit<OfferState> {
     } catch (e) {
       emit(state.copyWith(
         status: OfferStatus.getProjectOffersFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  Future<void> acceptOffer(int projectId, int offerId) async {
+    emit(state.copyWith(status: OfferStatus.acceptOfferLoading));
+
+    try {
+      await _offerRepo.acceptOffer(projectId: projectId, offerId: offerId);
+      emit(state.copyWith(
+        status: OfferStatus.acceptOfferSuccess,
+        message: 'Offer accepted successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: OfferStatus.acceptOfferFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  Future<void> denyOffer(int projectId, int offerId) async {
+    emit(state.copyWith(status: OfferStatus.denyOfferLoading));
+
+    try {
+      await _offerRepo.denyOffer(projectId: projectId, offerId: offerId);
+      emit(state.copyWith(
+        status: OfferStatus.denyOfferSuccess,
+        message: 'Offer denied successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: OfferStatus.denyOfferFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }
