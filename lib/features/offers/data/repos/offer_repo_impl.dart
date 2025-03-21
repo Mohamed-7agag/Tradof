@@ -2,7 +2,6 @@ import '../../../../core/api/api_service.dart';
 import '../../../../core/api/end_points.dart';
 import '../model/add_offer_request_model.dart';
 import '../model/offer_response_model.dart';
-
 import 'offer_repo.dart';
 
 class OfferRepoImpl implements OfferRepo {
@@ -39,10 +38,28 @@ class OfferRepoImpl implements OfferRepo {
     required String freelancerId,
     required int pageIndex,
     required int pageSize,
-  }) async{
-    final response= await apiServices.get(
-      EndPoint.getProposalByFreelancerId(freelancerId),
+  }) async {
+    final response = await apiServices.get(
+      EndPoint.getProposalByFreelancerId,
       queryParameters: {
+        'freelancerId': freelancerId,
+        'pageIndex': pageIndex,
+        'pageSize': pageSize,
+      },
+    );
+    return OfferResponseModel.fromJson(response);
+  }
+
+  @override
+  Future<OfferResponseModel> getProjectOffers({
+    required int pageIndex,
+    required int pageSize,
+    required String projectId,
+  }) async {
+    final response = await apiServices.get(
+      EndPoint.offer,
+      queryParameters: {
+        'projectId': projectId,
         'pageIndex': pageIndex,
         'pageSize': pageSize,
       },

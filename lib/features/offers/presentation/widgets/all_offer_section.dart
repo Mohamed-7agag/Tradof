@@ -28,7 +28,7 @@ class _AllOfferSectionState extends State<AllOfferSection> {
     if (offerCubit.state.allOffers.isNotEmpty) {
       _pagingController.value = PagingState(
         itemList: offerCubit.state.allOffers,
-        nextPageKey: offerCubit.state.pageIndex + 1,
+        nextPageKey: offerCubit.state.allOffersPageIndex + 1,
       );
     } else {
       _pagingController.addPageRequestListener((pageKey) {
@@ -53,10 +53,11 @@ class _AllOfferSectionState extends State<AllOfferSection> {
           current.status.isGetAllOffersLoading,
       listener: (context, state) {
         if (state.status.isGetAllOffersSuccess) {
-          if (state.hasReachedMax) {
+          if (state.allOffersHasReachedMax) {
             _pagingController.appendLastPage(state.allOffers);
           } else {
-            _pagingController.appendPage(state.allOffers, state.pageIndex + 1);
+            _pagingController.appendPage(
+                state.allOffers, state.allOffersPageIndex + 1);
           }
         } else if (state.status.isGetAllOffersFailure) {
           _pagingController.error = state.errorMessage;

@@ -74,6 +74,7 @@ class _BuildUpdateCompanyProfileViewState
                 verticalSpace(30),
                 SettingUpdateProfileImage(
                   imageUrl: widget.companyModel.profileImageUrl,
+                  isFreelancer: false,
                 ),
                 verticalSpace(50),
                 CustomTextField(

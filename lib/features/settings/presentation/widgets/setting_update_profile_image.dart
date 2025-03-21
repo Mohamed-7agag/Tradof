@@ -11,10 +11,16 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/theming/app_colors.dart';
 import '../logic/company_setting_cubit/company_setting_cubit.dart';
+import '../logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
 
 class SettingUpdateProfileImage extends StatefulWidget {
-  const SettingUpdateProfileImage({super.key, this.imageUrl});
+  const SettingUpdateProfileImage({
+    super.key,
+    this.imageUrl,
+    this.isFreelancer = true,
+  });
   final String? imageUrl;
+  final bool isFreelancer;
   @override
   State<SettingUpdateProfileImage> createState() =>
       _SettingUpdateProfileImageState();
@@ -30,9 +36,15 @@ class _SettingUpdateProfileImageState extends State<SettingUpdateProfileImage> {
       if (image != null) {
         setState(() {
           _image = File(image.path);
-          context
-              .read<CompanySettingCubit>()
-              .setImageProfileAndCountryId(image: _image);
+          if (widget.isFreelancer) {
+            context
+                .read<FreelancerSettingCubit>()
+                .setImageProfileAndCountryId(image: _image);
+          } else {
+            context
+                .read<CompanySettingCubit>()
+                .setImageProfileAndCountryId(image: _image);
+          }
         });
       }
     } catch (e) {

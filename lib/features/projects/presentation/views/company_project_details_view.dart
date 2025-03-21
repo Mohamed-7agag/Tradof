@@ -11,7 +11,7 @@ import '../../data/models/project_model.dart';
 import '../logic/file_cubit.dart';
 import '../widgets/attachment_files_section.dart';
 import '../widgets/create_project_industries_section.dart';
-import '../widgets/delete_project_section.dart';
+import '../widgets/project_header_section.dart';
 import '../widgets/project_text_field.dart';
 import '../widgets/update_project_button.dart';
 import '../widgets/update_project_language_pair.dart';
@@ -77,7 +77,10 @@ class _CompanyProjectDetailsViewState extends State<CompanyProjectDetailsView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 verticalSpace(14),
-                DeleteProjectSection(projectId: widget.projectModel.id),
+                ProjectHeaderSection(
+                  projectId: widget.projectModel.id,
+                  offersCount: widget.projectModel.numberOfOffers,
+                ),
                 verticalSpace(35),
                 ProjectTextField(
                   labelText: 'Project Name',

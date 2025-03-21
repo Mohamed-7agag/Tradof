@@ -31,6 +31,8 @@ import '../../features/projects/presentation/views/company_project_details_view.
 import '../../features/projects/presentation/views/company_project_workspace_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_workspace_view.dart';
+import '../../features/projects/presentation/views/project_offer_details_view.dart';
+import '../../features/projects/presentation/views/project_offers_view.dart';
 import '../../features/settings/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
 import '../../features/settings/presentation/logic/feedback_cubit/feedback_cubit.dart';
 import '../../features/settings/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
@@ -274,6 +276,20 @@ class AppRouter {
             create: (context) => FeedbackCubit(getIt()),
             child: const AskQuestionView(),
           ),
+        );
+      case Routes.projectOffersViewRoute:
+        final projectId = settings.arguments as int;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                OfferCubit(getIt())..getProjectOffers(projectId),
+            child:  ProjectOffersView(projectId: projectId),
+          ),
+        );
+      case Routes.projectOfferDetailsViewRoute:
+        final offer = settings.arguments as OfferModel;
+        return MaterialPageRoute(
+          builder: (_) =>  ProjectOfferDetailsView(offer : offer),
         );
       default:
         return null;

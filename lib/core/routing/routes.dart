@@ -43,5 +43,6 @@ abstract class Routes {
 
   static const String calendarViewRoute = "/calendarView";
   static const String askQuestionRoute = "/askQuestion";
-
+  static const String projectOffersViewRoute = "/projectOffersView";
+  static const String projectOfferDetailsViewRoute = "/projectOfferDetailsView";
 }

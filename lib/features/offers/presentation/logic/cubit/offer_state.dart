@@ -8,12 +8,15 @@ enum OfferStatus {
   updateOfferLoading,
   updateOfferSuccess,
   updateOfferFailure,
-  deleteOfferLoading, 
+  deleteOfferLoading,
   deleteOfferSuccess,
   deleteOfferFailure,
   getAllOffersLoading,
   getAllOffersSuccess,
   getAllOffersFailure,
+  getProjectOffersLoading,
+  getProjectOffersSuccess,
+  getProjectOffersFailure,
 }
 
 extension OfferStatusExtension on OfferStatus {
@@ -30,6 +33,12 @@ extension OfferStatusExtension on OfferStatus {
   bool get isGetAllOffersLoading => this == OfferStatus.getAllOffersLoading;
   bool get isGetAllOffersSuccess => this == OfferStatus.getAllOffersSuccess;
   bool get isGetAllOffersFailure => this == OfferStatus.getAllOffersFailure;
+  bool get isGetProjectOffersLoading =>
+      this == OfferStatus.getProjectOffersLoading;
+  bool get isGetProjectOffersSuccess =>
+      this == OfferStatus.getProjectOffersSuccess;
+  bool get isGetProjectOffersFailure =>
+      this == OfferStatus.getProjectOffersFailure;
 }
 
 class OfferState extends Equatable {
@@ -39,20 +48,30 @@ class OfferState extends Equatable {
     this.message = '',
     this.offerPrice,
     this.allOffers = const [],
-    this.pageIndex = 1,
-    this.pageSize = 8,
-    this.count = 0,
-    this.hasReachedMax = false,
+    this.projectOffers = const [],
+    this.allOffersPageIndex = 1,
+    this.allOffersPageSize = 8,
+    this.allOffersCount = 0,
+    this.allOffersHasReachedMax = false,
+    this.projectOffersPageIndex = 1,
+    this.projectOffersPageSize = 8,
+    this.projectOffersCount = 0,
+    this.projectOffersHasReachedMax = false,
   });
   final OfferStatus status;
   final String errorMessage;
   final String message;
   final double? offerPrice;
   final List<OfferModel> allOffers;
-  final int pageIndex;
-  final int pageSize;
-  final int count;
-  final bool hasReachedMax;
+  final List<OfferModel> projectOffers;
+  final int allOffersPageIndex;
+  final int allOffersPageSize;
+  final int allOffersCount;
+  final bool allOffersHasReachedMax;
+  final int projectOffersPageIndex;
+  final int projectOffersPageSize;
+  final int projectOffersCount;
+  final bool projectOffersHasReachedMax;
 
   OfferState copyWith({
     OfferStatus? status,
@@ -60,10 +79,15 @@ class OfferState extends Equatable {
     String? message,
     double? offerPrice,
     List<OfferModel>? allOffers,
-    int? pageIndex,
-    int? pageSize,
-    int? count,
-    bool? hasReachedMax,
+    List<OfferModel>? projectOffers,
+    int? allOffersPageIndex,
+    int? allOffersPageSize,
+    int? allOffersCount,
+    bool? allOffersHasReachedMax,
+    int? projectOffersPageSize,
+    int? projectOffersPageIndex,
+    int? projectOffersCount,
+    bool? projectOffersHasReachedMax,
   }) {
     return OfferState(
       status: status ?? this.status,
@@ -71,10 +95,19 @@ class OfferState extends Equatable {
       message: message ?? this.message,
       offerPrice: offerPrice ?? this.offerPrice,
       allOffers: allOffers ?? this.allOffers,
-      pageIndex: pageIndex ?? this.pageIndex,
-      pageSize: pageSize ?? this.pageSize,
-      count: count ?? this.count,
-      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      projectOffers: projectOffers ?? this.projectOffers,
+      allOffersPageIndex: allOffersPageIndex ?? this.allOffersPageIndex,
+      allOffersPageSize: allOffersPageSize ?? this.allOffersPageSize,
+      allOffersCount: allOffersCount ?? this.allOffersCount,
+      allOffersHasReachedMax:
+          allOffersHasReachedMax ?? this.allOffersHasReachedMax,
+      projectOffersPageIndex:
+          projectOffersPageIndex ?? this.projectOffersPageIndex,
+      projectOffersPageSize:
+          projectOffersPageSize ?? this.projectOffersPageSize,
+      projectOffersCount: projectOffersCount ?? this.projectOffersCount,
+      projectOffersHasReachedMax:
+          projectOffersHasReachedMax ?? this.projectOffersHasReachedMax,
     );
   }
 
@@ -84,5 +117,15 @@ class OfferState extends Equatable {
         errorMessage,
         message,
         offerPrice,
+        allOffers,
+        projectOffers,
+        allOffersPageIndex,
+        allOffersPageSize,
+        allOffersCount,
+        allOffersHasReachedMax,
+        projectOffersPageIndex,
+        projectOffersHasReachedMax,
+        projectOffersCount,
+        projectOffersPageSize
       ];
 }
