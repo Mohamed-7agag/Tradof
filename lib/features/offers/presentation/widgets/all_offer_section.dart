@@ -10,6 +10,7 @@ import '../../../../core/helpers/extensions.dart';
 import '../../../../core/routing/routes.dart';
 import '../../data/model/offer_model.dart';
 import '../logic/cubit/offer_cubit.dart';
+import '../logic/cubit/offer_state_extension.dart';
 import 'offer_item.dart';
 
 class AllOfferSection extends StatefulWidget {
@@ -28,7 +29,7 @@ class _AllOfferSectionState extends State<AllOfferSection> {
     if (offerCubit.state.allOffers.isNotEmpty) {
       _pagingController.value = PagingState(
         itemList: offerCubit.state.allOffers,
-        nextPageKey: offerCubit.state.allOffersPageIndex + 1,
+        nextPageKey: offerCubit.state.allOffersPagination.pageIndex + 1,
       );
     } else {
       _pagingController.addPageRequestListener((pageKey) {
@@ -53,11 +54,11 @@ class _AllOfferSectionState extends State<AllOfferSection> {
           current.status.isGetAllOffersLoading,
       listener: (context, state) {
         if (state.status.isGetAllOffersSuccess) {
-          if (state.allOffersHasReachedMax) {
+          if (state.allOffersPagination.hasReachedMax) {
             _pagingController.appendLastPage(state.allOffers);
           } else {
             _pagingController.appendPage(
-                state.allOffers, state.allOffersPageIndex + 1);
+                state.allOffers, state.allOffersPagination.pageIndex + 1);
           }
         } else if (state.status.isGetAllOffersFailure) {
           _pagingController.error = state.errorMessage;

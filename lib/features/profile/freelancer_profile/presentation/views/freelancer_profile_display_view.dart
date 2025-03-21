@@ -46,12 +46,15 @@ class FreelancerProfileDisplayView extends StatelessWidget {
                             ratingSum: state.freelancerModel!.ratingSum,
                             reviewCount: state.freelancerModel!.reviewCount,
                           ),
-                          verticalSpace(20),
-                          SocialMediaSection(
-                            userId: state.freelancerModel!.userId,
-                            socialMedia: state.freelancerModel!.socialMedias,
-                            isFreeLancer: true,
-                          ),
+                          if (state
+                              .freelancerModel!.socialMedias.isNotEmpty) ...[
+                            verticalSpace(20),
+                            SocialMediaSection(
+                              userId: state.freelancerModel!.userId,
+                              socialMedia: state.freelancerModel!.socialMedias,
+                              isFreeLancer: true,
+                            ),
+                          ],
                           verticalSpace(30),
                           FreelancerProfileTables(
                             freelancerModel: state.freelancerModel!,

@@ -38,7 +38,7 @@ class OfferCubit extends Cubit<OfferState> {
       final result = await _offerRepo.addOffer(offerModel);
 
       emit(state.copyWith(
-        status: OfferStatus.addOfferSucess,
+        status: OfferStatus.addOfferSuccess,
         message: result,
       ));
     } catch (e) {
@@ -50,29 +50,33 @@ class OfferCubit extends Cubit<OfferState> {
   }
 
   Future<void> getAllOffers({bool loadMore = false}) async {
-    if (loadMore && state.allOffersHasReachedMax) return;
+    if (loadMore && state.allOffersPagination.hasReachedMax) return;
 
-    final nextPageIndex = loadMore ? state.allOffersPageIndex + 1 : 1;
+    final nextPageIndex =
+        loadMore ? state.allOffersPagination.pageIndex + 1 : 1;
 
     emit(state.copyWith(status: OfferStatus.getAllOffersLoading));
     try {
       final response = await _offerRepo.getAllOffers(
         freelancerId: AppConstants.kUserId,
         pageIndex: nextPageIndex,
-        pageSize: state.allOffersPageSize,
+        pageSize: state.allOffersPagination.pageSize,
       );
 
       final newOffers = response.items;
       log('newOffers: ${newOffers.toString()}');
       log('allOffers: ${state.allOffers.toString()}');
-      final hasReachedMax = newOffers.length < state.allOffersPageSize;
+      final hasReachedMax =
+          newOffers.length < state.allOffersPagination.pageSize;
 
       emit(state.copyWith(
         status: OfferStatus.getAllOffersSuccess,
         allOffers: loadMore ? [...state.allOffers, ...newOffers] : newOffers,
-        allOffersPageIndex: nextPageIndex,
-        allOffersHasReachedMax: hasReachedMax,
-        allOffersCount: response.count,
+        allOffersPagination: state.allOffersPagination.copyWith(
+          pageIndex: nextPageIndex,
+          hasReachedMax: hasReachedMax,
+          count: response.count,
+        ),
       ));
     } catch (e) {
       emit(state.copyWith(
@@ -133,25 +137,29 @@ class OfferCubit extends Cubit<OfferState> {
   }
 
   Future<void> getProjectOffers(int projectId, {bool loadMore = false}) async {
-    if (loadMore && state.projectOffersHasReachedMax) return;
+    if (loadMore && state.projectOffersPagination.hasReachedMax) return;
 
-    final nextPageIndex = loadMore ? state.projectOffersPageIndex + 1 : 1;
+    final nextPageIndex =
+        loadMore ? state.projectOffersPagination.pageIndex + 1 : 1;
     emit(state.copyWith(status: OfferStatus.getProjectOffersLoading));
     try {
       final response = await _offerRepo.getProjectOffers(
         projectId: projectId,
         pageIndex: nextPageIndex,
-        pageSize: state.allOffersPageSize,
+        pageSize: state.projectOffersPagination.pageSize,
       );
       final newOffers = response.items;
-      final hasReachedMax = newOffers.length < state.allOffersPageSize;
+      final hasReachedMax =
+          newOffers.length < state.projectOffersPagination.pageSize;
       emit(state.copyWith(
         status: OfferStatus.getProjectOffersSuccess,
         projectOffers:
             loadMore ? [...state.projectOffers, ...newOffers] : newOffers,
-        projectOffersPageIndex: nextPageIndex,
-        projectOffersHasReachedMax: hasReachedMax,
-        projectOffersCount: response.count,
+        projectOffersPagination: state.projectOffersPagination.copyWith(
+          pageIndex: nextPageIndex,
+          hasReachedMax: hasReachedMax,
+          count: response.count,
+        ),
       ));
     } catch (e) {
       emit(state.copyWith(

@@ -7,6 +7,7 @@ import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../../../projects/presentation/logic/file_cubit.dart';
 import '../logic/cubit/offer_cubit.dart';
+import '../logic/cubit/offer_state_extension.dart';
 
 class AddOfferButton extends StatelessWidget {
   const AddOfferButton({

@@ -9,6 +9,7 @@ import '../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../data/model/offer_model.dart';
 import '../logic/cubit/offer_cubit.dart';
+import '../logic/cubit/offer_state_extension.dart';
 import '../widgets/project_offer_item.dart';
 
 class ProjectOffersView extends StatefulWidget {
@@ -28,7 +29,7 @@ class _ProjectOffersViewState extends State<ProjectOffersView> {
     if (offerCubit.state.projectOffers.isNotEmpty) {
       _pagingController.value = PagingState(
         itemList: offerCubit.state.projectOffers,
-        nextPageKey: offerCubit.state.projectOffersPageIndex + 1,
+        nextPageKey: offerCubit.state.projectOffersPagination.pageIndex + 1,
       );
     } else {
       _pagingController.addPageRequestListener((pageKey) {
@@ -52,17 +53,14 @@ class _ProjectOffersViewState extends State<ProjectOffersView> {
         actionIcon: HugeIcons.strokeRoundedClipboard,
       ),
       body: BlocListener<OfferCubit, OfferState>(
-        listenWhen: (previous, current) =>
-            current.status.isGetProjectOffersSuccess ||
-            current.status.isGetProjectOffersFailure ||
-            current.status.isGetProjectOffersLoading,
+        listenWhen: (previous, current) => _listenWhen(current),
         listener: (context, state) {
           if (state.status.isGetProjectOffersSuccess) {
-            if (state.projectOffersHasReachedMax) {
+            if (state.projectOffersPagination.hasReachedMax) {
               _pagingController.appendLastPage(state.projectOffers);
             } else {
-              _pagingController.appendPage(
-                  state.projectOffers, state.projectOffersPageIndex + 1);
+              _pagingController.appendPage(state.projectOffers,
+                  state.projectOffersPagination.pageIndex + 1);
             }
           } else if (state.status.isGetProjectOffersFailure) {
             _pagingController.error = state.errorMessage;
@@ -105,5 +103,11 @@ class _ProjectOffersViewState extends State<ProjectOffersView> {
         ),
       ),
     );
+  }
+
+  bool _listenWhen(OfferState current) {
+    return current.status.isGetProjectOffersSuccess ||
+        current.status.isGetProjectOffersFailure ||
+        current.status.isGetProjectOffersLoading;
   }
 }

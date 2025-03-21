@@ -44,12 +44,14 @@ class CompanyProfileDisplayView extends StatelessWidget {
                             ratingSum: state.companyModel!.ratingSum,
                             reviewCount: state.companyModel!.reviewCount,
                           ),
-                          verticalSpace(20),
-                          SocialMediaSection(
-                            userId: state.companyModel!.id,
-                            socialMedia: state.companyModel!.socialMedia,
-                            isFreeLancer: false,
-                          ),
+                          if (state.companyModel!.socialMedia.isNotEmpty) ...[
+                            verticalSpace(20),
+                            SocialMediaSection(
+                              userId: state.companyModel!.id,
+                              socialMedia: state.companyModel!.socialMedia,
+                              isFreeLancer: false,
+                            ),
+                          ],
                           verticalSpace(30),
                           SlideInUp(
                             from: 150,
