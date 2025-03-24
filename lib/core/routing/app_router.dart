@@ -13,6 +13,8 @@ import '../../features/calendar/presentation/views/calender_view.dart';
 import '../../features/offers/data/model/offer_model.dart';
 import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../features/offers/presentation/views/add_offer_view.dart';
+import '../../features/offers/presentation/views/project_offer_details_view.dart';
+import '../../features/offers/presentation/views/project_offers_view.dart';
 import '../../features/offers/presentation/views/update_offer_view.dart';
 import '../../features/profile/company_profile/data/model/company_model.dart';
 import '../../features/profile/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
@@ -31,8 +33,6 @@ import '../../features/projects/presentation/views/company_project_details_view.
 import '../../features/projects/presentation/views/company_project_workspace_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_workspace_view.dart';
-import '../../features/offers/presentation/views/project_offer_details_view.dart';
-import '../../features/offers/presentation/views/project_offers_view.dart';
 import '../../features/settings/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
 import '../../features/settings/presentation/logic/feedback_cubit/feedback_cubit.dart';
 import '../../features/settings/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
@@ -210,11 +210,17 @@ class AppRouter {
         );
       case Routes.companyProjectWorkspaceViewRoute:
         return MaterialPageRoute(
-          builder: (_) => const CompanyProjectWorkspaceView(),
+          builder: (_) => BlocProvider(
+            create: (context) => ProjectCubit(getIt()),
+            child: const CompanyProjectWorkspaceView(),
+          ),
         );
       case Routes.freelancerProjectWorkspaceViewRoute:
         return MaterialPageRoute(
-          builder: (_) => const FreelancerProjectWorkspaceView(),
+          builder: (_) => BlocProvider(
+            create: (context) => ProjectCubit(getIt()),
+            child: const FreelancerProjectWorkspaceView(),
+          ),
         );
       case Routes.freelancerProjectDetailsViewRoute:
         final data = settings.arguments as ProjectModel;
@@ -290,7 +296,7 @@ class AppRouter {
         final offer = settings.arguments as OfferModel;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) =>  OfferCubit(getIt()),
+            create: (context) => OfferCubit(getIt()),
             child: ProjectOfferDetailsView(offer: offer),
           ),
         );

@@ -9,6 +9,7 @@ import '../../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../../core/utils/widgets/custom_refresh_indicator.dart';
 import '../../../../projects/data/models/project_model.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart';
+import '../../../../projects/presentation/logic/project_cubit/project_extenstion.dart';
 import '../../../../projects/presentation/widgets/project_item.dart';
 import '../../../../profile/company_profile/data/model/company_model.dart';
 

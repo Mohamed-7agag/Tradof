@@ -5,15 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 import '../../../core/helpers/exit_dialog.dart';
-import '../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
-import '../widgets/custom_bottom_nav_bar.dart';
 import '../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../core/utils/widgets/custom_loading_widget.dart';
-import '../../projects/presentation/views/create_project_view.dart';
 import '../../dashboard/company_dashboard/presentation/views/company_dashboard_view.dart';
 import '../../profile/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import '../../profile/company_profile/presentation/views/company_profile_view.dart';
+import '../../projects/presentation/views/create_project_view.dart';
 import '../../settings/presentation/views/company_setting_view.dart';
+import '../widgets/custom_bottom_nav_bar.dart';
 
 class CompanyBottomNavBarView extends StatefulWidget {
   const CompanyBottomNavBarView({super.key});
@@ -25,14 +24,6 @@ class CompanyBottomNavBarView extends StatefulWidget {
 
 class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
   int currentIndex = 0;
-
-  @override
-  void initState() {
-    if (!context.read<MetaDataCubit>().state.status.isFetchAllMetaDataSuccess) {
-      context.read<MetaDataCubit>().fetchAllMetaData();
-    }
-    super.initState();
-  }
 
   List<Widget> _buildIndexedStackChildren(CompanyProfileState state) {
     return [

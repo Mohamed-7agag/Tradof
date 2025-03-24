@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) {
         return BlocProvider(
+          lazy: false,
           create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
           child: _myMaterialApp(),
         );

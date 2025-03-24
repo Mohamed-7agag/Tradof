@@ -22,7 +22,8 @@ class ProjectRepoImpl implements ProjectRepo {
   }
 
   @override
-  Future<void> updateProject(CreateProjectRequestModel model, int projectId) async {
+  Future<void> updateProject(
+      CreateProjectRequestModel model, int projectId) async {
     await _apiServices.put(
       EndPoint.project,
       data: {
@@ -49,6 +50,7 @@ class ProjectRepoImpl implements ProjectRepo {
   Future<List<ProjectModel>> getStartedProjects() async {
     final response = await _apiServices.get(
       EndPoint.getStartedProjects,
+      queryParameters: {"companyId": AppConstants.kUserId},
     );
     return List<ProjectModel>.from(
       response.map((project) => ProjectModel.fromJson(project)),
@@ -70,5 +72,19 @@ class ProjectRepoImpl implements ProjectRepo {
       'pageSize': pageSize,
     });
     return ProjectResponseModel.fromJson(response);
+  }
+
+  @override
+  Future<void> sendProjectReview({required int projectId}) async {
+    await _apiServices.put(
+      EndPoint.sendProjectReview(projectId),
+    );
+  }
+
+  @override
+  Future<void> markProjectAsFinished({required int projectId}) async {
+    await _apiServices.put(
+      EndPoint.markProjectAsFinished(projectId),
+    );
   }
 }

@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 import '../../../core/helpers/exit_dialog.dart';
-import '../../../core/utils/logic/meta_data_cubit/meta_data_cubit.dart';
 import '../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../dashboard/freelancer_dashboard/presentation/views/freelance_dashbord_view.dart';
@@ -26,13 +25,6 @@ class FreelancerBottomNavBarView extends StatefulWidget {
 class _FreelancerBottomNavBarViewState
     extends State<FreelancerBottomNavBarView> {
   int currentIndex = 0;
-  @override
-  void initState() {
-    super.initState();
-    if (!context.read<MetaDataCubit>().state.status.isFetchAllMetaDataSuccess) {
-      context.read<MetaDataCubit>().fetchAllMetaData();
-    }
-  }
 
   List<Widget> _buildIndexedStackChildren(FreelancerProfileState state) {
     return [

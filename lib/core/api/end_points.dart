@@ -20,6 +20,8 @@ abstract class EndPoint {
   static String getUpcomingProjects = 'project/allincomingprojects';
   static String getStartedProjects = 'project/allstartedprojects';
   static String deleteProject(int projectId) => 'project/$projectId';
+  static String sendProjectReview(int projectId) => 'project/SendReviewRequest/$projectId';
+  static String markProjectAsFinished(int projectId) => 'project/MarkAsFinished/$projectId';
 
   //company
   static String changeCompanyPassword(String id) {

@@ -214,4 +214,38 @@ class ProjectCubit extends Cubit<ProjectState> {
       files: await prepareFiles(files),
     );
   }
+
+  //! send project review
+  Future<void> sendProjectReview(int projectId) async {
+    emit(state.copyWith(status: ProjectStatus.sendReviewLoading));
+    try {
+      await _projectRepo.sendProjectReview(projectId: projectId);
+      emit(state.copyWith(
+        status: ProjectStatus.sendReviewSuccess,
+        message: 'Review Sent Successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.sendReviewFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! mark project as finished
+  Future<void> markProjectAsFinished(int projectId) async {
+    emit(state.copyWith(status: ProjectStatus.markAsFinishedLoading));
+    try {
+      await _projectRepo.markProjectAsFinished(projectId: projectId);
+      emit(state.copyWith(
+        status: ProjectStatus.markAsFinishedSuccess,
+        message: 'Project Marked as Finished Successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.markAsFinishedFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
 }

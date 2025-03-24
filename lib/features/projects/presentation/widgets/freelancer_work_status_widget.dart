@@ -29,13 +29,8 @@ class FreelancerWorkStatusWidget extends StatelessWidget {
                   child: const AttachmentFilesSection(),
                 ),
                 Expanded(child: verticalSpace(40)),
-                Align(
-                  child: CustomButton(
-                    text: 'Review Request',
-                    color: AppColors.lightOrange,
-                    width: 0.6,
-                    onPressed: () {},
-                  ),
+                const Align(
+                  child: FreelancerWorkStatusButton(),
                 ),
                 verticalSpace(20),
               ],
@@ -43,6 +38,20 @@ class FreelancerWorkStatusWidget extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class FreelancerWorkStatusButton extends StatelessWidget {
+  const FreelancerWorkStatusButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomButton(
+      text: 'Review Request',
+      color: AppColors.lightOrange,
+      width: 0.6,
+      onPressed: () {},
     );
   }
 }
