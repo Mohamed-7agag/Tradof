@@ -11,20 +11,18 @@ class CalendarRepoImpl implements CalendarRepo {
       : _apiServices = apiServices;
 
   @override
-  Future<dynamic> createCalendar({required String userId}) async {
+  Future<dynamic> createCalendar() async {
     return await _apiServices.post(
       EndPoint.calendar,
-      data: {'userId': userId},
     );
   }
 
   @override
   Future<EventModel> createEvent({
     required EventRequestModel model,
-    required String calendarId,
   }) async {
     final response = await _apiServices.post(
-      EndPoint.createEvent(calendarId),
+      EndPoint.createEvent,
       data: model.toJson(),
     );
     return EventModel.fromJson(response['event']);
@@ -32,14 +30,13 @@ class CalendarRepoImpl implements CalendarRepo {
 
   @override
   Future<List<EventModel>> getAllEvents({
-    required String calendarId,
     required int year,
     required int month,
     required int day,
   }) async {
-    final response = await _apiServices.get(EndPoint.getAllEvents(calendarId),
+    final response = await _apiServices.get(EndPoint.getAllEvents,
         queryParameters: {'day': day, 'month': month, 'year': year});
-    return List<EventModel>.from(response['events'].map(
+    return List<EventModel>.from(response['data'].map(
       (e) => EventModel.fromJson(e),
     ));
   }
@@ -49,7 +46,7 @@ class CalendarRepoImpl implements CalendarRepo {
     required EventRequestModel model,
     required String eventId,
   }) async {
-    final response = await _apiServices.put(
+    final response = await _apiServices.patch(
       EndPoint.updateOrDeleteEvent(eventId),
       data: model.toJson(),
     );

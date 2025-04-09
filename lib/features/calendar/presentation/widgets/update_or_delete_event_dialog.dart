@@ -52,8 +52,8 @@ showUpdateOrDeleteEventDialog(BuildContext context, EventModel event) {
       final updatedEvent = EventRequestModel(
         title: titleController.text,
         description: descriptionController.text,
-        startTime: event.startTime,
-        endTime: event.endTime,
+        startDate: event.startDate,
+        endDate: event.endDate,
       );
       context.read<CalendarCubit>().updateEvent(
             eventId: event.id,

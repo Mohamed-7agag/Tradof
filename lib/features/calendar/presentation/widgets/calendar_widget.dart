@@ -79,12 +79,12 @@ class EventDataSource extends CalendarDataSource {
 
   @override
   DateTime getStartTime(int index) {
-    return appointments![index].startTime;
+    return appointments![index].startDate;
   }
 
   @override
   DateTime getEndTime(int index) {
-    return appointments![index].endTime;
+    return appointments![index].endDate;
   }
 
   @override

@@ -1,6 +1,6 @@
 abstract class EndPoint {
   static const String baseUrl = 'https://tradof.runasp.net/api/';
-  static const String baseUrl2 = 'https://tradof-api.vercel.app/api/';
+  static const String baseUrl2 = 'https://tradofserver.azurewebsites.net/api/';
   // auth
   static const String login = 'auth/log-in';
   static const String registerFreelancer = 'auth/register-freelancer';
@@ -20,8 +20,10 @@ abstract class EndPoint {
   static String getUpcomingProjects = 'project/allincomingprojects';
   static String getStartedProjects = 'project/allstartedprojects';
   static String deleteProject(int projectId) => 'project/$projectId';
-  static String sendProjectReview(int projectId) => 'project/SendReviewRequest/$projectId';
-  static String markProjectAsFinished(int projectId) => 'project/MarkAsFinished/$projectId';
+  static String sendProjectReview(int projectId) =>
+      'project/SendReviewRequest/$projectId';
+  static String markProjectAsFinished(int projectId) =>
+      'project/MarkAsFinished/$projectId';
 
   //company
   static String changeCompanyPassword(String id) {
@@ -94,19 +96,15 @@ abstract class EndPoint {
 
   static String offer = 'proposal';
   static String feedback = 'feedback/';
-  static String calendar = 'calendar/';
+  static String calendar = 'calendar';
   static String askQuestion = 'askQuestion';
   static String acceptOffer = 'proposal/accept';
   static String denyOffer = 'proposal/deny';
-  static String createEvent(String calendarId) {
-    return 'calendar/$calendarId/event';
-  }
+  static String createEvent = 'calendar/event';
 
   static String updateOrDeleteEvent(String eventId) {
-    return 'calendar/event/$eventId';
+    return 'calendar/$eventId';
   }
 
-  static String getAllEvents(String calendarId) {
-    return 'calendar/events/$calendarId';
-  }
+  static String getAllEvents = 'calendar/events';
 }

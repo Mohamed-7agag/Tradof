@@ -53,8 +53,8 @@ void showAddEventDialog(BuildContext context, DateTime selectedDate) {
       final event = EventRequestModel(
         title: titleController.text,
         description: descriptionController.text,
-        startTime: startTime,
-        endTime: endTime,
+        startDate: startTime,
+        endDate: endTime,
       );
       context.read<CalendarCubit>().createEvent(model: event);
     },

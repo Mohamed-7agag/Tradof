@@ -18,7 +18,7 @@ class CalendarCubit extends Cubit<CalendarState> {
     emit(state.copyWith(status: CalendarStatus.createCalendarLoading));
     try {
       final response =
-          await _calendarRepo.createCalendar(userId: AppConstants.kUserId);
+          await _calendarRepo.createCalendar();
       CacheHelper.setData(
           key: AppConstants.calenderId, value: response['calendar']['_id']);
       emit(state.copyWith(
@@ -39,7 +39,6 @@ class CalendarCubit extends Cubit<CalendarState> {
     try {
       final response = await _calendarRepo.createEvent(
         model: model,
-        calendarId: CacheHelper.getString(AppConstants.calenderId),
       );
       emit(state.copyWith(
         status: CalendarStatus.createOrUpdateOrDeleteEventSuccess,
@@ -65,7 +64,6 @@ class CalendarCubit extends Cubit<CalendarState> {
     emit(state.copyWith(status: CalendarStatus.getAllEventsLoading));
     try {
       final allEvents = await _calendarRepo.getAllEvents(
-        calendarId: CacheHelper.getString(AppConstants.calenderId),
         year : year,
         month : month,
         day : day,

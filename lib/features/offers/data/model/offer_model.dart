@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class OfferModel extends Equatable {
   final int id;
   final int projectId;
-  final int freelancerId;
+  final String freelancerId;
   final int proposalStatus;
   final String proposalDescription;
   final int days;

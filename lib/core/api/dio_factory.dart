@@ -144,7 +144,18 @@ class NonAuthenticatedDioFactory {
       ..options.contentType = 'application/json'
       ..options.headers = {'Accept': 'application/json'};
     _addLoggingInterceptor(dio);
+     addDioHeaders();
+    
     return dio;
+  }
+
+static Future<void> addDioHeaders() async {
+    final userToken = await CacheHelper.getSecuredString(AppConstants.token);
+    _dio?.options.headers = {'Authorization': 'Bearer $userToken'};
+  }
+
+  static void setTokenIntoHeaderAfterLogin(String token) {
+    _dio?.options.headers = {'Authorization': 'Bearer $token'};
   }
 
   // Add logging interceptor (optional)
