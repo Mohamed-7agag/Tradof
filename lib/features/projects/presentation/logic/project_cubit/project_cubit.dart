@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/errors/exception.dart';
 import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/helpers/pagination_class.dart';
 import '../../../../../core/helpers/prepare_files.dart';
+import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/models/language_model.dart';
 import '../../../data/models/create_project_request_model.dart';
 import '../../../data/models/project_model.dart';
@@ -17,13 +19,35 @@ class ProjectCubit extends Cubit<ProjectState> {
   final ProjectRepo _projectRepo;
 
 //! get upcoming projects
-  Future<void> getUpcomingProjects() async {
+  Future<void> getUpcomingProjects({bool loadMore = false}) async {
+    if (loadMore && state.upcomingProjectsPagination.hasReachedMax) return;
+
+    final nextPageIndex =
+        loadMore ? state.upcomingProjectsPagination.pageIndex + 1 : 1;
+
     emit(state.copyWith(status: ProjectStatus.getUpcomingProjectsLoading));
+
     try {
-      final projects = await _projectRepo.getUpcomingProjects();
+      final response = await _projectRepo.getUpcomingProjects(
+        companyId: AppConstants.kUserId,
+        pageIndex: nextPageIndex,
+        pageSize: state.upcomingProjectsPagination.pageSize,
+      );
+
+      final newProjects = response.items;
+      final hasReachedMax =
+          newProjects.length < state.upcomingProjectsPagination.pageSize;
+
       emit(state.copyWith(
         status: ProjectStatus.getUpcomingProjectsSuccess,
-        upcomingProjects: projects,
+        upcomingProjects: loadMore
+            ? [...state.upcomingProjects, ...newProjects]
+            : newProjects,
+        upcomingProjectsPagination: state.upcomingProjectsPagination.copyWith(
+          pageIndex: nextPageIndex,
+          hasReachedMax: hasReachedMax,
+          count: response.count,
+        ),
       ));
     } catch (e) {
       emit(state.copyWith(
@@ -34,13 +58,34 @@ class ProjectCubit extends Cubit<ProjectState> {
   }
 
   //! get started projects
-  Future<void> getStartedProjects() async {
+  Future<void> getStartedProjects({bool loadMore = false}) async {
+    if (loadMore && state.startedProjectsPagination.hasReachedMax) return;
+
+    final nextPageIndex =
+        loadMore ? state.startedProjectsPagination.pageIndex + 1 : 1;
+
     emit(state.copyWith(status: ProjectStatus.getStartedtProjectsLoading));
+
     try {
-      final projects = await _projectRepo.getStartedProjects();
+      final response = await _projectRepo.getStartedProjects(
+        pageIndex: nextPageIndex,
+        pageSize: state.startedProjectsPagination.pageSize,
+        companyId: AppConstants.kUserId,
+      );
+
+      final newProjects = response.items;
+      final hasReachedMax =
+          newProjects.length < state.startedProjectsPagination.pageSize;
+
       emit(state.copyWith(
         status: ProjectStatus.getStartedtProjectsSuccess,
-        startedProjects: projects,
+        startedProjects:
+            loadMore ? [...state.startedProjects, ...newProjects] : newProjects,
+        startedProjectsPagination: state.startedProjectsPagination.copyWith(
+          pageIndex: nextPageIndex,
+          hasReachedMax: hasReachedMax,
+          count: response.count,
+        ),
       ));
     } catch (e) {
       emit(state.copyWith(
@@ -50,34 +95,77 @@ class ProjectCubit extends Cubit<ProjectState> {
     }
   }
 
+  //! get all projects
   Future<void> getAllProjects({bool loadMore = false}) async {
-    if (loadMore && state.hasReachedMax) return;
+    if (loadMore && state.allProjectsPagination.hasReachedMax) return;
 
-    final nextPageIndex = loadMore ? state.pageIndex + 1 : 1;
+    final nextPageIndex =
+        loadMore ? state.allProjectsPagination.pageIndex + 1 : 1;
 
     emit(state.copyWith(status: ProjectStatus.getAllProjectsLoading));
 
     try {
       final response = await _projectRepo.getAllProjects(
         pageIndex: nextPageIndex,
-        pageSize: state.pageSize,
+        pageSize: state.allProjectsPagination.pageSize,
       );
 
       final newProjects = response.items;
-      final hasReachedMax = newProjects.length < state.pageSize;
+      final hasReachedMax =
+          newProjects.length < state.allProjectsPagination.pageSize;
 
       emit(state.copyWith(
         status: ProjectStatus.getAllProjectsSuccess,
         allProjects: loadMore
             ? [...state.upcomingProjects, ...newProjects]
             : newProjects,
-        pageIndex: nextPageIndex,
-        hasReachedMax: hasReachedMax,
-        count: response.count,
+        allProjectsPagination: state.allProjectsPagination.copyWith(
+          pageIndex: nextPageIndex,
+          hasReachedMax: hasReachedMax,
+          count: response.count,
+        ),
       ));
     } catch (e) {
       emit(state.copyWith(
         status: ProjectStatus.getAllProjectsFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! get current projects
+  Future<void> getCurrentProjects({bool loadMore = false}) async {
+    if (loadMore && state.currentProjectsPagination.hasReachedMax) return;
+
+    final nextPageIndex =
+        loadMore ? state.currentProjectsPagination.pageIndex + 1 : 1;
+
+    emit(state.copyWith(status: ProjectStatus.currentProjectsLoading));
+
+    try {
+      final response = await _projectRepo.currentProjects(
+        pageIndex: nextPageIndex,
+        pageSize: state.allProjectsPagination.pageSize,
+        freelancerId: AppConstants.kUserId,
+      );
+
+      final newProjects = response.items;
+      final hasReachedMax =
+          newProjects.length < state.currentProjectsPagination.pageSize;
+
+      emit(state.copyWith(
+        status: ProjectStatus.currentProjectsSuccess,
+        currentProjects:
+            loadMore ? [...state.currentProjects, ...newProjects] : newProjects,
+        currentProjectsPagination: state.currentProjectsPagination.copyWith(
+          pageIndex: nextPageIndex,
+          hasReachedMax: hasReachedMax,
+          count: response.count,
+        ),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.currentProjectsFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

@@ -1,41 +1,113 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../../core/utils/widgets/custom_loading_widget.dart';
+import '../../../../../core/utils/widgets/custom_refresh_indicator.dart';
+import '../../../../projects/data/models/project_model.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_extenstion.dart';
 import '../../../../projects/presentation/widgets/project_item.dart';
 
-class StartedProjectsListView extends StatelessWidget {
+class StartedProjectsListView extends StatefulWidget {
   const StartedProjectsListView({super.key});
 
   @override
+  State<StartedProjectsListView> createState() =>
+      _StartedProjectsListViewState();
+}
+
+class _StartedProjectsListViewState extends State<StartedProjectsListView> {
+  late final PagingController<int, ProjectModel> _pagingController;
+
+  @override
+  void initState() {
+    _pagingController = PagingController(firstPageKey: 1);
+    final projectCubit = context.read<ProjectCubit>();
+    if (projectCubit.state.startedProjects.isNotEmpty) {
+      _pagingController.value = PagingState(
+        itemList: projectCubit.state.startedProjects,
+        nextPageKey: projectCubit.state.startedProjectsPagination.pageIndex + 1,
+      );
+    } else {
+      _pagingController.addPageRequestListener((pageKey) {
+        projectCubit.getStartedProjects(loadMore: pageKey != 1);
+      });
+    }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProjectCubit, ProjectState>(
-      buildWhen: (previous, current) => _buildWhen(current),
-      builder: (context, state) {
+    return BlocListener<ProjectCubit, ProjectState>(
+      listenWhen: (previous, current) => _buildWhen(current),
+      listener: (context, state) {
         if (state.status.isGetStartedtProjectsSuccess) {
-          return SliverList.builder(
-            itemCount: state.startedProjects.length,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(bottom: 14),
-              child: ProjectItem(
-                project: state.startedProjects[index],
-                onTap: () {},
-              ),
-            ),
-          );
+          if (state.startedProjectsPagination.hasReachedMax) {
+            _pagingController.appendLastPage(state.startedProjects);
+          } else {
+            _pagingController.appendPage(state.startedProjects,
+                state.startedProjectsPagination.pageIndex + 1);
+          }
         } else if (state.status.isGetStartedtProjectsFailure) {
-          return SliverToBoxAdapter(
-            child: CustomFailureWidget(text: state.errorMessage),
-          );
+          _pagingController.error = state.errorMessage;
         }
-        return const SliverToBoxAdapter(
-          child: CustomLoadingWidget(),
-        );
       },
+      child: CustomRefreshIndicator(
+        onRefresh: () async => _refreshData(),
+        child: PagedListView<int, ProjectModel>(
+          pagingController: _pagingController,
+          physics: const NeverScrollableScrollPhysics(),
+          builderDelegate: PagedChildBuilderDelegate<ProjectModel>(
+            itemBuilder: (context, project, index) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 14),
+                child: ProjectItem(
+                  project: project,
+                  onTap: () {
+                    // context.pushNamed(
+                    //   Routes.freelancerProjectDetailsViewRoute,
+                    //   arguments: project,
+                    // );
+                  },
+                ),
+              );
+            },
+            firstPageProgressIndicatorBuilder: (context) {
+              return const CustomLoadingWidget();
+            },
+            newPageProgressIndicatorBuilder: (context) {
+              return const CustomLoadingWidget();
+            },
+            firstPageErrorIndicatorBuilder: (context) {
+              return CustomFailureWidget(
+                text: _pagingController.error?.toString() ??
+                    'Error Occurred, please try again',
+                onRetry: () => _pagingController.retryLastFailedRequest(),
+              );
+            },
+            noItemsFoundIndicatorBuilder: (context) {
+              return CustomFailureWidget(
+                text: _pagingController.error?.toString() ??
+                    'No started projects found',
+              );
+            },
+          ),
+        ),
+      ),
     );
+  }
+
+  void _refreshData() {
+    _pagingController.refresh();
+    context.read<ProjectCubit>().getStartedProjects();
   }
 
   bool _buildWhen(ProjectState state) =>

@@ -70,7 +70,7 @@ class _AllOfferSectionState extends State<AllOfferSection> {
           onRefresh: () async => _refreshData(),
           child: PagedListView<int, OfferModel>(
             pagingController: _pagingController,
-            padding: const EdgeInsets.only(top: 20, bottom: 100),
+            padding: const EdgeInsets.only(top: 20, bottom: 80),
             physics: const BouncingScrollPhysics(),
             builderDelegate: PagedChildBuilderDelegate<OfferModel>(
               itemBuilder: (context, offer, index) {
@@ -115,6 +115,6 @@ class _AllOfferSectionState extends State<AllOfferSection> {
 
   void _refreshData() {
     _pagingController.refresh();
-    context.read<OfferCubit>().getAllOffers();
+    //context.read<OfferCubit>().getAllOffers();
   }
 }

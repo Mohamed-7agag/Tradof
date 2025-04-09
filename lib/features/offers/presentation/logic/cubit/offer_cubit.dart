@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/errors/exception.dart';
+import '../../../../../core/helpers/pagination_class.dart';
 import '../../../../../core/helpers/prepare_files.dart';
 import '../../../../../core/utils/app_constants.dart';
 import '../../../data/model/add_offer_request_model.dart';
@@ -64,8 +63,6 @@ class OfferCubit extends Cubit<OfferState> {
       );
 
       final newOffers = response.items;
-      log('newOffers: ${newOffers.toString()}');
-      log('allOffers: ${state.allOffers.toString()}');
       final hasReachedMax =
           newOffers.length < state.allOffersPagination.pageSize;
 

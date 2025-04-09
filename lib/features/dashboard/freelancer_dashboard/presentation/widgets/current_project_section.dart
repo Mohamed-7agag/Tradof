@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helpers/spacing.dart';
+import 'current_projects_list_view.dart';
 import 'freelancer_statistic_card.dart';
 
 class CurrentProjectsSection extends StatelessWidget {
@@ -9,29 +10,25 @@ class CurrentProjectsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          verticalSpace(40),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: List.generate(3, (index) {
-                return Padding(
-                  padding: EdgeInsets.only(left: index == 0 ? 8 : 0),
-                  child: const FreelancerStatisticCard(),
-                );
-              }),
+    return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
+      slivers: [
+        SliverToBoxAdapter(child: verticalSpace(40)),
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: 120.h,
+            child: ListView.builder(
+              itemCount: 3,
+              itemBuilder: (_, index) => const FreelancerStatisticCard(),
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
             ),
           ),
-          verticalSpace(25),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: const Column(),
-          ),
-          verticalSpace(100),
-        ],
-      ),
+        ),
+        const SliverFillRemaining(
+          child: CurrentProjectsListView(),
+        ),
+      ],
     );
   }
 }

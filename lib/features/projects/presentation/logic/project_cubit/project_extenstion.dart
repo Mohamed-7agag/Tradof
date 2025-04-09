@@ -44,4 +44,10 @@ extension ProjectStatusX on ProjectStatus {
       this == ProjectStatus.markAsFinishedSuccess;
   bool get isMarkAsFinishedFailure =>
       this == ProjectStatus.markAsFinishedFailure;
+  bool get isCurrentProjectsLoading =>
+      this == ProjectStatus.currentProjectsLoading;
+  bool get isCurrentProjectsSuccess =>
+      this == ProjectStatus.currentProjectsSuccess;
+  bool get isCurrentProjectsFailure =>
+      this == ProjectStatus.currentProjectsFailure;
 }

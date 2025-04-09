@@ -2,7 +2,6 @@ import '../../../../core/api/api_service.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../models/create_project_request_model.dart';
-import '../models/project_model.dart';
 import '../models/project_response_model.dart';
 import 'project_repo.dart';
 
@@ -14,7 +13,7 @@ class ProjectRepoImpl implements ProjectRepo {
   @override
   Future<void> createProject(CreateProjectRequestModel model) async {
     await _apiServices.post(
-      EndPoint.project,
+      EndPoint.allProjects,
       data: model.toJson(),
       queryParameters: {"companyId": AppConstants.kUserId},
       isFormData: true,
@@ -25,7 +24,7 @@ class ProjectRepoImpl implements ProjectRepo {
   Future<void> updateProject(
       CreateProjectRequestModel model, int projectId) async {
     await _apiServices.put(
-      EndPoint.project,
+      EndPoint.allProjects,
       data: {
         "id": projectId,
         ...model.toJson(),
@@ -36,25 +35,37 @@ class ProjectRepoImpl implements ProjectRepo {
   }
 
   @override
-  Future<List<ProjectModel>> getUpcomingProjects() async {
+  Future<ProjectResponseModel> getUpcomingProjects({
+    required int pageIndex,
+    required int pageSize,
+    required String companyId,
+  }) async {
     final response = await _apiServices.get(
       EndPoint.getUpcomingProjects,
-      queryParameters: {"companyId": AppConstants.kUserId},
+      queryParameters: {
+        'companyId': companyId,
+        'pageIndex': pageIndex,
+        'pageSize': pageSize,
+      },
     );
-    return List<ProjectModel>.from(
-      response.map((project) => ProjectModel.fromJson(project)),
-    );
+    return ProjectResponseModel.fromJson(response);
   }
 
   @override
-  Future<List<ProjectModel>> getStartedProjects() async {
+  Future<ProjectResponseModel> getStartedProjects({
+    required int pageIndex,
+    required int pageSize,
+    required String companyId,
+  }) async {
     final response = await _apiServices.get(
       EndPoint.getStartedProjects,
-      queryParameters: {"companyId": AppConstants.kUserId},
+      queryParameters: {
+        'companyId': companyId,
+        'pageIndex': pageIndex,
+        'pageSize': pageSize,
+      },
     );
-    return List<ProjectModel>.from(
-      response.map((project) => ProjectModel.fromJson(project)),
-    );
+    return ProjectResponseModel.fromJson(response);
   }
 
   @override
@@ -67,10 +78,30 @@ class ProjectRepoImpl implements ProjectRepo {
   @override
   Future<ProjectResponseModel> getAllProjects(
       {required int pageIndex, required int pageSize}) async {
-    final response = await _apiServices.get(EndPoint.project, queryParameters: {
-      'pageIndex': pageIndex,
-      'pageSize': pageSize,
-    });
+    final response = await _apiServices.get(
+      EndPoint.allProjects,
+      queryParameters: {
+        'pageIndex': pageIndex,
+        'pageSize': pageSize,
+      },
+    );
+    return ProjectResponseModel.fromJson(response);
+  }
+
+  @override
+  Future<ProjectResponseModel> currentProjects({
+    required int pageIndex,
+    required int pageSize,
+    required String freelancerId,
+  }) async {
+    final response = await _apiServices.get(
+      EndPoint.currentProjects,
+      queryParameters: {
+        'freelancerId': freelancerId,
+        'pageIndex': pageIndex,
+        'pageSize': pageSize,
+      },
+    );
     return ProjectResponseModel.fromJson(response);
   }
 

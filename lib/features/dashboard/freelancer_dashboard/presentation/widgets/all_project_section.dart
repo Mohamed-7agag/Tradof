@@ -29,7 +29,7 @@ class _AllProjectsSectionState extends State<AllProjectsSection> {
     if (projectCubit.state.allProjects.isNotEmpty) {
       _pagingController.value = PagingState(
         itemList: projectCubit.state.allProjects,
-        nextPageKey: projectCubit.state.pageIndex + 1,
+        nextPageKey: projectCubit.state.allProjectsPagination.pageIndex + 1,
       );
     } else {
       _pagingController.addPageRequestListener((pageKey) {
@@ -54,11 +54,11 @@ class _AllProjectsSectionState extends State<AllProjectsSection> {
           current.status.isGetAllProjectsLoading,
       listener: (context, state) {
         if (state.status.isGetAllProjectsSuccess) {
-          if (state.hasReachedMax) {
+          if (state.allProjectsPagination.hasReachedMax) {
             _pagingController.appendLastPage(state.allProjects);
           } else {
             _pagingController.appendPage(
-                state.allProjects, state.pageIndex + 1);
+                state.allProjects, state.allProjectsPagination.pageIndex + 1);
           }
         } else if (state.status.isGetAllProjectsFailure) {
           _pagingController.error = state.errorMessage;

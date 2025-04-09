@@ -12,31 +12,29 @@ import '../../../../projects/data/models/project_model.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_extenstion.dart';
 import '../../../../projects/presentation/widgets/project_item.dart';
-import '../../../../profile/company_profile/data/model/company_model.dart';
 
-class UpcomingProjectsSection extends StatefulWidget {
-  const UpcomingProjectsSection({required this.companyModel, super.key});
-  final CompanyModel companyModel;
+class CurrentProjectsListView extends StatefulWidget {
+  const CurrentProjectsListView({super.key});
 
   @override
-  State<UpcomingProjectsSection> createState() => _UpcomingProjectsSectionState();
+  State<CurrentProjectsListView> createState() =>
+      _CurrentProjectsListViewState();
 }
 
-class _UpcomingProjectsSectionState extends State<UpcomingProjectsSection> {
+class _CurrentProjectsListViewState extends State<CurrentProjectsListView> {
   late final PagingController<int, ProjectModel> _pagingController;
-
   @override
   void initState() {
     _pagingController = PagingController(firstPageKey: 1);
     final projectCubit = context.read<ProjectCubit>();
-    if (projectCubit.state.upcomingProjects.isNotEmpty) {
+    if (projectCubit.state.currentProjects.isNotEmpty) {
       _pagingController.value = PagingState(
-        itemList: projectCubit.state.upcomingProjects,
-        nextPageKey: projectCubit.state.upcomingProjectsPagination.pageIndex + 1,
+        itemList: projectCubit.state.currentProjects,
+        nextPageKey: projectCubit.state.currentProjectsPagination.pageIndex + 1,
       );
     } else {
       _pagingController.addPageRequestListener((pageKey) {
-        projectCubit.getUpcomingProjects(loadMore: pageKey != 1);
+        projectCubit.getCurrentProjects(loadMore: pageKey != 1);
       });
     }
     super.initState();
@@ -52,18 +50,18 @@ class _UpcomingProjectsSectionState extends State<UpcomingProjectsSection> {
   Widget build(BuildContext context) {
     return BlocListener<ProjectCubit, ProjectState>(
       listenWhen: (previous, current) =>
-          current.status.isGetUpcomingProjectsSuccess ||
-          current.status.isGetUpcomingProjectsFailure ||
-          current.status.isGetUpcomingProjectsLoading,
+          current.status.isCurrentProjectsFailure ||
+          current.status.isCurrentProjectsLoading ||
+          current.status.isCurrentProjectsSuccess,
       listener: (context, state) {
-        if (state.status.isGetUpcomingProjectsSuccess) {
-          if (state.upcomingProjectsPagination.hasReachedMax) {
-            _pagingController.appendLastPage(state.upcomingProjects);
+        if (state.status.isCurrentProjectsSuccess) {
+          if (state.currentProjectsPagination.hasReachedMax) {
+            _pagingController.appendLastPage(state.currentProjects);
           } else {
-            _pagingController.appendPage(state.upcomingProjects,
-                state.upcomingProjectsPagination.pageIndex + 1);
+            _pagingController.appendPage(state.currentProjects,
+                state.currentProjectsPagination.pageIndex + 1);
           }
-        } else if (state.status.isGetUpcomingProjectsFailure) {
+        } else if (state.status.isCurrentProjectsFailure) {
           _pagingController.error = state.errorMessage;
         }
       },
@@ -73,22 +71,17 @@ class _UpcomingProjectsSectionState extends State<UpcomingProjectsSection> {
           onRefresh: () async => _refreshData(),
           child: PagedListView<int, ProjectModel>(
             pagingController: _pagingController,
-            padding: const EdgeInsets.symmetric(vertical: 45),
-            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.only(bottom: 45,top: 25),
+            physics: const NeverScrollableScrollPhysics(),
             builderDelegate: PagedChildBuilderDelegate<ProjectModel>(
               itemBuilder: (context, project, index) {
                 return ProjectItem(
                   project: project,
-                  onTap: () async {
-                    final result = await context.pushNamed(
-                        Routes.companyProjectDetailsViewRoute,
-                        arguments: {
-                          'projectModel': project,
-                          'companyModel': widget.companyModel,
-                        });
-                    if (result == true && context.mounted) {
-                      _refreshData();
-                    }
+                  onTap: () {
+                    context.pushNamed(
+                      Routes.freelancerProjectDetailsViewRoute,
+                      arguments: project,
+                    );
                   },
                 );
               },
@@ -106,7 +99,10 @@ class _UpcomingProjectsSectionState extends State<UpcomingProjectsSection> {
                 );
               },
               noItemsFoundIndicatorBuilder: (context) {
-                return const CustomFailureWidget(text: 'No Projects Found');
+                return CustomFailureWidget(
+                  text: _pagingController.error?.toString() ??
+                      'No projects found',
+                );
               },
             ),
           ),
@@ -117,6 +113,6 @@ class _UpcomingProjectsSectionState extends State<UpcomingProjectsSection> {
 
   void _refreshData() {
     _pagingController.refresh();
-    context.read<ProjectCubit>().getUpcomingProjects();
+    context.read<ProjectCubit>().getCurrentProjects();
   }
 }

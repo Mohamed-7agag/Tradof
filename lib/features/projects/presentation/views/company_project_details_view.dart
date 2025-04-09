@@ -152,7 +152,7 @@ class _CompanyProjectDetailsViewState extends State<CompanyProjectDetailsView> {
                   daysController: daysController,
                   projectModel: widget.projectModel,
                 ),
-                verticalSpace(40),
+                verticalSpace(20),
               ],
             ),
           ),
