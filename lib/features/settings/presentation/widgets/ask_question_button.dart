@@ -5,14 +5,14 @@ import '../../../../core/helpers/extensions.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
-import '../logic/feedback_cubit/feedback_cubit.dart';
+import '../logic/miscellaneous_cubit/miscellaneous_cubit.dart';
 
 class AskQuestionButton extends StatelessWidget {
   const AskQuestionButton({required this.controller, super.key});
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FeedbackCubit, FeedbackState>(
+    return BlocConsumer<MiscellaneousCubit, MiscellaneousState>(
       listenWhen: (previous, current) => _buildAndListenWhen(current),
       buildWhen: (previous, current) => _buildAndListenWhen(current),
       listener: (context, state) {
@@ -34,7 +34,7 @@ class AskQuestionButton extends StatelessWidget {
                     errorToast(context, 'Error', 'Please enter your Question');
                     return;
                   }
-                  context.read<FeedbackCubit>().askQuestion(
+                  context.read<MiscellaneousCubit>().askQuestion(
                         question: controller.text.trim(),
                       );
                 },
@@ -43,7 +43,7 @@ class AskQuestionButton extends StatelessWidget {
     );
   }
 
-  bool _buildAndListenWhen(FeedbackState current) {
+  bool _buildAndListenWhen(MiscellaneousState current) {
     return current.status.isAskQuestionFailure ||
         current.status.isAskQuestionLoading ||
         current.status.isAskQuestionSuccess;

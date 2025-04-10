@@ -11,11 +11,9 @@ import 'setting_item.dart';
 class SettingSection2 extends StatelessWidget {
   const SettingSection2({
     required this.onChangePasswordTap,
-    required this.onTechnicalSupportTap,
     super.key,
   });
   final VoidCallback onChangePasswordTap;
-  final VoidCallback onTechnicalSupportTap;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +41,9 @@ class SettingSection2 extends StatelessWidget {
               icon: HugeIcons.strokeRoundedCustomerService02,
               color: Colors.teal,
             ),
-            onTap: onTechnicalSupportTap,
+            onTap: () {
+              context.pushNamed(Routes.technicalSupportViewRoute);
+            },
           ),
           const Divider(color: AppColors.cardDarkColor),
           SettingItem(

@@ -34,11 +34,12 @@ import '../../features/projects/presentation/views/company_project_workspace_vie
 import '../../features/projects/presentation/views/freelancer_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_workspace_view.dart';
 import '../../features/settings/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
-import '../../features/settings/presentation/logic/feedback_cubit/feedback_cubit.dart';
 import '../../features/settings/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
+import '../../features/settings/presentation/logic/miscellaneous_cubit/miscellaneous_cubit.dart';
 import '../../features/settings/presentation/views/ask_question_view.dart';
 import '../../features/settings/presentation/views/change_password_view.dart';
 import '../../features/settings/presentation/views/feedback_view.dart';
+import '../../features/settings/presentation/views/technical_support_view.dart';
 import '../../features/settings/presentation/views/update_company_profile_view.dart';
 import '../../features/settings/presentation/views/update_freelancer_profile_view.dart';
 import '../../welcome_view.dart';
@@ -250,7 +251,7 @@ class AppRouter {
       case Routes.feedbackViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => FeedbackCubit(getIt()),
+            create: (context) => MiscellaneousCubit(getIt()),
             child: const FeedbackView(),
           ),
         );
@@ -279,7 +280,7 @@ class AppRouter {
       case Routes.askQuestionRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => FeedbackCubit(getIt()),
+            create: (context) => MiscellaneousCubit(getIt()),
             child: const AskQuestionView(),
           ),
         );
@@ -299,6 +300,15 @@ class AppRouter {
             child: ProjectOfferDetailsView(offer: offer),
           ),
         );
+      case Routes.technicalSupportViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                MiscellaneousCubit(getIt())..getTechnicalSupportMessages(),
+            child: const TechnicalSupportView(),
+          ),
+        );
+
       default:
         return null;
     }
