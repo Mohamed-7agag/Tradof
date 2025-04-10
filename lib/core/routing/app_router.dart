@@ -287,8 +287,7 @@ class AppRouter {
         final projectId = settings.arguments as int;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) =>
-                OfferCubit(getIt())..getProjectOffers(projectId),
+            create: (context) => OfferCubit(getIt()),
             child: ProjectOffersView(projectId: projectId),
           ),
         );

@@ -7,6 +7,7 @@ import '../../../../../core/helpers/extensions.dart';
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
+import '../../../core/routing/routes.dart';
 
 class DashboardListTile extends StatelessWidget {
   const DashboardListTile({
@@ -58,9 +59,14 @@ class DashboardListTile extends StatelessWidget {
             color: AppColors.white,
           ),
           horizontalSpace(18),
-          const HugeIcon(
-            icon: HugeIcons.strokeRoundedCalendar02,
-            color: AppColors.white,
+          InkWell(
+            onTap: () {
+              context.pushNamed(Routes.calendarViewRoute);
+            },
+            child: const HugeIcon(
+              icon: HugeIcons.strokeRoundedCalendar02,
+              color: AppColors.white,
+            ),
           ),
           horizontalSpace(4),
         ],

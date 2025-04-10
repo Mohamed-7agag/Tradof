@@ -4,7 +4,6 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../../core/utils/widgets/custom_loading_widget.dart';
-import '../../../../../core/utils/widgets/custom_refresh_indicator.dart';
 import '../../../../projects/data/models/project_model.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_extenstion.dart';
@@ -60,54 +59,43 @@ class _StartedProjectsListViewState extends State<StartedProjectsListView> {
           _pagingController.error = state.errorMessage;
         }
       },
-      child: CustomRefreshIndicator(
-        onRefresh: () async => _refreshData(),
-        child: PagedListView<int, ProjectModel>(
-          pagingController: _pagingController,
-          physics: const NeverScrollableScrollPhysics(),
-          builderDelegate: PagedChildBuilderDelegate<ProjectModel>(
-            itemBuilder: (context, project, index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 14),
-                child: ProjectItem(
-                  project: project,
-                  onTap: () {
-                    // context.pushNamed(
-                    //   Routes.freelancerProjectDetailsViewRoute,
-                    //   arguments: project,
-                    // );
-                  },
-                ),
-              );
-            },
-            firstPageProgressIndicatorBuilder: (context) {
-              return const CustomLoadingWidget();
-            },
-            newPageProgressIndicatorBuilder: (context) {
-              return const CustomLoadingWidget();
-            },
-            firstPageErrorIndicatorBuilder: (context) {
-              return CustomFailureWidget(
-                text: _pagingController.error?.toString() ??
-                    'Error Occurred, please try again',
-                onRetry: () => _pagingController.retryLastFailedRequest(),
-              );
-            },
-            noItemsFoundIndicatorBuilder: (context) {
-              return CustomFailureWidget(
-                text: _pagingController.error?.toString() ??
-                    'No started projects found',
-              );
-            },
-          ),
+      child: PagedListView<int, ProjectModel>(
+        pagingController: _pagingController,
+        physics: const NeverScrollableScrollPhysics(),
+        builderDelegate: PagedChildBuilderDelegate<ProjectModel>(
+          itemBuilder: (context, project, index) {
+            return ProjectItem(
+              project: project,
+              onTap: () {
+                // context.pushNamed(
+                //   Routes.freelancerProjectDetailsViewRoute,
+                //   arguments: project,
+                // );
+              },
+            );
+          },
+          firstPageProgressIndicatorBuilder: (context) {
+            return const CustomLoadingWidget();
+          },
+          newPageProgressIndicatorBuilder: (context) {
+            return const CustomLoadingWidget();
+          },
+          firstPageErrorIndicatorBuilder: (context) {
+            return CustomFailureWidget(
+              text: _pagingController.error?.toString() ??
+                  'Error Occurred, please try again',
+              onRetry: () => _pagingController.retryLastFailedRequest(),
+            );
+          },
+          noItemsFoundIndicatorBuilder: (context) {
+            return CustomFailureWidget(
+              text: _pagingController.error?.toString() ??
+                  'No started projects found',
+            );
+          },
         ),
       ),
     );
-  }
-
-  void _refreshData() {
-    _pagingController.refresh();
-    context.read<ProjectCubit>().getStartedProjects();
   }
 
   bool _buildWhen(ProjectState state) =>

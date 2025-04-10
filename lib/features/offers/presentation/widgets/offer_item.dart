@@ -98,7 +98,7 @@ class OfferItem extends StatelessWidget {
                     height: 35,
                     child: VerticalDivider(color: AppColors.cardDarkColor),
                   ),
-                  _buildInfoColumn('Price', '${offer.offerPrice}'),
+                  _buildInfoColumn('Price', '${offer.offerPrice}\$'),
                   const SizedBox(
                     height: 35,
                     child: VerticalDivider(color: AppColors.cardDarkColor),

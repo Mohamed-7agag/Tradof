@@ -20,7 +20,7 @@ class ProjectModel extends Equatable {
   final SpecializationModel specialization;
   final int numberOfOffers;
   final List<FileModel> files;
-  final int companyId; //TODO
+  final String companyId; 
   final String firstName;
   final String lastName;
   final String jobTitle;

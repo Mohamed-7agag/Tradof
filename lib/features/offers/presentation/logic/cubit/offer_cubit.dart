@@ -145,13 +145,13 @@ class OfferCubit extends Cubit<OfferState> {
         pageIndex: nextPageIndex,
         pageSize: state.projectOffersPagination.pageSize,
       );
-      final newOffers = response.items;
+      final offers = response.items;
       final hasReachedMax =
-          newOffers.length < state.projectOffersPagination.pageSize;
+          offers.length < state.projectOffersPagination.pageSize;
       emit(state.copyWith(
         status: OfferStatus.getProjectOffersSuccess,
         projectOffers:
-            loadMore ? [...state.projectOffers, ...newOffers] : newOffers,
+            loadMore ? [...state.projectOffers, ...offers] : offers,
         projectOffersPagination: state.projectOffersPagination.copyWith(
           pageIndex: nextPageIndex,
           hasReachedMax: hasReachedMax,
