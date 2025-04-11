@@ -101,7 +101,7 @@ class _CurrentProjectsListViewState extends State<CurrentProjectsListView> {
               noItemsFoundIndicatorBuilder: (context) {
                 return CustomFailureWidget(
                   text: _pagingController.error?.toString() ??
-                      'No projects found',
+                      'No projecsts found',
                 );
               },
             ),

@@ -6,6 +6,7 @@ import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
+import '../../../projects/data/models/project_model.dart';
 import '../../../projects/presentation/logic/file_cubit.dart';
 import '../../../projects/presentation/widgets/attachment_files_section.dart';
 import '../../../projects/presentation/widgets/project_text_field.dart';
@@ -13,8 +14,8 @@ import '../widgets/add_offer_button.dart';
 import '../widgets/select_offer_budget.dart';
 
 class AddOfferView extends StatefulWidget {
-  const AddOfferView({required this.projectId, super.key});
-  final int projectId;
+  const AddOfferView({required this.project, super.key});
+  final ProjectModel project;
   @override
   State<AddOfferView> createState() => _AddOfferViewState();
 }
@@ -68,7 +69,10 @@ class _AddOfferViewState extends State<AddOfferView> {
                         keyboardType: TextInputType.number,
                       ),
                       verticalSpace(25),
-                      const SelectOfferBudget(),
+                      SelectOfferBudget(
+                        maxPrice: widget.project.maxPrice.toDouble(),
+                        minPrice: widget.project.minPrice.toDouble(),
+                      ),
                       verticalSpace(35),
                       Text(
                         "Attachments Files",
@@ -78,7 +82,7 @@ class _AddOfferViewState extends State<AddOfferView> {
                       const AttachmentFilesSection(),
                       Expanded(child: verticalSpace(40)),
                       AddOfferButton(
-                        projectId: widget.projectId,
+                        projectId: widget.project.id,
                         offerDetailsController: offerDetailsController,
                         daysController: daysController,
                       ),

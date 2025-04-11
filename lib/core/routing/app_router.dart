@@ -152,11 +152,11 @@ class AppRouter {
           ),
         );
       case Routes.addOfferViewRoute:
-        final id = settings.arguments as int;
+        final project = settings.arguments as ProjectModel;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => OfferCubit(getIt()),
-            child: AddOfferView(projectId: id),
+            child: AddOfferView(project: project),
           ),
         );
       case Routes.updateSocialMediaViewRoute:

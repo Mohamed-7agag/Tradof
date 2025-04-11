@@ -103,8 +103,7 @@ class OfferItem extends StatelessWidget {
                     height: 35,
                     child: VerticalDivider(color: AppColors.cardDarkColor),
                   ),
-                  _buildInfoColumn(
-                      'Status', offer.proposalStatus.toString(), true),
+                  _buildStatusWidget('Status', status(offer.proposalStatus)),
                 ],
               ),
             ],
@@ -114,7 +113,42 @@ class OfferItem extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoColumn(String title, String value, [bool isStatus = false]) {
+  StatusClass status(int status) {
+    switch (status) {
+      case 0:
+        return StatusClass(
+            status: status,
+            value: 'Pending',
+            color: const Color(0xffA20000),
+            backgroundColor: const Color(0xffFFC3C3));
+      case 1:
+        return StatusClass(
+            status: status,
+            value: 'Accepted',
+            color: const Color(0xff44AA44),
+            backgroundColor: const Color(0xffA9FFA9));
+      case 2:
+        return StatusClass(
+            status: status,
+            value: 'Declined',
+            color: AppColors.primary,
+            backgroundColor: AppColors.primary.withValues(alpha: 0.15));
+      case 3:
+        return StatusClass(
+            status: status,
+            value: 'Canceled',
+            color: const Color(0xff8E8E93),
+            backgroundColor: const Color(0xffFFFFFF));
+      default:
+        return StatusClass(
+            status: status,
+            value: 'Unknown',
+            color: AppColors.primary,
+            backgroundColor: AppColors.primary.withValues(alpha: 0.15));
+    }
+  }
+
+  Widget _buildInfoColumn(String title, String value) {
     return Column(
       children: [
         Text(
@@ -122,30 +156,52 @@ class OfferItem extends StatelessWidget {
           style: AppStyle.robotoCondensedRegular12,
         ),
         verticalSpace(6),
-        isStatus
-            ? Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.green.withValues(alpha: 0.15),
-                  borderRadius: const BorderRadius.all(Radius.circular(12)),
-                ),
-                child: Text(
-                  offer.proposalStatus.toString(),
-                  style: AppStyle.robotoRegular8.copyWith(
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )
-            : Text(
-                value,
-                style: AppStyle.robotoRegular12.copyWith(
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+        Text(
+          value,
+          style: AppStyle.robotoRegular12.copyWith(
+            color: AppColors.primary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ],
     );
   }
+
+  Widget _buildStatusWidget(String title, StatusClass status) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: AppStyle.robotoCondensedRegular12,
+        ),
+        verticalSpace(6),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+          decoration: BoxDecoration(
+            color: status.backgroundColor,
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+          ),
+          child: Text(
+            status.value,
+            style: AppStyle.robotoRegular8.copyWith(
+              color: status.color,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class StatusClass {
+  int status;
+  String value;
+  Color color;
+  Color backgroundColor;
+  StatusClass(
+      {required this.status,
+      required this.value,
+      required this.color,
+      required this.backgroundColor});
 }

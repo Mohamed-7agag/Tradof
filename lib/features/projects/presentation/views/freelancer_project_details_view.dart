@@ -108,7 +108,7 @@ class FreelancerProjectDetailsView extends StatelessWidget {
                         onPressed: () {
                           context.pushNamed(
                             Routes.addOfferViewRoute,
-                            arguments: projectModel.id,
+                            arguments: projectModel,
                           );
                         }),
                   ),

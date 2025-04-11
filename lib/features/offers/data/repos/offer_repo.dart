@@ -20,6 +20,11 @@ abstract class OfferRepo {
   Future<String> deleteOffer({
     required int id,
   });
+
+  Future<String> cancelOffer({
+    required int id,
+  });
+
   Future<void> acceptOffer({
     required int projectId,
     required int offerId,

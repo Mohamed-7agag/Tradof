@@ -26,4 +26,7 @@ extension OfferStatusExtension on OfferStatus {
   bool get isDenyOfferLoading => this == OfferStatus.denyOfferLoading;
   bool get isDenyOfferSuccess => this == OfferStatus.denyOfferSuccess;
   bool get isDenyOfferFailure => this == OfferStatus.denyOfferFailure;
+  bool get isCancelOfferLoading => this == OfferStatus.cancelOfferLoading;
+  bool get isCancelOfferSuccess => this == OfferStatus.cancelOfferSuccess;
+  bool get isCancelOfferFailure => this == OfferStatus.cancelOfferFailure;
 }

@@ -23,6 +23,10 @@ enum OfferStatus {
   denyOfferLoading,
   denyOfferSuccess,
   denyOfferFailure,
+  cancelOfferLoading,
+  cancelOfferSuccess,
+  cancelOfferFailure,
+  
 }
 
 class OfferState extends Equatable {

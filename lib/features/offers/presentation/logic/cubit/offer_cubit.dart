@@ -129,6 +129,23 @@ class OfferCubit extends Cubit<OfferState> {
     }
   }
 
+  Future<void> cancelOffer(int id) async {
+    emit(state.copyWith(status: OfferStatus.cancelOfferLoading));
+
+    try {
+      final result = await _offerRepo.cancelOffer(id: id);
+      emit(state.copyWith(
+        status: OfferStatus.cancelOfferSuccess,
+        message: result,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: OfferStatus.cancelOfferFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
   void setOfferPrice({double? price}) {
     emit(state.copyWith(offerPrice: price));
   }

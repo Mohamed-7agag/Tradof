@@ -23,6 +23,12 @@ class _CreateAccountPageViewState extends State<CreateAccountPageView> {
   int _currentPage = 0;
 
   @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
   void dispose() {
     _pageController.dispose();
     super.dispose();

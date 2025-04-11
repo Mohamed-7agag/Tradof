@@ -19,6 +19,7 @@ abstract class EndPoint {
   static const String getSpecializations = 'specialization';
 
   // Project Endpoints
+  static const String createProject = 'project';
   static const String allProjects = 'project/unassigned-projects';
   static const String currentProjects = 'project/projects/freelancer';
   static const String getUpcomingProjects =
@@ -69,7 +70,9 @@ abstract class EndPoint {
   static const String offer = 'proposal';
   static const String getProposalByFreelancerId =
       'proposal/freelancer-proposals';
-  static String deleteOffer(int proposalId) => 'proposal/id=$proposalId';
+  static String deleteOffer(int proposalId) => 'proposal/$proposalId';
+  static String cancelOffer(int proposalId) =>
+      'proposal/cancel?proposalId=$proposalId';
   static const String acceptOffer = 'proposal/accept';
   static const String denyOffer = 'proposal/deny';
 

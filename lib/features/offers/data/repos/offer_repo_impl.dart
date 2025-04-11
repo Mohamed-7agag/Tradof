@@ -34,6 +34,13 @@ class OfferRepoImpl implements OfferRepo {
   }
 
   @override
+  Future<String> cancelOffer({required int id}) async {
+    return await apiServices.post(
+      EndPoint.cancelOffer(id),
+    );
+  }
+
+  @override
   Future<OfferResponseModel> getAllOffers({
     required String freelancerId,
     required int pageIndex,

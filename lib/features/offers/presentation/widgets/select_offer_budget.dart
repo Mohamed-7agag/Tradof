@@ -7,21 +7,30 @@ import '../../../../core/theming/app_style.dart';
 import '../logic/cubit/offer_cubit.dart';
 
 class SelectOfferBudget extends StatefulWidget {
-  const SelectOfferBudget({super.key, this.initialPrice});
+  const SelectOfferBudget({
+    required this.maxPrice,
+    required this.minPrice,
+    super.key,
+    this.initialPrice,
+  });
 
   final double? initialPrice;
+  final double maxPrice;
+  final double minPrice;
 
   @override
   State<SelectOfferBudget> createState() => _SelectOfferBudgetState();
 }
 
 class _SelectOfferBudgetState extends State<SelectOfferBudget> {
-  double selectedBudget = 0.0;
+  double selectedBudget = 1200;
   @override
   void initState() {
     super.initState();
-    selectedBudget = widget.initialPrice ?? 0.0;
+    selectedBudget = widget.initialPrice ?? 1200;
+
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,7 +51,8 @@ class _SelectOfferBudgetState extends State<SelectOfferBudget> {
             thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8.0),
           ),
           child: Slider(
-            max: 5000,
+            max: widget.maxPrice,
+            min: widget.minPrice,
             divisions: 200,
             value: selectedBudget,
             onChanged: (newValue) {
@@ -57,7 +67,7 @@ class _SelectOfferBudgetState extends State<SelectOfferBudget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "0\$",
+              "${widget.minPrice}\$",
               style: AppStyle.robotoRegular12.copyWith(
                 color: AppColors.darkGrey,
               ),
@@ -67,7 +77,7 @@ class _SelectOfferBudgetState extends State<SelectOfferBudget> {
               style: AppStyle.poppinsMedium14,
             ),
             Text(
-              "5000\$",
+              "${widget.maxPrice}\$",
               style: AppStyle.robotoRegular12.copyWith(
                 color: AppColors.darkGrey,
               ),
