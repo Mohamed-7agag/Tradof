@@ -7,14 +7,14 @@ import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../../data/model/send_feedback_request_model.dart';
-import '../logic/feedback_cubit/feedback_cubit.dart';
+import '../logic/miscellaneous_cubit/miscellaneous_cubit.dart';
 
 class FeedbackButton extends StatelessWidget {
   const FeedbackButton({required this.controller, super.key});
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FeedbackCubit, FeedbackState>(
+    return BlocConsumer<MiscellaneousCubit, MiscellaneousState>(
       listenWhen: (previous, current) => _buildAndListenWhen(current),
       buildWhen: (previous, current) => _buildAndListenWhen(current),
       listener: (context, state) {
@@ -42,14 +42,14 @@ class FeedbackButton extends StatelessWidget {
                     rate: state.rate,
                     reasonRate: controller.text.trim(),
                   );
-                  context.read<FeedbackCubit>().sendFeedback(model: model);
+                  context.read<MiscellaneousCubit>().sendFeedback(model: model);
                 },
               );
       },
     );
   }
 
-  bool _buildAndListenWhen(FeedbackState current) {
+  bool _buildAndListenWhen(MiscellaneousState current) {
     return current.status.isSendFeedbackFailure ||
         current.status.isSendFeedbackLoading ||
         current.status.isSendFeedbackSuccess;
