@@ -38,8 +38,10 @@ class _BuildUpdateFreelancerProfileViewState
         TextEditingController(text: widget.freelancerModel.firstName);
     lastNameController =
         TextEditingController(text: widget.freelancerModel.lastName);
-    phoneNumberController =
-        TextEditingController(text: widget.freelancerModel.phone);
+    phoneNumberController = TextEditingController(
+        text: widget.freelancerModel.phone.length == 11
+            ? widget.freelancerModel.phone.substring(1)
+            : widget.freelancerModel.phone);
     if (context.read<MetaDataCubit>().state.countries.isEmpty) {
       context.read<MetaDataCubit>().getCountries();
     }

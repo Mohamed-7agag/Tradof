@@ -23,12 +23,11 @@ class SelectOfferBudget extends StatefulWidget {
 }
 
 class _SelectOfferBudgetState extends State<SelectOfferBudget> {
-  double selectedBudget = 1200;
+  late double selectedBudget;
   @override
   void initState() {
     super.initState();
-    selectedBudget = widget.initialPrice ?? 1200;
-
+    selectedBudget = widget.initialPrice ?? widget.minPrice;
   }
 
   @override

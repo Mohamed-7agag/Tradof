@@ -11,6 +11,7 @@ import '../../../projects/presentation/widgets/attachment_files_section.dart';
 import '../../../projects/presentation/widgets/project_text_field.dart';
 import '../../data/model/offer_model.dart';
 import '../widgets/offer_header_section.dart';
+import '../widgets/select_offer_budget.dart';
 import '../widgets/update_offer_button.dart';
 
 class UpdateOfferView extends StatefulWidget {
@@ -76,11 +77,11 @@ class _UpdateOfferViewState extends State<UpdateOfferView> {
                         keyboardType: TextInputType.number,
                       ),
                       verticalSpace(25),
-                      // SelectOfferBudget(
-                      //   initialPrice: widget.offer.offerPrice,
-                      //   maxPrice: widget.offer.maxPrice,
-                      //   minPrice: widget.offer.minPrice,
-                      // ),
+                      SelectOfferBudget(
+                        initialPrice: widget.offer.offerPrice,
+                        maxPrice: widget.offer.projectMaxPrice,
+                        minPrice: widget.offer.projectMinPrice,
+                      ),
                       verticalSpace(35),
                       Text(
                         "Attachments Files",

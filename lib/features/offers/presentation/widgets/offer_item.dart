@@ -137,8 +137,8 @@ class OfferItem extends StatelessWidget {
         return StatusClass(
             status: status,
             value: 'Canceled',
-            color: const Color(0xff8E8E93),
-            backgroundColor: const Color(0xffFFFFFF));
+            color: const Color(0xffFFFFFF),
+            backgroundColor: const Color(0xff8E8E93));
       default:
         return StatusClass(
             status: status,

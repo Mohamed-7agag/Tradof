@@ -4,6 +4,7 @@ import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/utils/widgets/custom_app_bar.dart';
 import '../widgets/all_offer_section.dart';
+import '../widgets/fliter_list_view.dart';
 
 class GetAllOffersView extends StatelessWidget {
   const GetAllOffersView({super.key});
@@ -18,7 +19,16 @@ class GetAllOffersView extends StatelessWidget {
           titlePadding: 16.w,
         ),
         const Expanded(
-          child: AllOfferSection(),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: FliterListView(),
+              ),
+              SliverFillRemaining(
+                child: AllOfferSection(),
+              ),
+            ],
+          ),
         ),
       ],
     );

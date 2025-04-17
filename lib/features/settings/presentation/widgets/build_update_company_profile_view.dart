@@ -40,8 +40,10 @@ class _BuildUpdateCompanyProfileViewState
         TextEditingController(text: widget.companyModel.firstName);
     lastNameController =
         TextEditingController(text: widget.companyModel.lastName);
-    phoneNumberController =
-        TextEditingController(text: widget.companyModel.phone);
+    phoneNumberController = TextEditingController(
+        text: widget.companyModel.phone.length == 11
+            ? widget.companyModel.phone.substring(1)
+            : widget.companyModel.phone);
     locationCompanyController =
         TextEditingController(text: widget.companyModel.companyAddress);
     companyNameController =

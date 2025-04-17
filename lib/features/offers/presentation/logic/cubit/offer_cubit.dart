@@ -17,6 +17,8 @@ class OfferCubit extends Cubit<OfferState> {
 
   final OfferRepo _offerRepo;
 
+  int? statusIndex;
+
   Future<void> addOffer(
     int projectId,
     String offerDetails,
@@ -60,6 +62,7 @@ class OfferCubit extends Cubit<OfferState> {
         freelancerId: AppConstants.kUserId,
         pageIndex: nextPageIndex,
         pageSize: state.allOffersPagination.pageSize,
+        status: statusIndex == -1 ? null : statusIndex,
       );
 
       final newOffers = response.items;
@@ -167,8 +170,7 @@ class OfferCubit extends Cubit<OfferState> {
           offers.length < state.projectOffersPagination.pageSize;
       emit(state.copyWith(
         status: OfferStatus.getProjectOffersSuccess,
-        projectOffers:
-            loadMore ? [...state.projectOffers, ...offers] : offers,
+        projectOffers: loadMore ? [...state.projectOffers, ...offers] : offers,
         projectOffersPagination: state.projectOffersPagination.copyWith(
           pageIndex: nextPageIndex,
           hasReachedMax: hasReachedMax,

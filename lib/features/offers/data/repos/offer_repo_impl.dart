@@ -28,16 +28,18 @@ class OfferRepoImpl implements OfferRepo {
 
   @override
   Future<String> deleteOffer({required int id}) async {
-    return await apiServices.delete(
+    final response = await apiServices.delete(
       EndPoint.deleteOffer(id),
     );
+    return response['message'] ?? 'Success';
   }
 
   @override
   Future<String> cancelOffer({required int id}) async {
-    return await apiServices.post(
+    final response = await apiServices.post(
       EndPoint.cancelOffer(id),
     );
+    return response['message'] ?? 'Success';
   }
 
   @override
@@ -45,6 +47,7 @@ class OfferRepoImpl implements OfferRepo {
     required String freelancerId,
     required int pageIndex,
     required int pageSize,
+    int? status,
   }) async {
     final response = await apiServices.get(
       EndPoint.getProposalByFreelancerId,
@@ -52,6 +55,7 @@ class OfferRepoImpl implements OfferRepo {
         'freelancerId': freelancerId,
         'pageIndex': pageIndex,
         'pageSize': pageSize,
+        'status': status,
       },
     );
     return OfferResponseModel.fromJson(response);
@@ -84,8 +88,7 @@ class OfferRepoImpl implements OfferRepo {
   }
 
   @override
-  Future<void> denyOffer(
-      {required int projectId, required int offerId}) async {
+  Future<void> denyOffer({required int projectId, required int offerId}) async {
     await apiServices.post(EndPoint.denyOffer, queryParameters: {
       'projectId': projectId,
       'proposalId': offerId,

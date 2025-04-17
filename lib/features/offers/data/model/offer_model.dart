@@ -9,6 +9,8 @@ class OfferModel extends Equatable {
   final int days;
   final String? freelancerName;
   final double offerPrice;
+  final double projectMaxPrice;
+  final double projectMinPrice;
   final String? freelancerImageUrl;
   final String? freelancerJobtitle;
   final String projecttitle;
@@ -29,6 +31,8 @@ class OfferModel extends Equatable {
     required this.projecttitle,
     required this.timePosted,
     required this.proposalAttachments,
+    required this.projectMaxPrice,
+    required this.projectMinPrice,
   });
 
   factory OfferModel.fromJson(Map<String, dynamic> json) {
@@ -41,6 +45,8 @@ class OfferModel extends Equatable {
       days: json['days'],
       freelancerName: json['freelancerName'],
       offerPrice: json['offerPrice'].toDouble(),
+      projectMaxPrice: json['projectMaxPrice'].toDouble(),
+      projectMinPrice: json['projectMinPrice'].toDouble(),
       freelancerImageUrl: json['freelancerImageUrl'],
       freelancerJobtitle: json['freelancerJobtitle'],
       projecttitle: json['projecttitle'],
@@ -61,6 +67,8 @@ class OfferModel extends Equatable {
       'days': days,
       'freelancerName': freelancerName,
       'offerPrice': offerPrice,
+      'projectMaxPrice': projectMaxPrice,
+      'projectMinPrice': projectMinPrice,
       'freelancerImageUrl': freelancerImageUrl,
       'freelancerJobtitle': freelancerJobtitle,
       'projecttitle': projecttitle,
@@ -84,6 +92,8 @@ class OfferModel extends Equatable {
         freelancerJobtitle,
         projecttitle,
         timePosted,
+        projectMaxPrice,
+        projectMinPrice,
         proposalAttachments
       ];
 }

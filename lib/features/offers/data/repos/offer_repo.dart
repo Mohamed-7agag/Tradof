@@ -10,6 +10,7 @@ abstract class OfferRepo {
     required int pageIndex,
     required int pageSize,
     required String freelancerId,
+    int? status,
   });
   Future<OfferResponseModel> getProjectOffers({
     required int pageIndex,
