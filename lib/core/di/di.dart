@@ -77,4 +77,5 @@ void setupGetIt() {
   getIt.registerLazySingleton<MiscellaneousRepo>(() => MiscellaneousRepoImpl(
         apiServices: getIt(instanceName: 'NonAuthenticatedApiServices'),
       ));
+  // chat 
 }

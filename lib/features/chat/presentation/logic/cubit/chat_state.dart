@@ -10,7 +10,7 @@ enum ChatStatus {
 
 class ChatState extends Equatable {
   final ChatStatus status;
-  final List<String> messages;
+  final List<MessageModel> messages;
   final String? error;
 
   const ChatState({
@@ -19,9 +19,12 @@ class ChatState extends Equatable {
     this.error,
   });
 
+  @override
+  List<Object?> get props => [status, messages, error];
+
   ChatState copyWith({
     ChatStatus? status,
-    List<String>? messages,
+    List<MessageModel>? messages,
     String? error,
   }) {
     return ChatState(
@@ -30,7 +33,4 @@ class ChatState extends Equatable {
       error: error ?? this.error,
     );
   }
-
-  @override
-  List<Object?> get props => [status, messages, error];
 }

@@ -1,18 +1,26 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/services/chat_service.dart';
+import '../../../data/model/message_model.dart';
 
 part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
-  final String websocketUrl;
   late ChatService _chatService;
-  StreamSubscription<String>? _messageSubscription;
+  StreamSubscription<Map<String, dynamic>>? _messageSubscription;
+  final String projectId;
+  final String freelancerId;
+  final String companyId;
 
-  ChatCubit({required this.websocketUrl}) : super(const ChatState()) {
+  ChatCubit({
+    required this.projectId,
+    required this.freelancerId,
+    required this.companyId,
+  }) : super(const ChatState()) {
     _initialize();
   }
 
@@ -20,16 +28,30 @@ class ChatCubit extends Cubit<ChatState> {
     try {
       emit(state.copyWith(status: ChatStatus.connecting));
 
-      _chatService = ChatService.connect(websocketUrl);
-
+      _chatService = ChatService.connect(projectId);
+      log('Connecting to chat service with projectId: $projectId');
       _messageSubscription = _chatService.messageStream.listen(
         (message) {
-          final updatedMessages = List<String>.from(state.messages)
-            ..add(message);
-          emit(state.copyWith(
-            messages: updatedMessages,
-            status: ChatStatus.connected,
-          ));
+          if (message['event'] == 'message') {
+            // Handle incoming message
+            final newMessage = MessageModel.fromJson(message);
+            final updatedMessages = List<MessageModel>.from(state.messages)
+              ..add(newMessage);
+            emit(state.copyWith(
+              messages: updatedMessages,
+              status: ChatStatus.connected,
+            ));
+            log('New message received: ${newMessage.message}');
+          } else if (message['event'] == 'messages') {
+            // Handle initial message list
+            final messages =
+                List<MessageModel>.from(message['data']['messages'] as List);
+            emit(state.copyWith(
+              messages: messages,
+              status: ChatStatus.connected,
+            ));
+            log('Initial messages received: ${messages.length}');
+          }
         },
         onError: (error) {
           emit(state.copyWith(
@@ -41,6 +63,9 @@ class ChatCubit extends Cubit<ChatState> {
           emit(state.copyWith(status: ChatStatus.disconnected));
         },
       );
+
+      // Request existing messages
+      _chatService.requestMessages();
 
       emit(state.copyWith(status: ChatStatus.connected));
     } catch (e) {
@@ -61,11 +86,12 @@ class ChatCubit extends Cubit<ChatState> {
     }
 
     try {
-      _chatService.sendMessage(message);
-      // Message will be added when received back from server
-      // Alternatively, you could add it immediately here with:
-      // final updatedMessages = List<String>.from(state.messages)..add(message);
-      // emit(state.copyWith(messages: updatedMessages));
+      _chatService.sendMessage(
+        message: message,
+        freelancerId: freelancerId,
+        companyId: companyId,
+      );
+      log('Message sent: $message');
     } catch (e) {
       emit(state.copyWith(
         status: ChatStatus.error,

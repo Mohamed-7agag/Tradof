@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 import '../../../core/helpers/exit_dialog.dart';
-import '../../../core/theming/app_colors.dart';
 import '../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../dashboard/freelancer_dashboard/presentation/views/freelance_dashbord_view.dart';

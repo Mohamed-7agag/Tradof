@@ -6,6 +6,7 @@ abstract class AppConstants {
   static const String firstTime = "firstTime";
   static const String calenderId = "calendarId";
   static String kUserId = '';
+  static String websocketUrl = 'wss://tradofserver.azurewebsites.net';
 }
 
 const List<String> employeesGroups = [

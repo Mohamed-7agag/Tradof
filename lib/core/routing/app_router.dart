@@ -10,6 +10,8 @@ import '../../features/bottom_nav_bar/views/company_bottom_nav_bar_view.dart';
 import '../../features/bottom_nav_bar/views/freelancer_bottom_nav_bar_view.dart';
 import '../../features/calendar/presentation/logic/calendar_cubit/calendar_cubit.dart';
 import '../../features/calendar/presentation/views/calender_view.dart';
+import '../../features/chat/presentation/logic/cubit/chat_cubit.dart';
+import '../../features/chat/presentation/views/chat_view.dart';
 import '../../features/offers/data/model/offer_model.dart';
 import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../features/offers/presentation/views/add_offer_view.dart';
@@ -308,7 +310,21 @@ class AppRouter {
             child: const TechnicalSupportView(),
           ),
         );
-
+      case Routes.chatViewRoute:
+        //final data = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ChatCubit(
+              // projectId: data['projectId'],
+              // freelancerId: data['freelancerId'],
+              // companyId: data['companyId'],
+              projectId: '24',
+              freelancerId: AppConstants.kUserId,
+              companyId: 'cbe2805d-6670-4e7f-b6bf-0b9152df089f',
+            ),
+            child: const ChatView(),
+          ),
+        );
       default:
         return null;
     }
