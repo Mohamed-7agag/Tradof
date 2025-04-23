@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
+import '../../../core/di/di.dart';
 import '../../../core/helpers/exit_dialog.dart';
 import '../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../dashboard/company_dashboard/presentation/views/company_dashboard_view.dart';
+import '../../finances/presentation/logic/cubit/finances_cubit.dart';
+import '../../finances/presentation/views/company_finance_view.dart';
 import '../../profile/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import '../../profile/company_profile/presentation/views/company_profile_view.dart';
 import '../../projects/presentation/views/create_project_view.dart';
@@ -30,7 +33,10 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
       CompanyDashboardView(companyModel: state.companyModel!),
       CreateProjectView(companyModel: state.companyModel!),
       CompanyProfileView(companyModel: state.companyModel!),
-      CompanyDashboardView(companyModel: state.companyModel!),
+      BlocProvider(
+        create: (context) => FinancesCubit(getIt())..getStatistics(),
+        child: const CompanyFinanceView(),
+      ),
       CompanySettingView(companyModel: state.companyModel!),
     ];
   }

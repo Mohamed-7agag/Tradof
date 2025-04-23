@@ -325,6 +325,7 @@ class AppRouter {
             child: const ChatView(),
           ),
         );
+
       default:
         return null;
     }

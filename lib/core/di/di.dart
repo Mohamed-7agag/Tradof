@@ -5,6 +5,8 @@ import '../../features/auth/data/repo/auth_repo.dart';
 import '../../features/auth/data/repo/auth_repo_impl.dart';
 import '../../features/calendar/data/repo/calendar_repo.dart';
 import '../../features/calendar/data/repo/calendar_repo_impl.dart';
+import '../../features/finances/data/repo/finances_repo.dart';
+import '../../features/finances/data/repo/finances_repo_impl.dart';
 import '../../features/offers/data/repos/offer_repo.dart';
 import '../../features/offers/data/repos/offer_repo_impl.dart';
 import '../../features/profile/company_profile/data/repos/company_profile_repo.dart';
@@ -77,5 +79,8 @@ void setupGetIt() {
   getIt.registerLazySingleton<MiscellaneousRepo>(() => MiscellaneousRepoImpl(
         apiServices: getIt(instanceName: 'NonAuthenticatedApiServices'),
       ));
-  // chat 
+  // finances repo
+  getIt.registerLazySingleton<FinancesRepo>(() => FinancesRepoImpl(
+        apiServices: getIt(instanceName: 'NonAuthenticatedApiServices'),
+      ));
 }

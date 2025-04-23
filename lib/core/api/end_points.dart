@@ -84,4 +84,6 @@ abstract class EndPoint {
   static String updateOrDeleteEvent(String eventId) => 'calendar/$eventId';
   static const String getAllEvents = 'calendar/events';
   static const String technicalSupport = 'technicalSupport';
+  static String statistics(String userId) =>
+      'financial/company-statistics/$userId';
 }
