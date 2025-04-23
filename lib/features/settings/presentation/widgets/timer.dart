@@ -4,11 +4,14 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../data/model/subscription_model.dart';
 
 class TimerOFdays extends StatelessWidget {
   const TimerOFdays({
+    required this.subscription,
     super.key,
   });
+  final SubscriptionModel subscription;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class TimerOFdays extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '250',
+                '${subscription.remaining}',
                 style: AppStyle.robotoCondensedSemiBold20,
               ),
               SvgPicture.asset('assets/images/timer.svg'),

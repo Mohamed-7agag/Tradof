@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/errors/exception.dart';
 import '../../../../../core/utils/app_constants.dart';
+import '../../../data/model/income_statistics_model.dart';
 import '../../../data/model/statistics_model.dart';
 import '../../../data/repo/finances_repo.dart';
 
@@ -25,6 +26,22 @@ class FinancesCubit extends Cubit<FinancesState> {
     } catch (e) {
       emit(state.copyWith(
         status: FinancesStatus.getStatisticsFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  Future<void> getIncomeStatistics() async {
+    emit(state.copyWith(status: FinancesStatus.getIncomeStatisticsLoading));
+    try {
+      final incomeStatisticsModel = await _financesRepo.getIncomeStatistics();
+      emit(state.copyWith(
+        status: FinancesStatus.getIncomeStatisticsSuccess,
+        incomeStatisticsModel: incomeStatisticsModel,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: FinancesStatus.getIncomeStatisticsFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

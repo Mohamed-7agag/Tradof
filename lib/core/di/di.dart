@@ -15,8 +15,8 @@ import '../../features/profile/freelancer_profile/data/repo/freelancer_profile_r
 import '../../features/profile/freelancer_profile/data/repo/freelancer_profile_repo_impl.dart';
 import '../../features/projects/data/repo/project_repo.dart';
 import '../../features/projects/data/repo/project_repo_impl.dart';
-import '../../features/settings/data/repo/feedback_repo/miscellaneous_repo.dart';
-import '../../features/settings/data/repo/feedback_repo/miscellaneous_repo_impl.dart';
+import '../../features/settings/data/repo/miscellaneous_repo/miscellaneous_repo.dart';
+import '../../features/settings/data/repo/miscellaneous_repo/miscellaneous_repo_impl.dart';
 import '../../features/settings/data/repo/setting_repo/setting_repo.dart';
 import '../../features/settings/data/repo/setting_repo/setting_repo_impl.dart';
 import '../api/api_service.dart';

@@ -14,6 +14,7 @@ import '../../finances/presentation/views/freelancer_finance_view.dart';
 import '../../offers/presentation/views/get_all_offers_view.dart';
 import '../../profile/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import '../../profile/freelancer_profile/presentation/views/freelancer_profile_view.dart';
+import '../../settings/presentation/logic/miscellaneous_cubit/miscellaneous_cubit.dart';
 import '../../settings/presentation/views/freelancer_setting_view.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
 
@@ -38,7 +39,10 @@ class _FreelancerBottomNavBarViewState
         create: (context) => FinancesCubit(getIt())..getStatistics(),
         child: const FreelancerFinanceView(),
       ),
-      FreelancerSettingView(freelancerModel: state.freelancerModel!),
+      BlocProvider(
+        create: (context) => MiscellaneousCubit(getIt())..getSubscription(),
+        child: FreelancerSettingView(freelancerModel: state.freelancerModel!),
+      ),
     ];
   }
 

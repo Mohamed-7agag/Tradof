@@ -14,6 +14,9 @@ enum MiscellaneousStatus {
   getTechnicalSupportMessagesLoading,
   getTechnicalSupportMessagesSuccess,
   getTechnicalSupportMessagesFailure,
+  getSubscriptionLoading,
+  getSubscriptionSuccess,
+  getSubscriptionFailure,
 }
 
 extension FeedbackStatusX on MiscellaneousStatus {
@@ -41,6 +44,12 @@ extension FeedbackStatusX on MiscellaneousStatus {
       this == MiscellaneousStatus.getTechnicalSupportMessagesSuccess;
   bool get isGetTechnicalSupportMessagesFailure =>
       this == MiscellaneousStatus.getTechnicalSupportMessagesFailure;
+  bool get isGetSubscriptionPlanLoading =>
+      this == MiscellaneousStatus.getSubscriptionLoading;
+  bool get isGetSubscriptionPlanSuccess =>    
+      this == MiscellaneousStatus.getSubscriptionSuccess;
+  bool get isGetSubscriptionPlanFailure =>
+      this == MiscellaneousStatus.getSubscriptionFailure;
 }
 
 class MiscellaneousState extends Equatable {
@@ -48,6 +57,7 @@ class MiscellaneousState extends Equatable {
   final String message;
   final String errMessage;
   final String rate;
+  final SubscriptionModel? subscriptionModel;
   final List<TechnicalSupportMessageModel> technicalSupportMessages;
 
   const MiscellaneousState({
@@ -55,6 +65,7 @@ class MiscellaneousState extends Equatable {
     this.message = '',
     this.errMessage = '',
     this.rate = 'Very Bad',
+    this.subscriptionModel,
     this.technicalSupportMessages = const [],
   });
 
@@ -63,6 +74,7 @@ class MiscellaneousState extends Equatable {
     String? message,
     String? errMessage,
     String? rate,
+    SubscriptionModel? subscriptionModel,
     List<TechnicalSupportMessageModel>? technicalSupportMessages,
   }) {
     return MiscellaneousState(
@@ -70,6 +82,7 @@ class MiscellaneousState extends Equatable {
         message: message ?? this.message,
         errMessage: errMessage ?? this.errMessage,
         rate: rate ?? this.rate,
+        subscriptionModel: subscriptionModel ?? this.subscriptionModel,
         technicalSupportMessages:
             technicalSupportMessages ?? this.technicalSupportMessages);
   }
@@ -81,5 +94,6 @@ class MiscellaneousState extends Equatable {
         errMessage,
         rate,
         technicalSupportMessages,
+        
       ];
 }

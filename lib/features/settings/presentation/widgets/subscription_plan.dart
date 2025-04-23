@@ -5,12 +5,14 @@ import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../data/model/subscription_model.dart';
 
 class Subscriptionplan extends StatelessWidget {
   const Subscriptionplan({
+    required this.subscription,
     super.key,
   });
-
+  final SubscriptionModel subscription;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,11 +44,11 @@ class Subscriptionplan extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Yearly Plan',
+                subscription.packageName,
                 style: AppStyle.robotoCondensedRegular15,
               ),
               Text(
-                '500 EUR',
+                '${subscription.price} \$',
                 style: AppStyle.robotoCondensedMedium12
                     .copyWith(fontStyle: FontStyle.italic),
               ),

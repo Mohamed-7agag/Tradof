@@ -14,6 +14,7 @@ import '../../finances/presentation/views/company_finance_view.dart';
 import '../../profile/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import '../../profile/company_profile/presentation/views/company_profile_view.dart';
 import '../../projects/presentation/views/create_project_view.dart';
+import '../../settings/presentation/logic/miscellaneous_cubit/miscellaneous_cubit.dart';
 import '../../settings/presentation/views/company_setting_view.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
 
@@ -37,7 +38,10 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
         create: (context) => FinancesCubit(getIt())..getStatistics(),
         child: const CompanyFinanceView(),
       ),
-      CompanySettingView(companyModel: state.companyModel!),
+      BlocProvider(
+        create: (context) => MiscellaneousCubit(getIt())..getSubscription(),
+        child: CompanySettingView(companyModel: state.companyModel!),
+      ),
     ];
   }
 

@@ -1,6 +1,7 @@
 import '../../../../../core/api/api_service.dart';
 import '../../../../../core/api/end_points.dart';
 import '../../model/send_feedback_request_model.dart';
+import '../../model/subscription_model.dart';
 import '../../model/technical_support_message_model.dart';
 import 'miscellaneous_repo.dart';
 
@@ -58,5 +59,13 @@ class MiscellaneousRepoImpl implements MiscellaneousRepo {
         (message) => TechnicalSupportMessageModel.fromJson(message),
       ),
     );
+  }
+
+  @override
+  Future<SubscriptionModel> getSubscription() async {
+    final response = await _apiServices.get(
+      EndPoint.getSubscription,
+    );
+    return SubscriptionModel.fromJson(response['data']);
   }
 }

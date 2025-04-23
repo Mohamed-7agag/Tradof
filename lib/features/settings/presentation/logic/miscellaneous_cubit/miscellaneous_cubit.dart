@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/errors/exception.dart';
 import '../../../../../core/utils/app_constants.dart';
 import '../../../data/model/send_feedback_request_model.dart';
+import '../../../data/model/subscription_model.dart';
 import '../../../data/model/technical_support_message_model.dart';
-import '../../../data/repo/feedback_repo/miscellaneous_repo.dart';
+import '../../../data/repo/miscellaneous_repo/miscellaneous_repo.dart';
 
 part 'miscellaneous_state.dart';
 
@@ -91,6 +92,23 @@ class MiscellaneousCubit extends Cubit<MiscellaneousState> {
       emit(state.copyWith(
         status: MiscellaneousStatus.getTechnicalSupportMessagesFailure,
         errMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+
+  Future<void> getSubscription() async {
+    emit(state.copyWith(status: MiscellaneousStatus.getSubscriptionLoading));
+    try {
+      final subscription = await _miscellaneousRepo.getSubscription();
+      emit(state.copyWith(
+        status: MiscellaneousStatus.getSubscriptionSuccess,
+        subscriptionModel: subscription,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: MiscellaneousStatus.getSubscriptionFailure,
+        errMessage: 'No subscription found',
       ));
     }
   }

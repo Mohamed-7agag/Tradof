@@ -1,5 +1,6 @@
 import '../../../../core/api/api_service.dart';
 import '../../../../core/api/end_points.dart';
+import '../model/income_statistics_model.dart';
 import '../model/statistics_model.dart';
 import 'finances_repo.dart';
 
@@ -14,5 +15,13 @@ class FinancesRepoImpl implements FinancesRepo {
       EndPoint.statistics(userId),
     );
     return StatisticsModel.fromJson(response['data']);
+  }
+
+  @override
+  Future<IncomeStatisticsModel> getIncomeStatistics() async {
+    final response = await _apiServices.get(
+      EndPoint.getIncomeStatistics,
+    );
+    return IncomeStatisticsModel.fromJson(response['data']);
   }
 }
