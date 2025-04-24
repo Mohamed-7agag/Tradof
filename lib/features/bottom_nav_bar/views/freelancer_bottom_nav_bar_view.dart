@@ -10,7 +10,7 @@ import '../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../dashboard/freelancer_dashboard/presentation/views/freelance_dashbord_view.dart';
 import '../../finances/presentation/logic/cubit/finances_cubit.dart';
-import '../../finances/presentation/views/freelancer_finance_view.dart';
+import '../../finances/presentation/views/finance_view.dart';
 import '../../offers/presentation/views/get_all_offers_view.dart';
 import '../../profile/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
 import '../../profile/freelancer_profile/presentation/views/freelancer_profile_view.dart';
@@ -37,7 +37,7 @@ class _FreelancerBottomNavBarViewState
       FreelancerProfileView(freelancerModel: state.freelancerModel!),
       BlocProvider(
         create: (context) => FinancesCubit(getIt())..getStatistics(),
-        child: const FreelancerFinanceView(),
+        child: const FinanceView(isCompany: false),
       ),
       BlocProvider(
         create: (context) => MiscellaneousCubit(getIt())..getSubscription(),

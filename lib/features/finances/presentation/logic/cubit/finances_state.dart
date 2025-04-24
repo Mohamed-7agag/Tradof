@@ -8,6 +8,9 @@ enum FinancesStatus {
   getIncomeStatisticsLoading,
   getIncomeStatisticsSuccess,
   getIncomeStatisticsFailure,
+  getFinanceProjectLoading,
+  getFinanceProjectSuccess,
+  getFinanceProjectFailure,
 }
 
 extension FinancesStatusX on FinancesStatus {
@@ -24,18 +27,26 @@ extension FinancesStatusX on FinancesStatus {
       this == FinancesStatus.getIncomeStatisticsSuccess;
   bool get isGetIncomeStatisticsFailure =>
       this == FinancesStatus.getIncomeStatisticsFailure;
+  bool get isGetFinanceProjectLoading =>
+      this == FinancesStatus.getFinanceProjectLoading;
+  bool get isGetFinanceProjectSuccess =>
+      this == FinancesStatus.getFinanceProjectSuccess;
+  bool get isGetFinanceProjectFailure =>
+      this == FinancesStatus.getFinanceProjectFailure;
 }
 
 class FinancesState extends Equatable {
   final FinancesStatus status;
   final StatisticsModel? statisticsModel;
-  final IncomeStatisticsModel ? incomeStatisticsModel;
+  final IncomeStatisticsModel? incomeStatisticsModel;
+  final List<FinanceProjectModel> financeProjects;
   final String errorMessage;
 
   const FinancesState({
     this.status = FinancesStatus.initial,
     this.statisticsModel,
     this.errorMessage = '',
+    this.financeProjects = const [],
     this.incomeStatisticsModel,
   });
 
@@ -43,13 +54,16 @@ class FinancesState extends Equatable {
     FinancesStatus? status,
     StatisticsModel? statisticsModel,
     String? errorMessage,
+    List<FinanceProjectModel>? financeProjects,
     IncomeStatisticsModel? incomeStatisticsModel,
   }) {
     return FinancesState(
       status: status ?? this.status,
       statisticsModel: statisticsModel ?? this.statisticsModel,
       errorMessage: errorMessage ?? this.errorMessage,
-      incomeStatisticsModel: incomeStatisticsModel ?? this.incomeStatisticsModel,
+      incomeStatisticsModel:
+          incomeStatisticsModel ?? this.incomeStatisticsModel,
+      financeProjects: financeProjects ?? this.financeProjects,
     );
   }
 
@@ -58,5 +72,7 @@ class FinancesState extends Equatable {
         status,
         statisticsModel,
         errorMessage,
+        incomeStatisticsModel,
+        financeProjects,
       ];
 }

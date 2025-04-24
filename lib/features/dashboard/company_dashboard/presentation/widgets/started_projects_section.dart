@@ -12,15 +12,21 @@ class StartedProjectsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          SliverToBoxAdapter(child: verticalSpace(40)),
-          const SliverToBoxAdapter(child: StartedProjectChart()),
-          const SliverFillRemaining(
-            child: StartedProjectsListView(),
-          ),
-        ],
+      child: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverToBoxAdapter(child: verticalSpace(40)),
+            const SliverToBoxAdapter(child: StartedProjectChart()),
+          ];
+        },
+        body: Column(
+          children: [
+            const Expanded(
+              child: StartedProjectsListView(),
+            ),
+            verticalSpace(50),
+          ],
+        ),
       ),
     );
   }

@@ -21,7 +21,10 @@ class StatisticsSection extends StatelessWidget {
             ? _buildStatisticsContent(state)
             : state.status.isGetStatisticsFailure
                 ? _buildFailureWidget(context, state.errorMessage)
-                : const CustomLoadingWidget();
+                : const Padding(
+                    padding: EdgeInsets.only(top: 15),
+                    child: CustomLoadingWidget(),
+                  );
       },
     );
   }
@@ -29,7 +32,13 @@ class StatisticsSection extends StatelessWidget {
   Widget _buildStatisticsContent(FinancesState state) {
     return Column(
       children: [
-        verticalSpace(15),
+        const Divider(
+          color: AppColors.cardDarkColor,
+          thickness: 1,
+          endIndent: 50,
+          indent: 50,
+          height: 50,
+        ),
         _buildTotalBalanceCard(state),
         verticalSpace(16),
         _buildBalanceRow(state),

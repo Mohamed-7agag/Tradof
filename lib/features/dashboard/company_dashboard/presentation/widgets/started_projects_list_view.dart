@@ -61,7 +61,8 @@ class _StartedProjectsListViewState extends State<StartedProjectsListView> {
       },
       child: PagedListView<int, ProjectModel>(
         pagingController: _pagingController,
-        physics: const NeverScrollableScrollPhysics(),
+        clipBehavior: Clip.none,
+        //physics: const NeverScrollableScrollPhysics(),
         builderDelegate: PagedChildBuilderDelegate<ProjectModel>(
           itemBuilder: (context, project, index) {
             return ProjectItem(

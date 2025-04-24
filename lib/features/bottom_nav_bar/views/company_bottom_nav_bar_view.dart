@@ -10,7 +10,7 @@ import '../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../dashboard/company_dashboard/presentation/views/company_dashboard_view.dart';
 import '../../finances/presentation/logic/cubit/finances_cubit.dart';
-import '../../finances/presentation/views/company_finance_view.dart';
+import '../../finances/presentation/views/finance_view.dart';
 import '../../profile/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
 import '../../profile/company_profile/presentation/views/company_profile_view.dart';
 import '../../projects/presentation/views/create_project_view.dart';
@@ -36,7 +36,7 @@ class _CompanyBottomNavBarViewState extends State<CompanyBottomNavBarView> {
       CompanyProfileView(companyModel: state.companyModel!),
       BlocProvider(
         create: (context) => FinancesCubit(getIt())..getStatistics(),
-        child: const CompanyFinanceView(),
+        child: const FinanceView(isCompany: true),
       ),
       BlocProvider(
         create: (context) => MiscellaneousCubit(getIt())..getSubscription(),

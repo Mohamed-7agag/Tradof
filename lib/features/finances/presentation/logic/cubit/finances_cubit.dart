@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/errors/exception.dart';
 import '../../../../../core/utils/app_constants.dart';
+import '../../../data/model/finance_project_model.dart';
 import '../../../data/model/income_statistics_model.dart';
 import '../../../data/model/statistics_model.dart';
 import '../../../data/repo/finances_repo.dart';
@@ -42,6 +43,23 @@ class FinancesCubit extends Cubit<FinancesState> {
     } catch (e) {
       emit(state.copyWith(
         status: FinancesStatus.getIncomeStatisticsFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  Future<void> getFinanceProjects({bool isCompany = false}) async {
+    emit(state.copyWith(status: FinancesStatus.getFinanceProjectLoading));
+    try {
+      final financeProjects =
+          await _financesRepo.getFinanceProjects(isCompany: isCompany);
+      emit(state.copyWith(
+        status: FinancesStatus.getFinanceProjectSuccess,
+        financeProjects: financeProjects,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: FinancesStatus.getFinanceProjectFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }
