@@ -85,7 +85,7 @@ class ProjectRepoImpl implements ProjectRepo {
         'pageSize': pageSize,
       },
     );
-    return ProjectResponseModel.fromJson(response);
+    return ProjectResponseModel.fromJson(response['data']);
   }
 
   @override

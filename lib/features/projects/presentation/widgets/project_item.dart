@@ -25,7 +25,6 @@ class ProjectItem extends StatelessWidget {
       borderRadius: const BorderRadius.all(Radius.circular(16)),
       onTap: onTap,
       child: SlideInLeft(
-        from: 400,
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           margin: const EdgeInsets.only(bottom: 12),
