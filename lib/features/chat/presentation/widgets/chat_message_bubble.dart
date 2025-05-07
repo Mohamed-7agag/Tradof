@@ -6,11 +6,11 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/app_constants.dart';
-import '../../data/model/message_model.dart';
+import '../../data/model/chat_message_model.dart';
 
 class ChatMessageBubble extends StatelessWidget {
   const ChatMessageBubble({required this.message, super.key});
-  final MessageModel message;
+  final ChatMessageModel message;
 
   bool isSender() {
     return message.senderId == AppConstants.kUserId;

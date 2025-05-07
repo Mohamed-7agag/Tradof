@@ -6,31 +6,35 @@ enum ChatStatus {
   connected,
   disconnected,
   error,
+  sending,
+  sent,
+  receiving,
+  loading
 }
 
 class ChatState extends Equatable {
   final ChatStatus status;
-  final List<MessageModel> messages;
-  final String? error;
+  final List<ChatMessageModel> messages;
+  final String errorMessage;
 
   const ChatState({
     this.status = ChatStatus.initial,
     this.messages = const [],
-    this.error,
+    this.errorMessage = '',
   });
 
   @override
-  List<Object?> get props => [status, messages, error];
+  List<Object?> get props => [status, messages, errorMessage];
 
   ChatState copyWith({
     ChatStatus? status,
-    List<MessageModel>? messages,
-    String? error,
+    List<ChatMessageModel>? messages,
+    String? errorMessage,
   }) {
     return ChatState(
       status: status ?? this.status,
       messages: messages ?? this.messages,
-      error: error ?? this.error,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }

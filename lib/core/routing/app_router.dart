@@ -314,14 +314,7 @@ class AppRouter {
         //final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ChatCubit(
-              // projectId: data['projectId'],
-              // freelancerId: data['freelancerId'],
-              // companyId: data['companyId'],
-              projectId: '24',
-              freelancerId: AppConstants.kUserId,
-              companyId: 'cbe2805d-6670-4e7f-b6bf-0b9152df089f',
-            ),
+            create: (context) => ChatCubit(getIt()),
             child: const ChatView(),
           ),
         );
@@ -334,7 +327,7 @@ class AppRouter {
   static String initialRoute() {
     if (CacheHelper.getBool(AppConstants.firstTime) == true) {
       if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
-        return Routes.freelancerBottomNavBarViewRoute;
+        return Routes.chatViewRoute;
       } else if (CacheHelper.getString(AppConstants.role) == 'CompanyAdmin') {
         return Routes.companyBottomNavBarViewRoute;
       } else {

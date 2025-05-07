@@ -43,42 +43,32 @@ class _SendMessageSectionState extends State<SendMessageSection> {
             ),
           ),
           horizontalSpace(8),
-          BlocBuilder<ChatCubit, ChatState>(
-            //buildWhen: (previous, current) => _buildWhen(current),
-            builder: (context, state) {
-              return IconButton(
-                onPressed: () {
-                  if (_controller.text.trim().isNotEmpty) {
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    context.read<ChatCubit>().sendMessage(
-                          _controller.text.trim(),
-                        );
-                    _controller.clear();
-                  }
-                },
-                icon: const Icon(
-                  Icons.send,
-                  color: AppColors.white,
-                  size: 26,
-                ),
-                style: IconButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: const EdgeInsets.all(12),
-                  fixedSize: const Size(56, 56),
-                ),
-              );
+          IconButton(
+            onPressed: () {
+              FocusManager.instance.primaryFocus?.unfocus();
+              if (_controller.text.trim().isNotEmpty) {
+                context.read<ChatCubit>().sendMessage(
+                      _controller.text.trim(),
+                    );
+                _controller.clear();
+              }
             },
+            icon: const Icon(
+              Icons.send,
+              color: AppColors.white,
+              size: 26,
+            ),
+            style: IconButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              padding: const EdgeInsets.all(12),
+              fixedSize: const Size(56, 56),
+            ),
           )
         ],
       ),
     );
   }
-  // bool _buildWhen(ChatState state) {
-  //   return state.status.isSendTechnicalSupportLoading ||
-  //       state.status.isSendTechnicalSupportSuccess ||
-  //       state.status.isSendTechnicalSupportFailure;
-  // }
 }
