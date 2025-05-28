@@ -8,6 +8,7 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../profile/company_profile/data/model/company_model.dart';
 import '../../../profile/company_profile/presentation/logic/company_profile_cubit/company_profile_cubit.dart';
+import '../widgets/notification_setting_section.dart';
 import '../widgets/setting_app_bar.dart';
 import '../widgets/setting_profile_info.dart';
 import '../widgets/setting_section1.dart';
@@ -64,6 +65,8 @@ class CompanySettingView extends StatelessWidget {
                       },
                     ),
                   ),
+                  verticalSpace(20),
+                  const NotificationSettingSection(),
                   verticalSpace(26),
                   const SubscriptionPlanAndTimer(),
                   verticalSpace(100),

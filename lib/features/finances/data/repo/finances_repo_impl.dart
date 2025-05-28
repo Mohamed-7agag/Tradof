@@ -23,7 +23,7 @@ class FinancesRepoImpl implements FinancesRepo {
     final response = await _apiServices.get(
       EndPoint.getIncomeStatistics,
     );
-    return IncomeStatisticsModel.fromJson(response['data']);
+    return IncomeStatisticsModel.fromJson(response);
   }
 
   @override

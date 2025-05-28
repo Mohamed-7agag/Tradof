@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../../../../../core/api/api_service.dart';
 import '../../../../../core/api/end_points.dart';
 import '../../model/notification_setting_model.dart';
@@ -71,7 +73,8 @@ class MiscellaneousRepoImpl implements MiscellaneousRepo {
   }
 
   @override
-  Future<void> updateNotificationSettings(NotificationSettingModel model) async {
+  Future<void> updateNotificationSettings(
+      NotificationSettingModel model) async {
     await _apiServices.patch(
       EndPoint.patchNotificationSetting,
       data: model.toJson(),
@@ -79,7 +82,9 @@ class MiscellaneousRepoImpl implements MiscellaneousRepo {
   }
 
   @override
-  Future<NotificationSettingModel> getNotificationSettings(String userId) async {
+  Future<NotificationSettingModel> getNotificationSettings(
+      String userId) async {
+    log('userId : $userId');
     final response = await _apiServices.get(
       EndPoint.notificationSetting(userId),
     );

@@ -129,5 +129,6 @@ class AuthCubit extends Cubit<AuthState> {
     );
     CacheHelper.setData(key: AppConstants.role, value: response.role);
     DioFactory.setTokenIntoHeaderAfterLogin(response.token);
+    NonAuthenticatedDioFactory.setTokenIntoHeaderAfterLogin(response.token);
   }
 }

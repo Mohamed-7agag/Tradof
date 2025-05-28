@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../logic/cubit/finances_cubit.dart';
-import 'finance_project_item.dart';
+import '../widgets/finance_project_item.dart';
 
 class FinanceProjectsView extends StatefulWidget {
   const FinanceProjectsView({required this.isCompany, super.key});
