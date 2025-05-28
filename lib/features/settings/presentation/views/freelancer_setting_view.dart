@@ -8,6 +8,7 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../profile/freelancer_profile/data/model/freelancer_model.dart';
 import '../../../profile/freelancer_profile/presentation/logic/freelancer_profile_cubit/freelancer_profile_cubit.dart';
+import '../widgets/notification_setting_section.dart';
 import '../widgets/setting_app_bar.dart';
 import '../widgets/setting_profile_info.dart';
 import '../widgets/setting_section1.dart';
@@ -63,6 +64,8 @@ class FreelancerSettingView extends StatelessWidget {
                       },
                     ),
                   ),
+                  verticalSpace(20),
+                  const NotificationSettingSection(),
                   verticalSpace(26),
                   const SubscriptionPlanAndTimer(),
                   verticalSpace(100),

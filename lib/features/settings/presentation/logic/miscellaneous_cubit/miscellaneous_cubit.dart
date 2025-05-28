@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/errors/exception.dart';
 import '../../../../../core/utils/app_constants.dart';
+import '../../../data/model/notification_setting_model.dart';
 import '../../../data/model/send_feedback_request_model.dart';
 import '../../../data/model/subscription_model.dart';
 import '../../../data/model/technical_support_message_model.dart';
@@ -96,7 +97,6 @@ class MiscellaneousCubit extends Cubit<MiscellaneousState> {
     }
   }
 
-
   Future<void> getSubscription() async {
     emit(state.copyWith(status: MiscellaneousStatus.getSubscriptionLoading));
     try {
@@ -115,5 +115,49 @@ class MiscellaneousCubit extends Cubit<MiscellaneousState> {
 
   void setRate(String rate) {
     emit(state.copyWith(rate: rate));
+  }
+
+  Future<void> updateNotificationSetting(
+      {int? sendEmail, int? alertOffers, int? messageChat}) async {
+    emit(state.copyWith(
+        status: MiscellaneousStatus.updateNotificationSettingLoading));
+    try {
+      await _miscellaneousRepo.updateNotificationSettings(
+        NotificationSettingModel(
+          sendEmail: sendEmail ?? state.notificationSettingModel?.sendEmail ??0,
+          alertOffers:
+              alertOffers ?? state.notificationSettingModel?.alertOffers ??0,
+          messageChat:
+              messageChat ?? state.notificationSettingModel?.messageChat ??0,
+        ),
+      );
+      emit(state.copyWith(
+        status: MiscellaneousStatus.updateNotificationSettingSuccess,
+        message: 'Settings Updated Successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: MiscellaneousStatus.updateNotificationSettingFailure,
+        errMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  Future<void> getNotificationSetting({required String userId}) async {
+    emit(state.copyWith(
+        status: MiscellaneousStatus.getNotificationSettingLoading));
+    try {
+      final notificationSettingModel =
+          await _miscellaneousRepo.getNotificationSettings(userId);
+      emit(state.copyWith(
+        status: MiscellaneousStatus.getNotificationSettingSuccess,
+        notificationSettingModel: notificationSettingModel,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: MiscellaneousStatus.getNotificationSettingFailure,
+        errMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
   }
 }

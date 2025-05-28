@@ -55,6 +55,10 @@ class MyApp extends StatelessWidget {
         backgroundColor: AppColors.primary,
         toolbarHeight: 65,
       ),
+      switchTheme: SwitchThemeData(
+        trackColor: WidgetStateProperty.all(AppColors.white),
+        trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
+      ),
       pageTransitionsTheme: const PageTransitionsTheme(builders: {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
       }),

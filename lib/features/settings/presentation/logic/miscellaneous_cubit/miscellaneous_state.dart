@@ -17,6 +17,12 @@ enum MiscellaneousStatus {
   getSubscriptionLoading,
   getSubscriptionSuccess,
   getSubscriptionFailure,
+  updateNotificationSettingLoading,
+  updateNotificationSettingSuccess,
+  updateNotificationSettingFailure,
+  getNotificationSettingLoading,
+  getNotificationSettingSuccess,
+  getNotificationSettingFailure,
 }
 
 extension FeedbackStatusX on MiscellaneousStatus {
@@ -46,10 +52,22 @@ extension FeedbackStatusX on MiscellaneousStatus {
       this == MiscellaneousStatus.getTechnicalSupportMessagesFailure;
   bool get isGetSubscriptionPlanLoading =>
       this == MiscellaneousStatus.getSubscriptionLoading;
-  bool get isGetSubscriptionPlanSuccess =>    
+  bool get isGetSubscriptionPlanSuccess =>
       this == MiscellaneousStatus.getSubscriptionSuccess;
   bool get isGetSubscriptionPlanFailure =>
       this == MiscellaneousStatus.getSubscriptionFailure;
+  bool get isUpdateNotificationSettingLoading =>
+      this == MiscellaneousStatus.updateNotificationSettingLoading;
+  bool get isUpdateNotificationSettingSuccess =>
+      this == MiscellaneousStatus.updateNotificationSettingSuccess;
+  bool get isUpdateNotificationSettingFailure =>
+      this == MiscellaneousStatus.updateNotificationSettingFailure;
+      bool get isGetNotificationSettingLoading =>
+        this == MiscellaneousStatus.getNotificationSettingLoading;
+      bool get isGetNotificationSettingSuccess =>
+        this == MiscellaneousStatus.getNotificationSettingSuccess;
+      bool get isGetNotificationSettingFailure =>
+        this == MiscellaneousStatus.getNotificationSettingFailure;
 }
 
 class MiscellaneousState extends Equatable {
@@ -57,6 +75,7 @@ class MiscellaneousState extends Equatable {
   final String message;
   final String errMessage;
   final String rate;
+  final NotificationSettingModel? notificationSettingModel;
   final SubscriptionModel? subscriptionModel;
   final List<TechnicalSupportMessageModel> technicalSupportMessages;
 
@@ -66,6 +85,7 @@ class MiscellaneousState extends Equatable {
     this.errMessage = '',
     this.rate = 'Very Bad',
     this.subscriptionModel,
+    this.notificationSettingModel,
     this.technicalSupportMessages = const [],
   });
 
@@ -74,6 +94,7 @@ class MiscellaneousState extends Equatable {
     String? message,
     String? errMessage,
     String? rate,
+    NotificationSettingModel? notificationSettingModel,
     SubscriptionModel? subscriptionModel,
     List<TechnicalSupportMessageModel>? technicalSupportMessages,
   }) {
@@ -83,6 +104,8 @@ class MiscellaneousState extends Equatable {
         errMessage: errMessage ?? this.errMessage,
         rate: rate ?? this.rate,
         subscriptionModel: subscriptionModel ?? this.subscriptionModel,
+        notificationSettingModel:
+            notificationSettingModel ?? this.notificationSettingModel,
         technicalSupportMessages:
             technicalSupportMessages ?? this.technicalSupportMessages);
   }
@@ -94,6 +117,5 @@ class MiscellaneousState extends Equatable {
         errMessage,
         rate,
         technicalSupportMessages,
-        
       ];
 }

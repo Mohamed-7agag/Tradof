@@ -18,9 +18,11 @@ abstract class EndPoint {
   static const String getCountries = 'country';
   static const String getLanguages = 'language';
   static const String getSpecializations = 'specialization';
-  
-  
-  static String increaseProfileView(String userId) => 'user/increase-profile-view/$userId';
+  static const String patchNotificationSetting = 'notification/setting';
+  static String notificationSetting(String userId) => 'notification/setting/';
+
+  static String increaseProfileView(String userId) =>
+      'user/increase-profile-view/$userId';
 
   // Project Endpoints
   static const String createProject = 'project';
@@ -87,7 +89,8 @@ abstract class EndPoint {
   static const String createEvent = 'calendar/event';
   static const String getSubscription = 'subscription/details';
   static const String companyFinancialProjects = 'financial/projects-company';
-  static const String freelancerFinancialProjects = 'financial/projects-freelancer';
+  static const String freelancerFinancialProjects =
+      'financial/projects-freelancer';
   static const String getIncomeStatistics = 'financial/income-statistics';
   static String updateOrDeleteEvent(String eventId) => 'calendar/$eventId';
   static const String getAllEvents = 'calendar/events';

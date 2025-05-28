@@ -1,5 +1,6 @@
 import '../../../../../core/api/api_service.dart';
 import '../../../../../core/api/end_points.dart';
+import '../../model/notification_setting_model.dart';
 import '../../model/send_feedback_request_model.dart';
 import '../../model/subscription_model.dart';
 import '../../model/technical_support_message_model.dart';
@@ -67,5 +68,21 @@ class MiscellaneousRepoImpl implements MiscellaneousRepo {
       EndPoint.getSubscription,
     );
     return SubscriptionModel.fromJson(response['data']);
+  }
+
+  @override
+  Future<void> updateNotificationSettings(NotificationSettingModel model) async {
+    await _apiServices.patch(
+      EndPoint.patchNotificationSetting,
+      data: model.toJson(),
+    );
+  }
+
+  @override
+  Future<NotificationSettingModel> getNotificationSettings(String userId) async {
+    final response = await _apiServices.get(
+      EndPoint.notificationSetting(userId),
+    );
+    return NotificationSettingModel.fromJson(response['data']);
   }
 }
