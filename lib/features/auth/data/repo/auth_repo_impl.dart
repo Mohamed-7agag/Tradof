@@ -69,4 +69,11 @@ class AuthRepoImpl implements AuthRepo {
       data: companyRegisterRequestModel.toJson(),
     );
   }
+  
+  @override
+  Future<void> loginWithGoogle() async{
+    await _apiServices.get(
+      EndPoint.loginWithGoogle,
+    );
+  }
 }

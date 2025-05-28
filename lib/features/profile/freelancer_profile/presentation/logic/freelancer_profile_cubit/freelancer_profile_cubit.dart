@@ -25,6 +25,10 @@ class FreelancerProfileCubit extends Cubit<FreelancerProfileState> {
         status: FreelancerProfileStatus.getFreelancerSuccess,
         freelancerModel: freelancerModel,
       ));
+      // Increase profile views only if freelancerId is not null
+      if (freelancerId != null) {
+        await _freelancerRepo.increaseProfileViews(freelancerId: freelancerId);
+      }
     } catch (e) {
       emit(state.copyWith(
         status: FreelancerProfileStatus.getFreelancerFailure,
@@ -137,6 +141,16 @@ class FreelancerProfileCubit extends Cubit<FreelancerProfileState> {
         status: FreelancerProfileStatus.specializationFailure,
         errMessage: ServerFailure.fromError(e).errMessage,
       ));
+    }
+  }
+
+  Future<void> increaseProfileViews({required String freelancerId}) async {
+    try {
+      await _freelancerRepo.increaseProfileViews(
+        freelancerId: freelancerId,
+      );
+    } catch (e) {
+      //
     }
   }
 }

@@ -29,6 +29,19 @@ class AuthCubit extends Cubit<AuthState> {
       ));
     }
   }
+  Future<void> loginWithGoogle() async {
+    emit(state.copyWith(status: AuthStatus.googleLoginLoading));
+    try {
+     await _authRepo.loginWithGoogle();
+      //await _cacheUserData(result);
+      emit(state.copyWith(status: AuthStatus.googleLoginSuccess));
+    } catch (e) {
+      emit(state.copyWith(
+        status: AuthStatus.googleLoginFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
 
   Future<void> forgetPassword(String email) async {
     emit(state.copyWith(status: AuthStatus.loading));
@@ -108,7 +121,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> _cacheUserData(LoginResponseModel response) async {
     await CacheHelper.setSecuredString(AppConstants.userId, response.userId);
-    await CacheHelper.setSecuredString(AppConstants.token, response.token);
+    await CacheHelper.setSecuredString(AppConstants.token, response.token); 
     AppConstants.kUserId = response.userId;
     await CacheHelper.setSecuredString(
       AppConstants.refreshToken,

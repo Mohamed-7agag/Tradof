@@ -51,7 +51,10 @@ class _ChatViewState extends State<ChatView> {
         child: BlocListener<ChatCubit, ChatState>(
           listenWhen: (prev, curr) => curr.status == ChatStatus.error,
           listener: (context, state) {
-            errorToast(context, 'Error', state.errorMessage);
+            if(state.status == ChatStatus.error) {
+              errorToast(context, 'Error', state.errorMessage);
+            }
+            
           },
           child: Column(
             children: [

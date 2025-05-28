@@ -12,21 +12,25 @@ import '../../../data/repos/company_profile_repo.dart';
 part 'company_profile_state.dart';
 
 class CompanyProfileCubit extends Cubit<CompanyProfileState> {
-  CompanyProfileCubit(this._profileCompanyRepo)
+  CompanyProfileCubit(this._companyProfileRepo)
       : super(const CompanyProfileState());
 
-  final CompanyProfileRepo _profileCompanyRepo;
+  final CompanyProfileRepo _companyProfileRepo;
 
   Future<void> getCompanyProfile({String? companyId}) async {
     emit(state.copyWith(status: CompanyProfileStatus.getCompanyloading));
     try {
-      final company = await _profileCompanyRepo.getCompanyProfrile(
+      final company = await _companyProfileRepo.getCompanyProfrile(
         companyId: companyId ?? AppConstants.kUserId,
       );
       emit(state.copyWith(
         status: CompanyProfileStatus.getCompanySuccess,
         companyModel: company,
       ));
+      // Increase profile views only if companyId is not null
+      if (companyId != null) {
+        await _companyProfileRepo.increaseProfileViews(companyId: companyId);
+      }
     } catch (e) {
       emit(state.copyWith(
         status: CompanyProfileStatus.getCompanyFailure,
@@ -40,7 +44,7 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
       status: CompanyProfileStatus.getCompanyEmployeesLoading,
     ));
     try {
-      final companyEmployees = await _profileCompanyRepo.getCompanyEmployees(
+      final companyEmployees = await _companyProfileRepo.getCompanyEmployees(
         companyId: AppConstants.kUserId,
       );
       emit(state.copyWith(
@@ -62,7 +66,7 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
     ));
 
     try {
-      final result = await _profileCompanyRepo.addCompanyEmployee(
+      final result = await _companyProfileRepo.addCompanyEmployee(
         employeeModel: employeeModel,
       );
       emit(state.copyWith(
@@ -88,7 +92,7 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
       status: CompanyProfileStatus.updateSocialMediaLoading,
     ));
     try {
-      final result = await _profileCompanyRepo.updateSocialMedia(
+      final result = await _companyProfileRepo.updateSocialMedia(
         socialMediaModel: socialMedia,
       );
       emit(state.copyWith(
@@ -113,12 +117,12 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
 
     try {
       if (addedLanguagesIds.isNotEmpty) {
-        await _profileCompanyRepo.addPreferedLanguages(
+        await _companyProfileRepo.addPreferedLanguages(
           languagesIds: addedLanguagesIds,
         );
       }
       if (deletedLanguagesIds.isNotEmpty) {
-        await _profileCompanyRepo.deletePreferedLanguages(
+        await _companyProfileRepo.deletePreferedLanguages(
           languagesIds: deletedLanguagesIds,
         );
       }
@@ -146,13 +150,13 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
 
     try {
       if (addedIndustriesIds.isNotEmpty) {
-        await _profileCompanyRepo.addIndustriesServed(
+        await _companyProfileRepo.addIndustriesServed(
           industriesIds: addedIndustriesIds,
         );
       }
 
       if (deletedIndustriesIds.isNotEmpty) {
-        await _profileCompanyRepo.deleteIndustriesServed(
+        await _companyProfileRepo.deleteIndustriesServed(
           industriesIds: deletedIndustriesIds,
         );
       }
@@ -168,6 +172,15 @@ class CompanyProfileCubit extends Cubit<CompanyProfileState> {
           errorMessage: ServerFailure.fromError(e).errMessage,
         ),
       );
+    }
+  }
+  Future<void> increaseProfileViews({required String companyId}) async {
+    try {
+      await _companyProfileRepo.increaseProfileViews(
+        companyId: companyId,
+      );
+    } catch (e) {
+      //
     }
   }
 }

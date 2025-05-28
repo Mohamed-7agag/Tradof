@@ -8,6 +8,7 @@ abstract class AuthRepo {
     String email,
     String password,
   );
+  Future<void> loginWithGoogle();
   Future<String> forgetPassword(
     String email,
   );

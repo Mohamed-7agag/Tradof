@@ -28,4 +28,7 @@ abstract class FreelancerProfileRepo {
   Future<void> deleteSpecialization({
     required List<int> specializationIds,
   });
+  Future<void> increaseProfileViews({
+    required String freelancerId,
+  });
 }

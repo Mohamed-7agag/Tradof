@@ -3,6 +3,9 @@ part of 'auth_cubit.dart';
 enum AuthStatus {
   initial,
   login,
+  googleLoginLoading,
+  googleLoginSuccess,
+  googleLoginFailure,
   forgotPassword,
   otpVerification,
   resendOtp,
@@ -13,6 +16,9 @@ enum AuthStatus {
 
 extension AuthStepX on AuthStatus {
   bool get isLogin => this == AuthStatus.login;
+  bool get isGoogleLogin => this == AuthStatus.googleLoginSuccess;
+  bool get isGoogleLoginLoading => this == AuthStatus.googleLoginLoading;
+  bool get isGoogleLoginFailure => this == AuthStatus.googleLoginFailure;
   bool get isForgotPassword => this == AuthStatus.forgotPassword;
   bool get isOtpVerification => this == AuthStatus.otpVerification;
   bool get isResetPassword => this == AuthStatus.resetPassword;

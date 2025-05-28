@@ -82,4 +82,11 @@ class FreelancerProfileRepoImpl implements FreelancerProfileRepo {
       data: specializationIds,
     );
   }
+  
+  @override
+  Future<void> increaseProfileViews({required String freelancerId}) async{
+    await _apiServices.post(
+      EndPoint.increaseProfileView(freelancerId),
+    );
+  }
 }

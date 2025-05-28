@@ -86,4 +86,11 @@ class CompanyProfileRepoImpl implements CompanyProfileRepo {
       data: industriesIds,
     );
   }
+
+  @override
+  Future<void> increaseProfileViews({required String companyId}) async {
+    await _apiServices.post(
+      EndPoint.increaseProfileView(companyId),
+    );
+  }
 }

@@ -32,4 +32,7 @@ abstract class CompanyProfileRepo {
   Future<String> updateSocialMedia({
     required List<SocialMediaModel> socialMediaModel,
   });
+  Future<void> increaseProfileViews({
+    required String companyId,
+  });
 }

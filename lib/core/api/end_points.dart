@@ -5,6 +5,7 @@ abstract class EndPoint {
 
   // Authentication Endpoints
   static const String login = 'auth/log-in';
+  static const String loginWithGoogle = 'auth/google-login';
   static const String registerFreelancer = 'auth/register-freelancer';
   static const String registerCompany = 'auth/register-company';
   static const String forgetPassword = 'auth/forget-password';
@@ -17,6 +18,9 @@ abstract class EndPoint {
   static const String getCountries = 'country';
   static const String getLanguages = 'language';
   static const String getSpecializations = 'specialization';
+  
+  
+  static String increaseProfileView(String userId) => 'user/increase-profile-view/$userId';
 
   // Project Endpoints
   static const String createProject = 'project';

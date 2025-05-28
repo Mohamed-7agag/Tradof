@@ -7,6 +7,7 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/widgets/custom_text_field.dart';
+import 'google_button.dart';
 import 'login_button_and_validation.dart';
 
 class LoginForm extends StatefulWidget {
@@ -56,7 +57,7 @@ class _LoginFormState extends State<LoginForm> {
             verticalSpace(12),
             SlideInRight(
               from: 400,
-              delay: const Duration(milliseconds: 350),
+              delay: const Duration(milliseconds: 300),
               child: CustomTextField(
                 labelText: 'Password',
                 controller: passwordController,
@@ -71,19 +72,27 @@ class _LoginFormState extends State<LoginForm> {
                 onTap: () {
                   context.pushNamed(Routes.forgetPasswordPageViewRoute);
                 },
-                child:
-                    Text('Forgot Password?', style: AppStyle.robotoRegular12),
+                child: Text(
+                  'Forgot Password?',
+                  style: AppStyle.robotoRegular12,
+                ),
               ),
             ),
             verticalSpace(50),
             SlideInUp(
               from: 400,
-              delay: const Duration(milliseconds: 500),
+              delay: const Duration(milliseconds: 450),
               child: LoginButtonAndValidation(
                 formKey: formKey,
                 emailController: emailController,
                 passwordController: passwordController,
               ),
+            ),
+            verticalSpace(20),
+            SlideInUp(
+              from: 400,
+              delay: const Duration(milliseconds: 600),
+              child: const GoogleButton(),
             )
           ],
         ),
