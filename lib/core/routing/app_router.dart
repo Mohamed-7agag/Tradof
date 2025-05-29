@@ -12,6 +12,7 @@ import '../../features/calendar/presentation/logic/calendar_cubit/calendar_cubit
 import '../../features/calendar/presentation/views/calender_view.dart';
 import '../../features/chat/presentation/logic/cubit/chat_cubit.dart';
 import '../../features/chat/presentation/views/chat_view.dart';
+import '../../features/finances/presentation/views/withdraw_profit_view.dart';
 import '../../features/offers/data/model/offer_model.dart';
 import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../features/offers/presentation/views/add_offer_view.dart';
@@ -318,7 +319,11 @@ class AppRouter {
             child: const ChatView(),
           ),
         );
-
+      case Routes.withdrawProfitViewRoute:
+        final availableBalance = settings.arguments as double;
+        return MaterialPageRoute(
+          builder: (_) => WithdrawProfitView(avalableBalance: availableBalance),
+        );
       default:
         return null;
     }

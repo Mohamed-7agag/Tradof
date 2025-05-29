@@ -39,7 +39,7 @@ class IncomeChartState extends State<IncomeChart> {
     for (int i = 0; i < monthNames.length; i++) {
       final month = monthNames[i];
       final monthData = yearData[month]!;
-      final pending = monthData['pending']?.toDouble() ?? 0 ;
+      final pending = monthData['pending']?.toDouble() ?? 0;
       final previous = monthData['previous']?.toDouble() ?? 0;
 
       groups.add(makeGroupData(i, pending, previous));
@@ -92,7 +92,9 @@ class IncomeChartState extends State<IncomeChart> {
             child: Expanded(
               child: BarChart(
                 BarChartData(
-                  maxY: 20,
+                  maxY:
+                      (state.incomeStatisticsModel?.maxValue.toDouble() ?? 0) *
+                          1.25,
                   barTouchData: BarTouchData(
                     touchTooltipData: BarTouchTooltipData(
                       getTooltipItem: (group, groupIndex, rod, rodIndex) {
@@ -164,9 +166,11 @@ class IncomeChartState extends State<IncomeChart> {
                     leftTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
-                        reservedSize: 20,
+                        reservedSize: 30,
                         interval: _calculateInterval(
-                            state.incomeStatisticsModel?.maxValue.toDouble()),
+                            (state.incomeStatisticsModel?.maxValue.toDouble() ??
+                                    0) *
+                                1.25),
                         getTitlesWidget: leftTitles,
                       ),
                     ),
@@ -184,7 +188,10 @@ class IncomeChartState extends State<IncomeChart> {
             onRetry: () => context.read<FinancesCubit>().getIncomeStatistics(),
           );
         }
-        return const CustomLoadingWidget();
+        return const SizedBox(
+          height: 350,
+          child: CustomLoadingWidget(),
+        );
       },
     );
   }
@@ -215,10 +222,20 @@ class IncomeChartState extends State<IncomeChart> {
       fontSize: 14,
     );
 
+    String formattedValue;
+    if (value >= 1000000) {
+      formattedValue = '${(value / 1000000).toStringAsFixed(1)}M';
+    } else if (value >= 1000) {
+      formattedValue = '${(value / 1000).toStringAsFixed(1)}k';
+    } else {
+      formattedValue = value.toInt().toString();
+    }
+
     return SideTitleWidget(
       meta: meta,
       space: 0,
-      child: Text(value.toInt().toString(), style: style),
+      child: FittedBox(
+          fit: BoxFit.scaleDown, child: Text(formattedValue, style: style)),
     );
   }
 
