@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/helpers/extensions.dart';
 import '../../../../core/helpers/spacing.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
@@ -38,8 +41,9 @@ class _WithdrawProfitViewState extends State<WithdrawProfitView> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SvgPicture.asset('assets/images/withdraw.svg', width: 0.8.sw),
+            verticalSpace(45),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
               width: 1.sw,
@@ -60,7 +64,9 @@ class _WithdrawProfitViewState extends State<WithdrawProfitView> {
                   Container(
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.symmetric(
-                        vertical: 17, horizontal: 12),
+                      vertical: 17,
+                      horizontal: 12,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.white,
                       borderRadius: BorderRadius.circular(14),
@@ -100,7 +106,8 @@ class _WithdrawProfitViewState extends State<WithdrawProfitView> {
                     child: CustomButton(
                       text: 'Next',
                       onPressed: () {
-                        _withdrawLogic(context);
+                        context.pushNamed(Routes.withdrawFormViewRoute);
+                        //_withdrawLogic(context);
                       },
                       width: 0.5,
                     ),

@@ -1,0 +1,154 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/utils/widgets/custom_app_bar.dart';
+import '../../../../core/utils/widgets/custom_button.dart';
+import '../widgets/withdraw_form_checkbox.dart';
+import '../widgets/withdraw_form_item.dart';
+
+class WithdrawFormView extends StatefulWidget {
+  const WithdrawFormView({super.key});
+
+  @override
+  State<WithdrawFormView> createState() => _WithdrawFormViewState();
+}
+
+class _WithdrawFormViewState extends State<WithdrawFormView> {
+  late TextEditingController _beneficialNameController;
+  late TextEditingController _ibanController;
+  late TextEditingController _swiftOrBicController;
+  late TextEditingController _addressLine1Controller;
+  late TextEditingController _addressLine2Controller;
+  late TextEditingController _cityController;
+  late TextEditingController _stateController;
+  late TextEditingController _postalCodeController;
+  late TextEditingController _countryController;
+
+  @override
+  void initState() {
+    super.initState();
+    _beneficialNameController = TextEditingController();
+    _ibanController = TextEditingController();
+    _swiftOrBicController = TextEditingController();
+    _addressLine1Controller = TextEditingController();
+    _addressLine2Controller = TextEditingController();
+    _cityController = TextEditingController();
+    _stateController = TextEditingController();
+    _postalCodeController = TextEditingController();
+    _countryController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _beneficialNameController.dispose();
+    _ibanController.dispose();
+    _swiftOrBicController.dispose();
+    _addressLine1Controller.dispose();
+    _addressLine2Controller.dispose();
+    _cityController.dispose();
+    _stateController.dispose();
+    _postalCodeController.dispose();
+    _countryController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: customAppbar(title: 'Withdraw Form'),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              verticalSpace(16),
+              WithdrawFormItem(
+                controller: _beneficialNameController,
+                hintText: 'Enter your beneficial name',
+                labelText: 'Beneficial Name',
+              ),
+              verticalSpace(14),
+              WithdrawFormItem(
+                controller: _ibanController,
+                hintText: 'Enter your IBAN',
+                labelText: 'IBAN',
+              ),
+              verticalSpace(14),
+              WithdrawFormItem(
+                controller: _swiftOrBicController,
+                hintText: 'Enter SWIFT/BIC code',
+                labelText: 'SWIFT/BIC Code',
+              ),
+              verticalSpace(14),
+              WithdrawFormItem(
+                controller: _addressLine1Controller,
+                hintText: 'Enter address line 1',
+                labelText: 'Address Line 1',
+              ),
+              verticalSpace(14),
+              WithdrawFormItem(
+                controller: _addressLine2Controller,
+                hintText: 'Enter address line 2',
+                labelText: 'Address Line 2',
+              ),
+              verticalSpace(14),
+              WithdrawFormItem(
+                controller: _cityController,
+                hintText: 'Enter your city',
+                labelText: 'City',
+              ),
+              verticalSpace(14),
+              WithdrawFormItem(
+                controller: _stateController,
+                hintText: 'Enter your state/province',
+                labelText: 'State/Province',
+              ),
+              verticalSpace(14),
+              WithdrawFormItem(
+                controller: _countryController,
+                hintText: 'Enter your country',
+                labelText: 'Country',
+              ),
+              verticalSpace(14),
+              WithdrawFormItem(
+                controller: _postalCodeController,
+                hintText: 'Enter postal code',
+                labelText: 'Postal Code',
+              ),
+              verticalSpace(16),
+              WithdrawFormCheckbox(
+                title: 'I confirm that the beneficiary information is correct',
+                onChanged: (bool value) {
+                  // Handle checkbox state change
+                },
+              ),
+              WithdrawFormCheckbox(
+                title:
+                    'I understand that the withdrawal process may take up to 5 business days',
+                onChanged: (bool value) {
+                  // Handle checkbox state change
+                },
+              ),
+              WithdrawFormCheckbox(
+                title:
+                    'I accept the terms and conditions of the withdrawal process',
+                onChanged: (bool value) {
+                  // Handle checkbox state change
+                },
+              ),
+              verticalSpace(24),
+              CustomButton(
+                text: 'Submit Form',
+                onPressed: () {},
+                width: 1,
+              ),
+              verticalSpace(20),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

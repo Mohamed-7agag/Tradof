@@ -50,4 +50,5 @@ abstract class Routes {
   static const String freelancerFinanceViewRoute = "/freelancerFinanceView";
   static const String financeProjectsViewRoute = "/financeProjectsView";
   static const String withdrawProfitViewRoute = "/withdrawProfitView";
+  static const String withdrawFormViewRoute = "/withdrawFormView";
 }
