@@ -77,6 +77,7 @@ class IncomeChartState extends State<IncomeChart> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FinancesCubit, FinancesState>(
+      buildWhen: (previous, current) => _buildWhen(current),
       builder: (context, state) {
         if (state.status.isGetIncomeStatisticsSuccess) {
           final newBarGroups = _generateBarGroups(state.incomeStatisticsModel);
@@ -261,5 +262,10 @@ class IncomeChartState extends State<IncomeChart> {
         ),
       ],
     );
+  }
+  bool _buildWhen(FinancesState current) {
+    return current.status.isGetIncomeStatisticsSuccess ||
+        current.status.isGetIncomeStatisticsFailure ||
+        current.status.isGetIncomeStatisticsLoading;
   }
 }

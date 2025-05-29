@@ -66,17 +66,17 @@ class _SelectOfferBudgetState extends State<SelectOfferBudget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "${widget.minPrice}\$",
+              "${widget.minPrice} EGP",
               style: AppStyle.robotoRegular12.copyWith(
                 color: AppColors.darkGrey,
               ),
             ),
             Text(
-              "${selectedBudget.ceil()}\$",
+              "${selectedBudget.ceil()} EGP",
               style: AppStyle.poppinsMedium14,
             ),
             Text(
-              "${widget.maxPrice}\$",
+              "${widget.maxPrice} EGP",
               style: AppStyle.robotoRegular12.copyWith(
                 color: AppColors.darkGrey,
               ),

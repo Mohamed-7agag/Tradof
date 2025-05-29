@@ -50,7 +50,7 @@ class FreelancerProjectDetailsBody extends StatelessWidget {
             children: [
               ProjectDetailsBodyItem(
                 title: 'Price',
-                value: '${projectModel.minPrice} - ${projectModel.maxPrice}\$',
+                value: '${projectModel.minPrice} - ${projectModel.maxPrice} EGP',
               ),
               
               const Spacer(flex: 2),

@@ -48,7 +48,7 @@ class Subscriptionplan extends StatelessWidget {
                 style: AppStyle.robotoCondensedRegular15,
               ),
               Text(
-                '${subscription.price} \$',
+                '${subscription.price} EGP',
                 style: AppStyle.robotoCondensedMedium12
                     .copyWith(fontStyle: FontStyle.italic),
               ),

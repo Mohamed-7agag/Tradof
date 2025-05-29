@@ -97,7 +97,8 @@ class BalanceRow extends StatelessWidget {
             title: 'Available Balance',
             amount: state.statisticsModel?.previousBalance,
             onTap: () => context.pushNamed(Routes.withdrawProfitViewRoute,
-                arguments: state.statisticsModel?.previousBalance.toDouble() ?? 0.0),
+                arguments:
+                    state.statisticsModel?.previousBalance.toDouble() ?? 0.0),
           ),
         ),
         horizontalSpace(10),
@@ -127,9 +128,10 @@ class BalanceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(14),
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: AppColors.cardColor,
           borderRadius: BorderRadius.circular(14),
@@ -139,7 +141,7 @@ class BalanceCard extends StatelessWidget {
           children: [
             Text(title, style: AppStyle.robotoCondensedMedium12),
             verticalSpace(6),
-            Text('$amount \$', style: AppStyle.poppinsMedium15),
+            Text('$amount EGP', style: AppStyle.poppinsMedium15),
           ],
         ),
       ),
@@ -167,7 +169,7 @@ class BalanceRow2 extends StatelessWidget {
           style: AppStyle.poppinsMedium15.copyWith(color: AppColors.white),
         ),
         Text(
-          '$amount \$',
+          '$amount EGP',
           style: AppStyle.poppinsMedium15.copyWith(color: AppColors.white),
         ),
       ],

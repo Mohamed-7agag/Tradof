@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
@@ -46,7 +47,14 @@ class SubscriptionPlanAndTimer extends StatelessWidget {
         } else if (state.status.isGetSubscriptionPlanFailure) {
           return CustomFailureWithContainer(text: state.errMessage);
         }
-        return const CustomLoadingWidget();
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          decoration: BoxDecoration(
+            color: AppColors.cardColor,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: const CustomLoadingWidget(),
+        );
       },
     );
   }
@@ -64,12 +72,21 @@ class CustomFailureWithContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 18),
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       decoration: BoxDecoration(
         color: AppColors.cardColor,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: CustomFailureWidget(text: text),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomFailureWidget(text: text),
+          const HugeIcon(
+            icon: HugeIcons.strokeRoundedCreditCardNotFound,
+            color: AppColors.primary,
+          )
+        ],
+      ),
     );
   }
 }

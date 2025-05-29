@@ -66,7 +66,7 @@ class ProjectOfferItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildInfoColumn('Price', '${offer.offerPrice}\$'),
+                _buildInfoColumn('Price', '${offer.offerPrice} EGP'),
                 const SizedBox(
                   height: 35,
                   child: VerticalDivider(color: AppColors.cardDarkColor),

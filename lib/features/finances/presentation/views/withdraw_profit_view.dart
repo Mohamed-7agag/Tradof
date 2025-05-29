@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/helpers/spacing.dart';
@@ -37,85 +38,92 @@ class _WithdrawProfitViewState extends State<WithdrawProfitView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppbar(title: 'Withdraw Profit'),
+      appBar: customAppbar(
+        title: 'Withdraw Profit',
+        actionIcon: HugeIcons.strokeRoundedCreditCardPos,
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Column(
-          children: [
-            SvgPicture.asset('assets/images/withdraw.svg', width: 0.8.sw),
-            verticalSpace(45),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-              width: 1.sw,
-              decoration: BoxDecoration(
-                color: AppColors.cardColor,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Available Balance',
-                    style: AppStyle.robotoRegular12.copyWith(
-                      color: AppColors.darkGrey,
-                    ),
-                  ),
-                  verticalSpace(5),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 17,
-                      horizontal: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Text(
-                      '${widget.avalableBalance} EGP',
-                      style: AppStyle.poppinsMedium15,
-                    ),
-                  ),
-                  verticalSpace(20),
-                  Text(
-                    'Withdraw Amount',
-                    style: AppStyle.robotoRegular12.copyWith(
-                      color: AppColors.darkGrey,
-                    ),
-                  ),
-                  verticalSpace(5),
-                  TextField(
-                    cursorColor: AppColors.primary,
-                    keyboardType: TextInputType.number,
-                    style: AppStyle.poppinsMedium15,
-                    controller: _amountController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.white,
-                      hintText: 'Enter amount (EGP)',
-                      hintStyle: AppStyle.poppinsMedium14
-                          .copyWith(color: AppColors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(14),
-                        borderSide: BorderSide.none,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SvgPicture.asset('assets/images/withdraw.svg', width: 0.8.sw),
+              verticalSpace(45),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+                width: 1.sw,
+                decoration: BoxDecoration(
+                  color: AppColors.cardColor,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Available Balance',
+                      style: AppStyle.robotoRegular12.copyWith(
+                        color: AppColors.darkGrey,
                       ),
                     ),
-                  ),
-                  verticalSpace(30),
-                  Align(
-                    child: CustomButton(
-                      text: 'Next',
-                      onPressed: () {
-                        context.pushNamed(Routes.withdrawFormViewRoute);
-                        //_withdrawLogic(context);
-                      },
-                      width: 0.5,
+                    verticalSpace(5),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 17,
+                        horizontal: 12,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Text(
+                        '${widget.avalableBalance} EGP',
+                        style: AppStyle.poppinsMedium15,
+                      ),
                     ),
-                  ),
-                ],
+                    verticalSpace(20),
+                    Text(
+                      'Withdraw Amount',
+                      style: AppStyle.robotoRegular12.copyWith(
+                        color: AppColors.darkGrey,
+                      ),
+                    ),
+                    verticalSpace(5),
+                    TextField(
+                      cursorColor: AppColors.primary,
+                      keyboardType: TextInputType.number,
+                      style: AppStyle.poppinsMedium15,
+                      controller: _amountController,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: AppColors.white,
+                        hintText: 'Enter amount (EGP)',
+                        hintStyle: AppStyle.poppinsMedium14
+                            .copyWith(color: AppColors.grey),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+                    verticalSpace(30),
+                    Align(
+                      child: CustomButton(
+                        text: 'Next',
+                        onPressed: () {
+                          context.pushNamed(Routes.withdrawFormViewRoute);
+                          //_withdrawLogic(context);
+                        },
+                        width: 0.5,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              verticalSpace(20)
+            ],
+          ),
         ),
       ),
     );

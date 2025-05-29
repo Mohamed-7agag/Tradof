@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
@@ -56,7 +57,10 @@ class _WithdrawFormViewState extends State<WithdrawFormView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppbar(title: 'Withdraw Form'),
+      appBar: customAppbar(
+        title: 'Withdraw Form',
+        actionIcon: HugeIcons.strokeRoundedCreditCardPos,
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: SingleChildScrollView(

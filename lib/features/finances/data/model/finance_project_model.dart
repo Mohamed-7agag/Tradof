@@ -45,13 +45,13 @@ class ProjectDataModel {
   final int id;
   final String name;
   final num depoistPrice;
-  final String? depoistDate;
+  final num deliveryTime;
 
   ProjectDataModel({
     required this.id,
     required this.name,
     required this.depoistPrice,
-    required this.depoistDate,
+    required this.deliveryTime,
   });
 
   factory ProjectDataModel.fromJson(Map<String, dynamic> json) {
@@ -59,7 +59,7 @@ class ProjectDataModel {
       id: json['id'],
       name: json['name'],
       depoistPrice: json['depoistPrice'],
-      depoistDate: json['depoistDate'],
+      deliveryTime: json['deliveryTime'],
     );
   }
 }

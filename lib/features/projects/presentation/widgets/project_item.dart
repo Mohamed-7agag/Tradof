@@ -95,7 +95,7 @@ class ProjectItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _buildInfoColumn(
-                      'Price', '${project.minPrice} - ${project.maxPrice}\$'),
+                      'Price', '${project.minPrice} - ${project.maxPrice} EGP'),
                   const SizedBox(
                     height: 35,
                     child: VerticalDivider(color: AppColors.cardDarkColor),

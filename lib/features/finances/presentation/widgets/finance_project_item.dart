@@ -58,11 +58,11 @@ class FinanceProjectItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                _formatDate(project.prjectData.depoistDate),
+                '${project.prjectData.deliveryTime} Days',
                 style: AppStyle.robotoRegular12,
               ),
               Text(
-                '${project.prjectData.depoistPrice} \$',
+                '${project.prjectData.depoistPrice} EGP',
                 style: AppStyle.poppinsMedium15.copyWith(
                   color: AppColors.primary,
                 ),
@@ -73,13 +73,5 @@ class FinanceProjectItem extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _formatDate(String? dateString) {
-    if (dateString == null || dateString.isEmpty) {
-      return 'N/A';
-    }
-    final DateTime date = DateTime.parse(dateString);
-    return '${date.day}/${date.month}/${date.year}';
   }
 }
