@@ -26,7 +26,7 @@ enum OfferStatus {
   cancelOfferLoading,
   cancelOfferSuccess,
   cancelOfferFailure,
-  
+  setStatusIndex,
 }
 
 class OfferState extends Equatable {
@@ -39,6 +39,7 @@ class OfferState extends Equatable {
     this.projectOffers = const [],
     this.allOffersPagination = const Pagination(),
     this.projectOffersPagination = const Pagination(),
+    this.statusIndex,
   });
 
   final OfferStatus status;
@@ -49,6 +50,7 @@ class OfferState extends Equatable {
   final List<OfferModel> projectOffers;
   final Pagination allOffersPagination;
   final Pagination projectOffersPagination;
+  final int? statusIndex;
 
   OfferState copyWith({
     OfferStatus? status,
@@ -59,6 +61,7 @@ class OfferState extends Equatable {
     List<OfferModel>? projectOffers,
     Pagination? allOffersPagination,
     Pagination? projectOffersPagination,
+    int? statusIndex,
   }) {
     return OfferState(
       status: status ?? this.status,
@@ -70,6 +73,7 @@ class OfferState extends Equatable {
       allOffersPagination: allOffersPagination ?? this.allOffersPagination,
       projectOffersPagination:
           projectOffersPagination ?? this.projectOffersPagination,
+      statusIndex: statusIndex ?? this.statusIndex,
     );
   }
 
@@ -83,6 +87,7 @@ class OfferState extends Equatable {
         projectOffers,
         allOffersPagination,
         projectOffersPagination,
+        statusIndex,
       ];
 }
 

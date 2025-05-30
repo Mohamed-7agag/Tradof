@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+import '../../../../core/helpers/custom_url_launcher.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
@@ -30,16 +33,22 @@ class DownloadAttachmentFilesSection extends StatelessWidget {
           verticalSpace(6),
           Column(
             children: files.map((file) {
-              return ListTile(
-                horizontalTitleGap: 10,
-                contentPadding: EdgeInsets.zero,
-                title: Text(file.fileName, style: AppStyle.robotoRegular14),
-                leading: const HugeIcon(
-                  icon: HugeIcons.strokeRoundedFile02,
-                  color: AppColors.black,
-                ),
-                trailing: Text(
-                  '${(file.fileSize / (1024 * 1024)).toStringAsFixed(2)} MB',
+              return GestureDetector(
+                onTap: () async {
+                  customUrlLauncher(context, file.filePath);
+                  log(file.filePath);
+                },
+                child: ListTile(
+                  horizontalTitleGap: 10,
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(file.fileName, style: AppStyle.robotoRegular14),
+                  leading: const HugeIcon(
+                    icon: HugeIcons.strokeRoundedFile02,
+                    color: AppColors.black,
+                  ),
+                  trailing: Text(
+                    '${(file.fileSize / (1024 * 1024)).toStringAsFixed(2)} MB',
+                  ),
                 ),
               );
             }).toList(),

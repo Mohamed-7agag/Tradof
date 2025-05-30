@@ -79,8 +79,8 @@ class _UpdateOfferViewState extends State<UpdateOfferView> {
                       verticalSpace(25),
                       SelectOfferBudget(
                         initialPrice: widget.offer.offerPrice,
-                        maxPrice: widget.offer.projectMaxPrice,
-                        minPrice: widget.offer.projectMinPrice,
+                        maxPrice: widget.offer.projectMaxPrice + 10000,
+                        minPrice: 0,
                       ),
                       verticalSpace(35),
                       Text(

@@ -38,7 +38,7 @@ class _FliterListViewState extends State<FliterListView> {
             onTap: () {
               setState(() {
                 selectedFilterIndex = index;
-                context.read<OfferCubit>().statusIndex = index-1;
+                context.read<OfferCubit>().setStatusIndex(index - 1);
                 context.read<OfferCubit>().getAllOffers();
               });
             },

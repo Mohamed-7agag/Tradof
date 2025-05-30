@@ -51,8 +51,12 @@ class _AllOfferSectionState extends State<AllOfferSection> {
       listenWhen: (previous, current) =>
           current.status.isGetAllOffersSuccess ||
           current.status.isGetAllOffersFailure ||
-          current.status.isGetAllOffersLoading,
+          current.status.isGetAllOffersLoading ||
+          current.status.isStatusIndexUpdated,
       listener: (context, state) {
+        if (state.status.isStatusIndexUpdated) {
+          _pagingController.refresh();
+        }
         if (state.status.isGetAllOffersSuccess) {
           if (state.allOffersPagination.hasReachedMax) {
             _pagingController.appendLastPage(state.allOffers);
