@@ -6,6 +6,7 @@ import '../../../../../core/utils/app_constants.dart';
 import '../../../data/model/finance_project_model.dart';
 import '../../../data/model/income_statistics_model.dart';
 import '../../../data/model/statistics_model.dart';
+import '../../../data/model/withdrawal_model.dart';
 import '../../../data/repo/finances_repo.dart';
 
 part 'finances_state.dart';
@@ -63,5 +64,32 @@ class FinancesCubit extends Cubit<FinancesState> {
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }
+  }
+
+  Future<void> submitWithdraw({
+    required WithdrawalModel withdrawalModel,
+  }) async {
+    emit(state.copyWith(status: FinancesStatus.withdrawalLoading));
+    try {
+      await _financesRepo.submitWithdraw(withdrawalModel: withdrawalModel);
+      emit(state.copyWith(status: FinancesStatus.withdrawalSuccess));
+    } catch (e) {
+      emit(state.copyWith(
+        status: FinancesStatus.withdrawalFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  void setWithdrawCheckboxValues({
+    bool? value1,
+    bool? value2,
+    bool? value3,
+  }) {
+    emit(state.copyWith(
+      withdrawCheckboxValue1: value1,
+      withdrawCheckboxValue2: value2,
+      withdrawCheckboxValue3: value3,
+    ));
   }
 }

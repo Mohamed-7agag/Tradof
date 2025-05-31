@@ -5,6 +5,7 @@ import '../../../../../core/api/dio_factory.dart';
 import '../../../../../core/cache/cache_helper.dart';
 import '../../../../../core/errors/exception.dart';
 import '../../../../../core/utils/app_constants.dart';
+import '../../../../settings/data/repo/miscellaneous_repo/miscellaneous_repo.dart';
 import '../../../data/model/login_response_model.dart';
 import '../../../data/model/reset_password_request_model.dart';
 import '../../../data/repo/auth_repo.dart';
@@ -12,15 +13,25 @@ import '../../../data/repo/auth_repo.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this._authRepo) : super(const AuthState());
+  AuthCubit(this._authRepo, this._miscellaneousRepo) : super(const AuthState());
 
   final AuthRepo _authRepo;
+  final MiscellaneousRepo _miscellaneousRepo;
 
   Future<void> login(String email, String password) async {
     emit(state.copyWith(status: AuthStatus.loading));
     try {
       final result = await _authRepo.login(email, password);
       await _cacheUserData(result);
+      if (result.role == 'CompanyAdmin') {
+        final bool isSubscribed = await getCurrentSubscription();
+        if (!isSubscribed) {
+          emit(state.copyWith(
+            status: AuthStatus.subscriptionRequired,
+          ));
+          return;
+        }
+      }
       emit(state.copyWith(status: AuthStatus.login));
     } catch (e) {
       emit(state.copyWith(
@@ -29,10 +40,11 @@ class AuthCubit extends Cubit<AuthState> {
       ));
     }
   }
+
   Future<void> loginWithGoogle() async {
     emit(state.copyWith(status: AuthStatus.googleLoginLoading));
     try {
-     await _authRepo.loginWithGoogle();
+      await _authRepo.loginWithGoogle();
       //await _cacheUserData(result);
       emit(state.copyWith(status: AuthStatus.googleLoginSuccess));
     } catch (e) {
@@ -119,9 +131,20 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  Future<bool> getCurrentSubscription() async {
+    try {
+      final subscription = await _miscellaneousRepo.getCurrentSubscription(
+        companyId: AppConstants.kUserId,
+      );
+      return subscription;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<void> _cacheUserData(LoginResponseModel response) async {
     await CacheHelper.setSecuredString(AppConstants.userId, response.userId);
-    await CacheHelper.setSecuredString(AppConstants.token, response.token); 
+    await CacheHelper.setSecuredString(AppConstants.token, response.token);
     AppConstants.kUserId = response.userId;
     await CacheHelper.setSecuredString(
       AppConstants.refreshToken,

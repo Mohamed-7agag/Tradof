@@ -1,7 +1,8 @@
 abstract class EndPoint {
   // Base URLs
   static const String baseUrl = 'https://tradof.runasp.net/api/';
-  static const String baseUrl2 = 'https://tradofserver.azurewebsites.net/api/';
+  static const String baseUrl2 =
+      'https://tradofapi-production.up.railway.app/api/';
 
   // Authentication Endpoints
   static const String login = 'auth/log-in';
@@ -23,6 +24,10 @@ abstract class EndPoint {
 
   static String increaseProfileView(String userId) =>
       'user/increase-profile-view/$userId';
+
+  static const String submitWithdraw = 'financial/request-withdrawProfits';
+  static String getCurrentSubscription(String companyId) =>
+      'subscription/current-subscription/$companyId';
 
   // Project Endpoints
   static const String createProject = 'project';

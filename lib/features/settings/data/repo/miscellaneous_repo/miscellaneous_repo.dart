@@ -16,4 +16,6 @@ abstract class MiscellaneousRepo {
   Future<SubscriptionModel> getSubscription();
   Future<void> updateNotificationSettings(NotificationSettingModel model);
   Future<NotificationSettingModel>getNotificationSettings(String userId);
+  Future<bool> getCurrentSubscription({required String companyId});
+
 }

@@ -124,11 +124,12 @@ class MiscellaneousCubit extends Cubit<MiscellaneousState> {
     try {
       await _miscellaneousRepo.updateNotificationSettings(
         NotificationSettingModel(
-          sendEmail: sendEmail ?? state.notificationSettingModel?.sendEmail ??0,
+          sendEmail:
+              sendEmail ?? state.notificationSettingModel?.sendEmail ?? 0,
           alertOffers:
-              alertOffers ?? state.notificationSettingModel?.alertOffers ??0,
+              alertOffers ?? state.notificationSettingModel?.alertOffers ?? 0,
           messageChat:
-              messageChat ?? state.notificationSettingModel?.messageChat ??0,
+              messageChat ?? state.notificationSettingModel?.messageChat ?? 0,
         ),
       );
       emit(state.copyWith(
@@ -154,6 +155,7 @@ class MiscellaneousCubit extends Cubit<MiscellaneousState> {
         notificationSettingModel: notificationSettingModel,
       ));
     } catch (e) {
+      if (isClosed) return;
       emit(state.copyWith(
         status: MiscellaneousStatus.getNotificationSettingFailure,
         errMessage: ServerFailure.fromError(e).errMessage,
