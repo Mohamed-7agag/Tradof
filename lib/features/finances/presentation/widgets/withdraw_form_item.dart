@@ -10,22 +10,29 @@ class WithdrawFormItem extends StatelessWidget {
     required this.hintText,
     required this.labelText,
     super.key, this.keyboardType,
+    this.isRequired = true,
   });
   final TextEditingController controller;
   final String hintText;
   final String labelText;
   final TextInputType? keyboardType;
+  final bool isRequired;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(labelText, style: AppStyle.robotoRegular12),
+        Row(
+          children: [
+            Text(labelText, style: AppStyle.robotoSemiBold12),
+            if (isRequired) const Text(' *', style: TextStyle(color: Colors.red)),
+          ],
+        ),
         verticalSpace(5),
         TextField(
           cursorColor: AppColors.primary,
           keyboardType: keyboardType,
-          style: AppStyle.poppinsMedium15,
+          style: AppStyle.robotoRegular15,
           controller: controller,
           decoration: InputDecoration(
             filled: true,

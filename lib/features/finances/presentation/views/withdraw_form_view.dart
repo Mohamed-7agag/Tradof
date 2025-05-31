@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
-import '../../../../core/utils/widgets/custom_button.dart';
+import '../logic/cubit/finances_cubit.dart';
+import '../widgets/withdraw_form_button.dart';
 import '../widgets/withdraw_form_checkbox.dart';
 import '../widgets/withdraw_form_item.dart';
 
 class WithdrawFormView extends StatefulWidget {
-  const WithdrawFormView({super.key});
-
+  const WithdrawFormView({required this.withdrawAmount, super.key});
+  final double withdrawAmount;
   @override
   State<WithdrawFormView> createState() => _WithdrawFormViewState();
 }
@@ -120,33 +122,47 @@ class _WithdrawFormViewState extends State<WithdrawFormView> {
                 controller: _postalCodeController,
                 hintText: 'Enter postal code',
                 labelText: 'Postal Code',
+                isRequired: false,
               ),
               verticalSpace(16),
               WithdrawFormCheckbox(
                 title: 'I confirm that the beneficiary information is correct',
                 onChanged: (bool value) {
-                  // Handle checkbox state change
+                  context
+                      .read<FinancesCubit>()
+                      .setWithdrawCheckboxValues(value1: value);
                 },
               ),
               WithdrawFormCheckbox(
                 title:
                     'I understand that the withdrawal process may take up to 5 business days',
                 onChanged: (bool value) {
-                  // Handle checkbox state change
+                  context
+                      .read<FinancesCubit>()
+                      .setWithdrawCheckboxValues(value2: value);
                 },
               ),
               WithdrawFormCheckbox(
                 title:
                     'I accept the terms and conditions of the withdrawal process',
                 onChanged: (bool value) {
-                  // Handle checkbox state change
+                  context
+                      .read<FinancesCubit>()
+                      .setWithdrawCheckboxValues(value3: value);
                 },
               ),
               verticalSpace(24),
-              CustomButton(
-                text: 'Submit Form',
-                onPressed: () {},
-                width: 1,
+              WithdrawFormButton(
+                withdrawAmount: widget.withdrawAmount,
+                beneficialNameController: _beneficialNameController,
+                ibanController: _ibanController,
+                swiftOrBicController: _swiftOrBicController,
+                addressLine1Controller: _addressLine1Controller,
+                addressLine2Controller: _addressLine2Controller,
+                cityController: _cityController,
+                stateController: _stateController,
+                postalCodeController: _postalCodeController,
+                countryController: _countryController,
               ),
               verticalSpace(20),
             ],

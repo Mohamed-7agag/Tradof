@@ -13,8 +13,8 @@ import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
 
 class WithdrawProfitView extends StatefulWidget {
-  const WithdrawProfitView({required this.avalableBalance, super.key});
-  final double avalableBalance;
+  const WithdrawProfitView({required this.availableBalance, super.key});
+  final double availableBalance;
 
   @override
   State<WithdrawProfitView> createState() => _WithdrawProfitViewState();
@@ -78,7 +78,7 @@ class _WithdrawProfitViewState extends State<WithdrawProfitView> {
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: Text(
-                        '${widget.avalableBalance} EGP',
+                        '${widget.availableBalance} EGP',
                         style: AppStyle.poppinsMedium15,
                       ),
                     ),
@@ -112,7 +112,14 @@ class _WithdrawProfitViewState extends State<WithdrawProfitView> {
                       child: CustomButton(
                         text: 'Next',
                         onPressed: () {
-                          context.pushNamed(Routes.withdrawFormViewRoute);
+                          final double amount = double.parse(
+                              _amountController.text.isEmpty
+                                  ? '0'
+                                  : _amountController.text);
+                          context.pushNamed(
+                            Routes.withdrawFormViewRoute,
+                            arguments: amount,
+                          );
                           //_withdrawLogic(context);
                         },
                         width: 0.5,
@@ -121,7 +128,7 @@ class _WithdrawProfitViewState extends State<WithdrawProfitView> {
                   ],
                 ),
               ),
-              verticalSpace(20)
+              verticalSpace(20),
             ],
           ),
         ),
@@ -133,10 +140,14 @@ class _WithdrawProfitViewState extends State<WithdrawProfitView> {
     if (_amountController.text.isEmpty) {
       warningToast(context, 'Warning', 'Please enter an amount');
     } else {
-      // Handle the withdrawal logic here
       final double amount = double.parse(_amountController.text);
-      if (amount > widget.avalableBalance || amount <= 0) {
+      if (amount > widget.availableBalance || amount <= 0) {
         errorToast(context, 'Error', 'Insufficient balance');
+      } else {
+        context.pushNamed(
+          Routes.withdrawFormViewRoute,
+          arguments: amount,
+        );
       }
     }
   }

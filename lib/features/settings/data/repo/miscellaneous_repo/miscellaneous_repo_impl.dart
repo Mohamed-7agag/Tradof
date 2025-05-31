@@ -90,4 +90,11 @@ class MiscellaneousRepoImpl implements MiscellaneousRepo {
     );
     return NotificationSettingModel.fromJson(response['data']);
   }
+  @override
+  Future<bool> getCurrentSubscription({required String companyId}) async {
+    final response = await _apiServices.get(
+      EndPoint.getCurrentSubscription(companyId),
+    );
+    return response['success'] as bool;
+  }
 }

@@ -6,12 +6,14 @@ import '../../features/auth/presentation/logic/registeration_cubit/registeration
 import '../../features/auth/presentation/views/create_account_page_view.dart';
 import '../../features/auth/presentation/views/forget_password_page_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
+import '../../features/auth/presentation/views/subscription_required_view.dart';
 import '../../features/bottom_nav_bar/views/company_bottom_nav_bar_view.dart';
 import '../../features/bottom_nav_bar/views/freelancer_bottom_nav_bar_view.dart';
 import '../../features/calendar/presentation/logic/calendar_cubit/calendar_cubit.dart';
 import '../../features/calendar/presentation/views/calender_view.dart';
 import '../../features/chat/presentation/logic/cubit/chat_cubit.dart';
 import '../../features/chat/presentation/views/chat_view.dart';
+import '../../features/finances/presentation/logic/cubit/finances_cubit.dart';
 import '../../features/finances/presentation/views/withdraw_form_view.dart';
 import '../../features/finances/presentation/views/withdraw_profit_view.dart';
 import '../../features/offers/data/model/offer_model.dart';
@@ -64,14 +66,14 @@ class AppRouter {
       case Routes.loginViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => AuthCubit(getIt()),
+            create: (context) => AuthCubit(getIt(),getIt()),
             child: const LoginView(),
           ),
         );
       case Routes.forgetPasswordPageViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => AuthCubit(getIt()),
+            create: (context) => AuthCubit(getIt(),getIt()),
             child: const ForgetPasswordPageView(),
           ),
         );
@@ -333,11 +335,20 @@ class AppRouter {
       case Routes.withdrawProfitViewRoute:
         final availableBalance = settings.arguments as double;
         return MaterialPageRoute(
-          builder: (_) => WithdrawProfitView(avalableBalance: availableBalance),
+          builder: (_) =>
+              WithdrawProfitView(availableBalance: availableBalance),
         );
       case Routes.withdrawFormViewRoute:
+        final amount = settings.arguments as double;
         return MaterialPageRoute(
-          builder: (_) => const WithdrawFormView(),
+          builder: (_) => BlocProvider(
+            create: (context) => FinancesCubit(getIt()),
+            child: WithdrawFormView(withdrawAmount: amount),
+          ),
+        );
+        case Routes.subscriptionRequiredViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => const SubscriptionRequiredView(),
         );
       default:
         return null;

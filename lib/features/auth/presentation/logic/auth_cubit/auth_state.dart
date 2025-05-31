@@ -12,6 +12,7 @@ enum AuthStatus {
   resetPassword,
   error,
   loading,
+  subscriptionRequired,
 }
 
 extension AuthStepX on AuthStatus {
@@ -25,6 +26,7 @@ extension AuthStepX on AuthStatus {
   bool get isResendOtp => this == AuthStatus.resendOtp;
   bool get isError => this == AuthStatus.error;
   bool get isLoading => this == AuthStatus.loading;
+  bool get isSubscriptionRequired => this == AuthStatus.subscriptionRequired;
 }
 
 class AuthState extends Equatable {

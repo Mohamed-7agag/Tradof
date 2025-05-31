@@ -3,6 +3,7 @@ import '../../../../core/api/end_points.dart';
 import '../model/finance_project_model.dart';
 import '../model/income_statistics_model.dart';
 import '../model/statistics_model.dart';
+import '../model/withdrawal_model.dart';
 import 'finances_repo.dart';
 
 class FinancesRepoImpl implements FinancesRepo {
@@ -38,6 +39,16 @@ class FinancesRepoImpl implements FinancesRepo {
       response['data'].map(
         (e) => FinanceProjectModel.fromJson(e),
       ),
+    );
+  }
+
+  @override
+  Future<void> submitWithdraw({
+    required WithdrawalModel withdrawalModel,
+  }) async {
+    await _apiServices.post(
+      EndPoint.submitWithdraw,
+      data: withdrawalModel.toJson(),
     );
   }
 }

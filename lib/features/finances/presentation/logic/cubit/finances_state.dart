@@ -11,6 +11,9 @@ enum FinancesStatus {
   getFinanceProjectLoading,
   getFinanceProjectSuccess,
   getFinanceProjectFailure,
+  withdrawalLoading,
+  withdrawalSuccess,
+  withdrawalFailure,
 }
 
 extension FinancesStatusX on FinancesStatus {
@@ -33,6 +36,9 @@ extension FinancesStatusX on FinancesStatus {
       this == FinancesStatus.getFinanceProjectSuccess;
   bool get isGetFinanceProjectFailure =>
       this == FinancesStatus.getFinanceProjectFailure;
+  bool get isWithdrawalLoading => this == FinancesStatus.withdrawalLoading;
+  bool get isWithdrawalSuccess => this == FinancesStatus.withdrawalSuccess;
+  bool get isWithdrawalFailure => this == FinancesStatus.withdrawalFailure;
 }
 
 class FinancesState extends Equatable {
@@ -41,6 +47,9 @@ class FinancesState extends Equatable {
   final IncomeStatisticsModel? incomeStatisticsModel;
   final List<FinanceProjectModel> financeProjects;
   final String errorMessage;
+  final bool withdrawCheckboxValue1;
+  final bool withdrawCheckboxValue2;
+  final bool withdrawCheckboxValue3;
 
   const FinancesState({
     this.status = FinancesStatus.initial,
@@ -48,6 +57,9 @@ class FinancesState extends Equatable {
     this.errorMessage = '',
     this.financeProjects = const [],
     this.incomeStatisticsModel,
+    this.withdrawCheckboxValue1 = false,
+    this.withdrawCheckboxValue2 = false,
+    this.withdrawCheckboxValue3 = false,
   });
 
   FinancesState copyWith({
@@ -56,6 +68,9 @@ class FinancesState extends Equatable {
     String? errorMessage,
     List<FinanceProjectModel>? financeProjects,
     IncomeStatisticsModel? incomeStatisticsModel,
+    bool? withdrawCheckboxValue1,
+    bool? withdrawCheckboxValue2,
+    bool? withdrawCheckboxValue3,
   }) {
     return FinancesState(
       status: status ?? this.status,
@@ -64,6 +79,12 @@ class FinancesState extends Equatable {
       incomeStatisticsModel:
           incomeStatisticsModel ?? this.incomeStatisticsModel,
       financeProjects: financeProjects ?? this.financeProjects,
+      withdrawCheckboxValue1:
+          withdrawCheckboxValue1 ?? this.withdrawCheckboxValue1,
+      withdrawCheckboxValue2:
+          withdrawCheckboxValue2 ?? this.withdrawCheckboxValue2,
+      withdrawCheckboxValue3:
+          withdrawCheckboxValue3 ?? this.withdrawCheckboxValue3,
     );
   }
 
@@ -74,5 +95,8 @@ class FinancesState extends Equatable {
         errorMessage,
         incomeStatisticsModel,
         financeProjects,
+        withdrawCheckboxValue1,
+        withdrawCheckboxValue2,
+        withdrawCheckboxValue3,
       ];
 }

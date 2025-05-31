@@ -32,6 +32,8 @@ class LoginButtonAndValidation extends StatelessWidget {
                 : Routes.companyBottomNavBarViewRoute,
             predicate: (route) => false,
           );
+        } else if (state.status.isSubscriptionRequired) {
+          context.pushNamed(Routes.subscriptionRequiredViewRoute);
         } else if (state.status.isError) {
           errorToast(context, 'Error', state.errorMessage);
         }
