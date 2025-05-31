@@ -93,6 +93,11 @@ class CacheHelper {
     debugPrint('FlutterSecureStorage : getSecuredString with key :');
     return await flutterSecureStorage.read(key: key) ?? '';
   }
+  /// remove secured string
+  static removeSecuredString(String key) async {
+    const flutterSecureStorage = FlutterSecureStorage();
+    debugPrint('FlutterSecureStorage : removeSecuredString with key :');
+    await flutterSecureStorage.delete(key: key);}
 
   /// Removes all keys and values in the FlutterSecureStorage
   static clearAllSecuredData() async {

@@ -24,8 +24,9 @@ class AuthCubit extends Cubit<AuthState> {
       final result = await _authRepo.login(email, password);
       await _cacheUserData(result);
       if (result.role == 'CompanyAdmin') {
-        final bool isSubscribed = await getCurrentSubscription();
+        final bool isSubscribed = await getCurrentSubscription(result.userId);
         if (!isSubscribed) {
+          await _resetCachedUserData();
           emit(state.copyWith(
             status: AuthStatus.subscriptionRequired,
           ));
@@ -131,10 +132,10 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<bool> getCurrentSubscription() async {
+  Future<bool> getCurrentSubscription(String companyId) async {
     try {
       final subscription = await _miscellaneousRepo.getCurrentSubscription(
-        companyId: AppConstants.kUserId,
+        companyId: companyId,
       );
       return subscription;
     } catch (e) {
@@ -153,5 +154,15 @@ class AuthCubit extends Cubit<AuthState> {
     CacheHelper.setData(key: AppConstants.role, value: response.role);
     DioFactory.setTokenIntoHeaderAfterLogin(response.token);
     NonAuthenticatedDioFactory.setTokenIntoHeaderAfterLogin(response.token);
+  }
+
+  Future<void> _resetCachedUserData() async {
+    await CacheHelper.removeSecuredString(AppConstants.userId);
+    await CacheHelper.removeSecuredString(AppConstants.token);
+    await CacheHelper.removeSecuredString(AppConstants.refreshToken);
+    await CacheHelper.removeData(key: AppConstants.role);
+    AppConstants.kUserId = '';
+    DioFactory.setTokenIntoHeaderAfterLogin('');
+    NonAuthenticatedDioFactory.setTokenIntoHeaderAfterLogin('');
   }
 }

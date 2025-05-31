@@ -23,7 +23,6 @@ class OfferItem extends StatelessWidget {
       borderRadius: const BorderRadius.all(Radius.circular(16)),
       onTap: onTap,
       child: SlideInLeft(
-        from: 400,
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: const BoxDecoration(

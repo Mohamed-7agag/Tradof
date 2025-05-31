@@ -49,8 +49,10 @@ class OfferCubit extends Cubit<OfferState> {
   }
 
   void setStatusIndex(int index) {
-    emit(
-        state.copyWith(statusIndex: index, status: OfferStatus.setStatusIndex));
+    emit(state.copyWith(
+      statusIndex: index,
+      status: OfferStatus.setStatusIndex,
+    ));
   }
 
   Future<void> getAllOffers({bool loadMore = false}) async {
