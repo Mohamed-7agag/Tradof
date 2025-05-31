@@ -5,11 +5,16 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
+import '../../../../core/utils/widgets/custom_loading_widget.dart';
+import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../logic/file_cubit.dart';
+import '../logic/project_cubit/project_cubit.dart';
 import 'attachment_files_section.dart';
 
 class FreelancerWorkStatusWidget extends StatelessWidget {
-  const FreelancerWorkStatusWidget({super.key});
+  const FreelancerWorkStatusWidget({required this.projectId, super.key});
+
+  final int projectId;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +34,8 @@ class FreelancerWorkStatusWidget extends StatelessWidget {
                   child: const AttachmentFilesSection(),
                 ),
                 Expanded(child: verticalSpace(40)),
-                const Align(
-                  child: FreelancerWorkStatusButton(),
+                Align(
+                  child: FreelancerWorkStatusButton(projectId: projectId),
                 ),
                 verticalSpace(20),
               ],
@@ -43,15 +48,32 @@ class FreelancerWorkStatusWidget extends StatelessWidget {
 }
 
 class FreelancerWorkStatusButton extends StatelessWidget {
-  const FreelancerWorkStatusButton({super.key});
+  const FreelancerWorkStatusButton({required this.projectId, super.key});
+
+  final int projectId;
 
   @override
   Widget build(BuildContext context) {
-    return CustomButton(
-      text: 'Review Request',
-      color: AppColors.lightOrange,
-      width: 0.6,
-      onPressed: () {},
+    return BlocConsumer<ProjectCubit, ProjectState>(
+      listener: (context, state) {
+        if (state.status == ProjectStatus.sendReviewSuccess) {
+          successToast(context, 'Success', state.message);
+        } else if (state.status == ProjectStatus.sendReviewFailure) {
+          errorToast(context, 'Error', state.errorMessage);
+        }
+      },
+      builder: (context, state) {
+        return state.status == ProjectStatus.sendReviewLoading
+            ? const CustomLoadingWidget()
+            : CustomButton(
+                text: 'Review Request',
+                color: AppColors.lightOrange,
+                width: 0.6,
+                onPressed: () {
+                  context.read<ProjectCubit>().sendProjectReview(projectId);
+                },
+              );
+      },
     );
   }
 }

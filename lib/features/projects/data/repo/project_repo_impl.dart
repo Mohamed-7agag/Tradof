@@ -108,7 +108,11 @@ class ProjectRepoImpl implements ProjectRepo {
   @override
   Future<void> sendProjectReview({required int projectId}) async {
     await _apiServices.put(
-      EndPoint.sendProjectReview(projectId),
+      EndPoint.sendProjectReview,
+      data: {
+        "projectId": projectId,
+        "freelancerId": AppConstants.kUserId,
+      },
     );
   }
 

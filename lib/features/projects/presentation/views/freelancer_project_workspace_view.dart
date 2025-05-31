@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
+import '../../data/models/project_model.dart';
 import '../widgets/freelancer_review_status_widget.dart';
 import '../widgets/freelancer_work_status_widget.dart';
 import '../widgets/project_workspace_app_bar.dart';
@@ -10,7 +11,9 @@ import '../widgets/project_workspace_status_section.dart';
 import '../widgets/rating_bar_section.dart';
 
 class FreelancerProjectWorkspaceView extends StatelessWidget {
-  const FreelancerProjectWorkspaceView({super.key});
+  const FreelancerProjectWorkspaceView({required this.projectModel, super.key});
+
+  final ProjectModel projectModel;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,7 @@ class FreelancerProjectWorkspaceView extends StatelessWidget {
   Widget getWorkspaceWidget(int status) {
     switch (status) {
       case 0:
-        return const FreelancerWorkStatusWidget();
+        return FreelancerWorkStatusWidget(projectId: projectModel.id);
       case 1:
         return const FreelancerReviewStatusWidget();
       case 2:
