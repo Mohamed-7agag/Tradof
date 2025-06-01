@@ -26,9 +26,9 @@ class _AllOfferSectionState extends State<AllOfferSection> {
   void initState() {
     _pagingController = PagingController(firstPageKey: 1);
     final offerCubit = context.read<OfferCubit>();
-    if (offerCubit.state.allOffers.isNotEmpty) {
+    if (offerCubit.state.filteredOffers.isNotEmpty) {
       _pagingController.value = PagingState(
-        itemList: offerCubit.state.allOffers,
+        itemList: offerCubit.state.filteredOffers,
         nextPageKey: offerCubit.state.allOffersPagination.pageIndex + 1,
       );
     } else {
@@ -55,7 +55,7 @@ class _AllOfferSectionState extends State<AllOfferSection> {
           current.status.isStatusIndexUpdated,
       listener: (context, state) {
         if (state.status.isStatusIndexUpdated) {
-          _pagingController.refresh();
+          _pagingController.itemList = state.filteredOffers;
         }
         if (state.status.isGetAllOffersSuccess) {
           if (state.allOffersPagination.hasReachedMax) {
@@ -119,6 +119,6 @@ class _AllOfferSectionState extends State<AllOfferSection> {
 
   void _refreshData() {
     _pagingController.refresh();
-    //context.read<OfferCubit>().getAllOffers();
+    context.read<OfferCubit>().getAllOffers();
   }
 }

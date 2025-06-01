@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,33 +25,48 @@ class _FliterListViewState extends State<FliterListView> {
     'unaccepted',
   ];
 
-  int selectedFilterIndex = 0;
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-      child: SizedBox(
-        height: 34.h,
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemCount: filterItems.length,
-          itemBuilder: (_, index) => GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedFilterIndex = index;
-                context.read<OfferCubit>().setStatusIndex(index - 1);
-                context.read<OfferCubit>().getAllOffers();
-              });
-            },
-            child: FliterItem(
-              title: filterItems[index],
-              isSelected: selectedFilterIndex == index,
+      child: BlocConsumer<OfferCubit, OfferState>(
+        listenWhen: (previous, current) =>
+            current.status == OfferStatus.setStatusIndex,
+        listener: (context, state) {
+        
+        },
+        builder: (context, state) {
+          return SizedBox(
+            height: 34.h,
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              controller: _scrollController,
+              itemCount: filterItems.length,
+              itemBuilder: (_, index) => GestureDetector(
+                onTap: () {
+                  setState(() {
+                    context.read<OfferCubit>().statusIndex = index;
+                    context.read<OfferCubit>().setStatusIndex();
+                  });
+                },
+                child: FliterItem(
+                  title: filterItems[index],
+                  isSelected: context.read<OfferCubit>().statusIndex == index,
+                ),
+              ),
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(right: 16),
             ),
-          ),
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.only(right: 16),
-        ),
+          );
+        },
       ),
     );
   }
