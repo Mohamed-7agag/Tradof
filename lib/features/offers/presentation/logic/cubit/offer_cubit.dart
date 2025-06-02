@@ -48,11 +48,18 @@ class OfferCubit extends Cubit<OfferState> {
     }
   }
 
-  void setStatusIndex(int index) {
-    emit(state.copyWith(
-      statusIndex: index,
-      status: OfferStatus.setStatusIndex,
-    ));
+  int statusIndex=0;
+  void setStatusIndex() {
+    
+    final filteredList = statusIndex-1 == -1
+      ? state.allOffers // -1 means "All"
+      : state.allOffers.where((offer) => offer.proposalStatus == statusIndex-1).toList();
+
+  emit(state.copyWith(
+    statusIndex: statusIndex,
+    status: OfferStatus.setStatusIndex,
+    filteredOffers: filteredList,
+  ));
   }
 
   Future<void> getAllOffers({bool loadMore = false}) async {
@@ -67,7 +74,6 @@ class OfferCubit extends Cubit<OfferState> {
         freelancerId: AppConstants.kUserId,
         pageIndex: nextPageIndex,
         pageSize: state.allOffersPagination.pageSize,
-        status: state.statusIndex == -1 ? null : state.statusIndex,
       );
 
       final newOffers = response.items;
@@ -83,6 +89,7 @@ class OfferCubit extends Cubit<OfferState> {
           count: response.count,
         ),
       ));
+      setStatusIndex();
     } catch (e) {
       emit(state.copyWith(
         status: OfferStatus.getAllOffersFailure,

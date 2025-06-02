@@ -37,6 +37,7 @@ import '../../features/projects/data/models/project_model.dart';
 import '../../features/projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../features/projects/presentation/views/company_project_details_view.dart';
 import '../../features/projects/presentation/views/company_project_workspace_view.dart';
+import '../../features/projects/presentation/views/freelancer_current_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_workspace_view.dart';
 import '../../features/settings/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
@@ -226,13 +227,22 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => ProjectCubit(getIt()),
-            child: const FreelancerProjectWorkspaceView(),
+            child: FreelancerProjectWorkspaceView(
+              projectModel: settings.arguments as ProjectModel,
+            ),
           ),
         );
       case Routes.freelancerProjectDetailsViewRoute:
         final data = settings.arguments as ProjectModel;
         return MaterialPageRoute(
           builder: (_) => FreelancerProjectDetailsView(
+            projectModel: data,
+          ),
+        );
+      case Routes.freelancerCurrentProjectDetailsViewRoute:
+        final data = settings.arguments as ProjectModel;
+        return MaterialPageRoute(
+          builder: (_) => FreelancerCurrentProjectDetailsView(
             projectModel: data,
           ),
         );

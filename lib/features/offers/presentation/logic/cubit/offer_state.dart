@@ -36,6 +36,7 @@ class OfferState extends Equatable {
     this.message = '',
     this.offerPrice,
     this.allOffers = const [],
+    this.filteredOffers = const [],
     this.projectOffers = const [],
     this.allOffersPagination = const Pagination(),
     this.projectOffersPagination = const Pagination(),
@@ -47,6 +48,7 @@ class OfferState extends Equatable {
   final String message;
   final double? offerPrice;
   final List<OfferModel> allOffers;
+  final List<OfferModel> filteredOffers;
   final List<OfferModel> projectOffers;
   final Pagination allOffersPagination;
   final Pagination projectOffersPagination;
@@ -59,6 +61,7 @@ class OfferState extends Equatable {
     double? offerPrice,
     List<OfferModel>? allOffers,
     List<OfferModel>? projectOffers,
+    List<OfferModel>? filteredOffers,
     Pagination? allOffersPagination,
     Pagination? projectOffersPagination,
     int? statusIndex,
@@ -69,6 +72,7 @@ class OfferState extends Equatable {
       message: message ?? this.message,
       offerPrice: offerPrice ?? this.offerPrice,
       allOffers: allOffers ?? this.allOffers,
+      filteredOffers: filteredOffers ?? this.filteredOffers,
       projectOffers: projectOffers ?? this.projectOffers,
       allOffersPagination: allOffersPagination ?? this.allOffersPagination,
       projectOffersPagination:
@@ -84,6 +88,7 @@ class OfferState extends Equatable {
         message,
         offerPrice,
         allOffers,
+        filteredOffers,
         projectOffers,
         allOffersPagination,
         projectOffersPagination,
