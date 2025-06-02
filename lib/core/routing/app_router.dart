@@ -66,14 +66,14 @@ class AppRouter {
       case Routes.loginViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => AuthCubit(getIt(),getIt()),
+            create: (context) => AuthCubit(getIt(), getIt()),
             child: const LoginView(),
           ),
         );
       case Routes.forgetPasswordPageViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => AuthCubit(getIt(),getIt()),
+            create: (context) => AuthCubit(getIt(), getIt()),
             child: const ForgetPasswordPageView(),
           ),
         );
@@ -325,18 +325,27 @@ class AppRouter {
           ),
         );
       case Routes.chatViewRoute:
-        //final data = settings.arguments as Map<String, dynamic>;
+       // final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ChatCubit(getIt()),
+            create: (context) => ChatCubit(getIt())
+              ..initializeChat(
+                // projectId: data['projectId'],
+                // freelancerId: data['freelancerId'],
+                // companyId: data['companyId'],
+                projectId: 55,
+                freelancerId: AppConstants.kUserId,
+                companyId: 'cbe2805d-6670-4e7f-b6bf-0b9152df089f',
+              ),
             child: const ChatView(),
           ),
         );
       case Routes.withdrawProfitViewRoute:
         final availableBalance = settings.arguments as double;
         return MaterialPageRoute(
-          builder: (_) =>
-              WithdrawProfitView(availableBalance: availableBalance),
+          builder: (_) => WithdrawProfitView(
+            availableBalance: availableBalance,
+          ),
         );
       case Routes.withdrawFormViewRoute:
         final amount = settings.arguments as double;
@@ -346,7 +355,7 @@ class AppRouter {
             child: WithdrawFormView(withdrawAmount: amount),
           ),
         );
-        case Routes.subscriptionRequiredViewRoute:
+      case Routes.subscriptionRequiredViewRoute:
         return MaterialPageRoute(
           builder: (_) => const SubscriptionRequiredView(),
         );
@@ -358,7 +367,7 @@ class AppRouter {
   static String initialRoute() {
     if (CacheHelper.getBool(AppConstants.firstTime) == true) {
       if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
-        return Routes.chatViewRoute;
+        return Routes.freelancerBottomNavBarViewRoute;
       } else if (CacheHelper.getString(AppConstants.role) == 'CompanyAdmin') {
         return Routes.companyBottomNavBarViewRoute;
       } else {

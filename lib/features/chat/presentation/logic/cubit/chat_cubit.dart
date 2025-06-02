@@ -82,7 +82,9 @@ class ChatCubit extends Cubit<ChatState> {
 
     _errorSub = _webSocketService.errorStream.listen((err) {
       emit(state.copyWith(
-          status: ChatStatus.connectionError, errorMessage: err));
+        status: ChatStatus.connectionError,
+        errorMessage: err,
+      ));
     });
   }
 

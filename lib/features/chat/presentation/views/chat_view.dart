@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/helpers/spacing.dart';
-import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
@@ -10,26 +9,8 @@ import '../logic/cubit/chat_cubit.dart';
 import '../widgets/chat_messages_section.dart';
 import '../widgets/send_message_section.dart';
 
-class ChatView extends StatefulWidget {
+class ChatView extends StatelessWidget {
   const ChatView({super.key});
-
-  @override
-  State<ChatView> createState() => _ChatViewState();
-}
-
-class _ChatViewState extends State<ChatView> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final chatCubit = context.read<ChatCubit>();
-      chatCubit.initializeChat(
-        projectId: 55,
-        freelancerId: AppConstants.kUserId,
-        companyId: 'cbe2805d-6670-4e7f-b6bf-0b9152df089f',
-      );
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

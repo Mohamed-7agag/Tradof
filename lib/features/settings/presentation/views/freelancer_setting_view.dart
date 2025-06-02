@@ -13,7 +13,6 @@ import '../widgets/setting_app_bar.dart';
 import '../widgets/setting_profile_info.dart';
 import '../widgets/setting_section1.dart';
 import '../widgets/setting_section2.dart';
-import '../widgets/subscription_plan_and_timer.dart';
 
 class FreelancerSettingView extends StatelessWidget {
   const FreelancerSettingView({required this.freelancerModel, super.key});
@@ -66,8 +65,6 @@ class FreelancerSettingView extends StatelessWidget {
                   ),
                   verticalSpace(20),
                   const NotificationSettingSection(),
-                  verticalSpace(26),
-                  const SubscriptionPlanAndTimer(),
                   verticalSpace(100),
                 ],
               ),

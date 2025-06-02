@@ -49,7 +49,7 @@ class WebSocketService {
         _connectionController.add(false);
       })
       ..on('newMessage', _handleIncomingMessage)
-      ..on('getMessages', _handleMessagesList)
+      ..on('messagesList', _handleMessagesList)
       ..on('messagesSeen', (data) {
         log('Messages seen: $data');
       })

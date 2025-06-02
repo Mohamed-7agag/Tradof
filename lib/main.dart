@@ -14,7 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeDateFormatting('en_US');
   setupGetIt();
-//  Bloc.observer = MyBlocObserver();
+  Bloc.observer = MyBlocObserver();
   await Future.wait([
     CacheHelper.init(),
     ScreenUtil.ensureScreenSize(),
