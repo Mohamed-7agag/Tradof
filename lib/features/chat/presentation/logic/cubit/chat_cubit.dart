@@ -13,82 +13,77 @@ part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
   final WebSocketService _webSocketService;
-  late final StreamSubscription _statusSub;
-  late final StreamSubscription _messageSub;
-  late final StreamSubscription _historySub;
+  StreamSubscription? _messageSub;
+  StreamSubscription? _messagesListSub;
+  StreamSubscription? _connectionSub;
+  StreamSubscription? _errorSub;
 
-  String? _projectId;
+  int? _projectId;
   String? _freelancerId;
   String? _companyId;
 
-  ChatCubit(this._webSocketService) : super(const ChatState()) {
-    _statusSub = _webSocketService.statusStream.listen(_onStatusChanged);
-    _messageSub = _webSocketService.messageStream.listen(_onMessageReceived);
-    _historySub =
-        _webSocketService.messagesHistoryStream.listen(_onHistoryReceived);
-  }
-  void setContext({
-    required String projectId,
+  ChatCubit(this._webSocketService) : super(const ChatState());
+
+  Future<void> initializeChat({
+    required int projectId,
     required String freelancerId,
     required String companyId,
-  }) {
+  }) async {
     _projectId = projectId;
     _freelancerId = freelancerId;
     _companyId = companyId;
-  }
 
-  Future<void> connect() async {
-    try {
-      await _webSocketService.connect();
-    } catch (e) {
-      emit(state.copyWith(
-        status: ChatStatus.error,
-        errorMessage: ServerFailure.fromError(e).errMessage,
-      ));
-      log('connect e --------- : $e');
+    await _connectAndListen();
+    if (!_webSocketService.isConnected) {
+      await _webSocketService.connectionStream
+          .firstWhere((connected) => connected);
     }
+    await loadMessages();
   }
 
-  Future<void> disconnect() async => _webSocketService.disconnect();
-
-  Future<void> sendMessage(String content) async {
-    if (_projectId == null || _freelancerId == null || _companyId == null) {
-      emit(state.copyWith(
-        status: ChatStatus.error,
-        errorMessage:
-            'Missing chat context. Set project, freelancer, and company IDs.',
-      ));
+  Future<void> _connectAndListen() async {
+    emit(state.copyWith(status: ChatStatus.connecting));
+    if (_webSocketService.isConnected) {
+      emit(state.copyWith(status: ChatStatus.connected));
       return;
     }
 
-    final message = ChatMessageModel(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
-      senderId: AppConstants.kUserId,
-      projectId: _projectId,
-      freelancerId: _freelancerId,
-      companyId: _companyId,
-      message: content.trim(),
-      timestamp: DateTime.now(),
-    );
+    final completer = Completer<void>();
+    StreamSubscription? tempSub;
+    tempSub = _webSocketService.connectionStream.listen((connected) {
+      if (connected) {
+        completer.complete();
+        tempSub?.cancel();
+      }
+    }, onError: (e) {
+      completer.completeError(e);
+      tempSub?.cancel();
+    });
 
-    final updatedMessages = [...state.messages, message];
-    emit(state.copyWith(messages: updatedMessages));
+    await _webSocketService.connect();
+    await completer.future;
+    emit(state.copyWith(status: ChatStatus.connected));
 
-    try {
-      await _webSocketService.sendMessage(
-        projectId: _projectId!,
-        freelancerId: _freelancerId!,
-        companyId: _companyId!,
-        senderId: AppConstants.kUserId,
-        message: content,
-      );
-    } catch (e) {
+    _connectionSub?.cancel();
+    _messageSub?.cancel();
+    _messagesListSub?.cancel();
+    _errorSub?.cancel();
+
+    _connectionSub = _webSocketService.connectionStream.listen((connected) {
       emit(state.copyWith(
-        status: ChatStatus.error,
-        errorMessage: ServerFailure.fromError(e).errMessage,
+        status: connected ? ChatStatus.connected : ChatStatus.disconnected,
       ));
-      log('Send message e -------- : $e');
-    }
+    });
+
+    _messageSub = _webSocketService.messageStream.listen(_onMessageReceived);
+    _messagesListSub = _webSocketService.messagesListStream.listen((messages) {
+      emit(state.copyWith(messages: messages, status: ChatStatus.loaded));
+    });
+
+    _errorSub = _webSocketService.errorStream.listen((err) {
+      emit(state.copyWith(
+          status: ChatStatus.connectionError, errorMessage: err));
+    });
   }
 
   Future<void> loadMessages() async {
@@ -99,49 +94,96 @@ class ChatCubit extends Cubit<ChatState> {
       ));
       return;
     }
+
+    emit(state.copyWith(status: ChatStatus.loading));
+    const maxRetries = 3;
+    var retries = 0;
+
+    while (retries < maxRetries) {
+      if (_webSocketService.isConnected) {
+        try {
+          await _webSocketService.getMessages(
+            projectId: _projectId!,
+            userId: AppConstants.kUserId,
+          );
+          emit(state.copyWith(status: ChatStatus.loaded));
+          return;
+        } catch (e) {
+          emit(state.copyWith(
+            status: ChatStatus.error,
+            errorMessage: _getErrorMessage(e),
+          ));
+          log('Load messages error: $e');
+          return;
+        }
+      }
+      retries++;
+      await Future.delayed(const Duration(milliseconds: 500));
+    }
+
+    emit(state.copyWith(
+      status: ChatStatus.error,
+      errorMessage: 'Failed to connect to socket after $maxRetries attempts',
+    ));
+  }
+
+  Future<void> sendMessage(String content) async {
+    if (!_isContextValid()) {
+      emit(state.copyWith(
+        status: ChatStatus.error,
+        errorMessage: 'Chat context not properly initialized',
+      ));
+      return;
+    }
+    if (content.trim().isEmpty) return;
     try {
-      emit(state.copyWith(status: ChatStatus.loading));
-      await _webSocketService.getMessages(
-          projectId: _projectId!, userId: AppConstants.kUserId);
+      await _webSocketService.sendMessage(
+        projectId: _projectId!,
+        freelancerId: _freelancerId!,
+        companyId: _companyId!,
+        senderId: AppConstants.kUserId,
+        message: content.trim(),
+      );
     } catch (e) {
       emit(state.copyWith(
         status: ChatStatus.error,
-        errorMessage: ServerFailure.fromError(e).errMessage,
+        errorMessage: _getErrorMessage(e),
       ));
-      log('load messages e -------- : $e');
+      log('Send message error: $e');
     }
-  }
-
-  void markMessageAsRead(String messageId) {
-    final updated = state.messages.map((msg) {
-      if (msg.id == messageId) return msg.copyWith(seen: true);
-      return msg;
-    }).toList();
-    emit(state.copyWith(messages: updated));
-  }
-
-  void _onStatusChanged(ChatStatus status) {
-    if (isClosed) return;
-    emit(state.copyWith(status: status));
   }
 
   void _onMessageReceived(ChatMessageModel message) {
     if (isClosed) return;
-    if (!state.messages.any((m) => m.id == message.id)) {
-      emit(state.copyWith(messages: [...state.messages, message]));
-    }
+    final updatedMessages = [...state.messages, message];
+    emit(state.copyWith(
+      messages: updatedMessages,
+      status: ChatStatus.loaded,
+    ));
   }
 
-  void _onHistoryReceived(List<ChatMessageModel> history) {
-    if (isClosed) return;
-    emit(state.copyWith(messages: history, status: ChatStatus.connected));
+  bool _isContextValid() {
+    return _projectId != null && _freelancerId != null && _companyId != null;
+  }
+
+  String _getErrorMessage(dynamic error) {
+    if (error is ServerFailure) {
+      return error.errMessage;
+    }
+    return ServerFailure.fromError(error).errMessage;
+  }
+
+  Future<void> disconnect() async {
+    _webSocketService.disconnect();
+    emit(state.copyWith(status: ChatStatus.disconnected));
   }
 
   @override
   Future<void> close() {
-    _statusSub.cancel();
-    _messageSub.cancel();
-    _historySub.cancel();
+    _messageSub?.cancel();
+    _messagesListSub?.cancel();
+    _connectionSub?.cancel();
+    _errorSub?.cancel();
     _webSocketService.dispose();
     return super.close();
   }

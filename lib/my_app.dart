@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return BlocProvider(
           lazy: false,
-          create: (context) => MetaDataCubit(getIt())..fetchAllMetaData(),
+          create: (context) => MetaDataCubit(getIt()),
           child: _myMaterialApp(),
         );
       },

@@ -17,7 +17,7 @@ class ChatMessageBubble extends StatelessWidget {
   }
 
   String convertTime() {
-    final DateTime dateTime = DateTime.parse(message.timestamp.toString());
+    final DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(message.timestamp);
     final String hourAndMinute = DateFormat('hh:mm', 'en').format(dateTime);
     final String type = DateFormat('a').format(dateTime);
     return '$hourAndMinute $type';

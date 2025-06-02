@@ -348,7 +348,7 @@ class AppRouter {
   static String initialRoute() {
     if (CacheHelper.getBool(AppConstants.firstTime) == true) {
       if (CacheHelper.getString(AppConstants.role) == 'Freelancer') {
-        return Routes.freelancerBottomNavBarViewRoute;
+        return Routes.chatViewRoute;
       } else if (CacheHelper.getString(AppConstants.role) == 'CompanyAdmin') {
         return Routes.companyBottomNavBarViewRoute;
       } else {

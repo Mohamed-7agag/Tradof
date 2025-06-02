@@ -12,30 +12,26 @@ class ChatMessagesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ChatCubit, ChatState>(
+      buildWhen: (previous, current) {
+        return current.status.isError ||
+            current.status.isLoading ||
+            current.status.isLoaded;
+      },
       builder: (context, state) {
-        if (state.status == ChatStatus.initial ||
-            state.status == ChatStatus.connecting ||
-            state.status == ChatStatus.loading) {
+        if (state.status.isLoading) {
           return const CustomLoadingWidget();
         }
-
-        if (state.status == ChatStatus.error) {
-          return CustomFailureWidget(
-            text: state.errorMessage,
-            onRetry: () => context.read<ChatCubit>().connect(),
-          );
+        if (state.status.isError) {
+          return CustomFailureWidget(text: state.errorMessage);
         }
-
         if (state.messages.isEmpty) {
           return const CustomFailureWidget(text: 'No messages yet!');
         }
-
         return ListView.builder(
           reverse: true,
           itemCount: state.messages.length,
           itemBuilder: (context, index) {
             final message = state.messages.reversed.toList()[index];
-
             return ChatMessageBubble(message: message);
           },
         );

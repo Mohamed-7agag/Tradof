@@ -1,153 +1,132 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:web_socket_channel/io.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
-
+import 'dart:developer';
+import 'package:socket_io_client/socket_io_client.dart' as io;
 import '../../features/chat/data/model/chat_message_model.dart';
-import '../../features/chat/presentation/logic/cubit/chat_cubit.dart';
-
-enum WebSocketEvent {
-  sendMessage,
-  getMessages,
-  newMessage,
-  messageHistory,
-}
-
-extension WebSocketEventExtension on WebSocketEvent {
-  String get name => toString().split('.').last;
-}
 
 class WebSocketService {
-  WebSocketChannel? _channel;
-  final _statusController = StreamController<ChatStatus>.broadcast();
+  io.Socket? _socket;
+
   final _messageController = StreamController<ChatMessageModel>.broadcast();
-  final _messagesHistoryController =
-      StreamController<List<ChatMessageModel>>.broadcast();
+  final _messagesListController = StreamController<List<ChatMessageModel>>.broadcast();
+  final _connectionController = StreamController<bool>.broadcast();
+  final _errorController = StreamController<String>.broadcast();
 
-  ChatStatus _currentStatus = ChatStatus.initial;
-  int _retryAttempts = 0;
-
-  Stream<ChatStatus> get statusStream => _statusController.stream;
   Stream<ChatMessageModel> get messageStream => _messageController.stream;
-  Stream<List<ChatMessageModel>> get messagesHistoryStream =>
-      _messagesHistoryController.stream;
+  Stream<List<ChatMessageModel>> get messagesListStream => _messagesListController.stream;
+  Stream<bool> get connectionStream => _connectionController.stream;
+  Stream<String> get errorStream => _errorController.stream;
+
+  bool get isConnected => _socket?.connected ?? false;
 
   Future<void> connect() async {
-    if (_currentStatus == ChatStatus.connected) return;
-
-    _updateStatus(ChatStatus.connecting);
+    if (isConnected) return;
 
     try {
-      _channel = IOWebSocketChannel.connect(
-        Uri.parse('wss://tradofserver.azurewebsites.net:443'),
-        pingInterval: const Duration(seconds: 5),
+      _socket = io.io(
+        'https://tradofapi-production.up.railway.app',
+        io.OptionBuilder()
+            .setTransports(['websocket'])
+            .enableAutoConnect()
+            .build(),
       );
-
-      // Listen immediately to avoid unhandled stream errors
-      _channel!.stream.listen(
-        _handleIncomingMessage,
-        onError: (error) {
-          _onConnectionError();
-        },
-        onDone: _onConnectionClosed,
-        cancelOnError: true,
-      );
-
-      _retryAttempts = 0;
-      _updateStatus(ChatStatus.connected);
+      _setupEventListeners();
+      _socket!.connect();
     } catch (e) {
-      _onConnectionError();
-      _updateStatus(ChatStatus.error);
-      throw Exception('WebSocket connection failed: $e');
+      log('Socket connection failed: $e');
+      _errorController.add('Socket connection failed: $e');
     }
   }
 
-  void _onConnectionError() {
-    _updateStatus(ChatStatus.error);
-    _scheduleReconnect();
+  void _setupEventListeners() {
+    _socket!
+      ..onConnect((_) {
+        log('Socket connected successfully👌');
+        _connectionController.add(true);
+      })
+      ..onDisconnect((_) {
+        log('Socket disconnected😒');
+        _connectionController.add(false);
+      })
+      ..on('newMessage', _handleIncomingMessage)
+      ..on('getMessages', _handleMessagesList)
+      ..on('messagesSeen', (data) {
+        log('Messages seen: $data');
+      })
+      ..on('error', (data) {
+        final msg = data is String ? data : data['message'] ?? data.toString();
+        _errorController.add(msg);
+        log('Socket error: $msg');
+      });
   }
 
-  void _onConnectionClosed() {
-    _updateStatus(ChatStatus.disconnected);
-    _scheduleReconnect();
+  void _handleIncomingMessage(dynamic data) {
+    try {
+      log('Handling incoming message: $data');
+      final message = ChatMessageModel.fromJson(data);
+      _messageController.add(message);
+    } catch (e) {
+      log('Error handling incoming message: $e');
+    }
   }
 
-  void _scheduleReconnect() {
-    if (_retryAttempts >= 5) return;
-    Future.delayed(Duration(seconds: 2 << _retryAttempts), () {
-      _retryAttempts++;
-      connect();
-    });
-  }
-
-  Future<void> disconnect() async {
-    await _channel?.sink.close();
-    _channel = null;
-    _updateStatus(ChatStatus.disconnected);
+  void _handleMessagesList(dynamic data) {
+    try {
+      final parsed = data is String ? jsonDecode(data) : data;
+      final messages = (parsed as List)
+          .map((item) => ChatMessageModel.fromJson(item))
+          .toList();
+      _messagesListController.add(messages);
+      log('Handling messages list: $messages');
+    } catch (e) {
+      log('Error handling messages list: $e');
+    }
   }
 
   Future<void> sendMessage({
-    required String projectId,
+    required int projectId,
     required String freelancerId,
     required String companyId,
     required String senderId,
     required String message,
   }) async {
-    if (_channel == null) throw Exception('WebSocket not connected');
+    if (!isConnected) throw Exception('Socket not connected');
     final payload = {
-      'event': WebSocketEvent.sendMessage.name,
-      'data': {
-        'projectId': projectId,
-        'freelancerId': freelancerId,
-        'companyId': companyId,
-        'senderId': senderId,
-        'message': message,
-      }
+      'projectId': projectId,
+      'freelancerId': freelancerId,
+      'companyId': companyId,
+      'senderId': senderId,
+      'message': message,
     };
-    _channel!.sink.add(jsonEncode(payload));
+    _socket!.emit('sendMessage', payload);
+    log('Message sent: $payload');
   }
 
   Future<void> getMessages({
-    required String projectId,
+    required int projectId,
     required String userId,
   }) async {
-    if (_channel == null) throw Exception('WebSocket not connected');
+    if (!isConnected) throw Exception('Socket not connected');
     final payload = {
-      'event': WebSocketEvent.getMessages.name,
-      'data': {
-        'projectId': projectId,
-        'userId': userId,
-      }
+      'projectId': projectId,
+      'userId': userId,
     };
-    _channel!.sink.add(jsonEncode(payload));
+    _socket!.emit('getMessages', payload);
+    log('Requesting messages for projectId: $projectId, userId: $userId');
   }
 
-  void _handleIncomingMessage(dynamic message) {
-    final parsed = jsonDecode(message as String);
-    switch (parsed['event']) {
-      case 'newMessage':
-        _messageController.add(ChatMessageModel.fromJson(parsed['data']));
-        break;
-      case 'messageHistory':
-        final List<ChatMessageModel> history = (parsed['data'] as List)
-            .map((e) => ChatMessageModel.fromJson(e))
-            .toList();
-        _messagesHistoryController.add(history);
-        break;
-    }
-    _updateStatus(ChatStatus.connected);
-  }
-
-  void _updateStatus(ChatStatus status) {
-    _currentStatus = status;
-    _statusController.add(status);
+  void disconnect() {
+    _socket?.disconnect();
+    _socket?.dispose();
+    _socket = null;
+    _connectionController.add(false);
   }
 
   void dispose() {
     disconnect();
-    _statusController.close();
     _messageController.close();
-    _messagesHistoryController.close();
+    _messagesListController.close();
+    _connectionController.close();
+    _errorController.close();
   }
 }

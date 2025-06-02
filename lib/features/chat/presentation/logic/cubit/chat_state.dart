@@ -5,11 +5,21 @@ enum ChatStatus {
   connecting,
   connected,
   disconnected,
+  connectionError,
   error,
-  sending,
-  sent,
-  receiving,
-  loading
+  loading,
+  loaded,
+}
+
+extension ChatStatusX on ChatStatus {
+  bool get isInitial => this == ChatStatus.initial;
+  bool get isConnecting => this == ChatStatus.connecting;
+  bool get isConnected => this == ChatStatus.connected;
+  bool get isDisconnected => this == ChatStatus.disconnected;
+  bool get isConnectionError => this == ChatStatus.connectionError;
+  bool get isError => this == ChatStatus.error;
+  bool get isLoading => this == ChatStatus.loading;
+  bool get isLoaded => this == ChatStatus.loaded;
 }
 
 class ChatState extends Equatable {

@@ -1,11 +1,11 @@
 class ChatMessageModel {
-  final String id;
+  final String? id;
   final String senderId;
   final String? projectId;
   final String? freelancerId;
   final String? companyId;
   final String message;
-  final DateTime timestamp;
+  final int timestamp;
   final bool seen;
 
   ChatMessageModel({
@@ -27,7 +27,7 @@ class ChatMessageModel {
       freelancerId: json['freelancerId'],
       companyId: json['companyId'],
       message: json['message'],
-      timestamp: DateTime.parse(json['timestamp']),
+      timestamp: json['timestamp'] ,
       seen: json['seen'] ?? false,
     );
   }
@@ -40,7 +40,7 @@ class ChatMessageModel {
       'freelancerId': freelancerId,
       'companyId': companyId,
       'message': message,
-      'timestamp': timestamp.toIso8601String(),
+      'timestamp': timestamp,
       'seen': seen,
     };
   }
@@ -52,7 +52,7 @@ class ChatMessageModel {
     String? freelancerId,
     String? companyId,
     String? message,
-    DateTime? timestamp,
+    int? timestamp,
     bool? seen,
   }) {
     return ChatMessageModel(
