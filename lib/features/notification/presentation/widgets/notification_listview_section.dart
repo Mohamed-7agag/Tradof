@@ -20,10 +20,10 @@ class NotificationListviewSection extends StatelessWidget {
         if (state.status.isLoading) {
           return const CustomLoadingWidget();
         }
-        if (state.status.isError) {
+        else if (state.status.isError) {
           return CustomFailureWidget(text: state.errorMessage);
         }
-        if (state.notifications.isEmpty && state.status.isLoaded) {
+        else if (state.status.isLoaded && state.notifications.isEmpty) {
           return const CustomFailureWidget(text: 'No Notifications yet!');
         }
         return ListView.builder(

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/convert_time.dart';
@@ -23,54 +24,61 @@ class NotificationDetailsView extends StatelessWidget {
         child: Column(
           children: [
             verticalSpace(16),
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 14,
-                vertical: 18,
-              ),
-              decoration: const BoxDecoration(
-                color: AppColors.cardColor,
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    notificationModel.type,
-                    style: AppStyle.robotoRegular14,
-                  ),
-                  Text(
-                    convertTime(notificationModel.timestamp),
-                    style: AppStyle.robotoRegular10,
-                  ),
-                ],
+            SlideInRight(
+              from: 400,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 18,
+                ),
+                decoration: const BoxDecoration(
+                  color: AppColors.cardColor,
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      notificationModel.type,
+                      style: AppStyle.robotoRegular14,
+                    ),
+                    Text(
+                      convertTime(notificationModel.timestamp),
+                      style: AppStyle.robotoRegular10,
+                    ),
+                  ],
+                ),
               ),
             ),
             verticalSpace(12),
             Expanded(
-              child: Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 16,
-                ),
-                decoration: const BoxDecoration(
-                  color: AppColors.cardColor,
-                  borderRadius: BorderRadius.all(Radius.circular(14)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      notificationModel.message,
-                      style: AppStyle.robotoRegular14,
-                    ),
-                    verticalSpace(6),
-                    Text(
-                      'Seen : ${notificationModel.seen ? 'Yes' : 'No'}',
-                      style: AppStyle.robotoRegular10,
-                    ),
-                  ],
+              child: SlideInRight(
+                from: 400,
+                delay: const Duration(milliseconds: 150),
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 16,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: AppColors.cardColor,
+                    borderRadius: BorderRadius.all(Radius.circular(14)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        notificationModel.message,
+                        style: AppStyle.robotoRegular14,
+                      ),
+                      verticalSpace(6),
+                      Text(
+                        'Seen : ${notificationModel.seen ? 'Yes' : 'No'}',
+                        style: AppStyle.robotoRegular10,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -45,6 +45,7 @@ class _WithdrawProfitViewState extends State<WithdrawProfitView> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               SvgPicture.asset('assets/images/withdraw.svg', width: 0.8.sw),

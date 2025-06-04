@@ -73,6 +73,7 @@ class _CompanyProjectDetailsViewState extends State<CompanyProjectDetailsView> {
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

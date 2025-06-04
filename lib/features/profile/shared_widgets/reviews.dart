@@ -26,7 +26,7 @@ class Reviews extends StatelessWidget {
             children: [
               Text(
                 'Reviews',
-                style: AppStyle.robotoMedium10.copyWith(
+                style: AppStyle.robotoCondensedMedium12.copyWith(
                   color: AppColors.white,
                 ),
               ),

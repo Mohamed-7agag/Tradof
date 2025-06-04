@@ -93,7 +93,10 @@ class NotificationCubit extends Cubit<NotificationState> {
       if (_notificationService.isConnected) {
         try {
           await _notificationService.getNotifications(AppConstants.kUserId);
-          emit(state.copyWith(status: NotificationStatus.loaded));
+          emit(state.copyWith(
+            status: NotificationStatus.loaded,
+            notifications: await _notificationService.notificationsStream.first,
+          ));
           return;
         } catch (e) {
           emit(state.copyWith(
