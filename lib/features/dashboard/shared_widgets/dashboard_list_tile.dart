@@ -54,15 +54,16 @@ class DashboardListTile extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const HugeIcon(
-            icon: HugeIcons.strokeRoundedNotification03,
-            color: AppColors.white,
+          InkWell(
+            onTap: () => context.pushNamed(Routes.notificationViewRoute),
+            child: const HugeIcon(
+              icon: HugeIcons.strokeRoundedNotification03,
+              color: AppColors.white,
+            ),
           ),
           horizontalSpace(18),
           InkWell(
-            onTap: () {
-              context.pushNamed(Routes.calendarViewRoute);
-            },
+            onTap: () => context.pushNamed(Routes.calendarViewRoute),
             child: const HugeIcon(
               icon: HugeIcons.strokeRoundedCalendar02,
               color: AppColors.white,

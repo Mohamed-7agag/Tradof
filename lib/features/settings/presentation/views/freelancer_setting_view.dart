@@ -47,7 +47,6 @@ class FreelancerSettingView extends StatelessWidget {
                       onPersonalInfoTap: () async {
                         await _onPersonalInfoTap(context);
                       },
-                      onNotificationTap: () {},
                     ),
                   ),
                   verticalSpace(20),

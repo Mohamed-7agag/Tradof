@@ -29,6 +29,7 @@ class ChatMessagesSection extends StatelessWidget {
         }
         return ListView.builder(
           reverse: true,
+          physics: const BouncingScrollPhysics(),
           itemCount: state.messages.length,
           itemBuilder: (context, index) {
             final message = state.messages.reversed.toList()[index];

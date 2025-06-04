@@ -54,4 +54,6 @@ abstract class Routes {
   static const String withdrawProfitViewRoute = "/withdrawProfitView";
   static const String withdrawFormViewRoute = "/withdrawFormView";
   static const String subscriptionRequiredViewRoute = "/subscriptionRequiredView";
+  static const String notificationViewRoute = "/notificationView";
+  static const String notificationDetailsViewRoute = "/notificationDetailsView";
 }
