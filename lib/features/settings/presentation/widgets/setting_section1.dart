@@ -38,7 +38,7 @@ class SettingsSection1 extends StatelessWidget {
           ),
           const Divider(color: AppColors.cardDarkColor),
           SettingItem(
-            title: 'Notification',
+            title: 'Notifications',
             icon: const HugeIcon(
               icon: HugeIcons.strokeRoundedNotification03,
               color: AppColors.primary,

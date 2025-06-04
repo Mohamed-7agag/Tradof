@@ -17,8 +17,7 @@ class CalendarCubit extends Cubit<CalendarState> {
   Future<void> createCalendar() async {
     emit(state.copyWith(status: CalendarStatus.createCalendarLoading));
     try {
-      final response =
-          await _calendarRepo.createCalendar();
+      final response = await _calendarRepo.createCalendar();
       CacheHelper.setData(
           key: AppConstants.calenderId, value: response['calendar']['_id']);
       emit(state.copyWith(
@@ -64,15 +63,18 @@ class CalendarCubit extends Cubit<CalendarState> {
     emit(state.copyWith(status: CalendarStatus.getAllEventsLoading));
     try {
       final allEvents = await _calendarRepo.getAllEvents(
-        year : year,
-        month : month,
-        day : day,
+        year: year,
+        month: month,
+        day: day,
       );
+      if (isClosed) return;
+
       emit(state.copyWith(
         status: CalendarStatus.getAllEventsSuccess,
         events: allEvents,
       ));
     } catch (e) {
+      if (isClosed) return;
       emit(state.copyWith(
         status: CalendarStatus.getAllEventsFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,

@@ -17,7 +17,7 @@ class FreelancerStatisticCard extends StatelessWidget {
       margin: EdgeInsets.only(right: 8.w),
       decoration: const BoxDecoration(
         color: AppColors.primary,
-        borderRadius: BorderRadius.all(Radius.circular(30)),
+        borderRadius: BorderRadius.all(Radius.circular(24)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

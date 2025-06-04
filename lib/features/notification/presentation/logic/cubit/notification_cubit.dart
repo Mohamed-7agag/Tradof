@@ -99,6 +99,7 @@ class NotificationCubit extends Cubit<NotificationState> {
           ));
           return;
         } catch (e) {
+          if (isClosed) return;
           emit(state.copyWith(
             status: NotificationStatus.error,
             errorMessage: _getErrorMessage(e),
@@ -110,6 +111,7 @@ class NotificationCubit extends Cubit<NotificationState> {
       retries++;
       await Future.delayed(const Duration(milliseconds: 500));
     }
+    if (isClosed) return;
 
     emit(state.copyWith(
       status: NotificationStatus.error,
@@ -122,6 +124,8 @@ class NotificationCubit extends Cubit<NotificationState> {
       await _notificationService.seenNotification(notificationId);
       //emit(state.copyWith(status: NotificationStatus.markedAsSeenSuccess));
     } catch (e) {
+            if(isClosed) return;
+
       emit(state.copyWith(
         status: NotificationStatus.markedAsSeenError,
         errorMessage: _getErrorMessage(e),

@@ -22,6 +22,7 @@ void main() async {
   ]);
   AppConstants.kUserId =
       await CacheHelper.getSecuredString(AppConstants.userId);
+
   runApp(const MyApp());
 
   // runApp(
@@ -33,6 +34,8 @@ void main() async {
 
 // to make sure that the device orientation is set to portrait
 Future<void> _systemChromeConfig() {
-  return SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  return SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 }
