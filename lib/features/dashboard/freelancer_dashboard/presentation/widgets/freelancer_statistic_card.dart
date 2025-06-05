@@ -7,8 +7,15 @@ import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 
 class FreelancerStatisticCard extends StatelessWidget {
-  const FreelancerStatisticCard({super.key});
-
+  const FreelancerStatisticCard({
+    required this.title,
+    required this.projectNumber,
+    required this.totalProjects,
+    super.key,
+  });
+  final String title;
+  final int projectNumber;
+  final int totalProjects;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +34,7 @@ class FreelancerStatisticCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Complete\nProjects",
+                title,
                 style: AppStyle.robotoBlack15.copyWith(color: Colors.white),
               ),
               verticalSpace(8),
@@ -36,7 +43,7 @@ class FreelancerStatisticCard extends StatelessWidget {
                   const Icon(Icons.task_alt, color: Colors.green, size: 18),
                   horizontalSpace(6),
                   Text(
-                    "10 from total 20",
+                    "$projectNumber from total $totalProjects",
                     style: AppStyle.robotoRegular10.copyWith(
                       color: Colors.white,
                     ),
@@ -48,19 +55,24 @@ class FreelancerStatisticCard extends StatelessWidget {
           CircularPercentIndicator(
             startAngle: 120,
             radius: 45,
-            lineWidth: 9.0,
-            percent: 0.5525,
+            lineWidth: 8.0,
+            percent: countPercentage() == 0.0 ? 1.0 : countPercentage(),
             animation: true,
             center: Text(
-              "55.25%",
+              "${(projectNumber / totalProjects * 100).toStringAsFixed(1)}%",
               style: AppStyle.robotoBlack15.copyWith(color: Colors.white),
             ),
-            progressColor: AppColors.lightOrange,
+            progressColor:
+                countPercentage() == 0.0 ? Colors.grey : AppColors.lightOrange,
             backgroundColor: Colors.transparent,
             circularStrokeCap: CircularStrokeCap.round,
           ),
         ],
       ),
     );
+  }
+
+  double countPercentage() {
+    return totalProjects == 0 ? 0.0 : projectNumber / totalProjects;
   }
 }

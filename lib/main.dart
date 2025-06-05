@@ -20,8 +20,9 @@ void main() async {
     ScreenUtil.ensureScreenSize(),
     _systemChromeConfig(),
   ]);
-  AppConstants.kUserId =
-      await CacheHelper.getSecuredString(AppConstants.userId);
+  AppConstants.kUserId = await CacheHelper.getSecuredString(
+    AppConstants.userId,
+  );
 
   runApp(const MyApp());
 

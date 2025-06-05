@@ -80,7 +80,8 @@ class ProjectItem extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: _getStatusColor(project.status.name).withValues(alpha: 0.15),
+                    color: _getStatusColor(project.status.name)
+                        .withValues(alpha: 0.15),
                     borderRadius: const BorderRadius.all(Radius.circular(12)),
                   ),
                   child: Text(

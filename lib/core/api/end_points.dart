@@ -37,9 +37,10 @@ abstract class EndPoint {
       'project/unassigned-projects/company';
   static const String getStartedProjects = 'project/allstartedprojects';
   static String deleteProject(int projectId) => 'project/$projectId';
-  static String sendProjectReview='project/send-review-request';
+  static String sendProjectReview = 'project/send-review-request';
   static String markProjectAsFinished(int projectId) =>
       'project/MarkAsFinished/$projectId';
+  static String getCurrentProjectsStatistics = 'project/statistics';
 
   // Company Endpoints
   static const String updateCompanyProfile = 'Company/UpdateCompany';

@@ -113,15 +113,7 @@ class _WithdrawProfitViewState extends State<WithdrawProfitView> {
                       child: CustomButton(
                         text: 'Next',
                         onPressed: () {
-                          final double amount = double.parse(
-                              _amountController.text.isEmpty
-                                  ? '0'
-                                  : _amountController.text);
-                          context.pushNamed(
-                            Routes.withdrawFormViewRoute,
-                            arguments: amount,
-                          );
-                          //_withdrawLogic(context);
+                          _withdrawLogic(context);
                         },
                         width: 0.5,
                       ),

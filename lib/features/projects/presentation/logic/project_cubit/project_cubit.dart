@@ -10,6 +10,7 @@ import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/models/language_model.dart';
 import '../../../data/models/create_project_request_model.dart';
 import '../../../data/models/project_model.dart';
+import '../../../data/models/project_statistics_model.dart';
 import '../../../data/repo/project_repo.dart';
 
 part 'project_state.dart';
@@ -166,6 +167,24 @@ class ProjectCubit extends Cubit<ProjectState> {
     } catch (e) {
       emit(state.copyWith(
         status: ProjectStatus.currentProjectsFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+//! get current projects statistics
+  Future<void> getCurrentProjectsStatistics() async {
+    emit(state.copyWith(status: ProjectStatus.getCurrentProjectsStatisticsLoading));
+
+    try {
+      final response = await _projectRepo.getCurrentProjectsStatistics();
+      emit(state.copyWith(
+        status: ProjectStatus.getCurrentProjectsStatisticsSuccess,
+        statistics: response,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.getCurrentProjectsStatisticsFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }
