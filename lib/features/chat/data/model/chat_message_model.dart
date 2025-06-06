@@ -44,26 +44,4 @@ class ChatMessageModel {
       'seen': seen,
     };
   }
-
-  ChatMessageModel copyWith({
-    String? id,
-    String? senderId,
-    String? projectId,
-    String? freelancerId,
-    String? companyId,
-    String? message,
-    int? timestamp,
-    bool? seen,
-  }) {
-    return ChatMessageModel(
-      id: id ?? this.id,
-      senderId: senderId ?? this.senderId,
-      projectId: projectId ?? this.projectId,
-      freelancerId: freelancerId ?? this.freelancerId,
-      companyId: companyId ?? this.companyId,
-      message: message ?? this.message,
-      timestamp: timestamp ?? this.timestamp,
-      seen: seen ?? this.seen,
-    );
-  }
 }

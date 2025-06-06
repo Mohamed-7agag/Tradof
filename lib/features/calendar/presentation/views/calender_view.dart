@@ -21,7 +21,7 @@ class _CalenderViewState extends State<CalenderView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppbar(
-        title: 'Calender',
+        title: 'Calendar',
         actionIcon: HugeIcons.strokeRoundedCalendar02,
       ),
       body: BlocListener<CalendarCubit, CalendarState>(

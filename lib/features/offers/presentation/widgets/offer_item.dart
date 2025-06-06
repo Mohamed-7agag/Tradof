@@ -49,6 +49,7 @@ class OfferItem extends StatelessWidget {
               ),
               verticalSpace(8),
               Container(
+                alignment: Alignment.topLeft,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: const BoxDecoration(
@@ -66,13 +67,14 @@ class OfferItem extends StatelessWidget {
               ),
               verticalSpace(12),
               Text(
-                'Offer',
+                'My Offer',
                 style: AppStyle.robotoCondensedRegular12.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
               ),
               verticalSpace(6),
               Container(
+                alignment: Alignment.topLeft,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: const BoxDecoration(
@@ -116,28 +118,31 @@ class OfferItem extends StatelessWidget {
     switch (status) {
       case 0:
         return StatusClass(
-            status: status,
-            value: 'Pending',
-            color: const Color(0xffA20000),
-            backgroundColor: const Color(0xffFFC3C3));
+          status: status,
+          value: 'Pending',
+          color: Colors.orange,
+          backgroundColor: Colors.orange.withValues(alpha: 0.15),
+        );
       case 1:
         return StatusClass(
-            status: status,
-            value: 'Accepted',
-            color: const Color(0xff44AA44),
-            backgroundColor: const Color(0xffA9FFA9));
+          status: status,
+          value: 'Accepted',
+          color: Colors.green,
+          backgroundColor: Colors.green.withValues(alpha: 0.15),
+        );
       case 2:
         return StatusClass(
             status: status,
             value: 'Declined',
-            color: AppColors.primary,
-            backgroundColor: AppColors.primary.withValues(alpha: 0.15));
+            color: Colors.grey,
+            backgroundColor: Colors.grey.withValues(alpha: 0.15));
       case 3:
         return StatusClass(
-            status: status,
-            value: 'Canceled',
-            color: const Color(0xffFFFFFF),
-            backgroundColor: const Color(0xff8E8E93));
+          status: status,
+          value: 'Canceled',
+          color: Colors.red,
+          backgroundColor: Colors.red.withValues(alpha: 0.15),
+        );
       default:
         return StatusClass(
             status: status,
@@ -198,9 +203,10 @@ class StatusClass {
   String value;
   Color color;
   Color backgroundColor;
-  StatusClass(
-      {required this.status,
-      required this.value,
-      required this.color,
-      required this.backgroundColor});
+  StatusClass({
+    required this.status,
+    required this.value,
+    required this.color,
+    required this.backgroundColor,
+  });
 }

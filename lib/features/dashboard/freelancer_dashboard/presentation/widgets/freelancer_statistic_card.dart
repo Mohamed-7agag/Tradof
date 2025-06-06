@@ -7,15 +7,8 @@ import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 
 class FreelancerStatisticCard extends StatelessWidget {
-  const FreelancerStatisticCard({
-    required this.totalProjects,
-    required this.projects,
-    required this.title,
-    super.key,
-  });
-  final num totalProjects;
-  final num projects;
-  final String title;
+  const FreelancerStatisticCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +17,7 @@ class FreelancerStatisticCard extends StatelessWidget {
       margin: EdgeInsets.only(right: 8.w),
       decoration: const BoxDecoration(
         color: AppColors.primary,
-        borderRadius: BorderRadius.all(Radius.circular(30)),
+        borderRadius: BorderRadius.all(Radius.circular(24)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -43,7 +36,7 @@ class FreelancerStatisticCard extends StatelessWidget {
                   const Icon(Icons.task_alt, color: Colors.green, size: 18),
                   horizontalSpace(6),
                   Text(
-                    "$projects from total $totalProjects",
+                    "10 from total 20",
                     style: AppStyle.robotoRegular10.copyWith(
                       color: Colors.white,
                     ),
@@ -55,17 +48,12 @@ class FreelancerStatisticCard extends StatelessWidget {
           CircularPercentIndicator(
             radius: 45,
             lineWidth: 9.0,
-            percent: totalProjects == 0 ? 0 : projects / totalProjects,
+            percent: 0.5525,
             animation: true,
-            center: totalProjects == 0
-                ? Text(
-                    "Not Found",
-                    style: AppStyle.robotoBlack15.copyWith(color: Colors.white),
-                  )
-                : Text(
-                    "${((projects / totalProjects) * 100).round()}%",
-                    style: AppStyle.robotoBlack15.copyWith(color: Colors.white),
-                  ),
+            center: Text(
+              "55.25%",
+              style: AppStyle.robotoBlack15.copyWith(color: Colors.white),
+            ),
             progressColor: AppColors.lightOrange,
             backgroundColor: Colors.transparent,
             circularStrokeCap: CircularStrokeCap.round,
@@ -73,5 +61,9 @@ class FreelancerStatisticCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  double countPercentage() {
+    return totalProjects == 0 ? 0.0 : projectNumber / totalProjects;
   }
 }

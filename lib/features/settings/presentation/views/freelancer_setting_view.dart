@@ -26,6 +26,7 @@ class FreelancerSettingView extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   verticalSpace(15),
@@ -47,7 +48,6 @@ class FreelancerSettingView extends StatelessWidget {
                       onPersonalInfoTap: () async {
                         await _onPersonalInfoTap(context);
                       },
-                      onNotificationTap: () {},
                     ),
                   ),
                   verticalSpace(20),

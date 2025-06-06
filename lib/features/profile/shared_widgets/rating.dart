@@ -26,7 +26,7 @@ class Rating extends StatelessWidget {
             children: [
               Text(
                 'Rating',
-                style: AppStyle.robotoMedium10.copyWith(
+                style: AppStyle.robotoCondensedMedium12.copyWith(
                   color: AppColors.white,
                 ),
               ),

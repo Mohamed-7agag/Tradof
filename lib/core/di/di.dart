@@ -21,6 +21,7 @@ import '../../features/settings/data/repo/setting_repo/setting_repo.dart';
 import '../../features/settings/data/repo/setting_repo/setting_repo_impl.dart';
 import '../api/api_service.dart';
 import '../api/dio_factory.dart';
+import '../services/notification_service.dart';
 import '../services/web_socket_service.dart';
 import '../utils/repo/meta_data_repo.dart';
 import '../utils/repo/meta_data_repo_impl.dart';
@@ -86,5 +87,8 @@ void setupGetIt() {
       ));
 
   // websocket service
-  getIt.registerLazySingleton<WebSocketService>(WebSocketService.new);
+  getIt.registerFactory<WebSocketService>(WebSocketService.new);
+
+  // notification service
+  getIt.registerFactory<NotificationService>(NotificationService.new);
 }

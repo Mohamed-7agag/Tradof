@@ -55,11 +55,10 @@ class WithdrawFormButton extends StatelessWidget {
         return state.status.isWithdrawalLoading
             ? const CustomLoadingWidget()
             : CustomButton(
-                text: 'Submit Form',
+                text: 'Submit',
                 onPressed: () {
                   _withdrawFormValidation(context);
                 },
-                width: 1,
               );
       },
     );

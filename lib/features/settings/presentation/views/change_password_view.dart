@@ -47,6 +47,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               verticalSpace(30),

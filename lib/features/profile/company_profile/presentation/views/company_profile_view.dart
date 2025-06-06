@@ -26,6 +26,7 @@ class CompanyProfileView extends StatelessWidget {
         ),
         Expanded(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(

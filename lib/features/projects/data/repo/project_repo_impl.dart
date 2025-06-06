@@ -4,7 +4,6 @@ import '../../../../core/utils/app_constants.dart';
 import '../../../finances/data/model/statistics_model.dart';
 import '../models/create_project_request_model.dart';
 import '../models/project_response_model.dart';
-import '../models/statistics_project_model.dart';
 import 'project_repo.dart';
 
 class ProjectRepoImpl implements ProjectRepo {
@@ -119,15 +118,5 @@ class ProjectRepoImpl implements ProjectRepo {
     await _apiServices.put(
       EndPoint.markProjectAsFinished(projectId),
     );
-  }
-
-  @override
-  Future<StatisticsProjectModel> getStatisticsProjectsFreelancer({
-    required String freelancerId,
-  }) async {
-    final response = await _apiServices.get(
-      EndPoint.statisticsProjectsFreelancer(freelancerId),
-    );
-    return StatisticsProjectModel.fromJson(response);
   }
 }

@@ -15,22 +15,22 @@ class FliterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10),
-      child: Container(
-        height: 34.h,
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: AppColors.white,
-          border: Border.all(
-            color: isSelected ? AppColors.primary : AppColors.grey,
-          ),
+    return Container(
+      margin: EdgeInsets.only(right: 8.w),
+      height: 34,
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: isSelected ? AppColors.primary : AppColors.white,
+        border: Border.all(
+          color: isSelected ? AppColors.primary : AppColors.grey,
         ),
-        child: Center(
-          child: Text(
-            title,
-            style: AppStyle.robotoRegular10,
+      ),
+      child: Center(
+        child: Text(
+          title,
+          style: AppStyle.robotoRegular10.copyWith(
+            color: isSelected ? AppColors.white : AppColors.black,
           ),
         ),
       ),
