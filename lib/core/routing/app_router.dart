@@ -93,7 +93,7 @@ class AppRouter {
                     FreelancerProfileCubit(getIt())..getFreelancerProfile(),
               ),
               BlocProvider(
-                create: (context) => ProjectCubit(getIt()),
+                create: (context) => ProjectCubit(getIt())..getStatistics(),
               ),
               BlocProvider(
                 create: (context) => OfferCubit(getIt()),

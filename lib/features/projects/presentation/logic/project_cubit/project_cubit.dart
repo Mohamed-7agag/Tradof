@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +12,7 @@ import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/models/language_model.dart';
 import '../../../data/models/create_project_request_model.dart';
 import '../../../data/models/project_model.dart';
+import '../../../data/models/statistics_project_model.dart';
 import '../../../data/repo/project_repo.dart';
 
 part 'project_state.dart';
@@ -303,9 +306,17 @@ class ProjectCubit extends Cubit<ProjectState> {
     );
   }
 
+  //! set project status
+  int projectStatus = 0;
+  void setProjectStatus(int status) {
+    projectStatus = status;
+    emit(state.copyWith(status: ProjectStatus.setProjectStatus));
+  }
+
   //! send project review
   Future<void> sendProjectReview(int projectId) async {
     emit(state.copyWith(status: ProjectStatus.sendReviewLoading));
+    log(projectId.toString());
     try {
       await _projectRepo.sendProjectReview(projectId: projectId);
       emit(state.copyWith(
@@ -336,4 +347,26 @@ class ProjectCubit extends Cubit<ProjectState> {
       ));
     }
   }
+
+  //! get statistics
+  Future<void> getStatistics() async {
+    emit(state.copyWith(status: ProjectStatus.getStatisticsLoading));
+    try {
+      final response = await _projectRepo.getStatisticsProjectsFreelancer(
+        freelancerId: AppConstants.kUserId,
+      );
+      emit(state.copyWith(
+        status: ProjectStatus.getStatisticsSuccess,
+        message: 'Statistics Retrieved Successfully',
+        statistics: response,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.getStatisticsFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  
 }

@@ -37,7 +37,8 @@ abstract class EndPoint {
       'project/unassigned-projects/company';
   static const String getStartedProjects = 'project/allstartedprojects';
   static String deleteProject(int projectId) => 'project/$projectId';
-  static String sendProjectReview='project/send-review-request';
+  static String sendProjectReview(int projectId, String freelancerId) =>
+      'project/send-review-request?projectId=$projectId&freelancerId=$freelancerId';
   static String markProjectAsFinished(int projectId) =>
       'project/MarkAsFinished/$projectId';
 
@@ -75,6 +76,8 @@ abstract class EndPoint {
       'freelancers/AddSpecialization/$freelancerId';
   static String deleteSpecialization(String freelancerId) =>
       'freelancers/RemoveSpecialization/$freelancerId';
+  static String statisticsProjectsFreelancer(String freelancerId) =>
+      'project/statistics?id=$freelancerId';
 
   // Proposal/Offer Endpoints
   static const String offer = 'proposal';

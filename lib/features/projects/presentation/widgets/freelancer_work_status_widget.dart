@@ -58,8 +58,10 @@ class FreelancerWorkStatusButton extends StatelessWidget {
       listener: (context, state) {
         if (state.status == ProjectStatus.sendReviewSuccess) {
           successToast(context, 'Success', state.message);
+          context.read<ProjectCubit>().setProjectStatus(1);
         } else if (state.status == ProjectStatus.sendReviewFailure) {
           errorToast(context, 'Error', state.errorMessage);
+          context.read<ProjectCubit>().setProjectStatus(1); //!
         }
       },
       builder: (context, state) {

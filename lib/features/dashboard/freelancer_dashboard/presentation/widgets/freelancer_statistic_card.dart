@@ -7,8 +7,15 @@ import '../../../../../core/theming/app_colors.dart';
 import '../../../../../core/theming/app_style.dart';
 
 class FreelancerStatisticCard extends StatelessWidget {
-  const FreelancerStatisticCard({super.key});
-
+  const FreelancerStatisticCard({
+    required this.totalProjects,
+    required this.projects,
+    required this.title,
+    super.key,
+  });
+  final num totalProjects;
+  final num projects;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +34,7 @@ class FreelancerStatisticCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Complete\nProjects",
+                title,
                 style: AppStyle.robotoBlack15.copyWith(color: Colors.white),
               ),
               verticalSpace(8),
@@ -36,7 +43,7 @@ class FreelancerStatisticCard extends StatelessWidget {
                   const Icon(Icons.task_alt, color: Colors.green, size: 18),
                   horizontalSpace(6),
                   Text(
-                    "10 from total 20",
+                    "$projects from total $totalProjects",
                     style: AppStyle.robotoRegular10.copyWith(
                       color: Colors.white,
                     ),
@@ -46,15 +53,19 @@ class FreelancerStatisticCard extends StatelessWidget {
             ],
           ),
           CircularPercentIndicator(
-            startAngle: 120,
             radius: 45,
             lineWidth: 9.0,
-            percent: 0.5525,
+            percent: totalProjects == 0 ? 0 : projects / totalProjects,
             animation: true,
-            center: Text(
-              "55.25%",
-              style: AppStyle.robotoBlack15.copyWith(color: Colors.white),
-            ),
+            center: totalProjects == 0
+                ? Text(
+                    "Not Found",
+                    style: AppStyle.robotoBlack15.copyWith(color: Colors.white),
+                  )
+                : Text(
+                    "${((projects / totalProjects) * 100).round()}%",
+                    style: AppStyle.robotoBlack15.copyWith(color: Colors.white),
+                  ),
             progressColor: AppColors.lightOrange,
             backgroundColor: Colors.transparent,
             circularStrokeCap: CircularStrokeCap.round,
