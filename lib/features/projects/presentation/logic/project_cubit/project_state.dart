@@ -28,7 +28,11 @@ enum ProjectStatus {
   markAsFinishedFailure,
   currentProjectsLoading,
   currentProjectsSuccess,
-  currentProjectsFailure
+  currentProjectsFailure,
+  getCurrentProjectsStatisticsLoading,
+  getCurrentProjectsStatisticsSuccess,
+  getCurrentProjectsStatisticsFailure,
+  
 }
 
 class ProjectState extends Equatable {
@@ -43,7 +47,6 @@ class ProjectState extends Equatable {
   final List<ProjectModel> startedProjects;
   final List<ProjectModel> currentProjects;
   final List<ProjectModel> allProjects;
-  final StatisticsProjectModel? statistics;
   final Pagination allProjectsPagination;
   final Pagination currentProjectsPagination;
   final Pagination upcomingProjectsPagination;
@@ -61,7 +64,6 @@ class ProjectState extends Equatable {
     this.startedProjects = const [],
     this.allProjects = const [],
     this.currentProjects = const [],
-    this.statistics,
     this.allProjectsPagination = const Pagination(),
     this.currentProjectsPagination = const Pagination(),
     this.upcomingProjectsPagination = const Pagination(),
@@ -80,7 +82,6 @@ class ProjectState extends Equatable {
     List<ProjectModel>? startedProjects,
     List<ProjectModel>? allProjects,
     List<ProjectModel>? currentProjects,
-    StatisticsProjectModel? statistics,
     Pagination? allProjectsPagination,
     Pagination? currentProjectsPagination,
     Pagination? upcomingProjectsPagination,
@@ -106,7 +107,6 @@ class ProjectState extends Equatable {
           upcomingProjectsPagination ?? this.upcomingProjectsPagination,
       startedProjectsPagination:
           startedProjectsPagination ?? this.startedProjectsPagination,
-      statistics: statistics??this.statistics,
     );
   }
 
@@ -127,6 +127,5 @@ class ProjectState extends Equatable {
         currentProjectsPagination,
         upcomingProjectsPagination,
         startedProjectsPagination,
-        statistics,
       ];
 }

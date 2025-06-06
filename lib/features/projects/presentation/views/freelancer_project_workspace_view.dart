@@ -28,7 +28,7 @@ class FreelancerProjectWorkspaceView extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: BlocBuilder<ProjectCubit, ProjectState>(
-                buildWhen: (previous, current) => current.status.isSetProjectStatus,
+              //  buildWhen: (previous, current) => current.status.isSetProjectStatus,
                 builder: (context, state) {
                   return Column(
                     children: [
@@ -41,10 +41,10 @@ class FreelancerProjectWorkspaceView extends StatelessWidget {
                         ),
                       ),
                       verticalSpace(25),
-                      ProjectWorkspaceStatusSection(
-                          status: context.read<ProjectCubit>().projectStatus),
+                      const ProjectWorkspaceStatusSection(
+                          status: 0),
                       getWorkspaceWidget(
-                          context.read<ProjectCubit>().projectStatus),
+                          0),
                     ],
                   );
                 },
