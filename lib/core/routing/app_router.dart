@@ -16,10 +16,6 @@ import '../../features/chat/presentation/views/chat_view.dart';
 import '../../features/finances/presentation/logic/cubit/finances_cubit.dart';
 import '../../features/finances/presentation/views/withdraw_form_view.dart';
 import '../../features/finances/presentation/views/withdraw_profit_view.dart';
-import '../../features/notification/data/model/notification_model.dart';
-import '../../features/notification/presentation/logic/cubit/notification_cubit.dart';
-import '../../features/notification/presentation/views/notification_details_view.dart';
-import '../../features/notification/presentation/views/notification_view.dart';
 import '../../features/offers/data/model/offer_model.dart';
 import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../features/offers/presentation/views/add_offer_view.dart';
@@ -329,7 +325,7 @@ class AppRouter {
           ),
         );
       case Routes.chatViewRoute:
-        // final data = settings.arguments as Map<String, dynamic>;
+       // final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => ChatCubit(getIt())
@@ -362,20 +358,6 @@ class AppRouter {
       case Routes.subscriptionRequiredViewRoute:
         return MaterialPageRoute(
           builder: (_) => const SubscriptionRequiredView(),
-        );
-      case Routes.notificationViewRoute:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => NotificationCubit(getIt())..initialize(),
-            child: const NotificationView(),
-          ),
-        );
-      case Routes.notificationDetailsViewRoute:
-        final notificationModel = settings.arguments as NotificationModel;
-        return MaterialPageRoute(
-          builder: (_) => NotificationDetailsView(
-            notificationModel: notificationModel,
-          ),
         );
       default:
         return null;

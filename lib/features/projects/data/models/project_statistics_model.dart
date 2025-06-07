@@ -1,19 +1,19 @@
 class ProjectStatisticsModel {
   final int activeProjects;
-  final int inProgressProjects;
-  final int acceptedProjects;
+  final int completedProjects;
+  final int cancelledProjects;
 
   ProjectStatisticsModel({
     required this.activeProjects,
-    required this.inProgressProjects,
-    required this.acceptedProjects,
+    required this.completedProjects,
+    required this.cancelledProjects,
   });
 
   factory ProjectStatisticsModel.fromJson(Map<String, dynamic> json) {
     return ProjectStatisticsModel(
       activeProjects: json['active'],
-      inProgressProjects: json['inProgress'],
-      acceptedProjects: json['accepted'],
+      completedProjects: json['completed'],
+      cancelledProjects: json['cancelled'],
     );
   }
 }

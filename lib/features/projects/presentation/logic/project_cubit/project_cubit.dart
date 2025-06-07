@@ -16,7 +16,7 @@ import '../../../data/repo/project_repo.dart';
 part 'project_state.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
-  ProjectCubit(this._projectRepo) : super(const ProjectState());
+  ProjectCubit(this._projectRepo) : super( ProjectState());
   final ProjectRepo _projectRepo;
 
 //! get upcoming projects
@@ -338,6 +338,8 @@ class ProjectCubit extends Cubit<ProjectState> {
       ));
     }
   }
+
+  
 
   //! mark project as finished
   Future<void> markProjectAsFinished(int projectId) async {

@@ -53,7 +53,6 @@ class FreelancerStatisticCard extends StatelessWidget {
             ],
           ),
           CircularPercentIndicator(
-            startAngle: 120,
             radius: 45,
             lineWidth: 8.0,
             percent: countPercentage() == 0.0 ? 1.0 : countPercentage(),

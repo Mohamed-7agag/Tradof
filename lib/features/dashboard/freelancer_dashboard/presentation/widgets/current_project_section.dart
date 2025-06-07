@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../../core/utils/widgets/custom_loading_widget.dart';
-import '../../../../projects/data/models/project_statistics_model.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../../../projects/presentation/logic/project_cubit/project_extenstion.dart';
+import '../../../../../core/utils/widgets/custom_failure_widget.dart';
+import '../../../../projects/data/models/project_statistics_model.dart';
 import 'current_projects_list_view.dart';
 import 'freelancer_statistic_card.dart';
 
@@ -28,13 +28,13 @@ class _CurrentProjectsSectionState extends State<CurrentProjectsSection> {
         };
       case 1:
         return {
-          'title': 'InProgress\nProjects',
-          'projectNumber': statistics.inProgressProjects,
+          'title': 'Completed\nProjects',
+          'projectNumber': statistics.completedProjects,
         };
       case 2:
         return {
-          'title': 'Finished\nProjects',
-          'projectNumber': statistics.acceptedProjects,
+          'title': 'Cancelled\nProjects',
+          'projectNumber': statistics.cancelledProjects,
         };
       default:
         return {};
@@ -54,6 +54,7 @@ class _CurrentProjectsSectionState extends State<CurrentProjectsSection> {
       slivers: [
         SliverToBoxAdapter(child: verticalSpace(40)),
         SliverToBoxAdapter(
+
           child: SizedBox(
             height: 120.h,
             child: BlocBuilder<ProjectCubit, ProjectState>(
@@ -69,9 +70,9 @@ class _CurrentProjectsSectionState extends State<CurrentProjectsSection> {
                         title: cardData(state.statistics!, index)['title']!,
                         projectNumber: cardData(
                             state.statistics!, index)['projectNumber']!,
-                        totalProjects: state.statistics!.acceptedProjects +
-                            state.statistics!.activeProjects +
-                            state.statistics!.inProgressProjects,
+                        totalProjects: state.statistics!.activeProjects +
+                            state.statistics!.completedProjects +
+                            state.statistics!.cancelledProjects,
                       );
                     },
                   );

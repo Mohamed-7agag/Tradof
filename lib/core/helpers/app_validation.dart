@@ -10,7 +10,7 @@ class AppValidation {
       errorToast(
         context,
         'Invalid Password',
-        'Password must be at least 8 characters long',
+        'Password must be at least 6 characters long',
       );
       return false;
     } else if (!AppRegex.hasLowerCase(password)) {
