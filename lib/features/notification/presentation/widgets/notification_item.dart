@@ -61,10 +61,20 @@ class NotificationItem extends StatelessWidget {
                       convertTime(notification.timestamp),
                       style: AppStyle.robotoRegular10,
                     ),
-                    if(!notification.seen) const Icon(
-                      Icons.circle,
-                      size: 8,
-                      color: AppColors.primary,
+                    BlocBuilder<NotificationCubit, NotificationState>(
+                      buildWhen: (previous, current) =>
+                          current.status.isMarkedAsSeenSuccess,
+                      builder: (context, state) {
+                        if (!state.notifications
+                            .any((n) => n.id == notification.id && n.seen)) {
+                          return const Icon(
+                            Icons.circle,
+                            size: 8,
+                            color: AppColors.primary,
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      },
                     ),
                   ],
                 ),

@@ -72,8 +72,7 @@ class NotificationService {
   }
 
   void _handleNotificationSeen(dynamic data) {
-    try {
-      //final notificationId = data['notificationId'];
+    try {      
       log('Notification seen: $data');
     } catch (e) {
       log('Error handling notification seen: $e');
@@ -88,8 +87,7 @@ class NotificationService {
 
   Future<void> seenNotification(String notificationId) async {
     if (!isConnected) throw Exception('Socket not connected');
-    _socket!.emit('seenNotification', {'notificationId': notificationId});
-    log('Marking notification as seen: $notificationId');
+    _socket!.emit('seenNotification', notificationId);
   }
 
   void disconnect() {

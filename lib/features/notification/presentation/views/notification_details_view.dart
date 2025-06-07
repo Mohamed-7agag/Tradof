@@ -65,19 +65,9 @@ class NotificationDetailsView extends StatelessWidget {
                     color: AppColors.cardColor,
                     borderRadius: BorderRadius.all(Radius.circular(14)),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        notificationModel.message,
-                        style: AppStyle.robotoRegular14,
-                      ),
-                      verticalSpace(6),
-                      Text(
-                        'Seen : ${notificationModel.seen ? 'Yes' : 'No'}',
-                        style: AppStyle.robotoRegular10,
-                      ),
-                    ],
+                  child: Text(
+                    notificationModel.message,
+                    style: AppStyle.robotoRegular14,
                   ),
                 ),
               ),

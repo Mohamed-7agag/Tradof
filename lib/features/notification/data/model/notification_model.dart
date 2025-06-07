@@ -27,15 +27,23 @@ class NotificationModel extends Equatable {
         receiverId: json['receiverId'] as String,
       );
 
-  Map<String, dynamic> toJson() => {
-        '_id': id,
-        'message': message,
-        'type': type,
-        'timestamp': timestamp.toIso8601String(),
-        'seen': seen,
-        'receiverId': receiverId,
-      };
-
+      NotificationModel copyWith({
+        String? id,
+        String? message,
+        String? type,
+        DateTime? timestamp,
+        bool? seen,
+        String? receiverId,
+      }) {
+        return NotificationModel(
+          id: id ?? this.id,
+          message: message ?? this.message,
+          type: type ?? this.type,
+          timestamp: timestamp ?? this.timestamp,
+          seen: seen ?? this.seen,
+          receiverId: receiverId ?? this.receiverId,
+        );
+      }
   @override
   List<Object?> get props => [id, message, type, timestamp, seen, receiverId];
 }

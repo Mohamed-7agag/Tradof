@@ -122,10 +122,16 @@ class NotificationCubit extends Cubit<NotificationState> {
   Future<void> markAsSeen(String notificationId) async {
     try {
       await _notificationService.seenNotification(notificationId);
-      //emit(state.copyWith(status: NotificationStatus.markedAsSeenSuccess));
+      final notifications = List<NotificationModel>.from(state.notifications);
+      final index = notifications.indexWhere((n) => n.id == notificationId);
+      if (index != -1) {
+        notifications[index] = notifications[index].copyWith(seen: true);
+        emit(state.copyWith(
+            notifications: notifications,
+            status: NotificationStatus.markedAsSeenSuccess));
+      }
     } catch (e) {
-            if(isClosed) return;
-
+      if (isClosed) return;
       emit(state.copyWith(
         status: NotificationStatus.markedAsSeenError,
         errorMessage: _getErrorMessage(e),
