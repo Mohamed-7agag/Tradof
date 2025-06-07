@@ -54,7 +54,7 @@ class OfferItem extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: const BoxDecoration(
                   color: AppColors.cardDarkColor,
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
                 ),
                 child: Text(
                   offer.projecttitle,
@@ -79,7 +79,7 @@ class OfferItem extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: const BoxDecoration(
                   color: AppColors.cardDarkColor,
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
                 ),
                 child: Text(
                   offer.proposalDescription,

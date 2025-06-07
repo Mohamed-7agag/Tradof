@@ -58,7 +58,7 @@ class FreelancerStatisticCard extends StatelessWidget {
             percent: countPercentage() == 0.0 ? 1.0 : countPercentage(),
             animation: true,
             center: Text(
-              "${(projectNumber / totalProjects * 100).toStringAsFixed(1)}%",
+              "${(countPercentage() * 100).toStringAsFixed(1)}%",
               style: AppStyle.robotoBlack15.copyWith(color: Colors.white),
             ),
             progressColor:

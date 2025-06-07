@@ -92,7 +92,10 @@ class MiscellaneousCubit extends Cubit<MiscellaneousState> {
     } catch (e) {
       emit(state.copyWith(
         status: MiscellaneousStatus.getTechnicalSupportMessagesFailure,
-        errMessage: ServerFailure.fromError(e).errMessage,
+        errMessage:
+            ServerFailure.fromError(e).errMessage.contains('success: false')
+                ? 'No messages found'
+                : ServerFailure.fromError(e).errMessage,
       ));
     }
   }
@@ -106,6 +109,7 @@ class MiscellaneousCubit extends Cubit<MiscellaneousState> {
         subscriptionModel: subscription,
       ));
     } catch (e) {
+      if (isClosed) return;
       emit(state.copyWith(
         status: MiscellaneousStatus.getSubscriptionFailure,
         errMessage: 'No subscription found',

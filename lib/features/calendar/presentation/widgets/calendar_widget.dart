@@ -58,7 +58,10 @@ class CalendarWidget extends StatelessWidget {
             ),
           );
         } else if (state.status.isGetAllEventsFailure) {
-          return CustomFailureWidget(text: state.errorMessage);
+          return CustomFailureWidget(
+            text: state.errorMessage,
+            onRetry: () => context.read<CalendarCubit>().createCalendar(),
+          );
         }
         return const CustomLoadingWidget();
       },

@@ -77,7 +77,10 @@ class CalendarCubit extends Cubit<CalendarState> {
       if (isClosed) return;
       emit(state.copyWith(
         status: CalendarStatus.getAllEventsFailure,
-        errorMessage: ServerFailure.fromError(e).errMessage,
+        errorMessage:
+            ServerFailure.fromError(e).errMessage.contains('success: false')
+                ? 'Invalid Calendar ID'
+                : ServerFailure.fromError(e).errMessage,
       ));
     }
   }
