@@ -6,7 +6,6 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../data/models/project_model.dart';
 import '../logic/project_cubit/project_cubit.dart';
-import '../logic/project_cubit/project_extenstion.dart';
 import '../widgets/freelancer_review_status_widget.dart';
 import '../widgets/freelancer_work_status_widget.dart';
 import '../widgets/project_workspace_app_bar.dart';
