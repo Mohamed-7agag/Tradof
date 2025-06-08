@@ -19,12 +19,10 @@ class FreelancerProjectWorkspaceView extends StatefulWidget {
   final ProjectModel projectModel;
 
   @override
-  State<FreelancerProjectWorkspaceView> createState() =>
-      _FreelancerProjectWorkspaceViewState();
+  State<FreelancerProjectWorkspaceView> createState() => _FreelancerProjectWorkspaceViewState();
 }
 
-class _FreelancerProjectWorkspaceViewState
-    extends State<FreelancerProjectWorkspaceView> {
+class _FreelancerProjectWorkspaceViewState extends State<FreelancerProjectWorkspaceView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +33,7 @@ class _FreelancerProjectWorkspaceViewState
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: BlocBuilder<ProjectCubit, ProjectState>(
-                //  buildWhen: (previous, current) => current.status.isSetProjectStatus,
+              //  buildWhen: (previous, current) => current.status.isSetProjectStatus,
                 builder: (context, state) {
                   return Column(
                     children: [
@@ -55,8 +53,9 @@ class _FreelancerProjectWorkspaceViewState
         Finished, ==> 4
         Cancelled, ==> 5
  */
-                      const ProjectWorkspaceStatusSection(status: 0),
-                      getWorkspaceWidget(0),
+                      ProjectWorkspaceStatusSection(
+                          status: widget.projectModel.status.value - 2),
+                      getWorkspaceWidget(widget.projectModel.status.value - 2),
                     ],
                   );
                 },
