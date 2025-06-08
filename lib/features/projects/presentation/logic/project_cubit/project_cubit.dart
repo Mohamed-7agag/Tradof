@@ -15,6 +15,7 @@ import '../../../data/models/pay_project_request_model.dart';
 import '../../../data/models/pay_project_response_model.dart';
 import '../../../data/models/project_model.dart';
 import '../../../data/models/project_statistics_model.dart';
+import '../../../data/models/rating_request_model.dart';
 import '../../../data/repo/project_repo.dart';
 
 part 'project_state.dart';
@@ -397,6 +398,23 @@ class ProjectCubit extends Cubit<ProjectState> {
     } catch (e) {
       emit(state.copyWith(
         status: ProjectStatus.getPaymentStatusFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! give rating
+  Future<void> giveRating(RatingRequestModel ratingRequestModel) async {
+    emit(state.copyWith(status: ProjectStatus.giveRatingLoading));
+    try {
+      await _projectRepo.giveRating(ratingRequestModel: ratingRequestModel);
+      emit(state.copyWith(
+        status: ProjectStatus.giveRatingSuccess,
+        message: 'Rating Given Successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.giveRatingFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

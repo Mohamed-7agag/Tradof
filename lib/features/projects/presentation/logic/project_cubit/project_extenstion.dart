@@ -62,4 +62,7 @@ extension ProjectStatusX on ProjectStatus {
   bool get isGetPaymentStatusLoading => this == ProjectStatus.getPaymentStatusLoading;
   bool get isGetPaymentStatusSuccess => this == ProjectStatus.getPaymentStatusSuccess;
   bool get isGetPaymentStatusFailure => this == ProjectStatus.getPaymentStatusFailure;
+  bool get isGiveRatingLoading => this == ProjectStatus.giveRatingLoading;
+  bool get isGiveRatingSuccess => this == ProjectStatus.giveRatingSuccess;
+  bool get isGiveRatingFailure => this == ProjectStatus.giveRatingFailure;
 }

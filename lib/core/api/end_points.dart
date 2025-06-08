@@ -109,4 +109,5 @@ abstract class EndPoint {
   static const String payProject = 'payment/pay-project';
   static String getPaymentStatus(int projectId) =>
       'financial/payment-status/$projectId';
+  static const String giveRating= 'project/create-rating';   
 }

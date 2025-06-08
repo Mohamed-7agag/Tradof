@@ -75,7 +75,7 @@ class ProjectModel extends Equatable {
       lastName: json['lastName'],
       jobTitle: json['jobTitle'],
       profileImageUrl: json['profileImageUrl'],
-      price: json['price'],
+      price: json['price'] ?? 0,//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       freelancerId: json['freelancerId'],
     );
   }

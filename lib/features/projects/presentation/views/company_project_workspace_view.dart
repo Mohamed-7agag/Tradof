@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../data/models/project_model.dart';
+import '../../data/models/rating_request_model.dart';
 import '../logic/project_cubit/project_cubit.dart';
 import '../widgets/company_review_status_widget.dart';
 import '../widgets/company_work_status_widget.dart';
@@ -78,7 +80,15 @@ class _CompanyProjectWorkspaceViewState
         return RatingBarSection(
           isFreelancer: false,
           onRatingUpdate: (rating) {
-            // set rating in project cubit to send to api
+            context.read<ProjectCubit>().giveRating(
+                  RatingRequestModel(
+                    projectId: widget.projectModel.id,
+                    ratingValue: rating,
+                    review: '',
+                    ratedToId: widget.projectModel.freelancerId,
+                    ratedById: widget.projectModel.companyId,
+                  ),
+                );
           },
         );
       default:

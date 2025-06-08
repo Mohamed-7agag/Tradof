@@ -38,7 +38,9 @@ enum ProjectStatus {
   getPaymentStatusLoading,
   getPaymentStatusSuccess,
   getPaymentStatusFailure,
-  
+  giveRatingLoading,
+  giveRatingSuccess,
+  giveRatingFailure,
 }
 
 class ProjectState extends Equatable {

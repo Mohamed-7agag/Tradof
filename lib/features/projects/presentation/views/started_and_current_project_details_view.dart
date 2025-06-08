@@ -23,9 +23,7 @@ class StartedAndCurrentProjectDetailsView extends StatelessWidget {
       {required this.projectModel, super.key});
   final ProjectModel projectModel;
 
-  @override
-
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
