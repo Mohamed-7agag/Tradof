@@ -2,6 +2,9 @@ import 'dart:developer';
 
 import '../../../../../core/api/api_service.dart';
 import '../../../../../core/api/end_points.dart';
+import '../../../../projects/data/models/pay_project_request_model.dart';
+import '../../../../projects/data/models/pay_project_response_model.dart';
+import '../../../../projects/data/models/project_payment_status_model.dart';
 import '../../model/notification_setting_model.dart';
 import '../../model/send_feedback_request_model.dart';
 import '../../model/subscription_model.dart';
@@ -96,5 +99,22 @@ class MiscellaneousRepoImpl implements MiscellaneousRepo {
       EndPoint.getCurrentSubscription(companyId),
     );
     return response['success'] as bool;
+  }
+
+  @override
+  Future<ProjectPaymentStatusModel> getPaymentStatus({required int projectId}) async {
+    final response = await _apiServices.get(
+      EndPoint.getPaymentStatus(projectId),
+    );
+    return ProjectPaymentStatusModel.fromJson(response);
+  }
+
+  @override
+  Future<PayProjectResponseModel> payProject({required PayProjectRequestModel payProjectRequestModel}) async {
+    final response = await _apiServices.post(
+      EndPoint.payProject,
+      data: payProjectRequestModel.toJson(),
+    );
+    return PayProjectResponseModel.fromJson(response);
   }
 }

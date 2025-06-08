@@ -79,7 +79,7 @@ class _CurrentProjectsListViewState extends State<CurrentProjectsListView> {
                   project: project,
                   onTap: () {
                     context.pushNamed(
-                      Routes.freelancerCurrentProjectDetailsViewRoute,
+                      Routes.startedAndCurrentProjectDetailsViewRoute,
                       arguments: project,
                     );
                   },

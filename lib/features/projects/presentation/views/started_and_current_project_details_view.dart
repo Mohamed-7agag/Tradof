@@ -1,24 +1,30 @@
+
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+import '../../../../core/cache/cache_helper.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../data/models/project_model.dart';
 import '../widgets/download_attachment_files_section.dart';
 import '../widgets/freelancer_project_details_body.dart';
 
-class FreelancerCurrentProjectDetailsView extends StatelessWidget {
-  const FreelancerCurrentProjectDetailsView(
+class StartedAndCurrentProjectDetailsView extends StatelessWidget {
+  const StartedAndCurrentProjectDetailsView(
       {required this.projectModel, super.key});
   final ProjectModel projectModel;
+
+  @override
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +60,14 @@ class FreelancerCurrentProjectDetailsView extends StatelessWidget {
                           leading: CircleAvatar(
                             radius: 24,
                             backgroundColor: AppColors.cardDarkColor,
-                            backgroundImage:
-                                projectModel.profileImageUrl.isNullOrEmpty()
-                                    ? null
-                                    : CachedNetworkImageProvider(
-                                        projectModel.profileImageUrl!,
-                                      ),
-                            child: projectModel.profileImageUrl.isNullOrEmpty()
+                            backgroundImage: projectModel.profileImageUrl
+                                    .isNullOrEmpty()
+                                ? null
+                                : CachedNetworkImageProvider(
+                                    projectModel.profileImageUrl!,
+                                  ),
+                            child: projectModel.profileImageUrl
+                                    .isNullOrEmpty()
                                 ? const HugeIcon(
                                     icon: HugeIcons.strokeRoundedUser,
                                     color: AppColors.primary,
@@ -107,10 +114,18 @@ class FreelancerCurrentProjectDetailsView extends StatelessWidget {
                     child: CustomButton(
                         text: 'Project Workspace',
                         onPressed: () {
-                          context.pushNamed(
-                            Routes.freelancerProjectWorkspaceViewRoute,
-                            arguments: projectModel,
-                          );
+                          if (CacheHelper.getString(AppConstants.role) ==
+                              'Freelancer') {
+                            context.pushNamed(
+                              Routes.freelancerProjectWorkspaceViewRoute,
+                              arguments: projectModel,
+                            );
+                          } else {
+                            context.pushNamed(
+                              Routes.companyProjectWorkspaceViewRoute,
+                              arguments: projectModel,
+                            );
+                          }
                         }),
                   ),
                   verticalSpace(20),

@@ -37,7 +37,7 @@ import '../../features/projects/data/models/project_model.dart';
 import '../../features/projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../features/projects/presentation/views/company_project_details_view.dart';
 import '../../features/projects/presentation/views/company_project_workspace_view.dart';
-import '../../features/projects/presentation/views/freelancer_current_project_details_view.dart';
+import '../../features/projects/presentation/views/started_and_current_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_workspace_view.dart';
 import '../../features/settings/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
@@ -93,7 +93,7 @@ class AppRouter {
                     FreelancerProfileCubit(getIt())..getFreelancerProfile(),
               ),
               BlocProvider(
-                create: (context) => ProjectCubit(getIt()),
+                create: (context) => ProjectCubit(getIt(),getIt()),
               ),
               BlocProvider(
                 create: (context) => OfferCubit(getIt()),
@@ -107,7 +107,7 @@ class AppRouter {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => ProjectCubit(getIt()),
+                create: (context) => ProjectCubit(getIt(),getIt()),
               ),
               BlocProvider(
                 create: (context) =>
@@ -209,7 +209,7 @@ class AppRouter {
         final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ProjectCubit(getIt()),
+            create: (context) => ProjectCubit(getIt(),getIt()),
             child: CompanyProjectDetailsView(
               companyModel: data['companyModel'],
               projectModel: data['projectModel'],
@@ -219,14 +219,16 @@ class AppRouter {
       case Routes.companyProjectWorkspaceViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ProjectCubit(getIt()),
-            child: const CompanyProjectWorkspaceView(),
+            create: (context) => ProjectCubit(getIt(),getIt()),
+            child: CompanyProjectWorkspaceView(
+              projectModel: settings.arguments as ProjectModel,
+            ),
           ),
         );
       case Routes.freelancerProjectWorkspaceViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ProjectCubit(getIt()),
+            create: (context) => ProjectCubit(getIt(),getIt()),
             child: FreelancerProjectWorkspaceView(
               projectModel: settings.arguments as ProjectModel,
             ),
@@ -239,11 +241,14 @@ class AppRouter {
             projectModel: data,
           ),
         );
-      case Routes.freelancerCurrentProjectDetailsViewRoute:
+      case Routes.startedAndCurrentProjectDetailsViewRoute:
         final data = settings.arguments as ProjectModel;
         return MaterialPageRoute(
-          builder: (_) => FreelancerCurrentProjectDetailsView(
-            projectModel: data,
+          builder: (_) => BlocProvider(
+            create: (context) => ProjectCubit(getIt(),getIt()),
+            child: StartedAndCurrentProjectDetailsView(
+              projectModel: data,
+            ),
           ),
         );
       case Routes.freelancerProfileDisplayViewRoute:
@@ -325,7 +330,7 @@ class AppRouter {
           ),
         );
       case Routes.chatViewRoute:
-       // final data = settings.arguments as Map<String, dynamic>;
+        // final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => ChatCubit(getIt())

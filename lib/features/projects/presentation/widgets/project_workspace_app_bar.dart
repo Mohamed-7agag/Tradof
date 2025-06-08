@@ -3,6 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/helpers/spacing.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
 
@@ -31,7 +32,9 @@ class ProjectWorkspaceAppBar extends StatelessWidget {
                 ),
                 const Spacer(),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pushNamed(Routes.chatViewRoute);
+                  },
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white24,
                     padding: const EdgeInsets.all(10),

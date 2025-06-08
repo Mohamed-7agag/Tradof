@@ -20,12 +20,13 @@ class ProjectModel extends Equatable {
   final SpecializationModel specialization;
   final int numberOfOffers;
   final List<FileModel> files;
-  final String companyId; 
+  final String companyId;
   final String firstName;
   final String lastName;
   final String jobTitle;
   final String? profileImageUrl;
-
+  final int price;
+  final String freelancerId;
 
   const ProjectModel({
     required this.id,
@@ -47,6 +48,8 @@ class ProjectModel extends Equatable {
     required this.lastName,
     required this.jobTitle,
     required this.profileImageUrl,
+    required this.price,
+    required this.freelancerId,
   });
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) {
@@ -72,6 +75,8 @@ class ProjectModel extends Equatable {
       lastName: json['lastName'],
       jobTitle: json['jobTitle'],
       profileImageUrl: json['profileImageUrl'],
+      price: json['price'],
+      freelancerId: json['freelancerId'],
     );
   }
 
@@ -91,5 +96,12 @@ class ProjectModel extends Equatable {
         specialization,
         numberOfOffers,
         files,
+        companyId,
+        firstName,
+        lastName,
+        jobTitle,
+        profileImageUrl,
+        price,
+        freelancerId,
       ];
 }

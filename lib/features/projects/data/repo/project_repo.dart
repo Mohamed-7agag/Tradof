@@ -30,4 +30,5 @@ abstract class ProjectRepo {
   Future<void> sendProjectReview({required int projectId});
   Future<void> markProjectAsFinished({required int projectId});
   Future<ProjectStatisticsModel> getCurrentProjectsStatistics();
+
 }

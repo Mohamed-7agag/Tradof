@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/routing/routes.dart';
 import '../../../../../core/utils/widgets/custom_failure_widget.dart';
 import '../../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../projects/data/models/project_model.dart';
@@ -72,6 +74,12 @@ class _StartedProjectsListViewState extends State<StartedProjectsListView> {
                 //   Routes.freelancerProjectDetailsViewRoute,
                 //   arguments: project,
                 // );
+               
+                context.pushNamed(
+                      Routes.startedAndCurrentProjectDetailsViewRoute,
+                      arguments: project,
+                  );
+                
               },
             );
           },

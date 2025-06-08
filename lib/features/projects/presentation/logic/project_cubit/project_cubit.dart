@@ -1,3 +1,4 @@
+
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +9,10 @@ import '../../../../../core/helpers/pagination_class.dart';
 import '../../../../../core/helpers/prepare_files.dart';
 import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/models/language_model.dart';
+import '../../../../settings/data/repo/miscellaneous_repo/miscellaneous_repo.dart';
 import '../../../data/models/create_project_request_model.dart';
+import '../../../data/models/pay_project_request_model.dart';
+import '../../../data/models/pay_project_response_model.dart';
 import '../../../data/models/project_model.dart';
 import '../../../data/models/project_statistics_model.dart';
 import '../../../data/repo/project_repo.dart';
@@ -16,8 +20,10 @@ import '../../../data/repo/project_repo.dart';
 part 'project_state.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
-  ProjectCubit(this._projectRepo) : super( ProjectState());
+  ProjectCubit(this._projectRepo, this._miscellaneousRepo)
+      : super(const ProjectState());
   final ProjectRepo _projectRepo;
+  final MiscellaneousRepo _miscellaneousRepo;
 
 //! get upcoming projects
   Future<void> getUpcomingProjects({bool loadMore = false}) async {
@@ -174,7 +180,8 @@ class ProjectCubit extends Cubit<ProjectState> {
 
 //! get current projects statistics
   Future<void> getCurrentProjectsStatistics() async {
-    emit(state.copyWith(status: ProjectStatus.getCurrentProjectsStatisticsLoading));
+    emit(state.copyWith(
+        status: ProjectStatus.getCurrentProjectsStatisticsLoading));
 
     try {
       final response = await _projectRepo.getCurrentProjectsStatistics();
@@ -339,8 +346,6 @@ class ProjectCubit extends Cubit<ProjectState> {
     }
   }
 
-  
-
   //! mark project as finished
   Future<void> markProjectAsFinished(int projectId) async {
     emit(state.copyWith(status: ProjectStatus.markAsFinishedLoading));
@@ -353,6 +358,45 @@ class ProjectCubit extends Cubit<ProjectState> {
     } catch (e) {
       emit(state.copyWith(
         status: ProjectStatus.markAsFinishedFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! pay project
+  Future<void> payProject(PayProjectRequestModel payProjectRequestModel) async {
+    emit(state.copyWith(status: ProjectStatus.payProjectLoading));
+    try {
+      final response = await _miscellaneousRepo.payProject(
+          payProjectRequestModel: payProjectRequestModel);
+      emit(state.copyWith(
+        status: ProjectStatus.payProjectSuccess,
+        message: 'Project Paid Successfully',
+        payProjectResponse: response,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.payProjectFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! get payment status
+  Future<void> getPaymentStatus(int projectId) async {
+    emit(state.copyWith(status: ProjectStatus.getPaymentStatusLoading));
+   
+    try {
+      final response =
+          await _miscellaneousRepo.getPaymentStatus(projectId: projectId);
+      emit(state.copyWith(
+        status: ProjectStatus.getPaymentStatusSuccess,
+        paymentStatus: response.success,
+      ));
+
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.getPaymentStatusFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

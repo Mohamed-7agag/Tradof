@@ -40,10 +40,16 @@ class FreelancerProjectWorkspaceView extends StatelessWidget {
                         ),
                       ),
                       verticalSpace(25),
-                      const ProjectWorkspaceStatusSection(
-                          status: 0),
-                      getWorkspaceWidget(
-                          0),
+                      /**
+        Active, ==> 1
+        InProgress, ==> 2
+        OnReviewing, ==> 3
+        Finished, ==> 4
+        Cancelled, ==> 5
+ */
+                      ProjectWorkspaceStatusSection(
+                          status: projectModel.status.value - 2),
+                      getWorkspaceWidget(projectModel.status.value - 2),
                     ],
                   );
                 },
