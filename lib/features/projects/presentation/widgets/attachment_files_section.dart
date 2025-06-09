@@ -13,7 +13,7 @@ import '../logic/file_cubit.dart';
 class AttachmentFilesSection extends StatelessWidget {
   const AttachmentFilesSection({
     super.key,
-    this.filesList,
+    this.filesList = const [],
     this.onDeleteFile,
   });
 
@@ -67,6 +67,7 @@ class AttachmentFilesSection extends StatelessWidget {
                           trailing: IconButton(
                               icon: const Icon(Icons.cancel, color: Colors.red),
                               onPressed: () {
+                                
                                 onDeleteFile?.call(file.id);
                               }),
                         );

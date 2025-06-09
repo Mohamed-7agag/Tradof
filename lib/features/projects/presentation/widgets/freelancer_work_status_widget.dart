@@ -7,14 +7,15 @@ import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../../../core/utils/widgets/custom_toastification.dart';
+import '../../data/models/project_model.dart';
 import '../logic/file_cubit.dart';
 import '../logic/project_cubit/project_cubit.dart';
 import 'attachment_files_section.dart';
 
 class FreelancerWorkStatusWidget extends StatelessWidget {
-  const FreelancerWorkStatusWidget({required this.projectId, super.key});
+  const FreelancerWorkStatusWidget({required this.projectModel, super.key});
 
-  final int projectId;
+  final ProjectModel projectModel;
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +32,13 @@ class FreelancerWorkStatusWidget extends StatelessWidget {
                 verticalSpace(12),
                 BlocProvider(
                   create: (context) => FileCubit(),
-                  child: const AttachmentFilesSection(),
+                  child: AttachmentFilesSection(
+                    filesList: projectModel.files,
+                  ),
                 ),
                 Expanded(child: verticalSpace(40)),
                 Align(
-                  child: FreelancerWorkStatusButton(projectId: projectId),
+                  child: FreelancerWorkStatusButton(projectId: projectModel.id),
                 ),
                 verticalSpace(20),
               ],

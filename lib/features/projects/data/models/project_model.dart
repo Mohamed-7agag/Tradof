@@ -25,7 +25,7 @@ class ProjectModel extends Equatable {
   final String lastName;
   final String jobTitle;
   final String? profileImageUrl;
-  final int price;
+  final double price;
   final String freelancerId;
 
   const ProjectModel({
@@ -75,7 +75,7 @@ class ProjectModel extends Equatable {
       lastName: json['lastName'],
       jobTitle: json['jobTitle'],
       profileImageUrl: json['profileImageUrl'],
-      price: json['price'] ?? 0,//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      price: (json['price'] as num?)?.toDouble() ?? 0.0,//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       freelancerId: json['freelancerId'],
     );
   }

@@ -31,6 +31,20 @@ class _CompanyProjectWorkspaceViewState
     context.read<ProjectCubit>().getPaymentStatus(widget.projectModel.id);
   }
 
+  int getStatus(String status) {
+    switch (status) {
+      case 'Active':
+        return 0;
+      case 'OnReviewing':
+        return 1;
+      case 'Finished':
+        return 2;
+
+      default:
+        return 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,8 +70,9 @@ class _CompanyProjectWorkspaceViewState
                       ),
                       verticalSpace(25),
                       ProjectWorkspaceStatusSection(
-                          status: widget.projectModel.status.value - 2),
-                      getWorkspaceWidget(widget.projectModel.status.value - 2),
+                          status: getStatus(widget.projectModel.status.name)),
+                      getWorkspaceWidget(
+                          getStatus(widget.projectModel.status.name)),
                     ],
                   ),
                 ),

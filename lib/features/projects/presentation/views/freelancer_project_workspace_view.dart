@@ -88,7 +88,7 @@ class _FreelancerProjectWorkspaceViewState
   Widget getWorkspaceWidget(int status) {
     switch (status) {
       case 0:
-        return FreelancerWorkStatusWidget(projectId: widget.projectModel.id);
+        return FreelancerWorkStatusWidget(projectModel: widget.projectModel);
       case 1:
         return const FreelancerReviewStatusWidget();
       case 2:
