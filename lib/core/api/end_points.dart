@@ -33,8 +33,7 @@ abstract class EndPoint {
   static const String createProject = 'project';
   static const String allProjects = 'project/unassigned-projects';
   static const String currentProjects = 'project/projects/freelancer';
-  static const String getUpcomingProjects =
-      'project/unassigned-projects/company';
+  static const String getUpcomingProjects = 'project/unassigned-projects/company';
   static const String getStartedProjects = 'project/allstartedprojects';
   static String deleteProject(int projectId) => 'project/$projectId';
   static String sendProjectReview(int projectId, String freelancerId) =>

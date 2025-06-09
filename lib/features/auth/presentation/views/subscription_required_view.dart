@@ -34,7 +34,7 @@ class SubscriptionRequiredView extends StatelessWidget {
                 final token = CacheHelper.getSecuredString(AppConstants.token);
                 await customUrlLauncher(
                   context,
-                  'http://localhost:5173/select-plan/:$token',
+                  'https://tradof.netlify.app/select-plan/:$token',
                 );
               },
             ),

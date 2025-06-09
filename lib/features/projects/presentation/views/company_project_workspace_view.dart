@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +29,6 @@ class _CompanyProjectWorkspaceViewState
   void initState() {
     super.initState();
     context.read<ProjectCubit>().getPaymentStatus(widget.projectModel.id);
-    
   }
 
   @override

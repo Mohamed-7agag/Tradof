@@ -16,6 +16,8 @@ import '../../features/chat/presentation/views/chat_view.dart';
 import '../../features/finances/presentation/logic/cubit/finances_cubit.dart';
 import '../../features/finances/presentation/views/withdraw_form_view.dart';
 import '../../features/finances/presentation/views/withdraw_profit_view.dart';
+import '../../features/notification/presentation/logic/cubit/notification_cubit.dart';
+import '../../features/notification/presentation/views/notification_view.dart';
 import '../../features/offers/data/model/offer_model.dart';
 import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
 import '../../features/offers/presentation/views/add_offer_view.dart';
@@ -303,6 +305,13 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => MiscellaneousCubit(getIt()),
             child: const AskQuestionView(),
+          ),
+        );
+      case Routes.notificationViewRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => NotificationCubit(getIt())..initialize(),
+            child: const NotificationView(),
           ),
         );
       case Routes.projectOffersViewRoute:

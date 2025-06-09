@@ -16,9 +16,11 @@ Future<void> customUrlLauncher(context, String url) async {
         animType: AnimType.rightSlide,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         dialogType: DialogType.error,
-        body: Text('This link is not available',
-            textAlign: TextAlign.center,
-            style: AppStyle.robotoRegular14.copyWith(height: 1.8)),
+        body: Text(
+          'This link is not available',
+          textAlign: TextAlign.center,
+          style: AppStyle.robotoRegular14.copyWith(height: 1.8),
+        ),
         dialogBackgroundColor: AppColors.cardColor,
         btnOkOnPress: () {},
       ).show();
