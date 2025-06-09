@@ -35,11 +35,7 @@ class ProjectWorkspaceAppBar extends StatelessWidget {
                 const Spacer(),
                 IconButton(
                   onPressed: () {
-                    context.pushNamed(Routes.chatViewRoute, arguments: {
-                      'projectId': projectModel.id,
-                      'freelancerId': projectModel.freelancerId,
-                      'companyId': projectModel.companyId,
-                    });
+                    context.pushNamed(Routes.chatViewRoute, arguments: projectModel);
                   },
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white24,
