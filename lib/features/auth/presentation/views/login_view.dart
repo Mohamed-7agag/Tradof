@@ -21,7 +21,10 @@ class LoginView extends StatelessWidget {
               children: [
                 SlideInDown(from: 200, child: const AuthShape()),
                 SlideInDown(
-                  child: Text('Login', style: AppStyle.robotoExtraBold32),
+                  child: Text(
+                    'Login',
+                    style: AppStyle.robotoExtraBold32,
+                  ),
                 ),
                 verticalSpace(25),
                 const LoginForm(),

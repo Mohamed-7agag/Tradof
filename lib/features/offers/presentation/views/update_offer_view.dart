@@ -10,7 +10,6 @@ import '../../../projects/presentation/logic/file_cubit.dart';
 import '../../../projects/presentation/widgets/attachment_files_section.dart';
 import '../../../projects/presentation/widgets/project_text_field.dart';
 import '../../data/model/offer_model.dart';
-import '../widgets/offer_header_section.dart';
 import '../widgets/select_offer_budget.dart';
 import '../widgets/update_offer_button.dart';
 

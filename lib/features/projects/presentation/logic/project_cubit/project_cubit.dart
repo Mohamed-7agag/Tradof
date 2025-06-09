@@ -72,7 +72,7 @@ class ProjectCubit extends Cubit<ProjectState> {
     final nextPageIndex =
         loadMore ? state.startedProjectsPagination.pageIndex + 1 : 1;
 
-    emit(state.copyWith(status: ProjectStatus.getStartedtProjectsLoading));
+    emit(state.copyWith(status: ProjectStatus.getStartedProjectsLoading));
 
     try {
       final response = await _projectRepo.getStartedProjects(
@@ -86,7 +86,7 @@ class ProjectCubit extends Cubit<ProjectState> {
           newProjects.length < state.startedProjectsPagination.pageSize;
 
       emit(state.copyWith(
-        status: ProjectStatus.getStartedtProjectsSuccess,
+        status: ProjectStatus.getStartedProjectsSuccess,
         startedProjects:
             loadMore ? [...state.startedProjects, ...newProjects] : newProjects,
         startedProjectsPagination: state.startedProjectsPagination.copyWith(
@@ -97,7 +97,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       ));
     } catch (e) {
       emit(state.copyWith(
-        status: ProjectStatus.getStartedtProjectsFailure,
+        status: ProjectStatus.getStartedProjectsFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

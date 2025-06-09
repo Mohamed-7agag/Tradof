@@ -12,12 +12,12 @@ extension ProjectStatusX on ProjectStatus {
   bool get isGetUpcomingProjectsFailure =>
       this == ProjectStatus.getUpcomingProjectsFailure;
 
-  bool get isGetStartedtProjectsLoading =>
-      this == ProjectStatus.getStartedtProjectsLoading;
-  bool get isGetStartedtProjectsSuccess =>
-      this == ProjectStatus.getStartedtProjectsSuccess;
-  bool get isGetStartedtProjectsFailure =>
-      this == ProjectStatus.getStartedtProjectsFailure;
+  bool get isGetStartedProjectsLoading =>
+      this == ProjectStatus.getStartedProjectsLoading;
+  bool get isGetStartedProjectsSuccess =>
+      this == ProjectStatus.getStartedProjectsSuccess;
+  bool get isGetStartedProjectsFailure =>
+      this == ProjectStatus.getStartedProjectsFailure;
 
   bool get isUpdateProjectLoading => this == ProjectStatus.updateProjectLoading;
   bool get isUpdateProjectSuccess => this == ProjectStatus.updateProjectSuccess;
