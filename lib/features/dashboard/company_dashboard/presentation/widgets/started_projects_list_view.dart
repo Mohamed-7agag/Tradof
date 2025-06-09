@@ -48,14 +48,14 @@ class _StartedProjectsListViewState extends State<StartedProjectsListView> {
     return BlocListener<ProjectCubit, ProjectState>(
       listenWhen: (previous, current) => _buildWhen(current),
       listener: (context, state) {
-        if (state.status.isGetStartedtProjectsSuccess) {
+        if (state.status.isGetStartedProjectsSuccess) {
           if (state.startedProjectsPagination.hasReachedMax) {
             _pagingController.appendLastPage(state.startedProjects);
           } else {
             _pagingController.appendPage(state.startedProjects,
                 state.startedProjectsPagination.pageIndex + 1);
           }
-        } else if (state.status.isGetStartedtProjectsFailure) {
+        } else if (state.status.isGetStartedProjectsFailure) {
           _pagingController.error = state.errorMessage;
         }
       },
@@ -100,7 +100,7 @@ class _StartedProjectsListViewState extends State<StartedProjectsListView> {
   }
 
   bool _buildWhen(ProjectState state) =>
-      state.status.isGetStartedtProjectsSuccess ||
-      state.status.isGetStartedtProjectsFailure ||
-      state.status.isGetStartedtProjectsLoading;
+      state.status.isGetStartedProjectsSuccess ||
+      state.status.isGetStartedProjectsFailure ||
+      state.status.isGetStartedProjectsLoading;
 }

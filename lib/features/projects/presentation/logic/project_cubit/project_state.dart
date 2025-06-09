@@ -11,9 +11,9 @@ enum ProjectStatus {
   getAllProjectsLoading,
   getAllProjectsSuccess,
   getAllProjectsFailure,
-  getStartedtProjectsLoading,
-  getStartedtProjectsSuccess,
-  getStartedtProjectsFailure,
+  getStartedProjectsLoading,
+  getStartedProjectsSuccess,
+  getStartedProjectsFailure,
   updateProjectLoading,
   updateProjectSuccess,
   updateProjectFailure,
@@ -32,7 +32,6 @@ enum ProjectStatus {
   getCurrentProjectsStatisticsLoading,
   getCurrentProjectsStatisticsSuccess,
   getCurrentProjectsStatisticsFailure,
-  
 }
 
 class ProjectState extends Equatable {

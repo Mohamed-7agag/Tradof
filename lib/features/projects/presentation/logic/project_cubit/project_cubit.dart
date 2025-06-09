@@ -16,7 +16,7 @@ import '../../../data/repo/project_repo.dart';
 part 'project_state.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
-  ProjectCubit(this._projectRepo) : super( ProjectState());
+  ProjectCubit(this._projectRepo) : super(const ProjectState());
   final ProjectRepo _projectRepo;
 
 //! get upcoming projects
@@ -65,7 +65,7 @@ class ProjectCubit extends Cubit<ProjectState> {
     final nextPageIndex =
         loadMore ? state.startedProjectsPagination.pageIndex + 1 : 1;
 
-    emit(state.copyWith(status: ProjectStatus.getStartedtProjectsLoading));
+    emit(state.copyWith(status: ProjectStatus.getStartedProjectsLoading));
 
     try {
       final response = await _projectRepo.getStartedProjects(
@@ -79,7 +79,7 @@ class ProjectCubit extends Cubit<ProjectState> {
           newProjects.length < state.startedProjectsPagination.pageSize;
 
       emit(state.copyWith(
-        status: ProjectStatus.getStartedtProjectsSuccess,
+        status: ProjectStatus.getStartedProjectsSuccess,
         startedProjects:
             loadMore ? [...state.startedProjects, ...newProjects] : newProjects,
         startedProjectsPagination: state.startedProjectsPagination.copyWith(
@@ -90,7 +90,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       ));
     } catch (e) {
       emit(state.copyWith(
-        status: ProjectStatus.getStartedtProjectsFailure,
+        status: ProjectStatus.getStartedProjectsFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }
@@ -174,7 +174,8 @@ class ProjectCubit extends Cubit<ProjectState> {
 
 //! get current projects statistics
   Future<void> getCurrentProjectsStatistics() async {
-    emit(state.copyWith(status: ProjectStatus.getCurrentProjectsStatisticsLoading));
+    emit(state.copyWith(
+        status: ProjectStatus.getCurrentProjectsStatisticsLoading));
 
     try {
       final response = await _projectRepo.getCurrentProjectsStatistics();
@@ -338,8 +339,6 @@ class ProjectCubit extends Cubit<ProjectState> {
       ));
     }
   }
-
-  
 
   //! mark project as finished
   Future<void> markProjectAsFinished(int projectId) async {
