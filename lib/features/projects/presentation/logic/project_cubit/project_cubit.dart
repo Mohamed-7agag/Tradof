@@ -394,7 +394,7 @@ class ProjectCubit extends Cubit<ProjectState> {
           await _miscellaneousRepo.getPaymentStatus(projectId: projectId);
       emit(state.copyWith(
         status: ProjectStatus.getPaymentStatusSuccess,
-        paymentStatus: response.success,
+        paymentStatus: response.paymentStatus,
       ));
     } catch (e) {
       emit(state.copyWith(

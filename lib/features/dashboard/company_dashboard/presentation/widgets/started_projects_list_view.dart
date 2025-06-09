@@ -70,16 +70,13 @@ class _StartedProjectsListViewState extends State<StartedProjectsListView> {
             return ProjectItem(
               project: project,
               onTap: () {
-                // context.pushNamed(
-                //   Routes.freelancerProjectDetailsViewRoute,
-                //   arguments: project,
-                // );
-               
                 context.pushNamed(
-                      Routes.startedAndCurrentProjectDetailsViewRoute,
-                      arguments: project,
-                  );
-                
+                  Routes.startedAndCurrentProjectDetailsViewRoute,
+                  arguments: {
+                    'projectModel': project,
+                    'isStartedProject': true,
+                  },
+                );
               },
             );
           },

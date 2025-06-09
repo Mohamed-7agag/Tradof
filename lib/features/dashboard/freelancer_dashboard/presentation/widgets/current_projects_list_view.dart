@@ -71,7 +71,7 @@ class _CurrentProjectsListViewState extends State<CurrentProjectsListView> {
           onRefresh: () async => _refreshData(),
           child: PagedListView<int, ProjectModel>(
             pagingController: _pagingController,
-            padding: const EdgeInsets.only(bottom: 45,top: 25),
+            padding: const EdgeInsets.only(bottom: 45, top: 25),
             physics: const NeverScrollableScrollPhysics(),
             builderDelegate: PagedChildBuilderDelegate<ProjectModel>(
               itemBuilder: (context, project, index) {
@@ -80,7 +80,10 @@ class _CurrentProjectsListViewState extends State<CurrentProjectsListView> {
                   onTap: () {
                     context.pushNamed(
                       Routes.startedAndCurrentProjectDetailsViewRoute,
-                      arguments: project,
+                      arguments: {
+                        'projectModel': project,
+                        'isStartedProject': false,
+                      },
                     );
                   },
                 );

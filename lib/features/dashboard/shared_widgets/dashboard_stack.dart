@@ -32,6 +32,7 @@ class _DashboardStackState extends State<DashboardStack> {
       children: [
         Container(
           width: double.infinity,
+          clipBehavior: Clip.hardEdge,
           margin: const EdgeInsets.only(top: 32.5),
           padding: const EdgeInsets.only(top: 10),
           decoration: _decoration(),
