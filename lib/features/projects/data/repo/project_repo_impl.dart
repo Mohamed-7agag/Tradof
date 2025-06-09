@@ -4,6 +4,7 @@ import '../../../../core/utils/app_constants.dart';
 import '../models/create_project_request_model.dart';
 import '../models/project_response_model.dart';
 import '../models/project_statistics_model.dart';
+import '../models/rating_request_model.dart';
 import 'project_repo.dart';
 
 class ProjectRepoImpl implements ProjectRepo {
@@ -126,5 +127,27 @@ class ProjectRepoImpl implements ProjectRepo {
       EndPoint.getCurrentProjectsStatistics,
     );
     return ProjectStatisticsModel.fromJson(response);
+  }
+
+  @override
+  Future<void> giveRating({required RatingRequestModel ratingRequestModel}) async {
+    await _apiServices.post(
+      EndPoint.giveRating,
+      data: ratingRequestModel.toJson(),
+    );
+  }
+
+  @override
+  Future<void> uploadFiles({required int projectId, required bool isFreelancer}) async {
+    await _apiServices.post(
+      EndPoint.uploadFiles(projectId, isFreelancer),
+    );
+  }
+
+  @override
+  Future<void> deleteFile({required int fileId}) async {
+    await _apiServices.delete(
+      EndPoint.deleteFile(fileId),
+    );
   }
 }

@@ -1,3 +1,4 @@
+
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,16 +9,22 @@ import '../../../../../core/helpers/pagination_class.dart';
 import '../../../../../core/helpers/prepare_files.dart';
 import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/models/language_model.dart';
+import '../../../../settings/data/repo/miscellaneous_repo/miscellaneous_repo.dart';
 import '../../../data/models/create_project_request_model.dart';
+import '../../../data/models/pay_project_request_model.dart';
+import '../../../data/models/pay_project_response_model.dart';
 import '../../../data/models/project_model.dart';
 import '../../../data/models/project_statistics_model.dart';
+import '../../../data/models/rating_request_model.dart';
 import '../../../data/repo/project_repo.dart';
 
 part 'project_state.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
-  ProjectCubit(this._projectRepo) : super(const ProjectState());
+  ProjectCubit(this._projectRepo, this._miscellaneousRepo)
+      : super(const ProjectState());
   final ProjectRepo _projectRepo;
+  final MiscellaneousRepo _miscellaneousRepo;
 
 //! get upcoming projects
   Future<void> getUpcomingProjects({bool loadMore = false}) async {
@@ -352,6 +359,95 @@ class ProjectCubit extends Cubit<ProjectState> {
     } catch (e) {
       emit(state.copyWith(
         status: ProjectStatus.markAsFinishedFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! pay project
+  Future<void> payProject(PayProjectRequestModel payProjectRequestModel) async {
+    emit(state.copyWith(status: ProjectStatus.payProjectLoading));
+    try {
+      final response = await _miscellaneousRepo.payProject(
+          payProjectRequestModel: payProjectRequestModel);
+      emit(state.copyWith(
+        status: ProjectStatus.payProjectSuccess,
+        message: 'Project Paid Successfully',
+        payProjectResponse: response,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.payProjectFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! get payment status
+  Future<void> getPaymentStatus(int projectId) async {
+    emit(state.copyWith(status: ProjectStatus.getPaymentStatusLoading));
+
+    try {
+      final response =
+          await _miscellaneousRepo.getPaymentStatus(projectId: projectId);
+      emit(state.copyWith(
+        status: ProjectStatus.getPaymentStatusSuccess,
+        paymentStatus: response.success,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.getPaymentStatusFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! give rating
+  Future<void> giveRating(RatingRequestModel ratingRequestModel) async {
+    emit(state.copyWith(status: ProjectStatus.giveRatingLoading));
+    try {
+      await _projectRepo.giveRating(ratingRequestModel: ratingRequestModel);
+      emit(state.copyWith(
+        status: ProjectStatus.giveRatingSuccess,
+        message: 'Rating Given Successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.giveRatingFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! upload files
+  Future<void> uploadFiles({required int projectId, required bool isFreelancer}) async {
+    emit(state.copyWith(status: ProjectStatus.uploadFilesLoading));
+    try {
+      await _projectRepo.uploadFiles(projectId: projectId, isFreelancer: isFreelancer);
+      emit(state.copyWith(
+        status: ProjectStatus.uploadFilesSuccess,
+        message: 'Files uploaded successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.uploadFilesFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! delete file
+  Future<void> deleteFile({required int fileId}) async {
+    emit(state.copyWith(status: ProjectStatus.deleteFileLoading));
+    try {
+      await _projectRepo.deleteFile(fileId: fileId);
+      emit(state.copyWith(
+        status: ProjectStatus.deleteFileSuccess,
+        message: 'File deleted successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.deleteFileFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

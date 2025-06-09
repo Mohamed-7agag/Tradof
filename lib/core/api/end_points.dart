@@ -40,7 +40,7 @@ abstract class EndPoint {
   static String sendProjectReview(int projectId, String freelancerId) =>
       'project/send-review-request?projectId=$projectId&freelancerId=$freelancerId';
   static String markProjectAsFinished(int projectId) =>
-      'project/MarkAsFinished/$projectId';
+      'project/MarkAsFinished?id=$projectId';
   static String getCurrentProjectsStatistics = 'project/statistics';
 
   // Company Endpoints
@@ -105,4 +105,11 @@ abstract class EndPoint {
   static const String technicalSupport = 'technicalSupport';
   static String statistics(String userId) =>
       'financial/company-statistics/$userId';
+
+  static const String payProject = 'payment/pay-project';
+  static String getPaymentStatus(int projectId) =>
+      'financial/payment-status/$projectId';
+  static const String giveRating= 'project/create-rating';   
+  static String uploadFiles(int projectId,bool isFreelancer) => '/project/upload-files/$projectId?isFreelancerUpload=$isFreelancer';
+  static String deleteFile(int fileId) => 'project/delete-file/$fileId';
 }

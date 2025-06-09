@@ -56,4 +56,19 @@ extension ProjectStatusX on ProjectStatus {
       this == ProjectStatus.getCurrentProjectsStatisticsSuccess;
   bool get isGetCurrentProjectsStatisticsFailure =>
       this == ProjectStatus.getCurrentProjectsStatisticsFailure;
+      bool get isPayProjectLoading => this == ProjectStatus.payProjectLoading;
+  bool get isPayProjectSuccess => this == ProjectStatus.payProjectSuccess;
+  bool get isPayProjectFailure => this == ProjectStatus.payProjectFailure;
+  bool get isGetPaymentStatusLoading => this == ProjectStatus.getPaymentStatusLoading;
+  bool get isGetPaymentStatusSuccess => this == ProjectStatus.getPaymentStatusSuccess;
+  bool get isGetPaymentStatusFailure => this == ProjectStatus.getPaymentStatusFailure;
+  bool get isGiveRatingLoading => this == ProjectStatus.giveRatingLoading;
+  bool get isGiveRatingSuccess => this == ProjectStatus.giveRatingSuccess;
+  bool get isGiveRatingFailure => this == ProjectStatus.giveRatingFailure;
+  bool get isUploadFilesLoading => this == ProjectStatus.uploadFilesLoading;
+  bool get isUploadFilesSuccess => this == ProjectStatus.uploadFilesSuccess;
+  bool get isUploadFilesFailure => this == ProjectStatus.uploadFilesFailure;
+  bool get isDeleteFileLoading => this == ProjectStatus.deleteFileLoading;
+  bool get isDeleteFileSuccess => this == ProjectStatus.deleteFileSuccess;
+  bool get isDeleteFileFailure => this == ProjectStatus.deleteFileFailure;
 }

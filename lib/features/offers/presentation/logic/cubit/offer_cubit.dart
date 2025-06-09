@@ -230,4 +230,6 @@ class OfferCubit extends Cubit<OfferState> {
       ));
     }
   }
+
+  
 }

@@ -45,6 +45,7 @@ class _CurrentProjectsSectionState extends State<CurrentProjectsSection> {
   void initState() {
     super.initState();
     context.read<ProjectCubit>().getCurrentProjectsStatistics();
+    
   }
 
   @override

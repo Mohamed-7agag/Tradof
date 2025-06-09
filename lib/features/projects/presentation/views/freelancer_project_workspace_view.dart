@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../data/models/project_model.dart';
+import '../../data/models/rating_request_model.dart';
 import '../logic/project_cubit/project_cubit.dart';
 import '../widgets/freelancer_review_status_widget.dart';
 import '../widgets/freelancer_work_status_widget.dart';
@@ -12,22 +13,43 @@ import '../widgets/project_workspace_app_bar.dart';
 import '../widgets/project_workspace_status_section.dart';
 import '../widgets/rating_bar_section.dart';
 
-class FreelancerProjectWorkspaceView extends StatelessWidget {
+class FreelancerProjectWorkspaceView extends StatefulWidget {
   const FreelancerProjectWorkspaceView({required this.projectModel, super.key});
 
   final ProjectModel projectModel;
+
+  @override
+  State<FreelancerProjectWorkspaceView> createState() =>
+      _FreelancerProjectWorkspaceViewState();
+}
+
+class _FreelancerProjectWorkspaceViewState
+    extends State<FreelancerProjectWorkspaceView> {
+  int getStatus(String status) {
+    switch (status) {
+      case 'Active':
+        return 0;
+      case 'OnReviewing':
+        return 1;
+      case 'Finished':
+        return 2;
+
+      default:
+        return 0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          const ProjectWorkspaceAppBar(),
+          ProjectWorkspaceAppBar(projectModel: widget.projectModel),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: BlocBuilder<ProjectCubit, ProjectState>(
-              //  buildWhen: (previous, current) => current.status.isSetProjectStatus,
+                
                 builder: (context, state) {
                   return Column(
                     children: [
@@ -40,16 +62,24 @@ class FreelancerProjectWorkspaceView extends StatelessWidget {
                         ),
                       ),
                       verticalSpace(25),
-                      const ProjectWorkspaceStatusSection(
-                          status: 0),
+                      /**
+        Pending ==> 0
+        Active, ==> 1
+        InProgress, ==> 2
+        OnReviewing, ==> 3
+        Finished, ==> 4
+        Cancelled, ==> 5
+ */
+                      ProjectWorkspaceStatusSection(
+                          status: getStatus(widget.projectModel.status.name)),
                       getWorkspaceWidget(
-                          0),
+                          getStatus(widget.projectModel.status.name)),
                     ],
                   );
                 },
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -58,13 +88,21 @@ class FreelancerProjectWorkspaceView extends StatelessWidget {
   Widget getWorkspaceWidget(int status) {
     switch (status) {
       case 0:
-        return FreelancerWorkStatusWidget(projectId: projectModel.id);
+        return FreelancerWorkStatusWidget(projectId: widget.projectModel.id);
       case 1:
         return const FreelancerReviewStatusWidget();
       case 2:
         return RatingBarSection(
           onRatingUpdate: (rating) {
-            // set rating in project cubit to send to api
+            context.read<ProjectCubit>().giveRating(
+                  RatingRequestModel(
+                    projectId: widget.projectModel.id,
+                    ratingValue: rating,
+                    review: '',
+                    ratedToId: widget.projectModel.companyId,
+                    ratedById: widget.projectModel.freelancerId,
+                  ),
+                );
           },
         );
       default:
