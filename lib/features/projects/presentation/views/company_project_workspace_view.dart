@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +31,7 @@ class _CompanyProjectWorkspaceViewState
   void initState() {
     super.initState();
     context.read<ProjectCubit>().getPaymentStatus(widget.projectModel.id);
+    
   }
 
   @override
@@ -37,7 +39,7 @@ class _CompanyProjectWorkspaceViewState
     return Scaffold(
       body: Column(
         children: [
-          const ProjectWorkspaceAppBar(),
+          ProjectWorkspaceAppBar(projectModel: widget.projectModel),
           BlocBuilder<ProjectCubit, ProjectState>(
             buildWhen: (previous, current) =>
                 current.status == ProjectStatus.currentProjectsSuccess,

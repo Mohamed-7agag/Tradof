@@ -386,7 +386,7 @@ class ProjectCubit extends Cubit<ProjectState> {
   //! get payment status
   Future<void> getPaymentStatus(int projectId) async {
     emit(state.copyWith(status: ProjectStatus.getPaymentStatusLoading));
-   
+
     try {
       final response =
           await _miscellaneousRepo.getPaymentStatus(projectId: projectId);
@@ -394,7 +394,6 @@ class ProjectCubit extends Cubit<ProjectState> {
         status: ProjectStatus.getPaymentStatusSuccess,
         paymentStatus: response.success,
       ));
-
     } catch (e) {
       emit(state.copyWith(
         status: ProjectStatus.getPaymentStatusFailure,
@@ -415,6 +414,40 @@ class ProjectCubit extends Cubit<ProjectState> {
     } catch (e) {
       emit(state.copyWith(
         status: ProjectStatus.giveRatingFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! upload files
+  Future<void> uploadFiles({required int projectId, required bool isFreelancer}) async {
+    emit(state.copyWith(status: ProjectStatus.uploadFilesLoading));
+    try {
+      await _projectRepo.uploadFiles(projectId: projectId, isFreelancer: isFreelancer);
+      emit(state.copyWith(
+        status: ProjectStatus.uploadFilesSuccess,
+        message: 'Files uploaded successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.uploadFilesFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
+
+  //! delete file
+  Future<void> deleteFile({required int fileId}) async {
+    emit(state.copyWith(status: ProjectStatus.deleteFileLoading));
+    try {
+      await _projectRepo.deleteFile(fileId: fileId);
+      emit(state.copyWith(
+        status: ProjectStatus.deleteFileSuccess,
+        message: 'File deleted successfully',
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.deleteFileFailure,
         errorMessage: ServerFailure.fromError(e).errMessage,
       ));
     }

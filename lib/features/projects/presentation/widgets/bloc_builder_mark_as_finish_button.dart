@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,56 +27,108 @@ class BlocBuilderMarkAsFinishButton extends StatelessWidget {
       listener: (context, state) {
         if (state.status == ProjectStatus.markAsFinishedSuccess) {
           successToast(context, 'Success', state.message);
-          context.read<ProjectCubit>().getCurrentProjects();
+          context.read<ProjectCubit>().getStartedProjects();
         } else if (state.status == ProjectStatus.markAsFinishedFailure) {
           errorToast(context, 'Error', state.errorMessage);
         }
         if (state.status == ProjectStatus.payProjectSuccess) {
           customUrlLauncher(context, state.payProjectResponse?.iframURL ?? '');
+          log(state.paymentStatus.toString());
           context.read<ProjectCubit>().getPaymentStatus(projectModel.id);
           //successToast(context, 'Success', state.message);
         } else if (state.status == ProjectStatus.payProjectFailure) {
           errorToast(context, 'Error', state.errorMessage);
         }
       },
-      buildWhen: (previous, current) =>
-          current.status == ProjectStatus.markAsFinishedLoading ||
-          current.status == ProjectStatus.markAsFinishedSuccess ||
-          current.status == ProjectStatus.markAsFinishedFailure ||
-          current.status == ProjectStatus.payProjectLoading ||
-          current.status == ProjectStatus.payProjectSuccess ||
-          current.status == ProjectStatus.payProjectFailure,
+      buildWhen: _buildWhen,
       builder: (context, state) {
-        return state.status == ProjectStatus.markAsFinishedLoading ||
-                state.status == ProjectStatus.getPaymentStatusLoading ||
-                state.status == ProjectStatus.payProjectLoading
-            ? const CustomLoadingWidget()
-            : state.paymentStatus
-                ? CustomButton(
-                    text: 'Finish',
-                    color: AppColors.lightOrange,
-                    width: 0.6,
-                    onPressed: () {
-                      context.read<ProjectCubit>().markProjectAsFinished(
-                            projectModel.id,
-                          );
-                    },
-                  )
-                : CustomButton(
-                    text: 'Pay',
-                    color: AppColors.lightOrange,
-                    width: 0.6,
-                    onPressed: () {
-                      context.read<ProjectCubit>().payProject(
-                            PayProjectRequestModel(
-                              projectId: projectModel.id,
-                              freelancerId: projectModel.freelancerId,
-                              budget: projectModel.price,
-                              deliveryTime: projectModel.days.toString(),
-                            ),
-                          );
-                    },
-                  );
+        if (state.status == ProjectStatus.getPaymentStatusLoading ||
+            state.status == ProjectStatus.markAsFinishedLoading ||
+            state.status == ProjectStatus.payProjectLoading) {
+          return const CustomLoadingWidget();
+        }
+        if (state.status == ProjectStatus.getPaymentStatusSuccess) {
+          return state.paymentStatus
+              ? CustomButton(
+                  text: 'Finish',
+                  color: AppColors.lightOrange,
+                  width: 0.6,
+                  onPressed: () {
+                    context.read<ProjectCubit>().markProjectAsFinished(
+                          projectModel.id,
+                        );
+                  },
+                )
+              : CustomButton(
+                  text: 'Pay',
+                  color: AppColors.lightOrange,
+                  width: 0.6,
+                  onPressed: () {
+                    context.read<ProjectCubit>().payProject(
+                          PayProjectRequestModel(
+                            projectId: projectModel.id,
+                            freelancerId: projectModel.freelancerId,
+                            budget: projectModel.price,
+                            deliveryTime: projectModel.days.toString(),
+                          ),
+                        );
+                  },
+                );
+        } else {
+          return state.paymentStatus
+              ? CustomButton(
+                  text: 'Finish',
+                  color: AppColors.lightOrange,
+                  width: 0.6,
+                  onPressed: () {
+                    context.read<ProjectCubit>().markProjectAsFinished(
+                          projectModel.id,
+                        );
+                  },
+                )
+              : CustomButton(
+                  text: 'Pay',
+                  color: AppColors.lightOrange,
+                  width: 0.6,
+                  onPressed: () {
+                    context.read<ProjectCubit>().payProject(
+                          PayProjectRequestModel(
+                            projectId: projectModel.id,
+                            freelancerId: projectModel.freelancerId,
+                            budget: projectModel.price,
+                            deliveryTime: projectModel.days.toString(),
+                          ),
+                        );
+                  },
+                );
+        }
+        // log("${state.paymentStatus}(((((((((((((())))))))))))))");
+        // return state.paymentStatus
+        //     ? CustomButton(
+        //         text: 'Finish',
+        //         color: AppColors.lightOrange,
+        //         width: 0.6,
+        //         onPressed: () {
+        //           context.read<ProjectCubit>().markProjectAsFinished(
+        //                 projectModel.id,
+        //               );
+        //         },
+        //       )
+        //     : CustomButton(
+        //         text: 'Pay',
+        //         color: AppColors.lightOrange,
+        //         width: 0.6,
+        //         onPressed: () {
+        //           context.read<ProjectCubit>().payProject(
+        //                 PayProjectRequestModel(
+        //                   projectId: projectModel.id,
+        //                   freelancerId: projectModel.freelancerId,
+        //                   budget: projectModel.price,
+        //                   deliveryTime: projectModel.days.toString(),
+        //                 ),
+        //               );
+        //         },
+        //       );
       },
     );
   }

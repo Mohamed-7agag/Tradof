@@ -32,5 +32,7 @@ abstract class ProjectRepo {
   Future<void> markProjectAsFinished({required int projectId});
   Future<ProjectStatisticsModel> getCurrentProjectsStatistics();
   Future<void> giveRating({required RatingRequestModel ratingRequestModel});
+  Future<void> uploadFiles({required int projectId, required bool isFreelancer});
+  Future<void> deleteFile({required int fileId});
 
 }

@@ -19,21 +19,37 @@ class FreelancerProjectWorkspaceView extends StatefulWidget {
   final ProjectModel projectModel;
 
   @override
-  State<FreelancerProjectWorkspaceView> createState() => _FreelancerProjectWorkspaceViewState();
+  State<FreelancerProjectWorkspaceView> createState() =>
+      _FreelancerProjectWorkspaceViewState();
 }
 
-class _FreelancerProjectWorkspaceViewState extends State<FreelancerProjectWorkspaceView> {
+class _FreelancerProjectWorkspaceViewState
+    extends State<FreelancerProjectWorkspaceView> {
+  int getStatus(String status) {
+    switch (status) {
+      case 'Active':
+        return 0;
+      case 'OnReviewing':
+        return 1;
+      case 'Finished':
+        return 2;
+
+      default:
+        return 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          const ProjectWorkspaceAppBar(),
+          ProjectWorkspaceAppBar(projectModel: widget.projectModel),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: BlocBuilder<ProjectCubit, ProjectState>(
-              //  buildWhen: (previous, current) => current.status.isSetProjectStatus,
+                
                 builder: (context, state) {
                   return Column(
                     children: [
@@ -47,6 +63,7 @@ class _FreelancerProjectWorkspaceViewState extends State<FreelancerProjectWorksp
                       ),
                       verticalSpace(25),
                       /**
+        Pending ==> 0
         Active, ==> 1
         InProgress, ==> 2
         OnReviewing, ==> 3
@@ -54,14 +71,15 @@ class _FreelancerProjectWorkspaceViewState extends State<FreelancerProjectWorksp
         Cancelled, ==> 5
  */
                       ProjectWorkspaceStatusSection(
-                          status: widget.projectModel.status.value - 2),
-                      getWorkspaceWidget(widget.projectModel.status.value - 2),
+                          status: getStatus(widget.projectModel.status.name)),
+                      getWorkspaceWidget(
+                          getStatus(widget.projectModel.status.name)),
                     ],
                   );
                 },
               ),
             ),
-          )
+          ),
         ],
       ),
     );

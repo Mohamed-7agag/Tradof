@@ -137,6 +137,17 @@ class ProjectRepoImpl implements ProjectRepo {
     );
   }
 
-  
+  @override
+  Future<void> uploadFiles({required int projectId, required bool isFreelancer}) async {
+    await _apiServices.post(
+      EndPoint.uploadFiles(projectId, isFreelancer),
+    );
+  }
 
+  @override
+  Future<void> deleteFile({required int fileId}) async {
+    await _apiServices.delete(
+      EndPoint.deleteFile(fileId),
+    );
+  }
 }

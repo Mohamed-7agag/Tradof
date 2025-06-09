@@ -330,17 +330,14 @@ class AppRouter {
           ),
         );
       case Routes.chatViewRoute:
-        // final data = settings.arguments as Map<String, dynamic>;
+        final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => ChatCubit(getIt())
               ..initializeChat(
-                // projectId: data['projectId'],
-                // freelancerId: data['freelancerId'],
-                // companyId: data['companyId'],
-                projectId: 55,
-                freelancerId: AppConstants.kUserId,
-                companyId: 'cbe2805d-6670-4e7f-b6bf-0b9152df089f',
+                projectId: data['projectId'],
+                freelancerId: data['freelancerId'],
+                companyId: data['companyId'],
               ),
             child: const ChatView(),
           ),

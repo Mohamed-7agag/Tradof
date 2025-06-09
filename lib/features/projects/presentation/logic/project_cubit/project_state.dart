@@ -41,6 +41,12 @@ enum ProjectStatus {
   giveRatingLoading,
   giveRatingSuccess,
   giveRatingFailure,
+  uploadFilesLoading,
+  uploadFilesSuccess,
+  uploadFilesFailure,
+  deleteFileLoading,
+  deleteFileSuccess,
+  deleteFileFailure,
 }
 
 class ProjectState extends Equatable {

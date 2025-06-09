@@ -61,9 +61,9 @@ class _UpdateOfferViewState extends State<UpdateOfferView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       verticalSpace(16),
-                      OfferHeaderSection(
-                        offerId: widget.offer.id,
-                      ),
+                      // OfferHeaderSection(
+                      //   offerId: widget.offer.id,
+                      // ),
                       verticalSpace(25),
                       ProjectTextField(
                         labelText: 'Offer details',
@@ -99,7 +99,7 @@ class _UpdateOfferViewState extends State<UpdateOfferView> {
                       verticalSpace(20),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           )),

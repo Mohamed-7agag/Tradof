@@ -6,9 +6,11 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_style.dart';
+import '../../data/models/project_model.dart';
 
 class ProjectWorkspaceAppBar extends StatelessWidget {
-  const ProjectWorkspaceAppBar({super.key});
+  const ProjectWorkspaceAppBar({required this.projectModel, super.key});
+  final ProjectModel projectModel;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,11 @@ class ProjectWorkspaceAppBar extends StatelessWidget {
                 const Spacer(),
                 IconButton(
                   onPressed: () {
-                    context.pushNamed(Routes.chatViewRoute);
+                    context.pushNamed(Routes.chatViewRoute, arguments: {
+                      'projectId': projectModel.id,
+                      'freelancerId': projectModel.freelancerId,
+                      'companyId': projectModel.companyId,
+                    });
                   },
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white24,

@@ -110,4 +110,6 @@ abstract class EndPoint {
   static String getPaymentStatus(int projectId) =>
       'financial/payment-status/$projectId';
   static const String giveRating= 'project/create-rating';   
+  static String uploadFiles(int projectId,bool isFreelancer) => '/project/upload-files/$projectId?isFreelancerUpload=$isFreelancer';
+  static String deleteFile(int fileId) => 'project/delete-file/$fileId';
 }
