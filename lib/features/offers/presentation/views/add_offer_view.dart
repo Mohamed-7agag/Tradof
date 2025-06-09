@@ -71,7 +71,7 @@ class _AddOfferViewState extends State<AddOfferView> {
                       verticalSpace(25),
                       SelectOfferBudget(
                         maxPrice: widget.project.maxPrice.toDouble(),
-                        minPrice: widget.project.minPrice.toDouble(),
+                        minPrice: 0.0,
                       ),
                       verticalSpace(35),
                       Text(

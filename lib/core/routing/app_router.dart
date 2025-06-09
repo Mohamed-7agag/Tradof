@@ -244,12 +244,13 @@ class AppRouter {
           ),
         );
       case Routes.startedAndCurrentProjectDetailsViewRoute:
-        final data = settings.arguments as ProjectModel;
+        final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => ProjectCubit(getIt(),getIt()),
             child: StartedAndCurrentProjectDetailsView(
-              projectModel: data,
+              projectModel: data['projectModel'],
+              isStartedProject: data['isStartedProject'],
             ),
           ),
         );

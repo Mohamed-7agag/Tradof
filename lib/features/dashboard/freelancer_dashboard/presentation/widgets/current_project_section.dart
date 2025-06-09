@@ -55,7 +55,6 @@ class _CurrentProjectsSectionState extends State<CurrentProjectsSection> {
       slivers: [
         SliverToBoxAdapter(child: verticalSpace(40)),
         SliverToBoxAdapter(
-
           child: SizedBox(
             height: 120.h,
             child: BlocBuilder<ProjectCubit, ProjectState>(

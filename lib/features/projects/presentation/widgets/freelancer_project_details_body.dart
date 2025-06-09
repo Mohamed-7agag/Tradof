@@ -50,9 +50,9 @@ class FreelancerProjectDetailsBody extends StatelessWidget {
             children: [
               ProjectDetailsBodyItem(
                 title: 'Price',
-                value: '${projectModel.minPrice} - ${projectModel.maxPrice} EGP',
+                value:
+                    '${projectModel.minPrice} - ${projectModel.maxPrice} EGP',
               ),
-              
               const Spacer(flex: 2),
               ProjectDetailsBodyItem(
                 title: 'DeadLine',
@@ -67,6 +67,13 @@ class FreelancerProjectDetailsBody extends StatelessWidget {
               const Spacer(),
             ],
           ),
+          if (projectModel.price != null) ...[
+            const Divider(color: AppColors.cardDarkColor, height: 40),
+            ProjectDetailsBodyItem(
+              title: 'Accepted Budget',
+              value: '${projectModel.price} EGP',
+            ),
+          ]
         ],
       ),
     );
