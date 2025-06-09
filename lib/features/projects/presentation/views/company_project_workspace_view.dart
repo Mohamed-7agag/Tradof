@@ -61,12 +61,13 @@ class _CompanyProjectWorkspaceViewState
                   child: Column(
                     children: [
                       verticalSpace(16),
-                      // FreelancerProfileData(
-                      //   projectModel: widget.projectModel,
-                      // ),
+                      FreelancerProfileData(
+                        projectModel: widget.projectModel,
+                      ),
                       verticalSpace(25),
                       ProjectWorkspaceStatusSection(
-                          status: getStatus(widget.projectModel.status.name)),
+                        status: _getStatus(),
+                      ),
                       getWorkspaceWidget(),
                     ],
                   ),
@@ -79,7 +80,19 @@ class _CompanyProjectWorkspaceViewState
     );
   }
 
-  
+  int _getStatus() {
+    switch (widget.projectModel.status.value) {
+      case 1:
+      case 2:
+        return 0; // Work in progress
+      case 3:
+        return 1; // Review
+      case 4:
+        return 2; // Completed
+      default:
+        return -1; // Unknown status
+    }
+  }
 
   Widget getWorkspaceWidget() {
     switch (widget.projectModel.status.value) {

@@ -12,6 +12,7 @@ import '../widgets/freelancer_work_status_widget.dart';
 import '../widgets/project_workspace_app_bar.dart';
 import '../widgets/project_workspace_status_section.dart';
 import '../widgets/rating_bar_section.dart';
+import 'started_and_current_project_details_view.dart';
 
 class FreelancerProjectWorkspaceView extends StatefulWidget {
   const FreelancerProjectWorkspaceView({required this.projectModel, super.key});
@@ -54,13 +55,7 @@ class _FreelancerProjectWorkspaceViewState
                   return Column(
                     children: [
                       verticalSpace(16),
-                      Container(
-                        height: 140,
-                        decoration: const BoxDecoration(
-                          color: AppColors.cardColor,
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                        ),
-                      ),
+                    CompanyProfileData(projectModel: widget.projectModel),
                       verticalSpace(25),
                       /**
         Pending ==> 0

@@ -67,7 +67,7 @@ class BlocBuilderMarkAsFinishButton extends StatelessWidget {
                           PayProjectRequestModel(
                             projectId: projectModel.id,
                             freelancerId: projectModel.freelancerId,
-                            budget: projectModel.price ?? 10,
+                            budget: projectModel.price!,
                             deliveryTime: projectModel.days.toString(),
                           ),
                         );
