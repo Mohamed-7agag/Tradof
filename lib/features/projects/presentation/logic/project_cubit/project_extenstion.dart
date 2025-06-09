@@ -71,4 +71,5 @@ extension ProjectStatusX on ProjectStatus {
   bool get isDeleteFileLoading => this == ProjectStatus.deleteFileLoading;
   bool get isDeleteFileSuccess => this == ProjectStatus.deleteFileSuccess;
   bool get isDeleteFileFailure => this == ProjectStatus.deleteFileFailure;
+  bool get isRemoveFilefromList => this == ProjectStatus.removeFilefromList;
 }

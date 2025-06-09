@@ -47,6 +47,7 @@ enum ProjectStatus {
   deleteFileLoading,
   deleteFileSuccess,
   deleteFileFailure,
+  removeFilefromList,
 }
 
 class ProjectState extends Equatable {

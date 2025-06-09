@@ -3,12 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:open_file/open_file.dart';
 
+import '../../../../core/helpers/custom_url_launcher.dart';
 import '../../../../core/theming/app_colors.dart';
+import '../../data/models/file_model.dart';
 import '../logic/file_cubit.dart';
 
 class AttachmentFilesSection extends StatelessWidget {
-  const AttachmentFilesSection({super.key});
+  const AttachmentFilesSection({
+    super.key,
+    this.filesList,
+    this.onDeleteFile,
+  });
+
+  final List<FileModel>? filesList;
+  final Function(int fileId)? onDeleteFile;
 
   Future<void> _pickFiles(BuildContext context) async {
     final FilePickerResult? result =
@@ -28,33 +38,77 @@ class AttachmentFilesSection extends StatelessWidget {
           builder: (context, files) {
             return Container(
               width: 1.sw,
-              height: files.isEmpty ? 80 : null,
+              height: filesList!.isEmpty && files.isEmpty ? 80 : null,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
                 border: Border.all(color: AppColors.grey),
               ),
-                child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: files.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final file = entry.value;
-                  return ListTile(
-                  contentPadding: EdgeInsets.only(
-                    left: 10.w,
-                    bottom: index == files.length - 1 ? 20 : 0,
+              child: Column(
+                children: [
+                  if (filesList!.isNotEmpty)
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: filesList!.asMap().entries.map((entry) {
+                        final index = entry.key;
+                        final file = entry.value;
+                        return ListTile(
+                          onTap: () =>
+                              customUrlLauncher(context, file.filePath),
+                          contentPadding: EdgeInsets.only(
+                            left: 10.w,
+                            bottom: index == filesList!.length - 1
+                                ? (files.isEmpty ? 20 : 0)
+                                : 0,
+                          ),
+                          title: Text(file.fileName),
+                          leading: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedFile02,
+                              color: AppColors.black),
+                          trailing: IconButton(
+                              icon: const Icon(Icons.cancel, color: Colors.red),
+                              onPressed: () {
+                                onDeleteFile?.call(file.id);
+                              }),
+                        );
+                      }).toList(),
+                    ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: files.asMap().entries.map((entry) {
+                      final index = entry.key;
+                      final file = entry.value;
+                      return ListTile(
+                        onTap: () async {
+                          try {
+                            await OpenFile.open(file.path);
+                          } catch (e) {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: Text(
+                                        'Could not open file: ${e.toString()}')),
+                              );
+                            }
+                          }
+                        },
+                        contentPadding: EdgeInsets.only(
+                          left: 10.w,
+                          bottom: index == files.length - 1 ? 20 : 0,
+                        ),
+                        title: Text(file.name),
+                        leading: const HugeIcon(
+                            icon: HugeIcons.strokeRoundedFile02,
+                            color: AppColors.black),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.cancel, color: Colors.red),
+                          onPressed: () =>
+                              context.read<FileCubit>().removeFile(index),
+                        ),
+                      );
+                    }).toList(),
                   ),
-                  title: Text(file.name),
-                  leading: const HugeIcon(
-                    icon: HugeIcons.strokeRoundedFile02,
-                    color: AppColors.black),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.cancel, color: Colors.red),
-                    onPressed: () =>
-                      context.read<FileCubit>().removeFile(index),
-                  ),
-                  );
-                }).toList(),
-                ),
+                ],
+              ),
             );
           },
         ),

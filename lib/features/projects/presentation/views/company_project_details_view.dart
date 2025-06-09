@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,9 +8,13 @@ import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
+import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../../../profile/company_profile/data/model/company_model.dart';
+import '../../data/models/file_model.dart';
 import '../../data/models/project_model.dart';
 import '../logic/file_cubit.dart';
+import '../logic/project_cubit/project_cubit.dart';
+import '../logic/project_cubit/project_extenstion.dart';
 import '../widgets/attachment_files_section.dart';
 import '../widgets/create_project_industries_section.dart';
 import '../widgets/project_header_section.dart';
@@ -35,6 +41,7 @@ class _CompanyProjectDetailsViewState extends State<CompanyProjectDetailsView> {
   late final TextEditingController minBudgetController;
   late final TextEditingController maxBudgetController;
   late final TextEditingController daysController;
+  late List<FileModel> _originalFiles; // Store original files
 
   @override
   void initState() {
@@ -48,6 +55,11 @@ class _CompanyProjectDetailsViewState extends State<CompanyProjectDetailsView> {
         TextEditingController(text: widget.projectModel.maxPrice.toString());
     daysController =
         TextEditingController(text: widget.projectModel.days.toString());
+
+    // Store original files and set them in the cubit
+    _originalFiles = List.from(widget.projectModel.files);
+    context.read<ProjectCubit>().filesProjectList = List.from(_originalFiles);
+
     super.initState();
   }
 
@@ -143,7 +155,22 @@ class _CompanyProjectDetailsViewState extends State<CompanyProjectDetailsView> {
                   style: AppStyle.poppinsMedium14,
                 ),
                 verticalSpace(12),
-                const AttachmentFilesSection(),
+                BlocBuilder<ProjectCubit, ProjectState>(
+                  buildWhen: (previous, current) =>
+                      current.status.isRemoveFilefromList,
+                  builder: (context, state) {
+                    final cubit = context.read<ProjectCubit>();
+                    return AttachmentFilesSection(
+                      key: ValueKey('files_${cubit.filesProjectList.length}'),
+                      filesList: cubit.filesProjectList,
+                      onDeleteFile: (int fileId) {
+                        setState(() {
+                          cubit.removeFile(fileId);
+                        });
+                      },
+                    );
+                  },
+                ),
                 verticalSpace(60),
                 UpdateProjectButton(
                   projectNameController: projectNameController,

@@ -59,6 +59,7 @@ dependencies:
   intl: 0.20.2
   intl_phone_field: ^3.2.0
   lazy_load_indexed_stack: ^1.2.1
+  open_file: ^3.5.10
   percent_indicator: ^4.2.4
   pretty_dio_logger: ^1.4.0
   shared_preferences: ^2.3.4

@@ -26,7 +26,7 @@ class ProjectRepoImpl implements ProjectRepo {
   Future<void> updateProject(
       CreateProjectRequestModel model, int projectId) async {
     await _apiServices.put(
-      EndPoint.allProjects,
+      EndPoint.updateProject,
       data: {
         "id": projectId,
         ...model.toJson(),

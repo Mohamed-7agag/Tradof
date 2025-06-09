@@ -5,12 +5,14 @@ class FileModel extends Equatable {
   final String filePath;
   final int fileType;
   final int fileSize;
+  final int id;
 
   const FileModel({
     required this.fileName,
     required this.filePath,
     required this.fileType,
     required this.fileSize,
+    required this.id,
   });
 
   factory FileModel.fromJson(Map<String, dynamic> json) {
@@ -18,6 +20,7 @@ class FileModel extends Equatable {
       fileName: json['fileName'],
       filePath: json['filePath'],
       fileType: json['fileType'],
+      id: json['id'],
       fileSize: json['fileSize'],
     );
   }

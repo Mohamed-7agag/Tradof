@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +10,7 @@ import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/models/language_model.dart';
 import '../../../../settings/data/repo/miscellaneous_repo/miscellaneous_repo.dart';
 import '../../../data/models/create_project_request_model.dart';
+import '../../../data/models/file_model.dart';
 import '../../../data/models/pay_project_request_model.dart';
 import '../../../data/models/pay_project_response_model.dart';
 import '../../../data/models/project_model.dart';
@@ -259,6 +259,8 @@ class ProjectCubit extends Cubit<ProjectState> {
       );
 
       await _projectRepo.updateProject(model, projectModel.id);
+
+
       emit(state.copyWith(
         status: ProjectStatus.updateProjectSuccess,
         message: 'Project Updated Successfully',
@@ -419,11 +421,22 @@ class ProjectCubit extends Cubit<ProjectState> {
     }
   }
 
+  List<FileModel> filesProjectList = [];
+  List<int> filesIdsDeleted = [];
+
+  removeFile(int fileId) {
+    filesProjectList.removeWhere((element) => element.id == fileId);
+    filesIdsDeleted.add(fileId);
+    emit(state.copyWith(status: ProjectStatus.removeFilefromList));
+  }
+
   //! upload files
-  Future<void> uploadFiles({required int projectId, required bool isFreelancer}) async {
+  Future<void> uploadFiles(
+      {required int projectId, required bool isFreelancer}) async {
     emit(state.copyWith(status: ProjectStatus.uploadFilesLoading));
     try {
-      await _projectRepo.uploadFiles(projectId: projectId, isFreelancer: isFreelancer);
+      await _projectRepo.uploadFiles(
+          projectId: projectId, isFreelancer: isFreelancer);
       emit(state.copyWith(
         status: ProjectStatus.uploadFilesSuccess,
         message: 'Files uploaded successfully',
