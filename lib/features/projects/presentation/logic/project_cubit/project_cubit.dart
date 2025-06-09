@@ -465,4 +465,21 @@ class ProjectCubit extends Cubit<ProjectState> {
       ));
     }
   }
+
+  //! get project by id
+  Future<void> getProjectByID(int projectId) async {
+    emit(state.copyWith(status: ProjectStatus.getProjectByIDLoading));
+    try {
+      final response = await _projectRepo.getProjectByID(projectId: projectId);
+      emit(state.copyWith(
+        status: ProjectStatus.getProjectByIDSuccess,
+        project: response,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProjectStatus.getProjectByIDFailure,
+        errorMessage: ServerFailure.fromError(e).errMessage,
+      ));
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import '../models/create_project_request_model.dart';
+import '../models/project_model.dart';
 import '../models/project_response_model.dart';
 import '../models/project_statistics_model.dart';
 import '../models/rating_request_model.dart';
@@ -34,5 +35,7 @@ abstract class ProjectRepo {
   Future<void> giveRating({required RatingRequestModel ratingRequestModel});
   Future<void> uploadFiles({required int projectId, required bool isFreelancer});
   Future<void> deleteFile({required int fileId});
+
+  Future<ProjectModel> getProjectByID({required int projectId});
 
 }

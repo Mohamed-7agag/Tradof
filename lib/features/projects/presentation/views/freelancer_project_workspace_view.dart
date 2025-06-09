@@ -26,6 +26,12 @@ class FreelancerProjectWorkspaceView extends StatefulWidget {
 
 class _FreelancerProjectWorkspaceViewState
     extends State<FreelancerProjectWorkspaceView> {
+  @override
+  void initState() {
+    context.read<ProjectCubit>().getProjectByID(widget.projectModel.id);
+    super.initState();
+  }
+
   int getStatus(String status) {
     switch (status) {
       case 'Active':
@@ -50,12 +56,11 @@ class _FreelancerProjectWorkspaceViewState
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: BlocBuilder<ProjectCubit, ProjectState>(
-                
                 builder: (context, state) {
                   return Column(
                     children: [
                       verticalSpace(16),
-                    CompanyProfileData(projectModel: widget.projectModel),
+                      CompanyProfileData(projectModel: widget.projectModel),
                       verticalSpace(25),
                       /**
         Pending ==> 0
@@ -87,17 +92,25 @@ class _FreelancerProjectWorkspaceViewState
       case 1:
         return const FreelancerReviewStatusWidget();
       case 2:
-        return RatingBarSection(
-          onRatingUpdate: (rating) {
-            context.read<ProjectCubit>().giveRating(
-                  RatingRequestModel(
-                    projectId: widget.projectModel.id,
-                    ratingValue: rating,
-                    review: '',
-                    ratedToId: widget.projectModel.companyId,
-                    ratedById: widget.projectModel.freelancerId,
-                  ),
-                );
+        return BlocBuilder<ProjectCubit, ProjectState>(
+          buildWhen: (previous, current) =>
+              current.status == ProjectStatus.getProjectByIDSuccess,
+          builder: (context, state) {
+            return RatingBarSection(
+              initialRating:
+                  state.project?.ratingFromFreelancer?.ratingValue.toDouble() ?? 3,
+              onRatingUpdate: (rating) {
+                context.read<ProjectCubit>().giveRating(
+                      RatingRequestModel(
+                        projectId: widget.projectModel.id,
+                        ratingValue: rating.toDouble(),
+                        review: '',
+                        ratedToId: widget.projectModel.companyId,
+                        ratedById: widget.projectModel.freelancerId,
+                      ),
+                    );
+              },
+            );
           },
         );
       default:

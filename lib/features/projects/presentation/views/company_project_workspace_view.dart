@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helpers/spacing.dart';
+import '../../../../core/utils/widgets/custom_loading_widget.dart';
 import '../../data/models/project_model.dart';
 import '../../data/models/rating_request_model.dart';
 import '../logic/project_cubit/project_cubit.dart';
@@ -28,7 +31,8 @@ class _CompanyProjectWorkspaceViewState
   @override
   void initState() {
     super.initState();
-    context.read<ProjectCubit>().getPaymentStatus(widget.projectModel.id);
+    // context.read<ProjectCubit>().getPaymentStatus(widget.projectModel.id);
+    context.read<ProjectCubit>().getProjectByID(widget.projectModel.id);
   }
 
   int getStatus(String status) {
@@ -102,19 +106,30 @@ class _CompanyProjectWorkspaceViewState
       case 3:
         return CompanyReviewStatusWidget(projectModel: widget.projectModel);
       case 4:
-        return RatingBarSection(
-          isFreelancer: false,
-          ignoreGestures: widget.projectModel.status.value == 4,
-          onRatingUpdate: (rating) {
-            context.read<ProjectCubit>().giveRating(
-                  RatingRequestModel(
-                    projectId: widget.projectModel.id,
-                    ratingValue: rating,
-                    review: '',
-                    ratedToId: widget.projectModel.freelancerId,
-                    ratedById: widget.projectModel.companyId,
-                  ),
-                );
+        return BlocBuilder<ProjectCubit, ProjectState>(
+          buildWhen: (previous, current) =>
+              current.status == ProjectStatus.getProjectByIDSuccess,
+          builder: (context, state) {
+            return state.status == ProjectStatus.getProjectByIDLoading
+                ? const CustomLoadingWidget()
+                : RatingBarSection(
+                    isFreelancer: false,
+                    initialRating: state.project?.ratingFromCompany?.ratingValue
+                            .toDouble() ??
+                        3,
+                    ignoreGestures: widget.projectModel.status.value == 4,
+                    onRatingUpdate: (rating) {
+                      context.read<ProjectCubit>().giveRating(
+                            RatingRequestModel(
+                              projectId: widget.projectModel.id,
+                              ratingValue: rating,
+                              review: '',
+                              ratedToId: widget.projectModel.freelancerId,
+                              ratedById: widget.projectModel.companyId,
+                            ),
+                          );
+                    },
+                  );
           },
         );
       default:

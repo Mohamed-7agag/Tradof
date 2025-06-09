@@ -10,10 +10,13 @@ class RatingBarSection extends StatelessWidget {
     this.isFreelancer = true,
     this.ignoreGestures = false,
     super.key,
+   this.initialRating=3 ,
   });
+
   final bool isFreelancer;
   final void Function(double rating) onRatingUpdate;
   final bool ignoreGestures;
+  final double initialRating;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -26,7 +29,7 @@ class RatingBarSection extends StatelessWidget {
           ),
           verticalSpace(20),
           RatingBar.builder(
-            initialRating: 3,
+            initialRating: initialRating,
             minRating: 1,
             itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
             itemBuilder: (__, _) => const Icon(

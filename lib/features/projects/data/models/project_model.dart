@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import '../../../../core/utils/models/language_model.dart';
 import '../../../../core/utils/models/specialization_model.dart';
 import 'file_model.dart';
+import 'rating_model.dart';
 import 'status_model.dart';
 
 class ProjectModel extends Equatable {
@@ -31,6 +32,8 @@ class ProjectModel extends Equatable {
   final String? freelancerLastName;
   final String? freelancerProfileImageUrl;
   final String? freelancerEmail;
+  final RatingModel? ratingFromCompany;
+  final RatingModel? ratingFromFreelancer;
 
   const ProjectModel({
     required this.id,
@@ -58,6 +61,8 @@ class ProjectModel extends Equatable {
     required this.freelancerLastName,
     required this.freelancerProfileImageUrl,
     required this.freelancerEmail,
+    this.ratingFromCompany,
+    this.ratingFromFreelancer,
   });
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) {
@@ -89,6 +94,12 @@ class ProjectModel extends Equatable {
       freelancerLastName: json['freelancerLastName'] ?? '',
       freelancerProfileImageUrl: json['freelancerProfileImageUrl'] ?? '',
       freelancerEmail: json['freelancerEmail'] ?? '',
+      ratingFromCompany: json['ratingFromCompany'] != null
+          ? RatingModel.fromJson(json['ratingFromCompany'])
+          : null,
+      ratingFromFreelancer: json['ratingFromFreelancer'] != null
+          ? RatingModel.fromJson(json['ratingFromFreelancer'])
+          : null,
     );
   }
 
@@ -119,5 +130,7 @@ class ProjectModel extends Equatable {
         freelancerLastName,
         freelancerProfileImageUrl,
         freelancerEmail,
+        ratingFromCompany,
+        ratingFromFreelancer,
       ];
 }

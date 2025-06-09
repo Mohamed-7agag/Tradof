@@ -2,6 +2,7 @@ import '../../../../core/api/api_service.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../models/create_project_request_model.dart';
+import '../models/project_model.dart';
 import '../models/project_response_model.dart';
 import '../models/project_statistics_model.dart';
 import '../models/rating_request_model.dart';
@@ -149,5 +150,13 @@ class ProjectRepoImpl implements ProjectRepo {
     await _apiServices.delete(
       EndPoint.deleteFile(fileId),
     );
+  }
+
+  @override
+  Future<ProjectModel> getProjectByID({required int projectId}) async {
+    final response = await _apiServices.get(
+      EndPoint.getProjectByID(projectId),
+    );
+    return ProjectModel.fromJson(response);
   }
 }

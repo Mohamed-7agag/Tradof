@@ -48,6 +48,9 @@ enum ProjectStatus {
   deleteFileSuccess,
   deleteFileFailure,
   removeFilefromList,
+  getProjectByIDLoading,
+  getProjectByIDSuccess,
+  getProjectByIDFailure,
 }
 
 class ProjectState extends Equatable {
@@ -68,6 +71,7 @@ class ProjectState extends Equatable {
   final Pagination startedProjectsPagination;
   final PayProjectResponseModel? payProjectResponse;
   final bool paymentStatus;
+  final ProjectModel? project;
 
   const ProjectState({
     this.status = ProjectStatus.initial,
@@ -87,6 +91,7 @@ class ProjectState extends Equatable {
     this.startedProjectsPagination = const Pagination(),
     this.payProjectResponse,
     this.paymentStatus = false,
+    this.project,
   });
 
   ProjectState copyWith({
@@ -107,6 +112,7 @@ class ProjectState extends Equatable {
     Pagination? startedProjectsPagination,
     PayProjectResponseModel? payProjectResponse,
     bool? paymentStatus,
+    ProjectModel? project,
   }) {
     return ProjectState(
       status: status ?? this.status,
@@ -130,6 +136,7 @@ class ProjectState extends Equatable {
           startedProjectsPagination ?? this.startedProjectsPagination,
       payProjectResponse: payProjectResponse ?? this.payProjectResponse,
       paymentStatus: paymentStatus ?? this.paymentStatus,
+      project: project ?? this.project,
     );
   }
 
@@ -152,5 +159,6 @@ class ProjectState extends Equatable {
         startedProjectsPagination,
         payProjectResponse,
         paymentStatus,
+        project,
       ];
 }

@@ -42,6 +42,7 @@ abstract class EndPoint {
       'project/MarkAsFinished?id=$projectId';
   static String getCurrentProjectsStatistics = 'project/statistics';
   static const String updateProject = 'project';
+  static String getProjectByID(int projectId) => 'project/$projectId';
 
   // Company Endpoints
   static const String updateCompanyProfile = 'Company/UpdateCompany';
