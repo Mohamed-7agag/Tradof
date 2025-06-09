@@ -96,15 +96,13 @@ class ProjectItem extends StatelessWidget {
               Text(
                 project.specialization.name,
                 style: AppStyle.robotoRegular12.copyWith(
-                  color: AppColors.black,
+                  fontStyle: FontStyle.italic,
                 ),
               ),
               verticalSpace(8),
               Text(
                 project.name,
-                style: AppStyle.robotoCondensedMedium15.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                style: AppStyle.poppinsMedium14,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -141,7 +139,7 @@ class ProjectItem extends StatelessWidget {
           title,
           style: AppStyle.robotoCondensedRegular12,
         ),
-        verticalSpace(6),
+        verticalSpace(4),
         Text(
           value,
           style: AppStyle.robotoRegular12.copyWith(

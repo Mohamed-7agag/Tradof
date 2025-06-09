@@ -49,8 +49,9 @@ class CompanyReviewStatusWidget extends StatelessWidget {
                 ),
                 Expanded(child: verticalSpace(20)),
                 Align(
-                  child:
-                      BlocBuilderMarkAsFinishButton(projectModel: projectModel),
+                  child: BlocBuilderMarkAsFinishButton(
+                    projectModel: projectModel,
+                  ),
                 ),
                 verticalSpace(20),
               ],
@@ -61,4 +62,3 @@ class CompanyReviewStatusWidget extends StatelessWidget {
     );
   }
 }
-

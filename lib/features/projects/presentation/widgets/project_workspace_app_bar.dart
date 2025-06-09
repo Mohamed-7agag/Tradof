@@ -61,9 +61,11 @@ class ProjectWorkspaceAppBar extends StatelessWidget {
                         AppStyle.robotoBold20.copyWith(color: AppColors.white),
                   ),
                   Text(
-                    'Translation of an article about medical tools...',
+                    projectModel.name,
                     style: AppStyle.robotoCondensedRegular15
                         .copyWith(color: AppColors.white),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
