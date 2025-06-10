@@ -16,7 +16,9 @@ import '../../features/chat/presentation/views/chat_view.dart';
 import '../../features/finances/presentation/logic/cubit/finances_cubit.dart';
 import '../../features/finances/presentation/views/withdraw_form_view.dart';
 import '../../features/finances/presentation/views/withdraw_profit_view.dart';
+import '../../features/notification/data/model/notification_model.dart';
 import '../../features/notification/presentation/logic/cubit/notification_cubit.dart';
+import '../../features/notification/presentation/views/notification_details_view.dart';
 import '../../features/notification/presentation/views/notification_view.dart';
 import '../../features/offers/data/model/offer_model.dart';
 import '../../features/offers/presentation/logic/cubit/offer_cubit.dart';
@@ -39,9 +41,9 @@ import '../../features/projects/data/models/project_model.dart';
 import '../../features/projects/presentation/logic/project_cubit/project_cubit.dart';
 import '../../features/projects/presentation/views/company_project_details_view.dart';
 import '../../features/projects/presentation/views/company_project_workspace_view.dart';
-import '../../features/projects/presentation/views/started_and_current_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_details_view.dart';
 import '../../features/projects/presentation/views/freelancer_project_workspace_view.dart';
+import '../../features/projects/presentation/views/started_and_current_project_details_view.dart';
 import '../../features/settings/presentation/logic/company_setting_cubit/company_setting_cubit.dart';
 import '../../features/settings/presentation/logic/freelancer_setting_cubit/freelancer_setting_cubit.dart';
 import '../../features/settings/presentation/logic/miscellaneous_cubit/miscellaneous_cubit.dart';
@@ -95,7 +97,7 @@ class AppRouter {
                     FreelancerProfileCubit(getIt())..getFreelancerProfile(),
               ),
               BlocProvider(
-                create: (context) => ProjectCubit(getIt(),getIt()),
+                create: (context) => ProjectCubit(getIt(), getIt()),
               ),
               BlocProvider(
                 create: (context) => OfferCubit(getIt()),
@@ -109,7 +111,7 @@ class AppRouter {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => ProjectCubit(getIt(),getIt()),
+                create: (context) => ProjectCubit(getIt(), getIt()),
               ),
               BlocProvider(
                 create: (context) =>
@@ -211,7 +213,7 @@ class AppRouter {
         final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ProjectCubit(getIt(),getIt()),
+            create: (context) => ProjectCubit(getIt(), getIt()),
             child: CompanyProjectDetailsView(
               companyModel: data['companyModel'],
               projectModel: data['projectModel'],
@@ -221,7 +223,7 @@ class AppRouter {
       case Routes.companyProjectWorkspaceViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ProjectCubit(getIt(),getIt()),
+            create: (context) => ProjectCubit(getIt(), getIt()),
             child: CompanyProjectWorkspaceView(
               projectModel: settings.arguments as ProjectModel,
             ),
@@ -230,7 +232,7 @@ class AppRouter {
       case Routes.freelancerProjectWorkspaceViewRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ProjectCubit(getIt(),getIt()),
+            create: (context) => ProjectCubit(getIt(), getIt()),
             child: FreelancerProjectWorkspaceView(
               projectModel: settings.arguments as ProjectModel,
             ),
@@ -247,7 +249,7 @@ class AppRouter {
         final data = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ProjectCubit(getIt(),getIt()),
+            create: (context) => ProjectCubit(getIt(), getIt()),
             child: StartedAndCurrentProjectDetailsView(
               projectModel: data['projectModel'],
               isStartedProject: data['isStartedProject'],
@@ -313,6 +315,13 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => NotificationCubit(getIt())..initialize(),
             child: const NotificationView(),
+          ),
+        );
+      case Routes.notificationDetailsViewRoute:
+        final notification = settings.arguments as NotificationModel;
+        return MaterialPageRoute(
+          builder: (_) => NotificationDetailsView(
+            notificationModel: notification,
           ),
         );
       case Routes.projectOffersViewRoute:
