@@ -45,27 +45,38 @@ class FinanceProjectItem extends StatelessWidget {
                     )
                   : null,
             ),
+            trailing: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: project.paymentStatus == 'paid' ? Colors.green.withValues(alpha: 0.2) : Colors.orange.withValues(alpha: 0.2),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                  ),
+                  child: Text(
+                    project.paymentStatus == 'paid' ? 'Paid' : 'Pending',
+                    style: AppStyle.robotoRegular8.copyWith(
+                      color: project.paymentStatus == 'paid' ? Colors.green : Colors.orange,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
           ),
           verticalSpace(8),
           Text(
             project.prjectData.name,
             style: AppStyle.robotoRegular14,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
           ),
           verticalSpace(12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${project.prjectData.deliveryTime} Days',
+                'delivery Time: ${project.prjectData.deliveryTime} Days',
                 style: AppStyle.robotoRegular12,
               ),
               Text(
-                '${project.prjectData.depoistPrice} EGP',
-                style: AppStyle.poppinsMedium15.copyWith(
-                  color: AppColors.primary,
-                ),
+                'depoist Price: ${project.prjectData.depoistPrice} EGP',
+               style: AppStyle.robotoRegular12,
               ),
             ],
           ),

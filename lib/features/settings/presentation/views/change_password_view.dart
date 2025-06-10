@@ -46,51 +46,55 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: SingleChildScrollView(
+        child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              verticalSpace(30),
-              SlideInLeft(
-                from: 400,
-                child: CustomTextField(
-                  labelText: 'Current Password',
-                  controller: currentPasswordController,
-                  outlineBorder: true,
-                  obscureText: true,
-                ),
+          slivers: [
+            SliverFillRemaining(
+              child: Column(
+                children: [
+                  verticalSpace(30),
+                  SlideInLeft(
+                    from: 400,
+                    child: CustomTextField(
+                      labelText: 'Current Password',
+                      controller: currentPasswordController,
+                      outlineBorder: true,
+                      obscureText: true,
+                    ),
+                  ),
+                  verticalSpace(16),
+                  SlideInLeft(
+                    from: 400,
+                    delay: const Duration(milliseconds: 120),
+                    child: CustomTextField(
+                      labelText: 'New Password',
+                      controller: newPasswordController,
+                      outlineBorder: true,
+                      obscureText: true,
+                    ),
+                  ),
+                  verticalSpace(16),
+                  SlideInLeft(
+                    from: 400,
+                    delay: const Duration(milliseconds: 240),
+                    child: CustomTextField(
+                      labelText: 'Confirm Password',
+                      controller: confirmPasswordController,
+                      outlineBorder: true,
+                      obscureText: true,
+                    ),
+                  ),
+                  Expanded(child: verticalSpace(60)),
+                  SlideInLeft(
+                    from: 400,
+                    delay: const Duration(milliseconds: 360),
+                    child: _changePasswordButton(),
+                  ),
+                  verticalSpace(20),
+                ],
               ),
-              verticalSpace(16),
-              SlideInLeft(
-                from: 400,
-                delay: const Duration(milliseconds: 120),
-                child: CustomTextField(
-                  labelText: 'New Password',
-                  controller: newPasswordController,
-                  outlineBorder: true,
-                  obscureText: true,
-                ),
-              ),
-              verticalSpace(16),
-              SlideInLeft(
-                from: 400,
-                delay: const Duration(milliseconds: 240),
-                child: CustomTextField(
-                  labelText: 'Confirm Password',
-                  controller: confirmPasswordController,
-                  outlineBorder: true,
-                  obscureText: true,
-                ),
-              ),
-              verticalSpace(60),
-              SlideInLeft(
-                from: 400,
-                delay: const Duration(milliseconds: 360),
-                child: _changePasswordButton(),
-              ),
-              verticalSpace(40),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

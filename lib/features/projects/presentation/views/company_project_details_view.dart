@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +6,6 @@ import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_style.dart';
 import '../../../../core/utils/widgets/custom_app_bar.dart';
-import '../../../../core/utils/widgets/custom_toastification.dart';
 import '../../../profile/company_profile/data/model/company_model.dart';
 import '../../data/models/file_model.dart';
 import '../../data/models/project_model.dart';
@@ -19,7 +16,6 @@ import '../widgets/attachment_files_section.dart';
 import '../widgets/create_project_industries_section.dart';
 import '../widgets/project_header_section.dart';
 import '../widgets/project_text_field.dart';
-import '../widgets/update_project_button.dart';
 import '../widgets/update_project_language_pair.dart';
 
 class CompanyProjectDetailsView extends StatefulWidget {
@@ -171,16 +167,16 @@ class _CompanyProjectDetailsViewState extends State<CompanyProjectDetailsView> {
                     );
                   },
                 ),
+                // verticalSpace(60),
+                // UpdateProjectButton(
+                //   projectNameController: projectNameController,
+                //   projectDescriptionController: projectDescriptionController,
+                //   minBudgetController: minBudgetController,
+                //   maxBudgetController: maxBudgetController,
+                //   daysController: daysController,
+                //   projectModel: widget.projectModel,
+                // ),
                 verticalSpace(60),
-                UpdateProjectButton(
-                  projectNameController: projectNameController,
-                  projectDescriptionController: projectDescriptionController,
-                  minBudgetController: minBudgetController,
-                  maxBudgetController: maxBudgetController,
-                  daysController: daysController,
-                  projectModel: widget.projectModel,
-                ),
-                verticalSpace(20),
               ],
             ),
           ),

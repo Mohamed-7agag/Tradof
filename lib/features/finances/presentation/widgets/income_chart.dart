@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/utils/widgets/custom_failure_widget.dart';
@@ -88,9 +89,11 @@ class IncomeChartState extends State<IncomeChart> {
 
           final monthNames = _getMonthNames(state.incomeStatisticsModel);
 
-          return AspectRatio(
-            aspectRatio: 1,
-            child: Expanded(
+          return SizedBox(
+            height: 310.h,
+            width: 1.sw,
+            child: AspectRatio(
+              aspectRatio: 1,
               child: BarChart(
                 BarChartData(
                   maxY:

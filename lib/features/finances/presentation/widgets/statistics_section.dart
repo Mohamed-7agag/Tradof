@@ -105,7 +105,7 @@ class BalanceRow extends StatelessWidget {
         Expanded(
           child: BalanceCard(
             title: 'Pending Balance',
-            amount: state.statisticsModel?.pendingBalance,
+            amount: state.statisticsModel?.pendingBalance.abs(),
           ),
         ),
       ],

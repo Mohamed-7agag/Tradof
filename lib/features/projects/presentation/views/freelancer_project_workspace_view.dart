@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helpers/spacing.dart';
-import '../../../../core/theming/app_colors.dart';
 import '../../data/models/project_model.dart';
 import '../../data/models/rating_request_model.dart';
 import '../logic/project_cubit/project_cubit.dart';
@@ -98,7 +97,8 @@ class _FreelancerProjectWorkspaceViewState
           builder: (context, state) {
             return RatingBarSection(
               initialRating:
-                  state.project?.ratingFromFreelancer?.ratingValue.toDouble() ?? 3,
+                  state.project?.ratingFromFreelancer?.ratingValue.toDouble() ??
+                      3,
               onRatingUpdate: (rating) {
                 context.read<ProjectCubit>().giveRating(
                       RatingRequestModel(

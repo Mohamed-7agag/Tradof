@@ -25,6 +25,7 @@ class MiscellaneousCubit extends Cubit<MiscellaneousState> {
         message: 'Feedback Sent Successfully',
       ));
     } catch (e) {
+      if (isClosed) return;
       emit(state.copyWith(
         status: MiscellaneousStatus.sendFeedbackFailure,
         errMessage: ServerFailure.fromError(e).errMessage,
@@ -42,6 +43,7 @@ class MiscellaneousCubit extends Cubit<MiscellaneousState> {
         message: 'Question Sent Successfully',
       ));
     } catch (e) {
+      if (isClosed) return;
       emit(state.copyWith(
         status: MiscellaneousStatus.askQuestionFailure,
         errMessage: ServerFailure.fromError(e).errMessage,
@@ -72,6 +74,7 @@ class MiscellaneousCubit extends Cubit<MiscellaneousState> {
         status: MiscellaneousStatus.getTechnicalSupportMessagesSuccess,
       ));
     } catch (e) {
+      if (isClosed) return;
       emit(state.copyWith(
         status: MiscellaneousStatus.sendTechnicalSupportFailure,
         errMessage: ServerFailure.fromError(e).errMessage,
@@ -90,6 +93,7 @@ class MiscellaneousCubit extends Cubit<MiscellaneousState> {
         technicalSupportMessages: messages,
       ));
     } catch (e) {
+      if (isClosed) return;
       emit(state.copyWith(
         status: MiscellaneousStatus.getTechnicalSupportMessagesFailure,
         errMessage:

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +21,7 @@ class BlocBuilderMarkAsFinishButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProjectCubit, ProjectState>(
-      listenWhen: (previous,current) => _buildAndListenWhen(current), 
+      listenWhen: (previous, current) => _buildAndListenWhen(current),
       listener: (context, state) {
         if (state.status == ProjectStatus.markAsFinishedSuccess) {
           successToast(context, 'Success', state.message);
@@ -46,33 +44,33 @@ class BlocBuilderMarkAsFinishButton extends StatelessWidget {
             state.status == ProjectStatus.payProjectLoading) {
           return const CustomLoadingWidget();
         }
-        
-          return state.paymentStatus
-              ? CustomButton(
-                  text: 'Finish',
-                  color: AppColors.lightOrange,
-                  width: 0.6,
-                  onPressed: () {
-                    context.read<ProjectCubit>().markProjectAsFinished(
-                          projectModel.id,
-                        );
-                  },
-                )
-              : CustomButton(
-                  text: 'Pay',
-                  color: AppColors.lightOrange,
-                  width: 0.6,
-                  onPressed: () {
-                    context.read<ProjectCubit>().payProject(
-                          PayProjectRequestModel(
-                            projectId: projectModel.id,
-                            freelancerId: projectModel.freelancerId,
-                            budget: projectModel.price!,
-                            deliveryTime: projectModel.days.toString(),
-                          ),
-                        );
-                  },
-                );
+
+        return state.paymentStatus
+            ? CustomButton(
+                text: 'Finish',
+                color: AppColors.lightOrange,
+                width: 0.6,
+                onPressed: () {
+                  context.read<ProjectCubit>().markProjectAsFinished(
+                        projectModel.id,
+                      );
+                },
+              )
+            : CustomButton(
+                text: 'Pay',
+                color: AppColors.lightOrange,
+                width: 0.6,
+                onPressed: () {
+                  context.read<ProjectCubit>().payProject(
+                        PayProjectRequestModel(
+                          projectId: projectModel.id,
+                          freelancerId: projectModel.freelancerId,
+                          budget: projectModel.price!,
+                          deliveryTime: projectModel.days.toString(),
+                        ),
+                      );
+                },
+              );
       },
     );
   }
