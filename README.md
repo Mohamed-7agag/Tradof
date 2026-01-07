@@ -8,7 +8,7 @@
 
 ## 📱 UI
 
-![1](https://github.com/user-attachments/assets/9c13469f-1524-4ff4-ab1a-870bfeb285ec)
+![1](https://github.com/user-attachments/assets/54ecc4db-1d79-46ef-adc5-0e2a0b6834f0)
 
 ![2](https://github.com/user-attachments/assets/88a12a43-a330-4948-bf5f-2fec50fd73ca)
 
@@ -28,7 +28,7 @@
 
 ![10](https://github.com/user-attachments/assets/6f058735-1e26-45df-a9b5-175ead465544)
 
-![11](https://github.com/user-attachments/assets/54ecc4db-1d79-46ef-adc5-0e2a0b6834f0)
+![11](https://github.com/user-attachments/assets/9c13469f-1524-4ff4-ab1a-870bfeb285ec)
 
 ![12](https://github.com/user-attachments/assets/9d2423ab-591c-455b-9c07-4e236f669767)
 
@@ -78,5 +78,6 @@
   toastification: ^2.3.0
   url_launcher: ^6.3.1
 ```
+
 
 
